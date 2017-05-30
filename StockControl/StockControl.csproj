@@ -1,0 +1,460 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{614400A9-5557-4A39-B77F-1364466E8564}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StockControl</RootNamespace>
+    <AssemblyName>PartManagement</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Graphicloads-100-Flat-System-analytics.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.WinControls, Version=2017.1.221.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2017.1.221.40\Telerik.WinControls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.WinControls.GridView, Version=2017.1.221.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.WinControls.Themes.Office2010Blue, Version=2017.1.221.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.WinControls.UI, Version=2017.1.221.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2017.1.221.40\Telerik.WinControls.UI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TelerikCommon, Version=2017.1.221.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2017.1.221.40\TelerikCommon.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TelerikData, Version=2017.1.221.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
+    <Reference Include="ThoughtWorks.QRCode, Version=1.0.2774.19990, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataClasses1.cs">
+      <DependentUpon>DataClasses1.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataClasses1.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataClasses1.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="dbClss.cs" />
+    <Compile Include="Main\Display.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Display.Designer.cs">
+      <DependentUpon>Display.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Home1600x900.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Home1600x900.Designer.cs">
+      <DependentUpon>Home1600x900.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Mainfrom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Mainfrom.Designer.cs">
+      <DependentUpon>Mainfrom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ChangeInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ChangeInvoice.Designer.cs">
+      <DependentUpon>ChangeInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\AdjustStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\AdjustStock.Designer.cs">
+      <DependentUpon>AdjustStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\A_Show.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\A_Show.Designer.cs">
+      <DependentUpon>A_Show.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\StockList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\StockList.Designer.cs">
+      <DependentUpon>StockList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ShippingCancel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ShippingCancel.Designer.cs">
+      <DependentUpon>ShippingCancel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ShippingList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ShippingList.Designer.cs">
+      <DependentUpon>ShippingList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\Shipping.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Shipping.Designer.cs">
+      <DependentUpon>Shipping.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ReturnReceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ReturnReceive.Designer.cs">
+      <DependentUpon>ReturnReceive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ReceiveList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ReceiveList.Designer.cs">
+      <DependentUpon>ReceiveList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\Receive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Receive.Designer.cs">
+      <DependentUpon>Receive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\CreatePR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\CreatePR.Designer.cs">
+      <DependentUpon>CreatePR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ListPR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ListPR.Designer.cs">
+      <DependentUpon>ListPR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\WaitingPR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\WaitingPR.Designer.cs">
+      <DependentUpon>WaitingPR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\CreatePart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\CreatePart.Designer.cs">
+      <DependentUpon>CreatePart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\CalculatePlanning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\CalculatePlanning.Designer.cs">
+      <DependentUpon>CalculatePlanning.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\Contact.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Contact.Designer.cs">
+      <DependentUpon>Contact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ListPart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ListPart.Designer.cs">
+      <DependentUpon>ListPart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\Forecast.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Forecast.Designer.cs">
+      <DependentUpon>Forecast.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ModelMapping.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ModelMapping.Designer.cs">
+      <DependentUpon>ModelMapping.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\MasterModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\MasterModel.Designer.cs">
+      <DependentUpon>MasterModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\WorkDays.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\WorkDays.Designer.cs">
+      <DependentUpon>WorkDays.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\Vendor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Vendor.Designer.cs">
+      <DependentUpon>Vendor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\PathConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\PathConfig.Designer.cs">
+      <DependentUpon>PathConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ServerConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ServerConfig.Designer.cs">
+      <DependentUpon>ServerConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\Types.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Types.Designer.cs">
+      <DependentUpon>Types.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\HistoryScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\HistoryScreen.Designer.cs">
+      <DependentUpon>HistoryScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\HistoryView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\HistoryView.Designer.cs">
+      <DependentUpon>HistoryView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\GroupType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\GroupType.Designer.cs">
+      <DependentUpon>GroupType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\Unit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Unit.Designer.cs">
+      <DependentUpon>Unit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RadForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RadForm1.Designer.cs">
+      <DependentUpon>RadForm1.cs</DependentUpon>
+    </Compile>
+    <None Include="DataClasses1.dbml.layout">
+      <DependentUpon>DataClasses1.dbml</DependentUpon>
+    </None>
+    <EmbeddedResource Include="Main\Display.resx">
+      <DependentUpon>Display.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Home1600x900.resx">
+      <DependentUpon>Home1600x900.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Mainfrom.resx">
+      <DependentUpon>Mainfrom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ChangeInvoice.resx">
+      <DependentUpon>ChangeInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\AdjustStock.resx">
+      <DependentUpon>AdjustStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\A_Show.resx">
+      <DependentUpon>A_Show.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\StockList.resx">
+      <DependentUpon>StockList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ShippingCancel.resx">
+      <DependentUpon>ShippingCancel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ShippingList.resx">
+      <DependentUpon>ShippingList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Shipping.resx">
+      <DependentUpon>Shipping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ReturnReceive.resx">
+      <DependentUpon>ReturnReceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ReceiveList.resx">
+      <DependentUpon>ReceiveList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Receive.resx">
+      <DependentUpon>Receive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\CreatePR.resx">
+      <DependentUpon>CreatePR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ListPR.resx">
+      <DependentUpon>ListPR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\WaitingPR.resx">
+      <DependentUpon>WaitingPR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\CreatePart.resx">
+      <DependentUpon>CreatePart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\CalculatePlanning.resx">
+      <DependentUpon>CalculatePlanning.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Contact.resx">
+      <DependentUpon>Contact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ListPart.resx">
+      <DependentUpon>ListPart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Forecast.resx">
+      <DependentUpon>Forecast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ModelMapping.resx">
+      <DependentUpon>ModelMapping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\MasterModel.resx">
+      <DependentUpon>MasterModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\WorkDays.resx">
+      <DependentUpon>WorkDays.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Vendor.resx">
+      <DependentUpon>Vendor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\PathConfig.resx">
+      <DependentUpon>PathConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ServerConfig.resx">
+      <DependentUpon>ServerConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Types.resx">
+      <DependentUpon>Types.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\HistoryScreen.resx">
+      <DependentUpon>HistoryScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\HistoryView.resx">
+      <DependentUpon>HistoryView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\GroupType.resx">
+      <DependentUpon>GroupType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Unit.resx">
+      <DependentUpon>Unit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="RadForm1.resx">
+      <DependentUpon>RadForm1.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="DataClasses1.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <!--sirinie -->
+    <Content Include="Bokehlicia-Pacifica-Mega-cloud.ico" />
+    <Content Include="favicon %282%29.ico" />
+    <Content Include="favicon %283%29.ico" />
+    <Content Include="favicon.ico" />
+    <Content Include="Graphicloads-100-Flat-Cloud.ico" />
+    <Content Include="Graphicloads-100-Flat-System-analytics.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLib\ClassLib.csproj">
+      <Project>{99e0a74a-66a9-41e5-938d-aa3a4c2a0405}</Project>
+      <Name>ClassLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
