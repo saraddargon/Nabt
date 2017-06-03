@@ -72,6 +72,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.radGridView1 = new Telerik.WinControls.UI.RadGridView();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
+            this.txtVendorNo = new Telerik.WinControls.UI.RadTextBox();
             this.cboVendor = new Telerik.WinControls.UI.RadMultiColumnComboBox();
             this.radButton1 = new Telerik.WinControls.UI.RadButton();
             this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
@@ -87,6 +88,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtVendorNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboVendor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboVendor.EditorControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboVendor.EditorControl.MasterTemplate)).BeginInit();
@@ -322,7 +324,6 @@
             this.radGridView1.MasterTemplate.AllowDragToGroup = false;
             this.radGridView1.MasterTemplate.AllowRowResize = false;
             this.radGridView1.MasterTemplate.AutoGenerateColumns = false;
-            gridViewCheckBoxColumn1.Checked = Telerik.WinControls.Enumerations.ToggleState.On;
             gridViewCheckBoxColumn1.EnableExpressionEditor = false;
             gridViewCheckBoxColumn1.EnableHeaderCheckBox = true;
             gridViewCheckBoxColumn1.HeaderText = "เลือก";
@@ -469,11 +470,13 @@
             this.radGridView1.ThemeName = "Office2010Blue";
             this.radGridView1.CellEndEdit += new Telerik.WinControls.UI.GridViewCellEventHandler(this.radGridView1_CellEndEdit);
             this.radGridView1.CellClick += new Telerik.WinControls.UI.GridViewCellEventHandler(this.radGridView1_CellClick);
+            this.radGridView1.CellDoubleClick += new Telerik.WinControls.UI.GridViewCellEventHandler(this.radGridView1_CellDoubleClick);
             this.radGridView1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.radGridView1_PreviewKeyDown);
             // 
             // radPanel1
             // 
             this.radPanel1.BackColor = System.Drawing.Color.AliceBlue;
+            this.radPanel1.Controls.Add(this.txtVendorNo);
             this.radPanel1.Controls.Add(this.cboVendor);
             this.radPanel1.Controls.Add(this.radButton1);
             this.radPanel1.Controls.Add(this.radLabel1);
@@ -483,6 +486,18 @@
             this.radPanel1.Size = new System.Drawing.Size(815, 38);
             this.radPanel1.TabIndex = 0;
             this.radPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.radPanel1_Paint);
+            // 
+            // txtVendorNo
+            // 
+            this.txtVendorNo.Enabled = false;
+            this.txtVendorNo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVendorNo.Location = new System.Drawing.Point(420, 12);
+            this.txtVendorNo.Name = "txtVendorNo";
+            this.txtVendorNo.ReadOnly = true;
+            this.txtVendorNo.Size = new System.Drawing.Size(70, 19);
+            this.txtVendorNo.TabIndex = 6;
+            this.txtVendorNo.ThemeName = "Office2010Blue";
+            this.txtVendorNo.Visible = false;
             // 
             // cboVendor
             // 
@@ -510,7 +525,7 @@
             this.cboVendor.EditorControl.ShowGroupPanel = false;
             this.cboVendor.EditorControl.Size = new System.Drawing.Size(240, 150);
             this.cboVendor.EditorControl.TabIndex = 0;
-            this.cboVendor.Location = new System.Drawing.Point(187, 12);
+            this.cboVendor.Location = new System.Drawing.Point(127, 12);
             this.cboVendor.Name = "cboVendor";
             this.cboVendor.Size = new System.Drawing.Size(287, 20);
             this.cboVendor.TabIndex = 5;
@@ -530,7 +545,7 @@
             // 
             // radLabel1
             // 
-            this.radLabel1.Location = new System.Drawing.Point(126, 12);
+            this.radLabel1.Location = new System.Drawing.Point(66, 12);
             this.radLabel1.Name = "radLabel1";
             this.radLabel1.Size = new System.Drawing.Size(55, 18);
             this.radLabel1.TabIndex = 0;
@@ -596,6 +611,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).EndInit();
             this.radPanel1.ResumeLayout(false);
             this.radPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtVendorNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboVendor.EditorControl.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboVendor.EditorControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboVendor)).EndInit();
@@ -640,5 +656,6 @@
         private Telerik.WinControls.UI.RadMultiColumnComboBox cboVendor;
         private Telerik.WinControls.UI.RadButton radButton1;
         private Telerik.WinControls.UI.RadLabel radLabel1;
+        private Telerik.WinControls.UI.RadTextBox txtVendorNo;
     }
 }

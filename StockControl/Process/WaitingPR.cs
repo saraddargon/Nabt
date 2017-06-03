@@ -110,20 +110,16 @@ namespace StockControl
                     //dt = ClassLib.Classlib.LINQToDataTable(db.tb_Units.ToList());
                     try
                     {
-                        // int year1 = 2017;
-
-                        //var gd = (from ix in db.tb_ForcastCalculates
-                        //          where ix.MMM == dbClss.getMonth(cboMonth.Text) && ix.YYYY == year1
-                        //          select new { ix.YYYY, ix.MMM, Month = dbClss.getMonthRevest(ix.MMM)
-                        //          , ix.CodeNo
-                        //          , ItemDescription =db.tb_Items.Where(s => s.CodeNo == ix.CodeNo).Select(o => o.ItemDescription).FirstOrDefault()
-                        //          ,ix.ForeCastQty,ix.Toolife_spc,ix.SumQty,ix.ExtendQty,ix.UsePerDay,ix.LeadTime,ix.KeepStock,ix.AddErrQty,ix.OrderQty}).ToList();
+                        string Vendorno = "";
+                        if (!cboVendor.Text.Equals(""))
+                            Vendorno = txtVendorNo.Text;
+                        
                         var gd = (from a in db.tb_Items
 
                                   select new {
                                       CodeNo = a.CodeNo,
                                       ItemDescription = a.ItemDescription,
-                                      Order = 555,
+                                      Order = 0,
                                       StockQty = 0,
                                       BackOrder = 0,
                                       UnitBuy = a.UnitBuy,
@@ -133,7 +129,7 @@ namespace StockControl
                                       MinStock = a.MinimumStock,
                                       VendorNo = a.VendorNo,
                                       VendorName = a.VendorItemName
-                                  }).Where(ab => ab.VendorName == cboVendor.Text)
+                                  }).Where(ab => ab.VendorNo.Contains(Vendorno))
                                   .ToList();
                         radGridView1.DataSource = gd;
 
@@ -157,23 +153,29 @@ namespace StockControl
 
             //    radGridView1.DataSource = dt;
         }
-        private bool CheckDuplicate(string code, string Code2)
+        private bool CheckDuplicate(string CodeNo)
         {
             bool ck = false;
-
-            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            string CodeNo_temp = "";
+            string CodeNo_temp2 = "";
+            foreach (GridViewRowInfo rowinfo in radGridView1.Rows.Where(o => Convert.ToBoolean(o.Cells["S"].Value)))
             {
-                int i = (from ix in db.tb_Models
-                         where ix.ModelName == code
+                if(CodeNo_temp.Equals(""))
+                    CodeNo_temp = StockControl.dbClss.TSt(rowinfo.Cells["CodeNo"].Value);
+                
 
-                         select ix).Count();
-                if (i > 0)
-                    ck = false;
-                else
+                if (!CodeNo_temp.Equals(CodeNo_temp2))
+                {
                     ck = true;
+                    break;
+                }
+                else
+                    ck = false;
+                
+                CodeNo_temp2 = StockControl.dbClss.TSt(rowinfo.Cells["CodeNo"].Value);
+                
             }
-
-            return ck;
+                return ck;
         }
 
         private bool AddUnit()
@@ -322,24 +324,20 @@ namespace StockControl
             try
             {
                 //int a = Convert.ToInt32(radGridView1.Rows[e.RowIndex].Cells["Order"].Value);
-                //radGridView1.Rows[e.RowIndex].Cells["dgvC"].Value = "T";
-                //string TM1 = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["ModelName"].Value);
-                ////string TM2 = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["MMM"].Value);
-                //string Chk = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["dgvCodeTemp"].Value);
-                //if (Chk.Equals("") && !TM1.Equals(""))
-                //{
 
-                //    if (!CheckDuplicate(TM1, Chk))
-                //    {
-                //        MessageBox.Show("ข้อมูล รายการซ้า");
-                //        radGridView1.Rows[e.RowIndex].Cells["ModelName"].Value = "";
-                //        //  radGridView1.Rows[e.RowIndex].Cells["MMM"].Value = "";
-                //        //  radGridView1.Rows[e.RowIndex].Cells["UnitCode"].IsSelected = true;
+                Boolean ss = StockControl.dbClss.TBo(radGridView1.Rows[e.RowIndex].Cells["S"].Value);
+                if (ss.Equals(true))
+                {
+                    string CodeNo = ""; 
+                    CodeNo = StockControl.dbClss.TSt(radGridView1.Rows[e.RowIndex].Cells["CodeNo"].Value);
 
-                //    }
-                //}
+                    if (!CheckDuplicate(CodeNo) && !CodeNo.Equals(""))
+                    {
+                        MessageBox.Show("ไม่สามารถสั่งซื้อต่างผู้ขายได้");
+                        radGridView1.Rows[e.RowIndex].Cells["S"].Value = false;
 
-
+                    }
+                }
             }
             catch (Exception ex) { }
         }
@@ -416,8 +414,21 @@ namespace StockControl
 
         private void cboModelName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if (crow == 0)
-            //    DataLoad();
+            //using (DataClasses1DataContext db = new DataClasses1DataContext())
+            //{
+            if (!cboVendor.Text.Equals(""))
+            {
+                txtVendorNo.Text = Convert.ToString(cboVendor.SelectedValue);
+                //var I = (from ix in db.tb_Vendors select ix).Where(a => a.Active == true 
+                //                && a.VendorName.Equals(cboVendor.Text)).ToList();
+                //if (I.Count > 0)
+
+            }
+            else
+                txtVendorNo.Text = "";
+
+            //}
+
         }
 
         private void cboYear_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
@@ -441,6 +452,30 @@ namespace StockControl
             //        rd.Cells["S"].Value = false;
             //    }
             //}
+        }
+
+        private void radGridView1_CellDoubleClick(object sender, GridViewCellEventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("สร้างรายการสั่งซื้อ ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    radGridView1.EndEdit();
+                    //dt_createPR
+                    List<GridViewRowInfo> dgvRow_List = new List<GridViewRowInfo>();
+                    
+                    dgvRow_List.Add(radGridView1.CurrentRow);
+                
+                    if (dgvRow_List.Count() > 0)
+                    {
+                        CreatePR MS = new CreatePR(dgvRow_List);
+                        MS.ShowDialog();
+                    }
+                    else
+                        MessageBox.Show("กรุณาเลือกรายการ");
+                }
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

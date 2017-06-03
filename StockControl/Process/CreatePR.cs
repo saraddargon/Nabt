@@ -816,14 +816,19 @@ namespace StockControl
                 dgvData.EndEdit();
                  if (e.RowIndex >= -1)
                 {
-                    if (dgvData.Columns["dgvOrderQty"].Index == e.ColumnIndex
-                        || dgvData.Columns["dgvStandardCost"].Index == e.ColumnIndex
-                        )
+                    if (dgvData.Columns["S"].Index == e.ColumnIndex)
                     {
-                        decimal OrderQty = 0; decimal.TryParse(StockControl.dbClss.TSt(e.Row.Cells["dgvOrderQty"].Value), out OrderQty);
-                        decimal StandardCost = 0; decimal.TryParse(StockControl.dbClss.TSt(e.Row.Cells["dgvStandardCost"].Value), out StandardCost);
-                        e.Row.Cells["dgvAmount"].Value = OrderQty * StandardCost;
+                        
+
                     }
+                    //if (dgvData.Columns["dgvOrderQty"].Index == e.ColumnIndex
+                    //    || dgvData.Columns["dgvStandardCost"].Index == e.ColumnIndex
+                    //    )
+                    //{
+                    //    decimal OrderQty = 0; decimal.TryParse(StockControl.dbClss.TSt(e.Row.Cells["dgvOrderQty"].Value), out OrderQty);
+                    //    decimal StandardCost = 0; decimal.TryParse(StockControl.dbClss.TSt(e.Row.Cells["dgvStandardCost"].Value), out StandardCost);
+                    //    e.Row.Cells["dgvAmount"].Value = OrderQty * StandardCost;
+                    //}
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
