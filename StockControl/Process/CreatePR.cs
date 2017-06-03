@@ -21,6 +21,7 @@ namespace StockControl
         public CreatePR(string PRNo)
         {
             InitializeComponent();
+            PRNo_temp = PRNo;
         }
         public CreatePR(List<GridViewRowInfo> RetDT)
         {
@@ -31,6 +32,7 @@ namespace StockControl
         //private int ColView = 10;
         //DataTable dt = new DataTable();
         List<GridViewRowInfo> RetDT;
+        string PRNo_temp = "";
         DataTable dt_PRH = new DataTable();
         DataTable dt_PRD = new DataTable();
         private void radMenuItem2_Click(object sender, EventArgs e)
@@ -92,25 +94,37 @@ namespace StockControl
         string Ac = "";
         private void Unit_Load(object sender, EventArgs e)
         {
-            //dgvData.ReadOnly = true;
-            dgvData.AutoGenerateColumns = false;
-            GETDTRow();
-            DefaultItem();
-            ClearData();
-           
-            if(RetDT !=null)
+            try
             {
+                this.Cursor = Cursors.WaitCursor;
+                //dgvData.ReadOnly = true;
+                dgvData.AutoGenerateColumns = false;
+                GETDTRow();
+                DefaultItem();
 
-                if (RetDT.Count > 0)
+                ClearData();
+
+                if (RetDT != null)
                 {
-                    btnNew_Click(null, null);
-                    CreatePR_from_WaitingPR();
+
+                    if (RetDT.Count > 0)
+                    {
+                        btnNew_Click(null, null);
+                        CreatePR_from_WaitingPR();
+                    }
+                }
+                else
+                {
+                    if (!PRNo_temp.Equals(""))
+                    {
+                        txtPRNo.Text = PRNo_temp;
+                        DataLoad();
+                        btnView_Click(null, null);
+                    }
                 }
             }
-            else
-                DataLoad();
-
-
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
         }
         private void DefaultItem()
         {
@@ -1126,7 +1140,10 @@ namespace StockControl
         private void txtPRNo_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13 && !txtPRNo.Text.Equals(""))
+            {
                 DataLoad();
+                btnView_Click(null, null);
+            }
         }
         private void CreatePR_from_WaitingPR()
         {

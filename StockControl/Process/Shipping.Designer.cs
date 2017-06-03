@@ -341,7 +341,6 @@
             this.radGridView1.MasterTemplate.AllowAddNewRow = false;
             this.radGridView1.MasterTemplate.AllowColumnChooser = false;
             this.radGridView1.MasterTemplate.AllowColumnHeaderContextMenu = false;
-            this.radGridView1.MasterTemplate.AllowColumnReorder = false;
             this.radGridView1.MasterTemplate.AllowDragToGroup = false;
             this.radGridView1.MasterTemplate.AllowRowResize = false;
             this.radGridView1.MasterTemplate.AutoGenerateColumns = false;
@@ -354,6 +353,7 @@
             gridViewTextBoxColumn2.HeaderText = "รหัสพาร์ท";
             gridViewTextBoxColumn2.Name = "CodeNo";
             gridViewTextBoxColumn2.Width = 82;
+            gridViewTextBoxColumn3.EnableExpressionEditor = false;
             gridViewTextBoxColumn3.FieldName = "ItemName";
             gridViewTextBoxColumn3.HeaderText = "ชื่อพาร์ท";
             gridViewTextBoxColumn3.Name = "ItemName";
@@ -369,6 +369,7 @@
             gridViewTextBoxColumn5.HeaderText = "จำนวนคงเหลือ";
             gridViewTextBoxColumn5.Name = "Qty";
             gridViewTextBoxColumn5.Width = 97;
+            gridViewTextBoxColumn6.EnableExpressionEditor = false;
             gridViewTextBoxColumn6.FieldName = "ReceiveQty";
             gridViewTextBoxColumn6.HeaderText = "จำนวนเบิก";
             gridViewTextBoxColumn6.Name = "ReceiveQty";
@@ -394,32 +395,34 @@
             gridViewTextBoxColumn10.HeaderText = "ยอดรวม";
             gridViewTextBoxColumn10.Name = "Amount";
             gridViewTextBoxColumn10.Width = 100;
+            gridViewTextBoxColumn11.EnableExpressionEditor = false;
             gridViewTextBoxColumn11.FieldName = "LotNo";
             gridViewTextBoxColumn11.HeaderText = "เลข LotNo";
             gridViewTextBoxColumn11.Name = "LotNo";
             gridViewTextBoxColumn11.Width = 90;
             gridViewTextBoxColumn12.EnableExpressionEditor = false;
-            gridViewTextBoxColumn12.FieldName = "Remark";
-            gridViewTextBoxColumn12.HeaderText = "วัตถุประสงค์";
-            gridViewTextBoxColumn12.Name = "Remark";
-            gridViewTextBoxColumn12.Width = 150;
+            gridViewTextBoxColumn12.FieldName = "SerialNo";
+            gridViewTextBoxColumn12.HeaderText = "ซีเรียล";
+            gridViewTextBoxColumn12.Name = "SerialNo";
+            gridViewTextBoxColumn12.ReadOnly = true;
+            gridViewTextBoxColumn12.Width = 112;
             gridViewTextBoxColumn13.EnableExpressionEditor = false;
-            gridViewTextBoxColumn13.HeaderText = "xC";
-            gridViewTextBoxColumn13.IsVisible = false;
-            gridViewTextBoxColumn13.Name = "dgvC";
+            gridViewTextBoxColumn13.FieldName = "MachineName";
+            gridViewTextBoxColumn13.HeaderText = "ชื่อ Machine";
+            gridViewTextBoxColumn13.Name = "MachineName";
             gridViewTextBoxColumn13.ReadOnly = true;
-            gridViewTextBoxColumn13.Width = 41;
+            gridViewTextBoxColumn13.Width = 141;
             gridViewTextBoxColumn14.EnableExpressionEditor = false;
-            gridViewTextBoxColumn14.HeaderText = "xCode";
-            gridViewTextBoxColumn14.IsVisible = false;
-            gridViewTextBoxColumn14.Name = "dgvCodetemp";
-            gridViewTextBoxColumn14.Width = 44;
+            gridViewTextBoxColumn14.FieldName = "Remark";
+            gridViewTextBoxColumn14.HeaderText = "วัตถุประสงค์";
+            gridViewTextBoxColumn14.Name = "Remark";
+            gridViewTextBoxColumn14.Width = 150;
             gridViewTextBoxColumn15.EnableExpressionEditor = false;
-            gridViewTextBoxColumn15.HeaderText = "xCodetemp2";
+            gridViewTextBoxColumn15.HeaderText = "xC";
             gridViewTextBoxColumn15.IsVisible = false;
-            gridViewTextBoxColumn15.Name = "dgvCodetemp2";
+            gridViewTextBoxColumn15.Name = "dgvC";
             gridViewTextBoxColumn15.ReadOnly = true;
-            gridViewTextBoxColumn15.Width = 47;
+            gridViewTextBoxColumn15.Width = 41;
             this.radGridView1.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
             gridViewTextBoxColumn1,
             gridViewTextBoxColumn2,

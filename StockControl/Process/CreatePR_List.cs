@@ -51,6 +51,8 @@ namespace StockControl
         }
         private void Unit_Load(object sender, EventArgs e)
         {
+            dtDateFrom.Value = DateTime.Now;
+            dtDateTo.Value = DateTime.Now;
             Set_dt_Print();
             //radGridView1.ReadOnly = true;
             radGridView1.AutoGenerateColumns = false;
@@ -69,11 +71,30 @@ namespace StockControl
                     //dt = ClassLib.Classlib.LINQToDataTable(db.tb_Units.ToList());
                     //radGridView1.DataSource = db.tb_Histories.Where(s => s.ScreenName == ScreenSearch).OrderBy(o => o.CreateDate).ToList();
                     int c = 0;
-                   
+                    int  dateFrom = StockControl.dbClss.TInt(DateTime.Now.ToString("yyyyMMdd"));
+                    int dateTo = StockControl.dbClss.TInt(DateTime.Now.ToString("yyyyMMdd"));
+                    if(!dtDateFrom.Text.Equals(""))
+                        dateFrom = StockControl.dbClss.TInt(dtDateFrom.Value.ToString("yyyyMMdd"));
+                    if(!dtDateTo.Text.Equals(""))
+                        dateTo = StockControl.dbClss.TInt(dtDateTo.Value.ToString("yyyyMMdd"));
+
+                    //MessageBox.Show(Convert.ToInt32(DateTime.Now.ToString("yyyyMMdd")).ToString());
+
                     var g = (from ix in db.tb_PurchaseRequests select ix).Where(a => a.VendorNo.Contains(txtVendorNo.Text)
                         && a.TEMPNo.Contains(txtTempNo.Text)
                         && a.PRNo.Contains(txtPRNo.Text)
-                        && a.VendorName.Contains(txtVendorName.Text))
+                        && a.VendorName.Contains(txtVendorName.Text)
+
+                        //&& (compart_date(Convert.ToDateTime(a.CreateDate), dtDateFrom.Value) >= 1 )
+                            
+                        //&& (
+                        //     (Convert.ToDateTime(a.CreateDate).ToString("yyyyMMdd") != "" &&
+                        //     (StockControl.dbClss.TInt(Convert.ToDateTime(a.CreateDate).ToString("yyyyMMdd"))  >= dateFrom)
+                        //     && (StockControl.dbClss.TInt(Convert.ToDateTime(a.CreateDate).ToString("yyyyMMdd")) <= dateTo)
+                        //    ))
+
+
+                         )
                         .ToList();
                     if (g.Count > 0)
                     {
@@ -94,6 +115,17 @@ namespace StockControl
 
 
             //    radGridView1.DataSource = dt;
+        }
+        private int compart_date(DateTime date1, DateTime date2)
+        {
+            int result = 0;
+            //DateTime date1 = new DateTime(2009, 8, 1, 0, 0, 0);
+            //DateTime date2 = new DateTime(2009, 8, 1, 12, 0, 0);
+            result = DateTime.Compare(date1, date2);
+
+            
+
+            return result;
         }
        
 
@@ -206,6 +238,12 @@ namespace StockControl
                 if (screen.Equals(1))
                 {
                     CodeNo_tt.Text = Convert.ToString(e.Row.Cells["PRNo"].Value);
+                    this.Close();
+                }
+                else
+                {
+                    CreatePR a = new CreatePR(Convert.ToString(e.Row.Cells["PRNo"].Value));
+                    a.ShowDialog();
                     this.Close();
                 }
                

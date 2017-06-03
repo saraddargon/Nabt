@@ -198,12 +198,6 @@
     <Compile Include="Process\CreatePR.Designer.cs">
       <DependentUpon>CreatePR.cs</DependentUpon>
     </Compile>
-    <Compile Include="Process\ListPR.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Process\ListPR.Designer.cs">
-      <DependentUpon>ListPR.cs</DependentUpon>
-    </Compile>
     <Compile Include="Process\WaitingPR.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -371,9 +365,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\CreatePR.resx">
       <DependentUpon>CreatePR.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Process\ListPR.resx">
-      <DependentUpon>ListPR.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\WaitingPR.resx">
       <DependentUpon>WaitingPR.cs</DependentUpon>
