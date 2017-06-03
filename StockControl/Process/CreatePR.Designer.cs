@@ -509,6 +509,7 @@
             gridViewTextBoxColumn9.EnableExpressionEditor = false;
             gridViewTextBoxColumn9.FieldName = "SerialNo";
             gridViewTextBoxColumn9.HeaderText = "ซีเรียล";
+            gridViewTextBoxColumn9.IsVisible = false;
             gridViewTextBoxColumn9.Name = "dgvSerialNo";
             gridViewTextBoxColumn9.Width = 101;
             gridViewTextBoxColumn10.EnableExpressionEditor = false;
@@ -531,12 +532,14 @@
             gridViewDecimalColumn5.EnableExpressionEditor = false;
             gridViewDecimalColumn5.FieldName = "RemainQty";
             gridViewDecimalColumn5.HeaderText = "จำนวนคงเหลือ";
+            gridViewDecimalColumn5.IsVisible = false;
             gridViewDecimalColumn5.Name = "dgvRemainQty";
             gridViewDecimalColumn5.ReadOnly = true;
             gridViewDecimalColumn5.Width = 86;
             gridViewTextBoxColumn12.EnableExpressionEditor = false;
             gridViewTextBoxColumn12.FieldName = "id";
             gridViewTextBoxColumn12.HeaderText = "id";
+            gridViewTextBoxColumn12.IsVisible = false;
             gridViewTextBoxColumn12.Name = "dgvid";
             gridViewTextBoxColumn12.ReadOnly = true;
             this.dgvData.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
@@ -865,6 +868,7 @@
             this.txtPRNo.Name = "txtPRNo";
             this.txtPRNo.Size = new System.Drawing.Size(119, 19);
             this.txtPRNo.TabIndex = 7;
+            this.txtPRNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPRNo_KeyPress);
             // 
             // txtVendorNo
             // 

@@ -22,9 +22,15 @@ namespace StockControl
         {
             InitializeComponent();
         }
+        public CreatePR(List<GridViewRowInfo> RetDT)
+        {
+            InitializeComponent();
+            this.RetDT = RetDT;
+        }
         //private int RowView = 50;
         //private int ColView = 10;
         //DataTable dt = new DataTable();
+        List<GridViewRowInfo> RetDT;
         DataTable dt_PRH = new DataTable();
         DataTable dt_PRD = new DataTable();
         private void radMenuItem2_Click(object sender, EventArgs e)
@@ -91,9 +97,17 @@ namespace StockControl
             GETDTRow();
             DefaultItem();
             ClearData();
-            DataLoad();
+           
 
-            
+            if(RetDT.Count>0)
+            {
+                btnNew_Click(null, null);
+                CreatePR_from_WaitingPR();
+            }
+            else
+                DataLoad();
+
+
         }
         private void DefaultItem()
         {
@@ -156,6 +170,7 @@ namespace StockControl
                         txtFax.Text = StockControl.dbClss.TSt(g.FirstOrDefault().Fax);
                         txtEmail.Text = StockControl.dbClss.TSt(g.FirstOrDefault().Email);
                         txtAddress.Text = StockControl.dbClss.TSt(g.FirstOrDefault().Address);
+                        txtRemarkHD.Text = StockControl.dbClss.TSt(g.FirstOrDefault().HDRemark);
 
                         //lblStatus.Text = StockControl.dbClss.TSt(g.FirstOrDefault().Status);
                         if (StockControl.dbClss.TSt(g.FirstOrDefault().Status).Equals("Cancel"))
@@ -265,7 +280,7 @@ namespace StockControl
                             gg.VendorNo = txtVendorNo.Text.Trim();
                             dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขรหัสผู้ขาย [" + txtVendorNo.Text.Trim() + "]", "");
                         }
-                        if (!txtCurrency.Text.Trim().Equals(row["HDRemark"].ToString()))
+                        if (!txtCurrency.Text.Trim().Equals(row["CRRNCY"].ToString()))
                         {
                             gg.CRRNCY = txtCurrency.Text.Trim();
                             dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขสกุลเงิน [" + txtCurrency.Text.Trim() + "]", "");
@@ -561,6 +576,7 @@ namespace StockControl
                 btnDel_Item.Enabled = ss;
                 //txtVendorNo.Enabled = ss;
                 txtEmail.Enabled = ss;
+                txtAddress.Enabled = ss;
             }
             else if (Condition.Equals("View"))
             {
@@ -570,13 +586,14 @@ namespace StockControl
                 txtFax.Enabled = ss;
                 txtContactName.Enabled = ss;
                 dtRequire.Enabled = ss;
-                dgvData.ReadOnly = ss;
+                dgvData.ReadOnly = !ss;
                 txtRemarkHD.Enabled = ss;
                 //txtCurrency.Enabled = ss;
                 btnAdd_Item.Enabled = ss;
                 btnDel_Item.Enabled = ss;
                 //txtVendorNo.Enabled = ss;
                 txtEmail.Enabled = ss;
+                txtAddress.Enabled = ss;
             }
             else if (Condition.Equals("Edit"))
             {
@@ -586,13 +603,14 @@ namespace StockControl
                 txtFax.Enabled = ss;
                 txtContactName.Enabled = ss;
                 dtRequire.Enabled = ss;
-                dgvData.ReadOnly = ss;
+                dgvData.ReadOnly = !ss;
                 txtRemarkHD.Enabled = ss;
                 //txtCurrency.Enabled = ss;
                 //txtVendorNo.Enabled = ss;
                 btnAdd_Item.Enabled = ss;
                 btnDel_Item.Enabled = ss;
                 txtEmail.Enabled = ss;
+                txtAddress.Enabled = ss;
             }
         }
        
@@ -639,7 +657,7 @@ namespace StockControl
             btnNew.Enabled = true;
             btnSave.Enabled = true;
           
-            Enable_Status(true, "View");
+            Enable_Status(false, "View");
             lblStatus.Text = "View";
             Ac = "View";
         }
@@ -650,10 +668,12 @@ namespace StockControl
             btnEdit.Enabled = false;
             btnNew.Enabled = true;
             btnSave.Enabled = true;
+            
 
             Enable_Status(true, "Edit");
             lblStatus.Text = "Edit";
             Ac = "Edit";
+           
 
         }
         private void btnDelete_Click(object sender, EventArgs e)
@@ -759,26 +779,31 @@ namespace StockControl
         {
             try
             {
-                if(Check_Save())
-                    return;
-                else
+                if (Ac.Equals("New") || Ac.Equals("Edit"))
                 {
-
-                    if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    if (Check_Save())
+                        return;
+                    else
                     {
-                        this.Cursor = Cursors.WaitCursor;
 
-                        if (Ac.Equals("New"))
-                            txtTempNo.Text = StockControl.dbClss.GetNo(3, 2);
-
-                        if (!txtTempNo.Text.Equals(""))
+                        if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-                            SaveHerder();
-                            AddPR_d();
-                            DataLoad();
+                            this.Cursor = Cursors.WaitCursor;
+
+                            if (Ac.Equals("New"))
+                                txtTempNo.Text = StockControl.dbClss.GetNo(3, 2);
+
+                            if (!txtTempNo.Text.Equals(""))
+                            {
+                                SaveHerder();
+                                AddPR_d();
+                                DataLoad();
+                            }
                         }
                     }
                 }
+                else
+                    MessageBox.Show("สถานะต้องเป็น New หรือ Edit เท่านั่น");
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             finally { this.Cursor = Cursors.Default; }
@@ -910,12 +935,13 @@ namespace StockControl
                     {
                         string CodeNo = "";
                         this.Cursor = Cursors.WaitCursor;
+                        int OrderQty = 1;
                         foreach (GridViewRowInfo ee in dgvRow_List)
                         {
                             CodeNo = Convert.ToString(ee.Cells["CodeNo"].Value).Trim();
                             if (!CodeNo.Equals(""))
                             {
-                                Add_Part(CodeNo);
+                                Add_Part(CodeNo, OrderQty);
                             }
                         }
                     }
@@ -926,7 +952,7 @@ namespace StockControl
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             finally { this.Cursor = Cursors.Default; }
         }
-        private void Add_Part(string CodeNo)
+        private void Add_Part(string CodeNo,int OrderQty)
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
@@ -938,7 +964,7 @@ namespace StockControl
                         StockControl.dbClss.TSt(g.FirstOrDefault().ItemNo)
                         , StockControl.dbClss.TSt(g.FirstOrDefault().ItemDescription)
                         , StockControl.dbClss.TSt(g.FirstOrDefault().GroupCode)
-                        , 1
+                        , OrderQty
                         , StockControl.dbClss.TDe(g.FirstOrDefault().PCSUnit)
                         , StockControl.dbClss.TSt(g.FirstOrDefault().UnitBuy)
                         , StockControl.dbClss.TDe(g.FirstOrDefault().StandardCost)
@@ -1091,6 +1117,64 @@ namespace StockControl
             Enable_Status(false, "View");
             txtPRNo.Text = PR;
             DataLoad();
+        }
+
+        private void txtPRNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13 && !txtPRNo.Text.Equals(""))
+                DataLoad();
+        }
+        private void CreatePR_from_WaitingPR()
+        {
+            try
+            {
+                if (RetDT.Count > 0)
+                {
+                    string CodeNo = "";
+                    this.Cursor = Cursors.WaitCursor;
+                    string VendorNo = "";
+                    foreach (GridViewRowInfo ee in RetDT)
+                    {
+                        VendorNo = Convert.ToString(ee.Cells["VendorNo"].Value).Trim();
+                        if(!VendorNo.Equals(""))
+                        {
+                            using (DataClasses1DataContext db = new DataClasses1DataContext())
+                            {
+                                var I = (from ix in db.tb_Vendors select ix).Where(a => a.Active == true 
+                                && a.VendorNo.Equals(VendorNo)).ToList();
+                                if (I.Count > 0)
+                                {
+                                    //StockControl.dbClss.TBo(a.Active).Equals(true)
+                                    txtCurrency.Text = I.FirstOrDefault().CRRNCY;
+                                    txtAddress.Text = I.FirstOrDefault().Address;
+                                    txtVendorNo.Text = I.FirstOrDefault().VendorNo;
+                                    cboVendorName.Text = I.FirstOrDefault().VendorName;
+                                    var g = (from ix in db.tb_VendorContacts select ix).Where(a => a.VendorNo.Equals(txtVendorNo.Text)).OrderByDescending(b => b.DefaultNo).ToList();
+                                    if (g.Count > 0)
+                                    {
+                                        txtContactName.Text = g.FirstOrDefault().ContactName;
+                                        txtTel.Text = g.FirstOrDefault().Tel;
+                                        txtFax.Text = g.FirstOrDefault().Fax;
+                                        txtEmail.Text = g.FirstOrDefault().Email;
+                                        
+                                    }
+                                }
+                            }
+
+                        }
+
+                        CodeNo = Convert.ToString(ee.Cells["CodeNo"].Value).Trim();
+                        if (!CodeNo.Equals(""))
+                        {
+                            Add_Part(CodeNo,StockControl.dbClss.TInt(ee.Cells["Order"].Value));
+
+                        }
+                        
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
         }
     }
 }
