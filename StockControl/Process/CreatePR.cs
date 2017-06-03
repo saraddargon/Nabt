@@ -98,11 +98,14 @@ namespace StockControl
             DefaultItem();
             ClearData();
            
-
-            if(RetDT.Count>0)
+            if(RetDT !=null)
             {
-                btnNew_Click(null, null);
-                CreatePR_from_WaitingPR();
+
+                if (RetDT.Count > 0)
+                {
+                    btnNew_Click(null, null);
+                    CreatePR_from_WaitingPR();
+                }
             }
             else
                 DataLoad();

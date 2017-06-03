@@ -10,6 +10,12 @@ namespace Report
 {
     public static class CRRReport
     {
+        public static string ServerName="";
+        public static string DbName = "";
+        public static string dbUser = "";
+        public static string dbPass = "";
+
+
         public static CrystalDecisions.CrystalReports.Engine.ReportDocument rptSourceX = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
 
     }
