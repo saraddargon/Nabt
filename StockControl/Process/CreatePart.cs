@@ -174,8 +174,9 @@ namespace StockControl
             }
             else
             {
+                btnNew_Click(null, null);
                 //New
-                Enable_Status(false, "-");
+                //Enable_Status(false, "-");
             }
         }
         private void Enable_Status(bool ss,string Condition)
@@ -213,6 +214,7 @@ namespace StockControl
 
                 btnAddDWG.Enabled = ss;
                 btnDeleteDWG.Enabled = ss;
+                btnGET.Enabled = true;
             }
             else if (Condition.Equals("View"))
             {
@@ -247,6 +249,7 @@ namespace StockControl
 
                 btnAddDWG.Enabled = ss;
                 btnDeleteDWG.Enabled = ss;
+                btnGET.Enabled = false;
             }
             else if (Condition.Equals("Edit"))
             {
@@ -281,6 +284,7 @@ namespace StockControl
 
                 btnAddDWG.Enabled = ss;
                 btnDeleteDWG.Enabled = ss;
+                btnGET.Enabled = false;
             }
         }
         private void LoadDefault()
@@ -442,6 +446,7 @@ namespace StockControl
 
         private void btnNew_Click(object sender, EventArgs e)
         {
+
             Cleardata();
             lbStatus.Text = "New";
             btnView.Enabled = true;
@@ -452,6 +457,7 @@ namespace StockControl
             //radGridView1.AllowAddNewRow = false;
             //radGridView1.Rows.AddNew();
             Enable_Status(true, "New");
+            btnGET.Enabled = true;
             Ac = "New";
             
         }
@@ -463,7 +469,9 @@ namespace StockControl
             btnEdit.Enabled = true;
             btnNew.Enabled = true;
             Enable_Status(false, "View");
-            
+            btnGET.Enabled = false;
+
+
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -479,6 +487,7 @@ namespace StockControl
                 btnNew.Enabled = true;
                 lbStatus.Text = "Edit";
                 Enable_Status(true, "Edit");
+                btnGET.Enabled = false;
                 Ac = "Edit";
             }
         }
@@ -865,6 +874,7 @@ namespace StockControl
                     {
                         AddPart();
                         DataLoad();
+                        btnGET.Enabled = false;
                     }
                 }
             }catch(Exception ex) { MessageBox.Show(ex.Message); }
@@ -981,12 +991,14 @@ namespace StockControl
                             db.SubmitChanges();
                             btnNew_Click(null, null);
                             btnSave.Enabled = true;
+                            btnGET.Enabled = false;
                         }
                         else // ไม่มีในระบบ
                         {
                             Cleardata();
                             Enable_Status(true, "New");
                             btnSave.Enabled = true;
+                            btnGET.Enabled = true;
                         }
                     }
 
@@ -1739,6 +1751,7 @@ namespace StockControl
                 btnNew.Enabled = true;
                 Cleardata();
                 Enable_Status(false, "View");
+                
 
                 this.Cursor = Cursors.WaitCursor;
                 ListPart sc = new ListPart(txtCodeNo);
@@ -1751,7 +1764,9 @@ namespace StockControl
                 ClassLib.Memory.Heap();
                 //LoadData
                 DataLoad();
-            }catch(Exception ex) { MessageBox.Show(ex.Message); dbClss.AddError("CreatePart", ex.Message + " : radButtonElement1_Click", this.Name); }
+                btnGET.Enabled = false;
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); dbClss.AddError("CreatePart", ex.Message + " : radButtonElement1_Click", this.Name); }
 
         }
 

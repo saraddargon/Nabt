@@ -297,8 +297,9 @@ namespace StockControl
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("สร้างรายการสั่งซื้อ ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                radGridView1.EndEdit();
                 //dt_createPR
                 List<GridViewRowInfo> dgvRow_List = new List<GridViewRowInfo>();
                 foreach (GridViewRowInfo rowinfo in radGridView1.Rows.Where(o => Convert.ToBoolean(o.Cells["S"].Value)))
