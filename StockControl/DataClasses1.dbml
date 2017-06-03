@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dbStockControl" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=mac-pc;Initial Catalog=dbStockControl;User ID=sa" SettingsObjectName="StockControl.Properties.Settings" SettingsPropertyName="dbStockControlConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=XTH-TOO\SQLEXPRESS;Initial Catalog=dbStockControl;User ID=sa" SettingsObjectName="StockControl.Properties.Settings" SettingsPropertyName="dbStockControlConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tb_Unit" Member="tb_Units">
     <Type Name="tb_Unit">
       <Column Name="UnitCode" Type="System.String" DbType="NVarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -287,6 +287,35 @@
       <Column Name="PCSUnit" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.TempPrintShelf" Member="TempPrintShelfs">
+    <Type Name="TempPrintShelf">
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CodeNo" Type="System.String" DbType="NVarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PartDescription" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ShelfNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PartNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Max" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Min" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="OrderPoint" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TempPrintKanban" Member="TempPrintKanbans">
+    <Type Name="TempPrintKanban">
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CodeNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PartNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PartDescription" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ShelfNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LeadTime" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="VendorName" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="GroupType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ToolLife" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Max" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Min" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="ReOrderPoint" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="BarCode" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
   <Function Name="dbo.Sp_ADM03_OpenFormSelect" Method="Sp_ADM03_OpenFormSelect">
     <ElementType Name="Sp_ADM03_OpenFormSelectResult">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -308,6 +337,13 @@
   <Function Name="dbo.getDate" Method="getDate" IsComposable="true">
     <Return Type="System.DateTime" />
   </Function>
+  <Function Name="dbo.Sp_GetNameControl_001" Method="Sp_GetNameControl_001">
+    <Parameter Name="ControlNo" Parameter="controlNo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Action" Parameter="action" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Sp_GetNameControl_001Result">
+      <Column Name="GetNo" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.sp_SelectVendor" Method="sp_SelectVendor">
     <ElementType Name="sp_SelectVendorResult">
       <Column Name="VendorNo" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
@@ -320,13 +356,6 @@
       <Column Name="Tel" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Fax" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.Sp_GetNameControl_001" Method="Sp_GetNameControl_001">
-    <Parameter Name="ControlNo" Parameter="controlNo" Type="System.Int32" DbType="Int" />
-    <Parameter Name="Action" Parameter="action" Type="System.Int32" DbType="Int" />
-    <ElementType Name="Sp_GetNameControl_001Result">
-      <Column Name="GetNo" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

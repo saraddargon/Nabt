@@ -38,23 +38,29 @@ namespace Report
         public static string WReport { get; set; }
         public static ReportDocument rptNull { get; set; }
         public static string[] Value { get; set; }
-        static string SERVERName = "Mac-pc";//ConnectDB.ConnectDB.server;//mainClass.mainClass.DB;
-        static string DBName = "dbStockControl";//ConnectDB.ConnectDB.dbname;//mainClass.mainClass.database;
-        static string Userdb = "sa";
-        static string PassDb = "";
+        static string SERVERName = Report.CRRReport.ServerName;
+        static string DBName = Report.CRRReport.DbName;
+        static string Userdb = Report.CRRReport.dbUser;
+        static string PassDb = Report.CRRReport.dbPass;
         static string DATA = "";
         
         private void Report_Load(object sender, EventArgs e)
         {
             try
             {
+                SERVERName = Report.CRRReport.ServerName;
+                DBName = Report.CRRReport.DbName;
+                Userdb = Report.CRRReport.dbUser;
+                PassDb = Report.CRRReport.dbPass;
+
+               // MessageBox.Show(SERVERName + "," + DBName + "," + Userdb + "," + PassDb);
                 // this.Cursor = Cursors.WaitCursor;
                 // dbClass.rptSourceX.Refresh();
                 // crystalReportViewer1.ReportSource = null;
                 DATA = "";
                 DATA = AppDomain.CurrentDomain.BaseDirectory;
                 DATA = DATA+@"Report\" + Rpt;
-              //  MessageBox.Show(DATA);
+              
                 if (fromdt.Equals(""))
                 {
 
@@ -145,7 +151,15 @@ namespace Report
 
             switch (WReport)
             {
-                case "Report_ShelfBox":
+                case "001_Kanban_Part":
+                    {
+
+                        rptDc.SetParameterValue("@User", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@DateTime", DateTime.Now);
+
+                    }
+                    break;
+                case "002_BoxShelf_Part":
                     {
 
                         rptDc.SetParameterValue("@User", Convert.ToString(Value[0].ToString()));

@@ -16,6 +16,10 @@ namespace StockControl
             ClassLib.Classlib.DomainUser = System.Environment.UserDomainName;
             ClassLib.Classlib.ScreenWidth = Screen.PrimaryScreen.Bounds.Width;
             ClassLib.Classlib.ScreenHight = Screen.PrimaryScreen.Bounds.Height;
+            Report.CRRReport.ServerName = "";
+            Report.CRRReport.DbName = "";
+            Report.CRRReport.dbUser = "";
+            Report.CRRReport.dbPass = "";
             string apc = Properties.Settings.Default.dbStockControlConnectionString2;
             try
             {
@@ -41,10 +45,7 @@ namespace StockControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
 
-            Report.CRRReport.ServerName = "";
-            Report.CRRReport.DbName = "";
-            Report.CRRReport.dbUser = "";
-            Report.CRRReport.dbPass = "";
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Mainfrom());

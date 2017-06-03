@@ -43,5 +43,15 @@ namespace StockControl.Properties {
                 return ((string)(this["dbStockControlConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=XTH-TOO\\SQLEXPRESS;Initial Catalog=dbStockControl;User ID=sa")]
+        public string dbStockControlConnectionString1 {
+            get {
+                return ((string)(this["dbStockControlConnectionString1"]));
+            }
+        }
     }
 }
