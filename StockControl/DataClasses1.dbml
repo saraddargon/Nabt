@@ -164,27 +164,6 @@
       <Column Name="Status" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.tb_PurchaseRequest" Member="tb_PurchaseRequests">
-    <Type Name="tb_PurchaseRequest">
-      <Column Name="PRNo" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="TEMPNo" Type="System.String" DbType="NVarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="VendorNo" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="VendorName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Column Name="Address" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="ContactName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Tel" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="Fax" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="RequireDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="HDRemark" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Status" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="UpdateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="UpdateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="CRRNCY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.tb_PurchaseRequestLine" Member="tb_PurchaseRequestLines">
     <Type Name="tb_PurchaseRequestLine">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -249,6 +228,28 @@
       <Column Name="DWG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.tb_PurchaseRequest" Member="tb_PurchaseRequests">
+    <Type Name="tb_PurchaseRequest">
+      <Column Name="PRNo" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="TEMPNo" Type="System.String" DbType="NVarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="VendorNo" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="VendorName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="ContactName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Tel" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Fax" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="RequireDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="HDRemark" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UpdateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CRRNCY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Barcode" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
   <Function Name="dbo.Sp_ADM03_OpenFormSelect" Method="Sp_ADM03_OpenFormSelect">
     <ElementType Name="Sp_ADM03_OpenFormSelectResult">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -263,13 +264,6 @@
   </Function>
   <Function Name="dbo.sp_BackupDatabase" Method="sp_BackupDatabase">
     <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.Sp_GetNameControl_001" Method="Sp_GetNameControl_001">
-    <Parameter Name="ControlNo" Parameter="controlNo" Type="System.Int32" DbType="Int" />
-    <Parameter Name="Action" Parameter="action" Type="System.Int32" DbType="Int" />
-    <ElementType Name="Sp_GetNameControl_001Result">
-      <Column Name="GetNo" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
-    </ElementType>
   </Function>
   <Function Name="dbo.getDateVachar" Method="getDateVachar" IsComposable="true">
     <Return Type="System.String" />
@@ -289,6 +283,13 @@
       <Column Name="Tel" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Fax" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Sp_GetNameControl_001" Method="Sp_GetNameControl_001">
+    <Parameter Name="ControlNo" Parameter="controlNo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Action" Parameter="action" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Sp_GetNameControl_001Result">
+      <Column Name="GetNo" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

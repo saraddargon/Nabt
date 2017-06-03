@@ -123,6 +123,18 @@
     <Compile Include="Process\A_Show.Designer.cs">
       <DependentUpon>A_Show.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\CreatePR_List.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\CreatePR_List.Designer.cs">
+      <DependentUpon>CreatePR_List.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ListPart_CreatePR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ListPart_CreatePR.Designer.cs">
+      <DependentUpon>ListPart_CreatePR.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\StockList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -315,6 +327,12 @@
     <EmbeddedResource Include="Process\A_Show.resx">
       <DependentUpon>A_Show.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Process\CreatePR_List.resx">
+      <DependentUpon>CreatePR_List.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ListPart_CreatePR.resx">
+      <DependentUpon>ListPart_CreatePR.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Process\StockList.resx">
       <DependentUpon>StockList.cs</DependentUpon>
     </EmbeddedResource>
@@ -443,6 +461,10 @@
     <ProjectReference Include="..\ClassLib\ClassLib.csproj">
       <Project>{99e0a74a-66a9-41e5-938d-aa3a4c2a0405}</Project>
       <Name>ClassLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Report\Report.csproj">
+      <Project>{18a2396d-dcf4-481c-8645-c0600b534e68}</Project>
+      <Name>Report</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

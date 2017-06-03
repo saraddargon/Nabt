@@ -38,8 +38,10 @@ namespace Report
         public static string WReport { get; set; }
         public static ReportDocument rptNull { get; set; }
         public static string[] Value { get; set; }
-        static string SERVERName = ConnectDB.ConnectDB.server;//mainClass.mainClass.DB;
-        static string DBName = ConnectDB.ConnectDB.dbname;//mainClass.mainClass.database;
+        static string SERVERName = "Mac-pc";//ConnectDB.ConnectDB.server;//mainClass.mainClass.DB;
+        static string DBName = "dbStockControl";//ConnectDB.ConnectDB.dbname;//mainClass.mainClass.database;
+        static string Userdb = "sa";
+        static string PassDb = "";
         static string DATA = "";
         
         private void Report_Load(object sender, EventArgs e)
@@ -87,13 +89,13 @@ namespace Report
                 for (int i = 0; i < rpt.Subreports.Count; i++)
                 {
 
-                    rpt.Subreports[i].DataSourceConnections[0].SetConnection(SERVERName, DBName, ConnectDB.ConnectDB.Userdb, ConnectDB.ConnectDB.PassDb);
+                    rpt.Subreports[i].DataSourceConnections[0].SetConnection(SERVERName, DBName, Userdb, PassDb);
                     rpt.Subreports[i].DataSourceConnections[0].IntegratedSecurity = false;
-                    rpt.Subreports[i].DataSourceConnections[SERVERName, DBName].SetLogon(ConnectDB.ConnectDB.Userdb, ConnectDB.ConnectDB.PassDb);
+                    rpt.Subreports[i].DataSourceConnections[SERVERName, DBName].SetLogon(Userdb, PassDb);
                 }
-                rpt.DataSourceConnections[0].SetConnection(SERVERName, DBName, ConnectDB.ConnectDB.Userdb, ConnectDB.ConnectDB.PassDb);
+                rpt.DataSourceConnections[0].SetConnection(SERVERName, DBName, Userdb, PassDb);
                 rpt.DataSourceConnections[0].IntegratedSecurity = false;
-                rpt.DataSourceConnections[SERVERName, DBName].SetLogon(ConnectDB.ConnectDB.Userdb, ConnectDB.ConnectDB.PassDb);
+                rpt.DataSourceConnections[SERVERName, DBName].SetLogon(Userdb, PassDb);
 
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -143,10 +145,10 @@ namespace Report
 
             switch (WReport)
             {
-                case "FromDL":
+                case "Report_ShelfBox":
                     {
 
-                        rptDc.SetParameterValue("@DocNo", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@User", Convert.ToString(Value[0].ToString()));
                         rptDc.SetParameterValue("@DateTime", DateTime.Now);
                         
                     } break;
@@ -164,110 +166,7 @@ namespace Report
                         rptDc.SetParameterValue("@Datex", DateTime.Now);
                         // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
                     } break;
-                case "ReportReceiveList":
-                    {
-                        rptDc.SetParameterValue("@RCNo", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@Datex", DateTime.Now);
-                        // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
-                    } break;
-                case "ReportReceiveTAG":
-                    {
-                        rptDc.SetParameterValue("@RCNo", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@Datex", DateTime.Now);
-                        // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
-                    } break;
-                case "Kanban":
-                    {
-                        rptDc.SetParameterValue("@USERID", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@Datex", DateTime.Now);
-                        // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
-                    } break;
-
-                case "ReportBOx":
-                    {
-                        rptDc.SetParameterValue("@CodeNo", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@Datex", DateTime.Now);
-                        // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
-                    } break;
-                case "Shipping":
-                    {
-                        rptDc.SetParameterValue("@SPNo", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@Datex", DateTime.Now);
-                        // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
-                    } break;
-                case "ReportReturn":
-                    {
-                        rptDc.SetParameterValue("@RTNo", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@Datex", DateTime.Now);
-                        // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
-                    } break;
-                case "Report01":
-                    {
-                        rptDc.SetParameterValue("@JobNo", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@Datex", DateTime.Now);
-                        // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
-                    } break;
-                case "ReportCost":
-                    {
-                        rptDc.SetParameterValue("@JobNo", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@Datex", DateTime.Now);
-                        // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
-                    } break;
-                case "ReportBox":
-                    {
-                        rptDc.SetParameterValue("@CodeNo", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@Datex", DateTime.Now);
-                        // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
-                    } break;
-
-                case "ReportCalJob":
-                    {
-                        rptDc.SetParameterValue("@JobNo", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@User", Convert.ToString(Value[1].ToString()));
-                        rptDc.SetParameterValue("@Datex", DateTime.Now);
-                    }break;
-                case "ReportCalTotal":
-                    {                       
-                        rptDc.SetParameterValue("@User", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@Datex", DateTime.Now);
-                    } break;
-                case "ReportToolALL":
-                    {                       
-                        rptDc.SetParameterValue("@Datex", DateTime.Now);
-                    } break;
-                case "ReportJobs":
-                    {
-                        rptDc.SetParameterValue("@User", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@Datex", DateTime.Now);
-                    } break;
-                case "BoxLabel":
-                    {
-                        rptDc.SetParameterValue("@CodeNo", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@Datex", DateTime.Now);
-                    } break;
-
-                case "CheckStock":
-                    {
-                        rptDc.SetParameterValue("@ListNo", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@Nowx", DateTime.Now);
-                        rptDc.SetParameterValue("@Ac", Convert.ToInt32(Value[1].ToString()));
-
-                    } break;
-                case "ShipWork":
-                    {
-                        rptDc.SetParameterValue("@RNo", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@Data", Convert.ToString(Value[1].ToString()));
-                        rptDc.SetParameterValue("@TY", Convert.ToString(Value[2].ToString()));
-                        rptDc.SetParameterValue("@Datex", DateTime.Now);
-                       
-
-                    } break;
-                case "ReportReceiveTAG_INS":
-                    {
-                        rptDc.SetParameterValue("@id", Convert.ToInt32(Value[0].ToString()));
-                        rptDc.SetParameterValue("@Datex", DateTime.Now);
-                        // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
-                    } break;
+               
             }
         }
 

@@ -248,7 +248,7 @@
         hRcv1KcWYUn6B1leT3o+xp6rAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="radButtonElement2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btn_PrintShelfTag.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAYiSURBVFhHzVdpTBRnGF5aW0EWEhsSSaytralGbdPQtDYmTUz6p/6QqIlGxCAiipFYUkJDOMTF
@@ -280,7 +280,7 @@
         mw3ysLCw5XAStqatymT/AMuTZFwh4lP5AAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="radButtonElement3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btn_Print_Barcode.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAdPSURBVFhHzVdpTJRnEF7tD2PSxgu8QFFBAVFQPLk8wAtQBAVTkQrI7QKK7opXQSuEorZEU9TU

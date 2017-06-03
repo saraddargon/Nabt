@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Linq;
 using Microsoft.VisualBasic.FileIO;
 using Telerik.WinControls.UI;
+using System.Globalization;
 
 namespace StockControl
 {
@@ -17,14 +18,19 @@ namespace StockControl
         {
             InitializeComponent();
         }
-
+        public CreatePR(string PRNo)
+        {
+            InitializeComponent();
+        }
         //private int RowView = 50;
         //private int ColView = 10;
-        DataTable dt = new DataTable();
+        //DataTable dt = new DataTable();
+        DataTable dt_PRH = new DataTable();
+        DataTable dt_PRD = new DataTable();
         private void radMenuItem2_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            HistoryView hw = new HistoryView(this.Name);
+            HistoryView hw = new HistoryView(this.Name + txtPRNo.Text.Trim());
             this.Cursor = Cursors.Default;
             hw.ShowDialog();
         }
@@ -35,46 +41,70 @@ namespace StockControl
         }
         private void GETDTRow()
         {
-            dt.Columns.Add(new DataColumn("YYYY", typeof(int)));
-            dt.Columns.Add(new DataColumn("ModelName", typeof(string)));
-            dt.Columns.Add(new DataColumn("JAN", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("FEB", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("MAR", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("APR", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("MAY", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("JUN", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("JUL", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("AUG", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("SEP", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("OCT", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("NOV", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("DEC", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("Active", typeof(bool)));
-           
-        }
-        int crow = 99;
+            dt_PRH.Columns.Add(new DataColumn("PRNo", typeof(string)));
+            dt_PRH.Columns.Add(new DataColumn("TEMPNo", typeof(string)));
+            dt_PRH.Columns.Add(new DataColumn("VendorNo", typeof(string)));
+            dt_PRH.Columns.Add(new DataColumn("VendorName", typeof(string)));
+            dt_PRH.Columns.Add(new DataColumn("Address", typeof(string)));
+            dt_PRH.Columns.Add(new DataColumn("ContactName", typeof(string)));
+            dt_PRH.Columns.Add(new DataColumn("Tel", typeof(string)));
+            dt_PRH.Columns.Add(new DataColumn("Fax", typeof(string)));
+            dt_PRH.Columns.Add(new DataColumn("Email", typeof(string)));
+            dt_PRH.Columns.Add(new DataColumn("RequireDate", typeof(DateTime)));
+            dt_PRH.Columns.Add(new DataColumn("HDRemark", typeof(string)));
+            dt_PRH.Columns.Add(new DataColumn("Status", typeof(string)));
+            dt_PRH.Columns.Add(new DataColumn("CreateDate", typeof(DateTime)));
+            dt_PRH.Columns.Add(new DataColumn("CreateBy", typeof(string)));
+            dt_PRH.Columns.Add(new DataColumn("UpdateDate", typeof(DateTime)));
+            dt_PRH.Columns.Add(new DataColumn("UpdateBy", typeof(string)));
+            dt_PRH.Columns.Add(new DataColumn("CRRNCY", typeof(string)));
+            dt_PRH.Columns.Add(new DataColumn("Barcode", typeof(string)));
+
+
+            dt_PRD.Columns.Add(new DataColumn("TempNo", typeof(string)));
+            dt_PRD.Columns.Add(new DataColumn("PRNo", typeof(string)));
+            dt_PRD.Columns.Add(new DataColumn("CodeNo", typeof(string)));
+            dt_PRD.Columns.Add(new DataColumn("ItemName", typeof(string)));
+            dt_PRD.Columns.Add(new DataColumn("ItemDesc", typeof(string)));
+            dt_PRD.Columns.Add(new DataColumn("GroupCode", typeof(string)));
+            dt_PRD.Columns.Add(new DataColumn("OrderQty", typeof(decimal)));
+            dt_PRD.Columns.Add(new DataColumn("RemainQty", typeof(decimal)));
+            dt_PRD.Columns.Add(new DataColumn("UnitCode", typeof(string)));
+            dt_PRD.Columns.Add(new DataColumn("PCSUnit", typeof(decimal)));
+            dt_PRD.Columns.Add(new DataColumn("StandardCost", typeof(decimal)));
+            dt_PRD.Columns.Add(new DataColumn("Amount", typeof(decimal)));
+            dt_PRD.Columns.Add(new DataColumn("DeliveryDate", typeof(DateTime)));
+            dt_PRD.Columns.Add(new DataColumn("LineName", typeof(string)));
+            dt_PRD.Columns.Add(new DataColumn("MCName", typeof(string)));
+            dt_PRD.Columns.Add(new DataColumn("SerialNo", typeof(string)));
+            dt_PRD.Columns.Add(new DataColumn("LotNo", typeof(string)));
+            dt_PRD.Columns.Add(new DataColumn("Remark", typeof(string)));
+            dt_PRD.Columns.Add(new DataColumn("SS", typeof(int)));
+            
+    }
+        
+        string Ac = "";
         private void Unit_Load(object sender, EventArgs e)
         {
-            radGridView1.ReadOnly = true;
-            radGridView1.AutoGenerateColumns = false;
+            //dgvData.ReadOnly = true;
+            dgvData.AutoGenerateColumns = false;
             GETDTRow();
-   
             DefaultItem();
-          
+            ClearData();
             DataLoad();
 
-            crow = 0;
+            
         }
         private void DefaultItem()
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
-                cboVendor.AutoCompleteMode = AutoCompleteMode.Append;
-                cboVendor.DisplayMember = "VendorName";
-                cboVendor.ValueMember = "VendorNo";
-                cboVendor.DataSource = (from ix in db.tb_Vendors.Where(s => s.Active == true)
+                cboVendorName.AutoCompleteMode = AutoCompleteMode.Append;
+                cboVendorName.DisplayMember = "VendorName";
+                cboVendorName.ValueMember = "VendorNo";
+                cboVendorName.DataSource = (from ix in db.tb_Vendors.Where(s => s.Active == true)
                                         select new { ix.VendorNo,ix.VendorName,ix.CRRNCY }).ToList();
-                cboVendor.SelectedIndex = 0;
+                cboVendorName.SelectedIndex = 0;
 
 
                 try
@@ -105,284 +135,673 @@ namespace StockControl
         }
         private void DataLoad()
         {
-            return;
-            //dt.Rows.Clear();
             try
             {
-
                 this.Cursor = Cursors.WaitCursor;
+                
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    //dt = ClassLib.Classlib.LINQToDataTable(db.tb_Units.ToList());
-                    try
+                    var g = (from ix in db.tb_PurchaseRequests select ix).Where(a => a.PRNo == txtPRNo.Text.Trim()).ToList();
+                    if (g.Count() > 0)
                     {
-                        //int year1 = 2017;
-                        //int.TryParse(cboYear.Text, out year1);
-                        //radGridView1.DataSource = db.tb_ProductionForecasts.Where(s => s.ModelName.Contains(cboVendor.Text.Trim()) 
-                        //&& s.YYYY== year1).ToList();
                         
 
-                        foreach (var x in radGridView1.Rows)
-                        {
-                            x.Cells["dgvCodeTemp"].Value = x.Cells["ModelName"].Value.ToString();
-                            x.Cells["dgvCodeTemp2"].Value = x.Cells["YYYY"].Value.ToString();
-                            x.Cells["ModelName"].ReadOnly = true;
-                            x.Cells["YYYY"].ReadOnly = true;
-                            //x.Cells["MMM"].ReadOnly = true;
-                        }
-                    }
-                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                        //txtPRNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().PRNo);
+                        txtTempNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().TEMPNo);
+                        txtVendorNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().VendorNo);
+                        cboVendorName.Text = StockControl.dbClss.TSt(g.FirstOrDefault().VendorName);
+                        txtTel.Text = StockControl.dbClss.TSt(g.FirstOrDefault().Tel);
+                        txtContactName.Text = StockControl.dbClss.TSt(g.FirstOrDefault().ContactName);
+                        txtCurrency.Text = StockControl.dbClss.TSt(g.FirstOrDefault().CRRNCY);
+                        txtFax.Text = StockControl.dbClss.TSt(g.FirstOrDefault().Fax);
+                        txtEmail.Text = StockControl.dbClss.TSt(g.FirstOrDefault().Email);
+                        txtAddress.Text = StockControl.dbClss.TSt(g.FirstOrDefault().Address);
 
+                        //lblStatus.Text = StockControl.dbClss.TSt(g.FirstOrDefault().Status);
+                        if (StockControl.dbClss.TSt(g.FirstOrDefault().Status).Equals("Cancel"))
+                        {
+                            btnSave.Enabled = false;
+                            btnDelete.Enabled = false;
+                            btnView.Enabled = false;
+                            btnEdit.Enabled = false;
+                            lblStatus.Text = "Cancel";
+                            dgvData.ReadOnly = true;
+                            btnAdd_Item.Enabled = false;
+                            btnDel_Item.Enabled = false;
+                        }
+                        else if
+                            (StockControl.dbClss.TSt(g.FirstOrDefault().Status).Equals("Completed"))
+                        {
+                            btnSave.Enabled = false;
+                            btnDelete.Enabled = false;
+                            btnView.Enabled = false;
+                            btnEdit.Enabled = false;
+                            lblStatus.Text = "Completed";
+                            dgvData.ReadOnly = true;
+                            btnAdd_Item.Enabled = false;
+                            btnDel_Item.Enabled = false;
+                        }
+                        else
+                        {
+                            btnSave.Enabled = true;
+                            btnDelete.Enabled = true;
+                            btnView.Enabled = true;
+                            btnEdit.Enabled = true;
+                            lblStatus.Text = StockControl.dbClss.TSt(g.FirstOrDefault().Status);
+                            dgvData.ReadOnly = true;
+                            btnAdd_Item.Enabled = false;
+                            btnDel_Item.Enabled = false;
+                        }
+                        dt_PRH = StockControl.dbClss.LINQToDataTable(g);
+
+                        //Detail
+                        var d = (from ix in db.tb_PurchaseRequestLines select ix)
+                            .Where(a => a.PRNo == txtPRNo.Text.Trim() && a.SS == 1 ).ToList();
+                        if (d.Count() > 0)
+                        {
+                            int c = 0;
+                            dgvData.DataSource = d;
+                            foreach (var x in dgvData.Rows)
+                            {
+                                c += 1;
+                                x.Cells["dgvNo"].Value = c;
+                            }
+                        }
+                       
+                    }
                 }
             }
-            catch { }
-            this.Cursor = Cursors.Default;
-
-
-            //    radGridView1.DataSource = dt;
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
         }
         private bool CheckDuplicate(string code, string Code2)
         {
             bool ck = false;
 
-            using (DataClasses1DataContext db = new DataClasses1DataContext())
-            {
-                int i = (from ix in db.tb_Models
-                         where ix.ModelName == code
+            //using (DataClasses1DataContext db = new DataClasses1DataContext())
+            //{
+            //    int i = (from ix in db.tb_Models
+            //             where ix.ModelName == code
 
-                         select ix).Count();
-                if (i > 0)
-                    ck = false;
-                else
-                    ck = true;
-            }
+            //             select ix).Count();
+            //    if (i > 0)
+            //        ck = false;
+            //    else
+            //        ck = true;
+            //}
 
             return ck;
         }
+        private void SaveHerder()
+        {
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                var g = (from ix in db.tb_PurchaseRequests
+                         where ix.PRNo.Trim() == txtPRNo.Text.Trim() && ix.Status != "Cancel" 
+                         //&& ix.TEMPNo.Trim() == txtTempNo.Text.Trim()
+                         select ix).ToList();
+                if (g.Count > 0)  //มีรายการในระบบ
+                {
+                    foreach (DataRow row in dt_PRH.Rows)
+                    {
 
-        private bool AddUnit()
+                        var gg = (from ix in db.tb_PurchaseRequests
+                                  where ix.PRNo.Trim() == txtPRNo.Text.Trim() 
+                                  //&& ix.TEMPNo.Trim() == txtTempNo.Text.Trim()
+                                  select ix).First();
+
+                        //gg.Status = "Waiting";
+                        //gg.TEMPNo = txtTempNo.Text;
+                        gg.UpdateBy = ClassLib.Classlib.User;
+                        gg.UpdateDate = DateTime.Now;
+                        dbClss.AddHistory(this.Name + txtPRNo.Text.Trim(), "แก้ไข CreatePR", "แก้ไขโดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
+
+                        if (StockControl.dbClss.TSt(gg.Barcode).Equals(""))
+                            gg.Barcode = StockControl.dbClss.SaveQRCode2D(txtPRNo.Text.Trim());
+
+                        if (!txtVendorNo.Text.Trim().Equals(row["VendorNo"].ToString()))
+                        {
+                            gg.VendorName = cboVendorName.Text;
+                            gg.VendorNo = txtVendorNo.Text.Trim();
+                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขรหัสผู้ขาย [" + txtVendorNo.Text.Trim() + "]", "");
+                        }
+                        if (!txtCurrency.Text.Trim().Equals(row["HDRemark"].ToString()))
+                        {
+                            gg.CRRNCY = txtCurrency.Text.Trim();
+                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขสกุลเงิน [" + txtCurrency.Text.Trim() + "]", "");
+                        }
+                        if (!txtContactName.Text.Trim().Equals(row["ContactName"].ToString()))
+                        {
+                            gg.ContactName = txtContactName.Text.Trim();
+                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขผู้ติดต่อ [" + txtContactName.Text.Trim() + "]", "");
+                        }
+                        if (!txtAddress.Text.Trim().Equals(row["Address"].ToString()))
+                        {
+                            gg.Address = txtAddress.Text.Trim();
+                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขที่อยู่ [" + txtAddress.Text.Trim() + "]", "");
+                        }
+                        if (!txtTel.Text.Trim().Equals(row["Tel"].ToString()))
+                        {
+                            gg.Tel = txtTel.Text.Trim();
+                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขเบอร์โทร [" + txtTel.Text.Trim() + "]", "");
+                        }
+                        if (!txtFax.Text.Trim().Equals(row["Fax"].ToString()))
+                        {
+                            gg.Fax = txtFax.Text.Trim();
+                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขเบอร์แฟกซ์ [" + txtFax.Text.Trim() + "]", "");
+                        }
+                        
+                        if (!txtEmail.Text.Trim().Equals(row["Email"].ToString()))
+                        {
+                            gg.Email = txtEmail.Text.Trim();
+                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขอีเมลล์ [" + txtEmail.Text.Trim() + "]", "");
+                        }
+
+                        if (!dtRequire.Text.Trim().Equals(""))
+                        {
+                            string date1 = "";
+                            date1 = dtRequire.Value.ToString("yyyyMMdd", new CultureInfo("en-US"));
+                            string date2 = "";
+                            if(!StockControl.dbClss.TSt(row["RequireDate"].ToString()).Equals(""))
+                            {
+                                DateTime temp = DateTime.Now;
+                                temp = Convert.ToDateTime(row["RequireDate"]);
+                                date2 = temp.ToString("yyyyMMdd", new CultureInfo("en-US"));
+
+                            }
+                            if(!date1.Equals(date2))
+                            {
+                                DateTime? RequireDate = DateTime.Now;
+                                if (!dtRequire.Text.Equals(""))
+                                    RequireDate = dtRequire.Value;
+                                gg.RequireDate = RequireDate;
+                                dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขวันที่ต้องการ [" + dtRequire.Text.Trim() + "]", "");
+
+                            }
+                            
+                        }
+                        if (!txtRemarkHD.Text.Trim().Equals(row["HDRemark"].ToString()))
+                        {
+                            gg.HDRemark = txtRemarkHD.Text.Trim();
+                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขหมายเหตุ [" + txtRemarkHD.Text.Trim() + "]", "");
+                        }
+                        db.SubmitChanges();
+                    }
+                }
+                else  // Add ใหม่
+                {
+                    byte[] barcode = StockControl.dbClss.SaveQRCode2D(txtPRNo.Text.Trim());
+                    DateTime? UpdateDate = null;
+                    
+                    tb_PurchaseRequest gg = new tb_PurchaseRequest();
+                    gg.UpdateBy = null;
+                    gg.UpdateDate = UpdateDate;
+                    gg.CreateBy = ClassLib.Classlib.User;
+                    gg.CreateDate = DateTime.Now;
+                    gg.VendorName = cboVendorName.Text;
+                    gg.VendorNo = txtVendorNo.Text.Trim();
+                    gg.Address = txtAddress.Text.Trim();
+                    gg.Tel = txtTel.Text.Trim();
+                    gg.Fax = txtFax.Text.Trim();
+                    gg.ContactName = txtContactName.Text.Trim();
+                    gg.Email = txtEmail.Text.Trim();
+                    gg.Barcode = barcode;
+                    gg.PRNo = txtPRNo.Text;
+                    gg.TEMPNo = txtTempNo.Text;
+
+                    DateTime? RequireDate = DateTime.Now;
+                    if (!dtRequire.Text.Equals(""))
+                        RequireDate = dtRequire.Value;
+
+                    gg.RequireDate = RequireDate;
+                    gg.HDRemark = txtRemarkHD.Text.Trim();
+                    gg.CRRNCY = txtCurrency.Text.Trim();
+                    gg.Status = "Waiting";
+
+                    db.tb_PurchaseRequests.InsertOnSubmit(gg);
+                    db.SubmitChanges();
+                    
+                    dbClss.AddHistory(this.Name + txtPRNo.Text.Trim(), "สร้าง CreatePR", "สร้าง PRNo [" + txtPRNo.Text.Trim() + ",เลขที่อ้างอิง :"+txtTempNo.Text+ "]", "");
+
+                }
+            }
+        }
+        private bool AddPR_d()
         {
           
             bool ck = false;
-            int C = 0;
-            try
-            {
+            //int C = 0;
+            //try
+            //{
 
 
-                radGridView1.EndEdit();
+                dgvData.EndEdit();
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    foreach (var g in radGridView1.Rows)
-                    {
-                        if (!Convert.ToString(g.Cells["ModelName"].Value).Equals("")
-                            )
+                    foreach (var g in dgvData.Rows)
+                   {
+                        if (g.IsVisible.Equals(true))
                         {
-                            if (Convert.ToString(g.Cells["dgvC"].Value).Equals("T"))
+                            DateTime? d = null;
+                            DateTime? DeliveryDate = DateTime.Now;
+                            if (StockControl.dbClss.TInt(g.Cells["dgvid"].Value)<=0)  //New ใหม่
                             {
-                                //int yyyy = 0;
-                                //int mmm = 0;
-                                //decimal wk = 0;
-                                //int.TryParse(Convert.ToString(g.Cells["YYYY"].Value), out yyyy);
-                                //int.TryParse(Convert.ToString(g.Cells["MMM"].Value), out mmm);
-                                //decimal.TryParse(Convert.ToString(g.Cells["WorkDays"].Value), out wk);
-                                DateTime? d = null;
-                                DateTime d1 = DateTime.Now;
-                                if (Convert.ToString(g.Cells["dgvCodeTemp"].Value).Equals(""))
-                                {
 
-                                    tb_Model u = new tb_Model();
-                                    u.ModelName = Convert.ToString(g.Cells["ModelName"].Value);
-                                    u.ModelDescription = Convert.ToString(g.Cells["ModelDescription"].Value);
-                                    u.ModelActive = Convert.ToBoolean(Convert.ToString(g.Cells["ModelActive"].Value));
-                                    u.LineName = Convert.ToString(g.Cells["LineName"].Value);
-                                    u.MCName = Convert.ToString(g.Cells["MCName"].Value);
-                                    u.Limit = Convert.ToBoolean(g.Cells["Limit"].Value);
-                                    if (DateTime.TryParse(Convert.ToString(g.Cells["ExpireDate"].Value), out d1))
-                                    {
-                                        d = dbClss.ChangeFormat(Convert.ToString(g.Cells["ExpireDate"].Value));
-                                        //Convert.ToDateTime(Convert.ToString(g.Cells["ExpireDate"].Value));
+                                tb_PurchaseRequestLine u = new tb_PurchaseRequestLine();
+                                u.PRNo = txtPRNo.Text;
+                                u.TempNo = txtTempNo.Text;
+                                u.CodeNo = StockControl.dbClss.TSt(g.Cells["dgvCodeNo"].Value);
+                                u.ItemName = StockControl.dbClss.TSt(g.Cells["dgvItemName"].Value);
+                                u.ItemDesc = StockControl.dbClss.TSt(g.Cells["dgvItemDesc"].Value);
+                                u.GroupCode = StockControl.dbClss.TSt(g.Cells["dgvGroupCode"].Value);
+                                u.OrderQty = StockControl.dbClss.TDe(g.Cells["dgvOrderQty"].Value);
+                                u.PCSUnit = StockControl.dbClss.TDe(g.Cells["dgvPCSUnit"].Value);
+                                u.UnitCode = StockControl.dbClss.TSt(g.Cells["dgvUnitCode"].Value);
+                                u.StandardCost = StockControl.dbClss.TDe(g.Cells["dgvStandardCost"].Value);
+                                u.Amount = StockControl.dbClss.TDe(g.Cells["dgvAmount"].Value);
+                                u.Remark = StockControl.dbClss.TSt(g.Cells["dgvRemark"].Value);
+                                u.LotNo = StockControl.dbClss.TSt(g.Cells["dgvLotNo"].Value);
+                                u.SerialNo = StockControl.dbClss.TSt(g.Cells["dgvSerialNo"].Value);
+                                u.MCName = StockControl.dbClss.TSt(g.Cells["dgvMCName"].Value);
+                                u.LineName = StockControl.dbClss.TSt(g.Cells["dgvLineName"].Value);
 
-                                    }
-                                    u.ExpireDate = d;
-
-
-                                    db.tb_Models.InsertOnSubmit(u);
-                                    db.SubmitChanges();
-                                    C += 1;
-                                    dbClss.AddHistory(this.Name, "เพิ่ม", "Insert Model [" + u.ModelName + "]", "");
-
-                                }
+                                if (!StockControl.dbClss.TSt(g.Cells["dgvDeliveryDate"].Value).Equals(""))
+                                    DeliveryDate = Convert.ToDateTime((g.Cells["dgvDeliveryDate"].Value));
                                 else
-                                {
+                                    DeliveryDate = d;
+                                u.DeliveryDate = DeliveryDate;
+                                u.RemainQty = StockControl.dbClss.TDe(g.Cells["dgvRemainQty"].Value);
+                                u.SS = 1;
+                                db.tb_PurchaseRequestLines.InsertOnSubmit(u);
+                                db.SubmitChanges();
+                                //C += 1;
+                                dbClss.AddHistory(this.Name, "เพิ่ม Item PR", "เพิ่มรายการ Create PR [" + u.CodeNo + "]", "");
 
-                                    var u = (from ix in db.tb_Models
-                                             where ix.ModelName == Convert.ToString(g.Cells["dgvCodeTemp"].Value)
-
-                                             select ix).First();
-
-                                    u.ModelDescription = Convert.ToString(g.Cells["ModelDescription"].Value);
-                                    u.ModelActive = Convert.ToBoolean(Convert.ToString(g.Cells["ModelActive"].Value));
-                                    u.LineName = Convert.ToString(g.Cells["LineName"].Value);
-                                    u.MCName = Convert.ToString(g.Cells["MCName"].Value);
-                                    u.Limit = Convert.ToBoolean(g.Cells["Limit"].Value);
-
-                                    if (DateTime.TryParse(Convert.ToString(g.Cells["ExpireDate"].Value), out d1))
-                                    {
-                                        d = dbClss.ChangeFormat(Convert.ToString(g.Cells["ExpireDate"].Value));
-                                        //Convert.ToDateTime(Convert.ToString(g.Cells["ExpireDate"].Value));
-
-                                    }
-                                    u.ExpireDate = d;
-
-                                    C += 1;
-
-                                    db.SubmitChanges();
-                                    dbClss.AddHistory(this.Name, "แก้ไข", "Update Model [" + u.ModelName + "]", "");
-
-                                }
                             }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                dbClss.AddError("AddUnit", ex.Message, this.Name);
-            }
-
-            if (C > 0)
-                MessageBox.Show("บันทึกสำเร็จ!");
-
-            return ck;
-        }
-        private bool DeleteUnit()
-        {
-            bool ck = false;
-
-            int C = 0;
-            try
-            {
-
-                if (row >= 0)
-                {
-                    string CodeDelete = Convert.ToString(radGridView1.Rows[row].Cells["ModelName"].Value);
-                    string CodeTemp = Convert.ToString(radGridView1.Rows[row].Cells["dgvCodeTemp"].Value);
-                    string CodeTemp2 = Convert.ToString(radGridView1.Rows[row].Cells["dgvCodeTemp2"].Value);
-                    radGridView1.EndEdit();
-                    if (MessageBox.Show("ต้องการลบรายการ ( " + CodeDelete + " ) หรือไม่ ?", "ลบรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        using (DataClasses1DataContext db = new DataClasses1DataContext())
-                        {
-
-                            if (!CodeDelete.Equals(""))
+                            else  // อัพเดต
                             {
-                                if (!CodeTemp.Equals(""))
+
+                                if (StockControl.dbClss.TInt(g.Cells["dgvid"].Value) > 0)
                                 {
-
-                                    var unit1 = (from ix in db.tb_Models
-                                                 where ix.ModelName == Convert.ToString(CodeTemp)
-
-                                                 select ix).ToList();
-                                    foreach (var d in unit1)
+                                    foreach (DataRow row in dt_PRD.Rows)
                                     {
-                                        db.tb_Models.DeleteOnSubmit(d);
-                                        dbClss.AddHistory(this.Name, "ลบรายการ ModelName", "Delete Model [" + d.ModelName + "]", "");
+                                        var u = (from ix in db.tb_PurchaseRequestLines
+                                                 where ix.PRNo == txtPRNo.Text.Trim() 
+                                                // && ix.TempNo == txtTempNo.Text
+                                                 && ix.id == StockControl.dbClss.TInt(g.Cells["dgvid"].Value)
+                                                 select ix).First();
+
+                                        dbClss.AddHistory(this.Name + txtPRNo.Text, "เพิ่ม Item PR", "id :" + StockControl.dbClss.TSt(g.Cells["dgvid"].Value)
+                                        + " CodeNo :" + StockControl.dbClss.TSt(g.Cells["dgvCodeNo"].Value)
+                                        + " แก้ไขโดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
+
+                                        if (!StockControl.dbClss.TSt(g.Cells["dgvCodeNo"].Value).Equals(row["CodeNo"].ToString()))
+                                        {
+                                            u.CodeNo = StockControl.dbClss.TSt(g.Cells["dgvCodeNo"].Value);
+                                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข Item PR", "แก้ไขรหัสพาร์ท [" + u.CodeNo + "]", "");
+                                        }
+                                       
+                                        u.ItemName = StockControl.dbClss.TSt(g.Cells["dgvItemName"].Value);
+                                        u.ItemDesc = StockControl.dbClss.TSt(g.Cells["dgvItemDesc"].Value);
+                                        u.GroupCode = StockControl.dbClss.TSt(g.Cells["dgvGroupCode"].Value);
+
+                                        if (!StockControl.dbClss.TSt(g.Cells["dgvOrderQty"].Value).Equals(row["OrderQty"].ToString()))
+                                        {
+                                            decimal OrderQty = 0; decimal.TryParse(StockControl.dbClss.TSt(g.Cells["dgvOrderQty"].Value), out OrderQty);
+                                            u.OrderQty = StockControl.dbClss.TDe(g.Cells["dgvOrderQty"].Value);
+                                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข Item PR", "แก้ไขจำนวน [" + OrderQty.ToString() + "]", "");
+                                        }
+                                        
+                                        u.PCSUnit = StockControl.dbClss.TDe(g.Cells["dgvPCSUnit"].Value);
+
+                                        if (!StockControl.dbClss.TSt(g.Cells["dgvUnitCode"].Value).Equals(row["UnitCode"].ToString()))
+                                        {
+                                            u.UnitCode = StockControl.dbClss.TSt(g.Cells["dgvUnitCode"].Value);
+                                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข Item PR", "แก้ไขหน่วย [" + u.UnitCode + "]", "");
+                                        }
+                                       
+                                        u.StandardCost = StockControl.dbClss.TDe(g.Cells["dgvStandardCost"].Value);
+                                        u.Amount = StockControl.dbClss.TDe(g.Cells["dgvAmount"].Value);
+                                        if (!StockControl.dbClss.TSt(g.Cells["dgvRemark"].Value).Equals(row["Remark"].ToString()))
+                                        {
+                                            u.Remark = StockControl.dbClss.TSt(g.Cells["dgvRemark"].Value);
+                                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข Item PR", "แก้ไขวัตถุประสงค์ [" + u.Remark + "]", "");
+                                        }
+                                        if (!StockControl.dbClss.TSt(g.Cells["dgvLotNo"].Value).Equals(row["LotNo"].ToString()))
+                                        {
+                                            u.LotNo = StockControl.dbClss.TSt(g.Cells["dgvLotNo"].Value);
+                                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข Item PR", "แก้ไข LotNo [" + u.LotNo + "]", "");
+                                        }
+                                        if (!StockControl.dbClss.TSt(g.Cells["dgvSerialNo"].Value).Equals(row["SerialNo"].ToString()))
+                                        {
+                                            u.SerialNo = StockControl.dbClss.TSt(g.Cells["dgvSerialNo"].Value);
+                                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข Item PR", "แก้ไขซีเรียล [" + u.SerialNo + "]", "");
+                                        }
+                                        if (!StockControl.dbClss.TSt(g.Cells["dgvMCName"].Value).Equals(row["MCName"].ToString()))
+                                        {
+                                            u.MCName = StockControl.dbClss.TSt(g.Cells["dgvMCName"].Value);
+                                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข Item PR", "แก้ไขชื่อ Machine [" + u.MCName + "]", "");
+                                        }
+                                        if (!StockControl.dbClss.TSt(g.Cells["dgvLineName"].Value).Equals(row["LineName"].ToString()))
+                                        {
+                                            u.LineName = StockControl.dbClss.TSt(g.Cells["dgvLineName"].Value);
+                                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข Item PR", "แก้ไขชื่อ Line [" + u.LineName + "]", "");
+                                        }
+                                        
+
+                                        if (!StockControl.dbClss.TSt(g.Cells["dgvDeliveryDate"].Value).Equals(""))
+                                            DeliveryDate = Convert.ToDateTime((g.Cells["dgvDeliveryDate"].Value));
+                                        else
+                                            DeliveryDate = d;
+                                        u.DeliveryDate = DeliveryDate;
+
+                                        u.RemainQty = StockControl.dbClss.TDe(g.Cells["dgvRemainQty"].Value);
+                                        u.SS = 1;
+
+
+                                        //C += 1;
+                                        db.SubmitChanges();
                                     }
-                                    C += 1;
-
-
-
-                                    db.SubmitChanges();
                                 }
-                            }
 
+                            }
+                        }
+                        else //Del
+                        {
+                            if (StockControl.dbClss.TInt(g.Cells["dgvid"].Value) > 0)
+                            {
+                                var u = (from ix in db.tb_PurchaseRequestLines
+                                         where ix.PRNo == txtPRNo.Text.Trim() 
+                                         //&& ix.TempNo == txtTempNo.Text 
+                                         &&  ix.id == StockControl.dbClss.TInt(g.Cells["dgvid"].Value)
+                                         select ix).First();
+                                u.SS = 0;
+                               
+                                dbClss.AddHistory(this.Name + txtPRNo.Text, "ลบ Item PR", "id :"+StockControl.dbClss.TSt(g.Cells["dgvid"].Value)
+                                    + " CodeNo :" + StockControl.dbClss.TSt(g.Cells["dgvCodeNo"].Value)
+                                    + " ลบโดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
+
+
+                                db.SubmitChanges();
+                            }
                         }
                     }
                 }
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //    dbClss.AddError("CreatePR", ex.Message, this.Name);
+            //}
 
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                dbClss.AddError("DeleteUnit", ex.Message, this.Name);
-            }
-
-            if (C > 0)
-            {
-                MessageBox.Show("ลบรายการ สำเร็จ!");
-            }
-
-
-
+            //if (C > 0)
+            //    MessageBox.Show("บันทึกสำเร็จ!");
 
             return ck;
         }
+       
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            DataLoad();
+           
         }
+        private void Enable_Status(bool ss, string Condition)
+        {
+            if (Condition.Equals("-") || Condition.Equals("New"))
+            {
+                txtPRNo.Enabled = ss;
+                cboVendorName.Enabled = ss;
+                txtTel.Enabled = ss;
+                txtFax.Enabled = ss;
+                txtContactName.Enabled = ss;
+                dtRequire.Enabled = ss;
+                dgvData.ReadOnly = false;
+                txtRemarkHD.Enabled = ss;
+                //txtCurrency.Enabled = ss;
+                btnAdd_Item.Enabled = ss;
+                btnDel_Item.Enabled = ss;
+                //txtVendorNo.Enabled = ss;
+                txtEmail.Enabled = ss;
+            }
+            else if (Condition.Equals("View"))
+            {
+                txtPRNo.Enabled = ss;
+                cboVendorName.Enabled = ss;
+                txtTel.Enabled = ss;
+                txtFax.Enabled = ss;
+                txtContactName.Enabled = ss;
+                dtRequire.Enabled = ss;
+                dgvData.ReadOnly = ss;
+                txtRemarkHD.Enabled = ss;
+                //txtCurrency.Enabled = ss;
+                btnAdd_Item.Enabled = ss;
+                btnDel_Item.Enabled = ss;
+                //txtVendorNo.Enabled = ss;
+                txtEmail.Enabled = ss;
+            }
+            else if (Condition.Equals("Edit"))
+            {
+                txtPRNo.Enabled = ss;
+                cboVendorName.Enabled = ss;
+                txtTel.Enabled = ss;
+                txtFax.Enabled = ss;
+                txtContactName.Enabled = ss;
+                dtRequire.Enabled = ss;
+                dgvData.ReadOnly = ss;
+                txtRemarkHD.Enabled = ss;
+                //txtCurrency.Enabled = ss;
+                //txtVendorNo.Enabled = ss;
+                btnAdd_Item.Enabled = ss;
+                btnDel_Item.Enabled = ss;
+                txtEmail.Enabled = ss;
+            }
+        }
+       
+        private void ClearData()
+        {
+            txtPRNo.Text = "";
+            cboVendorName.Text = "";
+            txtTempNo.Text = "";
+            txtTel.Text = "";
+            txtFax.Text = "";
+            txtAddress.Text = "";
+            txtContactName.Text = "";
+            lblStatus.Text = "-";
+            dtRequire.Value = DateTime.Now;
+            dgvData.Rows.Clear();
+            txtRemarkHD.Text = "";
+            txtCurrency.Text = "";
+            txtVendorNo.Text = "";
+            txtEmail.Text = "";
 
+            dt_PRH.Rows.Clear();
+            dt_PRD.Rows.Clear();
+        }
         private void btnNew_Click(object sender, EventArgs e)
         {
-            return;
-            radGridView1.ReadOnly = false;
-            radGridView1.AllowAddNewRow = false;
-            radGridView1.Rows.AddNew();
+            btnView.Enabled = true;
+            btnEdit.Enabled = true;
+            btnNew.Enabled = false;
+            btnSave.Enabled = true;
+            ClearData();
+            Enable_Status(true, "New");
+            lblStatus.Text = "New";
+            Ac = "New";
+
+            //getมาไว้ก่อน แต่ยังไมได้ save 
+            txtTempNo.Text = StockControl.dbClss.GetNo(3, 0);
+            
         }
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            radGridView1.ReadOnly = true;
             btnView.Enabled = false;
             btnEdit.Enabled = true;
-            radGridView1.AllowAddNewRow = false;
-            DataLoad();
+            btnNew.Enabled = true;
+            btnSave.Enabled = true;
+          
+            Enable_Status(true, "View");
+            lblStatus.Text = "View";
+            Ac = "View";
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            radGridView1.ReadOnly = false;
-            btnEdit.Enabled = false;
             btnView.Enabled = true;
-            radGridView1.AllowAddNewRow = false;
-            //DataLoad();
-        }
+            btnEdit.Enabled = false;
+            btnNew.Enabled = true;
+            btnSave.Enabled = true;
 
+            Enable_Status(true, "Edit");
+            lblStatus.Text = "Edit";
+            Ac = "Edit";
+
+        }
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                Ac = "Del";
+                if (MessageBox.Show("ต้องการลบรายการ ( " + txtPRNo.Text + " ) หรือไม่ ?", "ลบรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                        var g = (from ix in db.tb_PurchaseRequests
+                                 where ix.PRNo.Trim() == txtPRNo.Text.Trim() && ix.Status != "Cancel" 
+                                 //&& ix.TEMPNo.Trim() == txtTempNo.Text.Trim()
+                                 select ix).ToList();
+                        if (g.Count > 0)  //มีรายการในระบบ
+                        {
+                            var gg = (from ix in db.tb_PurchaseRequests
+                                      where ix.PRNo.Trim() == txtPRNo.Text.Trim() 
+                                      //&& ix.TEMPNo.Trim() == txtTempNo.Text.Trim()
+                                      select ix).First();
+
+
+                            gg.Status = "Cancel";
+                            gg.UpdateBy = ClassLib.Classlib.User;
+                            gg.UpdateDate = DateTime.Now;
+
+                            dbClss.AddHistory(this.Name + txtPRNo.Text.Trim(), "ลบ PR", "Delete PRNo [" + txtPRNo.Text.Trim() + "]", "");
+
+                            db.SubmitChanges();
+                            btnNew_Click(null, null);
+                            btnSave.Enabled = true;
+                        }
+                        else // ไม่มีในระบบ
+                        {
+                            btnNew_Click(null, null);
+                            btnSave.Enabled = true;
+                        }
+                    }
+
+                    MessageBox.Show("ลบรายการ สำเร็จ!");
+                }
+
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            
+        }
+        private bool Check_Save()
+        {
+            bool re = true;
+            string err = "";
+            try
+            {
+                //if (txtCodeNo.Text.Equals(""))
+                //    err += " “รหัสพาร์ท:” เป็นค่าว่าง \n";
+                if (txtPRNo.Text.Equals(""))
+                    err += " “เลขที่ใบขอสั่งซื้อ:” เป็นค่าว่าง \n";
+                if (cboVendorName.Text.Equals(""))
+                    err += "- “เลือกผู้ขาย:” เป็นค่าว่าง \n";
+                if (txtVendorNo.Text.Equals(""))
+                    err += "- “รหัสผู้ขาย:” เป็นค่าว่าง \n";
+                if (txtCurrency.Text.Equals(""))
+                    err += "- “สกุลเงิน:” เป็นค่าว่าง \n";
+                if (txtContactName.Text.Equals(""))
+                    err += "- “ผู้ติดต่อ:” เป็นค่าว่าง \n";
+                if (txtAddress.Text.Equals(""))
+                    err += "- “ที่อยู่:” เป็นค่าว่าง \n";
+                if (txtTel.Text.Equals(""))
+                    err += "- “เบอร์โทร:” เป็นค่าว่าง \n";
+                if (dtRequire.Text.Equals(""))
+                    err += "- “วันที่ต้องการ:” เป็นค่าว่าง \n";
+
+                foreach (GridViewRowInfo rowInfo in dgvData.Rows)
+                {
+                    if (rowInfo.IsVisible)
+                    {
+                       if(StockControl.dbClss.TSt(rowInfo.Cells["dgvCodeNo"].Value).Equals(""))
+                           err += "- “รหัสพาร์ท:” เป็นค่าว่าง \n";
+                        if (StockControl.dbClss.TDe(rowInfo.Cells["dgvOrderQty"].Value)<=0)
+                            err += "- “จำนวน:” น้อยกว่า 0 \n";
+                        if(StockControl.dbClss.TDe(rowInfo.Cells["dgvUnitCode"].Value).Equals(""))
+                            err += "- “หน่วย:” เป็นค่าว่าง \n";
+                    }
+                }
+
+
+                        if (!err.Equals(""))
+                    MessageBox.Show(err);
+                else
+                    re = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                dbClss.AddError("CreatePR", ex.Message, this.Name);
+            }
+
+            return re;
+        }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            try
             {
-                return;
-                AddUnit();
-                DataLoad();
-            }
-        }
+                if(Check_Save())
+                    return;
+                else
+                {
 
+                    if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        this.Cursor = Cursors.WaitCursor;
+
+                        if (Ac.Equals("New"))
+                            txtTempNo.Text = StockControl.dbClss.GetNo(3, 2);
+
+                        if (!txtTempNo.Text.Equals(""))
+                        {
+                            SaveHerder();
+                            AddPR_d();
+                            DataLoad();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
+        }
+       
         private void radGridView1_CellEndEdit(object sender, Telerik.WinControls.UI.GridViewCellEventArgs e)
         {
             try
             {
-                radGridView1.Rows[e.RowIndex].Cells["dgvC"].Value = "T";
-                //string TM1 = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["ModelName"].Value);
-                ////string TM2 = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["MMM"].Value);
-                //string Chk = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["dgvCodeTemp"].Value);
-                //if (Chk.Equals("") && !TM1.Equals(""))
-                //{
-
-                //    if (!CheckDuplicate(TM1, Chk))
-                //    {
-                //        MessageBox.Show("ข้อมูล รายการซ้า");
-                //        radGridView1.Rows[e.RowIndex].Cells["ModelName"].Value = "";
-                //        //  radGridView1.Rows[e.RowIndex].Cells["MMM"].Value = "";
-                //        //  radGridView1.Rows[e.RowIndex].Cells["UnitCode"].IsSelected = true;
-
-                //    }
-                //}
-
-
+                dgvData.EndEdit();
+                 if (e.RowIndex >= -1)
+                {
+                    if (dgvData.Columns["dgvOrderQty"].Index == e.ColumnIndex
+                        || dgvData.Columns["dgvStandardCost"].Index == e.ColumnIndex
+                        )
+                    {
+                        decimal OrderQty = 0; decimal.TryParse(StockControl.dbClss.TSt(e.Row.Cells["dgvOrderQty"].Value), out OrderQty);
+                        decimal StandardCost = 0; decimal.TryParse(StockControl.dbClss.TSt(e.Row.Cells["dgvStandardCost"].Value), out StandardCost);
+                        e.Row.Cells["dgvAmount"].Value = OrderQty * StandardCost;
+                    }
+                }
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void Unit_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -396,22 +815,11 @@ namespace StockControl
 
             if (e.KeyData == (Keys.Control | Keys.S))
             {
-                if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    return;
-                    AddUnit();
-                    DataLoad();
-                }
+                btnSave_Click(null, null);
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            return;
-            DeleteUnit();
-            DataLoad();
-
-        }
+        
 
         int row = -1;
         private void radGridView1_CellClick(object sender, Telerik.WinControls.UI.GridViewCellEventArgs e)
@@ -419,200 +827,15 @@ namespace StockControl
             row = e.RowIndex;
         }
 
-        private void btnExport_Click(object sender, EventArgs e)
-        {
-            //dbClss.ExportGridCSV(radGridView1);
-            dbClss.ExportGridXlSX(radGridView1);
-        }
-
-        private void btnImport_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                return;
-                OpenFileDialog op = new OpenFileDialog();
-                op.Filter = "Spread Sheet files (*.csv)|*.csv|All files (*.csv)|*.csv";
-                if (op.ShowDialog() == DialogResult.OK)
-                {
-
-
-                    using (TextFieldParser parser = new TextFieldParser(op.FileName))
-                    {
-                        dt.Rows.Clear();
-                        DateTime? d = null;
-                        DateTime d1 = DateTime.Now;
-                        parser.TextFieldType = FieldType.Delimited;
-                        parser.SetDelimiters(",");
-                        int a = 0;
-                        int c = 0;
-                        while (!parser.EndOfData)
-                        {
-                            //Processing row
-                            a += 1;
-                            DataRow rd = dt.NewRow();
-                            // MessageBox.Show(a.ToString());
-                            string[] fields = parser.ReadFields();
-                            c = 0;
-                            foreach (string field in fields)
-                            {
-                                c += 1;
-                                //TODO: Process field
-
-                                if (a > 1)
-                                {
-                                    if (c == 1)
-                                        rd["ModelName"] = Convert.ToString(field).Trim();
-                                    else if (c == 2)
-                                        rd["ModelDescription"] = Convert.ToString(field);
-                                    else if (c == 3)
-                                        rd["ModelActive"] = Convert.ToBoolean(field);
-                                    else if (c == 4)
-                                        rd["LineName"] = Convert.ToString(field).Trim();
-                                    else if (c == 5)
-                                        rd["MCName"] = Convert.ToString(field);
-                                    else if (c == 6)
-                                        rd["Limit"] = Convert.ToBoolean(field);
-                                    else if (c == 7)
-                                    {
-                                        if (DateTime.TryParse(Convert.ToString(field), out d1))
-                                        {
-                                            rd["ExpireDate"] = Convert.ToDateTime(field);
-
-                                        }
-                                        else
-                                        {
-                                            rd["ExpireDate"] = d;
-                                        }
-                                    }
-
-                                }
-                                else
-                                {
-                                    if (c == 1)
-                                        rd["ModelName"] = "";
-                                    else if (c == 2)
-                                        rd["ModelDescription"] = "";
-                                    else if (c == 3)
-                                        rd["ModelActive"] = false;
-                                    else if (c == 4)
-                                        rd["LineName"] = "";
-                                    else if (c == 5)
-                                        rd["MCName"] = "";
-                                    else if (c == 6)
-                                        rd["Limit"] = false;
-                                    else if (c == 7)
-                                        rd["ExpireDate"] = d;
-
-
-
-
-                                }
-
-
-                            }
-                            dt.Rows.Add(rd);
-
-                        }
-                    }
-                    if (dt.Rows.Count > 0)
-                    {
-
-                        dbClss.AddHistory(this.Name, "Import", "Import file CSV in to System", "");
-                        ImportData();
-                        MessageBox.Show("Import Completed.");
-
-                        DataLoad();
-                    }
-
-                }
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); dt.Rows.Clear(); }
-        }
-
-        private void ImportData()
-        {
-            try
-            {
-                using (DataClasses1DataContext db = new DataClasses1DataContext())
-                {
-
-                    foreach (DataRow rd in dt.Rows)
-                    {
-                        if (!rd["ModelName"].ToString().Equals(""))
-                        {
-
-
-                            var x = (from ix in db.tb_Models where ix.ModelName == rd["ModelName"].ToString().Trim() select ix).FirstOrDefault();
-
-
-                            DateTime? d = null;
-                            DateTime d1 = DateTime.Now;
-                            if (x == null)
-                            {
-                                tb_Model u = new tb_Model();
-                                u.ModelName = rd["ModelName"].ToString().Trim();
-                                u.ModelDescription = rd["ModelDescription"].ToString().Trim();
-                                u.ModelActive = Convert.ToBoolean(rd["ModelActive"].ToString());
-                                u.LineName = rd["LineName"].ToString().Trim();
-                                u.MCName = rd["MCName"].ToString().Trim();
-                                u.Limit = Convert.ToBoolean(rd["Limit"].ToString());
-                                if (DateTime.TryParse(rd["ExpireDate"].ToString(), out d1))
-                                {
-
-                                    u.ExpireDate = Convert.ToDateTime(rd["ExpireDate"].ToString());
-                                }
-                                else
-                                {
-                                    u.ExpireDate = d;
-                                }
-                                db.tb_Models.InsertOnSubmit(u);
-                                db.SubmitChanges();
-                            }
-                            else
-                            {
-                                x.ModelName = rd["ModelName"].ToString().Trim();
-                                x.ModelDescription = rd["ModelDescription"].ToString().Trim();
-                                x.ModelActive = Convert.ToBoolean(rd["ModelActive"].ToString());
-                                x.LineName = rd["LineName"].ToString().Trim();
-                                x.MCName = rd["MCName"].ToString().Trim();
-                                x.Limit = Convert.ToBoolean(rd["Limit"].ToString());
-                                if (DateTime.TryParse(rd["ExpireDate"].ToString(), out d1))
-                                {
-
-                                    x.ExpireDate = Convert.ToDateTime(rd["ExpireDate"].ToString());
-                                }
-                                else
-                                {
-                                    x.ExpireDate = d;
-                                }
-
-
-                                db.SubmitChanges();
-
-                            }
-
-
-
-                        }
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                dbClss.AddError("InportData", ex.Message, this.Name);
-            }
-        }
-
+    
         private void btnFilter1_Click(object sender, EventArgs e)
         {
-            radGridView1.EnableFiltering = true;
+            dgvData.EnableFiltering = true;
         }
 
         private void btnUnfilter1_Click(object sender, EventArgs e)
         {
-            radGridView1.EnableFiltering = false;
+            dgvData.EnableFiltering = false;
         }
 
         private void radMenuItem1_Click(object sender, EventArgs e)
@@ -623,11 +846,6 @@ namespace StockControl
         private void radButton1_Click(object sender, EventArgs e)
         {
             DataLoad();
-        }
-
-        private void radGridView1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void chkActive_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
@@ -642,20 +860,20 @@ namespace StockControl
 
         private void radGridView1_CellFormatting(object sender, Telerik.WinControls.UI.CellFormattingEventArgs e)
         {
-            if (e.CellElement.ColumnInfo.Name == "ModelName")
-            {
-                if (e.CellElement.RowInfo.Cells["ModelName"].Value != null)
-                {
-                    if (!e.CellElement.RowInfo.Cells["ModelName"].Value.Equals(""))
-                    {
-                        e.CellElement.DrawFill = true;
-                        // e.CellElement.ForeColor = Color.Blue;
-                        e.CellElement.NumberOfColors = 1;
-                        e.CellElement.BackColor = Color.WhiteSmoke;
-                    }
+            //if (e.CellElement.ColumnInfo.Name == "ModelName")
+            //{
+            //    if (e.CellElement.RowInfo.Cells["ModelName"].Value != null)
+            //    {
+            //        if (!e.CellElement.RowInfo.Cells["ModelName"].Value.Equals(""))
+            //        {
+            //            e.CellElement.DrawFill = true;
+            //            // e.CellElement.ForeColor = Color.Blue;
+            //            e.CellElement.NumberOfColors = 1;
+            //            e.CellElement.BackColor = Color.WhiteSmoke;
+            //        }
 
-                }
-            }
+            //    }
+            //}
         }
 
         private void txtModelName_TextChanged(object sender, EventArgs e)
@@ -670,19 +888,209 @@ namespace StockControl
 
         private void cboModelName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (crow == 0)
-                DataLoad();
-        }
-
-        private void cboYear_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
-        {
-            if (crow == 0)
-                DataLoad();
+         
         }
 
         private void radLabel5_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void เพมพารทToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!txtVendorNo.Text.Equals(""))
+                {
+                    List<GridViewRowInfo> dgvRow_List = new List<GridViewRowInfo>();
+                    //dgvRow_List.Clear();
+                    ListPart_CreatePR MS = new ListPart_CreatePR(dgvRow_List, txtVendorNo.Text);
+                    MS.ShowDialog();
+                    if (dgvRow_List.Count > 0)
+                    {
+                        string CodeNo = "";
+                        this.Cursor = Cursors.WaitCursor;
+                        foreach (GridViewRowInfo ee in dgvRow_List)
+                        {
+                            CodeNo = Convert.ToString(ee.Cells["CodeNo"].Value).Trim();
+                            if (!CodeNo.Equals(""))
+                            {
+                                Add_Part(CodeNo);
+                            }
+                        }
+                    }
+                }
+                else
+                    MessageBox.Show("เลือกผู้ขายก่อน !!!");
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
+        }
+        private void Add_Part(string CodeNo)
+        {
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                int Row = 0; Row = dgvData.Rows.Count()+1;
+                var g = (from ix in db.tb_Items select ix).Where(a => a.CodeNo.Contains(CodeNo)).ToList();
+                if (g.Count > 0)
+                {
+                    dgvData.Rows.Add(Row.ToString(), CodeNo,
+                        StockControl.dbClss.TSt(g.FirstOrDefault().ItemNo)
+                        , StockControl.dbClss.TSt(g.FirstOrDefault().ItemDescription)
+                        , StockControl.dbClss.TSt(g.FirstOrDefault().GroupCode)
+                        , 1
+                        , StockControl.dbClss.TDe(g.FirstOrDefault().PCSUnit)
+                        , StockControl.dbClss.TSt(g.FirstOrDefault().UnitBuy)
+                        , StockControl.dbClss.TDe(g.FirstOrDefault().StandardCost)
+                        , 1 * StockControl.dbClss.TDe(g.FirstOrDefault().StandardCost)
+                        , ""
+                        , "" //Lotno
+                        , "" //SerialNo
+                        , "" //MCName
+                        , "" //LineName
+                        , DateTime.Now
+                        ,0.0 // RemainQty
+                        ,0
+                        );
+                }
+            }
+        }
+        private void ลบพารทToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+               
+                if (dgvData.Rows.Count < 0)
+                    return;
+
+
+                if (Ac.Equals("New") || Ac.Equals("Edit"))
+                {
+                    this.Cursor = Cursors.WaitCursor;
+                    
+                    int id = 0;
+                    int.TryParse(StockControl.dbClss.TSt(dgvData.CurrentRow.Cells["dgvid"].Value), out id);
+                    if (id <= 0)
+                        dgvData.Rows.Remove(dgvData.CurrentRow);
+                    
+                    else
+                    {
+                        string CodeNo = ""; StockControl.dbClss.TSt(dgvData.CurrentRow.Cells["CodeNo"]);
+                        if (MessageBox.Show("ต้องการลบรายการ ( " + CodeNo + " ) ออกจากรายการ หรือไม่ ?", "ลบรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            dgvData.CurrentRow.IsVisible = false;
+                        }
+                    }
+                    SetRowNo1(dgvData);
+                }
+                else
+                {
+                    MessageBox.Show("ไม่สามารถทำการลบรายการได้");
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
+        }
+        public static void SetRowNo1(RadGridView Grid)//เลขลำดับ
+        {
+            int i = 1;
+            Grid.Rows.Where(o => o.IsVisible).ToList().ForEach(o =>
+            {
+                o.Cells["dgvNo"].Value = i;
+                i++;
+            });
+        }
+        private void cboVendor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    if (!cboVendorName.Text.Equals(""))
+                    {
+                        var I = (from ix in db.tb_Vendors select ix).Where(a => a.Active == true && a.VendorName.Equals(cboVendorName.Text)).ToList();
+                        if (I.Count > 0)
+                        {
+                            //StockControl.dbClss.TBo(a.Active).Equals(true)
+                            txtCurrency.Text = I.FirstOrDefault().CRRNCY;
+                            txtAddress.Text = I.FirstOrDefault().Address;
+                            txtVendorNo.Text = I.FirstOrDefault().VendorNo;
+                            var g = (from ix in db.tb_VendorContacts select ix).Where(a => a.VendorNo.Equals(txtVendorNo.Text)).OrderByDescending(b => b.DefaultNo).ToList();
+                            if (g.Count > 0)
+                            {
+                                txtContactName.Text = g.FirstOrDefault().ContactName;
+                                txtTel.Text = g.FirstOrDefault().Tel;
+                                txtFax.Text = g.FirstOrDefault().Fax;
+                                txtEmail.Text = g.FirstOrDefault().Email;
+                            }
+                            else
+                            {
+                                txtContactName.Text = "";
+                                txtTel.Text = "";
+                                txtFax.Text = "";
+                                txtEmail.Text = "";
+                            }
+                        }
+                        else
+                        {
+                            txtCurrency.Text = "";
+                            txtAddress.Text = "";
+                            txtVendorNo.Text = "";
+                            txtContactName.Text = "";
+                            txtTel.Text = "";
+                            txtFax.Text = "";
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void MasterTemplate_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+                ลบพารทToolStripMenuItem_Click(null, null);
+        }
+
+        private void btnListItem_Click(object sender, EventArgs e)
+        {
+            ////DataLoad();
+            try
+            {
+                btnEdit.Enabled = true;
+                btnView.Enabled = false;
+                btnNew.Enabled = true;
+                ClearData();
+                Enable_Status(false, "View");
+
+                this.Cursor = Cursors.WaitCursor;
+                CreatePR_List sc = new CreatePR_List(txtPRNo);
+                this.Cursor = Cursors.Default;
+                sc.ShowDialog();
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+
+                ClassLib.Memory.SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
+                ClassLib.Memory.Heap();
+                //LoadData
+                DataLoad();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); dbClss.AddError("CreatePart", ex.Message + " : radButtonElement1_Click", this.Name); }
+
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            btnEdit.Enabled = true;
+            btnView.Enabled = false;
+            btnNew.Enabled = true;
+            
+            string PR = txtPRNo.Text;
+            ClearData();
+            Enable_Status(false, "View");
+            txtPRNo.Text = PR;
+            DataLoad();
         }
     }
 }

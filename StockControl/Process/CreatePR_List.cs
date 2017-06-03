@@ -9,9 +9,9 @@ using System.Linq;
 using Microsoft.VisualBasic.FileIO;
 namespace StockControl
 {
-    public partial class ListPart : Telerik.WinControls.UI.RadRibbonForm
+    public partial class CreatePR_List : Telerik.WinControls.UI.RadRibbonForm
     {
-        public ListPart(string CodeNox)
+        public CreatePR_List(string CodeNox)
         {
             InitializeComponent();
             CodeNo = CodeNox;
@@ -19,13 +19,13 @@ namespace StockControl
         }
         Telerik.WinControls.UI.RadTextBox CodeNo_tt = new Telerik.WinControls.UI.RadTextBox();
         int screen = 0;
-        public ListPart(Telerik.WinControls.UI.RadTextBox  CodeNox)
+        public CreatePR_List(Telerik.WinControls.UI.RadTextBox  CodeNox)
         {
             InitializeComponent();
             CodeNo_tt = CodeNox;
             screen = 1;
         }
-        public ListPart()
+        public CreatePR_List()
         {
             InitializeComponent();
         }
@@ -70,10 +70,10 @@ namespace StockControl
                     //radGridView1.DataSource = db.tb_Histories.Where(s => s.ScreenName == ScreenSearch).OrderBy(o => o.CreateDate).ToList();
                     int c = 0;
                    
-                    var g = (from ix in db.tb_Items select ix).Where(a => a.CodeNo.Contains(txtCodeNo.Text)
-                        && a.ItemNo.Contains(txtPartName.Text)
-                        && a.ItemDescription.Contains(txtDescription.Text)
-                        && a.VendorItemName.Contains(txtVendorName.Text))
+                    var g = (from ix in db.tb_PurchaseRequests select ix).Where(a => a.VendorNo.Contains(txtVendorNo.Text)
+                        && a.TEMPNo.Contains(txtTempNo.Text)
+                        && a.PRNo.Contains(txtPRNo.Text)
+                        && a.VendorName.Contains(txtVendorName.Text))
                         .ToList();
                     if (g.Count > 0)
                     {
@@ -86,9 +86,7 @@ namespace StockControl
                         }
                     }
                     
-                        
-
-
+                       
                 }
             }
             catch(Exception ex) { MessageBox.Show(ex.Message); }
@@ -97,20 +95,7 @@ namespace StockControl
 
             //    radGridView1.DataSource = dt;
         }
-        private bool CheckDuplicate(string code)
-        {
-            bool ck = false;
-
-            using (DataClasses1DataContext db = new DataClasses1DataContext())
-            {
-                int i = (from ix in db.tb_Units where ix.UnitCode == code select ix).Count();
-                if (i > 0)
-                    ck = false;
-                else
-                    ck = true;
-            }
-            return ck;
-        }
+       
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -220,28 +205,19 @@ namespace StockControl
             {
                 if (screen.Equals(1))
                 {
-                    CodeNo_tt.Text = Convert.ToString(e.Row.Cells["CodeNo"].Value);
+                    CodeNo_tt.Text = Convert.ToString(e.Row.Cells["PRNo"].Value);
                     this.Close();
                 }
-                else
-                {
-                    CreatePart sc = new CreatePart(Convert.ToString(e.Row.Cells["CodeNo"].Value));
-                    this.Cursor = Cursors.Default;
-                    sc.Show();
-                }
+               
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-        DataTable dt_ShelfTag = new DataTable();
+        
         DataTable dt_Kanban = new DataTable();
 
         private void Set_dt_Print()
         {
-            dt_ShelfTag.Columns.Add(new DataColumn("CodeNo", typeof(string)));
-            dt_ShelfTag.Columns.Add(new DataColumn("PartDescription", typeof(string)));
-            dt_ShelfTag.Columns.Add(new DataColumn("ShelfNo", typeof(string)));
-
-
+          
             dt_Kanban.Columns.Add(new DataColumn("CodeNo", typeof(string)));
             dt_Kanban.Columns.Add(new DataColumn("PartNo", typeof(string)));
             dt_Kanban.Columns.Add(new DataColumn("PartDescription", typeof(string)));
@@ -256,36 +232,7 @@ namespace StockControl
             dt_Kanban.Columns.Add(new DataColumn("BarCode", typeof(Image)));
 
         }
-        private void btn_PrintShelfTag_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                dt_ShelfTag.Rows.Clear();
-
-                using (DataClasses1DataContext db = new DataClasses1DataContext())
-                {
-                    var g = (from ix in db.tb_Items select ix).Where(a => a.CodeNo == txtCodeNo.Text).ToList();
-                    if (g.Count() > 0)
-                    {
-                        foreach (var gg in g)
-                        {
-                            dt_ShelfTag.Rows.Add(gg.CodeNo, gg.ItemDescription, gg.ShelfNo);
-                        }
-                        //DataTable DT =  StockControl.dbClss.LINQToDataTable(g);
-                        //Reportx1 po = new Reportx1("Report_PurchaseRequest_Content1.rpt", DT, "FromDT");
-                        //po.Show();
-
-                        Report.Reportx1 op = new Report.Reportx1("002_BoxShelf_Part.rpt", dt_ShelfTag, "FromDL");
-                        op.Show();
-                    }
-                    else
-                        MessageBox.Show("not found.");
-                }
-
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-        }
-
+       
         private void btn_Print_Barcode_Click(object sender, EventArgs e)
         {
             try
@@ -294,7 +241,7 @@ namespace StockControl
 
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    var g = (from ix in db.tb_Items select ix).Where(a => a.CodeNo == txtCodeNo.Text).ToList();
+                    var g = (from ix in db.tb_Items select ix).Where(a => a.CodeNo == txtVendorNo.Text).ToList();
                     if (g.Count() > 0)
                     {
                         foreach (var gg in g)
