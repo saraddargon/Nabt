@@ -53,7 +53,7 @@ namespace StockControl
         private void Unit_Load(object sender, EventArgs e)
         {
             //radGridView1.ReadOnly = true;
-            radGridView1.AutoGenerateColumns = false;
+            dgvData.AutoGenerateColumns = false;
             GETDTRow();
             DefaultItem();
             
@@ -131,10 +131,10 @@ namespace StockControl
                                       VendorName = a.VendorItemName
                                   }).Where(ab => ab.VendorNo.Contains(Vendorno))
                                   .ToList();
-                        radGridView1.DataSource = gd;
+                        dgvData.DataSource = gd;
 
                         int rowcount = 0;
-                        foreach (var x in radGridView1.Rows)
+                        foreach (var x in dgvData.Rows)
                         {
                             rowcount += 1;
                             x.Cells["dgvNo"].Value = rowcount;
@@ -158,21 +158,25 @@ namespace StockControl
             bool ck = false;
             string CodeNo_temp = "";
             string CodeNo_temp2 = "";
-            foreach (GridViewRowInfo rowinfo in radGridView1.Rows.Where(o => Convert.ToBoolean(o.Cells["S"].Value)))
-            {
-                if(CodeNo_temp.Equals(""))
-                    CodeNo_temp = StockControl.dbClss.TSt(rowinfo.Cells["CodeNo"].Value);
-                
+            dgvData.EndEdit();
 
-                if (!CodeNo_temp.Equals(CodeNo_temp2))
+            foreach(var rowinfo in dgvData.Rows)
+            {
+                if (StockControl.dbClss.TBo(rowinfo.Cells["S"].Value))
                 {
-                    ck = true;
-                    break;
+                    if (CodeNo_temp.Equals(""))
+                        CodeNo_temp = StockControl.dbClss.TSt(rowinfo.Cells["VendorNo"].Value);
+                    CodeNo_temp2 = StockControl.dbClss.TSt(rowinfo.Cells["VendorNo"].Value);
+
+                    if (!CodeNo_temp.Equals(CodeNo_temp2))
+                    {
+                        ck = true;
+                        break;
+                    }
+                    else
+                        ck = false;
                 }
-                else
-                    ck = false;
                 
-                CodeNo_temp2 = StockControl.dbClss.TSt(rowinfo.Cells["CodeNo"].Value);
                 
             }
                 return ck;
@@ -187,10 +191,10 @@ namespace StockControl
             {
 
 
-                radGridView1.EndEdit();
+                dgvData.EndEdit();
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    foreach (var g in radGridView1.Rows)
+                    foreach (var g in dgvData.Rows)
                     {
                         if (!Convert.ToString(g.Cells["ModelName"].Value).Equals("")
                             )
@@ -283,17 +287,17 @@ namespace StockControl
         private void btnNew_Click(object sender, EventArgs e)
         {
             return;
-            radGridView1.ReadOnly = false;
-            radGridView1.AllowAddNewRow = false;
-            radGridView1.Rows.AddNew();
+            dgvData.ReadOnly = false;
+            dgvData.AllowAddNewRow = false;
+            dgvData.Rows.AddNew();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            radGridView1.ReadOnly = false;
+            dgvData.ReadOnly = false;
            // btnEdit.Enabled = false;
             btnCal.Enabled = true;
-            radGridView1.AllowAddNewRow = false;
+            dgvData.AllowAddNewRow = false;
             //DataLoad();
         }
 
@@ -301,10 +305,10 @@ namespace StockControl
         {
             if (MessageBox.Show("สร้างรายการสั่งซื้อ ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                radGridView1.EndEdit();
+                dgvData.EndEdit();
                 //dt_createPR
                 List<GridViewRowInfo> dgvRow_List = new List<GridViewRowInfo>();
-                foreach (GridViewRowInfo rowinfo in radGridView1.Rows.Where(o => Convert.ToBoolean(o.Cells["S"].Value)))
+                foreach (GridViewRowInfo rowinfo in dgvData.Rows.Where(o => Convert.ToBoolean(o.Cells["S"].Value)))
                 {
                     dgvRow_List.Add(rowinfo);
                 }
@@ -325,16 +329,16 @@ namespace StockControl
             {
                 //int a = Convert.ToInt32(radGridView1.Rows[e.RowIndex].Cells["Order"].Value);
 
-                Boolean ss = StockControl.dbClss.TBo(radGridView1.Rows[e.RowIndex].Cells["S"].Value);
+                Boolean ss = StockControl.dbClss.TBo(dgvData.Rows[e.RowIndex].Cells["S"].Value);
                 if (ss.Equals(true))
                 {
                     string CodeNo = ""; 
-                    CodeNo = StockControl.dbClss.TSt(radGridView1.Rows[e.RowIndex].Cells["CodeNo"].Value);
+                    CodeNo = StockControl.dbClss.TSt(dgvData.Rows[e.RowIndex].Cells["CodeNo"].Value);
 
-                    if (!CheckDuplicate(CodeNo) && !CodeNo.Equals(""))
+                    if (CheckDuplicate(CodeNo))
                     {
                         MessageBox.Show("ไม่สามารถสั่งซื้อต่างผู้ขายได้");
-                        radGridView1.Rows[e.RowIndex].Cells["S"].Value = false;
+                        dgvData.Rows[e.RowIndex].Cells["S"].Value = false;
 
                     }
                 }
@@ -368,7 +372,7 @@ namespace StockControl
         private void btnExport_Click(object sender, EventArgs e)
         {
             //dbClss.ExportGridCSV(radGridView1);
-            dbClss.ExportGridXlSX(radGridView1);
+            dbClss.ExportGridXlSX(dgvData);
         }
 
       
@@ -376,12 +380,12 @@ namespace StockControl
       
         private void btnFilter1_Click(object sender, EventArgs e)
         {
-            radGridView1.EnableFiltering = true;
+            dgvData.EnableFiltering = true;
         }
 
         private void btnUnfilter1_Click(object sender, EventArgs e)
         {
-            radGridView1.EnableFiltering = false;
+            dgvData.EnableFiltering = false;
         }
 
         private void radMenuItem1_Click(object sender, EventArgs e)
@@ -460,11 +464,11 @@ namespace StockControl
             {
                 if (MessageBox.Show("สร้างรายการสั่งซื้อ ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    radGridView1.EndEdit();
+                    dgvData.EndEdit();
                     //dt_createPR
                     List<GridViewRowInfo> dgvRow_List = new List<GridViewRowInfo>();
                     
-                    dgvRow_List.Add(radGridView1.CurrentRow);
+                    dgvRow_List.Add(dgvData.CurrentRow);
                 
                     if (dgvRow_List.Count() > 0)
                     {

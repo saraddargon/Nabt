@@ -663,11 +663,6 @@ namespace StockControl
             DataLoad();
         }
 
-        private void radPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void cboModelName_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (crow == 0)
