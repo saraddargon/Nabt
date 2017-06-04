@@ -120,6 +120,12 @@
     <Compile Include="Process\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\Report\ReportAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Report\ReportAccount.Designer.cs">
+      <DependentUpon>ReportAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\ChangeInvoice.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -327,6 +333,9 @@
     <EmbeddedResource Include="Process\About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Process\Report\ReportAccount.resx">
+      <DependentUpon>ReportAccount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Process\ChangeInvoice.resx">
       <DependentUpon>ChangeInvoice.cs</DependentUpon>
     </EmbeddedResource>
@@ -493,6 +502,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

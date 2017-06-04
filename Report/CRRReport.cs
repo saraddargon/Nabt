@@ -14,6 +14,7 @@ namespace Report
         public static string DbName = "";
         public static string dbUser = "";
         public static string dbPass = "";
+        public static string dbPartReport = "";
 
 
         public static CrystalDecisions.CrystalReports.Engine.ReportDocument rptSourceX = new CrystalDecisions.CrystalReports.Engine.ReportDocument();

@@ -53,6 +53,9 @@
             this.commandBarSeparator4 = new Telerik.WinControls.UI.CommandBarSeparator();
             this.radLabelElement4 = new Telerik.WinControls.UI.RadLabelElement();
             this.lblresolution = new Telerik.WinControls.UI.RadLabelElement();
+            this.commandBarSeparator5 = new Telerik.WinControls.UI.CommandBarSeparator();
+            this.radLabelElement5 = new Telerik.WinControls.UI.RadLabelElement();
+            this.txtposition = new Telerik.WinControls.UI.RadLabelElement();
             this.radMenuItem1 = new Telerik.WinControls.UI.RadMenuItem();
             this.radMenuItem19 = new Telerik.WinControls.UI.RadMenuItem();
             this.radMenuItem3 = new Telerik.WinControls.UI.RadMenuItem();
@@ -87,9 +90,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.radMenu1 = new Telerik.WinControls.UI.RadMenu();
-            this.commandBarSeparator5 = new Telerik.WinControls.UI.CommandBarSeparator();
-            this.radLabelElement5 = new Telerik.WinControls.UI.RadLabelElement();
-            this.txtposition = new Telerik.WinControls.UI.RadLabelElement();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radMenu1)).BeginInit();
@@ -232,6 +232,26 @@
             this.radStatusStrip1.SetSpring(this.lblresolution, false);
             this.lblresolution.Text = "xy";
             this.lblresolution.TextWrap = true;
+            // 
+            // commandBarSeparator5
+            // 
+            this.commandBarSeparator5.Name = "commandBarSeparator5";
+            this.radStatusStrip1.SetSpring(this.commandBarSeparator5, false);
+            this.commandBarSeparator5.VisibleInOverflowMenu = false;
+            // 
+            // radLabelElement5
+            // 
+            this.radLabelElement5.Name = "radLabelElement5";
+            this.radStatusStrip1.SetSpring(this.radLabelElement5, false);
+            this.radLabelElement5.Text = "Position :";
+            this.radLabelElement5.TextWrap = true;
+            // 
+            // txtposition
+            // 
+            this.txtposition.Name = "txtposition";
+            this.radStatusStrip1.SetSpring(this.txtposition, false);
+            this.txtposition.Text = "xy";
+            this.txtposition.TextWrap = true;
             // 
             // radMenuItem1
             // 
@@ -558,27 +578,6 @@
             ((Telerik.WinControls.Primitives.FillPrimitive)(this.radMenu1.GetChildAt(0).GetChildAt(1))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(4)))), ((int)(((byte)(129)))));
             ((Telerik.WinControls.Primitives.FillPrimitive)(this.radMenu1.GetChildAt(0).GetChildAt(1))).ClipDrawing = false;
             // 
-            // commandBarSeparator5
-            // 
-            this.commandBarSeparator5.Name = "commandBarSeparator5";
-            this.radStatusStrip1.SetSpring(this.commandBarSeparator5, false);
-            this.commandBarSeparator5.Text = "";
-            this.commandBarSeparator5.VisibleInOverflowMenu = false;
-            // 
-            // radLabelElement5
-            // 
-            this.radLabelElement5.Name = "radLabelElement5";
-            this.radStatusStrip1.SetSpring(this.radLabelElement5, false);
-            this.radLabelElement5.Text = "Position :";
-            this.radLabelElement5.TextWrap = true;
-            // 
-            // txtposition
-            // 
-            this.txtposition.Name = "txtposition";
-            this.radStatusStrip1.SetSpring(this.txtposition, false);
-            this.txtposition.Text = "xy";
-            this.txtposition.TextWrap = true;
-            // 
             // Mainfrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -601,6 +600,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Part Management 1.0.0";
             this.ThemeName = "Office2010Blue";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.MaximumSizeChanged += new System.EventHandler(this.Mainfrom_MaximumSizeChanged);
             this.MinimumSizeChanged += new System.EventHandler(this.Mainfrom_MinimumSizeChanged);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Mainfrom_FormClosed);
