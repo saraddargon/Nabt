@@ -81,6 +81,21 @@ namespace StockControl
                 MessageBox.Show("Export Finished");
             }
         }
+        public static void ExportGridXlSX2(RadGridView rv,string FileName)
+        {
+            //SaveFileDialog dialog = new SaveFileDialog();
+            //dialog.Filter = "Excel File (*.xls)|*.xls";
+            //if (dialog.ShowDialog() == DialogResult.OK)
+            //{
+
+                ExportToExcelML exporter = new ExportToExcelML(rv);
+
+                exporter.HiddenRowOption = HiddenOption.DoNotExport;
+                exporter.HiddenColumnOption = HiddenOption.DoNotExport;
+                exporter.RunExport(FileName);
+            //    MessageBox.Show("Export Finished");
+            //}
+        }
 
         public static void AddError(string Mathod,string Error,string Screen)
         {

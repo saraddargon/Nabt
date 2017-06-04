@@ -107,9 +107,10 @@ namespace StockControl
             this.Cursor = Cursors.WaitCursor;
             try
             {
-                
+
                 //System.IO.File.Copy(Report.CRRReport.dbPartReport + "Account_Sheet.xls", FileName, true);
                 //System.Diagnostics.Process.Start();
+                dbClss.ExportGridXlSX(radGridView1);
                 dbClss.AddHistory(this.Name, "ออกรายงาน", "เลือกออกรายงาน ", "");
                 ck = true;
                 
