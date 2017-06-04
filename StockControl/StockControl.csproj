@@ -318,6 +318,7 @@
     <Compile Include="RadForm1.Designer.cs">
       <DependentUpon>RadForm1.cs</DependentUpon>
     </Compile>
+    <Compile Include="version.cs" />
     <None Include="DataClasses1.dbml.layout">
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </None>
