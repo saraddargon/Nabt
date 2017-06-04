@@ -169,6 +169,7 @@ namespace StockControl
         private bool GetData(string FileName)
         {
             bool ck = false;
+            this.Cursor = Cursors.WaitCursor ;
             try
             {
                 
@@ -179,7 +180,7 @@ namespace StockControl
                 
             }
             catch { ck = false; }
-
+            this.Cursor = Cursors.Default;
             return ck;
         }
     }

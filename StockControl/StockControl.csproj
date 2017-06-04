@@ -120,6 +120,12 @@
     <Compile Include="Process\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\Report\ReportPart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Report\ReportPart.Designer.cs">
+      <DependentUpon>ReportPart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\Report\ReportAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -333,6 +339,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Report\ReportPart.resx">
+      <DependentUpon>ReportPart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\Report\ReportAccount.resx">
       <DependentUpon>ReportAccount.cs</DependentUpon>
