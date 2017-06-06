@@ -120,6 +120,18 @@
     <Compile Include="Process\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\Report\ReportPart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Report\ReportPart.Designer.cs">
+      <DependentUpon>ReportPart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\Report\ReportAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Report\ReportAccount.Designer.cs">
+      <DependentUpon>ReportAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\ChangeInvoice.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -324,6 +336,7 @@
     <Compile Include="RadForm1.Designer.cs">
       <DependentUpon>RadForm1.cs</DependentUpon>
     </Compile>
+    <Compile Include="version.cs" />
     <None Include="DataClasses1.dbml.layout">
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </None>
@@ -338,6 +351,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Report\ReportPart.resx">
+      <DependentUpon>ReportPart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Report\ReportAccount.resx">
+      <DependentUpon>ReportAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\ChangeInvoice.resx">
       <DependentUpon>ChangeInvoice.cs</DependentUpon>
@@ -511,6 +530,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

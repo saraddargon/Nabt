@@ -20,6 +20,9 @@ namespace StockControl
             Report.CRRReport.DbName = "";
             Report.CRRReport.dbUser = "";
             Report.CRRReport.dbPass = "";
+            Report.CRRReport.dbPartReport = "";
+     
+            Report.CRRReport.dbPartReport = AppDomain.CurrentDomain.BaseDirectory + @"Report\";
             string apc = Properties.Settings.Default.dbStockControlConnectionString2;
             try
             {
