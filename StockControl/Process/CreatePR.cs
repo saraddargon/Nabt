@@ -117,9 +117,11 @@ namespace StockControl
                 {
                     if (!PRNo_temp.Equals(""))
                     {
+                        Enable_Status(false, "View");
+                        btnView_Click(null, null);
                         txtPRNo.Text = PRNo_temp;
                         DataLoad();
-                        btnView_Click(null, null);
+                        
                     }
                 }
             }
@@ -169,14 +171,16 @@ namespace StockControl
             try
             {
                 this.Cursor = Cursors.WaitCursor;
-                
+                dt_PRD.Rows.Clear();
+                dt_PRH.Rows.Clear();
+               
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
                     var g = (from ix in db.tb_PurchaseRequests select ix).Where(a => a.PRNo == txtPRNo.Text.Trim()).ToList();
                     if (g.Count() > 0)
                     {
-                        
 
+                        DateTime ? temp_date = null;
                         //txtPRNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().PRNo);
                         txtTempNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().TEMPNo);
                         txtVendorNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().VendorNo);
@@ -188,10 +192,34 @@ namespace StockControl
                         txtEmail.Text = StockControl.dbClss.TSt(g.FirstOrDefault().Email);
                         txtAddress.Text = StockControl.dbClss.TSt(g.FirstOrDefault().Address);
                         txtRemarkHD.Text = StockControl.dbClss.TSt(g.FirstOrDefault().HDRemark);
+                        if (!StockControl.dbClss.TSt(g.FirstOrDefault().RequireDate).Equals(""))
+                            dtRequire.Value = Convert.ToDateTime(g.FirstOrDefault().RequireDate);
+                        else
+                            dtRequire.Value = Convert.ToDateTime(temp_date);
+
+
+                        
+                        dt_PRH = StockControl.dbClss.LINQToDataTable(g);
+
+                        //Detail
+                        var d = (from ix in db.tb_PurchaseRequestLines select ix)
+                            .Where(a => a.PRNo == txtPRNo.Text.Trim() && a.SS == 1 ).ToList();
+                        if (d.Count() > 0)
+                        {
+                            int c = 0;
+                            dgvData.DataSource = d;
+                            dt_PRD = StockControl.dbClss.LINQToDataTable(d);
+                            foreach (var x in dgvData.Rows)
+                            {
+                                c += 1;
+                                x.Cells["dgvNo"].Value = c;
+                            }
+                        }
 
                         //lblStatus.Text = StockControl.dbClss.TSt(g.FirstOrDefault().Status);
                         if (StockControl.dbClss.TSt(g.FirstOrDefault().Status).Equals("Cancel"))
                         {
+                            btnNew.Enabled = true;
                             btnSave.Enabled = false;
                             btnDelete.Enabled = false;
                             btnView.Enabled = false;
@@ -208,6 +236,7 @@ namespace StockControl
                             btnDelete.Enabled = false;
                             btnView.Enabled = false;
                             btnEdit.Enabled = false;
+                            btnNew.Enabled = true;
                             lblStatus.Text = "Completed";
                             dgvData.ReadOnly = true;
                             btnAdd_Item.Enabled = false;
@@ -215,29 +244,15 @@ namespace StockControl
                         }
                         else
                         {
+                            btnNew.Enabled = true;
                             btnSave.Enabled = true;
                             btnDelete.Enabled = true;
                             btnView.Enabled = true;
                             btnEdit.Enabled = true;
                             lblStatus.Text = StockControl.dbClss.TSt(g.FirstOrDefault().Status);
-                            dgvData.ReadOnly = true;
+                            dgvData.ReadOnly = false;
                             btnAdd_Item.Enabled = false;
                             btnDel_Item.Enabled = false;
-                        }
-                        dt_PRH = StockControl.dbClss.LINQToDataTable(g);
-
-                        //Detail
-                        var d = (from ix in db.tb_PurchaseRequestLines select ix)
-                            .Where(a => a.PRNo == txtPRNo.Text.Trim() && a.SS == 1 ).ToList();
-                        if (d.Count() > 0)
-                        {
-                            int c = 0;
-                            dgvData.DataSource = d;
-                            foreach (var x in dgvData.Rows)
-                            {
-                                c += 1;
-                                x.Cells["dgvNo"].Value = c;
-                            }
                         }
                        
                     }
@@ -278,7 +293,7 @@ namespace StockControl
                     {
 
                         var gg = (from ix in db.tb_PurchaseRequests
-                                  where ix.PRNo.Trim() == txtPRNo.Text.Trim() 
+                                  where ix.PRNo.Trim() == txtPRNo.Text.Trim() && ix.Status != "Cancel"
                                   //&& ix.TEMPNo.Trim() == txtTempNo.Text.Trim()
                                   select ix).First();
 
@@ -442,7 +457,7 @@ namespace StockControl
                                 else
                                     DeliveryDate = d;
                                 u.DeliveryDate = DeliveryDate;
-                                u.RemainQty = StockControl.dbClss.TDe(g.Cells["dgvRemainQty"].Value);
+                                u.RemainQty = u.OrderQty;//StockControl.dbClss.TDe(g.Cells["dgvRemainQty"].Value);
                                 u.SS = 1;
                                 db.tb_PurchaseRequestLines.InsertOnSubmit(u);
                                 db.SubmitChanges();
@@ -463,7 +478,7 @@ namespace StockControl
                                                  && ix.id == StockControl.dbClss.TInt(g.Cells["dgvid"].Value)
                                                  select ix).First();
 
-                                        dbClss.AddHistory(this.Name + txtPRNo.Text, "เพิ่ม Item PR", "id :" + StockControl.dbClss.TSt(g.Cells["dgvid"].Value)
+                                        dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไขรายการ Item PR", "id :" + StockControl.dbClss.TSt(g.Cells["dgvid"].Value)
                                         + " CodeNo :" + StockControl.dbClss.TSt(g.Cells["dgvCodeNo"].Value)
                                         + " แก้ไขโดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
 
@@ -481,7 +496,9 @@ namespace StockControl
                                         {
                                             decimal OrderQty = 0; decimal.TryParse(StockControl.dbClss.TSt(g.Cells["dgvOrderQty"].Value), out OrderQty);
                                             u.OrderQty = StockControl.dbClss.TDe(g.Cells["dgvOrderQty"].Value);
+                                            u.RemainQty = OrderQty;//StockControl.dbClss.TDe(g.Cells["dgvRemainQty"].Value);
                                             dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข Item PR", "แก้ไขจำนวน [" + OrderQty.ToString() + "]", "");
+
                                         }
                                         
                                         u.PCSUnit = StockControl.dbClss.TDe(g.Cells["dgvPCSUnit"].Value);
@@ -527,7 +544,7 @@ namespace StockControl
                                             DeliveryDate = d;
                                         u.DeliveryDate = DeliveryDate;
 
-                                        u.RemainQty = StockControl.dbClss.TDe(g.Cells["dgvRemainQty"].Value);
+                                       
                                         u.SS = 1;
 
 
@@ -640,7 +657,7 @@ namespace StockControl
             txtFax.Text = "";
             txtAddress.Text = "";
             txtContactName.Text = "";
-            lblStatus.Text = "-";
+            //lblStatus.Text = "-";
             dtRequire.Value = DateTime.Now;
             dgvData.Rows.Clear();
             txtRemarkHD.Text = "";
@@ -657,6 +674,7 @@ namespace StockControl
             btnEdit.Enabled = true;
             btnNew.Enabled = false;
             btnSave.Enabled = true;
+            btnDelete.Enabled = true;
             ClearData();
             Enable_Status(true, "New");
             lblStatus.Text = "New";
@@ -685,6 +703,7 @@ namespace StockControl
             btnEdit.Enabled = false;
             btnNew.Enabled = true;
             btnSave.Enabled = true;
+            btnDelete.Enabled = true;
             
 
             Enable_Status(true, "Edit");
@@ -697,7 +716,7 @@ namespace StockControl
         {
             try
             {
-
+                lblStatus.Text = "Delete";
                 Ac = "Del";
                 if (MessageBox.Show("ต้องการลบรายการ ( " + txtPRNo.Text + " ) หรือไม่ ?", "ลบรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
@@ -765,6 +784,8 @@ namespace StockControl
                 if (dtRequire.Text.Equals(""))
                     err += "- “วันที่ต้องการ:” เป็นค่าว่าง \n";
 
+                if(dgvData.Rows.Count<=0)
+                    err += "- “รายการ:” เป็นค่าว่าง \n";
                 foreach (GridViewRowInfo rowInfo in dgvData.Rows)
                 {
                     if (rowInfo.IsVisible)
@@ -779,7 +800,7 @@ namespace StockControl
                 }
 
 
-                        if (!err.Equals(""))
+                 if (!err.Equals(""))
                     MessageBox.Show(err);
                 else
                     re = false;
@@ -814,7 +835,9 @@ namespace StockControl
                             {
                                 SaveHerder();
                                 AddPR_d();
+                                MessageBox.Show("บันทึกสำเร็จ!");
                                 DataLoad();
+                                btnNew.Enabled = true;
                             }
                         }
                     }
@@ -957,9 +980,13 @@ namespace StockControl
                         foreach (GridViewRowInfo ee in dgvRow_List)
                         {
                             CodeNo = Convert.ToString(ee.Cells["CodeNo"].Value).Trim();
-                            if (!CodeNo.Equals(""))
+                            if (!CodeNo.Equals("") && !check_Duppicate(CodeNo))
                             {
                                 Add_Part(CodeNo, OrderQty);
+                            }
+                            else
+                            {
+                                MessageBox.Show("รหัสพาร์ท ซ้ำ");
                             }
                         }
                     }
@@ -969,6 +996,21 @@ namespace StockControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             finally { this.Cursor = Cursors.Default; }
+        }
+        private bool check_Duppicate(string CodeNo)
+        {
+            bool re = false;
+            foreach (var rd1 in dgvData.Rows)
+            {
+                if (rd1.IsVisible.Equals(true))
+                {
+                    if (StockControl.dbClss.TSt(rd1.Cells["dgvCodeNo"].Value).Equals(CodeNo))
+                        re = true;
+                }
+            }
+
+            return re;
+
         }
         private void Add_Part(string CodeNo,int OrderQty)
         {
@@ -1121,7 +1163,7 @@ namespace StockControl
                 DataLoad();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); dbClss.AddError("CreatePart", ex.Message + " : radButtonElement1_Click", this.Name); }
-
+            finally { this.Cursor = Cursors.Default; }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -1135,14 +1177,16 @@ namespace StockControl
             Enable_Status(false, "View");
             txtPRNo.Text = PR;
             DataLoad();
+            Ac = "View";
         }
 
         private void txtPRNo_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13 && !txtPRNo.Text.Equals(""))
             {
-                DataLoad();
                 btnView_Click(null, null);
+                DataLoad();
+                
             }
         }
         private void CreatePR_from_WaitingPR()
@@ -1196,6 +1240,11 @@ namespace StockControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             finally { this.Cursor = Cursors.Default; }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

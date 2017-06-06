@@ -66,6 +66,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.radGridView1 = new Telerik.WinControls.UI.RadGridView();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
+            this.dtDateTo = new Telerik.WinControls.UI.RadDateTimePicker();
+            this.dtDateFrom = new Telerik.WinControls.UI.RadDateTimePicker();
+            this.radLabel4 = new Telerik.WinControls.UI.RadLabel();
+            this.radLabel5 = new Telerik.WinControls.UI.RadLabel();
             this.btnSearch = new Telerik.WinControls.UI.RadButton();
             this.txtPRNo = new Telerik.WinControls.UI.RadTextBox();
             this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
@@ -80,10 +84,6 @@
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
-            this.dtDateTo = new Telerik.WinControls.UI.RadDateTimePicker();
-            this.dtDateFrom = new Telerik.WinControls.UI.RadDateTimePicker();
-            this.radLabel4 = new Telerik.WinControls.UI.RadLabel();
-            this.radLabel5 = new Telerik.WinControls.UI.RadLabel();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -91,6 +91,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtDateTo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtDateFrom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPRNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
@@ -100,10 +104,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVendorNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel37)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtDateTo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtDateFrom)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -266,6 +266,7 @@
             this.btn_PrintPR.Name = "btn_PrintPR";
             this.btn_PrintPR.Text = "พิมพ์เอกสาร";
             this.btn_PrintPR.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btn_PrintPR.Click += new System.EventHandler(this.btn_PrintPR_Click);
             // 
             // btn_Print_Barcode
             // 
@@ -485,6 +486,54 @@
             this.radPanel1.TabIndex = 1;
             this.radPanel1.ThemeName = "Office2010Blue";
             // 
+            // dtDateTo
+            // 
+            this.dtDateTo.CustomFormat = "dd/MMM/yyyy";
+            this.dtDateTo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtDateTo.Location = new System.Drawing.Point(263, 56);
+            this.dtDateTo.Name = "dtDateTo";
+            this.dtDateTo.Size = new System.Drawing.Size(140, 19);
+            this.dtDateTo.TabIndex = 10;
+            this.dtDateTo.TabStop = false;
+            this.dtDateTo.Text = "16/May/2017";
+            this.dtDateTo.ThemeName = "Office2010Blue";
+            this.dtDateTo.Value = new System.DateTime(2017, 5, 16, 21, 48, 34, 546);
+            this.dtDateTo.Visible = false;
+            // 
+            // dtDateFrom
+            // 
+            this.dtDateFrom.CustomFormat = "dd/MMM/yyyy";
+            this.dtDateFrom.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtDateFrom.Location = new System.Drawing.Point(116, 57);
+            this.dtDateFrom.Name = "dtDateFrom";
+            this.dtDateFrom.Size = new System.Drawing.Size(118, 19);
+            this.dtDateFrom.TabIndex = 11;
+            this.dtDateFrom.TabStop = false;
+            this.dtDateFrom.Text = "16/May/2017";
+            this.dtDateFrom.ThemeName = "Office2010Blue";
+            this.dtDateFrom.Value = new System.DateTime(2017, 5, 16, 21, 48, 34, 546);
+            this.dtDateFrom.Visible = false;
+            // 
+            // radLabel4
+            // 
+            this.radLabel4.Location = new System.Drawing.Point(238, 57);
+            this.radLabel4.Name = "radLabel4";
+            this.radLabel4.Size = new System.Drawing.Size(18, 18);
+            this.radLabel4.TabIndex = 8;
+            this.radLabel4.Text = "ถึง";
+            this.radLabel4.Visible = false;
+            // 
+            // radLabel5
+            // 
+            this.radLabel5.Location = new System.Drawing.Point(63, 57);
+            this.radLabel5.Name = "radLabel5";
+            this.radLabel5.Size = new System.Drawing.Size(50, 18);
+            this.radLabel5.TabIndex = 9;
+            this.radLabel5.Text = "เลือกวันที่";
+            this.radLabel5.Visible = false;
+            // 
             // btnSearch
             // 
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
@@ -603,54 +652,6 @@
             this.radRibbonBarButtonGroup5.ShowBorder = false;
             this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
-            // dtDateTo
-            // 
-            this.dtDateTo.CustomFormat = "dd/MMM/yyyy";
-            this.dtDateTo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDateTo.Location = new System.Drawing.Point(263, 56);
-            this.dtDateTo.Name = "dtDateTo";
-            this.dtDateTo.Size = new System.Drawing.Size(140, 19);
-            this.dtDateTo.TabIndex = 10;
-            this.dtDateTo.TabStop = false;
-            this.dtDateTo.Text = "16/May/2017";
-            this.dtDateTo.ThemeName = "Office2010Blue";
-            this.dtDateTo.Value = new System.DateTime(2017, 5, 16, 21, 48, 34, 546);
-            this.dtDateTo.Visible = false;
-            // 
-            // dtDateFrom
-            // 
-            this.dtDateFrom.CustomFormat = "dd/MMM/yyyy";
-            this.dtDateFrom.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDateFrom.Location = new System.Drawing.Point(116, 57);
-            this.dtDateFrom.Name = "dtDateFrom";
-            this.dtDateFrom.Size = new System.Drawing.Size(118, 19);
-            this.dtDateFrom.TabIndex = 11;
-            this.dtDateFrom.TabStop = false;
-            this.dtDateFrom.Text = "16/May/2017";
-            this.dtDateFrom.ThemeName = "Office2010Blue";
-            this.dtDateFrom.Value = new System.DateTime(2017, 5, 16, 21, 48, 34, 546);
-            this.dtDateFrom.Visible = false;
-            // 
-            // radLabel4
-            // 
-            this.radLabel4.Location = new System.Drawing.Point(238, 57);
-            this.radLabel4.Name = "radLabel4";
-            this.radLabel4.Size = new System.Drawing.Size(18, 18);
-            this.radLabel4.TabIndex = 8;
-            this.radLabel4.Text = "ถึง";
-            this.radLabel4.Visible = false;
-            // 
-            // radLabel5
-            // 
-            this.radLabel5.Location = new System.Drawing.Point(63, 57);
-            this.radLabel5.Name = "radLabel5";
-            this.radLabel5.Size = new System.Drawing.Size(50, 18);
-            this.radLabel5.TabIndex = 9;
-            this.radLabel5.Text = "เลือกวันที่";
-            this.radLabel5.Visible = false;
-            // 
             // CreatePR_List
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -679,6 +680,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).EndInit();
             this.radPanel1.ResumeLayout(false);
             this.radPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtDateTo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtDateFrom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSearch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPRNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
@@ -688,10 +693,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVendorNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel37)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtDateTo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtDateFrom)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

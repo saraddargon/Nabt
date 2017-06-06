@@ -875,6 +875,7 @@ namespace StockControl
                         AddPart();
                         DataLoad();
                         btnGET.Enabled = false;
+                        btnNew.Enabled = true;
                     }
                 }
             }catch(Exception ex) { MessageBox.Show(ex.Message); }
@@ -1928,6 +1929,7 @@ namespace StockControl
             Enable_Status(false, "View");
             txtCodeNo.Text = CodeNo;
             DataLoad();
+            Ac = "View";
         }
 
         private void btnOpenDWG_Click(object sender, EventArgs e)

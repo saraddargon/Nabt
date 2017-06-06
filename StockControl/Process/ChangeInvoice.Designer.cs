@@ -34,7 +34,7 @@
             this.radRibbonBarGroup1 = new Telerik.WinControls.UI.RadRibbonBarGroup();
             this.btnSave = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarGroup2 = new Telerik.WinControls.UI.RadRibbonBarGroup();
-            this.btnView = new Telerik.WinControls.UI.RadButtonElement();
+            this.btnPrint = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarGroup3 = new Telerik.WinControls.UI.RadRibbonBarGroup();
             this.btnRefresh = new Telerik.WinControls.UI.RadButtonElement();
             this.radMenuItem1 = new Telerik.WinControls.UI.RadMenuItem();
@@ -44,26 +44,26 @@
             this.radLabelElement1 = new Telerik.WinControls.UI.RadLabelElement();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
-            this.radTextBox1 = new Telerik.WinControls.UI.RadTextBox();
+            this.txtInvoiceNo2 = new Telerik.WinControls.UI.RadTextBox();
+            this.txtInvoiceNo = new Telerik.WinControls.UI.RadTextBox();
             this.radButton1 = new Telerik.WinControls.UI.RadButton();
+            this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
             this.office2010BlueTheme1 = new Telerik.WinControls.Themes.Office2010BlueTheme();
             this.radRibbonBarButtonGroup2 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
-            this.radTextBox2 = new Telerik.WinControls.UI.RadTextBox();
-            this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInvoiceNo2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInvoiceNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButton1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,33 +115,32 @@
             this.radRibbonBarGroup1.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.btnSave});
             this.radRibbonBarGroup1.Name = "radRibbonBarGroup1";
-            this.radRibbonBarGroup1.Text = "Return";
+            this.radRibbonBarGroup1.Text = "Invoice/DL No";
             // 
             // btnSave
             // 
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnSave.Name = "btnSave";
-            this.btnSave.Text = "คืนรายการ";
+            this.btnSave.Text = "    เปลี่ยน   ";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // radRibbonBarGroup2
             // 
             this.radRibbonBarGroup2.Items.AddRange(new Telerik.WinControls.RadItem[] {
-            this.btnView});
+            this.btnPrint});
             this.radRibbonBarGroup2.Name = "radRibbonBarGroup2";
             this.radRibbonBarGroup2.Text = "Print Document";
             // 
-            // btnView
+            // btnPrint
             // 
-            this.btnView.Image = ((System.Drawing.Image)(resources.GetObject("btnView.Image")));
-            this.btnView.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnView.Name = "btnView";
-            this.btnView.Text = "พิมพ์เอกสาร";
-            this.btnView.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnView.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnView.Click += new System.EventHandler(this.btnView_Click);
+            this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
+            this.btnPrint.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Text = "พิมพ์เอกสาร";
+            this.btnPrint.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // radRibbonBarGroup3
             // 
@@ -150,6 +149,7 @@
             this.btnRefresh});
             this.radRibbonBarGroup3.Name = "radRibbonBarGroup3";
             this.radRibbonBarGroup3.Text = "Page";
+            this.radRibbonBarGroup3.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
             // 
             // btnRefresh
             // 
@@ -212,8 +212,8 @@
             // radPanel1
             // 
             this.radPanel1.BackColor = System.Drawing.Color.LavenderBlush;
-            this.radPanel1.Controls.Add(this.radTextBox2);
-            this.radPanel1.Controls.Add(this.radTextBox1);
+            this.radPanel1.Controls.Add(this.txtInvoiceNo2);
+            this.radPanel1.Controls.Add(this.txtInvoiceNo);
             this.radPanel1.Controls.Add(this.radButton1);
             this.radPanel1.Controls.Add(this.radLabel2);
             this.radPanel1.Controls.Add(this.radLabel1);
@@ -225,13 +225,22 @@
             this.radPanel1.ThemeName = "Office2010Blue";
             this.radPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.radPanel1_Paint);
             // 
-            // radTextBox1
+            // txtInvoiceNo2
             // 
-            this.radTextBox1.Location = new System.Drawing.Point(68, 52);
-            this.radTextBox1.Name = "radTextBox1";
-            this.radTextBox1.Size = new System.Drawing.Size(187, 20);
-            this.radTextBox1.TabIndex = 4;
-            this.radTextBox1.ThemeName = "Office2010Blue";
+            this.txtInvoiceNo2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txtInvoiceNo2.Location = new System.Drawing.Point(68, 110);
+            this.txtInvoiceNo2.Name = "txtInvoiceNo2";
+            this.txtInvoiceNo2.Size = new System.Drawing.Size(187, 20);
+            this.txtInvoiceNo2.TabIndex = 4;
+            this.txtInvoiceNo2.ThemeName = "Office2010Blue";
+            // 
+            // txtInvoiceNo
+            // 
+            this.txtInvoiceNo.Location = new System.Drawing.Point(68, 52);
+            this.txtInvoiceNo.Name = "txtInvoiceNo";
+            this.txtInvoiceNo.Size = new System.Drawing.Size(187, 20);
+            this.txtInvoiceNo.TabIndex = 4;
+            this.txtInvoiceNo.ThemeName = "Office2010Blue";
             // 
             // radButton1
             // 
@@ -243,6 +252,14 @@
             this.radButton1.Text = "เลือก";
             this.radButton1.ThemeName = "Office2010Blue";
             this.radButton1.Click += new System.EventHandler(this.radButton1_Click_1);
+            // 
+            // radLabel2
+            // 
+            this.radLabel2.Location = new System.Drawing.Point(68, 86);
+            this.radLabel2.Name = "radLabel2";
+            this.radLabel2.Size = new System.Drawing.Size(150, 18);
+            this.radLabel2.TabIndex = 0;
+            this.radLabel2.Text = "เลขที่ Invoice No , DL No ใหม่";
             // 
             // radLabel1
             // 
@@ -286,23 +303,6 @@
             this.radRibbonBarButtonGroup5.ShowBorder = false;
             this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
-            // radTextBox2
-            // 
-            this.radTextBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.radTextBox2.Location = new System.Drawing.Point(68, 110);
-            this.radTextBox2.Name = "radTextBox2";
-            this.radTextBox2.Size = new System.Drawing.Size(187, 20);
-            this.radTextBox2.TabIndex = 4;
-            this.radTextBox2.ThemeName = "Office2010Blue";
-            // 
-            // radLabel2
-            // 
-            this.radLabel2.Location = new System.Drawing.Point(68, 86);
-            this.radLabel2.Name = "radLabel2";
-            this.radLabel2.Size = new System.Drawing.Size(150, 18);
-            this.radLabel2.TabIndex = 0;
-            this.radLabel2.Text = "เลขที่ Invoice No , DL No ใหม่";
-            // 
             // ChangeInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -327,11 +327,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).EndInit();
             this.radPanel1.ResumeLayout(false);
             this.radPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInvoiceNo2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInvoiceNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButton1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -348,7 +348,7 @@
         private Telerik.WinControls.UI.RibbonTab ribbonTab1;
         private Telerik.WinControls.UI.RadRibbonBarGroup radRibbonBarGroup1;
         private Telerik.WinControls.UI.RadRibbonBarGroup radRibbonBarGroup2;
-        private Telerik.WinControls.UI.RadButtonElement btnView;
+        private Telerik.WinControls.UI.RadButtonElement btnPrint;
         private Telerik.WinControls.UI.RadRibbonBarGroup radRibbonBarGroup3;
         private Telerik.WinControls.UI.RadButtonElement btnRefresh;
         private Telerik.WinControls.Themes.Office2010BlueTheme office2010BlueTheme1;
@@ -362,8 +362,8 @@
         private Telerik.WinControls.UI.RadPanel radPanel1;
         private Telerik.WinControls.UI.RadButton radButton1;
         private Telerik.WinControls.UI.RadLabel radLabel1;
-        private Telerik.WinControls.UI.RadTextBox radTextBox1;
-        private Telerik.WinControls.UI.RadTextBox radTextBox2;
+        private Telerik.WinControls.UI.RadTextBox txtInvoiceNo;
+        private Telerik.WinControls.UI.RadTextBox txtInvoiceNo2;
         private Telerik.WinControls.UI.RadLabel radLabel2;
     }
 }

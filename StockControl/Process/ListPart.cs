@@ -256,7 +256,7 @@ namespace StockControl
             dt_Kanban.Columns.Add(new DataColumn("BarCode", typeof(Image)));
 
         }
-        private void btn_PrintShelfTag_Click(object sender, EventArgs e)
+        private void Print_Shelftag_datatable()
         {
             try
             {
@@ -282,6 +282,64 @@ namespace StockControl
                         MessageBox.Show("not found.");
                 }
 
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+        private void btn_PrintShelfTag_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    //delete ทิ้งก่อน
+                    var deleteItem = (from ii in db.TempPrintShelfs where ii.UserName == Environment.UserName select ii);
+                    foreach (var d in deleteItem)
+                    {
+                        db.TempPrintShelfs.DeleteOnSubmit(d);
+                        db.SubmitChanges();
+                    }
+
+                    int c = 0;
+                    string CodeNo = "";
+                    radGridView1.EndEdit();
+                    //insert
+                    foreach (var Rowinfo in radGridView1.Rows)
+                    {
+                        if (StockControl.dbClss.TBo(Rowinfo.Cells["S"].Value).Equals(true))
+                        {
+                            CodeNo = StockControl.dbClss.TSt(Rowinfo.Cells["CodeNo"].Value);
+                            var g = (from ix in db.tb_Items select ix).Where(a => a.CodeNo == CodeNo).ToList();
+                            if (g.Count() > 0)
+                            {
+                                
+                                c += 1;
+                                TempPrintShelf ps = new TempPrintShelf();
+                                ps.UserName = Environment.UserName;
+                                ps.CodeNo = g.FirstOrDefault().CodeNo;
+                                ps.PartDescription = g.FirstOrDefault().ItemDescription;
+                                ps.PartNo = g.FirstOrDefault().ItemNo;
+                                ps.ShelfNo = g.FirstOrDefault().ShelfNo;
+                                ps.Max = Convert.ToDecimal(g.FirstOrDefault().MaximumStock);
+                                ps.Min = Convert.ToDecimal(g.FirstOrDefault().MinimumStock);
+                                ps.OrderPoint = Convert.ToDecimal(g.FirstOrDefault().ReOrderPoint);
+                                db.TempPrintShelfs.InsertOnSubmit(ps);
+                                db.SubmitChanges();
+                            }
+                        }
+
+                    }
+                    if (c > 0)
+                    {
+                        Report.Reportx1.Value = new string[2];
+                        Report.Reportx1.Value[0] = Environment.UserName;
+                        Report.Reportx1.WReport = "002_BoxShelf_Part";
+                        Report.Reportx1 op = new Report.Reportx1("002_BoxShelf_Part.rpt");
+                        op.Show();
+                    }
+                    else
+                        MessageBox.Show("not found.");
+                }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
