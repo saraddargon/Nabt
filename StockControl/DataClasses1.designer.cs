@@ -396,15 +396,15 @@ namespace StockControl
 			return ((ISingleResult<sp_SelectVendorResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_003_Cal_Receive_Eemain")]
-		public int sp_003_Cal_Receive_Eemain([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PRID", DbType="Int")] System.Nullable<int> pRID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PRNo", DbType="VarChar(50)")] string pRNo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="TempNo", DbType="VarChar(50)")] string tempNo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RemainQty", DbType="Decimal(18,6)")] System.Nullable<decimal> remainQty)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_R001_ReportPart")]
+		public ISingleResult<sp_R001_ReportPartResult> sp_R001_ReportPart([global::System.Data.Linq.Mapping.ParameterAttribute(Name="GroupType", DbType="NVarChar(50)")] string groupType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Status", DbType="VarChar(50)")] string status, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="VendorName", DbType="NVarChar(70)")] string vendorName)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pRID, pRNo, tempNo, remainQty);
-			return ((int)(result.ReturnValue));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), groupType, status, vendorName);
+			return ((ISingleResult<sp_R001_ReportPartResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_004_Update_Receive_Remain")]
-		public int sp_004_Update_Receive_Remain([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PRID", DbType="Int")] System.Nullable<int> pRID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PRNo", DbType="VarChar(50)")] string pRNo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="TempNo", DbType="VarChar(50)")] string tempNo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RemainQty", DbType="Decimal(18,6)")] System.Nullable<decimal> remainQty)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_R002_ReportReceive")]
+		public ISingleResult<sp_R002_ReportReceiveResult> sp_R002_ReportReceive([global::System.Data.Linq.Mapping.ParameterAttribute(Name="GroupType", DbType="NVarChar(50)")] string groupType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Status", DbType="VarChar(50)")] string status, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="VendorName", DbType="NVarChar(70)")] string vendorName)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pRID, pRNo, tempNo, remainQty);
 			return ((int)(result.ReturnValue));
@@ -416,12 +416,14 @@ namespace StockControl
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pRID, pRNo);
 			return ((int)(result.ReturnValue));
 		}
+	}
+	
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_007_Update_SH_Status")]
-		public int sp_007_Update_SH_Status([global::System.Data.Linq.Mapping.ParameterAttribute(Name="SHNo", DbType="VarChar(50)")] string sHNo, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string id)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_001ReportPart")]
+		public ISingleResult<sp_001ReportPartResult> sp_001ReportPart([global::System.Data.Linq.Mapping.ParameterAttribute(Name="GroupType", DbType="NVarChar(50)")] string groupType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Status", DbType="VarChar(50)")] string status, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="VendorName", DbType="NVarChar(70)")] string vendorName)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), sHNo, id);
-			return ((int)(result.ReturnValue));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), groupType, status, vendorName);
+			return ((ISingleResult<sp_001ReportPartResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -8890,192 +8892,246 @@ namespace StockControl
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_Item")]
-	public partial class tb_Item : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class sp_001ReportPartResult
 	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private string _CodeNo;
 		
-		private string _ItemNo;
+		private string _รหัสพาร์ท;
 		
-		private string _ItemDescription;
+		private string _ชื่อพาร์ท;
 		
-		private string _GroupCode;
+		private string _รายละเอียดพาร์ท;
 		
-		private string _TypeCode;
+		private int _จำนวนคงเหลือ;
 		
-		private string _UnitBuy;
+		private int _จำนวนคงเหลือ_Temp_;
 		
-		private string _UnitShip;
+		private int _จำนวนสั่งซื้อ;
 		
-		private System.Nullable<decimal> _PCSUnit;
+		private string _ประเภทกลุ่มพาร์ท;
 		
-		private string _ShelfNo;
+		private string _ประเภทพาร์ท;
 		
-		private System.Nullable<decimal> _StandardCost;
+		private string _รหัสผู้ขาย;
 		
-		private string _CostingMethod;
+		private string _ชื่อผู้ขาย;
 		
-		private string _ItemGroup;
+		private string _ชื่อผู้ผลิต;
 		
-		private string _Replacement;
+		private System.Nullable<decimal> _ราคา;
 		
-		private string _VendorNo;
+		private System.Nullable<decimal> _จำนวน_หน่วย;
 		
-		private string _VendorItemName;
+		private string _หน่วยซื้อ;
 		
-		private string _UseTacking;
+		private string _หน่วยเบิก;
 		
-		private System.Nullable<bool> _Critical;
+		private System.Nullable<decimal> _ระยะเวลาซื้อ;
 		
-		private System.Nullable<decimal> _MaximumStock;
+		private System.Nullable<decimal> _Maximum;
 		
-		private System.Nullable<decimal> _MinimumStock;
+		private System.Nullable<decimal> _Minimum;
 		
-		private System.Nullable<decimal> _SafetyStock;
+		private System.Nullable<decimal> _จุดสั่งซื้อ;
 		
-		private System.Nullable<decimal> _ReOrderPoint;
+		private System.Nullable<decimal> _จำนวนใช้งาน;
 		
-		private string _Status;
+		private string _ชั้นเก็บ;
 		
-		private System.Nullable<bool> _StopOrder;
+		private System.Nullable<bool> _หยุดสั่งซื้อ;
 		
-		private string _Remark;
+		private string _สถานะ;
+		
+		private string _Drawing;
 		
 		private string _Size;
 		
-		private string _DWGNo;
-		
-		private string _Maker;
-		
-		private System.Nullable<decimal> _SD;
-		
-		private System.Data.Linq.Binary _BarCode;
-		
-		private string _CreateBy;
-		
-		private System.Nullable<System.DateTime> _CreateDate;
-		
-		private string _UpdateBy;
-		
-		private System.Nullable<System.DateTime> _UpdateDate;
-		
-		private System.Nullable<decimal> _Toollife;
-		
-		private System.Nullable<decimal> _Leadtime;
-		
-		private System.Nullable<bool> _DWG;
-		
-		private System.Nullable<decimal> _StockInv;
-		
-		private System.Nullable<decimal> _StockDL;
-		
-		private System.Nullable<decimal> _StockBackOrder;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnCodeNoChanging(string value);
-    partial void OnCodeNoChanged();
-    partial void OnItemNoChanging(string value);
-    partial void OnItemNoChanged();
-    partial void OnItemDescriptionChanging(string value);
-    partial void OnItemDescriptionChanged();
-    partial void OnGroupCodeChanging(string value);
-    partial void OnGroupCodeChanged();
-    partial void OnTypeCodeChanging(string value);
-    partial void OnTypeCodeChanged();
-    partial void OnUnitBuyChanging(string value);
-    partial void OnUnitBuyChanged();
-    partial void OnUnitShipChanging(string value);
-    partial void OnUnitShipChanged();
-    partial void OnPCSUnitChanging(System.Nullable<decimal> value);
-    partial void OnPCSUnitChanged();
-    partial void OnShelfNoChanging(string value);
-    partial void OnShelfNoChanged();
-    partial void OnStandardCostChanging(System.Nullable<decimal> value);
-    partial void OnStandardCostChanged();
-    partial void OnCostingMethodChanging(string value);
-    partial void OnCostingMethodChanged();
-    partial void OnItemGroupChanging(string value);
-    partial void OnItemGroupChanged();
-    partial void OnReplacementChanging(string value);
-    partial void OnReplacementChanged();
-    partial void OnVendorNoChanging(string value);
-    partial void OnVendorNoChanged();
-    partial void OnVendorItemNameChanging(string value);
-    partial void OnVendorItemNameChanged();
-    partial void OnUseTackingChanging(string value);
-    partial void OnUseTackingChanged();
-    partial void OnCriticalChanging(System.Nullable<bool> value);
-    partial void OnCriticalChanged();
-    partial void OnMaximumStockChanging(System.Nullable<decimal> value);
-    partial void OnMaximumStockChanged();
-    partial void OnMinimumStockChanging(System.Nullable<decimal> value);
-    partial void OnMinimumStockChanged();
-    partial void OnSafetyStockChanging(System.Nullable<decimal> value);
-    partial void OnSafetyStockChanged();
-    partial void OnReOrderPointChanging(System.Nullable<decimal> value);
-    partial void OnReOrderPointChanged();
-    partial void OnStatusChanging(string value);
-    partial void OnStatusChanged();
-    partial void OnStopOrderChanging(System.Nullable<bool> value);
-    partial void OnStopOrderChanged();
-    partial void OnRemarkChanging(string value);
-    partial void OnRemarkChanged();
-    partial void OnSizeChanging(string value);
-    partial void OnSizeChanged();
-    partial void OnDWGNoChanging(string value);
-    partial void OnDWGNoChanged();
-    partial void OnMakerChanging(string value);
-    partial void OnMakerChanged();
-    partial void OnSDChanging(System.Nullable<decimal> value);
-    partial void OnSDChanged();
-    partial void OnBarCodeChanging(System.Data.Linq.Binary value);
-    partial void OnBarCodeChanged();
-    partial void OnCreateByChanging(string value);
-    partial void OnCreateByChanged();
-    partial void OnCreateDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreateDateChanged();
-    partial void OnUpdateByChanging(string value);
-    partial void OnUpdateByChanged();
-    partial void OnUpdateDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnUpdateDateChanged();
-    partial void OnToollifeChanging(System.Nullable<decimal> value);
-    partial void OnToollifeChanged();
-    partial void OnLeadtimeChanging(System.Nullable<decimal> value);
-    partial void OnLeadtimeChanged();
-    partial void OnDWGChanging(System.Nullable<bool> value);
-    partial void OnDWGChanged();
-    partial void OnStockInvChanging(System.Nullable<decimal> value);
-    partial void OnStockInvChanged();
-    partial void OnStockDLChanging(System.Nullable<decimal> value);
-    partial void OnStockDLChanged();
-    partial void OnStockBackOrderChanging(System.Nullable<decimal> value);
-    partial void OnStockBackOrderChanged();
-    #endregion
-		
-		public tb_Item()
+		public sp_R001_ReportPartResult()
 		{
-			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodeNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_No", DbType="BigInt")]
+		public System.Nullable<long> No
+		{
+			get
+			{
+				return this._No;
+			}
+			set
+			{
+				if ((this._No != value))
+				{
+					this._No = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_รหัสพาร์ท", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string รหัสพาร์ท
+		{
+			get
+			{
+				return this._รหัสพาร์ท;
+			}
+			set
+			{
+				if ((this._รหัสพาร์ท != value))
+				{
+					this._รหัสพาร์ท = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ชื่อพาร์ท", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string ชื่อพาร์ท
+		{
+			get
+			{
+				return this._ชื่อพาร์ท;
+			}
+			set
+			{
+				if ((this._ชื่อพาร์ท != value))
+				{
+					this._ชื่อพาร์ท = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_รายละเอียดพาร์ท", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string รายละเอียดพาร์ท
+		{
+			get
+			{
+				return this._รายละเอียดพาร์ท;
+			}
+			set
+			{
+				if ((this._รายละเอียดพาร์ท != value))
+				{
+					this._รายละเอียดพาร์ท = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_จำนวนคงเหลือ", DbType="Int NOT NULL")]
+		public int จำนวนคงเหลือ
+		{
+			get
+			{
+				return this._จำนวนคงเหลือ;
+			}
+			set
+			{
+				if ((this._จำนวนคงเหลือ != value))
+				{
+					this._จำนวนคงเหลือ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[จำนวนคงเหลือ[Temp]]]", Storage="_จำนวนคงเหลือ_Temp_", DbType="Int NOT NULL")]
+		public int จำนวนคงเหลือ_Temp_
+		{
+			get
+			{
+				return this._จำนวนคงเหลือ_Temp_;
+			}
+			set
+			{
+				if ((this._จำนวนคงเหลือ_Temp_ != value))
+				{
+					this._จำนวนคงเหลือ_Temp_ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_จำนวนสั่งซื้อ", DbType="Int NOT NULL")]
+		public int จำนวนสั่งซื้อ
+		{
+			get
+			{
+				return this._จำนวนสั่งซื้อ;
+			}
+			set
+			{
+				if ((this._จำนวนสั่งซื้อ != value))
+				{
+					this._จำนวนสั่งซื้อ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ประเภทกลุ่มพาร์ท", DbType="NVarChar(30)")]
+		public string ประเภทกลุ่มพาร์ท
+		{
+			get
+			{
+				return this._ประเภทกลุ่มพาร์ท;
+			}
+			set
+			{
+				if ((this._ประเภทกลุ่มพาร์ท != value))
+				{
+					this._ประเภทกลุ่มพาร์ท = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ประเภทพาร์ท", DbType="NVarChar(30)")]
+		public string ประเภทพาร์ท
+		{
+			get
+			{
+				return this._ประเภทพาร์ท;
+			}
+			set
+			{
+				if ((this._ประเภทพาร์ท != value))
+				{
+					this._ประเภทพาร์ท = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_รหัสผู้ขาย", DbType="NVarChar(10)")]
+		public string รหัสผู้ขาย
+		{
+			get
+			{
+				return this._รหัสผู้ขาย;
+			}
+			set
+			{
+				if ((this._รหัสผู้ขาย != value))
+				{
+					this._รหัสผู้ขาย = value;
+				}
+			}
+		}
+		
+		private int _StockQty;
+		
+		private int _TempQty;
+		
+		private int _OrderQty;
+		
+		public sp_001ReportPartResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodeNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string CodeNo
 		{
 			get
 			{
-				return this._CodeNo;
+				return this._จำนวน_หน่วย;
 			}
 			set
 			{
-				if ((this._CodeNo != value))
+				if ((this._จำนวน_หน่วย != value))
 				{
-					this.OnCodeNoChanging(value);
-					this.SendPropertyChanging();
 					this._CodeNo = value;
 					this.SendPropertyChanged("CodeNo");
 					this.OnCodeNoChanged();
@@ -9083,19 +9139,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string ItemNo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_หน่วยซื้อ", DbType="NVarChar(20)")]
+		public string หน่วยซื้อ
 		{
 			get
 			{
-				return this._ItemNo;
+				return this._หน่วยซื้อ;
 			}
 			set
 			{
-				if ((this._ItemNo != value))
+				if ((this._หน่วยซื้อ != value))
 				{
-					this.OnItemNoChanging(value);
-					this.SendPropertyChanging();
 					this._ItemNo = value;
 					this.SendPropertyChanged("ItemNo");
 					this.OnItemNoChanged();
@@ -9103,19 +9157,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemDescription", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
-		public string ItemDescription
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_หน่วยเบิก", DbType="NVarChar(20)")]
+		public string หน่วยเบิก
 		{
 			get
 			{
-				return this._ItemDescription;
+				return this._หน่วยเบิก;
 			}
 			set
 			{
-				if ((this._ItemDescription != value))
+				if ((this._หน่วยเบิก != value))
 				{
-					this.OnItemDescriptionChanging(value);
-					this.SendPropertyChanging();
 					this._ItemDescription = value;
 					this.SendPropertyChanged("ItemDescription");
 					this.OnItemDescriptionChanged();
@@ -9123,19 +9175,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroupCode", DbType="NVarChar(30)")]
-		public string GroupCode
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ระยะเวลาซื้อ", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> ระยะเวลาซื้อ
 		{
 			get
 			{
-				return this._GroupCode;
+				return this._ระยะเวลาซื้อ;
 			}
 			set
 			{
-				if ((this._GroupCode != value))
+				if ((this._ระยะเวลาซื้อ != value))
 				{
-					this.OnGroupCodeChanging(value);
-					this.SendPropertyChanging();
 					this._GroupCode = value;
 					this.SendPropertyChanged("GroupCode");
 					this.OnGroupCodeChanged();
@@ -9143,19 +9193,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TypeCode", DbType="NVarChar(30)")]
-		public string TypeCode
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Maximum", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Maximum
 		{
 			get
 			{
-				return this._TypeCode;
+				return this._Maximum;
 			}
 			set
 			{
-				if ((this._TypeCode != value))
+				if ((this._Maximum != value))
 				{
-					this.OnTypeCodeChanging(value);
-					this.SendPropertyChanging();
 					this._TypeCode = value;
 					this.SendPropertyChanged("TypeCode");
 					this.OnTypeCodeChanged();
@@ -9163,19 +9211,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitBuy", DbType="NVarChar(20)")]
-		public string UnitBuy
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Minimum", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Minimum
 		{
 			get
 			{
-				return this._UnitBuy;
+				return this._Minimum;
 			}
 			set
 			{
-				if ((this._UnitBuy != value))
+				if ((this._Minimum != value))
 				{
-					this.OnUnitBuyChanging(value);
-					this.SendPropertyChanging();
 					this._UnitBuy = value;
 					this.SendPropertyChanged("UnitBuy");
 					this.OnUnitBuyChanged();
@@ -9183,19 +9229,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitShip", DbType="NVarChar(20)")]
-		public string UnitShip
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_จุดสั่งซื้อ", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> จุดสั่งซื้อ
 		{
 			get
 			{
-				return this._UnitShip;
+				return this._จุดสั่งซื้อ;
 			}
 			set
 			{
-				if ((this._UnitShip != value))
+				if ((this._จุดสั่งซื้อ != value))
 				{
-					this.OnUnitShipChanging(value);
-					this.SendPropertyChanging();
 					this._UnitShip = value;
 					this.SendPropertyChanged("UnitShip");
 					this.OnUnitShipChanged();
@@ -9203,19 +9247,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PCSUnit", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> PCSUnit
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_จำนวนใช้งาน", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> จำนวนใช้งาน
 		{
 			get
 			{
-				return this._PCSUnit;
+				return this._จำนวนใช้งาน;
 			}
 			set
 			{
-				if ((this._PCSUnit != value))
+				if ((this._จำนวนใช้งาน != value))
 				{
-					this.OnPCSUnitChanging(value);
-					this.SendPropertyChanging();
 					this._PCSUnit = value;
 					this.SendPropertyChanged("PCSUnit");
 					this.OnPCSUnitChanged();
@@ -9223,19 +9265,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShelfNo", DbType="NVarChar(20)")]
-		public string ShelfNo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ชั้นเก็บ", DbType="NVarChar(20)")]
+		public string ชั้นเก็บ
 		{
 			get
 			{
-				return this._ShelfNo;
+				return this._ชั้นเก็บ;
 			}
 			set
 			{
-				if ((this._ShelfNo != value))
+				if ((this._ชั้นเก็บ != value))
 				{
-					this.OnShelfNoChanging(value);
-					this.SendPropertyChanging();
 					this._ShelfNo = value;
 					this.SendPropertyChanged("ShelfNo");
 					this.OnShelfNoChanged();
@@ -9243,19 +9283,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StandardCost", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> StandardCost
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_หยุดสั่งซื้อ", DbType="Bit")]
+		public System.Nullable<bool> หยุดสั่งซื้อ
 		{
 			get
 			{
-				return this._StandardCost;
+				return this._หยุดสั่งซื้อ;
 			}
 			set
 			{
-				if ((this._StandardCost != value))
+				if ((this._หยุดสั่งซื้อ != value))
 				{
-					this.OnStandardCostChanging(value);
-					this.SendPropertyChanging();
 					this._StandardCost = value;
 					this.SendPropertyChanged("StandardCost");
 					this.OnStandardCostChanged();
@@ -9263,19 +9301,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CostingMethod", DbType="NVarChar(10)")]
-		public string CostingMethod
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_สถานะ", DbType="NVarChar(20)")]
+		public string สถานะ
 		{
 			get
 			{
-				return this._CostingMethod;
+				return this._สถานะ;
 			}
 			set
 			{
-				if ((this._CostingMethod != value))
+				if ((this._สถานะ != value))
 				{
-					this.OnCostingMethodChanging(value);
-					this.SendPropertyChanging();
 					this._CostingMethod = value;
 					this.SendPropertyChanged("CostingMethod");
 					this.OnCostingMethodChanged();
@@ -9283,262 +9319,20 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemGroup", DbType="NVarChar(20)")]
-		public string ItemGroup
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Drawing", DbType="NVarChar(150)")]
+		public string Drawing
 		{
 			get
 			{
-				return this._ItemGroup;
+				return this._Drawing;
 			}
 			set
 			{
-				if ((this._ItemGroup != value))
+				if ((this._Drawing != value))
 				{
-					this.OnItemGroupChanging(value);
-					this.SendPropertyChanging();
 					this._ItemGroup = value;
 					this.SendPropertyChanged("ItemGroup");
 					this.OnItemGroupChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Replacement", DbType="NVarChar(10)")]
-		public string Replacement
-		{
-			get
-			{
-				return this._Replacement;
-			}
-			set
-			{
-				if ((this._Replacement != value))
-				{
-					this.OnReplacementChanging(value);
-					this.SendPropertyChanging();
-					this._Replacement = value;
-					this.SendPropertyChanged("Replacement");
-					this.OnReplacementChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VendorNo", DbType="NVarChar(10)")]
-		public string VendorNo
-		{
-			get
-			{
-				return this._VendorNo;
-			}
-			set
-			{
-				if ((this._VendorNo != value))
-				{
-					this.OnVendorNoChanging(value);
-					this.SendPropertyChanging();
-					this._VendorNo = value;
-					this.SendPropertyChanged("VendorNo");
-					this.OnVendorNoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VendorItemName", DbType="NVarChar(50)")]
-		public string VendorItemName
-		{
-			get
-			{
-				return this._VendorItemName;
-			}
-			set
-			{
-				if ((this._VendorItemName != value))
-				{
-					this.OnVendorItemNameChanging(value);
-					this.SendPropertyChanging();
-					this._VendorItemName = value;
-					this.SendPropertyChanged("VendorItemName");
-					this.OnVendorItemNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UseTacking", DbType="NVarChar(50)")]
-		public string UseTacking
-		{
-			get
-			{
-				return this._UseTacking;
-			}
-			set
-			{
-				if ((this._UseTacking != value))
-				{
-					this.OnUseTackingChanging(value);
-					this.SendPropertyChanging();
-					this._UseTacking = value;
-					this.SendPropertyChanged("UseTacking");
-					this.OnUseTackingChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Critical", DbType="Bit")]
-		public System.Nullable<bool> Critical
-		{
-			get
-			{
-				return this._Critical;
-			}
-			set
-			{
-				if ((this._Critical != value))
-				{
-					this.OnCriticalChanging(value);
-					this.SendPropertyChanging();
-					this._Critical = value;
-					this.SendPropertyChanged("Critical");
-					this.OnCriticalChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaximumStock", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> MaximumStock
-		{
-			get
-			{
-				return this._MaximumStock;
-			}
-			set
-			{
-				if ((this._MaximumStock != value))
-				{
-					this.OnMaximumStockChanging(value);
-					this.SendPropertyChanging();
-					this._MaximumStock = value;
-					this.SendPropertyChanged("MaximumStock");
-					this.OnMaximumStockChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MinimumStock", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> MinimumStock
-		{
-			get
-			{
-				return this._MinimumStock;
-			}
-			set
-			{
-				if ((this._MinimumStock != value))
-				{
-					this.OnMinimumStockChanging(value);
-					this.SendPropertyChanging();
-					this._MinimumStock = value;
-					this.SendPropertyChanged("MinimumStock");
-					this.OnMinimumStockChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SafetyStock", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> SafetyStock
-		{
-			get
-			{
-				return this._SafetyStock;
-			}
-			set
-			{
-				if ((this._SafetyStock != value))
-				{
-					this.OnSafetyStockChanging(value);
-					this.SendPropertyChanging();
-					this._SafetyStock = value;
-					this.SendPropertyChanged("SafetyStock");
-					this.OnSafetyStockChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReOrderPoint", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> ReOrderPoint
-		{
-			get
-			{
-				return this._ReOrderPoint;
-			}
-			set
-			{
-				if ((this._ReOrderPoint != value))
-				{
-					this.OnReOrderPointChanging(value);
-					this.SendPropertyChanging();
-					this._ReOrderPoint = value;
-					this.SendPropertyChanged("ReOrderPoint");
-					this.OnReOrderPointChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NVarChar(20)")]
-		public string Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this.OnStatusChanging(value);
-					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StopOrder", DbType="Bit")]
-		public System.Nullable<bool> StopOrder
-		{
-			get
-			{
-				return this._StopOrder;
-			}
-			set
-			{
-				if ((this._StopOrder != value))
-				{
-					this.OnStopOrderChanging(value);
-					this.SendPropertyChanging();
-					this._StopOrder = value;
-					this.SendPropertyChanged("StopOrder");
-					this.OnStopOrderChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Remark", DbType="NVarChar(150)")]
-		public string Remark
-		{
-			get
-			{
-				return this._Remark;
-			}
-			set
-			{
-				if ((this._Remark != value))
-				{
-					this.OnRemarkChanging(value);
-					this.SendPropertyChanging();
-					this._Remark = value;
-					this.SendPropertyChanged("Remark");
-					this.OnRemarkChanged();
 				}
 			}
 		}
@@ -9554,8 +9348,220 @@ namespace StockControl
 			{
 				if ((this._Size != value))
 				{
-					this.OnSizeChanging(value);
-					this.SendPropertyChanging();
+					this._Replacement = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_No", DbType="BigInt")]
+		public System.Nullable<long> No
+		{
+			get
+			{
+				return this._No;
+			}
+			set
+			{
+				if ((this._No != value))
+				{
+					this._VendorNo = value;
+					this.SendPropertyChanged("VendorNo");
+					this.OnVendorNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_รหัสพาร์ท", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string รหัสพาร์ท
+		{
+			get
+			{
+				return this._รหัสพาร์ท;
+			}
+			set
+			{
+				if ((this._รหัสพาร์ท != value))
+				{
+					this._VendorItemName = value;
+					this.SendPropertyChanged("VendorItemName");
+					this.OnVendorItemNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ชื่อพาร์ท", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string ชื่อพาร์ท
+		{
+			get
+			{
+				return this._ชื่อพาร์ท;
+			}
+			set
+			{
+				if ((this._ชื่อพาร์ท != value))
+				{
+					this._UseTacking = value;
+					this.SendPropertyChanged("UseTacking");
+					this.OnUseTackingChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_รายละเอียดพาร์ท", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string รายละเอียดพาร์ท
+		{
+			get
+			{
+				return this._รายละเอียดพาร์ท;
+			}
+			set
+			{
+				if ((this._รายละเอียดพาร์ท != value))
+				{
+					this._Critical = value;
+					this.SendPropertyChanged("Critical");
+					this.OnCriticalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_จำนวนคงเหลือ", DbType="Int NOT NULL")]
+		public int จำนวนคงเหลือ
+		{
+			get
+			{
+				return this._จำนวนคงเหลือ;
+			}
+			set
+			{
+				if ((this._จำนวนคงเหลือ != value))
+				{
+					this._MaximumStock = value;
+					this.SendPropertyChanged("MaximumStock");
+					this.OnMaximumStockChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[จำนวนคงเหลือ[Temp]]]", Storage="_จำนวนคงเหลือ_Temp_", DbType="Int NOT NULL")]
+		public int จำนวนคงเหลือ_Temp_
+		{
+			get
+			{
+				return this._จำนวนคงเหลือ_Temp_;
+			}
+			set
+			{
+				if ((this._จำนวนคงเหลือ_Temp_ != value))
+				{
+					this._MinimumStock = value;
+					this.SendPropertyChanged("MinimumStock");
+					this.OnMinimumStockChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_จำนวนสั่งซื้อ", DbType="Int NOT NULL")]
+		public int จำนวนสั่งซื้อ
+		{
+			get
+			{
+				return this._จำนวนสั่งซื้อ;
+			}
+			set
+			{
+				if ((this._จำนวนสั่งซื้อ != value))
+				{
+					this._SafetyStock = value;
+					this.SendPropertyChanged("SafetyStock");
+					this.OnSafetyStockChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ประเภทกลุ่มพาร์ท", DbType="NVarChar(30)")]
+		public string ประเภทกลุ่มพาร์ท
+		{
+			get
+			{
+				return this._ประเภทกลุ่มพาร์ท;
+			}
+			set
+			{
+				if ((this._ประเภทกลุ่มพาร์ท != value))
+				{
+					this._ReOrderPoint = value;
+					this.SendPropertyChanged("ReOrderPoint");
+					this.OnReOrderPointChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ประเภทพาร์ท", DbType="NVarChar(30)")]
+		public string ประเภทพาร์ท
+		{
+			get
+			{
+				return this._ประเภทพาร์ท;
+			}
+			set
+			{
+				if ((this._ประเภทพาร์ท != value))
+				{
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_รหัสผู้ขาย", DbType="NVarChar(10)")]
+		public string รหัสผู้ขาย
+		{
+			get
+			{
+				return this._รหัสผู้ขาย;
+			}
+			set
+			{
+				if ((this._รหัสผู้ขาย != value))
+				{
+					this._StopOrder = value;
+					this.SendPropertyChanged("StopOrder");
+					this.OnStopOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ชื่อผู้ขาย", DbType="NVarChar(50)")]
+		public string ชื่อผู้ขาย
+		{
+			get
+			{
+				return this._ชื่อผู้ขาย;
+			}
+			set
+			{
+				if ((this._ชื่อผู้ขาย != value))
+				{
+					this._Remark = value;
+					this.SendPropertyChanged("Remark");
+					this.OnRemarkChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ชื่อผู้ผลิต", DbType="NVarChar(150)")]
+		public string ชื่อผู้ผลิต
+		{
+			get
+			{
+				return this._ชื่อผู้ผลิต;
+			}
+			set
+			{
+				if ((this._ชื่อผู้ผลิต != value))
+				{
 					this._Size = value;
 					this.SendPropertyChanged("Size");
 					this.OnSizeChanged();
@@ -9563,19 +9569,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DWGNo", DbType="NVarChar(150)")]
-		public string DWGNo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ราคา", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> ราคา
 		{
 			get
 			{
-				return this._DWGNo;
+				return this._ราคา;
 			}
 			set
 			{
-				if ((this._DWGNo != value))
+				if ((this._ราคา != value))
 				{
-					this.OnDWGNoChanging(value);
-					this.SendPropertyChanging();
 					this._DWGNo = value;
 					this.SendPropertyChanged("DWGNo");
 					this.OnDWGNoChanged();
@@ -9583,19 +9587,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Maker", DbType="NVarChar(150)")]
-		public string Maker
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[จำนวน:หน่วย]", Storage="_จำนวน_หน่วย", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> จำนวน_หน่วย
 		{
 			get
 			{
-				return this._Maker;
+				return this._จำนวน_หน่วย;
 			}
 			set
 			{
-				if ((this._Maker != value))
+				if ((this._จำนวน_หน่วย != value))
 				{
-					this.OnMakerChanging(value);
-					this.SendPropertyChanging();
 					this._Maker = value;
 					this.SendPropertyChanged("Maker");
 					this.OnMakerChanged();
@@ -9603,19 +9605,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SD", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> SD
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_หน่วยซื้อ", DbType="NVarChar(20)")]
+		public string หน่วยซื้อ
 		{
 			get
 			{
-				return this._SD;
+				return this._หน่วยซื้อ;
 			}
 			set
 			{
-				if ((this._SD != value))
+				if ((this._หน่วยซื้อ != value))
 				{
-					this.OnSDChanging(value);
-					this.SendPropertyChanging();
 					this._SD = value;
 					this.SendPropertyChanged("SD");
 					this.OnSDChanged();
@@ -9623,19 +9623,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BarCode", DbType="Image", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BarCode", DbType="Image")]
 		public System.Data.Linq.Binary BarCode
 		{
 			get
 			{
-				return this._BarCode;
+				return this._หน่วยเบิก;
 			}
 			set
 			{
-				if ((this._BarCode != value))
+				if ((this._หน่วยเบิก != value))
 				{
-					this.OnBarCodeChanging(value);
-					this.SendPropertyChanging();
 					this._BarCode = value;
 					this.SendPropertyChanged("BarCode");
 					this.OnBarCodeChanged();
@@ -9643,19 +9641,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateBy", DbType="NVarChar(50)")]
-		public string CreateBy
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ระยะเวลาซื้อ", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> ระยะเวลาซื้อ
 		{
 			get
 			{
-				return this._CreateBy;
+				return this._ระยะเวลาซื้อ;
 			}
 			set
 			{
-				if ((this._CreateBy != value))
+				if ((this._ระยะเวลาซื้อ != value))
 				{
-					this.OnCreateByChanging(value);
-					this.SendPropertyChanging();
 					this._CreateBy = value;
 					this.SendPropertyChanged("CreateBy");
 					this.OnCreateByChanged();
@@ -9663,19 +9659,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreateDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Maximum", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Maximum
 		{
 			get
 			{
-				return this._CreateDate;
+				return this._Maximum;
 			}
 			set
 			{
-				if ((this._CreateDate != value))
+				if ((this._Maximum != value))
 				{
-					this.OnCreateDateChanging(value);
-					this.SendPropertyChanging();
 					this._CreateDate = value;
 					this.SendPropertyChanged("CreateDate");
 					this.OnCreateDateChanged();
@@ -9683,19 +9677,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateBy", DbType="NVarChar(50)")]
-		public string UpdateBy
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Minimum", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Minimum
 		{
 			get
 			{
-				return this._UpdateBy;
+				return this._Minimum;
 			}
 			set
 			{
-				if ((this._UpdateBy != value))
+				if ((this._Minimum != value))
 				{
-					this.OnUpdateByChanging(value);
-					this.SendPropertyChanging();
 					this._UpdateBy = value;
 					this.SendPropertyChanged("UpdateBy");
 					this.OnUpdateByChanged();
@@ -9703,19 +9695,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> UpdateDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_จุดสั่งซื้อ", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> จุดสั่งซื้อ
 		{
 			get
 			{
-				return this._UpdateDate;
+				return this._จุดสั่งซื้อ;
 			}
 			set
 			{
-				if ((this._UpdateDate != value))
+				if ((this._จุดสั่งซื้อ != value))
 				{
-					this.OnUpdateDateChanging(value);
-					this.SendPropertyChanging();
 					this._UpdateDate = value;
 					this.SendPropertyChanged("UpdateDate");
 					this.OnUpdateDateChanged();
@@ -9723,19 +9713,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Toollife", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> Toollife
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_จำนวนใช้งาน", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> จำนวนใช้งาน
 		{
 			get
 			{
-				return this._Toollife;
+				return this._จำนวนใช้งาน;
 			}
 			set
 			{
-				if ((this._Toollife != value))
+				if ((this._จำนวนใช้งาน != value))
 				{
-					this.OnToollifeChanging(value);
-					this.SendPropertyChanging();
 					this._Toollife = value;
 					this.SendPropertyChanged("Toollife");
 					this.OnToollifeChanged();
@@ -9743,19 +9731,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Leadtime", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> Leadtime
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ชั้นเก็บ", DbType="NVarChar(20)")]
+		public string ชั้นเก็บ
 		{
 			get
 			{
-				return this._Leadtime;
+				return this._ชั้นเก็บ;
 			}
 			set
 			{
-				if ((this._Leadtime != value))
+				if ((this._ชั้นเก็บ != value))
 				{
-					this.OnLeadtimeChanging(value);
-					this.SendPropertyChanging();
 					this._Leadtime = value;
 					this.SendPropertyChanged("Leadtime");
 					this.OnLeadtimeChanged();
@@ -9763,19 +9749,17 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DWG", DbType="Bit")]
-		public System.Nullable<bool> DWG
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_หยุดสั่งซื้อ", DbType="Bit")]
+		public System.Nullable<bool> หยุดสั่งซื้อ
 		{
 			get
 			{
-				return this._DWG;
+				return this._หยุดสั่งซื้อ;
 			}
 			set
 			{
-				if ((this._DWG != value))
+				if ((this._หยุดสั่งซื้อ != value))
 				{
-					this.OnDWGChanging(value);
-					this.SendPropertyChanging();
 					this._DWG = value;
 					this.SendPropertyChanged("DWG");
 					this.OnDWGChanged();
@@ -10181,50 +10165,50 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tel", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Tel
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StockQty", DbType="Int NOT NULL")]
+		public int StockQty
 		{
 			get
 			{
-				return this._Tel;
+				return this._StockQty;
 			}
 			set
 			{
-				if ((this._Tel != value))
+				if ((this._StockQty != value))
 				{
-					this._Tel = value;
+					this._StockQty = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fax", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Fax
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TempQty", DbType="Int NOT NULL")]
+		public int TempQty
 		{
 			get
 			{
-				return this._Fax;
+				return this._TempQty;
 			}
 			set
 			{
-				if ((this._Fax != value))
+				if ((this._TempQty != value))
 				{
-					this._Fax = value;
+					this._TempQty = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Email
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderQty", DbType="Int NOT NULL")]
+		public int OrderQty
 		{
 			get
 			{
-				return this._Email;
+				return this._OrderQty;
 			}
 			set
 			{
-				if ((this._Email != value))
+				if ((this._OrderQty != value))
 				{
-					this._Email = value;
+					this._OrderQty = value;
 				}
 			}
 		}
