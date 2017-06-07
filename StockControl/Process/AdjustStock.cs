@@ -447,23 +447,31 @@ namespace StockControl
         {
             try
             {
-                //dgvData.Rows[e.RowIndex].Cells["dgvC"].Value = "T";
-                //string TM1 = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["ModelName"].Value);
-                ////string TM2 = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["MMM"].Value);
-                //string Chk = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["dgvCodeTemp"].Value);
-                //if (Chk.Equals("") && !TM1.Equals(""))
-                //{
+                dgvData.EndEdit();
+                if (e.RowIndex >= -1)
+                {
 
-                //    if (!CheckDuplicate(TM1, Chk))
-                //    {
-                //        MessageBox.Show("ข้อมูล รายการซ้า");
-                //        radGridView1.Rows[e.RowIndex].Cells["ModelName"].Value = "";
-                //        //  radGridView1.Rows[e.RowIndex].Cells["MMM"].Value = "";
-                //        //  radGridView1.Rows[e.RowIndex].Cells["UnitCode"].IsSelected = true;
+                    //if (dgvData.Columns["QTY"].Index == e.ColumnIndex)
+                    //{
+                    //    decimal QTY = 0; decimal.TryParse(StockControl.dbClss.TSt(e.Row.Cells["QTY"].Value), out QTY);
+                    //    decimal RemainQty = 0; decimal.TryParse(StockControl.dbClss.TSt(e.Row.Cells["RemainQty"].Value), out RemainQty);
+                    //    if (QTY > RemainQty)
+                    //    {
+                    //        MessageBox.Show("ไม่สามารถรับเกินจำนวนคงเหลือได้");
+                    //        e.Row.Cells["QTY"].Value = 0;
+                    //    }
+                    //}
 
-                //    }
-                //}
-
+                    if (dgvData.Columns["QTY"].Index == e.ColumnIndex
+                        || dgvData.Columns["StandardCost"].Index == e.ColumnIndex
+                        )
+                    {
+                        decimal QTY = 0; decimal.TryParse(StockControl.dbClss.TSt(e.Row.Cells["QTY"].Value), out QTY);
+                        decimal CostPerUnit = 0; decimal.TryParse(StockControl.dbClss.TSt(e.Row.Cells["StandardCost"].Value), out CostPerUnit);
+                        e.Row.Cells["Amount"].Value = QTY * CostPerUnit;
+                        //Cal_Amount();
+                    }
+                }
 
             }
             catch (Exception ex) { }
@@ -593,121 +601,89 @@ namespace StockControl
             {
                 if (e.KeyChar == 13)
                 {
-
-                   // Insert_data(txtCodeNo.Text);
+                    
+                    Insert_data(txtCodeNo.Text);
                     txtCodeNo.Text = "";
 
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-        //private void Insert_data(string CodeNo)
-        //{
-        //    if (!CodeNo.Equals(""))
-        //    {
-        //        using (DataClasses1DataContext db = new DataClasses1DataContext())
-        //        {
-        //            int No = 0;
-                  
-        //            string ItemNo = "";
-        //            string ItemDescription = "";
-        //            decimal QTY = 0;
-        //            decimal RemainQty = 0;
-        //            string Unit = "";
-        //            decimal PCSUnit = 0;
-        //            decimal CostPerUnit = 0;
-        //            decimal Amount = 0;
-        //            //string CRRNCY = "";
-        //            string LotNo = "";
-                    
-        //            string Remark = "";
-                   
-        //            int duppicate_CodeNo = 0;
-        //            string Status = "Waiting";
-                    
+        private void Insert_data(string CodeNo)
+        {
 
+            try
 
-        //            var g = (from ix in db.tb_PurchaseRequests select ix).Where(a => a.PRNo == txtPRNo.Text.Trim()).ToList();
-        //            if (g.Count() > 0)
-        //            {
-        //                if (txtVendorNo.Text.Equals(""))
-        //                {
-        //                    txtVendorName.Text = StockControl.dbClss.TSt(g.FirstOrDefault().VendorName);
-        //                    txtVendorNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().VendorNo);
-        //                    //txtTempNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().TEMPNo);
+            {
+                if (!CodeNo.Equals(""))
+                {
+                    this.Cursor = Cursors.WaitCursor;
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                        int No = 0;
 
-        //                }
-        //                else
-        //                {
-        //                    if (!txtVendorNo.Text.Equals(StockControl.dbClss.TSt(g.FirstOrDefault().VendorNo)))
-        //                    {
-        //                        MessageBox.Show("ไม่สามารถรับสินค้าต่างผู้ขายได้");
-        //                        duppicate_vendor = 1;
-        //                    }
-        //                }
+                        string ItemNo = "";
+                        string ItemDescription = "";
+                        decimal QTY = 0;
+                        decimal RemainQty = 0;
+                        string Unit = "";
+                        decimal PCSUnit = 0;
+                        decimal CostPerUnit = 0;
+                        decimal Amount = 0;
+                        //string CRRNCY = "";
+                        string LotNo = "";
 
-        //                CRRNCY = StockControl.dbClss.TSt(g.FirstOrDefault().CRRNCY);
+                        string Remark = "";
 
-        //                if (duppicate_vendor <= 0)
-        //                {
-        //                    No = dgvData.Rows.Count() + 1;
+                        int duppicate_CodeNo = 0;
+                        //string Status = "Waiting";
 
-        //                    var d = (from ix in db.tb_PurchaseRequestLines select ix)
-        //                        .Where(a => a.PRNo == txtPRNo.Text.Trim() && a.SS == 1
-        //                        && (Convert.ToDecimal(a.RemainQty) > Convert.ToDecimal(0.00))
-        //                        )
+                        var d = (from ix in db.tb_Items select ix)
+                            .Where(a => a.CodeNo == CodeNo.Trim() && a.Status == "Active"
 
-        //                        .ToList();
-        //                    if (d.Count() > 0)
+                            ).First();
 
-        //                    {
-        //                        foreach (var gg in d)
-        //                        {
-        //                            CodeNo = StockControl.dbClss.TSt(gg.CodeNo);
-        //                            if (!check_Duppicate(CodeNo))
-        //                            {
-        //                                TempNo = StockControl.dbClss.TSt(gg.TempNo);
+                        ItemNo = d.ItemNo;
+                        ItemDescription = d.ItemDescription;
+                        RemainQty = Convert.ToDecimal(d.StockInv);
+                        Unit = d.UnitBuy;
+                        PCSUnit = Convert.ToDecimal(d.PCSUnit);
+                        CostPerUnit = Convert.ToDecimal(d.StandardCost);
 
-        //                                ItemNo = StockControl.dbClss.TSt(gg.ItemName);
-        //                                ItemDescription = StockControl.dbClss.TSt(gg.ItemDesc);
-        //                                QTY = 0;//StockControl.dbClss.TDe(gg.OrderQty);
-        //                                        //RemainQty ต้อง Cal ใหม่ ว่ารับเข้าทั้งหมดเท่าแล้วค่อยเอามาหักลบกัน
-        //                                RemainQty = StockControl.dbClss.TDe(gg.RemainQty);
-        //                                Unit = StockControl.dbClss.TSt(gg.UnitCode);
-        //                                // จำนวนต่อหน่วย
-        //                                PCSUnit = StockControl.dbClss.TDe(gg.PCSUnit);
-        //                                // ราคาต่อหน่วย
-        //                                CostPerUnit = StockControl.dbClss.TDe(gg.StandardCost);
-        //                                Amount = QTY * CostPerUnit;
-        //                                //CRRNCY = CRRNCY;  //มาจาก herder
-        //                                LotNo = StockControl.dbClss.TSt(gg.LotNo);
-        //                                SerialNo = StockControl.dbClss.TSt(gg.SerialNo);
-        //                                Remark = "";
-        //                                PRNo = txtPRNo.Text;
-        //                                RCNo = "";
-        //                                PRID = StockControl.dbClss.TInt(gg.id);
+                        No = dgvData.Rows.Count() + 1;
+                        if (!check_Duppicate(CodeNo))
+                        {
+                            dgvData.Rows.Add(No,
+                                                CodeNo,
+                                                ItemNo,
+                                                ItemDescription,
+                                                RemainQty,
+                                                QTY,
+                                                Unit,
+                                                PCSUnit,
+                                                CostPerUnit,
+                                                Amount,
+                                                LotNo,
+                                                Remark
+                                                );
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.WaitCursor; }
+        }
+        private bool check_Duppicate(string CodeNo)
+        {
+            bool re = false;
+            foreach (var rd1 in dgvData.Rows)
+            {
+                if (StockControl.dbClss.TSt(rd1.Cells["CodeNo"].Value).Equals(CodeNo))
+                    re = true;
+            }
 
-        //                                if (StockControl.dbClss.TDe(gg.OrderQty)
-        //                                        == StockControl.dbClss.TDe(gg.RemainQty))
-        //                                    Status = "Waiting";
-        //                                else
-        //                                    Status = "Partial";
+            return re;
 
-
-        //                                dgvData.Rows.Add(No.ToString(), Status, CodeNo, ItemNo, ItemDescription, QTY, RemainQty, Unit
-        //                                    , PCSUnit, CostPerUnit, Amount, CRRNCY, LotNo, SerialNo, ShelfNo, Remark, TempNo, PRNo, RCNo, InvoiceNo
-        //                                    , ID.ToString(), PRID.ToString()
-        //                                    );
-        //                            }
-        //                        }
-        //                    }
-        //                    Cal_Amount();
-        //                }
-        //                duppicate_vendor = 0;
-        //            }
-
-        //        }
-        //    }
-        //}
+        }
     }
 }
