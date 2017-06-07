@@ -684,7 +684,10 @@ namespace StockControl
                             DataLoad();
                             btnNew.Enabled = true;
                             btnDel_Item.Enabled = false;
-                        }
+
+                            //insert Stock
+                            Insert_Stock();
+                    }
                         else
                         {
                             MessageBox.Show("ไม่สามารถโหลดเลขที่รับสินค้าได้ ติดต่อแผนก IT");
@@ -692,7 +695,79 @@ namespace StockControl
                     }
                 }
         }
+        private decimal get_cost(string Code)
+        {
+            decimal re = 0;
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                var g = (from ix in db.tb_Items
+                         where ix.CodeNo == Code && ix.Status == "Active"
+                         select ix).First();
+                re = Convert.ToDecimal(g.StandardCost);
 
+            }
+            return re;
+        }
+        private void Insert_Stock()
+        {
+            try
+            {
+
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    DateTime? CalDate = null;
+                    DateTime? AppDate = DateTime.Now;
+                    int Seq = 0;
+                    
+                    
+
+                    string CNNo = CNNo = StockControl.dbClss.GetNo(6, 2);
+                    var g = (from ix in db.tb_Shippings
+                                 //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
+                             where ix.ShippingNo.Trim() == txtSHNo.Text.Trim() && ix.Status != "Cancel"
+
+                             select ix).ToList();
+                    if (g.Count > 0)
+                    {
+                        //insert Stock
+
+                        foreach (var vv in g)
+                        {
+                            Seq += 1;
+
+                            tb_Stock1 gg = new tb_Stock1();
+                            gg.AppDate = AppDate;
+                            gg.Seq = Seq;
+                            gg.App = "Shipping";
+                            gg.Appid = Seq;
+                            gg.CreateBy = ClassLib.Classlib.User;
+                            gg.CreateDate = DateTime.Now;
+                            gg.DocNo = CNNo;
+                            gg.RefNo = txtSHNo.Text;
+                            gg.Type = "Ship";
+                            gg.QTY = -Convert.ToDecimal(vv.QTY);
+                            gg.Inbound = 0;
+                            gg.Outbound = -Convert.ToDecimal(vv.QTY); ;
+                            gg.AmountCost = (-Convert.ToDecimal(vv.QTY)) * get_cost(vv.CodeNo);
+                            gg.UnitCost = get_cost(vv.CodeNo);
+                            gg.RemainQty = 0;
+                            gg.RemainUnitCost = 0;
+                            gg.RemainAmount = 0;
+                            gg.CalDate = CalDate;
+                            gg.Status = "Active";
+
+                            db.tb_Stock1s.InsertOnSubmit(gg);
+                            db.SubmitChanges();
+
+                            dbClss.Insert_Stock(vv.CodeNo, (-Convert.ToDecimal(vv.QTY)), "Shipping", "Inv");
+
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
         private void radGridView1_CellEndEdit(object sender, Telerik.WinControls.UI.GridViewCellEventArgs e)
         {
             try

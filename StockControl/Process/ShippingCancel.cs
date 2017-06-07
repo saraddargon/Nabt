@@ -56,7 +56,7 @@ namespace StockControl
         private void Unit_Load(object sender, EventArgs e)
         {
             ddlType.Text = "ทั้งใบ";
-            //txtCNNo.Text = StockControl.dbClss.GetNo(6, 0);
+            txtCNNo.Text = StockControl.dbClss.GetNo(6, 0);
         }
         private void DefaultItem()
         {
@@ -139,69 +139,181 @@ namespace StockControl
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if(ddlType.Text.Equals(""))
+            try
             {
-                MessageBox.Show("กรุณาเลือกประเภทการคืนรายการ");
-                return;
-            }
+                if (ddlType.Text.Equals(""))
+                {
+                    MessageBox.Show("กรุณาเลือกประเภทการคืนรายการ");
+                    return;
+                }
 
-            else if (ddlType.Text.Equals("ตามรายการ") && ((txtid.Text.Equals(""))) && txtid.Text.Equals("0"))
+                else if (ddlType.Text.Equals("ตามรายการ") && ((txtid.Text.Equals(""))) && txtid.Text.Equals("0"))
+                {
+                    MessageBox.Show("ไม่สามารถทำการคืนรายการได้");
+                    return;
+                }
+                else if (ddlType.Text.Equals("ทั้งใบ") && txtSHNo.Text.Equals(""))
+                {
+                    MessageBox.Show("ไม่สามารถทำการคืนรายการได้");
+                    return;
+                }
+
+                if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    this.Cursor = Cursors.WaitCursor;
+                    txtCNNo.Text = StockControl.dbClss.GetNo(6, 2);
+
+                    if (ddlType.Text.Equals("ตามรายการ"))
+                        Save_detail();
+                    else if (ddlType.Text.Equals("ทั้งใบ"))
+                        Save_herder();
+
+                    MessageBox.Show("บันทึกสำเร็จ!");
+
+                    ClearData();
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
+        }
+        private decimal get_cost(string Code)
+        {
+            decimal re = 0;
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
-                MessageBox.Show("ไม่สามารถทำการคืนรายการได้");
-                return;
+                var g = (from ix in db.tb_Items
+                         where ix.CodeNo == Code && ix.Status == "Active"
+                         select ix).First();
+                re = Convert.ToDecimal(g.StandardCost);
+
             }
-            else if (ddlType.Text.Equals("ทั้งใบ") && txtSHNo.Text.Equals(""))
-            {
-                MessageBox.Show("ไม่สามารถทำการคืนรายการได้");
-                return;
-            }
-
-            if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                txtCNNo.Text = StockControl.dbClss.GetNo(6, 2);
-
-                if(ddlType.Text.Equals("ตามรายการ"))
-                    Save_detail();
-                else if(ddlType.Text.Equals("ทั้งใบ"))
-                    Save_herder();
-
-                MessageBox.Show("บันทึกสำเร็จ!");
-
-                ClearData();
-            }
+            return re ;
         }
         private void Save_detail()
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
-                //var g = (from ix in db.tb_Shippings
-                //         where ix.ShippingNo.Trim() == txtInvoiceNo.Text.Trim() && ix.Status != "Cancel"
-                //         //&& ix.TEMPNo.Trim() == txtTempNo.Text.Trim()
-                //         select ix).ToList();
-                //if (g.Count > 0)  //มีรายการในระบบ
-                //{
-                //    //Herder 
-                //    string RCNo = StockControl.dbClss.TSt(g.FirstOrDefault().RCNo);
+                var g = (from ix in db.tb_Shippings
+                             //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
+                         where ix.ShippingNo.Trim() == txtSHNo.Text.Trim() && ix.Status != "Cancel"
+                         && ix.id == Convert.ToInt32(txtid.Text)
+                         select ix).First();
 
-                //}
+                g.Status = "Cancel";
+
+                db.SubmitChanges();
+
+                //insert Stock
+                DateTime? CalDate = null;
+                DateTime? AppDate = DateTime.Now;
+                int Seq = 1;
+
+                tb_Stock1 gg = new tb_Stock1();
+                gg.AppDate = AppDate;
+                gg.Seq = Seq;
+                gg.App = "Cancel SH";
+                gg.Appid = Seq;
+                gg.CreateBy = ClassLib.Classlib.User;
+                gg.CreateDate = DateTime.Now;
+                gg.DocNo = txtCNNo.Text;
+                gg.RefNo = txtSHNo.Text;
+                gg.Type = ddlType.Text;
+                gg.QTY = Convert.ToDecimal(txtQTY.Text);
+                gg.Inbound = Convert.ToDecimal(txtQTY.Text);
+                gg.Outbound = 0;
+                gg.AmountCost = Convert.ToDecimal(txtQTY.Text) * get_cost(g.CodeNo);
+                gg.UnitCost = get_cost(g.CodeNo);
+                gg.RemainQty = 0;
+                gg.RemainUnitCost = 0;
+                gg.RemainAmount = 0;
+                gg.CalDate = CalDate;
+                gg.Status = "Active";
+                db.tb_Stock1s.InsertOnSubmit(gg);
+                db.SubmitChanges();
+
+                dbClss.AddHistory(this.Name , "เพิ่ม Stock", "Cancel รายการ Shipping [" + txtSHNo.Text.Trim() + " id : "+ g.id.ToString() + "]", "");
+
+                //update stock item
+                dbClss.Insert_Stock(g.CodeNo, Convert.ToDecimal(g.QTY), "CNSH", "Inv");
+
+                //update Status
+                db.sp_007_Update_SH_Status(g.ShippingNo, Convert.ToString(g.id));
+
             }
         }
         private void Save_herder()
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
-                //var g = (from ix in db.tb_Shippings
-                //         where ix.InvoiceNo.Trim() == txtInvoiceNo.Text.Trim() && ix.Status != "Cancel"
-                //         //&& ix.TEMPNo.Trim() == txtTempNo.Text.Trim()
-                //         select ix).ToList();
-                //if (g.Count > 0)  //มีรายการในระบบ
-                //{
-                //    //Herder 
-                //    string RCNo = StockControl.dbClss.TSt(g.FirstOrDefault().RCNo);
+                int seq = 0;
+                var g = (from ix in db.tb_Shippings
+                         where ix.ShippingNo.Trim() == txtSHNo.Text.Trim() && ix.Status != "Cancel"
+                         
+                         select ix).ToList();
+                if (g.Count > 0) 
+                {
+                    dbClss.AddHistory(this.Name, "เพิ่ม Stock", "Cancel รายการ Shipping [" + txtSHNo.Text.Trim() + "]", "");
 
-                //}
+                    foreach (var gg in g)
+                    {
+                        seq += 1;
+                        Save_detail(seq, Convert.ToInt32(gg.id), gg.ShippingNo);
+                    }
+
+                    //update Status
+                    db.sp_007_Update_SH_Status(txtSHNo.Text,"0");
+                }
             }
         }
+        private void Save_detail(int seq,int id,string SHNo)
+        {
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                var g = (from ix in db.tb_Shippings
+                             //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
+                         where ix.ShippingNo.Trim() == SHNo.Trim() && ix.Status != "Cancel"
+                         && ix.id == id
+                         select ix).First();
+
+                g.Status = "Cancel";
+
+                
+
+                //insert Stock
+                DateTime? CalDate = null;
+                DateTime? AppDate = DateTime.Now;
+                int Seq = seq;
+
+                tb_Stock1 gg = new tb_Stock1();
+                gg.AppDate = AppDate;
+                gg.Seq = Seq;
+                gg.App = "Cancel SH";
+                gg.Appid = Seq;
+                gg.CreateBy = ClassLib.Classlib.User;
+                gg.CreateDate = DateTime.Now;
+                gg.DocNo = txtCNNo.Text;
+                gg.RefNo = SHNo;
+                gg.Type = ddlType.Text;
+                gg.QTY = Convert.ToDecimal(g.QTY);
+                gg.Inbound = Convert.ToDecimal(g.QTY);
+                gg.Outbound = 0;
+                gg.AmountCost = Convert.ToDecimal(g.QTY) * get_cost(g.CodeNo);
+                gg.UnitCost = get_cost(g.CodeNo);
+                gg.RemainQty = 0;
+                gg.RemainUnitCost = 0;
+                gg.RemainAmount = 0;
+                gg.CalDate = CalDate;
+                gg.Status = "Active";
+
+                db.tb_Stock1s.InsertOnSubmit(gg);
+                db.SubmitChanges();
+
+
+               
+
+            }
+        }
+
         private void ClearData()
         {
             ddlType.Text = "ทั้งใบ";

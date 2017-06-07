@@ -157,6 +157,83 @@ namespace StockControl
 
                 return No;
         }
+        public static decimal Insert_Stock(string CodeNo, decimal Qty,string Screen,string Type)
+        {
+            decimal re = 0;
+
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                decimal qty_can = 0;
+                string tt = "";
+                if (Qty < 0)
+                {
+                    tt = "ลบ";
+                    qty_can = -Qty;   //-(-10)   =>>> 10   เพื่อไปเปรียบเทียบ
+                }
+                else
+                {
+                    tt = "เพิ่ม";
+                }
+                decimal Remain_Inv = 0;
+                decimal Remain_Dl = 0;
+                decimal Remain_Temp = 0;
+                
+
+
+
+                var g = (from ix in db.tb_Items
+                         where ix.CodeNo.Trim() == CodeNo.Trim() //&& ix.Status == "Active"
+                         select ix).ToList();
+                if (g.Count > 0)  //มีรายการในระบบ
+                {
+                    var gg = (from ix in db.tb_Items
+                              where ix.CodeNo.Trim() == CodeNo.Trim()
+                              select ix).First();
+
+                    decimal.TryParse(StockControl.dbClss.TSt(gg.StockInv), out Remain_Inv);
+                    decimal.TryParse(StockControl.dbClss.TSt(gg.StockDL), out Remain_Dl);
+
+                    if(Type.Equals("Inv"))
+                    {
+                        if(Qty<0) //เบิกของออก  Shipping,Cancel Receive
+                        {
+                            if (qty_can > Remain_Inv) //เบิกของออกจะตัดที่ stock ปกติก่อน แต่ถ้าไม่พอจะไปเอาที่ Temp (DL)
+                            {
+                                Remain_Temp = qty_can - Remain_Inv;
+                                gg.StockInv = 0;            //ตัด Stock ปกติให้เป็น 0
+                                gg.StockDL = Remain_Dl - Remain_Temp;   //แล้วมาตัดที่ temp 
+                            }
+                            else//ใน Stock ปกติมีของพอสำหรับการเบิกก็จะตัดเพียง Stock inv เดียว
+                            {
+                                gg.StockInv = Remain_Inv - Qty;
+                            }
+                        }
+                        else //ของเข้า Receive,Cancel Shipping
+                        {
+                            gg.StockInv = Remain_Inv + Qty;
+                        }
+                    }
+                    else //DL
+                    {
+                        //if (Qty < 0) //เบิกของออก  Shipping,Cancel Receive
+                        //{
+
+                        //}
+                        //else //ของเข้า Receive,Cancel Shipping
+                        //{
+                            gg.StockDL = Remain_Dl + Qty;
+                        //}
+                    }
+
+                    dbClss.AddHistory(Screen, CodeNo, tt + " Stock [" + CodeNo +  " จำนวน "+ Qty.ToString()+"]", "");
+
+                    db.SubmitChanges();
+                   
+                }
+            }
+
+            return re;
+        }
         public static DateTime ChangeFormat(string ds)
         {
             CultureInfo c = new CultureInfo("en-us", true);

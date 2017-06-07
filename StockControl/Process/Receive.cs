@@ -365,7 +365,7 @@ namespace StockControl
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-           
+
             btnNew.Enabled = false;
             btnSave.Enabled = true;
             ClearData();
@@ -662,6 +662,7 @@ namespace StockControl
                                 PRNo = u.PRNo;
                                 PRID = StockControl.dbClss.TInt(g.Cells["PRID"].Value);
                                 RemainQty = Convert.ToDecimal(u.RemainQty);
+                                
                                 db.tb_Receives.InsertOnSubmit(u);
                                 db.SubmitChanges();
 
@@ -838,6 +839,9 @@ namespace StockControl
                             SaveDetail();
                             DataLoad();
                             btnNew.Enabled = true;
+
+                            //insert Stock
+                            Insert_Stock();
                         }
                         else
                         {
@@ -847,6 +851,68 @@ namespace StockControl
                 }
             }catch(Exception ex) { MessageBox.Show(ex.Message); }
             finally { this.Cursor = Cursors.Default; }
+        }
+        private void Insert_Stock()
+        {
+            try
+            {
+                
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    DateTime? CalDate = null;
+                    DateTime? AppDate = DateTime.Now;
+                    int Seq = 0;
+                    string Type = "";
+                    if (rdoInvoice.IsChecked)
+                        Type = "รับด้วยใบ Invoice";
+                    else
+                        Type = "ใบส่งของชั่วคราว";
+
+                    string CNNo = CNNo = StockControl.dbClss.GetNo(6, 2);
+                    var g = (from ix in db.tb_Receives
+                                 //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
+                             where ix.RCNo.Trim() == txtRCNo.Text.Trim() && ix.Status != "Cancel"
+                             
+                             select ix).ToList();
+                    if (g.Count > 0)
+                    {
+                        //insert Stock
+
+                        foreach (var vv in g)
+                        {
+                            Seq += 1;
+
+                            tb_Stock1 gg = new tb_Stock1();
+                            gg.AppDate = AppDate;
+                            gg.Seq = Seq;
+                            gg.App = "Receive";
+                            gg.Appid = Seq;
+                            gg.CreateBy = ClassLib.Classlib.User;
+                            gg.CreateDate = DateTime.Now;
+                            gg.DocNo = CNNo;
+                            gg.RefNo = txtRCNo.Text;
+                            gg.Type = Type;
+                            gg.QTY = Convert.ToDecimal(vv.QTY);
+                            gg.Inbound = Convert.ToDecimal(vv.QTY);
+                            gg.Outbound = 0;
+                            gg.AmountCost = Convert.ToDecimal(vv.QTY) * Convert.ToDecimal(vv.CostPerUnit);
+                            gg.UnitCost = Convert.ToDecimal(vv.CostPerUnit);
+                            gg.RemainQty = 0;
+                            gg.RemainUnitCost = 0;
+                            gg.RemainAmount = 0;
+                            gg.CalDate = CalDate;
+                            gg.Status = "Active";
+
+                           
+                            db.tb_Stock1s.InsertOnSubmit(gg);
+                            db.SubmitChanges();
+
+                            dbClss.Insert_Stock(vv.CodeNo, Convert.ToDecimal(vv.QTY), "Receive", "Inv");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
         private void update_remainqty_Receive(string PRNo, string TempNo, int PRID, decimal RemainQty)
         {
