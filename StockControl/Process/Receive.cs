@@ -81,6 +81,7 @@ namespace StockControl
         {
             try
             {
+                this.Cursor = Cursors.WaitCursor;
                 btnNew_Click(null, null);
                 dgvData.AutoGenerateColumns = false;
                 GETDTRow();
@@ -105,6 +106,7 @@ namespace StockControl
                     
                 
             }catch(Exception ex) { MessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
         }
         private void DefaultItem()
         {
@@ -450,7 +452,7 @@ namespace StockControl
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                dbClss.AddError("CreatePR", ex.Message, this.Name);
+                dbClss.AddError("Receive", ex.Message, this.Name);
             }
 
             return re;

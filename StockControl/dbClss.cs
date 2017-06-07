@@ -205,7 +205,7 @@ namespace StockControl
                             }
                             else//ใน Stock ปกติมีของพอสำหรับการเบิกก็จะตัดเพียง Stock inv เดียว
                             {
-                                gg.StockInv = Remain_Inv - Qty;
+                                gg.StockInv = Remain_Inv + Qty;
                             }
                         }
                         else //ของเข้า Receive,Cancel Shipping

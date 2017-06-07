@@ -460,6 +460,43 @@
       <Column Name="StockBackOrder" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.tb_StockAdjust" Member="tb_StockAdjusts">
+    <Type Name="tb_StockAdjust">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AdjustNo" Type="System.String" DbType="NVarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Seq" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CodeNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StockType" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ItemNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ItemDescription" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Qty" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="PCSUnit" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Unit" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="Reason" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SerialNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Calbit" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_StockAdjustH" Member="tb_StockAdjustHs">
+    <Type Name="tb_StockAdjustH">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ADNo" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ADDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ADBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="VarChar(512)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UpdateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdateBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="BarCode" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
   <Function Name="dbo.Sp_ADM03_OpenFormSelect" Method="Sp_ADM03_OpenFormSelect">
     <ElementType Name="Sp_ADM03_OpenFormSelectResult">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -502,50 +539,61 @@
       <Column Name="Email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.sp_001ReportPart" Method="sp_001ReportPart">
+  <Function Name="dbo.sp_003_Cal_Receive_Eemain" Method="sp_003_Cal_Receive_Eemain">
+    <Parameter Name="PRID" Parameter="pRID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PRNo" Parameter="pRNo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="TempNo" Parameter="tempNo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="RemainQty" Parameter="remainQty" Type="System.Decimal" DbType="Decimal(18,6)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_004_Update_Receive_Remain" Method="sp_004_Update_Receive_Remain">
+    <Parameter Name="PRID" Parameter="pRID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PRNo" Parameter="pRNo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="TempNo" Parameter="tempNo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="RemainQty" Parameter="remainQty" Type="System.Decimal" DbType="Decimal(18,6)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_006_Update_PR_Remain" Method="sp_006_Update_PR_Remain">
+    <Parameter Name="PRID" Parameter="pRID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PRNo" Parameter="pRNo" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_007_Update_SH_Status" Method="sp_007_Update_SH_Status">
+    <Parameter Name="SHNo" Parameter="sHNo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="id" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_R001_ReportPart" Method="sp_R001_ReportPart">
     <Parameter Name="GroupType" Parameter="groupType" Type="System.String" DbType="NVarChar(50)" />
     <Parameter Name="Status" Parameter="status" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="VendorName" Parameter="vendorName" Type="System.String" DbType="NVarChar(70)" />
-    <ElementType Name="sp_001ReportPartResult">
-      <Column Name="CodeNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ItemNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ItemDescription" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
-      <Column Name="GroupCode" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="TypeCode" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="UnitBuy" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="UnitShip" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="PCSUnit" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="ShelfNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="StandardCost" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="CostingMethod" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="ItemGroup" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="Replacement" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="VendorNo" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="VendorItemName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="UseTacking" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Critical" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="MaximumStock" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="MinimumStock" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="SafetyStock" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="ReOrderPoint" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="Status" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="StopOrder" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Remark" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+    <ElementType Name="sp_R001_ReportPartResult">
+      <Column Name="No" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="รหัสพาร์ท" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ชื่อพาร์ท" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="รายละเอียดพาร์ท" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="จำนวนคงเหลือ" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[จำนวนคงเหลือ[Temp]]]" Member="จำนวนคงเหลือ_Temp_" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="จำนวนสั่งซื้อ" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ประเภทกลุ่มพาร์ท" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="ประเภทพาร์ท" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="รหัสผู้ขาย" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ชื่อผู้ขาย" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ชื่อผู้ผลิต" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ราคา" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="[จำนวน:หน่วย]" Member="จำนวน_หน่วย" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="หน่วยซื้อ" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="หน่วยเบิก" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ระยะเวลาซื้อ" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Maximum" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Minimum" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="จุดสั่งซื้อ" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="จำนวนใช้งาน" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="ชั้นเก็บ" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="หยุดสั่งซื้อ" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="สถานะ" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Drawing" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
       <Column Name="Size" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Column Name="DWGNo" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Column Name="Maker" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Column Name="SD" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="BarCode" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
-      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="UpdateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="UpdateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Toollife" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="Leadtime" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="DWG" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="StockQty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="TempQty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="OrderQty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>
