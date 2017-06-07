@@ -43,43 +43,491 @@ namespace StockControl
         private void Unit_Load(object sender, EventArgs e)
         {
 
-            radGridView1.ReadOnly = true;
-            radGridView1.AutoGenerateColumns = false;
+            dgvData.ReadOnly = true;
+            dgvData.AutoGenerateColumns = false;
             DataLoad();
-        }
 
-        private void DataLoad()
+
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+
+                var TypeCode = (from p in db.tb_Items
+                                                select p.TypeCode).Distinct();
+              
+
+                //var g = (from i in db.tb_Items
+                //         select new  
+                //         {
+                //             Type =  i.TypeCode    
+
+                //         }).ToList();
+                //dgvData.DataSource = g;
+                //if (TypeCode.Count > 0)
+                //{
+                    ddlType.DataSource = TypeCode;
+                    ddlType.DisplayMember = "TypeCode";
+                    ddlType.Text = "";
+
+                    ddlType.Items.Add("");//การ add ค่าเข้าไปต่อท้าย
+                //}
+                   
+            }
+
+        }
+        private void Load_Item()  
         {
-            //dt.Rows.Clear();
             try
             {
                 this.Cursor = Cursors.WaitCursor;
+
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    //dt = ClassLib.Classlib.LINQToDataTable(db.tb_Units.ToList());
-                    //radGridView1.DataSource = db.tb_Histories.Where(s => s.ScreenName == ScreenSearch).OrderBy(o => o.CreateDate).ToList();
-                    int c = 0;
-                   
-                    var g = (from ix in db.tb_Items select ix).ToList();
+                    var g = (from i in db.tb_Items
+                             where 
+                                  i.CodeNo.Contains(txtCodeNo.Text.Trim())
+                                 && i.ItemNo.Contains(txtItemNo.Text.Trim())
+                                 && i.ItemDescription.Contains(txtItemDescription.Text.Trim())
+                                 && i.VendorItemName.Contains(txtVendorName.Text.Trim())
+                                 && i.ShelfNo.Contains(txtShelf.Text.Trim())
+                                 && i.TypeCode.Contains(ddlType.Text)
+                                 
+
+                             select new
+                             {
+                                 
+                                 CodeNo = i.CodeNo,
+                                 ItemNo = i.ItemNo,
+                                 ItemDescription = i.ItemDescription,
+                                 StockQty = StockControl.dbClss.TDe(i.StockInv),
+                                 StockTemp = StockControl.dbClss.TDe(i.StockDL),
+                                 ShelfNo = i.ShelfNo,
+                                 QTY = 0,//StockControl.dbClss.TDe(s.QTY),
+                                 GroupCode = i.GroupCode,
+                                 TypeCode = i.TypeCode,
+                                 StandardCost = Convert.ToDecimal(i.StandardCost),
+                                 UnitBuy = i.UnitBuy,
+                                 Amount = 0,//StockControl.dbClss.TDe(i.StockInv) * Convert.ToDecimal(i.StandardCost),
+                                 VendorNo = i.VendorNo,
+                                 VendorItemName = i.VendorItemName,
+                                 Leadtime = i.Leadtime,
+                                 MaximumStock = i.MaximumStock,
+                                 MinimumStock = i.MinimumStock,
+                                 ToolLife = i.Toollife,
+                                 SD = i.SD,
+                                 Status = i.Status,
+                                 StopOrder = i.StopOrder
+
+                             }).ToList();
+                    //dgvData.DataSource = g;
                     if (g.Count > 0)
                     {
-
-                        radGridView1.DataSource = g;
-                        foreach (var x in radGridView1.Rows)
+                        foreach (var gg in g)
                         {
-                            c += 1;
-                            x.Cells["No"].Value = c;
+                            dgvData.Rows.Add("",
+                                   
+                                    gg.CodeNo,
+                                    gg.ItemNo,
+                                    gg.ItemDescription,
+                                    gg.StockQty,
+                                    gg.StockTemp,
+                                    gg.ShelfNo,
+                                    gg.QTY,
+                                    gg.GroupCode,
+                                    gg.TypeCode,
+                                    gg.StandardCost,
+                                    gg.UnitBuy,
+                                    (Convert.ToDecimal(gg.StandardCost) * Convert.ToDecimal(gg.StockQty))
+                                    + (Convert.ToDecimal(gg.StandardCost) * Convert.ToDecimal(gg.StockTemp)), //gg.Amount,
+                                    gg.VendorNo,
+                                    gg.VendorItemName,
+                                    gg.Leadtime,
+                                    gg.MaximumStock,
+                                    gg.MinimumStock,
+                                    gg.ToolLife,
+                                    gg.SD,//      ค่าเบียงเบน
+                                    gg.Status,
+                                    gg.StopOrder);
                         }
                     }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            this.Cursor = Cursors.Default;
+        }
+        private void Load_Receive()  //รับสินค้า
+        {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
 
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    var g = (from i in db.tb_Items
+                             join r in db.tb_Receives on i.CodeNo equals r.CodeNo
+                             join s in db.tb_Stock1s on r.RCNo equals s.RefNo
+
+                             where s.Status == "Active" //&& d.verticalID == VerticalID
+                                    && s.App == "Receive"
+                                 && i.CodeNo.Contains(txtCodeNo.Text.Trim())
+                                 && i.ItemNo.Contains(txtItemNo.Text.Trim())
+                                 && i.ItemDescription.Contains(txtItemDescription.Text.Trim())
+                                 && i.VendorItemName.Contains(txtVendorName.Text.Trim())
+                                 && i.ShelfNo.Contains(txtShelf.Text.Trim())
+
+                             select new
+                             {
+                                 GroupCode = s.App,
+                                 TypeCode = s.App,
+                                 CodeNo = i.CodeNo,
+                                 ItemNo = i.ItemNo,
+                                 ItemDescription = i.ItemDescription,
+                                 StockQty = StockControl.dbClss.TDe(i.StockInv),
+                                 StockTemp = StockControl.dbClss.TDe(i.StockDL),
+                                 ShelfNo = i.ShelfNo,
+                                 QTY = StockControl.dbClss.TDe(s.QTY),
+                                 StandardCost = Convert.ToDecimal(i.StandardCost),
+                                 UnitBuy = i.UnitBuy,
+                                 Amount = Convert.ToDecimal(s.QTY) * Convert.ToDecimal(i.StandardCost),
+                                 VendorNo = i.VendorNo,
+                                 VendorItemName = i.VendorItemName,
+                                 Leadtime = i.Leadtime,
+                                 MaximumStock = i.MaximumStock,
+                                 MinimumStock = i.MinimumStock,
+                                 ToolLife = i.Toollife,
+                                 SD = i.SD,
+                                 Status = i.Status,
+                                 StopOrder = i.StopOrder
+
+                             }).ToList();
+                    //dgvData.DataSource = g;
+                    if(g.Count>0)
+                    {
+                        foreach (var gg in g)
+                        {
+                            dgvData.Rows.Add("",
+                                    gg.GroupCode,
+                                    gg.TypeCode,
+                                    gg.CodeNo,
+                                    gg.ItemNo,
+                                    gg.ItemDescription,
+                                    gg.StockQty,
+                                    gg.StockTemp,
+                                    gg.ShelfNo,
+                                    gg.QTY,
+                                     Convert.ToDecimal(gg.StandardCost),
+                                    gg.UnitBuy,
+                                    gg.Amount,
+                                    gg.VendorNo,
+                                    gg.VendorItemName,
+                                    gg.Leadtime,
+                                    gg.MaximumStock,
+                                    gg.MinimumStock,
+                                    gg.ToolLife,
+                                    gg.SD,//      ค่าเบียงเบน
+                                    gg.Status,
+                                    gg.StopOrder);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            this.Cursor = Cursors.Default;
+        }
+        private void Load_CancelReceive()  //ยกเลิกรับสินค้า
+        {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                  
+                    var g = (from i in db.tb_Items
+                             join r in db.tb_Receive_Dels on i.CodeNo equals r.CodeNo
+                             join s in db.tb_Stock1s on r.RCNo equals s.RefNo
+
+                             where s.Status == "Active" //&& d.verticalID == VerticalID
+                                    && s.App == "Cancel RC"
+                                 && i.CodeNo.Contains(txtCodeNo.Text.Trim())
+                                 && i.ItemNo.Contains(txtItemNo.Text.Trim())
+                                 && i.ItemDescription.Contains(txtItemDescription.Text.Trim())
+                                 && i.VendorItemName.Contains(txtVendorName.Text.Trim())
+                                 && i.ShelfNo.Contains(txtShelf.Text.Trim())
+
+                             select new
+                             {
+                                 GroupCode = s.App,
+                                 TypeCode = s.App,
+                                 CodeNo = i.CodeNo,
+                                 ItemNo = i.ItemNo,
+                                 ItemDescription = i.ItemDescription,
+                                 StockQty = StockControl.dbClss.TDe(i.StockInv),
+                                 StockTemp = StockControl.dbClss.TDe(i.StockDL),
+                                 ShelfNo = i.ShelfNo,
+                                 QTY = StockControl.dbClss.TDe(s.QTY),
+                                 StandardCost = Convert.ToDecimal(i.StandardCost),
+                                 UnitBuy = i.UnitBuy,
+                                 Amount = Convert.ToDecimal(s.QTY) * Convert.ToDecimal(i.StandardCost),
+                                 VendorNo = i.VendorNo,
+                                 VendorItemName = i.VendorItemName,
+                                 Leadtime = i.Leadtime,
+                                 MaximumStock = i.MaximumStock,
+                                 MinimumStock = i.MinimumStock,
+                                 ToolLife = i.Toollife,
+                                 SD = i.SD,
+                                 Status = i.Status,
+                                 StopOrder = i.StopOrder
+
+                             }).ToList();
+                    //dgvData.DataSource = g;
+                    if (g.Count > 0)
+                    {
+                        foreach (var gg in g)
+                        {
+                            dgvData.Rows.Add("",
+                                    gg.GroupCode,
+                                    gg.TypeCode,
+                                    gg.CodeNo,
+                                    gg.ItemNo,
+                                    gg.ItemDescription,
+                                    gg.StockQty,
+                                    gg.StockTemp,
+                                    gg.ShelfNo,
+                                    gg.QTY,
+                                    gg.StandardCost,
+                                    gg.UnitBuy,
+                                    gg.Amount,
+                                    gg.VendorNo,
+                                    gg.VendorItemName,
+                                    gg.Leadtime,
+                                    gg.MaximumStock,
+                                    gg.MinimumStock,
+                                    gg.ToolLife,
+                                    gg.SD,//      ค่าเบียงเบน
+                                    gg.Status,
+                                    gg.StopOrder);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            this.Cursor = Cursors.Default;
+        }
+        private void Load_Shipping()  //เบิกสินค้า
+        {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    var g = (from i in db.tb_Items
+                             join r in db.tb_Shippings on i.CodeNo equals r.CodeNo
+                             join s in db.tb_Stock1s on r.ShippingNo equals s.RefNo
+
+                             where s.Status == "Active" //&& d.verticalID == VerticalID
+                                    && s.App == "Shipping"
+                                 && i.CodeNo.Contains(txtCodeNo.Text.Trim())
+                                 && i.ItemNo.Contains(txtItemNo.Text.Trim())
+                                 && i.ItemDescription.Contains(txtItemDescription.Text.Trim())
+                                 && i.VendorItemName.Contains(txtVendorName.Text.Trim())
+                                 && i.ShelfNo.Contains(txtShelf.Text.Trim())
+
+                             select new
+                             {
+
+                                 GroupCode = s.App,
+                                 TypeCode = s.App,
+                                 CodeNo = i.CodeNo,
+                                 ItemNo = i.ItemNo,
+                                 ItemDescription = i.ItemDescription,
+                                 StockQty = StockControl.dbClss.TDe(i.StockInv),
+                                 StockTemp = StockControl.dbClss.TDe(i.StockDL),
+                                 ShelfNo = i.ShelfNo,
+                                 QTY = StockControl.dbClss.TDe(s.QTY),
+                                 StandardCost = Convert.ToDecimal(i.StandardCost),
+                                 UnitBuy = i.UnitBuy,
+                                 Amount = Convert.ToDecimal(s.QTY) * Convert.ToDecimal(i.StandardCost),
+                                 VendorNo = i.VendorNo,
+                                 VendorItemName = i.VendorItemName,
+                                 Leadtime = i.Leadtime,
+                                 MaximumStock = i.MaximumStock,
+                                 MinimumStock = i.MinimumStock,
+                                 ToolLife = i.Toollife,
+                                 SD = i.SD,
+                                 Status = i.Status,
+                                 StopOrder = i.StopOrder
+
+                             }).ToList();
+                    //dgvData.DataSource = g;
+                    if (g.Count > 0)
+                    {
+                        foreach (var gg in g)
+                        {
+                            dgvData.Rows.Add("",
+                                    gg.GroupCode,
+                                    gg.TypeCode,
+                                    gg.CodeNo,
+                                    gg.ItemNo,
+                                    gg.ItemDescription,
+                                    gg.StockQty,
+                                    gg.StockTemp,
+                                    gg.ShelfNo,
+                                    gg.QTY,
+                                    gg.StandardCost,
+                                    gg.UnitBuy,
+                                    gg.Amount,
+                                    gg.VendorNo,
+                                    gg.VendorItemName,
+                                    gg.Leadtime,
+                                    gg.MaximumStock,
+                                    gg.MinimumStock,
+                                    gg.ToolLife,
+                                    gg.SD,//      ค่าเบียงเบน
+                                    gg.Status,
+                                    gg.StopOrder);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            this.Cursor = Cursors.Default;
+        }
+        private void Load_CancelShipping()  //ยกเลิกเบิกสินค้า
+        {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    var g = (from i in db.tb_Items
+                             join r in db.tb_Shippings on i.CodeNo equals r.CodeNo
+                             join s in db.tb_Stock1s on r.ShippingNo equals s.RefNo
+
+                             where s.Status == "Active" //&& d.verticalID == VerticalID
+                                    && s.App == "Cancel SH"
+                                    && r.Status == "Cancel"
+                                 && i.CodeNo.Contains(txtCodeNo.Text.Trim())
+                                 && i.ItemNo.Contains(txtItemNo.Text.Trim())
+                                 && i.ItemDescription.Contains(txtItemDescription.Text.Trim())
+                                 && i.VendorItemName.Contains(txtVendorName.Text.Trim())
+                                 && i.ShelfNo.Contains(txtShelf.Text.Trim())
+
+                             select new
+                             {
+                                 GroupCode = s.App,
+                                 TypeCode = s.App,
+                                 CodeNo = i.CodeNo,
+                                 ItemNo = i.ItemNo,
+                                 ItemDescription = i.ItemDescription,
+                                 StockQty = StockControl.dbClss.TDe(i.StockInv),
+                                 StockTemp = StockControl.dbClss.TDe(i.StockDL),
+                                 ShelfNo = i.ShelfNo,
+                                 QTY = StockControl.dbClss.TDe(s.QTY),
+                                 StandardCost = Convert.ToDecimal(i.StandardCost),
+                                 UnitBuy = i.UnitBuy,
+                                 Amount = Convert.ToDecimal(s.QTY) * Convert.ToDecimal(i.StandardCost),
+                                 VendorNo = i.VendorNo,
+                                 VendorItemName = i.VendorItemName,
+                                 Leadtime = i.Leadtime,
+                                 MaximumStock = i.MaximumStock,
+                                 MinimumStock = i.MinimumStock,
+                                 ToolLife = i.Toollife,
+                                 SD = i.SD,
+                                 Status = i.Status,
+                                 StopOrder = i.StopOrder
+                             }).ToList();
+                    //dgvData.DataSource = g;
+                    if (g.Count > 0)
+                    {
+                        foreach (var gg in g)
+                        {
+                            dgvData.Rows.Add("",
+                                    gg.GroupCode,
+                                    gg.TypeCode,
+                                    gg.CodeNo,
+                                    gg.ItemNo,
+                                    gg.ItemDescription,
+                                    gg.StockQty,
+                                    gg.StockTemp,
+                                    gg.ShelfNo,
+                                    gg.QTY,
+                                    gg.StandardCost,
+                                    gg.UnitBuy,
+                                    gg.Amount,
+                                    gg.VendorNo,
+                                    gg.VendorItemName,
+                                    gg.Leadtime,
+                                    gg.MaximumStock,
+                                    gg.MinimumStock,
+                                    gg.ToolLife,
+                                    gg.SD,//      ค่าเบียงเบน
+                                    gg.Status,
+                                    gg.StopOrder);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            this.Cursor = Cursors.Default;
+        }
+        private void DataLoad()
+        {
+            dgvData.Rows.Clear();
+            try
+
+            {
+                this.Cursor = Cursors.WaitCursor;
+
+                Load_Item();
+                //if (ddlType.Text.Equals("รับสินค้า"))
+                //    Load_Receive();
+                //else if (ddlType.Text.Equals("ยกเลิกรับสินค้า"))
+                //    Load_CancelReceive();
+                //else if (ddlType.Text.Equals("เบิกสินค้า"))
+                //    Load_Shipping();
+                //else if (ddlType.Text.Equals("ยกเลิกเบิกสินค้า"))
+                //    Load_CancelShipping();
+                //else
+                //{
+                //    Load_Receive();
+                //    Load_CancelReceive();
+                //    Load_Shipping();
+                //    Load_CancelShipping();
+                //}
+
+                int c = 0;
+                foreach (var x in dgvData.Rows)
+                {
+                    c += 1;
+                    x.Cells["dgvNo"].Value = c;
+
+                    //if(Convert.ToString(x.Cells["TypeCode"].Value).Equals("Receive"))
+                    //{
+                    //    x.Cells["TypeCode"].Value = "รับสินค้า";
+                    //}
+                    //else if (Convert.ToString(x.Cells["TypeCode"].Value).Equals("Cancel RC"))
+                    //{
+                    //    x.Cells["TypeCode"].Value = "ยกเลิกรับสินค้า";
+                    //}
+                    //else if (Convert.ToString(x.Cells["TypeCode"].Value).Equals("Cancel SH"))
+                    //{
+                    //    x.Cells["TypeCode"].Value = "ยกเลิกเบิกสินค้า";
+                    //}
+                    //else if (Convert.ToString(x.Cells["TypeCode"].Value).Equals("Shipping"))
+                    //{
+                    //    x.Cells["TypeCode"].Value = "เบิกสินค้า";
+                    //}
+                    //else
+                    //{
+                    //    x.Cells["TypeCode"].Value = "-";
+                    //}
 
                 }
             }
-            catch(Exception ex) { MessageBox.Show(ex.Message); }
-            this.Cursor = Cursors.Default;
-
-
-            //    radGridView1.DataSource = dt;
+            catch { }
+            finally {this.Cursor = Cursors.Default; }    
         }
         private bool CheckDuplicate(string code)
         {
@@ -103,24 +551,24 @@ namespace StockControl
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            radGridView1.ReadOnly = false;
-            radGridView1.AllowAddNewRow = false;
-            radGridView1.Rows.AddNew();
+            dgvData.ReadOnly = false;
+            dgvData.AllowAddNewRow = false;
+            dgvData.Rows.AddNew();
         }
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            radGridView1.ReadOnly = true;
+            dgvData.ReadOnly = true;
 
-            radGridView1.AllowAddNewRow = false;
+            dgvData.AllowAddNewRow = false;
             DataLoad();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            radGridView1.ReadOnly = false;
+            dgvData.ReadOnly = false;
 
-            radGridView1.AllowAddNewRow = false;
+            dgvData.AllowAddNewRow = false;
             //DataLoad();
         }
 
@@ -160,19 +608,19 @@ namespace StockControl
         private void btnExport_Click(object sender, EventArgs e)
         {
             //  dbClss.ExportGridCSV(radGridView1);
-            dbClss.ExportGridXlSX(radGridView1);
+            dbClss.ExportGridXlSX(dgvData);
         }
 
 
 
         private void btnFilter1_Click(object sender, EventArgs e)
         {
-            radGridView1.EnableFiltering = true;
+            dgvData.EnableFiltering = true;
         }
 
         private void btnUnfilter1_Click(object sender, EventArgs e)
         {
-            radGridView1.EnableFiltering = false;
+            dgvData.EnableFiltering = false;
         }
 
         private void radMenuItem1_Click(object sender, EventArgs e)
@@ -182,15 +630,7 @@ namespace StockControl
 
         private void radButtonElement1_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
-            CreatePart sc = new CreatePart();
-            this.Cursor = Cursors.Default;
-            sc.ShowDialog();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-
-            ClassLib.Memory.SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
-            ClassLib.Memory.Heap();
+           
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

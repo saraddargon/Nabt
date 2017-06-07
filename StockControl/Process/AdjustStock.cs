@@ -18,9 +18,10 @@ namespace StockControl
             InitializeComponent();
         }
 
-        //private int RowView = 50;
-        //private int ColView = 10;
-        DataTable dt = new DataTable();
+        string Ac = "";
+        DataTable dt_ADH = new DataTable();
+        DataTable dt_ADD = new DataTable();
+
         private void radMenuItem2_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
@@ -35,35 +36,35 @@ namespace StockControl
         }
         private void GETDTRow()
         {
-            dt.Columns.Add(new DataColumn("YYYY", typeof(int)));
-            dt.Columns.Add(new DataColumn("ModelName", typeof(string)));
-            dt.Columns.Add(new DataColumn("JAN", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("FEB", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("MAR", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("APR", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("MAY", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("JUN", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("JUL", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("AUG", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("SEP", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("OCT", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("NOV", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("DEC", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("Active", typeof(bool)));
+            //dt.Columns.Add(new DataColumn("YYYY", typeof(int)));
+            //dt.Columns.Add(new DataColumn("ModelName", typeof(string)));
+            //dt.Columns.Add(new DataColumn("JAN", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("FEB", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("MAR", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("APR", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("MAY", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("JUN", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("JUL", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("AUG", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("SEP", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("OCT", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("NOV", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("DEC", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("Active", typeof(bool)));
            
         }
         int crow = 99;
         private void Unit_Load(object sender, EventArgs e)
         {
-            radGridView1.ReadOnly = true;
-            radGridView1.AutoGenerateColumns = false;
-            GETDTRow();
+            //dgvData.ReadOnly = true;
+            dgvData.AutoGenerateColumns = false;
+            //GETDTRow();
    
-            DefaultItem();
+           // DefaultItem();
           
             DataLoad();
 
-            crow = 0;
+           
         }
         private void DefaultItem()
         {
@@ -122,7 +123,7 @@ namespace StockControl
                         //&& s.YYYY== year1).ToList();
                         
 
-                        foreach (var x in radGridView1.Rows)
+                        foreach (var x in dgvData.Rows)
                         {
                             x.Cells["dgvCodeTemp"].Value = x.Cells["ModelName"].Value.ToString();
                             x.Cells["dgvCodeTemp2"].Value = x.Cells["YYYY"].Value.ToString();
@@ -169,10 +170,10 @@ namespace StockControl
             {
 
 
-                radGridView1.EndEdit();
+                dgvData.EndEdit();
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    foreach (var g in radGridView1.Rows)
+                    foreach (var g in dgvData.Rows)
                     {
                         if (!Convert.ToString(g.Cells["ModelName"].Value).Equals("")
                             )
@@ -266,10 +267,10 @@ namespace StockControl
 
                 if (row >= 0)
                 {
-                    string CodeDelete = Convert.ToString(radGridView1.Rows[row].Cells["ModelName"].Value);
-                    string CodeTemp = Convert.ToString(radGridView1.Rows[row].Cells["dgvCodeTemp"].Value);
-                    string CodeTemp2 = Convert.ToString(radGridView1.Rows[row].Cells["dgvCodeTemp2"].Value);
-                    radGridView1.EndEdit();
+                    string CodeDelete = Convert.ToString(dgvData.Rows[row].Cells["ModelName"].Value);
+                    string CodeTemp = Convert.ToString(dgvData.Rows[row].Cells["dgvCodeTemp"].Value);
+                    string CodeTemp2 = Convert.ToString(dgvData.Rows[row].Cells["dgvCodeTemp2"].Value);
+                    dgvData.EndEdit();
                     if (MessageBox.Show("ต้องการลบรายการ ( " + CodeDelete + " ) หรือไม่ ?", "ลบรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         using (DataClasses1DataContext db = new DataClasses1DataContext())
@@ -322,15 +323,72 @@ namespace StockControl
         {
             DataLoad();
         }
+        private void ClearData()
+        {
+            txtADNo.Text = "";
+            txtAdjustBy.Text = ClassLib.Classlib.User;
 
+            dtRequire.Value = DateTime.Now;
+            txtCreateBy.Text = ClassLib.Classlib.User;
+            txtAdjustBy.Text = DateTime.Now.ToString("dd/MMM/yyyy");
+            txtRemark.Text = "";
+           
+            txtCodeNo.Text = "";
+           
+            dgvData.Rows.Clear();
+            dt_ADH.Rows.Clear();
+            dt_ADD.Rows.Clear();
+        }
         private void btnNew_Click(object sender, EventArgs e)
         {
-            return;
-            radGridView1.ReadOnly = false;
-            radGridView1.AllowAddNewRow = false;
-            radGridView1.Rows.AddNew();
-        }
+            btnNew.Enabled = false;
+            btnSave.Enabled = true;
+            ClearData();
+            Enable_Status(true, "New");
+            lblStatus.Text = "New";
+            Ac = "New";
 
+            //getมาไว้ก่อน แต่ยังไมได้ save 
+            txtADNo.Text = StockControl.dbClss.GetNo(7, 0);
+        }
+        private void Enable_Status(bool ss, string Condition)
+        {
+            if (Condition.Equals("-") || Condition.Equals("New"))
+            {
+                txtCodeNo.Enabled = ss;
+                //txtVendorName.Enabled = ss;
+                //txtRCNo.Enabled = ss;
+                txtRemark.Enabled = ss;
+                //txtTempNo.Enabled = ss;
+                dtRequire.Enabled = ss;
+                dgvData.ReadOnly = false;
+               
+
+            }
+            else if (Condition.Equals("View"))
+            {
+                txtCodeNo.Enabled = ss;
+                //txtVendorName.Enabled = ss;
+                //txtRCNo.Enabled = ss;
+                txtRemark.Enabled = ss;
+                //txtTempNo.Enabled = ss;
+                dtRequire.Enabled = ss;
+                dgvData.ReadOnly = false;
+                
+            }
+
+            else if (Condition.Equals("Edit"))
+            {
+                txtCodeNo.Enabled = ss;
+                //txtVendorName.Enabled = ss;
+                //txtRCNo.Enabled = ss;
+                txtRemark.Enabled = ss;
+                //txtTempNo.Enabled = ss;
+                dtRequire.Enabled = ss;
+                dgvData.ReadOnly = false;
+               
+            }
+        }
         private void btnView_Click(object sender, EventArgs e)
         {
             //radGridView1.ReadOnly = true;
@@ -351,19 +409,45 @@ namespace StockControl
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            try
             {
-                return;
-                AddUnit();
-                DataLoad();
+                if (Ac.Equals("New"))// || Ac.Equals("Edit"))
+                {
+                    //if (Check_Save())
+                    //    return;
+                    //if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    //{
+                    //    this.Cursor = Cursors.WaitCursor;
+
+                    //    if (Ac.Equals("New"))
+                    //        txtRCNo.Text = StockControl.dbClss.GetNo(4, 2);
+
+                    //    if (!txtRCNo.Text.Equals(""))
+                    //    {
+                    //        SaveHerder();
+                    //        SaveDetail();
+                    //        DataLoad();
+                    //        btnNew.Enabled = true;
+
+                    //        //insert Stock
+                    //        Insert_Stock();
+                    //    }
+                    //    else
+                    //    {
+                    //        MessageBox.Show("ไม่สามารถโหลดเลขที่รับสินค้าได้ ติดต่อแผนก IT");
+                    //    }
+                    //}
+                }
             }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
         }
 
         private void radGridView1_CellEndEdit(object sender, Telerik.WinControls.UI.GridViewCellEventArgs e)
         {
             try
             {
-                radGridView1.Rows[e.RowIndex].Cells["dgvC"].Value = "T";
+                //dgvData.Rows[e.RowIndex].Cells["dgvC"].Value = "T";
                 //string TM1 = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["ModelName"].Value);
                 ////string TM2 = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["MMM"].Value);
                 //string Chk = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["dgvCodeTemp"].Value);
@@ -394,15 +478,10 @@ namespace StockControl
         {
             // MessageBox.Show(e.KeyCode.ToString());
 
-            if (e.KeyData == (Keys.Control | Keys.S))
-            {
-                if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    return;
-                    AddUnit();
-                    DataLoad();
-                }
-            }
+            //if (e.KeyData == (Keys.Control | Keys.S))
+            //{
+                
+            //}
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -422,197 +501,18 @@ namespace StockControl
         private void btnExport_Click(object sender, EventArgs e)
         {
             //dbClss.ExportGridCSV(radGridView1);
-            dbClss.ExportGridXlSX(radGridView1);
+            dbClss.ExportGridXlSX(dgvData);
         }
 
-        private void btnImport_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                return;
-                OpenFileDialog op = new OpenFileDialog();
-                op.Filter = "Spread Sheet files (*.csv)|*.csv|All files (*.csv)|*.csv";
-                if (op.ShowDialog() == DialogResult.OK)
-                {
-
-
-                    using (TextFieldParser parser = new TextFieldParser(op.FileName))
-                    {
-                        dt.Rows.Clear();
-                        DateTime? d = null;
-                        DateTime d1 = DateTime.Now;
-                        parser.TextFieldType = FieldType.Delimited;
-                        parser.SetDelimiters(",");
-                        int a = 0;
-                        int c = 0;
-                        while (!parser.EndOfData)
-                        {
-                            //Processing row
-                            a += 1;
-                            DataRow rd = dt.NewRow();
-                            // MessageBox.Show(a.ToString());
-                            string[] fields = parser.ReadFields();
-                            c = 0;
-                            foreach (string field in fields)
-                            {
-                                c += 1;
-                                //TODO: Process field
-
-                                if (a > 1)
-                                {
-                                    if (c == 1)
-                                        rd["ModelName"] = Convert.ToString(field).Trim();
-                                    else if (c == 2)
-                                        rd["ModelDescription"] = Convert.ToString(field);
-                                    else if (c == 3)
-                                        rd["ModelActive"] = Convert.ToBoolean(field);
-                                    else if (c == 4)
-                                        rd["LineName"] = Convert.ToString(field).Trim();
-                                    else if (c == 5)
-                                        rd["MCName"] = Convert.ToString(field);
-                                    else if (c == 6)
-                                        rd["Limit"] = Convert.ToBoolean(field);
-                                    else if (c == 7)
-                                    {
-                                        if (DateTime.TryParse(Convert.ToString(field), out d1))
-                                        {
-                                            rd["ExpireDate"] = Convert.ToDateTime(field);
-
-                                        }
-                                        else
-                                        {
-                                            rd["ExpireDate"] = d;
-                                        }
-                                    }
-
-                                }
-                                else
-                                {
-                                    if (c == 1)
-                                        rd["ModelName"] = "";
-                                    else if (c == 2)
-                                        rd["ModelDescription"] = "";
-                                    else if (c == 3)
-                                        rd["ModelActive"] = false;
-                                    else if (c == 4)
-                                        rd["LineName"] = "";
-                                    else if (c == 5)
-                                        rd["MCName"] = "";
-                                    else if (c == 6)
-                                        rd["Limit"] = false;
-                                    else if (c == 7)
-                                        rd["ExpireDate"] = d;
-
-
-
-
-                                }
-
-
-                            }
-                            dt.Rows.Add(rd);
-
-                        }
-                    }
-                    if (dt.Rows.Count > 0)
-                    {
-
-                        dbClss.AddHistory(this.Name, "Import", "Import file CSV in to System", "");
-                        ImportData();
-                        MessageBox.Show("Import Completed.");
-
-                        DataLoad();
-                    }
-
-                }
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); dt.Rows.Clear(); }
-        }
-
-        private void ImportData()
-        {
-            try
-            {
-                using (DataClasses1DataContext db = new DataClasses1DataContext())
-                {
-
-                    foreach (DataRow rd in dt.Rows)
-                    {
-                        if (!rd["ModelName"].ToString().Equals(""))
-                        {
-
-
-                            var x = (from ix in db.tb_Models where ix.ModelName == rd["ModelName"].ToString().Trim() select ix).FirstOrDefault();
-
-
-                            DateTime? d = null;
-                            DateTime d1 = DateTime.Now;
-                            if (x == null)
-                            {
-                                tb_Model u = new tb_Model();
-                                u.ModelName = rd["ModelName"].ToString().Trim();
-                                u.ModelDescription = rd["ModelDescription"].ToString().Trim();
-                                u.ModelActive = Convert.ToBoolean(rd["ModelActive"].ToString());
-                                u.LineName = rd["LineName"].ToString().Trim();
-                                u.MCName = rd["MCName"].ToString().Trim();
-                                u.Limit = Convert.ToBoolean(rd["Limit"].ToString());
-                                if (DateTime.TryParse(rd["ExpireDate"].ToString(), out d1))
-                                {
-
-                                    u.ExpireDate = Convert.ToDateTime(rd["ExpireDate"].ToString());
-                                }
-                                else
-                                {
-                                    u.ExpireDate = d;
-                                }
-                                db.tb_Models.InsertOnSubmit(u);
-                                db.SubmitChanges();
-                            }
-                            else
-                            {
-                                x.ModelName = rd["ModelName"].ToString().Trim();
-                                x.ModelDescription = rd["ModelDescription"].ToString().Trim();
-                                x.ModelActive = Convert.ToBoolean(rd["ModelActive"].ToString());
-                                x.LineName = rd["LineName"].ToString().Trim();
-                                x.MCName = rd["MCName"].ToString().Trim();
-                                x.Limit = Convert.ToBoolean(rd["Limit"].ToString());
-                                if (DateTime.TryParse(rd["ExpireDate"].ToString(), out d1))
-                                {
-
-                                    x.ExpireDate = Convert.ToDateTime(rd["ExpireDate"].ToString());
-                                }
-                                else
-                                {
-                                    x.ExpireDate = d;
-                                }
-
-
-                                db.SubmitChanges();
-
-                            }
-
-
-
-                        }
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                dbClss.AddError("InportData", ex.Message, this.Name);
-            }
-        }
-
+       
         private void btnFilter1_Click(object sender, EventArgs e)
         {
-            radGridView1.EnableFiltering = true;
+            dgvData.EnableFiltering = true;
         }
 
         private void btnUnfilter1_Click(object sender, EventArgs e)
         {
-            radGridView1.EnableFiltering = false;
+            dgvData.EnableFiltering = false;
         }
 
         private void radMenuItem1_Click(object sender, EventArgs e)
@@ -642,20 +542,7 @@ namespace StockControl
 
         private void radGridView1_CellFormatting(object sender, Telerik.WinControls.UI.CellFormattingEventArgs e)
         {
-            if (e.CellElement.ColumnInfo.Name == "ModelName")
-            {
-                if (e.CellElement.RowInfo.Cells["ModelName"].Value != null)
-                {
-                    if (!e.CellElement.RowInfo.Cells["ModelName"].Value.Equals(""))
-                    {
-                        e.CellElement.DrawFill = true;
-                        // e.CellElement.ForeColor = Color.Blue;
-                        e.CellElement.NumberOfColors = 1;
-                        e.CellElement.BackColor = Color.WhiteSmoke;
-                    }
-
-                }
-            }
+          
         }
 
         private void txtModelName_TextChanged(object sender, EventArgs e)
@@ -699,5 +586,128 @@ namespace StockControl
         {
 
         }
+
+        private void txtCodeNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (e.KeyChar == 13)
+                {
+
+                   // Insert_data(txtCodeNo.Text);
+                    txtCodeNo.Text = "";
+
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+        //private void Insert_data(string CodeNo)
+        //{
+        //    if (!CodeNo.Equals(""))
+        //    {
+        //        using (DataClasses1DataContext db = new DataClasses1DataContext())
+        //        {
+        //            int No = 0;
+                  
+        //            string ItemNo = "";
+        //            string ItemDescription = "";
+        //            decimal QTY = 0;
+        //            decimal RemainQty = 0;
+        //            string Unit = "";
+        //            decimal PCSUnit = 0;
+        //            decimal CostPerUnit = 0;
+        //            decimal Amount = 0;
+        //            //string CRRNCY = "";
+        //            string LotNo = "";
+                    
+        //            string Remark = "";
+                   
+        //            int duppicate_CodeNo = 0;
+        //            string Status = "Waiting";
+                    
+
+
+        //            var g = (from ix in db.tb_PurchaseRequests select ix).Where(a => a.PRNo == txtPRNo.Text.Trim()).ToList();
+        //            if (g.Count() > 0)
+        //            {
+        //                if (txtVendorNo.Text.Equals(""))
+        //                {
+        //                    txtVendorName.Text = StockControl.dbClss.TSt(g.FirstOrDefault().VendorName);
+        //                    txtVendorNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().VendorNo);
+        //                    //txtTempNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().TEMPNo);
+
+        //                }
+        //                else
+        //                {
+        //                    if (!txtVendorNo.Text.Equals(StockControl.dbClss.TSt(g.FirstOrDefault().VendorNo)))
+        //                    {
+        //                        MessageBox.Show("ไม่สามารถรับสินค้าต่างผู้ขายได้");
+        //                        duppicate_vendor = 1;
+        //                    }
+        //                }
+
+        //                CRRNCY = StockControl.dbClss.TSt(g.FirstOrDefault().CRRNCY);
+
+        //                if (duppicate_vendor <= 0)
+        //                {
+        //                    No = dgvData.Rows.Count() + 1;
+
+        //                    var d = (from ix in db.tb_PurchaseRequestLines select ix)
+        //                        .Where(a => a.PRNo == txtPRNo.Text.Trim() && a.SS == 1
+        //                        && (Convert.ToDecimal(a.RemainQty) > Convert.ToDecimal(0.00))
+        //                        )
+
+        //                        .ToList();
+        //                    if (d.Count() > 0)
+
+        //                    {
+        //                        foreach (var gg in d)
+        //                        {
+        //                            CodeNo = StockControl.dbClss.TSt(gg.CodeNo);
+        //                            if (!check_Duppicate(CodeNo))
+        //                            {
+        //                                TempNo = StockControl.dbClss.TSt(gg.TempNo);
+
+        //                                ItemNo = StockControl.dbClss.TSt(gg.ItemName);
+        //                                ItemDescription = StockControl.dbClss.TSt(gg.ItemDesc);
+        //                                QTY = 0;//StockControl.dbClss.TDe(gg.OrderQty);
+        //                                        //RemainQty ต้อง Cal ใหม่ ว่ารับเข้าทั้งหมดเท่าแล้วค่อยเอามาหักลบกัน
+        //                                RemainQty = StockControl.dbClss.TDe(gg.RemainQty);
+        //                                Unit = StockControl.dbClss.TSt(gg.UnitCode);
+        //                                // จำนวนต่อหน่วย
+        //                                PCSUnit = StockControl.dbClss.TDe(gg.PCSUnit);
+        //                                // ราคาต่อหน่วย
+        //                                CostPerUnit = StockControl.dbClss.TDe(gg.StandardCost);
+        //                                Amount = QTY * CostPerUnit;
+        //                                //CRRNCY = CRRNCY;  //มาจาก herder
+        //                                LotNo = StockControl.dbClss.TSt(gg.LotNo);
+        //                                SerialNo = StockControl.dbClss.TSt(gg.SerialNo);
+        //                                Remark = "";
+        //                                PRNo = txtPRNo.Text;
+        //                                RCNo = "";
+        //                                PRID = StockControl.dbClss.TInt(gg.id);
+
+        //                                if (StockControl.dbClss.TDe(gg.OrderQty)
+        //                                        == StockControl.dbClss.TDe(gg.RemainQty))
+        //                                    Status = "Waiting";
+        //                                else
+        //                                    Status = "Partial";
+
+
+        //                                dgvData.Rows.Add(No.ToString(), Status, CodeNo, ItemNo, ItemDescription, QTY, RemainQty, Unit
+        //                                    , PCSUnit, CostPerUnit, Amount, CRRNCY, LotNo, SerialNo, ShelfNo, Remark, TempNo, PRNo, RCNo, InvoiceNo
+        //                                    , ID.ToString(), PRID.ToString()
+        //                                    );
+        //                            }
+        //                        }
+        //                    }
+        //                    Cal_Amount();
+        //                }
+        //                duppicate_vendor = 0;
+        //            }
+
+        //        }
+        //    }
+        //}
     }
 }

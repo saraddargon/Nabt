@@ -399,6 +399,9 @@ namespace StockControl
                         else
                             txtUpdateDate.Text = "";
 
+                        lblStock.Text = StockControl.dbClss.TDe(g.FirstOrDefault().StockInv).ToString("###,###,##0.00");
+                        lblTempStock.Text = StockControl.dbClss.TDe(g.FirstOrDefault().StockDL).ToString("###,###,##0.00");
+                        lblOrder.Text = StockControl.dbClss.TDe(g.FirstOrDefault().StockBackOrder).ToString("###,###,##0.00");
 
                         if (StockControl.dbClss.TSt(g.FirstOrDefault().Status).Equals("InActive"))
                         {
@@ -581,7 +584,9 @@ namespace StockControl
                         u.BarCode = null;// barcode;
                         u.DWGNo = txtDwgfile.Text;
                         u.DWG = chkDWG.Checked;
-
+                        u.StockDL = 0;//Convert.ToDecimal(lblTempStock.Text);
+                        u.StockInv = 0;// Convert.ToDecimal(lblStock.Text);
+                        u.StockBackOrder = 0;
                         //Save Drawing
                         if (chkDWG.Checked)
                         {

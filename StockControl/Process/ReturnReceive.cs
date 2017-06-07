@@ -390,6 +390,8 @@ namespace StockControl
                 this.Cursor = Cursors.WaitCursor;
                 if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    int seq = 0;
+                    string CNNo = StockControl.dbClss.GetNo(6, 2);
                     using (DataClasses1DataContext db = new DataClasses1DataContext())
                     {
                         var g = (from ix in db.tb_ReceiveHs
@@ -440,9 +442,6 @@ namespace StockControl
                                     PRID = Convert.ToInt32(vvd.PRID);
                                     var pp = (from ix in db.tb_PurchaseRequestLines
                                               where ix.id == PRID
-                                              // && ix.TempNo == StockControl.dbClss.TSt(g.Cells["TempNo"].Value)
-                                              //&& ix.PRNo == StockControl.dbClss.TSt(g.Cells["PRNo"].Value)
-                                              //&& ix.CodeNo == StockControl.dbClss.TSt(g.Cells["CodeNo"].Value)
                                               select ix).ToList();
 
                                     if (pp.Count > 0)
@@ -463,10 +462,8 @@ namespace StockControl
                                                 + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
                                         }
                                     }
-
-
+                                    
                                     //insert tb_Receives เข้า tb_receive_Del
-
                                     tb_Receive_Del u = new tb_Receive_Del();
                                     u.PRNo = StockControl.dbClss.TSt(vvd.PRNo);
                                     u.TempNo = StockControl.dbClss.TSt(vvd.TempNo);
@@ -507,6 +504,13 @@ namespace StockControl
 
                                     //db.tb_Receives.DeleteOnSubmit(vvd);
                                     //db.SubmitChanges();
+
+
+                                    seq += 1;
+                                    
+                                    // Insert Stock
+                                    Insert_Stock(seq, Convert.ToInt32(vvd.ID), vvd.RCNo, CNNo);
+                                    
                                 }
 
 
@@ -543,6 +547,48 @@ namespace StockControl
             Save_Return2(); //วิธีที่ 2 การปรับแบบการ Insert เข้า table delete
         }
 
+        private void Insert_Stock(int seq, int id, string RCNo,string CNNo)
+        {
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                var g = (from ix in db.tb_Receives
+                             //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
+                         where ix.RCNo.Trim() == RCNo.Trim() && ix.Status != "Cancel"
+                         && ix.ID == id
+                         select ix).First();
+                
+                //insert Stock
+                DateTime? CalDate = null;
+                DateTime? AppDate = DateTime.Now;
+                int Seq = seq;
+
+                tb_Stock1 gg = new tb_Stock1();
+                gg.AppDate = AppDate;
+                gg.Seq = Seq;
+                gg.App = "Cancel RC";
+                gg.Appid = Seq;
+                gg.CreateBy = ClassLib.Classlib.User;
+                gg.CreateDate = DateTime.Now;
+                gg.DocNo = CNNo;
+                gg.RefNo = RCNo;
+                gg.Type = "Inv/DL";
+                gg.QTY = -Convert.ToDecimal(g.QTY);
+                gg.Inbound = 0;
+                gg.Outbound = -Convert.ToDecimal(g.QTY);
+                gg.AmountCost = -Convert.ToDecimal(g.QTY) * Convert.ToDecimal(g.CostPerUnit);
+                gg.UnitCost = Convert.ToDecimal(g.CostPerUnit);
+                gg.RemainQty = 0;
+                gg.RemainUnitCost = 0;
+                gg.RemainAmount = 0;
+                gg.CalDate = CalDate;
+                gg.Status = "Active";
+
+                db.tb_Stock1s.InsertOnSubmit(gg);
+                db.SubmitChanges();
+                //udpate Stock Item
+                dbClss.Insert_Stock(g.CodeNo, (-Convert.ToDecimal(g.QTY)), "CNRC", "Inv");
+            }
+        }
         private void radGridView1_CellEndEdit(object sender, Telerik.WinControls.UI.GridViewCellEventArgs e)
         {
             try
