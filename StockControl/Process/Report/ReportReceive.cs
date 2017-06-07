@@ -11,9 +11,9 @@ using Telerik.WinControls.UI;
 
 namespace StockControl
 {
-    public partial class ReportPart : Telerik.WinControls.UI.RadRibbonForm
+    public partial class ReportReceive : Telerik.WinControls.UI.RadRibbonForm
     {
-        public ReportPart()
+        public ReportReceive()
         {
             InitializeComponent();
         }

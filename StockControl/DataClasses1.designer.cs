@@ -330,11 +330,18 @@ namespace StockControl
 			return ((ISingleResult<sp_SelectVendorResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_001ReportPart")]
-		public ISingleResult<sp_001ReportPartResult> sp_001ReportPart([global::System.Data.Linq.Mapping.ParameterAttribute(Name="GroupType", DbType="NVarChar(50)")] string groupType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Status", DbType="VarChar(50)")] string status, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="VendorName", DbType="NVarChar(70)")] string vendorName)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_R001_ReportPart")]
+		public ISingleResult<sp_R001_ReportPartResult> sp_R001_ReportPart([global::System.Data.Linq.Mapping.ParameterAttribute(Name="GroupType", DbType="NVarChar(50)")] string groupType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Status", DbType="VarChar(50)")] string status, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="VendorName", DbType="NVarChar(70)")] string vendorName)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), groupType, status, vendorName);
-			return ((ISingleResult<sp_001ReportPartResult>)(result.ReturnValue));
+			return ((ISingleResult<sp_R001_ReportPartResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_R002_ReportReceive")]
+		public ISingleResult<sp_R002_ReportReceiveResult> sp_R002_ReportReceive([global::System.Data.Linq.Mapping.ParameterAttribute(Name="GroupType", DbType="NVarChar(50)")] string groupType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Status", DbType="VarChar(50)")] string status, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="VendorName", DbType="NVarChar(70)")] string vendorName)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), groupType, status, vendorName);
+			return ((ISingleResult<sp_R002_ReportReceiveResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -7035,471 +7042,461 @@ namespace StockControl
 		}
 	}
 	
-	public partial class sp_001ReportPartResult
+	public partial class sp_R001_ReportPartResult
 	{
 		
-		private string _CodeNo;
+		private System.Nullable<long> _No;
 		
-		private string _ItemNo;
+		private string _รหัสพาร์ท;
 		
-		private string _ItemDescription;
+		private string _ชื่อพาร์ท;
 		
-		private string _GroupCode;
+		private string _รายละเอียดพาร์ท;
 		
-		private string _TypeCode;
+		private int _จำนวนคงเหลือ;
 		
-		private string _UnitBuy;
+		private int _จำนวนคงเหลือ_Temp_;
 		
-		private string _UnitShip;
+		private int _จำนวนสั่งซื้อ;
 		
-		private System.Nullable<decimal> _PCSUnit;
+		private string _ประเภทกลุ่มพาร์ท;
 		
-		private string _ShelfNo;
+		private string _ประเภทพาร์ท;
 		
-		private System.Nullable<decimal> _StandardCost;
+		private string _รหัสผู้ขาย;
 		
-		private string _CostingMethod;
+		private string _ชื่อผู้ขาย;
 		
-		private string _ItemGroup;
+		private string _ชื่อผู้ผลิต;
 		
-		private string _Replacement;
+		private System.Nullable<decimal> _ราคา;
 		
-		private string _VendorNo;
+		private System.Nullable<decimal> _จำนวน_หน่วย;
 		
-		private string _VendorItemName;
+		private string _หน่วยซื้อ;
 		
-		private string _UseTacking;
+		private string _หน่วยเบิก;
 		
-		private System.Nullable<bool> _Critical;
+		private System.Nullable<decimal> _ระยะเวลาซื้อ;
 		
-		private System.Nullable<decimal> _MaximumStock;
+		private System.Nullable<decimal> _Maximum;
 		
-		private System.Nullable<decimal> _MinimumStock;
+		private System.Nullable<decimal> _Minimum;
 		
-		private System.Nullable<decimal> _SafetyStock;
+		private System.Nullable<decimal> _จุดสั่งซื้อ;
 		
-		private System.Nullable<decimal> _ReOrderPoint;
+		private System.Nullable<decimal> _จำนวนใช้งาน;
 		
-		private string _Status;
+		private string _ชั้นเก็บ;
 		
-		private System.Nullable<bool> _StopOrder;
+		private System.Nullable<bool> _หยุดสั่งซื้อ;
 		
-		private string _Remark;
+		private string _สถานะ;
+		
+		private string _Drawing;
 		
 		private string _Size;
 		
-		private string _DWGNo;
-		
-		private string _Maker;
-		
-		private System.Nullable<decimal> _SD;
-		
-		private System.Data.Linq.Binary _BarCode;
-		
-		private string _CreateBy;
-		
-		private System.Nullable<System.DateTime> _CreateDate;
-		
-		private string _UpdateBy;
-		
-		private System.Nullable<System.DateTime> _UpdateDate;
-		
-		private System.Nullable<decimal> _Toollife;
-		
-		private System.Nullable<decimal> _Leadtime;
-		
-		private System.Nullable<bool> _DWG;
-		
-		private int _StockQty;
-		
-		private int _TempQty;
-		
-		private int _OrderQty;
-		
-		public sp_001ReportPartResult()
+		public sp_R001_ReportPartResult()
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodeNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string CodeNo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_No", DbType="BigInt")]
+		public System.Nullable<long> No
 		{
 			get
 			{
-				return this._CodeNo;
+				return this._No;
 			}
 			set
 			{
-				if ((this._CodeNo != value))
+				if ((this._No != value))
 				{
-					this._CodeNo = value;
+					this._No = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string ItemNo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_รหัสพาร์ท", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string รหัสพาร์ท
 		{
 			get
 			{
-				return this._ItemNo;
+				return this._รหัสพาร์ท;
 			}
 			set
 			{
-				if ((this._ItemNo != value))
+				if ((this._รหัสพาร์ท != value))
 				{
-					this._ItemNo = value;
+					this._รหัสพาร์ท = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemDescription", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
-		public string ItemDescription
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ชื่อพาร์ท", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string ชื่อพาร์ท
 		{
 			get
 			{
-				return this._ItemDescription;
+				return this._ชื่อพาร์ท;
 			}
 			set
 			{
-				if ((this._ItemDescription != value))
+				if ((this._ชื่อพาร์ท != value))
 				{
-					this._ItemDescription = value;
+					this._ชื่อพาร์ท = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroupCode", DbType="NVarChar(30)")]
-		public string GroupCode
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_รายละเอียดพาร์ท", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string รายละเอียดพาร์ท
 		{
 			get
 			{
-				return this._GroupCode;
+				return this._รายละเอียดพาร์ท;
 			}
 			set
 			{
-				if ((this._GroupCode != value))
+				if ((this._รายละเอียดพาร์ท != value))
 				{
-					this._GroupCode = value;
+					this._รายละเอียดพาร์ท = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TypeCode", DbType="NVarChar(30)")]
-		public string TypeCode
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_จำนวนคงเหลือ", DbType="Int NOT NULL")]
+		public int จำนวนคงเหลือ
 		{
 			get
 			{
-				return this._TypeCode;
+				return this._จำนวนคงเหลือ;
 			}
 			set
 			{
-				if ((this._TypeCode != value))
+				if ((this._จำนวนคงเหลือ != value))
 				{
-					this._TypeCode = value;
+					this._จำนวนคงเหลือ = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitBuy", DbType="NVarChar(20)")]
-		public string UnitBuy
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[จำนวนคงเหลือ[Temp]]]", Storage="_จำนวนคงเหลือ_Temp_", DbType="Int NOT NULL")]
+		public int จำนวนคงเหลือ_Temp_
 		{
 			get
 			{
-				return this._UnitBuy;
+				return this._จำนวนคงเหลือ_Temp_;
 			}
 			set
 			{
-				if ((this._UnitBuy != value))
+				if ((this._จำนวนคงเหลือ_Temp_ != value))
 				{
-					this._UnitBuy = value;
+					this._จำนวนคงเหลือ_Temp_ = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitShip", DbType="NVarChar(20)")]
-		public string UnitShip
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_จำนวนสั่งซื้อ", DbType="Int NOT NULL")]
+		public int จำนวนสั่งซื้อ
 		{
 			get
 			{
-				return this._UnitShip;
+				return this._จำนวนสั่งซื้อ;
 			}
 			set
 			{
-				if ((this._UnitShip != value))
+				if ((this._จำนวนสั่งซื้อ != value))
 				{
-					this._UnitShip = value;
+					this._จำนวนสั่งซื้อ = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PCSUnit", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> PCSUnit
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ประเภทกลุ่มพาร์ท", DbType="NVarChar(30)")]
+		public string ประเภทกลุ่มพาร์ท
 		{
 			get
 			{
-				return this._PCSUnit;
+				return this._ประเภทกลุ่มพาร์ท;
 			}
 			set
 			{
-				if ((this._PCSUnit != value))
+				if ((this._ประเภทกลุ่มพาร์ท != value))
 				{
-					this._PCSUnit = value;
+					this._ประเภทกลุ่มพาร์ท = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShelfNo", DbType="NVarChar(20)")]
-		public string ShelfNo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ประเภทพาร์ท", DbType="NVarChar(30)")]
+		public string ประเภทพาร์ท
 		{
 			get
 			{
-				return this._ShelfNo;
+				return this._ประเภทพาร์ท;
 			}
 			set
 			{
-				if ((this._ShelfNo != value))
+				if ((this._ประเภทพาร์ท != value))
 				{
-					this._ShelfNo = value;
+					this._ประเภทพาร์ท = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StandardCost", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> StandardCost
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_รหัสผู้ขาย", DbType="NVarChar(10)")]
+		public string รหัสผู้ขาย
 		{
 			get
 			{
-				return this._StandardCost;
+				return this._รหัสผู้ขาย;
 			}
 			set
 			{
-				if ((this._StandardCost != value))
+				if ((this._รหัสผู้ขาย != value))
 				{
-					this._StandardCost = value;
+					this._รหัสผู้ขาย = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CostingMethod", DbType="NVarChar(10)")]
-		public string CostingMethod
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ชื่อผู้ขาย", DbType="NVarChar(50)")]
+		public string ชื่อผู้ขาย
 		{
 			get
 			{
-				return this._CostingMethod;
+				return this._ชื่อผู้ขาย;
 			}
 			set
 			{
-				if ((this._CostingMethod != value))
+				if ((this._ชื่อผู้ขาย != value))
 				{
-					this._CostingMethod = value;
+					this._ชื่อผู้ขาย = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemGroup", DbType="NVarChar(20)")]
-		public string ItemGroup
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ชื่อผู้ผลิต", DbType="NVarChar(150)")]
+		public string ชื่อผู้ผลิต
 		{
 			get
 			{
-				return this._ItemGroup;
+				return this._ชื่อผู้ผลิต;
 			}
 			set
 			{
-				if ((this._ItemGroup != value))
+				if ((this._ชื่อผู้ผลิต != value))
 				{
-					this._ItemGroup = value;
+					this._ชื่อผู้ผลิต = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Replacement", DbType="NVarChar(10)")]
-		public string Replacement
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ราคา", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> ราคา
 		{
 			get
 			{
-				return this._Replacement;
+				return this._ราคา;
 			}
 			set
 			{
-				if ((this._Replacement != value))
+				if ((this._ราคา != value))
 				{
-					this._Replacement = value;
+					this._ราคา = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VendorNo", DbType="NVarChar(10)")]
-		public string VendorNo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[จำนวน:หน่วย]", Storage="_จำนวน_หน่วย", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> จำนวน_หน่วย
 		{
 			get
 			{
-				return this._VendorNo;
+				return this._จำนวน_หน่วย;
 			}
 			set
 			{
-				if ((this._VendorNo != value))
+				if ((this._จำนวน_หน่วย != value))
 				{
-					this._VendorNo = value;
+					this._จำนวน_หน่วย = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VendorItemName", DbType="NVarChar(50)")]
-		public string VendorItemName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_หน่วยซื้อ", DbType="NVarChar(20)")]
+		public string หน่วยซื้อ
 		{
 			get
 			{
-				return this._VendorItemName;
+				return this._หน่วยซื้อ;
 			}
 			set
 			{
-				if ((this._VendorItemName != value))
+				if ((this._หน่วยซื้อ != value))
 				{
-					this._VendorItemName = value;
+					this._หน่วยซื้อ = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UseTacking", DbType="NVarChar(50)")]
-		public string UseTacking
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_หน่วยเบิก", DbType="NVarChar(20)")]
+		public string หน่วยเบิก
 		{
 			get
 			{
-				return this._UseTacking;
+				return this._หน่วยเบิก;
 			}
 			set
 			{
-				if ((this._UseTacking != value))
+				if ((this._หน่วยเบิก != value))
 				{
-					this._UseTacking = value;
+					this._หน่วยเบิก = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Critical", DbType="Bit")]
-		public System.Nullable<bool> Critical
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ระยะเวลาซื้อ", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> ระยะเวลาซื้อ
 		{
 			get
 			{
-				return this._Critical;
+				return this._ระยะเวลาซื้อ;
 			}
 			set
 			{
-				if ((this._Critical != value))
+				if ((this._ระยะเวลาซื้อ != value))
 				{
-					this._Critical = value;
+					this._ระยะเวลาซื้อ = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaximumStock", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> MaximumStock
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Maximum", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Maximum
 		{
 			get
 			{
-				return this._MaximumStock;
+				return this._Maximum;
 			}
 			set
 			{
-				if ((this._MaximumStock != value))
+				if ((this._Maximum != value))
 				{
-					this._MaximumStock = value;
+					this._Maximum = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MinimumStock", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> MinimumStock
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Minimum", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Minimum
 		{
 			get
 			{
-				return this._MinimumStock;
+				return this._Minimum;
 			}
 			set
 			{
-				if ((this._MinimumStock != value))
+				if ((this._Minimum != value))
 				{
-					this._MinimumStock = value;
+					this._Minimum = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SafetyStock", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> SafetyStock
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_จุดสั่งซื้อ", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> จุดสั่งซื้อ
 		{
 			get
 			{
-				return this._SafetyStock;
+				return this._จุดสั่งซื้อ;
 			}
 			set
 			{
-				if ((this._SafetyStock != value))
+				if ((this._จุดสั่งซื้อ != value))
 				{
-					this._SafetyStock = value;
+					this._จุดสั่งซื้อ = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReOrderPoint", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> ReOrderPoint
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_จำนวนใช้งาน", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> จำนวนใช้งาน
 		{
 			get
 			{
-				return this._ReOrderPoint;
+				return this._จำนวนใช้งาน;
 			}
 			set
 			{
-				if ((this._ReOrderPoint != value))
+				if ((this._จำนวนใช้งาน != value))
 				{
-					this._ReOrderPoint = value;
+					this._จำนวนใช้งาน = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NVarChar(20)")]
-		public string Status
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ชั้นเก็บ", DbType="NVarChar(20)")]
+		public string ชั้นเก็บ
 		{
 			get
 			{
-				return this._Status;
+				return this._ชั้นเก็บ;
 			}
 			set
 			{
-				if ((this._Status != value))
+				if ((this._ชั้นเก็บ != value))
 				{
-					this._Status = value;
+					this._ชั้นเก็บ = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StopOrder", DbType="Bit")]
-		public System.Nullable<bool> StopOrder
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_หยุดสั่งซื้อ", DbType="Bit")]
+		public System.Nullable<bool> หยุดสั่งซื้อ
 		{
 			get
 			{
-				return this._StopOrder;
+				return this._หยุดสั่งซื้อ;
 			}
 			set
 			{
-				if ((this._StopOrder != value))
+				if ((this._หยุดสั่งซื้อ != value))
 				{
-					this._StopOrder = value;
+					this._หยุดสั่งซื้อ = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Remark", DbType="NVarChar(150)")]
-		public string Remark
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_สถานะ", DbType="NVarChar(20)")]
+		public string สถานะ
 		{
 			get
 			{
-				return this._Remark;
+				return this._สถานะ;
 			}
 			set
 			{
-				if ((this._Remark != value))
+				if ((this._สถานะ != value))
 				{
-					this._Remark = value;
+					this._สถานะ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Drawing", DbType="NVarChar(150)")]
+		public string Drawing
+		{
+			get
+			{
+				return this._Drawing;
+			}
+			set
+			{
+				if ((this._Drawing != value))
+				{
+					this._Drawing = value;
 				}
 			}
 		}
@@ -7519,227 +7516,479 @@ namespace StockControl
 				}
 			}
 		}
+	}
+	
+	public partial class sp_R002_ReportReceiveResult
+	{
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DWGNo", DbType="NVarChar(150)")]
-		public string DWGNo
+		private System.Nullable<long> _No;
+		
+		private string _รหัสพาร์ท;
+		
+		private string _ชื่อพาร์ท;
+		
+		private string _รายละเอียดพาร์ท;
+		
+		private int _จำนวนคงเหลือ;
+		
+		private int _จำนวนคงเหลือ_Temp_;
+		
+		private int _จำนวนสั่งซื้อ;
+		
+		private string _ประเภทกลุ่มพาร์ท;
+		
+		private string _ประเภทพาร์ท;
+		
+		private string _รหัสผู้ขาย;
+		
+		private string _ชื่อผู้ขาย;
+		
+		private string _ชื่อผู้ผลิต;
+		
+		private System.Nullable<decimal> _ราคา;
+		
+		private System.Nullable<decimal> _จำนวน_หน่วย;
+		
+		private string _หน่วยซื้อ;
+		
+		private string _หน่วยเบิก;
+		
+		private System.Nullable<decimal> _ระยะเวลาซื้อ;
+		
+		private System.Nullable<decimal> _Maximum;
+		
+		private System.Nullable<decimal> _Minimum;
+		
+		private System.Nullable<decimal> _จุดสั่งซื้อ;
+		
+		private System.Nullable<decimal> _จำนวนใช้งาน;
+		
+		private string _ชั้นเก็บ;
+		
+		private System.Nullable<bool> _หยุดสั่งซื้อ;
+		
+		private string _สถานะ;
+		
+		private string _Drawing;
+		
+		private string _Size;
+		
+		public sp_R002_ReportReceiveResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_No", DbType="BigInt")]
+		public System.Nullable<long> No
 		{
 			get
 			{
-				return this._DWGNo;
+				return this._No;
 			}
 			set
 			{
-				if ((this._DWGNo != value))
+				if ((this._No != value))
 				{
-					this._DWGNo = value;
+					this._No = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Maker", DbType="NVarChar(150)")]
-		public string Maker
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_รหัสพาร์ท", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string รหัสพาร์ท
 		{
 			get
 			{
-				return this._Maker;
+				return this._รหัสพาร์ท;
 			}
 			set
 			{
-				if ((this._Maker != value))
+				if ((this._รหัสพาร์ท != value))
 				{
-					this._Maker = value;
+					this._รหัสพาร์ท = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SD", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> SD
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ชื่อพาร์ท", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string ชื่อพาร์ท
 		{
 			get
 			{
-				return this._SD;
+				return this._ชื่อพาร์ท;
 			}
 			set
 			{
-				if ((this._SD != value))
+				if ((this._ชื่อพาร์ท != value))
 				{
-					this._SD = value;
+					this._ชื่อพาร์ท = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BarCode", DbType="Image")]
-		public System.Data.Linq.Binary BarCode
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_รายละเอียดพาร์ท", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string รายละเอียดพาร์ท
 		{
 			get
 			{
-				return this._BarCode;
+				return this._รายละเอียดพาร์ท;
 			}
 			set
 			{
-				if ((this._BarCode != value))
+				if ((this._รายละเอียดพาร์ท != value))
 				{
-					this._BarCode = value;
+					this._รายละเอียดพาร์ท = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateBy", DbType="NVarChar(50)")]
-		public string CreateBy
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_จำนวนคงเหลือ", DbType="Int NOT NULL")]
+		public int จำนวนคงเหลือ
 		{
 			get
 			{
-				return this._CreateBy;
+				return this._จำนวนคงเหลือ;
 			}
 			set
 			{
-				if ((this._CreateBy != value))
+				if ((this._จำนวนคงเหลือ != value))
 				{
-					this._CreateBy = value;
+					this._จำนวนคงเหลือ = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreateDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[จำนวนคงเหลือ[Temp]]]", Storage="_จำนวนคงเหลือ_Temp_", DbType="Int NOT NULL")]
+		public int จำนวนคงเหลือ_Temp_
 		{
 			get
 			{
-				return this._CreateDate;
+				return this._จำนวนคงเหลือ_Temp_;
 			}
 			set
 			{
-				if ((this._CreateDate != value))
+				if ((this._จำนวนคงเหลือ_Temp_ != value))
 				{
-					this._CreateDate = value;
+					this._จำนวนคงเหลือ_Temp_ = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateBy", DbType="NVarChar(50)")]
-		public string UpdateBy
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_จำนวนสั่งซื้อ", DbType="Int NOT NULL")]
+		public int จำนวนสั่งซื้อ
 		{
 			get
 			{
-				return this._UpdateBy;
+				return this._จำนวนสั่งซื้อ;
 			}
 			set
 			{
-				if ((this._UpdateBy != value))
+				if ((this._จำนวนสั่งซื้อ != value))
 				{
-					this._UpdateBy = value;
+					this._จำนวนสั่งซื้อ = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> UpdateDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ประเภทกลุ่มพาร์ท", DbType="NVarChar(30)")]
+		public string ประเภทกลุ่มพาร์ท
 		{
 			get
 			{
-				return this._UpdateDate;
+				return this._ประเภทกลุ่มพาร์ท;
 			}
 			set
 			{
-				if ((this._UpdateDate != value))
+				if ((this._ประเภทกลุ่มพาร์ท != value))
 				{
-					this._UpdateDate = value;
+					this._ประเภทกลุ่มพาร์ท = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Toollife", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> Toollife
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ประเภทพาร์ท", DbType="NVarChar(30)")]
+		public string ประเภทพาร์ท
 		{
 			get
 			{
-				return this._Toollife;
+				return this._ประเภทพาร์ท;
 			}
 			set
 			{
-				if ((this._Toollife != value))
+				if ((this._ประเภทพาร์ท != value))
 				{
-					this._Toollife = value;
+					this._ประเภทพาร์ท = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Leadtime", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> Leadtime
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_รหัสผู้ขาย", DbType="NVarChar(10)")]
+		public string รหัสผู้ขาย
 		{
 			get
 			{
-				return this._Leadtime;
+				return this._รหัสผู้ขาย;
 			}
 			set
 			{
-				if ((this._Leadtime != value))
+				if ((this._รหัสผู้ขาย != value))
 				{
-					this._Leadtime = value;
+					this._รหัสผู้ขาย = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DWG", DbType="Bit")]
-		public System.Nullable<bool> DWG
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ชื่อผู้ขาย", DbType="NVarChar(50)")]
+		public string ชื่อผู้ขาย
 		{
 			get
 			{
-				return this._DWG;
+				return this._ชื่อผู้ขาย;
 			}
 			set
 			{
-				if ((this._DWG != value))
+				if ((this._ชื่อผู้ขาย != value))
 				{
-					this._DWG = value;
+					this._ชื่อผู้ขาย = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StockQty", DbType="Int NOT NULL")]
-		public int StockQty
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ชื่อผู้ผลิต", DbType="NVarChar(150)")]
+		public string ชื่อผู้ผลิต
 		{
 			get
 			{
-				return this._StockQty;
+				return this._ชื่อผู้ผลิต;
 			}
 			set
 			{
-				if ((this._StockQty != value))
+				if ((this._ชื่อผู้ผลิต != value))
 				{
-					this._StockQty = value;
+					this._ชื่อผู้ผลิต = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TempQty", DbType="Int NOT NULL")]
-		public int TempQty
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ราคา", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> ราคา
 		{
 			get
 			{
-				return this._TempQty;
+				return this._ราคา;
 			}
 			set
 			{
-				if ((this._TempQty != value))
+				if ((this._ราคา != value))
 				{
-					this._TempQty = value;
+					this._ราคา = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderQty", DbType="Int NOT NULL")]
-		public int OrderQty
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[จำนวน:หน่วย]", Storage="_จำนวน_หน่วย", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> จำนวน_หน่วย
 		{
 			get
 			{
-				return this._OrderQty;
+				return this._จำนวน_หน่วย;
 			}
 			set
 			{
-				if ((this._OrderQty != value))
+				if ((this._จำนวน_หน่วย != value))
 				{
-					this._OrderQty = value;
+					this._จำนวน_หน่วย = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_หน่วยซื้อ", DbType="NVarChar(20)")]
+		public string หน่วยซื้อ
+		{
+			get
+			{
+				return this._หน่วยซื้อ;
+			}
+			set
+			{
+				if ((this._หน่วยซื้อ != value))
+				{
+					this._หน่วยซื้อ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_หน่วยเบิก", DbType="NVarChar(20)")]
+		public string หน่วยเบิก
+		{
+			get
+			{
+				return this._หน่วยเบิก;
+			}
+			set
+			{
+				if ((this._หน่วยเบิก != value))
+				{
+					this._หน่วยเบิก = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ระยะเวลาซื้อ", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> ระยะเวลาซื้อ
+		{
+			get
+			{
+				return this._ระยะเวลาซื้อ;
+			}
+			set
+			{
+				if ((this._ระยะเวลาซื้อ != value))
+				{
+					this._ระยะเวลาซื้อ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Maximum", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Maximum
+		{
+			get
+			{
+				return this._Maximum;
+			}
+			set
+			{
+				if ((this._Maximum != value))
+				{
+					this._Maximum = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Minimum", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Minimum
+		{
+			get
+			{
+				return this._Minimum;
+			}
+			set
+			{
+				if ((this._Minimum != value))
+				{
+					this._Minimum = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_จุดสั่งซื้อ", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> จุดสั่งซื้อ
+		{
+			get
+			{
+				return this._จุดสั่งซื้อ;
+			}
+			set
+			{
+				if ((this._จุดสั่งซื้อ != value))
+				{
+					this._จุดสั่งซื้อ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_จำนวนใช้งาน", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> จำนวนใช้งาน
+		{
+			get
+			{
+				return this._จำนวนใช้งาน;
+			}
+			set
+			{
+				if ((this._จำนวนใช้งาน != value))
+				{
+					this._จำนวนใช้งาน = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ชั้นเก็บ", DbType="NVarChar(20)")]
+		public string ชั้นเก็บ
+		{
+			get
+			{
+				return this._ชั้นเก็บ;
+			}
+			set
+			{
+				if ((this._ชั้นเก็บ != value))
+				{
+					this._ชั้นเก็บ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_หยุดสั่งซื้อ", DbType="Bit")]
+		public System.Nullable<bool> หยุดสั่งซื้อ
+		{
+			get
+			{
+				return this._หยุดสั่งซื้อ;
+			}
+			set
+			{
+				if ((this._หยุดสั่งซื้อ != value))
+				{
+					this._หยุดสั่งซื้อ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_สถานะ", DbType="NVarChar(20)")]
+		public string สถานะ
+		{
+			get
+			{
+				return this._สถานะ;
+			}
+			set
+			{
+				if ((this._สถานะ != value))
+				{
+					this._สถานะ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Drawing", DbType="NVarChar(150)")]
+		public string Drawing
+		{
+			get
+			{
+				return this._Drawing;
+			}
+			set
+			{
+				if ((this._Drawing != value))
+				{
+					this._Drawing = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Size", DbType="NVarChar(150)")]
+		public string Size
+		{
+			get
+			{
+				return this._Size;
+			}
+			set
+			{
+				if ((this._Size != value))
+				{
+					this._Size = value;
 				}
 			}
 		}
