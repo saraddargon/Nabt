@@ -300,5 +300,10 @@ namespace StockControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
+
+        private void btn_PrintPR_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

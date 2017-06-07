@@ -168,6 +168,18 @@
     <Compile Include="Process\ListPart_CreatePR.Designer.cs">
       <DependentUpon>ListPart_CreatePR.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\ReturnReceiveList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ReturnReceiveList.Designer.cs">
+      <DependentUpon>ReturnReceiveList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ShippingList2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ShippingList2.Designer.cs">
+      <DependentUpon>ShippingList2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\StockList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -369,6 +381,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\ListPart_CreatePR.resx">
       <DependentUpon>ListPart_CreatePR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ReturnReceiveList.resx">
+      <DependentUpon>ReturnReceiveList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ShippingList2.resx">
+      <DependentUpon>ShippingList2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\StockList.resx">
       <DependentUpon>StockList.cs</DependentUpon>
