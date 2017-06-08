@@ -130,7 +130,11 @@ namespace StockControl
                                   select new { ix.YYYY, ix.MMM, Month = dbClss.getMonthRevest(ix.MMM)
                                   , ix.CodeNo
                                   , ItemDescription =db.tb_Items.Where(s => s.CodeNo == ix.CodeNo).Select(o => o.ItemDescription).FirstOrDefault()
-                                  ,ix.ForeCastQty,ix.Toolife_spc,ix.SumQty,ix.ExtendQty,ix.UsePerDay,ix.LeadTime,ix.KeepStock,ix.AddErrQty,ix.OrderQty}).ToList();
+                                  ,ix.ForeCastQty,ix.Toolife_spc,ix.SumQty,ix.ExtendQty,ix.UsePerDay
+                                  ,ix.StockQty
+                                  ,ix.RemainOrder
+                                  ,ix.ReOrderPoint
+                                  ,ix.LeadTime,ix.KeepStock,ix.AddErrQty,ix.OrderQty}).ToList();
                         //MessageBox.Show(gd.Count().ToString());
                         radGridView1.DataSource = gd;
 
@@ -179,6 +183,7 @@ namespace StockControl
 
         private bool AddUnit()
         {
+            return false;
           
             bool ck = false;
             int C = 0;
@@ -275,6 +280,7 @@ namespace StockControl
         }
         private bool DeleteUnit()
         {
+            return false;
             bool ck = false;
 
             int C = 0;
@@ -368,11 +374,11 @@ namespace StockControl
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("ต้องการคำนวน หรือไม่?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 return;
-                AddUnit();
-                DataLoad();
+                //AddUnit();
+               // DataLoad();
             }
         }
 
@@ -695,6 +701,14 @@ namespace StockControl
         {
             if (crow == 0)
                 DataLoad();
+        }
+
+        private void radButtonElement1_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("ต้องการกำหนดค่าสั้งซื้อใหม่ ?", "Apply", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)==DialogResult.OK)
+            {
+                MessageBox.Show("Apply เรียบร้อยแล้ว!");
+            }
         }
     }
 }

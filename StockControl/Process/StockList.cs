@@ -53,7 +53,7 @@ namespace StockControl
 
                 var TypeCode = (from p in db.tb_Items
                                                 select p.TypeCode).Distinct();
-              
+
 
                 //var g = (from i in db.tb_Items
                 //         select new  
@@ -61,13 +61,14 @@ namespace StockControl
                 //             Type =  i.TypeCode    
 
                 //         }).ToList();
-               
-                 
+
+                /*
                     ddlType.DataSource = TypeCode;
                     ddlType.DisplayMember = "TypeCode";
                     ddlType.Text = "";
 
                     ddlType.Items.Add("");//การ add ค่าเข้าไปต่อท้าย
+                    */
               
                    
             }
@@ -629,7 +630,10 @@ namespace StockControl
 
         private void radButtonElement1_Click(object sender, EventArgs e)
         {
-           
+            this.Cursor = Cursors.WaitCursor;
+            AdjustStock ad = new AdjustStock();
+            this.Cursor = Cursors.Default;
+            ad.Show();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
