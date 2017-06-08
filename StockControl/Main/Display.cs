@@ -212,6 +212,9 @@ namespace StockControl
                         else if (c.LinkNode.ToString().Equals("MovementStock"))
                         {
                             ListItem.ImageIndex = 30;
+                        }else if(c.LinkNode.ToString().Equals("ClearTempList"))
+                        {
+                            ListItem.ImageIndex = 18;
                         }
                         else
                         {
