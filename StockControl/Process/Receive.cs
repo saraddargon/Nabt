@@ -850,8 +850,7 @@ namespace StockControl
                             //insert Stock
                             Insert_Stock();
 
-                            ////insert Stock
-                            //Insert_Stock();
+                          
                         }
                         else
                         {
