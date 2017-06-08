@@ -153,6 +153,7 @@ namespace StockControl
 
             dt_ADH.Rows.Clear();
             dt_ADD.Rows.Clear();
+            dgvData.Rows.Clear();
             try
             {
 
@@ -175,7 +176,7 @@ namespace StockControl
 
 
                             txtAdjustBy.Text = StockControl.dbClss.TSt(g.FirstOrDefault().ADBy);
-                            txtCreateBy.Text = StockControl.dbClss.TSt(g.FirstOrDefault().ADBy);
+                            txtCreateBy.Text = StockControl.dbClss.TSt(g.FirstOrDefault().CreateBy);
                             if (!StockControl.dbClss.TSt(g.FirstOrDefault().CreateDate).Equals(""))
                             {
                                     txtCreateDate.Text = Convert.ToDateTime(g.FirstOrDefault().CreateDate).ToString("dd/MMM/yyyy");
@@ -220,47 +221,105 @@ namespace StockControl
                             }
                             dt_ADH = StockControl.dbClss.LINQToDataTable(g);
 
-                            //Detail
-                            var d = (from ix in db.tb_StockAdjusts select ix)
-                            .Where(a => a.AdjustNo == txtADNo.Text.Trim()
-                                && a.Status != "Cancel").ToList();
-                            if (d.Count() > 0)
-                            {
-                                int c = 0;
-                                dgvData.DataSource = d;
 
-                                dt_ADD = StockControl.dbClss.LINQToDataTable(d);
-                                string SS = "";
-                                foreach (var x in dgvData.Rows)
-                                {
-                                    c += 1;
-                                    x.Cells["dgvNo"].Value = c;
+                            int dgvNo = 0;
+                            //detail
+                            var r = (from d in db.tb_StockAdjusts
+                                     join i in db.tb_Items on d.CodeNo equals i.CodeNo
+                                     where d.AdjustNo == txtADNo.Text
 
-                                    //if (Convert.ToString(x.Cells["Status"].Value).Equals("Waiting"))
-                                    //{
-                                    //    x.Cells["QTY"].ReadOnly = false;
-                                    //    x.Cells["Unit"].ReadOnly = false;
-                                    //    x.Cells["PCSUnit"].ReadOnly = false;
-                                    //    x.Cells["StandardCost"].ReadOnly = false;
-                                    //    x.Cells["Remark"].ReadOnly = false;
-                                    //    x.Cells["LotNo"].ReadOnly = false;
-                                    //    x.Cells["Remark"].ReadOnly = false;
-                                    //}
-                                    //else if (Convert.ToString(x.Cells["Status"].Value).Equals("Completed")
-                                    //    || Convert.ToString(x.Cells["Status"].Value).Equals("Cancel")
-                                    //    )
+                                        && d.Status != "Cancel"
+
+                                     select new
+                                     {
+                                         CodeNo = d.CodeNo,
+                                         S = false,
+                                         ItemNo = d.ItemNo,
+                                         ItemDescription = d.ItemDescription,
                                         
-                                    //{
-                                    //    x.Cells["QTY"].ReadOnly = true;
-                                    //    x.Cells["Unit"].ReadOnly = true;
-                                    //    x.Cells["PCSUnit"].ReadOnly = true;
-                                    //    x.Cells["StandardCost"].ReadOnly = true;
-                                    //    x.Cells["Remark"].ReadOnly = true;
-                                    //    x.Cells["LotNo"].ReadOnly = true;
-                                    //    x.Cells["Remark"].ReadOnly = true;
-                                    //}
+                                         QTY = d.Qty,
+                                         
+                                         RemainQty = i.StockInv,
+                                         Unit = d.Unit,
+                                         PCSUnit = d.PCSUnit,
+                                         MaxStock = i.MaximumStock,
+                                         MinStock = i.MinimumStock,
+                                         StandardCost = i.StandardCost,
+                                         Amount =d.Amount,
+                                         LotNo = d.LotNo,
+                                         Remark = d.Reason,
+                                         id = d.id
+                                     }
+                            ).ToList();
+                            if (r.Count > 0)
+                            {
+                                dgvNo = dgvData.Rows.Count() + 1;
+
+                                foreach (var vv in r)
+                                {
+                                    dgvData.Rows.Add(dgvNo.ToString(),
+                                        vv.CodeNo,
+                                        vv.ItemNo,
+                                        vv.ItemDescription,
+                                        vv.RemainQty,
+                                        vv.QTY,
+                                        vv.Unit,
+                                        vv.PCSUnit,
+                                        vv.StandardCost,
+                                        vv.Amount,
+                                        vv.LotNo,
+                                        vv.Remark,
+                                        vv.id);
                                 }
+
                             }
+
+
+
+
+
+
+                            ////Detail  แบบที่ สอง
+                            //var d = (from ix in db.tb_StockAdjusts select ix)
+                            //.Where(a => a.AdjustNo == txtADNo.Text.Trim()
+                            //    && a.Status != "Cancel").ToList();
+                            //if (d.Count() > 0)
+                            //{
+                            //    int c = 0;
+                            //    dgvData.DataSource = d;
+                                
+                            //    dt_ADD = StockControl.dbClss.LINQToDataTable(d);
+                            //    string SS = "";
+                            //    foreach (var x in dgvData.Rows)
+                            //    {
+                            //        c += 1;
+                            //        x.Cells["dgvNo"].Value = c;
+
+                            //        //if (Convert.ToString(x.Cells["Status"].Value).Equals("Waiting"))
+                            //        //{
+                            //        //    x.Cells["QTY"].ReadOnly = false;
+                            //        //    x.Cells["Unit"].ReadOnly = false;
+                            //        //    x.Cells["PCSUnit"].ReadOnly = false;
+                            //        //    x.Cells["StandardCost"].ReadOnly = false;
+                            //        //    x.Cells["Remark"].ReadOnly = false;
+                            //        //    x.Cells["LotNo"].ReadOnly = false;
+                            //        //    x.Cells["Remark"].ReadOnly = false;
+                            //        //}
+                            //        //else if (Convert.ToString(x.Cells["Status"].Value).Equals("Completed")
+                            //        //    || Convert.ToString(x.Cells["Status"].Value).Equals("Cancel")
+                            //        //    )
+                                        
+                            //        //{
+                            //        //    x.Cells["QTY"].ReadOnly = true;
+                            //        //    x.Cells["Unit"].ReadOnly = true;
+                            //        //    x.Cells["PCSUnit"].ReadOnly = true;
+                            //        //    x.Cells["StandardCost"].ReadOnly = true;
+                            //        //    x.Cells["Remark"].ReadOnly = true;
+                            //        //    x.Cells["LotNo"].ReadOnly = true;
+                            //        //    x.Cells["Remark"].ReadOnly = true;
+                            //        //}
+                            //    }
+                            //}
                         }
                     }
                     catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -452,8 +511,14 @@ namespace StockControl
 
                         if (!txtADNo.Text.Equals("")) //&& Ac.Equals("New"))
                         {
+                            
                             SaveHerder();
                             SaveDetail();
+                            string ADNo = txtADNo.Text;
+                            ClearData();
+                            txtADNo.Text = ADNo;
+                            MessageBox.Show("บันทึกสำเร็จ!");
+
                             DataLoad();
                             btnNew.Enabled = true;
                             btnDel_Item.Enabled = false;
@@ -625,6 +690,7 @@ namespace StockControl
 
                     tb_StockAdjustH gg = new tb_StockAdjustH();
                     gg.ADNo = txtADNo.Text;
+                    gg.ADBy = txtAdjustBy.Text;
                     gg.ADDate = RequireDate;
                     gg.UpdateBy = null;
                     gg.UpdateDate = UpdateDate;

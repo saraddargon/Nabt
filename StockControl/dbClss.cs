@@ -234,6 +234,48 @@ namespace StockControl
 
             return re;
         }
+        public static decimal Insert_StockTemp(string CodeNo, decimal Qty, string Screen, string Type)
+        {
+            decimal re = 0;
+
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                decimal qty_can = 0;
+                string tt = "";
+                if (Qty < 0)
+                {
+                    tt = "ลบ";
+                    qty_can = -Qty;   //-(-10)   =>>> 10   เพื่อไปเปรียบเทียบ
+                }
+                else
+                {
+                    tt = "เพิ่ม";
+                }
+                decimal Remain_BackOrder = 0;
+                
+                var g = (from ix in db.tb_Items
+                         where ix.CodeNo.Trim() == CodeNo.Trim() //&& ix.Status == "Active"
+                         select ix).ToList();
+                if (g.Count > 0)  //มีรายการในระบบ
+                {
+                    var gg = (from ix in db.tb_Items
+                              where ix.CodeNo.Trim() == CodeNo.Trim()
+                              select ix).First();
+
+                    decimal.TryParse(StockControl.dbClss.TSt(gg.StockBackOrder), out Remain_BackOrder);
+                   
+                   gg.StockBackOrder = Remain_BackOrder + Qty;
+                     
+
+                    dbClss.AddHistory(Screen, CodeNo, tt + " Stock BackOrder [" + CodeNo + " จำนวน " + Qty.ToString() + "]", "");
+
+                    db.SubmitChanges();
+
+                }
+            }
+
+            return re;
+        }
         public static DateTime ChangeFormat(string ds)
         {
             CultureInfo c = new CultureInfo("en-us", true);

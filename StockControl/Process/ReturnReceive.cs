@@ -511,6 +511,7 @@ namespace StockControl
                                     // Insert Stock
                                     Insert_Stock(seq, Convert.ToInt32(vvd.ID), vvd.RCNo, CNNo);
                                     
+                                    
                                 }
 
 
@@ -587,6 +588,8 @@ namespace StockControl
                 db.SubmitChanges();
                 //udpate Stock Item
                 dbClss.Insert_Stock(g.CodeNo, (-Convert.ToDecimal(g.QTY)), "CNRC", "Inv");
+
+                dbClss.Insert_StockTemp(g.CodeNo, Convert.ToDecimal(g.QTY), "CNRC_Temp", "Inv");
             }
         }
         private void radGridView1_CellEndEdit(object sender, Telerik.WinControls.UI.GridViewCellEventArgs e)

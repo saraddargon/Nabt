@@ -78,6 +78,8 @@
             this.btnSearch = new Telerik.WinControls.UI.RadButton();
             this.txtItemDescription = new Telerik.WinControls.UI.RadTextBox();
             this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
+            this.txtShelf = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel5 = new Telerik.WinControls.UI.RadLabel();
             this.txtVendorName = new Telerik.WinControls.UI.RadTextBox();
             this.radLabel3 = new Telerik.WinControls.UI.RadLabel();
             this.txtItemNo = new Telerik.WinControls.UI.RadTextBox();
@@ -90,8 +92,6 @@
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
-            this.radLabel5 = new Telerik.WinControls.UI.RadLabel();
-            this.txtShelf = new Telerik.WinControls.UI.RadTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -103,6 +103,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnSearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtItemDescription)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtShelf)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVendorName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtItemNo)).BeginInit();
@@ -110,8 +112,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCodeNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel37)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtShelf)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -509,6 +509,7 @@
             this.dgvData.TabIndex = 2;
             this.dgvData.Text = "Grid";
             this.dgvData.ThemeName = "Office2010Blue";
+            this.dgvData.CellDoubleClick += new Telerik.WinControls.UI.GridViewCellEventHandler(this.dgvData_CellDoubleClick);
             // 
             // radPanel1
             // 
@@ -570,6 +571,24 @@
             this.radLabel2.Size = new System.Drawing.Size(93, 17);
             this.radLabel2.TabIndex = 4;
             this.radLabel2.Text = "รายละเอียดพาร์ท :";
+            // 
+            // txtShelf
+            // 
+            this.txtShelf.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtShelf.Location = new System.Drawing.Point(304, 59);
+            this.txtShelf.Name = "txtShelf";
+            this.txtShelf.Size = new System.Drawing.Size(133, 19);
+            this.txtShelf.TabIndex = 5;
+            this.txtShelf.ThemeName = "Office2010Blue";
+            // 
+            // radLabel5
+            // 
+            this.radLabel5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radLabel5.Location = new System.Drawing.Point(252, 59);
+            this.radLabel5.Name = "radLabel5";
+            this.radLabel5.Size = new System.Drawing.Size(45, 17);
+            this.radLabel5.TabIndex = 4;
+            this.radLabel5.Text = "ชั้นเก็บ :";
             // 
             // txtVendorName
             // 
@@ -668,24 +687,6 @@
             this.radRibbonBarButtonGroup5.ShowBorder = false;
             this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
-            // radLabel5
-            // 
-            this.radLabel5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel5.Location = new System.Drawing.Point(252, 59);
-            this.radLabel5.Name = "radLabel5";
-            this.radLabel5.Size = new System.Drawing.Size(45, 17);
-            this.radLabel5.TabIndex = 4;
-            this.radLabel5.Text = "ชั้นเก็บ :";
-            // 
-            // txtShelf
-            // 
-            this.txtShelf.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtShelf.Location = new System.Drawing.Point(304, 59);
-            this.txtShelf.Name = "txtShelf";
-            this.txtShelf.Size = new System.Drawing.Size(133, 19);
-            this.txtShelf.TabIndex = 5;
-            this.txtShelf.ThemeName = "Office2010Blue";
-            // 
             // StockList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -718,6 +719,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnSearch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtItemDescription)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtShelf)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVendorName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtItemNo)).EndInit();
@@ -725,8 +728,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCodeNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel37)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtShelf)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

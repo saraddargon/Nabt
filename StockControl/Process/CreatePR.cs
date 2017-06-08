@@ -181,7 +181,7 @@ namespace StockControl
                     {
 
                         DateTime ? temp_date = null;
-                        //txtPRNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().PRNo);
+                        txtPRNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().PRNo);
                         txtTempNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().TEMPNo);
                         txtVendorNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().VendorNo);
                         cboVendorName.Text = StockControl.dbClss.TSt(g.FirstOrDefault().VendorName);
@@ -833,10 +833,17 @@ namespace StockControl
 
                             if (!txtTempNo.Text.Equals(""))
                             {
+
                                 SaveHerder();
                                 AddPR_d();
+                                //string PRNo = txtPRNo.Text;
+
                                 MessageBox.Show("บันทึกสำเร็จ!");
                                 DataLoad();
+
+                                //insert Stock temp
+                                Insert_Stock_temp();
+
                                 btnNew.Enabled = true;
                             }
                         }
@@ -848,7 +855,30 @@ namespace StockControl
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             finally { this.Cursor = Cursors.Default; }
         }
-       
+        private void Insert_Stock_temp()
+        {
+            try
+            {
+
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                  
+                    var g = (from ix in db.tb_PurchaseRequestLines
+                                 //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
+                             where ix.PRNo.Trim() == txtPRNo.Text.Trim() && ix.SS == 1
+                             select ix).ToList();
+                    if (g.Count > 0)
+                    {
+                        //insert Stock
+                        foreach (var vv in g)
+                        {
+                            dbClss.Insert_StockTemp(vv.CodeNo, Convert.ToDecimal(vv.OrderQty), "PR_Temp", "Inv");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
         private void radGridView1_CellEndEdit(object sender, Telerik.WinControls.UI.GridViewCellEventArgs e)
         {
             try

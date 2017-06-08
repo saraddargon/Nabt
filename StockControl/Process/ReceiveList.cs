@@ -159,6 +159,7 @@ namespace StockControl
                              where //h.Status == "Waiting" //&& d.verticalID == VerticalID
                                 Convert.ToDecimal(d.OrderQty ) == Convert.ToDecimal(d.RemainQty)
                                 && h.VendorNo.Contains(VendorNo_ss)
+                                && d.SS == 1
                              select new
                              {
                                  CodeNo = d.CodeNo,
@@ -256,6 +257,7 @@ namespace StockControl
                          join i in db.tb_Items on d.CodeNo equals i.CodeNo
 
                          where d.Status == "Partial" && c.VendorNo.Contains(VendorNo_ss)
+                             && p.SS == 1
                          select new
                          {
                              CodeNo = d.CodeNo,
@@ -341,6 +343,7 @@ namespace StockControl
                          join i in db.tb_Items on d.CodeNo equals i.CodeNo
 
                          where d.Status == "Completed" && c.VendorNo.Contains(VendorNo_ss)
+                              && p.SS == 1
                          select new
                          {
                              CodeNo = d.CodeNo,

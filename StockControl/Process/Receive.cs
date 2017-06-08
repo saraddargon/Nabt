@@ -275,6 +275,8 @@ namespace StockControl
                                         x.Cells["ShelfNo"].ReadOnly = false;
                                     }
                                 }
+
+                                Cal_Amount();
                             }
                         }
                     }
@@ -431,8 +433,8 @@ namespace StockControl
                                 err += "- “เลขที่อ้างอิงเอกสาร PRNo:” เป็นค่าว่าง \n";
                             if (StockControl.dbClss.TSt(rowInfo.Cells["CodeNo"].Value).Equals(""))
                                 err += "- “รหัสพาร์ท:” เป็นค่าว่าง \n";
-                            //if (StockControl.dbClss.TDe(rowInfo.Cells["QTY"].Value) <= 0)
-                            //    err += "- “จำนวนรับ:” น้อยกว่า 0 \n";
+                            if (StockControl.dbClss.TDe(rowInfo.Cells["QTY"].Value) <= 0)
+                                err += "- “จำนวนรับ:” น้อยกว่า 0 \n";
                             if (StockControl.dbClss.TDe(rowInfo.Cells["Unit"].Value).Equals(""))
                                 err += "- “หน่วย:” เป็นค่าว่าง \n";
                             
@@ -839,11 +841,17 @@ namespace StockControl
                         {
                             SaveHerder();
                             SaveDetail();
+
+                            MessageBox.Show("บันทึกสำเร็จ!");
+
                             DataLoad();
                             btnNew.Enabled = true;
 
                             //insert Stock
                             Insert_Stock();
+
+                            ////insert Stock
+                            //Insert_Stock();
                         }
                         else
                         {
@@ -910,12 +918,15 @@ namespace StockControl
                             db.SubmitChanges();
 
                             dbClss.Insert_Stock(vv.CodeNo, Convert.ToDecimal(vv.QTY), "Receive", "Inv");
+
+                            dbClss.Insert_StockTemp(vv.CodeNo, (-Convert.ToDecimal(vv.QTY)), "RC_Temp", "Inv");
                         }
                     }
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
+       
         private void update_remainqty_Receive(string PRNo, string TempNo, int PRID, decimal RemainQty)
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())

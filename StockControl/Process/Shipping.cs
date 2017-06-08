@@ -681,7 +681,10 @@ namespace StockControl
                         {
                             SaveHerder();
                             SaveDetail();
-                            DataLoad();
+
+                        MessageBox.Show("บันทึกสำเร็จ!");
+
+                        DataLoad();
                             btnNew.Enabled = true;
                             btnDel_Item.Enabled = false;
 
