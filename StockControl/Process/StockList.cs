@@ -61,15 +61,14 @@ namespace StockControl
                 //             Type =  i.TypeCode    
 
                 //         }).ToList();
-                //dgvData.DataSource = g;
-                //if (TypeCode.Count > 0)
-                //{
+               
+                 
                     ddlType.DataSource = TypeCode;
                     ddlType.DisplayMember = "TypeCode";
                     ddlType.Text = "";
 
                     ddlType.Items.Add("");//การ add ค่าเข้าไปต่อท้าย
-                //}
+              
                    
             }
 
