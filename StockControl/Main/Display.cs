@@ -169,7 +169,7 @@ namespace StockControl
                         {
                             ListItem.ImageIndex = 19;
                         }
-                        else if (c.LinkNode.ToString().Equals("ListPR"))
+                        else if (c.LinkNode.ToString().Equals("CreatePR_List"))
                         {
                             ListItem.ImageIndex = 20;
                         }
