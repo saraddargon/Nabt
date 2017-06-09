@@ -167,13 +167,19 @@ namespace StockControl
                             txtVendorNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().VendorNo);
                             txtVendorName.Text = StockControl.dbClss.TSt(g.FirstOrDefault().VendorName);
                             txtRemark.Text = StockControl.dbClss.TSt(g.FirstOrDefault().RemarkHD);
-                            txtInvoiceNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().InvoiceNo);
+
+
 
                             if (StockControl.dbClss.TSt(g.FirstOrDefault().Type).Equals("รับด้วยใบ Invoice"))
+                            {
                                 rdoInvoice.IsChecked = true;
+                                txtInvoiceNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().InvoiceNo);
+                            }
                             else //ใบส่งของชั่วคราว
+                            {
                                 rdoDL.IsChecked = true;
-
+                                txtDLNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().InvoiceNo);
+                            }
                             if (!StockControl.dbClss.TSt(g.FirstOrDefault().RCDate).Equals(""))
                                 dtRequire.Value = Convert.ToDateTime(g.FirstOrDefault().RCDate);
                             else
@@ -311,6 +317,8 @@ namespace StockControl
         private void ClearData()
         {
             txtInvoiceNo.Text = "";
+            txtDLNo.Text = "";
+            txtDLNo.Enabled = false;
             txtRCNo.Text = "";
             
             dtRequire.Value = DateTime.Now;
@@ -415,8 +423,16 @@ namespace StockControl
                 //    err += "- “รหัสผู้ขาย:” เป็นค่าว่าง \n";
                 if (dtRequire.Text.Equals(""))
                     err += "- “วันที่รับสินค้า:” เป็นค่าว่าง \n";
-                if (txtInvoiceNo.Text.Equals(""))
-                    err += "- “Invoice No or DL No:” เป็นค่าว่าง \n";
+                if (rdoInvoice.IsChecked)
+                {
+                    if (txtInvoiceNo.Text.Equals(""))
+                        err += "- “Invoice No:” เป็นค่าว่าง \n";
+                }
+                if(rdoDL.IsChecked)
+                {
+                    if (txtDLNo.Text.Equals(""))
+                        err += "- “DL No:” เป็นค่าว่าง \n";
+                }
                 if (dgvData.Rows.Count <= 0)
                     err += "- “รายการ:” เป็นค่าว่าง \n";
                 int c = 0;
@@ -641,11 +657,13 @@ namespace StockControl
                                 u.SerialNo = StockControl.dbClss.TSt(g.Cells["SerialNo"].Value);
                                 u.CRRNCY = StockControl.dbClss.TSt(g.Cells["CRRNCY"].Value);
                                 u.RCNo = RCNo;
-                                u.InvoiceNo = txtInvoiceNo.Text;
+                               
                                 u.PRID = StockControl.dbClss.TInt(g.Cells["PRID"].Value);
                                 u.ShelfNo = StockControl.dbClss.TSt(g.Cells["ShelfNo"].Value);
                                 if (rdoDL.IsChecked)
                                     u.TempInvNo = txtInvoiceNo.Text;
+                                if(rdoInvoice.IsChecked)
+                                    u.InvoiceNo = txtInvoiceNo.Text;
 
                                 u.RCDate = RequireDate;
                                 u.Seq = Seq;
@@ -1159,7 +1177,12 @@ namespace StockControl
                     string PRNo = "";
                     string RCNo = "";
                     string TempNo = "";
-                    string InvoiceNo = txtInvoiceNo.Text;
+                    string InvoiceNo = "";
+                    if (rdoInvoice.IsChecked)
+                        InvoiceNo = txtInvoiceNo.Text;
+                    else
+                        InvoiceNo = txtDLNo.Text;
+
                     int duppicate_vendor = 0;
                     string Status = "Waiting";
                     int ID = 0;
@@ -1335,6 +1358,24 @@ namespace StockControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); dbClss.AddError("CreatePart", ex.Message + " : radButtonElement1_Click", this.Name); }
 
+        }
+
+        private void rdoDL_ToggleStateChanged(object sender, StateChangedEventArgs args)
+        {
+            if(rdoDL.IsChecked)
+            {
+                txtDLNo.Enabled = true;
+                txtInvoiceNo.Enabled = false;
+            }
+        }
+
+        private void rdoInvoice_ToggleStateChanged(object sender, StateChangedEventArgs args)
+        {
+            if (rdoInvoice.IsChecked)
+            {
+                txtDLNo.Enabled = false;
+                txtInvoiceNo.Enabled = true;
+            }
         }
     }
 }

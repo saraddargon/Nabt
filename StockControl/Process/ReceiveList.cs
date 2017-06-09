@@ -279,6 +279,7 @@ namespace StockControl
                             ,CreateBy = d.CreateBy
                             ,CreateDate = d.RCDate
                             ,Status = "รับเข้าบางส่วน"//d.Status
+                            ,InvNo = c.InvoiceNo
                          }
                 ).ToList();
                 //dgvData.DataSource = StockControl.dbClss.LINQToDataTable(r);
@@ -288,7 +289,7 @@ namespace StockControl
 
                     foreach (var vv in r)
                     {
-                        dgvData.Rows.Add(dgvNo.ToString(), S, vv.RCNo, vv.PRNo, vv.CodeNo, vv.ItemNo, vv.ItemDescription
+                        dgvData.Rows.Add(dgvNo.ToString(), S, vv.RCNo, vv.PRNo, vv.InvNo ,vv.CodeNo, vv.ItemNo, vv.ItemDescription
                                     , vv.DeliveryDate, vv.QTY, vv.BackOrder, vv.RemainQty,vv.Unit,vv.PCSUnit,vv.MaxStock,
                                     vv.MinStock,vv.VendorNo,vv.VendorName,vv.CreateBy,vv.CreateDate,vv.Status
                                     );
@@ -371,6 +372,8 @@ namespace StockControl
                              CreateDate = d.RCDate
                             ,
                              Status = "รับเข้าแล้ว"//d.Status
+                             ,
+                             InvNo = c.InvoiceNo
                          }
                 ).ToList();
                 //dgvData.DataSource = StockControl.dbClss.LINQToDataTable(r);
@@ -380,7 +383,7 @@ namespace StockControl
 
                     foreach (var vv in r)
                     {
-                        dgvData.Rows.Add(dgvNo.ToString(), S, vv.RCNo, vv.PRNo, vv.CodeNo, vv.ItemNo, vv.ItemDescription
+                        dgvData.Rows.Add(dgvNo.ToString(), S, vv.RCNo, vv.PRNo,vv.InvNo ,vv.CodeNo, vv.ItemNo, vv.ItemDescription
                                     , vv.DeliveryDate, vv.QTY, vv.BackOrder, vv.RemainQty, vv.Unit, vv.PCSUnit, vv.MaxStock,
                                     vv.MinStock, vv.VendorNo, vv.VendorName, vv.CreateBy, vv.CreateDate, vv.Status
                                     );
@@ -411,15 +414,15 @@ namespace StockControl
                     
                     try
                     {
-                        if (cboStatus.Text.Equals("รอรับเข้า"))
-                            Load_WaitingReceive();
-                        else if (cboStatus.Text.Equals("รับเข้าบางส่วน"))
+                        //if (cboStatus.Text.Equals("รอรับเข้า"))
+                        //    Load_WaitingReceive();
+                        if (cboStatus.Text.Equals("รับเข้าบางส่วน"))
                             Load_PratitalReceive();
                         else if (cboStatus.Text.Equals("รับเข้าแล้ว"))
                             Load_CompletedReceive();
                         else
                         {
-                            Load_WaitingReceive();
+                            //Load_WaitingReceive();
                             Load_PratitalReceive();
                             Load_CompletedReceive();
                         }

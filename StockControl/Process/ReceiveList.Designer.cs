@@ -36,24 +36,24 @@
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn5 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewDateTimeColumn gridViewDateTimeColumn1 = new Telerik.WinControls.UI.GridViewDateTimeColumn();
             Telerik.WinControls.UI.GridViewDecimalColumn gridViewDecimalColumn1 = new Telerik.WinControls.UI.GridViewDecimalColumn();
             Telerik.WinControls.UI.GridViewDecimalColumn gridViewDecimalColumn2 = new Telerik.WinControls.UI.GridViewDecimalColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewDecimalColumn gridViewDecimalColumn3 = new Telerik.WinControls.UI.GridViewDecimalColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn9 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewDecimalColumn gridViewDecimalColumn3 = new Telerik.WinControls.UI.GridViewDecimalColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn10 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn11 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn12 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn13 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewDateTimeColumn gridViewDateTimeColumn2 = new Telerik.WinControls.UI.GridViewDateTimeColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn14 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewDateTimeColumn gridViewDateTimeColumn2 = new Telerik.WinControls.UI.GridViewDateTimeColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn15 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
             Telerik.WinControls.UI.RadListDataItem radListDataItem1 = new Telerik.WinControls.UI.RadListDataItem();
             Telerik.WinControls.UI.RadListDataItem radListDataItem2 = new Telerik.WinControls.UI.RadListDataItem();
             Telerik.WinControls.UI.RadListDataItem radListDataItem3 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem4 = new Telerik.WinControls.UI.RadListDataItem();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
@@ -371,24 +371,30 @@
             gridViewTextBoxColumn3.ReadOnly = true;
             gridViewTextBoxColumn3.Width = 104;
             gridViewTextBoxColumn4.EnableExpressionEditor = false;
-            gridViewTextBoxColumn4.FieldName = "CodeNo";
-            gridViewTextBoxColumn4.HeaderText = "รหัสพาร์ท";
-            gridViewTextBoxColumn4.Name = "CodeNo";
+            gridViewTextBoxColumn4.FieldName = "InvNo";
+            gridViewTextBoxColumn4.HeaderText = "เลขที่ Inv";
+            gridViewTextBoxColumn4.Name = "InvNo";
             gridViewTextBoxColumn4.ReadOnly = true;
-            gridViewTextBoxColumn4.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewTextBoxColumn4.Width = 74;
+            gridViewTextBoxColumn4.Width = 97;
             gridViewTextBoxColumn5.EnableExpressionEditor = false;
-            gridViewTextBoxColumn5.FieldName = "ItemNo";
-            gridViewTextBoxColumn5.HeaderText = "ชื่อพาร์ท";
-            gridViewTextBoxColumn5.Name = "ItemNo";
+            gridViewTextBoxColumn5.FieldName = "CodeNo";
+            gridViewTextBoxColumn5.HeaderText = "รหัสพาร์ท";
+            gridViewTextBoxColumn5.Name = "CodeNo";
             gridViewTextBoxColumn5.ReadOnly = true;
-            gridViewTextBoxColumn5.Width = 120;
+            gridViewTextBoxColumn5.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn5.Width = 74;
             gridViewTextBoxColumn6.EnableExpressionEditor = false;
-            gridViewTextBoxColumn6.FieldName = "ItemDescription";
-            gridViewTextBoxColumn6.HeaderText = "รายละเอียดพาร์ท";
-            gridViewTextBoxColumn6.Name = "ItemDescription";
+            gridViewTextBoxColumn6.FieldName = "ItemNo";
+            gridViewTextBoxColumn6.HeaderText = "ชื่อพาร์ท";
+            gridViewTextBoxColumn6.Name = "ItemNo";
             gridViewTextBoxColumn6.ReadOnly = true;
-            gridViewTextBoxColumn6.Width = 180;
+            gridViewTextBoxColumn6.Width = 120;
+            gridViewTextBoxColumn7.EnableExpressionEditor = false;
+            gridViewTextBoxColumn7.FieldName = "ItemDescription";
+            gridViewTextBoxColumn7.HeaderText = "รายละเอียดพาร์ท";
+            gridViewTextBoxColumn7.Name = "ItemDescription";
+            gridViewTextBoxColumn7.ReadOnly = true;
+            gridViewTextBoxColumn7.Width = 180;
             gridViewDateTimeColumn1.EnableExpressionEditor = false;
             gridViewDateTimeColumn1.FieldName = "DeliveryDate";
             gridViewDateTimeColumn1.Format = System.Windows.Forms.DateTimePickerFormat.Long;
@@ -411,21 +417,21 @@
             gridViewDecimalColumn2.Name = "BackOrder";
             gridViewDecimalColumn2.ReadOnly = true;
             gridViewDecimalColumn2.Width = 85;
-            gridViewTextBoxColumn7.EnableExpressionEditor = false;
-            gridViewTextBoxColumn7.FieldName = "RemainQty";
-            gridViewTextBoxColumn7.FormatString = "{0:N2}";
-            gridViewTextBoxColumn7.HeaderText = "จำนวนคงเหลือ";
-            gridViewTextBoxColumn7.Name = "RemainQty";
-            gridViewTextBoxColumn7.ReadOnly = true;
-            gridViewTextBoxColumn7.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn7.Width = 88;
             gridViewTextBoxColumn8.EnableExpressionEditor = false;
-            gridViewTextBoxColumn8.FieldName = "Unit";
-            gridViewTextBoxColumn8.HeaderText = "หน่วย";
-            gridViewTextBoxColumn8.Name = "Unit";
+            gridViewTextBoxColumn8.FieldName = "RemainQty";
+            gridViewTextBoxColumn8.FormatString = "{0:N2}";
+            gridViewTextBoxColumn8.HeaderText = "จำนวนคงเหลือ";
+            gridViewTextBoxColumn8.Name = "RemainQty";
             gridViewTextBoxColumn8.ReadOnly = true;
-            gridViewTextBoxColumn8.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewTextBoxColumn8.Width = 58;
+            gridViewTextBoxColumn8.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn8.Width = 88;
+            gridViewTextBoxColumn9.EnableExpressionEditor = false;
+            gridViewTextBoxColumn9.FieldName = "Unit";
+            gridViewTextBoxColumn9.HeaderText = "หน่วย";
+            gridViewTextBoxColumn9.Name = "Unit";
+            gridViewTextBoxColumn9.ReadOnly = true;
+            gridViewTextBoxColumn9.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn9.Width = 58;
             gridViewDecimalColumn3.EnableExpressionEditor = false;
             gridViewDecimalColumn3.FieldName = "PCSUnit";
             gridViewDecimalColumn3.FormatString = "{0:N2}";
@@ -433,40 +439,40 @@
             gridViewDecimalColumn3.Name = "PCSUnit";
             gridViewDecimalColumn3.ReadOnly = true;
             gridViewDecimalColumn3.Width = 81;
-            gridViewTextBoxColumn9.EnableExpressionEditor = false;
-            gridViewTextBoxColumn9.FieldName = "MaxStock";
-            gridViewTextBoxColumn9.FormatString = "{0:N2}";
-            gridViewTextBoxColumn9.HeaderText = "MAX Stock";
-            gridViewTextBoxColumn9.Name = "MaxStock";
-            gridViewTextBoxColumn9.ReadOnly = true;
-            gridViewTextBoxColumn9.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn9.Width = 70;
             gridViewTextBoxColumn10.EnableExpressionEditor = false;
-            gridViewTextBoxColumn10.FieldName = "MinStock";
+            gridViewTextBoxColumn10.FieldName = "MaxStock";
             gridViewTextBoxColumn10.FormatString = "{0:N2}";
-            gridViewTextBoxColumn10.HeaderText = "MIN Stock";
-            gridViewTextBoxColumn10.Name = "MinStock";
+            gridViewTextBoxColumn10.HeaderText = "MAX Stock";
+            gridViewTextBoxColumn10.Name = "MaxStock";
             gridViewTextBoxColumn10.ReadOnly = true;
-            gridViewTextBoxColumn10.Width = 68;
+            gridViewTextBoxColumn10.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn10.Width = 70;
             gridViewTextBoxColumn11.EnableExpressionEditor = false;
-            gridViewTextBoxColumn11.FieldName = "VendorNo";
-            gridViewTextBoxColumn11.HeaderText = "รหัสผู้ขาย";
-            gridViewTextBoxColumn11.Name = "VendorNo";
+            gridViewTextBoxColumn11.FieldName = "MinStock";
+            gridViewTextBoxColumn11.FormatString = "{0:N2}";
+            gridViewTextBoxColumn11.HeaderText = "MIN Stock";
+            gridViewTextBoxColumn11.Name = "MinStock";
             gridViewTextBoxColumn11.ReadOnly = true;
-            gridViewTextBoxColumn11.Width = 66;
+            gridViewTextBoxColumn11.Width = 68;
             gridViewTextBoxColumn12.EnableExpressionEditor = false;
-            gridViewTextBoxColumn12.FieldName = "VendorName";
-            gridViewTextBoxColumn12.HeaderText = "ชื่อผู้ขาย";
-            gridViewTextBoxColumn12.Name = "VendorName";
+            gridViewTextBoxColumn12.FieldName = "VendorNo";
+            gridViewTextBoxColumn12.HeaderText = "รหัสผู้ขาย";
+            gridViewTextBoxColumn12.Name = "VendorNo";
             gridViewTextBoxColumn12.ReadOnly = true;
-            gridViewTextBoxColumn12.Width = 180;
+            gridViewTextBoxColumn12.Width = 66;
             gridViewTextBoxColumn13.EnableExpressionEditor = false;
-            gridViewTextBoxColumn13.FieldName = "CreateBy";
-            gridViewTextBoxColumn13.HeaderText = "ผู้รับ";
-            gridViewTextBoxColumn13.Name = "CreateBy";
+            gridViewTextBoxColumn13.FieldName = "VendorName";
+            gridViewTextBoxColumn13.HeaderText = "ชื่อผู้ขาย";
+            gridViewTextBoxColumn13.Name = "VendorName";
             gridViewTextBoxColumn13.ReadOnly = true;
-            gridViewTextBoxColumn13.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewTextBoxColumn13.Width = 106;
+            gridViewTextBoxColumn13.Width = 180;
+            gridViewTextBoxColumn14.EnableExpressionEditor = false;
+            gridViewTextBoxColumn14.FieldName = "CreateBy";
+            gridViewTextBoxColumn14.HeaderText = "ผู้รับ";
+            gridViewTextBoxColumn14.Name = "CreateBy";
+            gridViewTextBoxColumn14.ReadOnly = true;
+            gridViewTextBoxColumn14.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn14.Width = 106;
             gridViewDateTimeColumn2.EnableExpressionEditor = false;
             gridViewDateTimeColumn2.FieldName = "CreateDate";
             gridViewDateTimeColumn2.Format = System.Windows.Forms.DateTimePickerFormat.Long;
@@ -475,12 +481,12 @@
             gridViewDateTimeColumn2.Name = "CreateDate";
             gridViewDateTimeColumn2.ReadOnly = true;
             gridViewDateTimeColumn2.Width = 103;
-            gridViewTextBoxColumn14.EnableExpressionEditor = false;
-            gridViewTextBoxColumn14.FieldName = "Status";
-            gridViewTextBoxColumn14.HeaderText = "สถานะ";
-            gridViewTextBoxColumn14.Name = "Status";
-            gridViewTextBoxColumn14.ReadOnly = true;
-            gridViewTextBoxColumn14.Width = 80;
+            gridViewTextBoxColumn15.EnableExpressionEditor = false;
+            gridViewTextBoxColumn15.FieldName = "Status";
+            gridViewTextBoxColumn15.HeaderText = "สถานะ";
+            gridViewTextBoxColumn15.Name = "Status";
+            gridViewTextBoxColumn15.ReadOnly = true;
+            gridViewTextBoxColumn15.Width = 80;
             this.dgvData.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
             gridViewTextBoxColumn1,
             gridViewCheckBoxColumn1,
@@ -489,19 +495,20 @@
             gridViewTextBoxColumn4,
             gridViewTextBoxColumn5,
             gridViewTextBoxColumn6,
+            gridViewTextBoxColumn7,
             gridViewDateTimeColumn1,
             gridViewDecimalColumn1,
             gridViewDecimalColumn2,
-            gridViewTextBoxColumn7,
             gridViewTextBoxColumn8,
-            gridViewDecimalColumn3,
             gridViewTextBoxColumn9,
+            gridViewDecimalColumn3,
             gridViewTextBoxColumn10,
             gridViewTextBoxColumn11,
             gridViewTextBoxColumn12,
             gridViewTextBoxColumn13,
+            gridViewTextBoxColumn14,
             gridViewDateTimeColumn2,
-            gridViewTextBoxColumn14});
+            gridViewTextBoxColumn15});
             this.dgvData.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
             this.dgvData.MasterTemplate.ViewDefinition = tableViewDefinition1;
             this.dgvData.Name = "dgvData";
@@ -576,13 +583,11 @@
             // 
             this.cboStatus.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             radListDataItem1.Text = "ทั้งหมด";
-            radListDataItem2.Text = "รอรับเข้า";
-            radListDataItem3.Text = "รับเข้าบางส่วน";
-            radListDataItem4.Text = "รับเข้าแล้ว";
+            radListDataItem2.Text = "รับเข้าบางส่วน";
+            radListDataItem3.Text = "รับเข้าแล้ว";
             this.cboStatus.Items.Add(radListDataItem1);
             this.cboStatus.Items.Add(radListDataItem2);
             this.cboStatus.Items.Add(radListDataItem3);
-            this.cboStatus.Items.Add(radListDataItem4);
             this.cboStatus.Location = new System.Drawing.Point(78, 34);
             this.cboStatus.Name = "cboStatus";
             this.cboStatus.Size = new System.Drawing.Size(118, 19);
