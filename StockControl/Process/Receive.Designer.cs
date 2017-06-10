@@ -92,11 +92,13 @@
             this.dtRequire = new Telerik.WinControls.UI.RadDateTimePicker();
             this.radLabel5 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel9 = new Telerik.WinControls.UI.RadLabel();
+            this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel11 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel12 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel4 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel7 = new Telerik.WinControls.UI.RadLabel();
+            this.txtDLNo = new Telerik.WinControls.UI.RadTextBox();
             this.txtInvoiceNo = new Telerik.WinControls.UI.RadTextBox();
             this.txtVendorNo = new Telerik.WinControls.UI.RadTextBox();
             this.txtVendorName = new Telerik.WinControls.UI.RadTextBox();
@@ -107,8 +109,6 @@
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
-            this.txtDLNo = new Telerik.WinControls.UI.RadTextBox();
-            this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -134,18 +134,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtRequire)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDLNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtInvoiceNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVendorNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVendorName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRCNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPRNo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDLNo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -298,6 +298,7 @@
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Text = "พิมพ์รายงาน";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // radRibbonBarGroup2
             // 
@@ -465,13 +466,11 @@
             gridViewTextBoxColumn8.FieldName = "LotNo";
             gridViewTextBoxColumn8.HeaderText = "เลข LotNo";
             gridViewTextBoxColumn8.Name = "LotNo";
-            gridViewTextBoxColumn8.ReadOnly = true;
             gridViewTextBoxColumn8.Width = 90;
             gridViewTextBoxColumn9.EnableExpressionEditor = false;
             gridViewTextBoxColumn9.FieldName = "SerialNo";
             gridViewTextBoxColumn9.HeaderText = "ซีเรียล";
             gridViewTextBoxColumn9.Name = "SerialNo";
-            gridViewTextBoxColumn9.ReadOnly = true;
             gridViewTextBoxColumn9.Width = 110;
             gridViewTextBoxColumn10.EnableExpressionEditor = false;
             gridViewTextBoxColumn10.FieldName = "ShelfNo";
@@ -762,6 +761,15 @@
             this.radLabel9.Text = "เอกสารทุกใบต้องมี (PRNo) เพื่อรับเข้า";
             this.radLabel9.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // radLabel1
+            // 
+            this.radLabel1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radLabel1.Location = new System.Drawing.Point(53, 90);
+            this.radLabel1.Name = "radLabel1";
+            this.radLabel1.Size = new System.Drawing.Size(34, 16);
+            this.radLabel1.TabIndex = 8;
+            this.radLabel1.Text = "<html>DL No</html>";
+            // 
             // radLabel11
             // 
             this.radLabel11.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -803,9 +811,19 @@
             this.radLabel7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radLabel7.Location = new System.Drawing.Point(13, 41);
             this.radLabel7.Name = "radLabel7";
-            this.radLabel7.Size = new System.Drawing.Size(87, 17);
+            this.radLabel7.Size = new System.Drawing.Size(84, 17);
             this.radLabel7.TabIndex = 8;
-            this.radLabel7.Text = "กรอกเลขที่ (P/R)";
+            this.radLabel7.Text = "กรอกเลขที่ (PO)";
+            // 
+            // txtDLNo
+            // 
+            this.txtDLNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txtDLNo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDLNo.Location = new System.Drawing.Point(103, 90);
+            this.txtDLNo.Name = "txtDLNo";
+            this.txtDLNo.Size = new System.Drawing.Size(119, 19);
+            this.txtDLNo.TabIndex = 3;
+            this.txtDLNo.TextChanged += new System.EventHandler(this.radTextBox2_TextChanged);
             // 
             // txtInvoiceNo
             // 
@@ -894,25 +912,6 @@
             this.radRibbonBarButtonGroup5.ShowBorder = false;
             this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
-            // txtDLNo
-            // 
-            this.txtDLNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtDLNo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDLNo.Location = new System.Drawing.Point(103, 90);
-            this.txtDLNo.Name = "txtDLNo";
-            this.txtDLNo.Size = new System.Drawing.Size(119, 19);
-            this.txtDLNo.TabIndex = 3;
-            this.txtDLNo.TextChanged += new System.EventHandler(this.radTextBox2_TextChanged);
-            // 
-            // radLabel1
-            // 
-            this.radLabel1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel1.Location = new System.Drawing.Point(53, 90);
-            this.radLabel1.Name = "radLabel1";
-            this.radLabel1.Size = new System.Drawing.Size(34, 16);
-            this.radLabel1.TabIndex = 8;
-            this.radLabel1.Text = "<html>DL No</html>";
-            // 
             // Receive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -958,18 +957,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtRequire)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDLNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtInvoiceNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVendorNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVendorName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRCNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPRNo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDLNo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

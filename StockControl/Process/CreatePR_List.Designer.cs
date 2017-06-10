@@ -158,7 +158,6 @@
             this.radButtonElement1});
             this.radRibbonBarGroup1.Name = "radRibbonBarGroup1";
             this.radRibbonBarGroup1.Text = "New Item";
-            this.radRibbonBarGroup1.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
             // 
             // radButtonElement1
             // 

@@ -520,8 +520,8 @@ namespace StockControl
                         else
                             txtCodeNo.Text = Get_CodeNo();
 
-                        byte[] barcode = StockControl.dbClss.SaveQRCode2D(txtCodeNo.Text);
-                       // byte[] barcode = null; 
+                        //byte[] barcode = StockControl.dbClss.SaveQRCode2D(txtCodeNo.Text);
+                         byte[] barcode = null; 
 
                         decimal StandardCost = 0; 
                         decimal MaximumStock = 0;
@@ -850,9 +850,10 @@ namespace StockControl
                     err += "- “Minimum Stock:” เป็นค่าว่าง \n";
                 if (txtErrorLeadtime.Text.Equals(""))
                     err += "- “Error Lead time:” เป็นค่าว่าง \n";
+                if (txtToolLife.Text.Equals(""))
+                    err += "- “อายุการใช้งาน:” เป็นค่าว่าง \n";
 
 
-                
 
 
                 if (!err.Equals(""))
@@ -1754,8 +1755,9 @@ namespace StockControl
             try
             {
                 btnEdit.Enabled = true;
-                btnView.Enabled = false;
+               
                 btnNew.Enabled = true;
+                
                 Cleardata();
                 Enable_Status(false, "View");
                 
@@ -1772,6 +1774,7 @@ namespace StockControl
                 //LoadData
                 DataLoad();
                 btnGET.Enabled = false;
+                btnView.Enabled = false;
             }
             catch(Exception ex) { MessageBox.Show(ex.Message); dbClss.AddError("CreatePart", ex.Message + " : radButtonElement1_Click", this.Name); }
 
@@ -1808,7 +1811,7 @@ namespace StockControl
 
                     if (!Temp_Running.Equals(""))
                     {
-                        var g = (from ix in db.tb_Items select ix).Where(a => a.Status == "Active" && a.CodeNo.Contains(Temp_Running)).OrderByDescending(b => b.CodeNo).ToList();
+                        var g = (from ix in db.tb_Items select ix).Where(a => a.CodeNo.Contains(Temp_Running)).OrderByDescending(b => b.CodeNo).ToList();
                         if (g.Count > 0)
                         {
                             //string temp = g.FirstOrDefault().CodeNo;

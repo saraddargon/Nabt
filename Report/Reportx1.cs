@@ -170,7 +170,7 @@ namespace Report
                     {
 
                         rptDc.SetParameterValue("@PRNo", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@Datex", DateTime.Now);
+                        rptDc.SetParameterValue("@DateTime", DateTime.Now);
                         // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
                     } break;
                 case "ReportPO":
@@ -180,7 +180,17 @@ namespace Report
                         rptDc.SetParameterValue("@Datex", DateTime.Now);
                         // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
                     } break;
-               
+                case "ReportReceive":
+                    {
+
+                        rptDc.SetParameterValue("@RCNo", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@DateTime", DateTime.Now);
+                        // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
+                    }
+                    break;
+                    
+
+
             }
         }
 
