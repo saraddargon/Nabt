@@ -39,6 +39,9 @@ namespace StockControl
         }
         private void Unit_Load(object sender, EventArgs e)
         {
+            RMenu4.Click += RMenu4_Click;
+            RMenu5.Click += RMenu5_Click;
+            
             radGridView1.ReadOnly = true;
             radGridView1.AutoGenerateColumns = false;
             GETDTRow();
@@ -53,6 +56,21 @@ namespace StockControl
             
             
             DataLoad();
+        }
+
+        private void RMenu6_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void RMenu5_Click(object sender, EventArgs e)
+        {
+            EditClick();
+        }
+
+        private void RMenu4_Click(object sender, EventArgs e)
+        {
+            ViewClick();
         }
 
         private void DataLoad()
@@ -150,6 +168,7 @@ namespace StockControl
         }
         private bool DeleteUnit()
         {
+            return false;
             bool ck = false;
          
             int C = 0;
@@ -210,15 +229,14 @@ namespace StockControl
         {
             DataLoad();
         }
-
-        private void btnNew_Click(object sender, EventArgs e)
+        private void EditClick()
         {
             radGridView1.ReadOnly = false;
+            btnEdit.Enabled = false;
+            btnView.Enabled = true;
             radGridView1.AllowAddNewRow = false;
-            radGridView1.Rows.AddNew();
         }
-
-        private void btnView_Click(object sender, EventArgs e)
+        private void ViewClick()
         {
             radGridView1.ReadOnly = true;
             btnView.Enabled = false;
@@ -226,14 +244,21 @@ namespace StockControl
             radGridView1.AllowAddNewRow = false;
             DataLoad();
         }
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            //radGridView1.ReadOnly = false;
+            //radGridView1.AllowAddNewRow = false;
+            //radGridView1.Rows.AddNew();
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            ViewClick();
+        }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            radGridView1.ReadOnly = false;
-            btnEdit.Enabled = false;
-            btnView.Enabled = true;
-            radGridView1.AllowAddNewRow = false;
-            //DataLoad();
+            EditClick();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
