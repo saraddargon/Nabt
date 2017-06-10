@@ -150,6 +150,12 @@
     <Compile Include="Process\Report\ReportStock.Designer.cs">
       <DependentUpon>ReportStock.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\Report\ReportAdjustStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Report\ReportAdjustStock.Designer.cs">
+      <DependentUpon>ReportAdjustStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\Report\ShippingReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -408,6 +414,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\Report\ReportStock.resx">
       <DependentUpon>ReportStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Report\ReportAdjustStock.resx">
+      <DependentUpon>ReportAdjustStock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\Report\ShippingReport.resx">
       <DependentUpon>ShippingReport.cs</DependentUpon>
