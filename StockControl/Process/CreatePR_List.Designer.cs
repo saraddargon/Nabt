@@ -158,7 +158,6 @@
             this.radButtonElement1});
             this.radRibbonBarGroup1.Name = "radRibbonBarGroup1";
             this.radRibbonBarGroup1.Text = "New Item";
-            this.radRibbonBarGroup1.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
             // 
             // radButtonElement1
             // 
@@ -499,7 +498,6 @@
             this.dtDateTo.Text = "16/May/2017";
             this.dtDateTo.ThemeName = "Office2010Blue";
             this.dtDateTo.Value = new System.DateTime(2017, 5, 16, 21, 48, 34, 546);
-            this.dtDateTo.Visible = false;
             // 
             // dtDateFrom
             // 
@@ -514,7 +512,6 @@
             this.dtDateFrom.Text = "16/May/2017";
             this.dtDateFrom.ThemeName = "Office2010Blue";
             this.dtDateFrom.Value = new System.DateTime(2017, 5, 16, 21, 48, 34, 546);
-            this.dtDateFrom.Visible = false;
             // 
             // radLabel4
             // 
@@ -523,7 +520,6 @@
             this.radLabel4.Size = new System.Drawing.Size(18, 18);
             this.radLabel4.TabIndex = 8;
             this.radLabel4.Text = "ถึง";
-            this.radLabel4.Visible = false;
             // 
             // radLabel5
             // 
@@ -532,7 +528,6 @@
             this.radLabel5.Size = new System.Drawing.Size(50, 18);
             this.radLabel5.TabIndex = 9;
             this.radLabel5.Text = "เลือกวันที่";
-            this.radLabel5.Visible = false;
             // 
             // btnSearch
             // 

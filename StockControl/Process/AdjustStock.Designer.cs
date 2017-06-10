@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdjustStock));
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
@@ -41,6 +42,7 @@
             Telerik.WinControls.UI.GridViewDecimalColumn gridViewDecimalColumn5 = new Telerik.WinControls.UI.GridViewDecimalColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
@@ -56,6 +58,8 @@
             this.ribbonBarGroupSeparator1 = new Telerik.WinControls.UI.RibbonBarGroupSeparator();
             this.radRibbonBarGroup4 = new Telerik.WinControls.UI.RadRibbonBarGroup();
             this.radButtonElement1 = new Telerik.WinControls.UI.RadButtonElement();
+            this.radRibbonBarGroup2 = new Telerik.WinControls.UI.RadRibbonBarGroup();
+            this.btnListitem = new Telerik.WinControls.UI.RadButtonElement();
             this.radMenuItem1 = new Telerik.WinControls.UI.RadMenuItem();
             this.radMenuSeparatorItem1 = new Telerik.WinControls.UI.RadMenuSeparatorItem();
             this.radMenuItem2 = new Telerik.WinControls.UI.RadMenuItem();
@@ -88,6 +92,8 @@
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnDel_Item = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -115,6 +121,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtRemark)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdjustBy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCodeNo)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -158,7 +165,8 @@
             this.radRibbonBarGroup1,
             this.radRibbonBarGroup3,
             this.radRibbonBarGroup5,
-            this.radRibbonBarGroup4});
+            this.radRibbonBarGroup4,
+            this.radRibbonBarGroup2});
             this.ribbonTab1.Name = "ribbonTab1";
             this.ribbonTab1.Text = "Action";
             // 
@@ -267,6 +275,22 @@
             this.radButtonElement1.Text = "พิมพ์รายงาน";
             this.radButtonElement1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
+            // radRibbonBarGroup2
+            // 
+            this.radRibbonBarGroup2.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.btnListitem});
+            this.radRibbonBarGroup2.Name = "radRibbonBarGroup2";
+            this.radRibbonBarGroup2.Text = "List item";
+            // 
+            // btnListitem
+            // 
+            this.btnListitem.Image = ((System.Drawing.Image)(resources.GetObject("btnListitem.Image")));
+            this.btnListitem.ImageAlignment = System.Drawing.ContentAlignment.TopCenter;
+            this.btnListitem.Name = "btnListitem";
+            this.btnListitem.Text = "รายการ";
+            this.btnListitem.TextAlignment = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnListitem.Click += new System.EventHandler(this.btnListitem_Click);
+            // 
             // radMenuItem1
             // 
             this.radMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("radMenuItem1.Image")));
@@ -321,6 +345,7 @@
             // 
             this.dgvData.BackColor = System.Drawing.Color.White;
             this.dgvData.ColumnChooserSortOrder = Telerik.WinControls.UI.RadSortOrder.Ascending;
+            this.dgvData.ContextMenuStrip = this.contextMenuStrip1;
             this.dgvData.Cursor = System.Windows.Forms.Cursors.Default;
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvData.EnterKeyMode = Telerik.WinControls.UI.RadGridViewEnterKeyMode.EnterMovesToNextCell;
@@ -335,6 +360,7 @@
             this.dgvData.MasterTemplate.AllowAddNewRow = false;
             this.dgvData.MasterTemplate.AllowColumnChooser = false;
             this.dgvData.MasterTemplate.AllowColumnHeaderContextMenu = false;
+            this.dgvData.MasterTemplate.AllowDeleteRow = false;
             this.dgvData.MasterTemplate.AllowDragToGroup = false;
             this.dgvData.MasterTemplate.AllowRowResize = false;
             this.dgvData.MasterTemplate.AutoGenerateColumns = false;
@@ -401,10 +427,16 @@
             gridViewTextBoxColumn6.Name = "LotNo";
             gridViewTextBoxColumn6.Width = 90;
             gridViewTextBoxColumn7.EnableExpressionEditor = false;
-            gridViewTextBoxColumn7.FieldName = "Remark";
+            gridViewTextBoxColumn7.FieldName = "Reason";
             gridViewTextBoxColumn7.HeaderText = "วัตถุประสงค์";
             gridViewTextBoxColumn7.Name = "Remark";
             gridViewTextBoxColumn7.Width = 150;
+            gridViewTextBoxColumn8.EnableExpressionEditor = false;
+            gridViewTextBoxColumn8.FieldName = "id";
+            gridViewTextBoxColumn8.HeaderText = "id";
+            gridViewTextBoxColumn8.IsVisible = false;
+            gridViewTextBoxColumn8.Name = "id";
+            gridViewTextBoxColumn8.ReadOnly = true;
             this.dgvData.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
             gridViewTextBoxColumn1,
             gridViewTextBoxColumn2,
@@ -417,7 +449,8 @@
             gridViewDecimalColumn4,
             gridViewDecimalColumn5,
             gridViewTextBoxColumn6,
-            gridViewTextBoxColumn7});
+            gridViewTextBoxColumn7,
+            gridViewTextBoxColumn8});
             this.dgvData.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
             this.dgvData.MasterTemplate.ViewDefinition = tableViewDefinition1;
             this.dgvData.Name = "dgvData";
@@ -685,6 +718,22 @@
             this.radRibbonBarButtonGroup5.ShowBorder = false;
             this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnDel_Item});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(117, 26);
+            // 
+            // btnDel_Item
+            // 
+            this.btnDel_Item.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnDel_Item.Enabled = false;
+            this.btnDel_Item.Name = "btnDel_Item";
+            this.btnDel_Item.Size = new System.Drawing.Size(116, 22);
+            this.btnDel_Item.Text = "ลบ พาร์ท";
+            this.btnDel_Item.Click += new System.EventHandler(this.btnDel_Item_Click);
+            // 
             // AdjustStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -732,6 +781,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtRemark)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAdjustBy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCodeNo)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -786,5 +836,9 @@
         private Telerik.WinControls.UI.RadTextBox txtRemark;
         private Telerik.WinControls.UI.RadTextBox txtAdjustBy;
         private System.Windows.Forms.Button button1;
+        private Telerik.WinControls.UI.RadRibbonBarGroup radRibbonBarGroup2;
+        private Telerik.WinControls.UI.RadButtonElement btnListitem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem btnDel_Item;
     }
 }

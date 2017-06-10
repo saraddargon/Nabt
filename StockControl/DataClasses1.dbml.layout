@@ -164,5 +164,17 @@
         <elementListCompartment Id="bf865f88-dc4b-497d-aad6-d08f28bdb4e2" absoluteBounds="0.64000000000000012, 4.46, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="afbda5f3-d12b-4a01-b187-04b370678f6b" isExpanded="false" absoluteBounds="5, 5.75, 2, 0.45">
+      <DataClassMoniker Name="/DataClasses1DataContext/tb_StockAdjustH" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a353cb49-f3b1-4277-b5e2-e9dbb451a0a9" absoluteBounds="5.015, 6.21, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e74a4170-aca2-40dd-bd7a-8a83cf04df8b" isExpanded="false" absoluteBounds="5, 6.375, 2, 0.45">
+      <DataClassMoniker Name="/DataClasses1DataContext/tb_StockAdjust" />
+      <nestedChildShapes>
+        <elementListCompartment Id="db94a95c-5565-4724-a85b-49921f72f6d8" absoluteBounds="5.015, 6.835, 1.9700000000000002, 3.7108154296875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

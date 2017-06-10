@@ -349,29 +349,71 @@ namespace StockControl
             try
             {
                 dt_Kanban.Rows.Clear();
-
+                this.Cursor = Cursors.WaitCursor;
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    var g = (from ix in db.tb_Items select ix).Where(a => a.CodeNo == txtCodeNo.Text).ToList();
-                    if (g.Count() > 0)
-                    {
-                        foreach (var gg in g)
-                        {
-                            dt_Kanban.Rows.Add(gg.CodeNo, gg.ItemNo, gg.ItemDescription, gg.ShelfNo, gg.Leadtime, gg.VendorItemName, gg.GroupCode, gg.Toollife, gg.MaximumStock, gg.MinimumStock, gg.ReOrderPoint, gg.BarCode);
-                        }
-                        //DataTable DT =  StockControl.dbClss.LINQToDataTable(g);
-                        //Reportx1 po = new Reportx1("Report_PurchaseRequest_Content1.rpt", DT, "FromDT");
-                        //po.Show();
 
-                        Report.Reportx1 op = new Report.Reportx1("001_Kanban_Part.rpt", dt_Kanban, "FromDL");
-                        op.Show();
-                    }
-                    else
-                        MessageBox.Show("not found.");
+                   
+                        // Step 1 delete UserName
+                        var deleteItem = (from ii in db.TempPrintKanbans where ii.UserName == Environment.UserName select ii);
+                        foreach (var d in deleteItem)
+                        {
+                            db.TempPrintKanbans.DeleteOnSubmit(d);
+                            db.SubmitChanges();
+                        }
+
+                        // Step 2 Insert to Table
+
+                        int c = 0;
+                        string CodeNo = "";
+                        radGridView1.EndEdit();
+                        //insert
+                        foreach (var Rowinfo in radGridView1.Rows)
+                        {
+                            if (StockControl.dbClss.TBo(Rowinfo.Cells["S"].Value).Equals(true))
+                            {
+                                CodeNo = StockControl.dbClss.TSt(Rowinfo.Cells["CodeNo"].Value);
+                                var g = (from ix in db.tb_Items select ix).Where(a => a.CodeNo == CodeNo).ToList();
+                                if (g.Count() > 0)
+                                {
+                                    c += 1;
+                                    TempPrintKanban tm = new TempPrintKanban();
+                                    tm.UserName = Environment.UserName;
+                                    tm.CodeNo = g.FirstOrDefault().CodeNo;
+                                    tm.PartDescription = g.FirstOrDefault().ItemDescription;
+                                    tm.PartNo = g.FirstOrDefault().ItemNo;
+                                    tm.VendorName = g.FirstOrDefault().VendorItemName;
+                                    tm.ShelfNo = g.FirstOrDefault().ShelfNo;
+                                    tm.GroupType = g.FirstOrDefault().GroupCode;
+                                    tm.Max = Convert.ToDecimal(g.FirstOrDefault().MaximumStock);
+                                    tm.Min = Convert.ToDecimal(g.FirstOrDefault().MinimumStock);
+                                    tm.ReOrderPoint = Convert.ToDecimal(g.FirstOrDefault().ReOrderPoint);
+                                    tm.ToolLife = Convert.ToDecimal(g.FirstOrDefault().Toollife);
+                                    byte[] barcode = StockControl.dbClss.SaveQRCode2D(g.FirstOrDefault().CodeNo);
+                                    tm.BarCode = barcode;
+                                    db.TempPrintKanbans.InsertOnSubmit(tm);
+                                    db.SubmitChanges();
+                                    this.Cursor = Cursors.Default;
+                                  
+                                }
+                            }
+                        }
+                        if (c > 0)
+                        {
+                            Report.Reportx1.Value = new string[2];
+                            Report.Reportx1.Value[0] = Environment.UserName;
+                            Report.Reportx1.WReport = "001_Kanban_Part";
+                            Report.Reportx1 op = new Report.Reportx1("001_Kanban_Part.rpt");
+                            op.Show();
+                        }
+                        else
+                            MessageBox.Show("not found.");
+                   
                 }
 
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+            this.Cursor = Cursors.Default;
         }
     }
 }

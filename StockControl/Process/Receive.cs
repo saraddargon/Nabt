@@ -81,6 +81,7 @@ namespace StockControl
         {
             try
             {
+                this.Cursor = Cursors.WaitCursor;
                 btnNew_Click(null, null);
                 dgvData.AutoGenerateColumns = false;
                 GETDTRow();
@@ -105,6 +106,7 @@ namespace StockControl
                     
                 
             }catch(Exception ex) { MessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
         }
         private void DefaultItem()
         {
@@ -165,13 +167,19 @@ namespace StockControl
                             txtVendorNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().VendorNo);
                             txtVendorName.Text = StockControl.dbClss.TSt(g.FirstOrDefault().VendorName);
                             txtRemark.Text = StockControl.dbClss.TSt(g.FirstOrDefault().RemarkHD);
-                            txtInvoiceNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().InvoiceNo);
+
+
 
                             if (StockControl.dbClss.TSt(g.FirstOrDefault().Type).Equals("รับด้วยใบ Invoice"))
+                            {
                                 rdoInvoice.IsChecked = true;
+                                txtInvoiceNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().InvoiceNo);
+                            }
                             else //ใบส่งของชั่วคราว
+                            {
                                 rdoDL.IsChecked = true;
-
+                                txtDLNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().InvoiceNo);
+                            }
                             if (!StockControl.dbClss.TSt(g.FirstOrDefault().RCDate).Equals(""))
                                 dtRequire.Value = Convert.ToDateTime(g.FirstOrDefault().RCDate);
                             else
@@ -273,6 +281,8 @@ namespace StockControl
                                         x.Cells["ShelfNo"].ReadOnly = false;
                                     }
                                 }
+
+                                Cal_Amount();
                             }
                         }
                     }
@@ -307,6 +317,8 @@ namespace StockControl
         private void ClearData()
         {
             txtInvoiceNo.Text = "";
+            txtDLNo.Text = "";
+            txtDLNo.Enabled = false;
             txtRCNo.Text = "";
             
             dtRequire.Value = DateTime.Now;
@@ -411,8 +423,16 @@ namespace StockControl
                 //    err += "- “รหัสผู้ขาย:” เป็นค่าว่าง \n";
                 if (dtRequire.Text.Equals(""))
                     err += "- “วันที่รับสินค้า:” เป็นค่าว่าง \n";
-                if (txtInvoiceNo.Text.Equals(""))
-                    err += "- “Invoice No or DL No:” เป็นค่าว่าง \n";
+                if (rdoInvoice.IsChecked)
+                {
+                    if (txtInvoiceNo.Text.Equals(""))
+                        err += "- “Invoice No:” เป็นค่าว่าง \n";
+                }
+                if(rdoDL.IsChecked)
+                {
+                    if (txtDLNo.Text.Equals(""))
+                        err += "- “DL No:” เป็นค่าว่าง \n";
+                }
                 if (dgvData.Rows.Count <= 0)
                     err += "- “รายการ:” เป็นค่าว่าง \n";
                 int c = 0;
@@ -429,8 +449,8 @@ namespace StockControl
                                 err += "- “เลขที่อ้างอิงเอกสาร PRNo:” เป็นค่าว่าง \n";
                             if (StockControl.dbClss.TSt(rowInfo.Cells["CodeNo"].Value).Equals(""))
                                 err += "- “รหัสพาร์ท:” เป็นค่าว่าง \n";
-                            //if (StockControl.dbClss.TDe(rowInfo.Cells["QTY"].Value) <= 0)
-                            //    err += "- “จำนวนรับ:” น้อยกว่า 0 \n";
+                            if (StockControl.dbClss.TDe(rowInfo.Cells["QTY"].Value) <= 0)
+                                err += "- “จำนวนรับ:” น้อยกว่า 0 \n";
                             if (StockControl.dbClss.TDe(rowInfo.Cells["Unit"].Value).Equals(""))
                                 err += "- “หน่วย:” เป็นค่าว่าง \n";
                             
@@ -450,7 +470,7 @@ namespace StockControl
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                dbClss.AddError("CreatePR", ex.Message, this.Name);
+                dbClss.AddError("Receive", ex.Message, this.Name);
             }
 
             return re;
@@ -637,11 +657,13 @@ namespace StockControl
                                 u.SerialNo = StockControl.dbClss.TSt(g.Cells["SerialNo"].Value);
                                 u.CRRNCY = StockControl.dbClss.TSt(g.Cells["CRRNCY"].Value);
                                 u.RCNo = RCNo;
-                                u.InvoiceNo = txtInvoiceNo.Text;
+                               
                                 u.PRID = StockControl.dbClss.TInt(g.Cells["PRID"].Value);
                                 u.ShelfNo = StockControl.dbClss.TSt(g.Cells["ShelfNo"].Value);
                                 if (rdoDL.IsChecked)
                                     u.TempInvNo = txtInvoiceNo.Text;
+                                if(rdoInvoice.IsChecked)
+                                    u.InvoiceNo = txtInvoiceNo.Text;
 
                                 u.RCDate = RequireDate;
                                 u.Seq = Seq;
@@ -837,11 +859,16 @@ namespace StockControl
                         {
                             SaveHerder();
                             SaveDetail();
+
+                            MessageBox.Show("บันทึกสำเร็จ!");
+
                             DataLoad();
                             btnNew.Enabled = true;
 
                             //insert Stock
                             Insert_Stock();
+
+                          
                         }
                         else
                         {
@@ -908,12 +935,15 @@ namespace StockControl
                             db.SubmitChanges();
 
                             dbClss.Insert_Stock(vv.CodeNo, Convert.ToDecimal(vv.QTY), "Receive", "Inv");
+
+                            dbClss.Insert_StockTemp(vv.CodeNo, (-Convert.ToDecimal(vv.QTY)), "RC_Temp", "Inv");
                         }
                     }
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
+       
         private void update_remainqty_Receive(string PRNo, string TempNo, int PRID, decimal RemainQty)
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())
@@ -1147,7 +1177,12 @@ namespace StockControl
                     string PRNo = "";
                     string RCNo = "";
                     string TempNo = "";
-                    string InvoiceNo = txtInvoiceNo.Text;
+                    string InvoiceNo = "";
+                    if (rdoInvoice.IsChecked)
+                        InvoiceNo = txtInvoiceNo.Text;
+                    else
+                        InvoiceNo = txtDLNo.Text;
+
                     int duppicate_vendor = 0;
                     string Status = "Waiting";
                     int ID = 0;
@@ -1323,6 +1358,51 @@ namespace StockControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); dbClss.AddError("CreatePart", ex.Message + " : radButtonElement1_Click", this.Name); }
 
+        }
+
+        private void rdoDL_ToggleStateChanged(object sender, StateChangedEventArgs args)
+        {
+            if(rdoDL.IsChecked)
+            {
+                txtDLNo.Enabled = true;
+                txtInvoiceNo.Enabled = false;
+            }
+        }
+
+        private void rdoInvoice_ToggleStateChanged(object sender, StateChangedEventArgs args)
+        {
+            if (rdoInvoice.IsChecked)
+            {
+                txtDLNo.Enabled = false;
+                txtInvoiceNo.Enabled = true;
+            }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //dt_ShelfTag.Rows.Clear();
+
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    var g = (from ix in db.sp_R003_ReportReceive(txtRCNo.Text, DateTime.Now) select ix).ToList();
+                    if (g.Count() > 0)
+                    {
+
+                        Report.Reportx1.Value = new string[2];
+                        Report.Reportx1.Value[0] = txtRCNo.Text;
+                        Report.Reportx1.WReport = "ReportReceive";
+                        Report.Reportx1 op = new Report.Reportx1("ReportReceive.rpt");
+                        op.Show();
+
+                    }
+                    else
+                        MessageBox.Show("not found.");
+                }
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

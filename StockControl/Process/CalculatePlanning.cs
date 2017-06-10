@@ -131,10 +131,14 @@ namespace StockControl
                                   , ix.CodeNo
                                   , ItemDescription =db.tb_Items.Where(s => s.CodeNo == ix.CodeNo).Select(o => o.ItemDescription).FirstOrDefault()
                                   ,ix.ForeCastQty,ix.Toolife_spc,ix.SumQty,ix.ExtendQty,ix.UsePerDay
-                                  ,ix.StockQty
-                                  ,ix.RemainOrder
-                                  ,ix.ReOrderPoint
-                                  ,ix.LeadTime,ix.KeepStock,ix.AddErrQty,ix.OrderQty}).ToList();
+                                  ,
+                                      ix.StockQty
+                                  ,
+                                      ix.RemainOrder
+                                  ,
+                                      ix.ReOrderPoint
+                                  ,
+                                      ix.LeadTime,ix.KeepStock,ix.AddErrQty,ix.OrderQty}).ToList();
                         //MessageBox.Show(gd.Count().ToString());
                         radGridView1.DataSource = gd;
 

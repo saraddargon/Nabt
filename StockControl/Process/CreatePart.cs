@@ -34,7 +34,7 @@ namespace StockControl
         private void radMenuItem2_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            HistoryView hw = new HistoryView(this.Name + txtCodeNo.Text);
+            HistoryView hw = new HistoryView(this.Name);
             this.Cursor = Cursors.Default;
             hw.ShowDialog();
         }
@@ -521,6 +521,7 @@ namespace StockControl
                             txtCodeNo.Text = Get_CodeNo();
 
                         //byte[] barcode = StockControl.dbClss.SaveQRCode2D(txtCodeNo.Text);
+                         byte[] barcode = null; 
 
                         decimal StandardCost = 0; 
                         decimal MaximumStock = 0;
@@ -554,8 +555,8 @@ namespace StockControl
                         u.GroupCode = cboGroupType.Text;
                         u.TypeCode = cboTypeCode.Text;
                         u.UnitBuy = cboUnitBuy.Text;
-                        u.VendorNo = cboVendor.Text;
-                        u.VendorItemName = txtVenderName.Text.Trim();
+                        u.VendorNo = txtVenderName.Text;
+                        u.VendorItemName = cboVendor.Text;
                         u.Maker = txtMaker.Text.Trim();
                         u.StandardCost = StandardCost;
                         u.UnitShip = cboUnitShipping.Text;
@@ -581,13 +582,13 @@ namespace StockControl
                         u.Status = "Active";
                         u.CostingMethod = CostingMethod;
                         u.ItemGroup = ItemGroup;
-                        u.BarCode = null;// barcode;
+                        u.BarCode = barcode;
                         u.DWGNo = txtDwgfile.Text;
                         u.DWG = chkDWG.Checked;
                         u.StockDL = 0;//Convert.ToDecimal(lblTempStock.Text);
                         u.StockInv = 0;// Convert.ToDecimal(lblStock.Text);
                         u.StockBackOrder = 0;
-                        //Save Drawing
+                        ///Save Drawing
                         if (chkDWG.Checked)
                         {
                             string tagetpart = lblPath.Text;
@@ -601,7 +602,7 @@ namespace StockControl
                             string File_temp = txtCodeNo.Text + "_" + ".pdf";//Path.GetExtension(AttachFile);  // IMG_IT-0123.jpg
                             File.Copy(FileName, tagetpart + File_temp, true);//ต้องทำเสมอ เป็นการ ก็อปปี้ Path เพื่อให้รูป มาว่างไว้ที่ path นี้ 
 
-                            dbClss.AddHistory(this.Name + txtCodeNo.Text, "Add DWG", "เพิ่มไฟล์ Drawing [" + txtCodeNo.Text.Trim() + "]", "");
+                            dbClss.AddHistory(this.Name , txtCodeNo.Text, "เพิ่มไฟล์ Drawing [" + txtCodeNo.Text.Trim() + "]", "");
                         }
                         
                         //
@@ -610,7 +611,7 @@ namespace StockControl
                         db.tb_Items.InsertOnSubmit(u);
                         db.SubmitChanges();
                         C += 1;
-                        dbClss.AddHistory(this.Name + txtCodeNo.Text, "เพิ่ม", "Insert Part [" + u.CodeNo + "]", "");
+                        dbClss.AddHistory(this.Name, txtCodeNo.Text, "Insert Part [" + u.CodeNo + "]", "");
                     }
                     else  //Edit
                     {
@@ -628,7 +629,7 @@ namespace StockControl
                                 
                                     gg.UpdateBy = ClassLib.Classlib.User;
                                     gg.UpdateDate = DateTime.Now;
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไขโดย [" + ClassLib.Classlib.User +" วันที่ :" +DateTime.Now.ToString("dd/MMM/yyyy")+ "]", "");
+                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขโดย [" + ClassLib.Classlib.User +" วันที่ :" +DateTime.Now.ToString("dd/MMM/yyyy")+ "]", "");
 
                                 //if(StockControl.dbClss.TSt(gg.BarCode).Equals(""))
                                 //    gg.BarCode = StockControl.dbClss.SaveQRCode2D(txtCodeNo.Text);
@@ -637,137 +638,137 @@ namespace StockControl
                                 if (!txtPartName.Text.Trim().Equals(row["ItemNo"].ToString()))
                                 {
                                     gg.ItemNo = txtPartName.Text.Trim();
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไขชื่อพาร์ท [" + txtPartName.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขชื่อพาร์ท [" + txtPartName.Text.Trim() + "]", "");
                                 }
                                 if (!txtDetailPart.Text.Trim().Equals(row["ItemDescription"].ToString()))
                                 {
                                     gg.ItemDescription = txtDetailPart.Text.Trim();
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไขรายละเอียดพาร์ท [" + txtDetailPart.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขรายละเอียดพาร์ท [" + txtDetailPart.Text.Trim() + "]", "");
                                 }
                                 if (!cboGroupType.Text.Trim().Equals(row["GroupCode"].ToString()))
                                 {
                                     gg.GroupCode = cboGroupType.Text.Trim();
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไขประเภทกลุ่มสินค้า [" + cboGroupType.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขประเภทกลุ่มสินค้า [" + cboGroupType.Text.Trim() + "]", "");
                                 }
                                 if (!cboTypeCode.Text.Trim().Equals(row["TypeCode"].ToString()))
                                 {
                                     gg.TypeCode = cboTypeCode.Text.Trim();
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไขประเภทสินค้า [" + cboTypeCode.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name, txtCodeNo.Text, "แก้ไขประเภทสินค้า [" + cboTypeCode.Text.Trim() + "]", "");
                                 }
                                 if (!cboUnitBuy.Text.Trim().Equals(row["UnitBuy"].ToString()))
                                 {
                                     gg.UnitBuy = cboUnitBuy.Text.Trim();
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไขหน่วยซื้อ [" + cboUnitBuy.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขหน่วยซื้อ [" + cboUnitBuy.Text.Trim() + "]", "");
                                 }
                                 if (!cboUnitShipping.Text.Trim().Equals(row["UnitShip"].ToString()))
                                 {
                                     gg.UnitShip = cboUnitShipping.Text.Trim();
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไขหน่วยขาย [" + cboUnitShipping.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name, txtCodeNo.Text, "แก้ไขหน่วยขาย [" + cboUnitShipping.Text.Trim() + "]", "");
                                 }
                                 if (!txtPCSUnit.Text.Trim().Equals(row["PCSUnit"].ToString()))
                                 {
                                     decimal PCSUnit = 0; decimal.TryParse(txtPCSUnit.Text, out PCSUnit);
                                     gg.PCSUnit = PCSUnit;
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไข ชิ้น/หน่วย [" + PCSUnit.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไข ชิ้น/หน่วย [" + PCSUnit.ToString() + "]", "");
                                 }
                                 if (!txtShelfNo.Text.Trim().Equals(row["ShelfNo"].ToString()))
                                 {
                                     gg.ShelfNo = txtShelfNo.Text.Trim();
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไขหน่วยขาย [" + txtShelfNo.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขหน่วยขาย [" + txtShelfNo.Text.Trim() + "]", "");
                                 }
                                 if (!txtStandCost.Text.Trim().Equals(row["StandardCost"].ToString()))
                                 {
                                     decimal StandardCost = 0; decimal.TryParse(txtStandCost.Text, out StandardCost);
                                     gg.StandardCost = StandardCost;
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไข ราคาซื้อ/หน่วย [" + StandardCost.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไข ราคาซื้อ/หน่วย [" + StandardCost.ToString() + "]", "");
                                 }
                                 if (!cboReplacement.Text.Trim().Equals(row["Replacement"].ToString()))
                                 {
                                     gg.Replacement = cboReplacement.Text.Trim();
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไขทดแทนด้วย(Replecement) [" + cboReplacement.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขทดแทนด้วย(Replecement) [" + cboReplacement.Text.Trim() + "]", "");
                                 }
                                 if (!txtVenderName.Text.Trim().Equals(row["VendorNo"].ToString()))
                                 {
                                     gg.VendorNo = txtVenderName.Text.Trim();
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไขรหัสผู้ขาย [" + txtVenderName.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขรหัสผู้ขาย [" + txtVenderName.Text.Trim() + "]", "");
                                 }
                                 if (!cboVendor.Text.Trim().Equals(row["VendorItemName"].ToString()))
                                 {
                                     gg.VendorItemName = cboVendor.Text.Trim();
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไขชื่อผู้ขาย [" + cboVendor.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขชื่อผู้ขาย [" + cboVendor.Text.Trim() + "]", "");
                                 }
                                 if (!ddlUseTacking.Text.Trim().Equals(row["UseTacking"].ToString()))
                                 {
                                     gg.UseTacking = ddlUseTacking.Text.Trim();
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไขควบคุม Lot (Use Tracking) [" + ddlUseTacking.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขควบคุม Lot (Use Tracking) [" + ddlUseTacking.Text.Trim() + "]", "");
                                 }
                                 if (!txtLeadTime.Text.Trim().Equals(row["Leadtime"].ToString()))
                                 {
                                     decimal Leadtime = 0; decimal.TryParse(txtLeadTime.Text, out Leadtime);
                                     gg.Leadtime = Leadtime;
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไข ระยะเวลาซื้อ [" + txtLeadTime.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name, txtCodeNo.Text, "แก้ไข ระยะเวลาซื้อ [" + txtLeadTime.ToString() + "]", "");
                                 }
                                 if (!txtMaximumStock.Text.Trim().Equals(row["MaximumStock"].ToString()))
                                 {
                                     decimal MaximumStock = 0; decimal.TryParse(txtMaximumStock.Text, out MaximumStock);
                                     gg.MaximumStock = MaximumStock;
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไข MaximumStock [" + txtMaximumStock.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไข MaximumStock [" + txtMaximumStock.ToString() + "]", "");
                                 }
                                 if (!txtMimimumStock.Text.Trim().Equals(row["MinimumStock"].ToString()))
                                 {
                                     decimal MinimumStock = 0; decimal.TryParse(txtMimimumStock.Text, out MinimumStock);
                                     gg.MinimumStock = MinimumStock;
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไข MinimumStock [" + txtMimimumStock.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name, txtCodeNo.Text, "แก้ไข MinimumStock [" + txtMimimumStock.ToString() + "]", "");
                                 }
                                 if (!txtReOrderPoint.Text.Trim().Equals(row["ReOrderPoint"].ToString()))
                                 {
                                     decimal ReOrderPoint = 0; decimal.TryParse(txtReOrderPoint.Text, out ReOrderPoint);
                                     gg.ReOrderPoint = ReOrderPoint;
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไข ReOrder Point [" + txtReOrderPoint.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไข ReOrder Point [" + txtReOrderPoint.ToString() + "]", "");
                                 }
                                 if (!chkStopOrder.Checked.ToString().Trim().Equals(row["StopOrder"].ToString()))
                                 {
                                     bool StopOrder = chkStopOrder.Checked;
                                     gg.StopOrder = StopOrder;
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไข หยุดสั่งซื้อ (Stop Order) [" + chkStopOrder.Checked.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name, txtCodeNo.Text, "แก้ไข หยุดสั่งซื้อ (Stop Order) [" + chkStopOrder.Checked.ToString() + "]", "");
                                 }
                                 if (!txtRemark.Text.Trim().Equals(row["Remark"].ToString()))
                                 {
                                     gg.Remark = txtRemark.Text.Trim();
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไข หมายเหตุ [" + txtRemark.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name  , txtCodeNo.Text, "แก้ไข หมายเหตุ [" + txtRemark.Text.Trim() + "]", "");
                                 }
                                 if (!txtSize.Text.Trim().Equals(row["Size"].ToString()))
                                 {
                                     gg.Size = txtSize.Text.Trim();
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไข ขนาด [" + txtSize.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name  , txtCodeNo.Text, "แก้ไข ขนาด [" + txtSize.Text.Trim() + "]", "");
                                 }
                                 if (!txtMaker.Text.Trim().Equals(row["Maker"].ToString()))
                                 {
                                     gg.Maker = txtMaker.Text.Trim();
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไข ผู้ผลิต [" + txtMaker.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name  , txtCodeNo.Text, "แก้ไข ผู้ผลิต [" + txtMaker.Text.Trim() + "]", "");
                                 }
                                 if (!txtToolLife.Text.Trim().Equals(row["Toollife"].ToString()))
                                 {
                                     decimal Toollife = 0; decimal.TryParse(txtToolLife.Text, out Toollife);
                                     gg.Toollife = Toollife;
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไข อายุการใช้งาน(Toollife)  [" + txtToolLife.Text.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไข อายุการใช้งาน(Toollife)  [" + txtToolLife.Text.ToString() + "]", "");
                                 }
                                 if (!txtErrorLeadtime.Text.Trim().Equals(row["SD"].ToString()))
                                 {
                                     decimal SD = 0; decimal.TryParse(txtErrorLeadtime.Text, out SD);
                                     gg.SD = SD;
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไข Error Lead time [" + txtErrorLeadtime.Text.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name  , txtCodeNo.Text, "แก้ไข Error Lead time [" + txtErrorLeadtime.Text.ToString() + "]", "");
                                 }
                                 if (!txtDwgfile.Text.Trim().Equals(row["DWGNo"].ToString()))
                                 {
                                     gg.DWGNo = txtDwgfile.Text.Trim();
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไข Drawing No [" + txtDwgfile.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name  , txtCodeNo.Text, "แก้ไข Drawing No [" + txtDwgfile.Text.Trim() + "]", "");
                                 }
                                 if (!chkDWG.Checked.ToString().Trim().Equals(row["DWG"].ToString()))
                                 {
                                     bool DWG = chkDWG.Checked;
                                     gg.DWG = DWG;
-                                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไข Drawing [" + chkDWG.Checked.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name  , txtCodeNo.Text, "แก้ไข Drawing [" + chkDWG.Checked.ToString() + "]", "");
                                 }
 
                                 //if (txtMimimumStock.Text.Trim().Equals(row["SafetyStock"].ToString()))
@@ -784,12 +785,12 @@ namespace StockControl
                                 //if (CostingMethod.Text.Trim().Equals(row["CostingMethod"].ToString()))
                                 //{
                                 //    gg.CostingMethod = CostingMethod.Text.Trim();
-                                //    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไขหน่วยขาย [" + txtShelfNo.Text.Trim() + "]", "");
+                                //    dbClss.AddHistory(this.Name  , txtCodeNo.Text, "แก้ไขหน่วยขาย [" + txtShelfNo.Text.Trim() + "]", "");
                                 //}
                                 //if (txtItemGroup.Text.Trim().Equals(row["ItemGroup"].ToString()))
                                 //{
                                 //    gg.ItemGroup = ItemGroup.Text.Trim();
-                                //    dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part", "แก้ไขหน่วยขาย [" + txtShelfNo.Text.Trim() + "]", "");
+                                //    dbClss.AddHistory(this.Name  , txtCodeNo.Text, "แก้ไขหน่วยขาย [" + txtShelfNo.Text.Trim() + "]", "");
                                 //}
 
                                 C += 1;
@@ -849,9 +850,10 @@ namespace StockControl
                     err += "- “Minimum Stock:” เป็นค่าว่าง \n";
                 if (txtErrorLeadtime.Text.Equals(""))
                     err += "- “Error Lead time:” เป็นค่าว่าง \n";
+                if (txtToolLife.Text.Equals(""))
+                    err += "- “อายุการใช้งาน:” เป็นค่าว่าง \n";
 
 
-                
 
 
                 if (!err.Equals(""))
@@ -992,7 +994,7 @@ namespace StockControl
                                gg.Status = "InActive";
                                gg.UpdateBy = ClassLib.Classlib.User;
                                gg.UpdateDate = DateTime.Now;
-                            dbClss.AddHistory(this.Name + txtCodeNo.Text, "ลบ Part", "Delete Part [" +txtCodeNo.Text.Trim() + "]", "");                              
+                            dbClss.AddHistory(this.Name  , txtCodeNo.Text, "Delete Part [" +txtCodeNo.Text.Trim() + "]", "");                              
                             
                             db.SubmitChanges();
                             btnNew_Click(null, null);
@@ -1152,7 +1154,7 @@ namespace StockControl
                 }
                 if (dt_Import.Rows.Count > 0)
                 {
-                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "Import", "Import file CSV in to System", "");
+                    dbClss.AddHistory(this.Name  , txtCodeNo.Text, "Import file CSV in to System", "");
                     //ImportData();
                     MessageBox.Show("Import Completed.");
 
@@ -1380,7 +1382,7 @@ namespace StockControl
                 }
                 if (dt_Import.Rows.Count > 0)
                 {
-                    dbClss.AddHistory(this.Name + txtCodeNo.Text, "Import", "Import file CSV in to System", "");
+                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "Import file CSV in to System", "");
                     ImportData();
                     MessageBox.Show("Import Completed.");
 
@@ -1416,7 +1418,7 @@ namespace StockControl
 
                                 gg.UpdateBy = rd["CreateBy"].ToString().Trim();
                                 gg.UpdateDate = Convert.ToDateTime(rd["CreateDate"].ToString()); //DateTime.Now;
-                                dbClss.AddHistory(this.Name + txtCodeNo.Text, "แก้ไข Part โดยการ Import ", "แก้ไขโดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
+                                dbClss.AddHistory(this.Name  , txtCodeNo.Text, " แก้ไข Part โดย Import โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
 
                                 //if (StockControl.dbClss.TSt(gg.BarCode).Equals(""))
                                 //    gg.BarCode = StockControl.dbClss.SaveQRCode2D(rd["CodeNo"].ToString());
@@ -1533,7 +1535,7 @@ namespace StockControl
                                 db.tb_Items.InsertOnSubmit(u);
                                 db.SubmitChanges();
 
-                                dbClss.AddHistory(this.Name + txtCodeNo.Text, "เพิ่ม Part โดยการ Import ", "เพิ่ม Part โดย Import [" + u.CodeNo + "]", "");
+                                dbClss.AddHistory(this.Name  , txtCodeNo.Text, "เพิ่ม Part โดย Import [" + u.CodeNo + "]", "");
 
                             }
                         }
@@ -1674,9 +1676,9 @@ namespace StockControl
                             File.Copy(FileName, tagetpart + File_temp, true);//ต้องทำเสมอ เป็นการ ก็อปปี้ Path เพื่อให้รูป มาว่างไว้ที่ path นี้ 
 
                             if(chkDWG.Checked)
-                                dbClss.AddHistory(this.Name + txtCodeNo.Text, "Edit DWG", "แก้ไขไฟล์Drawing [" + txtCodeNo.Text.Trim() + "]", "");
+                                dbClss.AddHistory(this.Name  , txtCodeNo.Text, "แก้ไขไฟล์Drawing [" + txtCodeNo.Text.Trim() + "]", "");
                             else
-                                dbClss.AddHistory(this.Name + txtCodeNo.Text, "Add DWG", "เพิ่มไฟล์ Drawing [" + txtCodeNo.Text.Trim() + "]", "");
+                                dbClss.AddHistory(this.Name , txtCodeNo.Text, "เพิ่มไฟล์ Drawing [" + txtCodeNo.Text.Trim() + "]", "");
 
 
                             chkDWG.Checked = true;
@@ -1721,7 +1723,7 @@ namespace StockControl
                 chkDWG.Checked = false;
 
 
-                dbClss.AddHistory(this.Name + txtCodeNo.Text, "Del DWG", "ลบไฟล์ Drawing [" + txtCodeNo.Text.Trim() + "]", "");
+                dbClss.AddHistory(this.Name  , txtCodeNo.Text, "ลบไฟล์ Drawing [" + txtCodeNo.Text.Trim() + "]", "");
 
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
@@ -1753,8 +1755,9 @@ namespace StockControl
             try
             {
                 btnEdit.Enabled = true;
-                btnView.Enabled = false;
+               
                 btnNew.Enabled = true;
+                
                 Cleardata();
                 Enable_Status(false, "View");
                 
@@ -1771,6 +1774,7 @@ namespace StockControl
                 //LoadData
                 DataLoad();
                 btnGET.Enabled = false;
+                btnView.Enabled = false;
             }
             catch(Exception ex) { MessageBox.Show(ex.Message); dbClss.AddError("CreatePart", ex.Message + " : radButtonElement1_Click", this.Name); }
 
@@ -1807,7 +1811,7 @@ namespace StockControl
 
                     if (!Temp_Running.Equals(""))
                     {
-                        var g = (from ix in db.tb_Items select ix).Where(a => a.Status == "Active" && a.CodeNo.Contains(Temp_Running)).OrderByDescending(b => b.CodeNo).ToList();
+                        var g = (from ix in db.tb_Items select ix).Where(a => a.CodeNo.Contains(Temp_Running)).OrderByDescending(b => b.CodeNo).ToList();
                         if (g.Count > 0)
                         {
                             //string temp = g.FirstOrDefault().CodeNo;

@@ -53,7 +53,7 @@ namespace StockControl
 
                 var TypeCode = (from p in db.tb_Items
                                                 select p.TypeCode).Distinct();
-
+              
 
                 //var g = (from i in db.tb_Items
                 //         select new  
@@ -61,14 +61,13 @@ namespace StockControl
                 //             Type =  i.TypeCode    
 
                 //         }).ToList();
-
-                /*
+               
+                 
                     ddlType.DataSource = TypeCode;
                     ddlType.DisplayMember = "TypeCode";
                     ddlType.Text = "";
 
                     ddlType.Items.Add("");//การ add ค่าเข้าไปต่อท้าย
-                    */
               
                    
             }
@@ -630,10 +629,32 @@ namespace StockControl
 
         private void radButtonElement1_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
-            AdjustStock ad = new AdjustStock();
-            this.Cursor = Cursors.Default;
-            ad.Show();
+            try
+            {
+                //if (screen.Equals(1))
+                //{
+                //    if (!Convert.ToString(dgvData.CurrentRow.Cells["RCNo"].Value).Equals(""))
+                //    {
+                //        RCNo_tt.Text = Convert.ToString(dgvData.CurrentRow.Cells["RCNo"].Value);
+                //        this.Close();
+                //    }
+                //    else
+                //    {
+                //        RCNo_tt.Text = Convert.ToString(dgvData.CurrentRow.Cells["RCNo"].Value);
+                //        PRNo_tt.Text = Convert.ToString(dgvData.CurrentRow.Cells["PRNo"].Value);
+                //        this.Close();
+                //    }
+                //}
+                //else
+                {
+                    AdjustStock a = new AdjustStock("",
+                        Convert.ToString(dgvData.CurrentRow.Cells["CodeNo"].Value));
+                    a.ShowDialog();
+                    this.Close();
+                }
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -644,6 +665,31 @@ namespace StockControl
         private void txtDescription_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void dgvData_CellDoubleClick(object sender, Telerik.WinControls.UI.GridViewCellEventArgs e)
+        {
+            //if (screen.Equals(1))
+            //{
+            //    if (!Convert.ToString(e.Row.Cells["RCNo"].Value).Equals(""))
+            //    {
+            //        RCNo_tt.Text = Convert.ToString(e.Row.Cells["RCNo"].Value);
+            //        this.Close();
+            //    }
+            //    else
+            //    {
+            //        RCNo_tt.Text = Convert.ToString(e.Row.Cells["RCNo"].Value);
+            //        PRNo_tt.Text = Convert.ToString(e.Row.Cells["PRNo"].Value);
+            //        this.Close();
+            //    }
+            //}
+            //else
+            {
+                AdjustStock a = new AdjustStock("",
+                    Convert.ToString(e.Row.Cells["CodeNo"].Value));
+                a.ShowDialog();
+                this.Close();
+            }
         }
     }
 }

@@ -216,7 +216,7 @@ namespace StockControl
         private void radButtonElement1_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            CreatePart sc = new CreatePart();
+            CreatePR sc = new CreatePR();
             this.Cursor = Cursors.Default;
             sc.ShowDialog();
             GC.Collect();
@@ -237,12 +237,12 @@ namespace StockControl
             {
                 if (screen.Equals(1))
                 {
-                    CodeNo_tt.Text = Convert.ToString(e.Row.Cells["PRNo"].Value);
+                    CodeNo_tt.Text = Convert.ToString(e.Row.Cells["TempNo"].Value);
                     this.Close();
                 }
                 else
                 {
-                    CreatePR a = new CreatePR(Convert.ToString(e.Row.Cells["PRNo"].Value));
+                    CreatePR a = new CreatePR(Convert.ToString(e.Row.Cells["TempNo"].Value));
                     a.ShowDialog();
                     this.Close();
                 }
@@ -303,7 +303,30 @@ namespace StockControl
 
         private void btn_PrintPR_Click(object sender, EventArgs e)
         {
+            try
+            {
+                //dt_ShelfTag.Rows.Clear();
+                string PRNo = "";
+                PRNo = StockControl.dbClss.TSt(radGridView1.CurrentRow.Cells["PRNo"].Value);
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    var g = (from ix in db.sp_R002_ReportPR(PRNo, DateTime.Now) select ix).ToList();
+                    if (g.Count() > 0)
+                    {
 
+                        Report.Reportx1.Value = new string[2];
+                        Report.Reportx1.Value[0] = PRNo;
+                        Report.Reportx1.WReport = "ReportPR";
+                        Report.Reportx1 op = new Report.Reportx1("ReportPR.rpt");
+                        op.Show();
+
+                    }
+                    else
+                        MessageBox.Show("not found.");
+                }
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

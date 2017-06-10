@@ -37,7 +37,17 @@ namespace StockControl.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=mac-pc;Initial Catalog=dbStockControl;User ID=sa")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=XTH-TOO\\SQLEXPRESS;Initial Catalog=dbStockControl;User ID=sa")]
+        public string dbStockControlConnectionString1 {
+            get {
+                return ((string)(this["dbStockControlConnectionString1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=XTH-TOO\\SQLEXPRESS;Initial Catalog=dbStockControl;User ID=sa")]
         public string dbStockControlConnectionString {
             get {
                 return ((string)(this["dbStockControlConnectionString"]));
@@ -47,10 +57,10 @@ namespace StockControl.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=XTH-TOO\\SQLEXPRESS;Initial Catalog=dbStockControl;User ID=sa")]
-        public string dbStockControlConnectionString1 {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=mac-pc;Initial Catalog=dbStockControl;User ID=sa")]
+        public string dbStockControlConnectionString3 {
             get {
-                return ((string)(this["dbStockControlConnectionString1"]));
+                return ((string)(this["dbStockControlConnectionString3"]));
             }
         }
     }

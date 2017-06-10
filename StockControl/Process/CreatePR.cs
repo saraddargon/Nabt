@@ -18,10 +18,10 @@ namespace StockControl
         {
             InitializeComponent();
         }
-        public CreatePR(string PRNo)
+        public CreatePR(string TempNo)
         {
             InitializeComponent();
-            PRNo_temp = PRNo;
+            TempNo_temp = TempNo;
         }
         public CreatePR(List<GridViewRowInfo> RetDT)
         {
@@ -32,13 +32,13 @@ namespace StockControl
         //private int ColView = 10;
         //DataTable dt = new DataTable();
         List<GridViewRowInfo> RetDT;
-        string PRNo_temp = "";
+        string TempNo_temp = "";
         DataTable dt_PRH = new DataTable();
         DataTable dt_PRD = new DataTable();
         private void radMenuItem2_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            HistoryView hw = new HistoryView(this.Name + txtPRNo.Text.Trim());
+            HistoryView hw = new HistoryView(this.Name + txtTempNo.Text.Trim());
             this.Cursor = Cursors.Default;
             hw.ShowDialog();
         }
@@ -115,11 +115,11 @@ namespace StockControl
                 }
                 else
                 {
-                    if (!PRNo_temp.Equals(""))
+                    if (!TempNo_temp.Equals(""))
                     {
                         Enable_Status(false, "View");
                         btnView_Click(null, null);
-                        txtPRNo.Text = PRNo_temp;
+                        txtTempNo.Text = TempNo_temp;
                         DataLoad();
                         
                     }
@@ -176,12 +176,12 @@ namespace StockControl
                
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    var g = (from ix in db.tb_PurchaseRequests select ix).Where(a => a.PRNo == txtPRNo.Text.Trim()).ToList();
+                    var g = (from ix in db.tb_PurchaseRequests select ix).Where(a => a.TEMPNo == txtTempNo.Text.Trim()).ToList();
                     if (g.Count() > 0)
                     {
 
                         DateTime ? temp_date = null;
-                        //txtPRNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().PRNo);
+                        txtPRNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().PRNo);
                         txtTempNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().TEMPNo);
                         txtVendorNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().VendorNo);
                         cboVendorName.Text = StockControl.dbClss.TSt(g.FirstOrDefault().VendorName);
@@ -203,7 +203,7 @@ namespace StockControl
 
                         //Detail
                         var d = (from ix in db.tb_PurchaseRequestLines select ix)
-                            .Where(a => a.PRNo == txtPRNo.Text.Trim() && a.SS == 1 ).ToList();
+                            .Where(a => a.TempNo == txtTempNo.Text.Trim() && a.SS == 1 ).ToList();
                         if (d.Count() > 0)
                         {
                             int c = 0;
@@ -284,7 +284,7 @@ namespace StockControl
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
                 var g = (from ix in db.tb_PurchaseRequests
-                         where ix.PRNo.Trim() == txtPRNo.Text.Trim() && ix.Status != "Cancel" 
+                         where ix.TEMPNo.Trim() == txtTempNo.Text.Trim() && ix.Status != "Cancel" 
                          //&& ix.TEMPNo.Trim() == txtTempNo.Text.Trim()
                          select ix).ToList();
                 if (g.Count > 0)  //มีรายการในระบบ
@@ -293,7 +293,7 @@ namespace StockControl
                     {
 
                         var gg = (from ix in db.tb_PurchaseRequests
-                                  where ix.PRNo.Trim() == txtPRNo.Text.Trim() && ix.Status != "Cancel"
+                                  where ix.TEMPNo.Trim() == txtTempNo.Text.Trim() && ix.Status != "Cancel"
                                   //&& ix.TEMPNo.Trim() == txtTempNo.Text.Trim()
                                   select ix).First();
 
@@ -301,7 +301,7 @@ namespace StockControl
                         //gg.TEMPNo = txtTempNo.Text;
                         gg.UpdateBy = ClassLib.Classlib.User;
                         gg.UpdateDate = DateTime.Now;
-                        dbClss.AddHistory(this.Name + txtPRNo.Text.Trim(), "แก้ไข CreatePR", "แก้ไขโดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
+                        dbClss.AddHistory(this.Name,"แก้ไข CreatePR", "แก้ไข CreatePR โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtPRNo.Text);
 
                         if (StockControl.dbClss.TSt(gg.Barcode).Equals(""))
                             gg.Barcode = StockControl.dbClss.SaveQRCode2D(txtPRNo.Text.Trim());
@@ -310,38 +310,38 @@ namespace StockControl
                         {
                             gg.VendorName = cboVendorName.Text;
                             gg.VendorNo = txtVendorNo.Text.Trim();
-                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขรหัสผู้ขาย [" + txtVendorNo.Text.Trim() + "]", "");
+                            dbClss.AddHistory(this.Name, "แก้ไข CreatePR", "แก้ไขรหัสผู้ขาย [" + txtVendorNo.Text.Trim() + "]", txtPRNo.Text);
                         }
                         if (!txtCurrency.Text.Trim().Equals(row["CRRNCY"].ToString()))
                         {
                             gg.CRRNCY = txtCurrency.Text.Trim();
-                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขสกุลเงิน [" + txtCurrency.Text.Trim() + "]", "");
+                            dbClss.AddHistory(this.Name , "แก้ไข CreatePR", "แก้ไขสกุลเงิน [" + txtCurrency.Text.Trim() + "]", txtPRNo.Text);
                         }
                         if (!txtContactName.Text.Trim().Equals(row["ContactName"].ToString()))
                         {
                             gg.ContactName = txtContactName.Text.Trim();
-                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขผู้ติดต่อ [" + txtContactName.Text.Trim() + "]", "");
+                            dbClss.AddHistory(this.Name, "แก้ไข CreatePR", "แก้ไขผู้ติดต่อ [" + txtContactName.Text.Trim() + "]", txtPRNo.Text);
                         }
                         if (!txtAddress.Text.Trim().Equals(row["Address"].ToString()))
                         {
                             gg.Address = txtAddress.Text.Trim();
-                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขที่อยู่ [" + txtAddress.Text.Trim() + "]", "");
+                            dbClss.AddHistory(this.Name , "แก้ไข CreatePR", "แก้ไขที่อยู่ [" + txtAddress.Text.Trim() + "]", txtPRNo.Text);
                         }
                         if (!txtTel.Text.Trim().Equals(row["Tel"].ToString()))
                         {
                             gg.Tel = txtTel.Text.Trim();
-                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขเบอร์โทร [" + txtTel.Text.Trim() + "]", "");
+                            dbClss.AddHistory(this.Name , "แก้ไข CreatePR", "แก้ไขเบอร์โทร [" + txtTel.Text.Trim() + "]", txtPRNo.Text);
                         }
                         if (!txtFax.Text.Trim().Equals(row["Fax"].ToString()))
                         {
                             gg.Fax = txtFax.Text.Trim();
-                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขเบอร์แฟกซ์ [" + txtFax.Text.Trim() + "]", "");
+                            dbClss.AddHistory(this.Name, "แก้ไข CreatePR", "แก้ไขเบอร์แฟกซ์ [" + txtFax.Text.Trim() + "]", txtPRNo.Text);
                         }
                         
                         if (!txtEmail.Text.Trim().Equals(row["Email"].ToString()))
                         {
                             gg.Email = txtEmail.Text.Trim();
-                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขอีเมลล์ [" + txtEmail.Text.Trim() + "]", "");
+                            dbClss.AddHistory(this.Name , "แก้ไข CreatePR", "แก้ไขอีเมลล์ [" + txtEmail.Text.Trim() + "]", txtPRNo.Text);
                         }
 
                         if (!dtRequire.Text.Trim().Equals(""))
@@ -362,7 +362,7 @@ namespace StockControl
                                 if (!dtRequire.Text.Equals(""))
                                     RequireDate = dtRequire.Value;
                                 gg.RequireDate = RequireDate;
-                                dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขวันที่ต้องการ [" + dtRequire.Text.Trim() + "]", "");
+                                dbClss.AddHistory(this.Name , "แก้ไข CreatePR", "แก้ไขวันที่ต้องการ [" + dtRequire.Text.Trim() + "]", txtPRNo.Text);
 
                             }
                             
@@ -370,14 +370,16 @@ namespace StockControl
                         if (!txtRemarkHD.Text.Trim().Equals(row["HDRemark"].ToString()))
                         {
                             gg.HDRemark = txtRemarkHD.Text.Trim();
-                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข CreatePR", "แก้ไขหมายเหตุ [" + txtRemarkHD.Text.Trim() + "]", "");
+                            dbClss.AddHistory(this.Name , "แก้ไข CreatePR", "แก้ไขหมายเหตุ [" + txtRemarkHD.Text.Trim() + "]", txtPRNo.Text);
                         }
                         db.SubmitChanges();
                     }
                 }
                 else  // Add ใหม่
                 {
-                    byte[] barcode = StockControl.dbClss.SaveQRCode2D(txtPRNo.Text.Trim());
+                    byte[] barcode = null;
+                    if(!txtPRNo.Text.Equals(""))
+                        barcode = StockControl.dbClss.SaveQRCode2D(txtPRNo.Text.Trim());
                     DateTime? UpdateDate = null;
                     
                     tb_PurchaseRequest gg = new tb_PurchaseRequest();
@@ -408,7 +410,7 @@ namespace StockControl
                     db.tb_PurchaseRequests.InsertOnSubmit(gg);
                     db.SubmitChanges();
                     
-                    dbClss.AddHistory(this.Name + txtPRNo.Text.Trim(), "สร้าง CreatePR", "สร้าง PRNo [" + txtPRNo.Text.Trim() + ",เลขที่อ้างอิง :"+txtTempNo.Text+ "]", "");
+                    dbClss.AddHistory(this.Name, "เพิ่ม CreatePR", "สร้าง PRNo [" + txtPRNo.Text.Trim() + ",เลขที่อ้างอิง :"+txtTempNo.Text+ "]", txtPRNo.Text);
 
                 }
             }
@@ -462,7 +464,7 @@ namespace StockControl
                                 db.tb_PurchaseRequestLines.InsertOnSubmit(u);
                                 db.SubmitChanges();
                                 //C += 1;
-                                dbClss.AddHistory(this.Name, "เพิ่ม Item PR", "เพิ่มรายการ Create PR [" + u.CodeNo + "]", "");
+                                dbClss.AddHistory(this.Name, "เพิ่ม Item PR", "เพิ่มรายการ Create PR [" + u.CodeNo + "]", txtPRNo.Text);
 
                             }
                             else  // อัพเดต
@@ -473,19 +475,19 @@ namespace StockControl
                                     foreach (DataRow row in dt_PRD.Rows)
                                     {
                                         var u = (from ix in db.tb_PurchaseRequestLines
-                                                 where ix.PRNo == txtPRNo.Text.Trim() 
+                                                 where ix.TempNo == txtTempNo.Text.Trim() 
                                                 // && ix.TempNo == txtTempNo.Text
                                                  && ix.id == StockControl.dbClss.TInt(g.Cells["dgvid"].Value)
                                                  select ix).First();
 
-                                        dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไขรายการ Item PR", "id :" + StockControl.dbClss.TSt(g.Cells["dgvid"].Value)
+                                        dbClss.AddHistory(this.Name , "แก้ไขรายการ Item PR", "id :" + StockControl.dbClss.TSt(g.Cells["dgvid"].Value)
                                         + " CodeNo :" + StockControl.dbClss.TSt(g.Cells["dgvCodeNo"].Value)
-                                        + " แก้ไขโดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
+                                        + " แก้ไขโดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtPRNo.Text);
 
                                         if (!StockControl.dbClss.TSt(g.Cells["dgvCodeNo"].Value).Equals(row["CodeNo"].ToString()))
                                         {
                                             u.CodeNo = StockControl.dbClss.TSt(g.Cells["dgvCodeNo"].Value);
-                                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข Item PR", "แก้ไขรหัสพาร์ท [" + u.CodeNo + "]", "");
+                                            dbClss.AddHistory(this.Name , "แก้ไข Item PR", "แก้ไขรหัสพาร์ท [" + u.CodeNo + "]", txtPRNo.Text);
                                         }
                                        
                                         u.ItemName = StockControl.dbClss.TSt(g.Cells["dgvItemName"].Value);
@@ -497,7 +499,7 @@ namespace StockControl
                                             decimal OrderQty = 0; decimal.TryParse(StockControl.dbClss.TSt(g.Cells["dgvOrderQty"].Value), out OrderQty);
                                             u.OrderQty = StockControl.dbClss.TDe(g.Cells["dgvOrderQty"].Value);
                                             u.RemainQty = OrderQty;//StockControl.dbClss.TDe(g.Cells["dgvRemainQty"].Value);
-                                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข Item PR", "แก้ไขจำนวน [" + OrderQty.ToString() + "]", "");
+                                            dbClss.AddHistory(this.Name , "แก้ไข Item PR", "แก้ไขจำนวน [" + OrderQty.ToString() + "]", txtPRNo.Text);
 
                                         }
                                         
@@ -506,7 +508,7 @@ namespace StockControl
                                         if (!StockControl.dbClss.TSt(g.Cells["dgvUnitCode"].Value).Equals(row["UnitCode"].ToString()))
                                         {
                                             u.UnitCode = StockControl.dbClss.TSt(g.Cells["dgvUnitCode"].Value);
-                                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข Item PR", "แก้ไขหน่วย [" + u.UnitCode + "]", "");
+                                            dbClss.AddHistory(this.Name , "แก้ไข Item PR", "แก้ไขหน่วย [" + u.UnitCode + "]", txtPRNo.Text);
                                         }
                                        
                                         u.StandardCost = StockControl.dbClss.TDe(g.Cells["dgvStandardCost"].Value);
@@ -514,27 +516,27 @@ namespace StockControl
                                         if (!StockControl.dbClss.TSt(g.Cells["dgvRemark"].Value).Equals(row["Remark"].ToString()))
                                         {
                                             u.Remark = StockControl.dbClss.TSt(g.Cells["dgvRemark"].Value);
-                                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข Item PR", "แก้ไขวัตถุประสงค์ [" + u.Remark + "]", "");
+                                            dbClss.AddHistory(this.Name , "แก้ไข Item PR", "แก้ไขวัตถุประสงค์ [" + u.Remark + "]", txtPRNo.Text);
                                         }
                                         if (!StockControl.dbClss.TSt(g.Cells["dgvLotNo"].Value).Equals(row["LotNo"].ToString()))
                                         {
                                             u.LotNo = StockControl.dbClss.TSt(g.Cells["dgvLotNo"].Value);
-                                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข Item PR", "แก้ไข LotNo [" + u.LotNo + "]", "");
+                                            dbClss.AddHistory(this.Name , "แก้ไข Item PR", "แก้ไข LotNo [" + u.LotNo + "]", txtPRNo.Text);
                                         }
                                         if (!StockControl.dbClss.TSt(g.Cells["dgvSerialNo"].Value).Equals(row["SerialNo"].ToString()))
                                         {
                                             u.SerialNo = StockControl.dbClss.TSt(g.Cells["dgvSerialNo"].Value);
-                                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข Item PR", "แก้ไขซีเรียล [" + u.SerialNo + "]", "");
+                                            dbClss.AddHistory(this.Name , "แก้ไข Item PR", "แก้ไขซีเรียล [" + u.SerialNo + "]", txtPRNo.Text);
                                         }
                                         if (!StockControl.dbClss.TSt(g.Cells["dgvMCName"].Value).Equals(row["MCName"].ToString()))
                                         {
                                             u.MCName = StockControl.dbClss.TSt(g.Cells["dgvMCName"].Value);
-                                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข Item PR", "แก้ไขชื่อ Machine [" + u.MCName + "]", "");
+                                            dbClss.AddHistory(this.Name , "แก้ไข Item PR", "แก้ไขชื่อ Machine [" + u.MCName + "]", txtPRNo.Text);
                                         }
                                         if (!StockControl.dbClss.TSt(g.Cells["dgvLineName"].Value).Equals(row["LineName"].ToString()))
                                         {
                                             u.LineName = StockControl.dbClss.TSt(g.Cells["dgvLineName"].Value);
-                                            dbClss.AddHistory(this.Name + txtPRNo.Text, "แก้ไข Item PR", "แก้ไขชื่อ Line [" + u.LineName + "]", "");
+                                            dbClss.AddHistory(this.Name , "แก้ไข Item PR", "แก้ไขชื่อ Line [" + u.LineName + "]", txtPRNo.Text);
                                         }
                                         
 
@@ -566,9 +568,9 @@ namespace StockControl
                                          select ix).First();
                                 u.SS = 0;
                                
-                                dbClss.AddHistory(this.Name + txtPRNo.Text, "ลบ Item PR", "id :"+StockControl.dbClss.TSt(g.Cells["dgvid"].Value)
+                                dbClss.AddHistory(this.Name , "ลบ Item PR", "id :"+StockControl.dbClss.TSt(g.Cells["dgvid"].Value)
                                     + " CodeNo :" + StockControl.dbClss.TSt(g.Cells["dgvCodeNo"].Value)
-                                    + " ลบโดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
+                                    + " ลบโดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtPRNo.Text);
 
 
                                 db.SubmitChanges();
@@ -723,13 +725,13 @@ namespace StockControl
                     using (DataClasses1DataContext db = new DataClasses1DataContext())
                     {
                         var g = (from ix in db.tb_PurchaseRequests
-                                 where ix.PRNo.Trim() == txtPRNo.Text.Trim() && ix.Status != "Cancel" 
+                                 where ix.TEMPNo.Trim() == txtTempNo.Text.Trim() && ix.Status != "Cancel" 
                                  //&& ix.TEMPNo.Trim() == txtTempNo.Text.Trim()
                                  select ix).ToList();
                         if (g.Count > 0)  //มีรายการในระบบ
                         {
                             var gg = (from ix in db.tb_PurchaseRequests
-                                      where ix.PRNo.Trim() == txtPRNo.Text.Trim() 
+                                      where ix.TEMPNo.Trim() == txtTempNo.Text.Trim() 
                                       //&& ix.TEMPNo.Trim() == txtTempNo.Text.Trim()
                                       select ix).First();
 
@@ -738,7 +740,7 @@ namespace StockControl
                             gg.UpdateBy = ClassLib.Classlib.User;
                             gg.UpdateDate = DateTime.Now;
 
-                            dbClss.AddHistory(this.Name + txtPRNo.Text.Trim(), "ลบ PR", "Delete PRNo [" + txtPRNo.Text.Trim() + "]", "");
+                            dbClss.AddHistory(this.Name, "ลบ PR", "Delete PRNo [" + txtPRNo.Text.Trim() + "]", txtPRNo.Text);
 
                             db.SubmitChanges();
                             btnNew_Click(null, null);
@@ -767,8 +769,8 @@ namespace StockControl
             {
                 //if (txtCodeNo.Text.Equals(""))
                 //    err += " “รหัสพาร์ท:” เป็นค่าว่าง \n";
-                if (txtPRNo.Text.Equals(""))
-                    err += " “เลขที่ใบขอสั่งซื้อ:” เป็นค่าว่าง \n";
+                //if (txtPRNo.Text.Equals(""))
+                //    err += " “เลขที่ใบขอสั่งซื้อ:” เป็นค่าว่าง \n";
                 if (cboVendorName.Text.Equals(""))
                     err += "- “เลือกผู้ขาย:” เป็นค่าว่าง \n";
                 if (txtVendorNo.Text.Equals(""))
@@ -833,10 +835,17 @@ namespace StockControl
 
                             if (!txtTempNo.Text.Equals(""))
                             {
+
                                 SaveHerder();
                                 AddPR_d();
+                                //string PRNo = txtPRNo.Text;
+
                                 MessageBox.Show("บันทึกสำเร็จ!");
                                 DataLoad();
+
+                                //insert Stock temp
+                                Insert_Stock_temp();
+
                                 btnNew.Enabled = true;
                             }
                         }
@@ -848,7 +857,30 @@ namespace StockControl
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             finally { this.Cursor = Cursors.Default; }
         }
-       
+        private void Insert_Stock_temp()
+        {
+            try
+            {
+
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                  
+                    var g = (from ix in db.tb_PurchaseRequestLines
+                                 //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
+                             where ix.TempNo.Trim() == txtTempNo.Text.Trim() && ix.SS == 1
+                             select ix).ToList();
+                    if (g.Count > 0)
+                    {
+                        //insert Stock
+                        foreach (var vv in g)
+                        {
+                            dbClss.Insert_StockTemp(vv.CodeNo, Convert.ToDecimal(vv.OrderQty), "PR_Temp", "Inv");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
         private void radGridView1_CellEndEdit(object sender, Telerik.WinControls.UI.GridViewCellEventArgs e)
         {
             try
@@ -1151,7 +1183,7 @@ namespace StockControl
                 Enable_Status(false, "View");
 
                 this.Cursor = Cursors.WaitCursor;
-                CreatePR_List sc = new CreatePR_List(txtPRNo);
+                CreatePR_List sc = new CreatePR_List(txtTempNo);
                 this.Cursor = Cursors.Default;
                 sc.ShowDialog();
                 GC.Collect();
@@ -1172,10 +1204,10 @@ namespace StockControl
             btnView.Enabled = false;
             btnNew.Enabled = true;
             
-            string PR = txtPRNo.Text;
+            string TempNo = txtTempNo.Text;
             ClearData();
             Enable_Status(false, "View");
-            txtPRNo.Text = PR;
+            txtTempNo.Text = TempNo;
             DataLoad();
             Ac = "View";
         }
@@ -1184,8 +1216,16 @@ namespace StockControl
         {
             if (e.KeyChar == 13 && !txtPRNo.Text.Equals(""))
             {
-                btnView_Click(null, null);
-                DataLoad();
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    var g = (from ix in db.tb_PurchaseRequests select ix).Where(a => a.PRNo == txtPRNo.Text.Trim()).ToList();
+                    if (g.Count() > 0)
+                    {
+                        txtTempNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().TEMPNo);
+                        btnView_Click(null, null);
+                        DataLoad();
+                    }
+                }
                 
             }
         }
@@ -1244,7 +1284,29 @@ namespace StockControl
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
+            try
+            {
+                //dt_ShelfTag.Rows.Clear();
 
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    var g = (from ix in db.sp_R002_ReportPR(txtPRNo.Text,DateTime.Now) select ix).ToList();
+                    if (g.Count() > 0)
+                    {
+
+                        Report.Reportx1.Value = new string[2];
+                        Report.Reportx1.Value[0] = txtPRNo.Text;
+                        Report.Reportx1.WReport = "ReportPR";
+                        Report.Reportx1 op = new Report.Reportx1("ReportPR.rpt");
+                        op.Show();
+
+                    }
+                    else
+                        MessageBox.Show("not found.");
+                }
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

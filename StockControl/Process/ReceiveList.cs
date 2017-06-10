@@ -159,6 +159,7 @@ namespace StockControl
                              where //h.Status == "Waiting" //&& d.verticalID == VerticalID
                                 Convert.ToDecimal(d.OrderQty ) == Convert.ToDecimal(d.RemainQty)
                                 && h.VendorNo.Contains(VendorNo_ss)
+                                && d.SS == 1
                              select new
                              {
                                  CodeNo = d.CodeNo,
@@ -256,6 +257,7 @@ namespace StockControl
                          join i in db.tb_Items on d.CodeNo equals i.CodeNo
 
                          where d.Status == "Partial" && c.VendorNo.Contains(VendorNo_ss)
+                             && p.SS == 1
                          select new
                          {
                              CodeNo = d.CodeNo,
@@ -277,6 +279,10 @@ namespace StockControl
                             ,CreateBy = d.CreateBy
                             ,CreateDate = d.RCDate
                             ,Status = "รับเข้าบางส่วน"//d.Status
+                            ,InvNo = c.InvoiceNo
+                            ,SerialNo =  d.SerialNo
+                            ,LotNo = d.LotNo
+                            ,ShelfNo = d.ShelfNo
                          }
                 ).ToList();
                 //dgvData.DataSource = StockControl.dbClss.LINQToDataTable(r);
@@ -286,9 +292,9 @@ namespace StockControl
 
                     foreach (var vv in r)
                     {
-                        dgvData.Rows.Add(dgvNo.ToString(), S, vv.RCNo, vv.PRNo, vv.CodeNo, vv.ItemNo, vv.ItemDescription
+                        dgvData.Rows.Add(dgvNo.ToString(), S, vv.RCNo, vv.PRNo, vv.InvNo ,vv.CodeNo, vv.ItemNo, vv.ItemDescription
                                     , vv.DeliveryDate, vv.QTY, vv.BackOrder, vv.RemainQty,vv.Unit,vv.PCSUnit,vv.MaxStock,
-                                    vv.MinStock,vv.VendorNo,vv.VendorName,vv.CreateBy,vv.CreateDate,vv.Status
+                                    vv.MinStock,vv.VendorNo,vv.VendorName,vv.LotNo,vv.SerialNo,vv.ShelfNo,vv.CreateBy,vv.CreateDate,vv.Status
                                     );
                     }
 
@@ -341,6 +347,7 @@ namespace StockControl
                          join i in db.tb_Items on d.CodeNo equals i.CodeNo
 
                          where d.Status == "Completed" && c.VendorNo.Contains(VendorNo_ss)
+                              && p.SS == 1
                          select new
                          {
                              CodeNo = d.CodeNo,
@@ -368,6 +375,14 @@ namespace StockControl
                              CreateDate = d.RCDate
                             ,
                              Status = "รับเข้าแล้ว"//d.Status
+                             ,
+                             InvNo = c.InvoiceNo
+                              ,
+                             SerialNo = d.SerialNo
+                            ,
+                             LotNo = d.LotNo
+                            ,
+                             ShelfNo = d.ShelfNo
                          }
                 ).ToList();
                 //dgvData.DataSource = StockControl.dbClss.LINQToDataTable(r);
@@ -377,9 +392,9 @@ namespace StockControl
 
                     foreach (var vv in r)
                     {
-                        dgvData.Rows.Add(dgvNo.ToString(), S, vv.RCNo, vv.PRNo, vv.CodeNo, vv.ItemNo, vv.ItemDescription
+                        dgvData.Rows.Add(dgvNo.ToString(), S, vv.RCNo, vv.PRNo,vv.InvNo ,vv.CodeNo, vv.ItemNo, vv.ItemDescription
                                     , vv.DeliveryDate, vv.QTY, vv.BackOrder, vv.RemainQty, vv.Unit, vv.PCSUnit, vv.MaxStock,
-                                    vv.MinStock, vv.VendorNo, vv.VendorName, vv.CreateBy, vv.CreateDate, vv.Status
+                                    vv.MinStock, vv.VendorNo, vv.VendorName, vv.LotNo, vv.SerialNo, vv.ShelfNo,vv.CreateBy, vv.CreateDate, vv.Status
                                     );
                     }
 
@@ -408,15 +423,15 @@ namespace StockControl
                     
                     try
                     {
-                        if (cboStatus.Text.Equals("รอรับเข้า"))
-                            Load_WaitingReceive();
-                        else if (cboStatus.Text.Equals("รับเข้าบางส่วน"))
+                        //if (cboStatus.Text.Equals("รอรับเข้า"))
+                        //    Load_WaitingReceive();
+                        if (cboStatus.Text.Equals("รับเข้าบางส่วน"))
                             Load_PratitalReceive();
                         else if (cboStatus.Text.Equals("รับเข้าแล้ว"))
                             Load_CompletedReceive();
                         else
                         {
-                            Load_WaitingReceive();
+                            //Load_WaitingReceive();
                             Load_PratitalReceive();
                             Load_CompletedReceive();
                         }
@@ -644,6 +659,34 @@ namespace StockControl
                 a.ShowDialog();
                 this.Close();
             }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //dt_ShelfTag.Rows.Clear();
+                string RCNo = "";
+                RCNo = StockControl.dbClss.TSt(dgvData.CurrentRow.Cells["RCNo"].Value);
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    var g = (from ix in db.sp_R003_ReportReceive(RCNo, DateTime.Now) select ix).ToList();
+                    if (g.Count() > 0)
+                    {
+
+                        Report.Reportx1.Value = new string[2];
+                        Report.Reportx1.Value[0] = RCNo;
+                        Report.Reportx1.WReport = "ReportReceive";
+                        Report.Reportx1 op = new Report.Reportx1("ReportReceive.rpt");
+                        op.Show();
+
+                    }
+                    else
+                        MessageBox.Show("not found.");
+                }
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

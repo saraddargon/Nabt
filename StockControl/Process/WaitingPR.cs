@@ -120,8 +120,8 @@ namespace StockControl
                                       CodeNo = a.CodeNo,
                                       ItemDescription = a.ItemDescription,
                                       Order = 0,
-                                      StockQty = 0,
-                                      BackOrder = 0,
+                                      StockQty = Convert.ToDecimal(a.StockInv) + Convert.ToDecimal(a.StockDL),
+                                      BackOrder = a.StockBackOrder,
                                       UnitBuy = a.UnitBuy,
                                       PCSUnit = StockControl.dbClss.TDe(a.PCSUnit),
                                       LeadTime = a.Leadtime,
@@ -308,9 +308,20 @@ namespace StockControl
                 dgvData.EndEdit();
                 //dt_createPR
                 List<GridViewRowInfo> dgvRow_List = new List<GridViewRowInfo>();
+                string CodeNo = "";
                 foreach (GridViewRowInfo rowinfo in dgvData.Rows.Where(o => Convert.ToBoolean(o.Cells["S"].Value)))
                 {
-                    dgvRow_List.Add(rowinfo);
+                    CodeNo = Convert.ToString(rowinfo.Cells["CodeNo"].Value);
+
+                    if (CheckDuplicate(CodeNo))
+                    {
+                        MessageBox.Show("ไม่สามารถสั่งซื้อต่างผู้ขายได้");
+                        break;
+                    }
+                    else
+                    {
+                        dgvRow_List.Add(rowinfo);
+                    }
                 }
 
                 if (dgvRow_List.Count() > 0)

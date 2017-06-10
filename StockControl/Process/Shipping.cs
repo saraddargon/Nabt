@@ -463,7 +463,7 @@ namespace StockControl
 
                         gg.UpdateBy = ClassLib.Classlib.User;
                         gg.UpdateDate = DateTime.Now;
-                        dbClss.AddHistory(this.Name + txtSHNo.Text.Trim(), "แก้ไขการเบิกสินค้า", "แก้ไขโดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
+                        dbClss.AddHistory(this.Name, txtSHNo.Text, "แก้ไขโดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
 
                         if (StockControl.dbClss.TSt(gg.BarCode).Equals(""))
                             gg.BarCode = StockControl.dbClss.SaveQRCode2D(txtSHNo.Text.Trim());
@@ -472,13 +472,13 @@ namespace StockControl
                         {
                             gg.ShipName = txtSHName.Text;
                            
-                            dbClss.AddHistory(this.Name + txtSHNo.Text, "แก้ไขการเบิกสินค้า", "แก้ไขผู้เบิกสินค้า [" + txtSHName.Text.Trim() + " เดิม :" + row["ShipName"].ToString() + "]", "");
+                            dbClss.AddHistory(this.Name , txtSHNo.Text, "แก้ไขผู้เบิกสินค้า [" + txtSHName.Text.Trim() + " เดิม :" + row["ShipName"].ToString() + "]", "");
                         }
                        
                         if (!txtRemark.Text.Trim().Equals(row["Remark"].ToString()))
                         {
                             gg.Remark = txtRemark.Text.Trim();
-                            dbClss.AddHistory(this.Name + txtSHNo.Text, "แก้ไขการเบิกสินค้า", "แก้ไขหมายเหตุ [" + txtRemark.Text.Trim() + " เดิม :" + row["Remark"].ToString() + "]", "");
+                            dbClss.AddHistory(this.Name, txtSHNo.Text, "แก้ไขหมายเหตุ [" + txtRemark.Text.Trim() + " เดิม :" + row["Remark"].ToString() + "]", "");
                         }
                       
                         if (!dtRequire.Text.Trim().Equals(""))
@@ -500,7 +500,7 @@ namespace StockControl
                                 if (!dtRequire.Text.Equals(""))
                                     RequireDate = dtRequire.Value;
                                 gg.ShipDate = RequireDate;
-                                dbClss.AddHistory(this.Name + txtSHNo.Text, "แก้ไขการเบิกสินค้า", "แก้ไขวันที่เบิกสินค้า [" + dtRequire.Text.Trim() + " เดิม :" + temp.ToString() + "]", "");
+                                dbClss.AddHistory(this.Name , txtSHNo.Text, "แก้ไขวันที่เบิกสินค้า [" + dtRequire.Text.Trim() + " เดิม :" + temp.ToString() + "]", "");
                             }
                         }
                         db.SubmitChanges();
@@ -530,7 +530,7 @@ namespace StockControl
                     db.tb_ShippingHs.InsertOnSubmit(gg);
                     db.SubmitChanges();
 
-                    dbClss.AddHistory(this.Name + txtSHNo.Text.Trim(), "สร้าง การเบิกสินค้า", "สร้าง การเบิกสินค้า [" + txtSHNo.Text.Trim() + "]", "");
+                    dbClss.AddHistory(this.Name , txtSHNo.Text, "สร้าง การเบิกสินค้า [" + txtSHNo.Text.Trim() + "]", "");
                 }
             }
         }
@@ -582,7 +582,7 @@ namespace StockControl
                                 db.SubmitChanges();
                                 
                                 //C += 1;
-                                dbClss.AddHistory(this.Name + txtSHNo.Text, "เพิ่มรายการเบิก", "เพิ่มรายการเบิก [" + u.CodeNo + " จำนวนเบิก :" + u.QTY.ToString() +" "+u.UnitShip+ "]", "");
+                                dbClss.AddHistory(this.Name , txtSHNo.Text, "เพิ่มรายการเบิก [" + u.CodeNo + " จำนวนเบิก :" + u.QTY.ToString() +" "+u.UnitShip+ "]", "");
                                 
                             }
                             else
@@ -598,7 +598,7 @@ namespace StockControl
                                                  select ix).First();
                                         
 
-                                        dbClss.AddHistory(this.Name + txtSHNo.Text, "แก้ไขรายการเบิก", "id :" + StockControl.dbClss.TSt(g.Cells["id"].Value)
+                                        dbClss.AddHistory(this.Name, txtSHNo.Text, " แก้ไขรายการเบิก id :" + StockControl.dbClss.TSt(g.Cells["id"].Value)
                                        + " CodeNo :" + StockControl.dbClss.TSt(g.Cells["CodeNo"].Value)
                                        + " แก้ไขโดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
 
@@ -607,33 +607,33 @@ namespace StockControl
                                         if (!StockControl.dbClss.TSt(g.Cells["CodeNo"].Value).Equals(row["CodeNo"].ToString()))
                                         {
                                             u.CodeNo = StockControl.dbClss.TSt(g.Cells["CodeNo"].Value);
-                                            dbClss.AddHistory(this.Name + txtSHNo.Text, "แก้ไขรายการเบิก", "แก้ไขรหัสพาร์ท [" + u.CodeNo + "]", "");
+                                            dbClss.AddHistory(this.Name , txtSHNo.Text, "แก้ไขรหัสพาร์ท [" + u.CodeNo + "]", "");
                                         }
                                         if (!StockControl.dbClss.TSt(g.Cells["QTY"].Value).Equals(row["QTY"].ToString()))
                                         {
                                             decimal QTY = 0; decimal.TryParse(StockControl.dbClss.TSt(g.Cells["QTY"].Value), out QTY);
                                             u.QTY = StockControl.dbClss.TDe(g.Cells["QTY"].Value);
-                                            dbClss.AddHistory(this.Name + txtSHNo.Text, "แก้ไขรายการเบิก", "แก้ไขจำนวนเบิก [" + QTY.ToString() + "]", "");
+                                            dbClss.AddHistory(this.Name , txtSHNo.Text, "แก้ไขจำนวนเบิก [" + QTY.ToString() + "]", "");
                                         }
                                         if (!StockControl.dbClss.TSt(g.Cells["UnitShip"].Value).Equals(row["UnitShip"].ToString()))
                                         {
                                             u.UnitShip = StockControl.dbClss.TSt(g.Cells["UnitShip"].Value);
-                                            dbClss.AddHistory(this.Name + txtSHNo.Text, "แก้ไขรายการเบิก", "แก้ไขหน่วย [" + u.UnitShip + "]", "");
+                                            dbClss.AddHistory(this.Name , txtSHNo.Text, "แก้ไขหน่วย [" + u.UnitShip + "]", "");
                                         }
                                         if (!StockControl.dbClss.TSt(g.Cells["PCSUnit"].Value).Equals(row["PCSUnit"].ToString()))
                                         {
                                             u.PCSUnit = StockControl.dbClss.TDe(g.Cells["PCSUnit"].Value);
-                                            dbClss.AddHistory(this.Name + txtSHNo.Text, "แก้ไขรายการเบิก", "แก้ไขจำนวน/หน่วย [" + u.PCSUnit + "]", "");
+                                            dbClss.AddHistory(this.Name , txtSHNo.Text, "แก้ไขจำนวน/หน่วย [" + u.PCSUnit + "]", "");
                                         }
                                         if (!StockControl.dbClss.TSt(g.Cells["LotNo"].Value).Equals(row["LotNo"].ToString()))
                                         {
                                             u.LotNo = StockControl.dbClss.TSt(g.Cells["LotNo"].Value);
-                                            dbClss.AddHistory(this.Name + txtSHNo.Text, "แก้ไขรายการเบิก", "แก้ไข LotNo [" + u.LotNo + "]", "");
+                                            dbClss.AddHistory(this.Name , txtSHNo.Text, "แก้ไข LotNo [" + u.LotNo + "]", "");
                                         }
                                         if (!StockControl.dbClss.TSt(g.Cells["SerialNo"].Value).Equals(row["SerialNo"].ToString()))
                                         {
                                             u.SerialNo = StockControl.dbClss.TSt(g.Cells["SerialNo"].Value);
-                                            dbClss.AddHistory(this.Name + txtSHNo.Text, "แก้ไขรายการเบิก", "แก้ไข ซีเรียล [" + u.SerialNo + "]", "");
+                                            dbClss.AddHistory(this.Name , txtSHNo.Text, "แก้ไข ซีเรียล [" + u.SerialNo + "]", "");
                                         }
                                         if (!StockControl.dbClss.TSt(g.Cells["MachineName"].Value).Equals(row["MachineName"].ToString()))
                                         {
@@ -643,12 +643,12 @@ namespace StockControl
                                         if (!StockControl.dbClss.TSt(g.Cells["LineName"].Value).Equals(row["LineName"].ToString()))
                                         {
                                             u.LineName = StockControl.dbClss.TSt(g.Cells["LineName"].Value);
-                                            dbClss.AddHistory(this.Name + txtSHNo.Text, "แก้ไขรายการเบิก", "แก้ไข ชื่อ Line [" + u.LineName + "]", "");
+                                            dbClss.AddHistory(this.Name , txtSHNo.Text, "แก้ไข ชื่อ Line [" + u.LineName + "]", "");
                                         }
                                         if (!StockControl.dbClss.TSt(g.Cells["Remark"].Value).Equals(row["Remark"].ToString()))
                                         {
                                             u.Remark = StockControl.dbClss.TSt(g.Cells["Remark"].Value);
-                                            dbClss.AddHistory(this.Name + txtSHNo.Text, "แก้ไขรายการเบิก", "แก้ไขวัตถุประสงค์ [" + u.Remark + "]", "");
+                                            dbClss.AddHistory(this.Name , txtSHNo.Text, "แก้ไขวัตถุประสงค์ [" + u.Remark + "]", "");
                                         }
                                         
                                         u.Status = "Completed";      
@@ -681,7 +681,10 @@ namespace StockControl
                         {
                             SaveHerder();
                             SaveDetail();
-                            DataLoad();
+
+                        MessageBox.Show("บันทึกสำเร็จ!");
+
+                        DataLoad();
                             btnNew.Enabled = true;
                             btnDel_Item.Enabled = false;
 
