@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HistoryScreen));
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HistoryScreen));
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
             this.radRibbonBarGroup4 = new Telerik.WinControls.UI.RadRibbonBarGroup();
+            this.btnView = new Telerik.WinControls.UI.RadButtonElement();
             this.btnExport = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarGroup3 = new Telerik.WinControls.UI.RadRibbonBarGroup();
             this.btnRefresh = new Telerik.WinControls.UI.RadButtonElement();
@@ -54,7 +55,6 @@
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
-            this.btnView = new Telerik.WinControls.UI.RadButtonElement();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -85,7 +85,7 @@
             // 
             // 
             this.radRibbonBar1.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.WrapAroundChildren;
-            this.radRibbonBar1.Size = new System.Drawing.Size(505, 161);
+            this.radRibbonBar1.Size = new System.Drawing.Size(681, 161);
             this.radRibbonBar1.StartButtonImage = ((System.Drawing.Image)(resources.GetObject("radRibbonBar1.StartButtonImage")));
             this.radRibbonBar1.StartMenuItems.AddRange(new Telerik.WinControls.RadItem[] {
             this.radMenuItem1});
@@ -112,6 +112,15 @@
             this.btnExport});
             this.radRibbonBarGroup4.Name = "radRibbonBarGroup4";
             this.radRibbonBarGroup4.Text = "Manage";
+            // 
+            // btnView
+            // 
+            this.btnView.Image = ((System.Drawing.Image)(resources.GetObject("btnView.Image")));
+            this.btnView.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnView.Name = "btnView";
+            this.btnView.Text = "ดูประวัติ";
+            this.btnView.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click_1);
             // 
             // btnExport
             // 
@@ -199,7 +208,7 @@
             this.radLabelElement1});
             this.radStatusStrip1.Location = new System.Drawing.Point(0, 448);
             this.radStatusStrip1.Name = "radStatusStrip1";
-            this.radStatusStrip1.Size = new System.Drawing.Size(505, 26);
+            this.radStatusStrip1.Size = new System.Drawing.Size(681, 26);
             this.radStatusStrip1.SizingGrip = false;
             this.radStatusStrip1.TabIndex = 1;
             this.radStatusStrip1.Text = "radStatusStrip1";
@@ -218,7 +227,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 161);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(505, 287);
+            this.panel1.Size = new System.Drawing.Size(681, 287);
             this.panel1.TabIndex = 2;
             // 
             // radGridView1
@@ -248,18 +257,18 @@
             gridViewTextBoxColumn1.FormatInfo = new System.Globalization.CultureInfo("");
             gridViewTextBoxColumn1.HeaderText = "ลำดับ";
             gridViewTextBoxColumn1.Name = "No";
-            gridViewTextBoxColumn1.Width = 78;
+            gridViewTextBoxColumn1.Width = 106;
             gridViewTextBoxColumn2.FieldName = "ScreenName";
             gridViewTextBoxColumn2.HeaderText = "หน้าต่างโปรแกรม";
             gridViewTextBoxColumn2.Name = "ScreenName";
-            gridViewTextBoxColumn2.Width = 371;
+            gridViewTextBoxColumn2.Width = 506;
             gridViewTextBoxColumn3.FieldName = "None";
             gridViewTextBoxColumn3.HeaderText = "";
             gridViewTextBoxColumn3.IsPinned = true;
             gridViewTextBoxColumn3.Name = "None";
             gridViewTextBoxColumn3.PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Right;
             gridViewTextBoxColumn3.ReadOnly = true;
-            gridViewTextBoxColumn3.Width = 36;
+            gridViewTextBoxColumn3.Width = 49;
             this.radGridView1.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
             gridViewTextBoxColumn1,
             gridViewTextBoxColumn2,
@@ -270,7 +279,7 @@
             this.radGridView1.ReadOnly = true;
             this.radGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.radGridView1.ShowGroupPanel = false;
-            this.radGridView1.Size = new System.Drawing.Size(505, 287);
+            this.radGridView1.Size = new System.Drawing.Size(681, 287);
             this.radGridView1.TabIndex = 0;
             this.radGridView1.Text = "Grid";
             this.radGridView1.ThemeName = "Office2010Blue";
@@ -312,20 +321,11 @@
             this.radRibbonBarButtonGroup5.ShowBorder = false;
             this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
-            // btnView
-            // 
-            this.btnView.Image = ((System.Drawing.Image)(resources.GetObject("btnView.Image")));
-            this.btnView.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnView.Name = "btnView";
-            this.btnView.Text = "ดูประวัติ";
-            this.btnView.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnView.Click += new System.EventHandler(this.btnView_Click_1);
-            // 
             // HistoryScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(505, 474);
+            this.ClientSize = new System.Drawing.Size(681, 474);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.radStatusStrip1);
             this.Controls.Add(this.radRibbonBar1);

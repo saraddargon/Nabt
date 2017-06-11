@@ -40,6 +40,10 @@ namespace StockControl
         }
         private void Unit_Load(object sender, EventArgs e)
         {
+            RMenu3.Click += RMenu3_Click;
+            RMenu4.Click += RMenu4_Click;
+            RMenu5.Click += RMenu5_Click;
+            RMenu6.Click += RMenu6_Click;
             radGridView1.ReadOnly = true;
             radGridView1.AutoGenerateColumns = false;
             GETDTRow();
@@ -56,6 +60,27 @@ namespace StockControl
             DataLoad();
         }
 
+        private void RMenu6_Click(object sender, EventArgs e)
+        {
+            DeleteUnit();
+            DataLoad();
+        }
+
+        private void RMenu5_Click(object sender, EventArgs e)
+        {
+            EditClick();
+        }
+
+        private void RMenu4_Click(object sender, EventArgs e)
+        {
+            ViewClick();
+        }
+
+        private void RMenu3_Click(object sender, EventArgs e)
+        {
+            NewClick();
+        }
+
         private void DataLoad()
         {
             //dt.Rows.Clear();
@@ -63,10 +88,18 @@ namespace StockControl
             {
                 //dt = ClassLib.Classlib.LINQToDataTable(db.tb_Units.ToList());
                 radGridView1.DataSource = db.tb_GroupTypes.ToList();// dt;
+                int ck = 0;
                 foreach(var x in radGridView1.Rows)
                 {
                     x.Cells["dgvCodeTemp"].Value = x.Cells["GroupCode"].Value.ToString();
                     x.Cells["GroupCode"].ReadOnly = true;
+                    if (row >= 0 && row == ck)
+                    {
+
+                        x.ViewInfo.CurrentRow = x;
+
+                    }
+                    ck += 1;
                 }
                
             }
@@ -202,6 +235,7 @@ namespace StockControl
 
             if (C > 0)
             {
+                row = row - 1;
                     MessageBox.Show("ลบรายการ สำเร็จ!");
             }
               
@@ -214,15 +248,22 @@ namespace StockControl
         {
             DataLoad();
         }
-
-        private void btnNew_Click(object sender, EventArgs e)
+        private void NewClick()
         {
             radGridView1.ReadOnly = false;
             radGridView1.AllowAddNewRow = false;
+            btnEdit.Enabled = false;
+            btnView.Enabled = true;
             radGridView1.Rows.AddNew();
         }
-
-        private void btnView_Click(object sender, EventArgs e)
+        private void EditClick()
+        {
+            radGridView1.ReadOnly = false;
+            btnEdit.Enabled = false;
+            btnView.Enabled = true;
+            radGridView1.AllowAddNewRow = false;
+        }
+        private void ViewClick()
         {
             radGridView1.ReadOnly = true;
             btnView.Enabled = false;
@@ -230,14 +271,19 @@ namespace StockControl
             radGridView1.AllowAddNewRow = false;
             DataLoad();
         }
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            NewClick();
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            ViewClick();
+        }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            radGridView1.ReadOnly = false;
-            btnEdit.Enabled = false;
-            btnView.Enabled = true;
-            radGridView1.AllowAddNewRow = false;
-            //DataLoad();
+            EditClick();
         }
 
         private void btnSave_Click(object sender, EventArgs e)

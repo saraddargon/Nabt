@@ -23,7 +23,7 @@ namespace StockControl
             Report.CRRReport.dbPartReport = "";
      
             Report.CRRReport.dbPartReport = AppDomain.CurrentDomain.BaseDirectory + @"Report\";
-            string apc = Properties.Settings.Default.dbStockControlConnectionString2;
+            string apc = Properties.Settings.Default.dbStockControlConnectionString3;
             try
             {
                 if (!apc.Equals(""))

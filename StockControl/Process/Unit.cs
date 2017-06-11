@@ -39,33 +39,61 @@ namespace StockControl
         }
         private void Unit_Load(object sender, EventArgs e)
         {
+            RMenu3.Click += RMenu3_Click;
+            RMenu4.Click += RMenu4_Click;
+            RMenu5.Click += RMenu5_Click;
+            RMenu6.Click += RMenu6_Click;
             radGridView1.ReadOnly = true;
             radGridView1.AutoGenerateColumns = false;
             GETDTRow();
-            //for (int i = 0; i <= RowView; i++)
-            //{
-            //    DataRow rd = dt.NewRow();
-            //    rd["UnitCode"] = "";
-            //    rd["UnitDetail"] = "";
-            //    rd["UnitActive"] = false;
-            //    dt.Rows.Add(rd);
-            //}
-            
+           
             
             DataLoad();
+        }
+
+        private void RMenu6_Click(object sender, EventArgs e)
+        {
+           
+            DeleteUnit();
+            DataLoad();
+        }
+
+        private void RMenu5_Click(object sender, EventArgs e)
+        {
+            EditClick();
+        }
+
+        private void RMenu4_Click(object sender, EventArgs e)
+        {
+            ViewClick();
+        }
+
+        private void RMenu3_Click(object sender, EventArgs e)
+        {
+            NewClick();
+
         }
 
         private void DataLoad()
         {
             //dt.Rows.Clear();
+            int ck = 0;
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
                 //dt = ClassLib.Classlib.LINQToDataTable(db.tb_Units.ToList());
                 radGridView1.DataSource = db.tb_Units.ToList();// dt;
                 foreach(var x in radGridView1.Rows)
                 {
+
                     x.Cells["dgvCodeTemp"].Value = x.Cells["UnitCode"].Value.ToString();
                     x.Cells["UnitCode"].ReadOnly = true;
+                    if(row>=0 && row==ck)
+                    {
+
+                        x.ViewInfo.CurrentRow = x;
+                        
+                    }
+                    ck += 1;
                 }
                
             }
@@ -155,7 +183,7 @@ namespace StockControl
             int C = 0;
             try
             {
-
+                
                 if (row >= 0)
                 {
                     string CodeDelete = Convert.ToString(radGridView1.Rows[row].Cells["UnitCode"].Value);
@@ -198,6 +226,7 @@ namespace StockControl
 
             if (C > 0)
             {
+                    row = row - 1;
                     MessageBox.Show("ลบรายการ สำเร็จ!");
             }
               
@@ -210,15 +239,22 @@ namespace StockControl
         {
             DataLoad();
         }
-
-        private void btnNew_Click(object sender, EventArgs e)
+        private void NewClick()
         {
             radGridView1.ReadOnly = false;
             radGridView1.AllowAddNewRow = false;
+            btnEdit.Enabled = false;
+            btnView.Enabled = true;
             radGridView1.Rows.AddNew();
         }
-
-        private void btnView_Click(object sender, EventArgs e)
+        private void EditClick()
+        {
+            radGridView1.ReadOnly = false;
+            btnEdit.Enabled = false;
+            btnView.Enabled = true;
+            radGridView1.AllowAddNewRow = false;
+        }
+        private void ViewClick()
         {
             radGridView1.ReadOnly = true;
             btnView.Enabled = false;
@@ -227,23 +263,39 @@ namespace StockControl
             DataLoad();
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void btnNew_Click(object sender, EventArgs e)
         {
-            radGridView1.ReadOnly = false;
-            btnEdit.Enabled = false;
-            btnView.Enabled = true;
-            radGridView1.AllowAddNewRow = false;
-            //DataLoad();
+            NewClick();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnView_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("ต้องการบันทึก ?","บันทึก",MessageBoxButtons.YesNo,MessageBoxIcon.Question)==DialogResult.Yes)
+            ViewClick();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+
+            EditClick();
+        }
+        private void Saveclick()
+        {
+            if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 AddUnit();
                 DataLoad();
             }
         }
+        private void DeleteClick()
+        {
+
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            Saveclick();
+        }
+
 
         private void radGridView1_CellEndEdit(object sender, Telerik.WinControls.UI.GridViewCellEventArgs e)
         {
@@ -271,14 +323,14 @@ namespace StockControl
 
         private void Unit_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-           // MessageBox.Show(e.KeyCode.ToString());
+
+
         }
 
         private void radGridView1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-           // MessageBox.Show(e.KeyCode.ToString());
 
-            if(e.KeyData==(Keys.Control|Keys.S))
+            if (e.KeyData == (Keys.Control | Keys.S))
             {
                 if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
@@ -286,6 +338,14 @@ namespace StockControl
                     DataLoad();
                 }
             }
+            else if (e.KeyData == (Keys.Control | Keys.N))
+            {
+                if (MessageBox.Show("ต้องการสร้างใหม่ ?", "สร้างใหม่", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    NewClick();
+                }
+            }
+
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

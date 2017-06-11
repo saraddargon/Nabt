@@ -152,6 +152,7 @@ namespace StockControl
                 var g = (from ix in db.sp_SelectVendor() select ix).ToList();
                 DataTable dt2 = ClassLib.Classlib.LINQToDataTable(g);
                 radGridView1.DataSource = dt2;
+                int ck = 0;
                 foreach(var x in radGridView1.Rows)
                 {
                     x.Cells["dgvCodeTemp"].Value = x.Cells["VendorNo"].Value.ToString();
@@ -160,6 +161,13 @@ namespace StockControl
                     x.Cells["VendorNo"].ReadOnly = true;
                     x.Cells["VendorNo"].Style.ForeColor = Color.MidnightBlue;
                     x.Cells["VendorNo"].Style.Font = new Font ("Tahoma",8,FontStyle.Italic);
+                    if (row >= 0 && row == ck)
+                    {
+
+                        x.ViewInfo.CurrentRow = x;
+
+                    }
+                    ck += 1;
                 }
                
             }
@@ -306,6 +314,7 @@ namespace StockControl
 
             if (C > 0)
             {
+                row = row - 1;
                     MessageBox.Show("ลบรายการ สำเร็จ!");
             }
               
@@ -318,15 +327,22 @@ namespace StockControl
         {
             DataLoad();
         }
-
-        private void btnNew_Click(object sender, EventArgs e)
+        private void NewClick()
         {
             radGridView1.ReadOnly = false;
             radGridView1.AllowAddNewRow = false;
+            btnEdit.Enabled = false;
+            btnView.Enabled = true;
             radGridView1.Rows.AddNew();
         }
-
-        private void btnView_Click(object sender, EventArgs e)
+        private void EditClick()
+        {
+            radGridView1.ReadOnly = false;
+            btnEdit.Enabled = false;
+            btnView.Enabled = true;
+            radGridView1.AllowAddNewRow = false;
+        }
+        private void ViewClick()
         {
             radGridView1.ReadOnly = true;
             btnView.Enabled = false;
@@ -334,14 +350,19 @@ namespace StockControl
             radGridView1.AllowAddNewRow = false;
             DataLoad();
         }
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            NewClick();
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            ViewClick();
+        }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            radGridView1.ReadOnly = false;
-            btnEdit.Enabled = false;
-            btnView.Enabled = true;
-            radGridView1.AllowAddNewRow = false;
-            //DataLoad();
+            EditClick();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -393,6 +414,14 @@ namespace StockControl
                     AddUnit();
                     DataLoad();
                 }
+            }
+            else if(e.KeyData == (Keys.Control | Keys.N))
+            {
+                if (MessageBox.Show("ต้องการสร้างใหม่ ?", "สร้างใหม่", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    NewClick();
+                }
+
             }
         }
 

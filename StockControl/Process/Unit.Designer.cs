@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Unit));
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
@@ -68,6 +69,13 @@
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
+            this.radContextMenu1 = new Telerik.WinControls.UI.RadContextMenu(this.components);
+            this.RMenu3 = new Telerik.WinControls.UI.RadMenuItem();
+            this.radMenuSeparatorItem2 = new Telerik.WinControls.UI.RadMenuSeparatorItem();
+            this.RMenu4 = new Telerik.WinControls.UI.RadMenuItem();
+            this.RMenu5 = new Telerik.WinControls.UI.RadMenuItem();
+            this.RMenu6 = new Telerik.WinControls.UI.RadMenuItem();
+            this.radContextMenuManager1 = new Telerik.WinControls.UI.RadContextMenuManager();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -349,10 +357,12 @@
             // 
             this.radGridView1.MasterTemplate.AddNewRowPosition = Telerik.WinControls.UI.SystemRowPosition.Bottom;
             this.radGridView1.MasterTemplate.AllowAddNewRow = false;
+            this.radGridView1.MasterTemplate.AllowCellContextMenu = false;
             this.radGridView1.MasterTemplate.AllowColumnChooser = false;
             this.radGridView1.MasterTemplate.AllowColumnHeaderContextMenu = false;
             this.radGridView1.MasterTemplate.AllowColumnReorder = false;
             this.radGridView1.MasterTemplate.AllowDragToGroup = false;
+            this.radGridView1.MasterTemplate.AllowRowHeaderContextMenu = false;
             this.radGridView1.MasterTemplate.AllowRowResize = false;
             this.radGridView1.MasterTemplate.AutoGenerateColumns = false;
             this.radGridView1.MasterTemplate.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
@@ -397,6 +407,7 @@
             this.radGridView1.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
             this.radGridView1.MasterTemplate.ViewDefinition = tableViewDefinition1;
             this.radGridView1.Name = "radGridView1";
+            this.radContextMenuManager1.SetRadContextMenu(this.radGridView1, this.radContextMenu1);
             this.radGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.radGridView1.ShowGroupPanel = false;
             this.radGridView1.Size = new System.Drawing.Size(730, 332);
@@ -440,6 +451,50 @@
             this.radRibbonBarButtonGroup5.ShowBackColor = false;
             this.radRibbonBarButtonGroup5.ShowBorder = false;
             this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
+            // 
+            // radContextMenu1
+            // 
+            this.radContextMenu1.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.RMenu3,
+            this.radMenuSeparatorItem2,
+            this.RMenu4,
+            this.RMenu5,
+            this.RMenu6});
+            this.radContextMenu1.ThemeName = "Office2010Blue";
+            // 
+            // RMenu3
+            // 
+            this.RMenu3.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.RMenu3.Image = ((System.Drawing.Image)(resources.GetObject("RMenu3.Image")));
+            this.RMenu3.Name = "RMenu3";
+            this.RMenu3.Text = "เพิ่มใหม่";
+            // 
+            // radMenuSeparatorItem2
+            // 
+            this.radMenuSeparatorItem2.Name = "radMenuSeparatorItem2";
+            this.radMenuSeparatorItem2.Text = "radMenuSeparatorItem2";
+            this.radMenuSeparatorItem2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // RMenu4
+            // 
+            this.RMenu4.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.RMenu4.Image = ((System.Drawing.Image)(resources.GetObject("RMenu4.Image")));
+            this.RMenu4.Name = "RMenu4";
+            this.RMenu4.Text = "แสดงรายการ";
+            // 
+            // RMenu5
+            // 
+            this.RMenu5.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.RMenu5.Image = ((System.Drawing.Image)(resources.GetObject("RMenu5.Image")));
+            this.RMenu5.Name = "RMenu5";
+            this.RMenu5.Text = "แก้ไข";
+            // 
+            // RMenu6
+            // 
+            this.RMenu6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.RMenu6.Image = ((System.Drawing.Image)(resources.GetObject("RMenu6.Image")));
+            this.RMenu6.Name = "RMenu6";
+            this.RMenu6.Text = "ลบรายการ";
             // 
             // Unit
             // 
@@ -504,5 +559,12 @@
         private Telerik.WinControls.UI.RadButtonElement Unfilter;
         private Telerik.WinControls.UI.RadRibbonBarButtonGroup radRibbonBarButtonGroup5;
         private Telerik.WinControls.UI.RibbonBarGroupSeparator ribbonBarGroupSeparator1;
+        private Telerik.WinControls.UI.RadContextMenu radContextMenu1;
+        private Telerik.WinControls.UI.RadMenuItem RMenu3;
+        private Telerik.WinControls.UI.RadMenuSeparatorItem radMenuSeparatorItem2;
+        private Telerik.WinControls.UI.RadMenuItem RMenu4;
+        private Telerik.WinControls.UI.RadMenuItem RMenu5;
+        private Telerik.WinControls.UI.RadMenuItem RMenu6;
+        private Telerik.WinControls.UI.RadContextMenuManager radContextMenuManager1;
     }
 }

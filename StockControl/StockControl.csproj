@@ -373,9 +373,6 @@
     <EmbeddedResource Include="Process\AdjustStock_List.resx">
       <DependentUpon>AdjustStock_List.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Process\PrintPR.resx">
-      <DependentUpon>PrintPR.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Process\Report\ReportReceive.resx">
       <DependentUpon>ReportReceive.cs</DependentUpon>
     </EmbeddedResource>
