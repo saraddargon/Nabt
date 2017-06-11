@@ -126,11 +126,35 @@
     <Compile Include="Process\AdjustStock_List.Designer.cs">
       <DependentUpon>AdjustStock_List.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\ClearTempList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ClearTempList.Designer.cs">
+      <DependentUpon>ClearTempList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\PrintPR.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Process\PrintPR.Designer.cs">
       <DependentUpon>PrintPR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\Report\ReportAdjustStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Report\ReportAdjustStock.Designer.cs">
+      <DependentUpon>ReportAdjustStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\Report\ReportForeCast.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Report\ReportForeCast.Designer.cs">
+      <DependentUpon>ReportForeCast.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\Report\ReportPR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Report\ReportPR.Designer.cs">
+      <DependentUpon>ReportPR.cs</DependentUpon>
     </Compile>
     <Compile Include="Process\Report\ReportReceive.cs">
       <SubType>Form</SubType>
@@ -179,6 +203,24 @@
     </Compile>
     <Compile Include="Process\ListPart_CreatePR.Designer.cs">
       <DependentUpon>ListPart_CreatePR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\Report\ReportStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Report\ReportStock.Designer.cs">
+      <DependentUpon>ReportStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\Report\ReportWaitingOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Report\ReportWaitingOrder.Designer.cs">
+      <DependentUpon>ReportWaitingOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\Report\ShippingReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Report\ShippingReport.Designer.cs">
+      <DependentUpon>ShippingReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Process\ReturnReceiveList.cs">
       <SubType>Form</SubType>
@@ -373,6 +415,18 @@
     <EmbeddedResource Include="Process\AdjustStock_List.resx">
       <DependentUpon>AdjustStock_List.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Process\ClearTempList.resx">
+      <DependentUpon>ClearTempList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Report\ReportAdjustStock.resx">
+      <DependentUpon>ReportAdjustStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Report\ReportForeCast.resx">
+      <DependentUpon>ReportForeCast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Report\ReportPR.resx">
+      <DependentUpon>ReportPR.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Process\Report\ReportReceive.resx">
       <DependentUpon>ReportReceive.cs</DependentUpon>
     </EmbeddedResource>
@@ -396,6 +450,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\ListPart_CreatePR.resx">
       <DependentUpon>ListPart_CreatePR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Report\ReportStock.resx">
+      <DependentUpon>ReportStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Report\ReportWaitingOrder.resx">
+      <DependentUpon>ReportWaitingOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Report\ShippingReport.resx">
+      <DependentUpon>ShippingReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\ReturnReceiveList.resx">
       <DependentUpon>ReturnReceiveList.cs</DependentUpon>
