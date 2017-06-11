@@ -706,4 +706,127 @@
       <Column Name="Remark" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.sp_R004_ReportShipping" Method="sp_R004_ReportShipping">
+    <Parameter Name="ShippingNo" Parameter="shippingNo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="DateTime" Parameter="dateTime" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="sp_R004_ReportShippingResult">
+      <Column Name="No" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="ShippingNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ShipDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RemarkHD" Type="System.String" DbType="VarChar(512)" CanBeNull="true" />
+      <Column Name="Barcode" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ShipType" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="รหัสพาร์ท" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="ชื่อพาร์ท" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="รายละเอียดพาร์ท" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="จำนวนรับ" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="[จำนวน:หน่วย]" Member="จำนวน_หน่วย" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="หน่วยเบิก" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="SerialNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="LineName" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="MachineName" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_R005_ReportPR" Method="sp_R005_ReportPR">
+    <Parameter Name="PRNoFrom" Parameter="pRNoFrom" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="PRNoTo" Parameter="pRNoTo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="DateTime" Parameter="dateTime" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="sp_R005_ReportPRResult">
+      <Column Name="No" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="PRNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="TEMPNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="VendorNo" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="VendorName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ContactName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Tel" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Fax" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="RequireDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="HDRemark" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CRRNCY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Barcode" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="รหัสพาร์ท" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ชื่อพาร์ท" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="รายละเอียดพาร์ท" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="จำนวนคงเหลือ" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="จำนวนสั่งซื้อ" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="ประเภทกลุ่มพาร์ท" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ราคา" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="[จำนวน:หน่วย]" Member="จำนวน_หน่วย" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="หน่วยซื้อ" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="DeliveryDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="LineName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MCName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SerialNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_R006_ReportReceive" Method="sp_R006_ReportReceive">
+    <Parameter Name="RCNo1" Parameter="rCNo1" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="RCNo2" Parameter="rCNo2" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="DateTime" Parameter="dateTime" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="sp_R006_ReportReceiveResult">
+      <Column Name="No" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="RCNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TEMPNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="VendorNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="VendorName" Type="System.String" DbType="NVarChar(512)" CanBeNull="true" />
+      <Column Name="RCDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RemarkHD" Type="System.String" DbType="NVarChar(512)" CanBeNull="true" />
+      <Column Name="Barcode" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="InvoiceNo" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="รหัสพาร์ท" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="ชื่อพาร์ท" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="รายละเอียดพาร์ท" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="จำนวนคงเหลือ" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="จำนวนรับ" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="CRRNCY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ราคา" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="[จำนวน:หน่วย]" Member="จำนวน_หน่วย" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="หน่วยซื้อ" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="ShelfNo" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="SerialNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_R007_ReportShipping" Method="sp_R007_ReportShipping">
+    <Parameter Name="ShippingNo1" Parameter="shippingNo1" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ShippingNo2" Parameter="shippingNo2" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="DateTime" Parameter="dateTime" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="sp_R007_ReportShippingResult">
+      <Column Name="No" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="ShippingNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ShipDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RemarkHD" Type="System.String" DbType="VarChar(512)" CanBeNull="true" />
+      <Column Name="Barcode" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ShipType" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="รหัสพาร์ท" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="ชื่อพาร์ท" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="รายละเอียดพาร์ท" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="จำนวนรับ" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="[จำนวน:หน่วย]" Member="จำนวน_หน่วย" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="หน่วยเบิก" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="SerialNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="LineName" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="MachineName" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

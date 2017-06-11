@@ -308,22 +308,25 @@ namespace StockControl
                 //dt_ShelfTag.Rows.Clear();
                 string PRNo = "";
                 PRNo = StockControl.dbClss.TSt(radGridView1.CurrentRow.Cells["PRNo"].Value);
-                using (DataClasses1DataContext db = new DataClasses1DataContext())
-                {
-                    var g = (from ix in db.sp_R002_ReportPR(PRNo, DateTime.Now) select ix).ToList();
-                    if (g.Count() > 0)
-                    {
+                PrintPR a = new PrintPR(PRNo, PRNo,"PR");
+                a.ShowDialog();
 
-                        Report.Reportx1.Value = new string[2];
-                        Report.Reportx1.Value[0] = PRNo;
-                        Report.Reportx1.WReport = "ReportPR";
-                        Report.Reportx1 op = new Report.Reportx1("ReportPR.rpt");
-                        op.Show();
+                //using (DataClasses1DataContext db = new DataClasses1DataContext())
+                //{
+                //    var g = (from ix in db.sp_R002_ReportPR(PRNo, DateTime.Now) select ix).ToList();
+                //    if (g.Count() > 0)
+                //    {
 
-                    }
-                    else
-                        MessageBox.Show("not found.");
-                }
+                //        Report.Reportx1.Value = new string[2];
+                //        Report.Reportx1.Value[0] = PRNo;
+                //        Report.Reportx1.WReport = "ReportPR";
+                //        Report.Reportx1 op = new Report.Reportx1("ReportPR.rpt");
+                //        op.Show();
+
+                //    }
+                //    else
+                //        MessageBox.Show("not found.");
+                //}
 
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }

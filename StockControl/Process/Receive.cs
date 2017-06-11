@@ -448,7 +448,7 @@ namespace StockControl
                             if (StockControl.dbClss.TSt(rowInfo.Cells["TempNo"].Value).Equals(""))
                                 err += "- “เลขที่อ้างอิงเอกสาร PRNo:” เป็นค่าว่าง \n";
                             if (StockControl.dbClss.TSt(rowInfo.Cells["CodeNo"].Value).Equals(""))
-                                err += "- “รหัสพาร์ท:” เป็นค่าว่าง \n";
+                                err += "- “รหัสทูล:” เป็นค่าว่าง \n";
                             if (StockControl.dbClss.TDe(rowInfo.Cells["QTY"].Value) <= 0)
                                 err += "- “จำนวนรับ:” น้อยกว่า 0 \n";
                             if (StockControl.dbClss.TDe(rowInfo.Cells["Unit"].Value).Equals(""))
@@ -650,8 +650,6 @@ namespace StockControl
                                 u.QTY = StockControl.dbClss.TDe(g.Cells["QTY"].Value);
                                 u.PCSUnit = StockControl.dbClss.TDe(g.Cells["PCSUnit"].Value);
                                 u.Unit = StockControl.dbClss.TSt(g.Cells["Unit"].Value);
-                                u.CostPerUnit = StockControl.dbClss.TDe(g.Cells["CostPerUnit"].Value);
-                                u.Amount = StockControl.dbClss.TDe(g.Cells["Amount"].Value);
                                 u.Remark = StockControl.dbClss.TSt(g.Cells["Remark"].Value);
                                 u.LotNo = StockControl.dbClss.TSt(g.Cells["LotNo"].Value);
                                 u.SerialNo = StockControl.dbClss.TSt(g.Cells["SerialNo"].Value);
@@ -661,10 +659,17 @@ namespace StockControl
                                 u.PRID = StockControl.dbClss.TInt(g.Cells["PRID"].Value);
                                 u.ShelfNo = StockControl.dbClss.TSt(g.Cells["ShelfNo"].Value);
                                 if (rdoDL.IsChecked)
+                                {
                                     u.TempInvNo = txtInvoiceNo.Text;
-                                if(rdoInvoice.IsChecked)
+                                    u.CostPerUnit = 0;
+                                    u.Amount = 0;
+                                }
+                                else if (rdoInvoice.IsChecked)
+                                {
                                     u.InvoiceNo = txtInvoiceNo.Text;
-
+                                    u.Amount = StockControl.dbClss.TDe(g.Cells["Amount"].Value);
+                                    u.CostPerUnit = StockControl.dbClss.TDe(g.Cells["CostPerUnit"].Value);
+                                }
                                 u.RCDate = RequireDate;
                                 u.Seq = Seq;
 
@@ -864,7 +869,7 @@ namespace StockControl
 
                             DataLoad();
                             btnNew.Enabled = true;
-
+                            txtPRNo.Enabled = false;
                             //insert Stock
                             Insert_Stock();
 
@@ -895,6 +900,9 @@ namespace StockControl
                     else
                         Type = "ใบส่งของชั่วคราว";
 
+                    decimal Cost = 0;
+
+
                     string CNNo = CNNo = StockControl.dbClss.GetNo(6, 2);
                     var g = (from ix in db.tb_Receives
                                  //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
@@ -922,8 +930,17 @@ namespace StockControl
                             gg.QTY = Convert.ToDecimal(vv.QTY);
                             gg.Inbound = Convert.ToDecimal(vv.QTY);
                             gg.Outbound = 0;
-                            gg.AmountCost = Convert.ToDecimal(vv.QTY) * Convert.ToDecimal(vv.CostPerUnit);
-                            gg.UnitCost = Convert.ToDecimal(vv.CostPerUnit);
+
+                            if(rdoDL.IsChecked)
+                            {
+                                gg.UnitCost = 0;
+                                gg.AmountCost = 0;
+                            }
+                            else
+                            {
+                                gg.AmountCost = Convert.ToDecimal(vv.QTY) * Convert.ToDecimal(vv.CostPerUnit);
+                                gg.UnitCost = Convert.ToDecimal(vv.CostPerUnit);
+                            }
                             gg.RemainQty = 0;
                             gg.RemainUnitCost = 0;
                             gg.RemainAmount = 0;
@@ -934,9 +951,10 @@ namespace StockControl
                             db.tb_Stock1s.InsertOnSubmit(gg);
                             db.SubmitChanges();
 
+
                             dbClss.Insert_Stock(vv.CodeNo, Convert.ToDecimal(vv.QTY), "Receive", "Inv");
 
-                            dbClss.Insert_StockTemp(vv.CodeNo, (-Convert.ToDecimal(vv.QTY)), "RC_Temp", "Inv");
+                            dbClss.Insert_StockTemp(vv.CodeNo, (Convert.ToDecimal(vv.QTY)), "RC_Temp", "Inv");
                         }
                     }
                 }
@@ -1222,8 +1240,8 @@ namespace StockControl
                                 
                                 .ToList();
                             if (d.Count() > 0)
-                            
-{
+
+                            {
                                 foreach (var gg in d)
                                 {
                                     CodeNo = StockControl.dbClss.TSt(gg.CodeNo);
@@ -1241,6 +1259,8 @@ namespace StockControl
                                         PCSUnit = StockControl.dbClss.TDe(gg.PCSUnit);
                                         // ราคาต่อหน่วย
                                         CostPerUnit = StockControl.dbClss.TDe(gg.StandardCost);
+                                        if (rdoDL.IsChecked)
+                                            CostPerUnit = 0;
                                         Amount = QTY * CostPerUnit;
                                         //CRRNCY = CRRNCY;  //มาจาก herder
                                         LotNo = StockControl.dbClss.TSt(gg.LotNo);
@@ -1382,24 +1402,25 @@ namespace StockControl
         {
             try
             {
-                //dt_ShelfTag.Rows.Clear();
+                PrintPR a = new PrintPR(txtRCNo.Text, txtRCNo.Text, "Receive");
+                a.ShowDialog();
 
-                using (DataClasses1DataContext db = new DataClasses1DataContext())
-                {
-                    var g = (from ix in db.sp_R003_ReportReceive(txtRCNo.Text, DateTime.Now) select ix).ToList();
-                    if (g.Count() > 0)
-                    {
+                //using (DataClasses1DataContext db = new DataClasses1DataContext())
+                //{
+                //    var g = (from ix in db.sp_R003_ReportReceive(txtRCNo.Text, DateTime.Now) select ix).ToList();
+                //    if (g.Count() > 0)
+                //    {
 
-                        Report.Reportx1.Value = new string[2];
-                        Report.Reportx1.Value[0] = txtRCNo.Text;
-                        Report.Reportx1.WReport = "ReportReceive";
-                        Report.Reportx1 op = new Report.Reportx1("ReportReceive.rpt");
-                        op.Show();
+                //        Report.Reportx1.Value = new string[2];
+                //        Report.Reportx1.Value[0] = txtRCNo.Text;
+                //        Report.Reportx1.WReport = "ReportReceive";
+                //        Report.Reportx1 op = new Report.Reportx1("ReportReceive.rpt");
+                //        op.Show();
 
-                    }
-                    else
-                        MessageBox.Show("not found.");
-                }
+                //    }
+                //    else
+                //        MessageBox.Show("not found.");
+                //}
 
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }

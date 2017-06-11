@@ -417,7 +417,7 @@ namespace StockControl
                             //if (StockControl.dbClss.TSt(rowInfo.Cells["TempNo"].Value).Equals(""))
                             //    err += "- “เลขที่อ้างอิงเอกสาร PRNo:” เป็นค่าว่าง \n";
                             if (StockControl.dbClss.TSt(rowInfo.Cells["CodeNo"].Value).Equals(""))
-                                err += "- “รหัสพาร์ท:” เป็นค่าว่าง \n";
+                                err += "- “รหัสทูล:” เป็นค่าว่าง \n";
                             //if (StockControl.dbClss.TDe(rowInfo.Cells["QTY"].Value) <= 0)
                             //    err += "- “จำนวนรับ:” น้อยกว่า 0 \n";
                             if (StockControl.dbClss.TDe(rowInfo.Cells["UnitShip"].Value).Equals(""))
@@ -1147,6 +1147,34 @@ namespace StockControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); dbClss.AddError("CreatePart", ex.Message + " : radButtonElement1_Click", this.Name); }
 
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PrintPR a = new PrintPR(txtSHNo.Text, txtSHNo.Text, "Shipping");
+                a.ShowDialog();
+
+                //using (DataClasses1DataContext db = new DataClasses1DataContext())
+                //{
+                //    var g = (from ix in db.sp_R004_ReportShipping(txtSHNo.Text, DateTime.Now) select ix).ToList();
+                //    if (g.Count() > 0)
+                //    {
+
+                //        Report.Reportx1.Value = new string[2];
+                //        Report.Reportx1.Value[0] = txtSHNo.Text;
+                //        Report.Reportx1.WReport = "ReportShipping";
+                //        Report.Reportx1 op = new Report.Reportx1("ReportShipping.rpt");
+                //        op.Show();
+
+                //    }
+                //    else
+                //        MessageBox.Show("not found.");
+                //}
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

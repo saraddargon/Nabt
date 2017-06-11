@@ -126,6 +126,9 @@ namespace StockControl
                              where h.Status != "Cancel" //&& d.verticalID == VerticalID
                                     && d.Status != "Cancel"
                                  && d.ShippingNo.Contains(txtSHNo.Text.Trim())
+                                 //&& ((Convert.ToDateTime(h.ShipDate.Value)) >= (Convert.ToDateTime(dtDate1.Value)))
+                                 //&& ((Convert.ToDateTime(h.ShipDate.Value)) <= (Convert.ToDateTime(dtDate2.Value)))
+                                 
                              select new
                              {
                                  ShippingNo = d.ShippingNo,
@@ -145,6 +148,10 @@ namespace StockControl
                                  Remark = d.Remark,
                                  Status = d.Status,
                                  id = d.id,
+                                 LineName = d.LineName,
+                                 MachineName = d.MachineName,
+                                 LotNo = d.LotNo,
+                                 SerialNo = d.SerialNo
 
 
                              }).ToList();
@@ -540,7 +547,10 @@ namespace StockControl
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-
+            string SHNo = "";
+            SHNo = StockControl.dbClss.TSt(dgvData.CurrentRow.Cells["ShippingNo"].Value);
+            PrintPR a = new PrintPR(SHNo, SHNo, "Shipping");
+            a.ShowDialog();
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)

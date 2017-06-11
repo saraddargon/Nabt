@@ -793,7 +793,7 @@ namespace StockControl
                     if (rowInfo.IsVisible)
                     {
                        if(StockControl.dbClss.TSt(rowInfo.Cells["dgvCodeNo"].Value).Equals(""))
-                           err += "- “รหัสพาร์ท:” เป็นค่าว่าง \n";
+                           err += "- “รหัสทูล:” เป็นค่าว่าง \n";
                         if (StockControl.dbClss.TDe(rowInfo.Cells["dgvOrderQty"].Value)<=0)
                             err += "- “จำนวน:” น้อยกว่า 0 \n";
                         if(StockControl.dbClss.TDe(rowInfo.Cells["dgvUnitCode"].Value).Equals(""))
@@ -1286,24 +1286,25 @@ namespace StockControl
         {
             try
             {
-                //dt_ShelfTag.Rows.Clear();
+                PrintPR a = new PrintPR(txtPRNo.Text,txtPRNo.Text,"PR");
+                a.ShowDialog();
 
-                using (DataClasses1DataContext db = new DataClasses1DataContext())
-                {
-                    var g = (from ix in db.sp_R002_ReportPR(txtPRNo.Text,DateTime.Now) select ix).ToList();
-                    if (g.Count() > 0)
-                    {
+                //using (DataClasses1DataContext db = new DataClasses1DataContext())
+                //{
+                //    var g = (from ix in db.sp_R002_ReportPR(txtPRNo.Text,DateTime.Now) select ix).ToList();
+                //    if (g.Count() > 0)
+                //    {
 
-                        Report.Reportx1.Value = new string[2];
-                        Report.Reportx1.Value[0] = txtPRNo.Text;
-                        Report.Reportx1.WReport = "ReportPR";
-                        Report.Reportx1 op = new Report.Reportx1("ReportPR.rpt");
-                        op.Show();
+                //        Report.Reportx1.Value = new string[2];
+                //        Report.Reportx1.Value[0] = txtPRNo.Text;
+                //        Report.Reportx1.WReport = "ReportPR";
+                //        Report.Reportx1 op = new Report.Reportx1("ReportPR.rpt");
+                //        op.Show();
 
-                    }
-                    else
-                        MessageBox.Show("not found.");
-                }
+                //    }
+                //    else
+                //        MessageBox.Show("not found.");
+                //}
 
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }

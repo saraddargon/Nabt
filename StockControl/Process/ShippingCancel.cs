@@ -276,9 +276,7 @@ namespace StockControl
                          select ix).First();
 
                 g.Status = "Cancel";
-
                 
-
                 //insert Stock
                 DateTime? CalDate = null;
                 DateTime? AppDate = DateTime.Now;
@@ -308,9 +306,8 @@ namespace StockControl
                 db.tb_Stock1s.InsertOnSubmit(gg);
                 db.SubmitChanges();
 
-
-               
-
+                //update stock item
+                dbClss.Insert_Stock(g.CodeNo, Convert.ToDecimal(g.QTY), "CNSH", "Inv");
             }
         }
 

@@ -444,19 +444,19 @@
             gridViewTextBoxColumn1.Width = 45;
             gridViewTextBoxColumn2.EnableExpressionEditor = false;
             gridViewTextBoxColumn2.FieldName = "CodeNo";
-            gridViewTextBoxColumn2.HeaderText = "รหัสพาร์ท";
+            gridViewTextBoxColumn2.HeaderText = "รหัสทูล";
             gridViewTextBoxColumn2.Name = "dgvCodeNo";
             gridViewTextBoxColumn2.ReadOnly = true;
             gridViewTextBoxColumn2.Width = 82;
             gridViewTextBoxColumn3.EnableExpressionEditor = false;
             gridViewTextBoxColumn3.FieldName = "ItemName";
-            gridViewTextBoxColumn3.HeaderText = "ชื่อพาร์ท";
+            gridViewTextBoxColumn3.HeaderText = "ชื่อทูล";
             gridViewTextBoxColumn3.Name = "dgvItemName";
             gridViewTextBoxColumn3.ReadOnly = true;
             gridViewTextBoxColumn3.Width = 120;
             gridViewTextBoxColumn4.EnableExpressionEditor = false;
             gridViewTextBoxColumn4.FieldName = "ItemDesc";
-            gridViewTextBoxColumn4.HeaderText = "รายละเอียดพาร์ท";
+            gridViewTextBoxColumn4.HeaderText = "รายละเอียดทูล";
             gridViewTextBoxColumn4.Name = "dgvItemDesc";
             gridViewTextBoxColumn4.ReadOnly = true;
             gridViewTextBoxColumn4.Width = 217;
@@ -795,11 +795,11 @@
             // radLabel4
             // 
             this.radLabel4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel4.Location = new System.Drawing.Point(12, 18);
+            this.radLabel4.Location = new System.Drawing.Point(22, 17);
             this.radLabel4.Name = "radLabel4";
-            this.radLabel4.Size = new System.Drawing.Size(85, 17);
+            this.radLabel4.Size = new System.Drawing.Size(71, 17);
             this.radLabel4.TabIndex = 8;
-            this.radLabel4.Text = "เลขที่ใบขอสั่งซื้อ";
+            this.radLabel4.Text = "เลขที่ใบสั่งซื้อ";
             // 
             // radLabel12
             // 

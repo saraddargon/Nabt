@@ -586,9 +586,10 @@ namespace StockControl
 
                 db.tb_Stock1s.InsertOnSubmit(gg);
                 db.SubmitChanges();
-                //udpate Stock Item
-                dbClss.Insert_Stock(g.CodeNo, (-Convert.ToDecimal(g.QTY)), "CNRC", "Inv");
 
+                //udpate Stock Item StockInv,StockDL
+                dbClss.Insert_Stock(g.CodeNo, (-Convert.ToDecimal(g.QTY)), "CNRC", "Inv");
+                //update stock StockBackOrder item
                 dbClss.Insert_StockTemp(g.CodeNo, Convert.ToDecimal(g.QTY), "CNRC_Temp", "Inv");
             }
         }

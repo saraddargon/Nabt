@@ -264,11 +264,11 @@
             // 
             // radLabel1
             // 
-            this.radLabel1.Location = new System.Drawing.Point(87, 95);
+            this.radLabel1.Location = new System.Drawing.Point(97, 94);
             this.radLabel1.Name = "radLabel1";
-            this.radLabel1.Size = new System.Drawing.Size(74, 18);
+            this.radLabel1.Size = new System.Drawing.Size(61, 18);
             this.radLabel1.TabIndex = 0;
-            this.radLabel1.Text = "เลขที่เบิกพาร์ท";
+            this.radLabel1.Text = "เลขที่เบิกทูล";
             // 
             // ddlType
             // 
@@ -297,11 +297,11 @@
             // 
             // radLabel3
             // 
-            this.radLabel3.Location = new System.Drawing.Point(107, 119);
+            this.radLabel3.Location = new System.Drawing.Point(115, 118);
             this.radLabel3.Name = "radLabel3";
-            this.radLabel3.Size = new System.Drawing.Size(53, 18);
+            this.radLabel3.Size = new System.Drawing.Size(39, 18);
             this.radLabel3.TabIndex = 0;
-            this.radLabel3.Text = "รหัสพาร์ท";
+            this.radLabel3.Text = "รหัสทูล";
             // 
             // radLabel6
             // 
@@ -319,6 +319,7 @@
             this.txtid.Size = new System.Drawing.Size(58, 20);
             this.txtid.TabIndex = 4;
             this.txtid.ThemeName = "Office2010Blue";
+            this.txtid.Visible = false;
             // 
             // txtQTY
             // 

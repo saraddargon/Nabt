@@ -821,9 +821,9 @@ namespace StockControl
                 //if (txtCodeNo.Text.Equals(""))
                 //    err += " “รหัสพาร์ท:” เป็นค่าว่าง \n";
                 if (txtPartName.Text.Equals(""))
-                    err += " “ชื่อพาร์ท:” เป็นค่าว่าง \n";
+                    err += " “ชื่อทูล:” เป็นค่าว่าง \n";
                 if (txtDetailPart.Text.Equals(""))
-                    err += "- “รายละเอียดพาร์ท:” เป็นค่าว่าง \n";
+                    err += "- “รายละเอียดทูล:” เป็นค่าว่าง \n";
                 if (cboGroupType.Text.Equals(""))
                     err += "- “ประเภทกลุ่ม สินค้า:” เป็นค่าว่าง \n";
                 if (cboTypeCode.Text.Equals(""))

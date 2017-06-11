@@ -173,6 +173,15 @@ namespace Report
                         rptDc.SetParameterValue("@DateTime", DateTime.Now);
                         // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
                     } break;
+                case "ReportPR2":
+                    {
+
+                        rptDc.SetParameterValue("@PRNoFrom", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@PRNoTo", Convert.ToString(Value[1].ToString()));
+                        rptDc.SetParameterValue("@DateTime", DateTime.Now);
+                        // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
+                    }
+                    break;
                 case "ReportPO":
                     {
 
@@ -188,7 +197,32 @@ namespace Report
                         // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
                     }
                     break;
-                    
+                case "ReportReceive2":
+                    {
+                        rptDc.SetParameterValue("@RCNo1", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@RCNo2", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@DateTime", DateTime.Now);
+                        // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
+                    }
+                    break;
+                case "ReportShipping":
+                    {
+
+                        rptDc.SetParameterValue("@ShippingNo", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@DateTime", DateTime.Now);
+                        // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
+                    }
+                    break;
+                case "ReportShipping2":
+                    {
+
+                        rptDc.SetParameterValue("@ShippingNo1", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@ShippingNo2", Convert.ToString(Value[1].ToString()));
+                        rptDc.SetParameterValue("@DateTime", DateTime.Now);
+                        // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
+                    }
+                    break;
+
 
 
             }

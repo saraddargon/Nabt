@@ -668,22 +668,25 @@ namespace StockControl
                 //dt_ShelfTag.Rows.Clear();
                 string RCNo = "";
                 RCNo = StockControl.dbClss.TSt(dgvData.CurrentRow.Cells["RCNo"].Value);
-                using (DataClasses1DataContext db = new DataClasses1DataContext())
-                {
-                    var g = (from ix in db.sp_R003_ReportReceive(RCNo, DateTime.Now) select ix).ToList();
-                    if (g.Count() > 0)
-                    {
+                PrintPR a = new PrintPR(RCNo, RCNo, "Receive");
+                a.ShowDialog();
 
-                        Report.Reportx1.Value = new string[2];
-                        Report.Reportx1.Value[0] = RCNo;
-                        Report.Reportx1.WReport = "ReportReceive";
-                        Report.Reportx1 op = new Report.Reportx1("ReportReceive.rpt");
-                        op.Show();
+                //using (DataClasses1DataContext db = new DataClasses1DataContext())
+                //{
+                //    var g = (from ix in db.sp_R003_ReportReceive(RCNo, DateTime.Now) select ix).ToList();
+                //    if (g.Count() > 0)
+                //    {
 
-                    }
-                    else
-                        MessageBox.Show("not found.");
-                }
+                //        Report.Reportx1.Value = new string[2];
+                //        Report.Reportx1.Value[0] = RCNo;
+                //        Report.Reportx1.WReport = "ReportReceive";
+                //        Report.Reportx1 op = new Report.Reportx1("ReportReceive.rpt");
+                //        op.Show();
+
+                //    }
+                //    else
+                //        MessageBox.Show("not found.");
+                //}
 
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
