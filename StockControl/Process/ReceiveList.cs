@@ -250,6 +250,10 @@ namespace StockControl
                 //DateTime? CreateDate = null;
                 //string CreateBy = "";
                 //string Status = "รอรับเข้า";
+                DateTime inclusiveStart = dtDate1.Value.Date;
+                // Include the *whole* of the day indicated by searchEndDate
+                DateTime exclusiveEnd = dtDate2.Value.Date.AddDays(1);
+
 
                 var r = (from d in db.tb_Receives
                          join c in db.tb_ReceiveHs on d.RCNo equals c.RCNo
@@ -258,6 +262,9 @@ namespace StockControl
 
                          where d.Status == "Partial" && c.VendorNo.Contains(VendorNo_ss)
                              && p.SS == 1
+                             && (c.RCDate >= inclusiveStart
+                                        && c.RCDate < exclusiveEnd)
+
                          select new
                          {
                              CodeNo = d.CodeNo,
@@ -340,6 +347,9 @@ namespace StockControl
                 //DateTime? CreateDate = null;
                 //string CreateBy = "";
                 //string Status = "รับเข้าแล้ว";
+                DateTime inclusiveStart = dtDate1.Value.Date;
+                // Include the *whole* of the day indicated by searchEndDate
+                DateTime exclusiveEnd = dtDate2.Value.Date.AddDays(1);
 
                 var r = (from d in db.tb_Receives
                          join c in db.tb_ReceiveHs on d.RCNo equals c.RCNo
@@ -348,6 +358,9 @@ namespace StockControl
 
                          where d.Status == "Completed" && c.VendorNo.Contains(VendorNo_ss)
                               && p.SS == 1
+                               && (c.RCDate >= inclusiveStart
+                                        && c.RCDate < exclusiveEnd)
+
                          select new
                          {
                              CodeNo = d.CodeNo,
@@ -525,7 +538,7 @@ namespace StockControl
                     Receive a = new Receive(Convert.ToString(dgvData.CurrentRow.Cells["RCNo"].Value),
                         Convert.ToString(dgvData.CurrentRow.Cells["PRNo"].Value));
                     a.ShowDialog();
-                    this.Close();
+                    //this.Close();
                 }
 
             }
@@ -657,7 +670,7 @@ namespace StockControl
                 Receive a = new Receive(Convert.ToString(e.Row.Cells["RCNo"].Value),
                     Convert.ToString(e.Row.Cells["PRNo"].Value));
                 a.ShowDialog();
-                this.Close();
+               // this.Close();
             }
         }
 

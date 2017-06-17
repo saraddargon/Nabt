@@ -364,8 +364,8 @@ namespace StockControl
                                 }
                             }
 
-                            dbClss.AddHistory(this.Name + txtInvoiceNo.Text.Trim(), "คืนการรับ Receive", " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
-                            dbClss.AddHistory(this.Name + RCNo, "คืนการรับ Receive", " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
+                            dbClss.AddHistory(this.Name , "คืนการรับ Receive", " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtInvoiceNo.Text.Trim());
+                            dbClss.AddHistory(this.Name , "คืนการรับ Receive", " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", RCNo);
                             dbClss.AddHistory(this.Name, "คืนการรับ Receive", " คืนการรับเลขที่ : " + txtInvoiceNo.Text + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
 
                         }
@@ -391,7 +391,7 @@ namespace StockControl
                 if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int seq = 0;
-                    string CNNo = StockControl.dbClss.GetNo(6, 2);
+                    string CRNo = StockControl.dbClss.GetNo(8, 2);
                     using (DataClasses1DataContext db = new DataClasses1DataContext())
                     {
                         var g = (from ix in db.tb_ReceiveHs
@@ -425,8 +425,20 @@ namespace StockControl
                             db.SubmitChanges();
 
 
+                            //string invno = "";
+                            //string TempNo = "";
+                            string Type = "";
+                            Type = StockControl.dbClss.TSt(g.FirstOrDefault().Type);
+                            //if (StockControl.dbClss.TSt(g.FirstOrDefault().Type).Equals("รับด้วยใบ Invoice"))
+                            //{
+                            //    invno = StockControl.dbClss.TSt(g.FirstOrDefault().InvoiceNo);
+                            //}
+                            //else
+                            //    TempNo = StockControl.dbClss.TSt(g.FirstOrDefault().TempNo);
+
+
                             //detail
-                            
+
                             var vv = (from ix in db.tb_Receives
                                       where ix.InvoiceNo.Trim() == txtInvoiceNo.Text.Trim() && ix.Status != "Cancel"
                                       //&& ix.TEMPNo.Trim() == txtTempNo.Text.Trim()
@@ -457,9 +469,9 @@ namespace StockControl
                                             //PRNo = vvd.PRNo;
                                             //db.SubmitChanges();
 
-                                            dbClss.AddHistory(this.Name + PRNo, "คืนการรับ Receive", " คืนการรับเลขที่ : " + txtInvoiceNo.Text
+                                            dbClss.AddHistory(this.Name , "คืนการรับ Receive", " คืนการรับเลขที่ : " + txtInvoiceNo.Text
                                                 + " PRID : " + vvd.PRID.ToString() + " CodeNo : " + vvd.CodeNo
-                                                + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
+                                                + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", PRNo);
                                         }
                                     }
                                     
@@ -501,17 +513,16 @@ namespace StockControl
                                     u.TempShip = vvd.TempShip;
 
                                     db.tb_Receive_Dels.InsertOnSubmit(u);
-
-                                    //db.tb_Receives.DeleteOnSubmit(vvd);
-                                    //db.SubmitChanges();
-
-
+                                    
                                     seq += 1;
-                                    
-                                    // Insert Stock
-                                    Insert_Stock(seq, Convert.ToInt32(vvd.ID), vvd.RCNo, CNNo);
-                                    
-                                    
+
+                                    //// Insert Stock1
+                                    //Insert_Stock(seq, Convert.ToInt32(vvd.ID), vvd.RCNo, CNNo);
+
+                                    //New Stock
+                                    InsertStock_new(seq, Convert.ToInt32(vvd.ID), vvd.RCNo, CRNo, vvd.InvoiceNo, Type);
+
+
                                 }
 
 
@@ -529,9 +540,9 @@ namespace StockControl
                                 update_RemainQty();
                             }
 
-                            dbClss.AddHistory(this.Name + txtInvoiceNo.Text.Trim(), "คืนการรับ Receive", " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
-                            dbClss.AddHistory(this.Name + RCNo, "คืนการรับ Receive", " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
-                            dbClss.AddHistory(this.Name, "คืนการรับ Receive", " คืนการรับเลขที่ : " + txtInvoiceNo.Text + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
+                            dbClss.AddHistory(this.Name, "คืนการรับ Receive", " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtInvoiceNo.Text.Trim());
+                            dbClss.AddHistory(this.Name, "คืนการรับ Receive", " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", RCNo);
+                            dbClss.AddHistory(this.Name, "คืนการรับ Receive", " คืนการรับเลขที่ : " + txtInvoiceNo.Text + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtInvoiceNo.Text);
 
                         }
                     }
@@ -545,7 +556,11 @@ namespace StockControl
         private void btnSave_Click(object sender, EventArgs e)
         {
             //Save_Return1();//วิธีที่ 1 เป็นการปรับแต่สถานะ ซึ่งทำให้ผิดเพราะ database ไม่ได้ออกแบบมาแบบนี้
-            Save_Return2(); //วิธีที่ 2 การปรับแบบการ Insert เข้า table delete
+
+            if(Check_QTY())
+                Save_Return2(); //วิธีที่ 2 การปรับแบบการ Insert เข้า table delete
+            
+
         }
 
         private void Insert_Stock(int seq, int id, string RCNo,string CNNo)
@@ -563,36 +578,371 @@ namespace StockControl
                 DateTime? AppDate = DateTime.Now;
                 int Seq = seq;
 
-                tb_Stock1 gg = new tb_Stock1();
-                gg.AppDate = AppDate;
-                gg.Seq = Seq;
-                gg.App = "Cancel RC";
-                gg.Appid = Seq;
-                gg.CreateBy = ClassLib.Classlib.User;
-                gg.CreateDate = DateTime.Now;
-                gg.DocNo = CNNo;
-                gg.RefNo = RCNo;
-                gg.Type = "Inv/DL";
-                gg.QTY = -Convert.ToDecimal(g.QTY);
-                gg.Inbound = 0;
-                gg.Outbound = -Convert.ToDecimal(g.QTY);
-                gg.AmountCost = -Convert.ToDecimal(g.QTY) * Convert.ToDecimal(g.CostPerUnit);
-                gg.UnitCost = Convert.ToDecimal(g.CostPerUnit);
-                gg.RemainQty = 0;
-                gg.RemainUnitCost = 0;
-                gg.RemainAmount = 0;
-                gg.CalDate = CalDate;
-                gg.Status = "Active";
+                //tb_Stock1 gg = new tb_Stock1();
+                //gg.AppDate = AppDate;
+                //gg.Seq = Seq;
+                //gg.App = "Cancel RC";
+                //gg.Appid = Seq;
+                //gg.CreateBy = ClassLib.Classlib.User;
+                //gg.CreateDate = DateTime.Now;
+                //gg.DocNo = CNNo;
+                //gg.RefNo = RCNo;
+                //gg.Type = "Inv/DL";
+                //gg.QTY = -Convert.ToDecimal(g.QTY);
+                //gg.Inbound = 0;
+                //gg.Outbound = -Convert.ToDecimal(g.QTY);
+                //gg.AmountCost = -Convert.ToDecimal(g.QTY) * Convert.ToDecimal(g.CostPerUnit);
+                //gg.UnitCost = Convert.ToDecimal(g.CostPerUnit);
+                //gg.RemainQty = 0;
+                //gg.RemainUnitCost = 0;
+                //gg.RemainAmount = 0;
+                //gg.CalDate = CalDate;
+                //gg.Status = "Active";
 
-                db.tb_Stock1s.InsertOnSubmit(gg);
-                db.SubmitChanges();
+                //db.tb_Stock1s.InsertOnSubmit(gg);
+                //db.SubmitChanges();
 
                 //udpate Stock Item StockInv,StockDL
-                dbClss.Insert_Stock(g.CodeNo, (-Convert.ToDecimal(g.QTY)), "CNRC", "Inv");
+                //dbClss.Insert_Stock(g.CodeNo, (-Convert.ToDecimal(g.QTY)), "CNRC", "Inv");
+
                 //update stock StockBackOrder item
                 dbClss.Insert_StockTemp(g.CodeNo, Convert.ToDecimal(g.QTY), "CNRC_Temp", "Inv");
             }
         }
+        private bool Check_QTY()
+        {
+            bool re = true;
+            try
+            {
+
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    int ID = 0;
+                    decimal Qty = 0;
+                    decimal Qty_Cancel = 0;
+
+                    var g = (from ix in db.tb_ReceiveHs
+                             where ix.InvoiceNo.Trim() == txtInvoiceNo.Text.Trim() && ix.Status != "Cancel"
+                             //&& ix.TEMPNo.Trim() == txtTempNo.Text.Trim()
+                             select ix).ToList();
+                    if (g.Count > 0)  //มีรายการในระบบ
+                    {
+                        //Herder 
+                        string RCNo = StockControl.dbClss.TSt(g.FirstOrDefault().RCNo);
+
+                        //detail
+                        string invno = "";
+                        string TempNo = "";
+                        if(StockControl.dbClss.TSt(g.FirstOrDefault().Type).Equals("รับด้วยใบ Invoice"))
+                            invno = StockControl.dbClss.TSt(g.FirstOrDefault().InvoiceNo);
+                        else
+                            TempNo = StockControl.dbClss.TSt(g.FirstOrDefault().TempNo);
+
+
+                        var vv = (from ix in db.tb_Receives
+                                  where ix.Status != "Cancel" 
+                                  && (((ix.InvoiceNo).Trim() == invno && invno != "")
+                                  || ((ix.TempInvNo).Trim() == TempNo && TempNo != ""))
+                                  select ix).ToList();
+                        if (vv.Count > 0)
+                        {
+
+                            foreach (var gg in vv)
+                            {
+                                Qty = 0;
+                                ID = gg.ID;
+                                Qty_Cancel = Convert.ToDecimal(gg.QTY);
+                                if (ID > 0)
+                                {
+                                    Qty = (Convert.ToDecimal(db.Cal_QTY(gg.CodeNo, "", 0)));
+
+                                    if (Qty < Qty_Cancel)
+                                    {
+                                        MessageBox.Show("จำนวนสินค้าบางรายการไม่พอในการยกเลิกการรับสินค้า");
+                                        re = false;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("ไม่พบ Invoice No , DL No");
+                            re = false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            return re;
+        }
+        private void InsertStock_new(int seq, int id, string RCNo, string CRNo,string inv,string Type)
+        {
+            try
+            {
+
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    DateTime? CalDate = null;
+                    DateTime? AppDate = DateTime.Now;
+                    int Seq = 0;
+                    string Category = "";
+                    decimal Qty_Inv = 0;
+                    decimal Qty_DL = 0;
+                    int ID = 0;
+                    decimal Qty_Remain = 0;
+                    decimal Qty_Cancel = 0;
+
+                    var g = (from ix in db.tb_Receives
+                                 //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
+                             where ix.Status != "Cancel"
+                                  && ((ix.InvoiceNo).Trim() == inv && inv != "")
+                                  && ix.ID == id
+                                  //&& (StockControl.dbClss.TSt(ix.TempInvNo).Trim() == TempNo && TempNo != "")
+
+                             select ix).ToList();
+                    if (g.Count > 0)
+                    {
+                        //insert Stock
+                        foreach (var vv in g)
+                        {
+                            Seq += 1;
+                            Qty_Remain = 0;
+                            ID = vv.ID;
+                            Qty_Cancel = Convert.ToDecimal(vv.QTY);
+                            if (ID>0)
+                            {
+                                Qty_Remain = (Convert.ToDecimal(db.Cal_QTY(vv.CodeNo, "", 0)));  //sum ทั้งหมด
+                                Qty_Inv = (Convert.ToDecimal(db.Cal_QTY(vv.CodeNo, "Invoice", 0))); //sum เฉพาะ Invoice
+                                Qty_DL = (Convert.ToDecimal(db.Cal_QTY(vv.CodeNo, "Temp", 0))); // sum เฉพาะ DL
+                                
+                                if (Qty_Cancel <= Qty_Remain)
+                                {
+                                    if (Type.Equals("รับด้วยใบ Invoice"))
+                                    {
+                                        if(Qty_Inv >= Qty_Cancel)//Cancel Invoice ก่อน
+                                        {
+                                            tb_Stock gg = new tb_Stock();
+                                            gg.AppDate = AppDate;
+                                            gg.Seq = Seq;
+                                            gg.App = "Cancel RC";
+                                            gg.Appid = Seq;
+                                            gg.CreateBy = ClassLib.Classlib.User;
+                                            gg.CreateDate = DateTime.Now;
+                                            gg.DocNo = CRNo;
+                                            gg.RefNo = RCNo;
+                                            gg.CodeNo = vv.CodeNo;
+                                            gg.Type = Type;
+                                            gg.QTY = -Qty_Cancel;
+                                            gg.Inbound = 0;
+                                            gg.Outbound = -Qty_Cancel;
+                                            gg.Type_i = 2;  //Receive = 1,Cancel Receive 2,Shipping = 3,Cancel Shipping = 4,Adjust stock = 5,ClearTemp = 6
+                                            gg.Category = "Invoice";
+                                            gg.Refid = ID;
+                                            gg.UnitCost = vv.CostPerUnit;
+                                            gg.AmountCost = vv.CostPerUnit * -Qty_Cancel;
+                                            gg.RemainQty = 0;
+                                            gg.RemainUnitCost = 0;
+                                            gg.RemainAmount = 0;
+                                            gg.CalDate = CalDate;
+                                            gg.Status = "Active";
+                                            gg.Flag_ClearTemp = 0;   //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
+
+                                            db.tb_Stocks.InsertOnSubmit(gg);
+                                            db.SubmitChanges();
+
+                                            dbClss.AddHistory(this.Name, "คืนการรับสินค้า", " คืนการรับเลขที่ : " + inv + " ประเภท : "+ Type +" CodeNo : " + vv.CodeNo + " จำนวน : " +(-Qty_Cancel).ToString() + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", inv);
+
+                                        }
+                                        else  // ต้องตัดสต็อก 2 ที่ ทั้ง invoice, Temp
+                                        {
+                                            //ตัด Invoice จริงก่อน
+
+                                            decimal Qty_temp = 0;
+                                            Qty_temp = Qty_Cancel - Qty_Inv;
+
+                                            tb_Stock gg = new tb_Stock();
+                                            gg.AppDate = AppDate;
+                                            gg.Seq = Seq;
+                                            gg.App = "Cancel RC";
+                                            gg.Appid = Seq;
+                                            gg.CreateBy = ClassLib.Classlib.User;
+                                            gg.CreateDate = DateTime.Now;
+                                            gg.DocNo = CRNo;
+                                            gg.RefNo = RCNo;
+                                            gg.CodeNo = vv.CodeNo;
+                                            gg.Type = Type;
+                                            gg.QTY = -Qty_Cancel;
+                                            gg.Inbound = 0;
+                                            gg.Outbound = -Qty_Cancel;
+                                            gg.Type_i = 2;  //Receive = 1,Cancel Receive 2,Shipping = 3,Cancel Shipping = 4,Adjust stock = 5,ClearTemp = 6
+                                            gg.Category = "Invoice";
+                                            gg.Refid = ID;
+                                            gg.UnitCost = vv.CostPerUnit;
+                                            gg.AmountCost = vv.CostPerUnit * -Qty_Cancel;
+                                            gg.RemainQty = 0;
+                                            gg.RemainUnitCost = 0;
+                                            gg.RemainAmount = 0;
+                                            gg.CalDate = CalDate;
+                                            gg.Status = "Active";
+                                            gg.Flag_ClearTemp = 0;   //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
+
+                                            db.tb_Stocks.InsertOnSubmit(gg);
+                                            db.SubmitChanges();
+
+                                            dbClss.AddHistory(this.Name, "คืนการรับสินค้า", " คืนการรับเลขที่ : " + inv+ " ประเภท : " + Type+ " CodeNo : " + vv.CodeNo + " จำนวน : " + (-Qty_Cancel).ToString() + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", inv);
+
+
+                                            //Temp
+                                            tb_Stock tt = new tb_Stock();
+                                            tt.AppDate = AppDate;
+                                            tt.Seq = Seq;
+                                            tt.App = "Cancel RC";
+                                            tt.Appid = Seq;
+                                            tt.CreateBy = ClassLib.Classlib.User;
+                                            tt.CreateDate = DateTime.Now;
+                                            tt.DocNo = CRNo;
+                                            tt.RefNo = RCNo;
+                                            tt.CodeNo = vv.CodeNo;
+                                            tt.Type = "ใบส่งของชั่วคราว";
+                                            tt.QTY = -Qty_temp;
+                                            tt.Inbound = 0;
+                                            tt.Outbound = -Qty_temp;
+                                            tt.Type_i = 2;  //Receive = 1,Cancel Receive 2,Shipping = 3,Cancel Shipping = 4,Adjust stock = 5,ClearTemp = 6
+                                            tt.Category = "Temp";
+                                            tt.Refid = ID;
+                                            tt.UnitCost = vv.CostPerUnit;
+                                            tt.AmountCost = vv.CostPerUnit * -Qty_temp;
+                                            tt.RemainQty = 0;
+                                            tt.RemainUnitCost = 0;
+                                            tt.RemainAmount = 0;
+                                            tt.CalDate = CalDate;
+                                            tt.Status = "Active";
+                                            tt.Flag_ClearTemp = 1;   //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
+
+                                            db.tb_Stocks.InsertOnSubmit(tt);
+                                            db.SubmitChanges();
+                                            dbClss.AddHistory(this.Name, "คืนการรับสินค้า", " คืนการรับเลขที่ : " + inv + " ประเภท : " + "ใบส่งของชั่วคราว" + " CodeNo : " + vv.CodeNo + " จำนวน : " + (-Qty_temp).ToString() + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", inv);
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (Qty_DL >= Qty_Cancel)//Cancel Temp ก่อน
+                                        {
+                                            //Temp
+                                            tb_Stock aa = new tb_Stock();
+                                            aa.AppDate = AppDate;
+                                            aa.Seq = Seq;
+                                            aa.App = "Cancel RC";
+                                            aa.Appid = Seq;
+                                            aa.CreateBy = ClassLib.Classlib.User;
+                                            aa.CreateDate = DateTime.Now;
+                                            aa.DocNo = CRNo;
+                                            aa.RefNo = RCNo;
+                                            aa.CodeNo = vv.CodeNo;
+                                            aa.Type = "ใบส่งของชั่วคราว";
+                                            aa.QTY = -Qty_Cancel;
+                                            aa.Inbound = 0;
+                                            aa.Outbound = -Qty_Cancel;
+                                            aa.Type_i = 2;  //Receive = 1,Cancel Receive 2,Shipping = 3,Cancel Shipping = 4,Adjust stock = 5,ClearTemp = 6
+                                            aa.Category = "Temp";
+                                            aa.Refid = ID;
+                                            aa.UnitCost = vv.CostPerUnit;
+                                            aa.AmountCost = vv.CostPerUnit * -Qty_Cancel;
+                                            aa.RemainQty = 0;
+                                            aa.RemainUnitCost = 0;
+                                            aa.RemainAmount = 0;
+                                            aa.CalDate = CalDate;
+                                            aa.Status = "Active";
+                                            aa.Flag_ClearTemp = 1;   //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
+
+                                            db.tb_Stocks.InsertOnSubmit(aa);
+                                            db.SubmitChanges();
+                                            dbClss.AddHistory(this.Name, "คืนการรับสินค้า", " คืนการรับเลขที่ : " + inv + " ประเภท : " + "ใบส่งของชั่วคราว" + " CodeNo : " + vv.CodeNo + " จำนวน : " + (-Qty_Cancel).ToString() + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", inv);
+
+                                        }
+                                        else // ต้องตัดสต็อก 2 ที่ ทั้ง invoice, Temp
+                                        {
+
+                                            decimal Qty_temp = 0;
+                                            Qty_temp = Qty_Cancel - Qty_DL;
+
+                                            //Temp
+                                            tb_Stock aa = new tb_Stock();
+                                            aa.AppDate = AppDate;
+                                            aa.Seq = Seq;
+                                            aa.App = "Cancel RC";
+                                            aa.Appid = Seq;
+                                            aa.CreateBy = ClassLib.Classlib.User;
+                                            aa.CreateDate = DateTime.Now;
+                                            aa.DocNo = CRNo;
+                                            aa.RefNo = RCNo;
+                                            aa.CodeNo = vv.CodeNo;
+                                            aa.Type = "ใบส่งของชั่วคราว";
+                                            aa.QTY = -Qty_Cancel;
+                                            aa.Inbound = 0;
+                                            aa.Outbound = -Qty_Cancel;
+                                            aa.Type_i = 2;  //Receive = 1,Cancel Receive 2,Shipping = 3,Cancel Shipping = 4,Adjust stock = 5,ClearTemp = 6
+                                            aa.Category = "Temp";
+                                            aa.Refid = ID;
+                                            aa.UnitCost = vv.CostPerUnit;
+                                            aa.AmountCost = vv.CostPerUnit * -Qty_Cancel;
+                                            aa.RemainQty = 0;
+                                            aa.RemainUnitCost = 0;
+                                            aa.RemainAmount = 0;
+                                            aa.CalDate = CalDate;
+                                            aa.Status = "Active";
+                                            aa.Flag_ClearTemp = 0;   //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
+
+                                            db.tb_Stocks.InsertOnSubmit(aa);
+                                            db.SubmitChanges();
+                                            dbClss.AddHistory(this.Name, "คืนการรับสินค้า", " คืนการรับเลขที่ : " + inv + " ประเภท : " + "ใบส่งของชั่วคราว" + " CodeNo : " + vv.CodeNo + " จำนวน : " + (-Qty_Cancel).ToString() + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", inv);
+
+                                            //Invoice                                            
+                                            tb_Stock bb = new tb_Stock();
+                                            bb.AppDate = AppDate;
+                                            bb.Seq = Seq;
+                                            bb.App = "Cancel RC";
+                                            bb.Appid = Seq;
+                                            bb.CreateBy = ClassLib.Classlib.User;
+                                            bb.CreateDate = DateTime.Now;
+                                            bb.DocNo = CRNo;
+                                            bb.RefNo = RCNo;
+                                            bb.CodeNo = vv.CodeNo;
+                                            bb.Type = "Invoice";
+                                            bb.QTY = -Qty_temp;
+                                            bb.Inbound = 0;
+                                            bb.Outbound = -Qty_temp;
+                                            bb.Type_i = 2;  //Receive = 1,Cancel Receive 2,Shipping = 3,Cancel Shipping = 4,Adjust stock = 5,ClearTemp = 6
+                                            bb.Category = "Invoice";
+                                            bb.Refid = ID;
+                                            bb.UnitCost = vv.CostPerUnit;
+                                            bb.AmountCost = vv.CostPerUnit * -Qty_temp;
+                                            bb.RemainQty = 0;
+                                            bb.RemainUnitCost = 0;
+                                            bb.RemainAmount = 0;
+                                            bb.CalDate = CalDate;
+                                            bb.Status = "Active";
+                                            bb.Flag_ClearTemp = 0;   //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
+
+                                            db.tb_Stocks.InsertOnSubmit(bb);
+                                            db.SubmitChanges();
+                                            dbClss.AddHistory(this.Name, "คืนการรับสินค้า", " คืนการรับเลขที่ : " + inv + " ประเภท : " + "ใบส่งของชั่วคราว" + " CodeNo : " + vv.CodeNo + " จำนวน : " + (-Qty_temp).ToString() + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", inv);
+                                            
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+       
         private void radGridView1_CellEndEdit(object sender, Telerik.WinControls.UI.GridViewCellEventArgs e)
         {
             try
@@ -630,7 +980,7 @@ namespace StockControl
 
             //if (e.KeyData == (Keys.Control | Keys.S))
             //{
-            //    if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //    if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxBuaaons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             //    {
                     
             //    }
@@ -737,6 +1087,11 @@ namespace StockControl
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
         {
 
         }

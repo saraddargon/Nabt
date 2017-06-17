@@ -83,6 +83,11 @@ namespace StockControl
                         {
                             c += 1;
                             x.Cells["No"].Value = c;
+
+                            x.Cells["StockInv"].Value = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(x.Cells["CodeNo"].Value), "Invoice", 0)));
+                            x.Cells["StockDL"].Value = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(x.Cells["CodeNo"].Value), "Temp", 0)));
+                            x.Cells["StockBackOrder"].Value = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(x.Cells["CodeNo"].Value), "BackOrder", 0)));
+
                         }
                     }
                     

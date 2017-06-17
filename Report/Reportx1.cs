@@ -173,7 +173,7 @@ namespace Report
                         rptDc.SetParameterValue("@DateTime", DateTime.Now);
                         // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
                     } break;
-                case "ReportPR2":
+                case "ReportPR3":
                     {
 
                         rptDc.SetParameterValue("@PRNoFrom", Convert.ToString(Value[0].ToString()));

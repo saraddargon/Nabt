@@ -250,8 +250,8 @@ namespace StockControl
                             Report.Reportx1.Value = new string[2];
                             Report.Reportx1.Value[0] = PRNo1;
                             Report.Reportx1.Value[1] = PRNo2;
-                            Report.Reportx1.WReport = "ReportPR2";
-                            Report.Reportx1 op = new Report.Reportx1("ReportPR2.rpt");
+                            Report.Reportx1.WReport = "ReportPR3";
+                            Report.Reportx1 op = new Report.Reportx1("ReportPR3.rpt");
                             op.Show();
                         }
                         else

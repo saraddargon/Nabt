@@ -283,6 +283,7 @@
             this.ddlType.Size = new System.Drawing.Size(125, 19);
             this.ddlType.TabIndex = 7;
             this.ddlType.ThemeName = "Office2010Blue";
+            this.ddlType.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.ddlType_SelectedIndexChanged);
             // 
             // txtCNNo
             // 
