@@ -315,7 +315,9 @@ namespace StockControl
             if (C > 0)
             {
                 row = row - 1;
-                    MessageBox.Show("ลบรายการ สำเร็จ!");
+                if (radGridView1.Rows.Count == 1)
+                    row = 0;
+                MessageBox.Show("ลบรายการ สำเร็จ!");
             }
               
 

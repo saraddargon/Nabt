@@ -132,6 +132,18 @@
     <Compile Include="Process\ClearTempList.Designer.cs">
       <DependentUpon>ClearTempList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\MappingAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\MappingAdd.Designer.cs">
+      <DependentUpon>MappingAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ModelMapping.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ModelMapping.Designer.cs">
+      <DependentUpon>ModelMapping.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\PrintPR.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -324,12 +336,6 @@
     <Compile Include="Process\Forecast.Designer.cs">
       <DependentUpon>Forecast.cs</DependentUpon>
     </Compile>
-    <Compile Include="Process\ModelMapping.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Process\ModelMapping.Designer.cs">
-      <DependentUpon>ModelMapping.cs</DependentUpon>
-    </Compile>
     <Compile Include="Process\MasterModel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -417,6 +423,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\ClearTempList.resx">
       <DependentUpon>ClearTempList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\MappingAdd.resx">
+      <DependentUpon>MappingAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ModelMapping.resx">
+      <DependentUpon>ModelMapping.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\Report\ReportAdjustStock.resx">
       <DependentUpon>ReportAdjustStock.cs</DependentUpon>
@@ -510,9 +522,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\Forecast.resx">
       <DependentUpon>Forecast.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Process\ModelMapping.resx">
-      <DependentUpon>ModelMapping.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\MasterModel.resx">
       <DependentUpon>MasterModel.cs</DependentUpon>
