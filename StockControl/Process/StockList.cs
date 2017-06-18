@@ -62,12 +62,21 @@ namespace StockControl
 
                 //         }).ToList();
                
-                 
-                    ddlType.DataSource = TypeCode;
-                    ddlType.DisplayMember = "TypeCode";
-                    ddlType.Text = "";
+                if(!TypeCode.Count().Equals(0))
+                {
 
-                    ddlType.Items.Add("");//การ add ค่าเข้าไปต่อท้าย
+                    try
+                    {
+
+                        ddlType.DataSource = TypeCode;
+                        ddlType.DisplayMember = "TypeCode";
+                        ddlType.Text = "";
+
+                        ddlType.Items.Add("");//การ add ค่าเข้าไปต่อท้าย
+                    }
+                    catch { }
+                }
+                 
               
                    
             }
