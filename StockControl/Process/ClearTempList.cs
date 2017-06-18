@@ -18,15 +18,15 @@ namespace StockControl
             InitializeComponent();
         }
         Telerik.WinControls.UI.RadTextBox RCNo_tt = new Telerik.WinControls.UI.RadTextBox();
-        Telerik.WinControls.UI.RadTextBox PRNo_tt = new Telerik.WinControls.UI.RadTextBox();
+       // Telerik.WinControls.UI.RadTextBox PRNo_tt = new Telerik.WinControls.UI.RadTextBox();
         int screen = 0;
         public ClearTempList(Telerik.WinControls.UI.RadTextBox RCNoxxx
-                    , Telerik.WinControls.UI.RadTextBox PRNoxxx
+                 
                 )
         {
             InitializeComponent();
             RCNo_tt = RCNoxxx;
-            PRNo_tt = PRNoxxx;
+           
             screen = 1;
         }
 
@@ -408,26 +408,84 @@ namespace StockControl
                     
                     try
                     {
-                        if (cboStatus.Text.Equals("รอรับเข้า"))
-                            Load_WaitingReceive();
-                        else if (cboStatus.Text.Equals("รับเข้าบางส่วน"))
-                            Load_PratitalReceive();
-                        else if (cboStatus.Text.Equals("รับเข้าแล้ว"))
-                            Load_CompletedReceive();
-                        else
+                        //if (cboStatus.Text.Equals("รอรับเข้า"))
+                        //    Load_WaitingReceive();
+                        // if (cboStatus.Text.Equals("รับเข้าบางส่วน"))
+                        //    Load_PratitalReceive();
+                        //else if (cboStatus.Text.Equals("รับเข้าแล้ว"))
+                        //    Load_CompletedReceive();
+                        //else
+                        //{
+                        //Load_WaitingReceive();
+                        //Load_PratitalReceive();
+                        //    Load_CompletedReceive();
+                        //}
+                        string VendorNo_ss = "";
+                        if (!cboVendorName.Text.Equals(""))
+                            VendorNo_ss = txtVendorNo.Text;
+                        int dgvNo = 0;
+                        bool S = false;
+                        DateTime inclusiveStart = dtDate1.Value.Date;
+                        // Include the *whole* of the day indicated by searchEndDate
+                        DateTime exclusiveEnd = dtDate2.Value.Date.AddDays(1);
+
+
+                        var r = (from d in db.tb_ReceiveHs
+                                     //join c in db.tb_ReceiveHs on d.RCNo equals c.RCNo
+                                     //join p in db.tb_PurchaseRequestLines on d.PRID equals p.id
+                                     //join i in db.tb_Items on d.CodeNo equals i.CodeNo
+
+                                 where d.VendorNo.Contains(VendorNo_ss)
+                                    && d.Flag_Temp == true && d.TempNo.Contains(txtDLNo.Text)
+                                    && d.Status != "Cancel"
+                                    && (d.CreateDate >= inclusiveStart
+                                        && d.CreateDate < exclusiveEnd)
+                                 select new
+                                 {
+                                    
+                                     RCNo = d.RCNo,
+                                     VendorNo = d.VendorNo
+                                    ,
+                                     VendorName = d.VendorName
+                                     ,RemarkHD = d.RemarkHD
+                                     ,
+                                     TempNo = d.TempNo
+                                     ,
+                                     RCDate = d.RCDate
+                                    ,
+                                     CreateBy = d.CreateBy
+                                    ,
+                                     CreateDate = d.CreateDate
+                                    ,
+                                     Status = d.Status
+                                 }
+                ).ToList();
+                        //dgvData.DataSource = StockControl.dbClss.LINQToDataTable(r);
+                        if (r.Count > 0)
                         {
-                            Load_WaitingReceive();
-                            Load_PratitalReceive();
-                            Load_CompletedReceive();
+                            dgvNo = dgvData.Rows.Count() + 1;
+                            string status = "";
+                            foreach (var vv in r)
+                            {
+                                if (vv.Status.Equals("Partial"))
+                                    status = "รับเข้าบางส่วน";
+                                else
+                                    status = "รับเข้าครบแล้ว";
+
+                                dgvData.Rows.Add(dgvNo.ToString(),vv.RCNo,vv.TempNo,vv.VendorNo,vv.VendorName,vv.RemarkHD
+                                    ,vv.CreateBy,vv.RCDate,vv.CreateDate, status
+                                            );
+                            }
+
                         }
 
-                        int rowcount = 0;
-                        foreach (var x in dgvData.Rows)
-                        {
-                            rowcount += 1;
-                            x.Cells["dgvNo"].Value = rowcount;
+                        //int rowcount = 0;
+                        //foreach (var x in dgvData.Rows)
+                        //{
+                        //    rowcount += 1;
+                        //    x.Cells["dgvNo"].Value = rowcount;
                             
-                        }
+                        //}
                     }
                     catch (Exception ex) { MessageBox.Show(ex.Message); }
 
@@ -498,19 +556,12 @@ namespace StockControl
                         RCNo_tt.Text = Convert.ToString(dgvData.CurrentRow.Cells["RCNo"].Value);
                         this.Close();
                     }
-                    else
-                    {
-                        RCNo_tt.Text = Convert.ToString(dgvData.CurrentRow.Cells["RCNo"].Value);
-                        PRNo_tt.Text = Convert.ToString(dgvData.CurrentRow.Cells["PRNo"].Value);
-                        this.Close();
-                    }
                 }
                 else
                 {
-                    Receive a = new Receive(Convert.ToString(dgvData.CurrentRow.Cells["RCNo"].Value),
-                        Convert.ToString(dgvData.CurrentRow.Cells["PRNo"].Value));
+                    ClearTemp a = new ClearTemp(Convert.ToString(dgvData.CurrentRow.Cells["RCNo"].Value));
                     a.ShowDialog();
-                    this.Close();
+
                 }
 
             }
@@ -621,29 +672,27 @@ namespace StockControl
                 txtVendorNo.Text = "";
         }
 
-        private void MasterTemplate_CellDoubleClick(object sender, GridViewCellEventArgs e)
+    
+
+        private void dgvData_CellDoubleClick(object sender, GridViewCellEventArgs e)
         {
-            if (screen.Equals(1))
+            try
+
             {
-                if (!Convert.ToString(e.Row.Cells["RCNo"].Value).Equals(""))
+                if (screen.Equals(1))
                 {
                     RCNo_tt.Text = Convert.ToString(e.Row.Cells["RCNo"].Value);
                     this.Close();
                 }
                 else
+
                 {
-                    RCNo_tt.Text = Convert.ToString(e.Row.Cells["RCNo"].Value);
-                    PRNo_tt.Text = Convert.ToString(e.Row.Cells["PRNo"].Value);
-                    this.Close();
+                    ClearTemp a = new ClearTemp(Convert.ToString(e.Row.Cells["RCNo"].Value));
+                    a.ShowDialog();
                 }
+                
             }
-            else
-            {
-                Receive a = new Receive(Convert.ToString(e.Row.Cells["RCNo"].Value),
-                    Convert.ToString(e.Row.Cells["PRNo"].Value));
-                a.ShowDialog();
-                this.Close();
-            }
+            catch { }
         }
     }
 }

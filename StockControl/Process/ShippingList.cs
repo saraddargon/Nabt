@@ -67,8 +67,10 @@ namespace StockControl
             //radGridView1.ReadOnly = true;
             dgvData.AutoGenerateColumns = false;
             //GETDTRow();
-           // DefaultItem();
-            
+            // DefaultItem();
+            dtDate1.Value = DateTime.Now;
+            dtDate2.Value = DateTime.Now;
+
             DataLoad();
 
          
@@ -115,7 +117,10 @@ namespace StockControl
             
             try
             {
-                
+                DateTime inclusiveStart = dtDate1.Value.Date;
+                // Include the *whole* of the day indicated by searchEndDate
+                DateTime exclusiveEnd = dtDate2.Value.Date.AddDays(1);
+
                 this.Cursor = Cursors.WaitCursor;
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
@@ -126,9 +131,11 @@ namespace StockControl
                              where h.Status != "Cancel" //&& d.verticalID == VerticalID
                                     && d.Status != "Cancel"
                                  && d.ShippingNo.Contains(txtSHNo.Text.Trim())
-                                 //&& ((Convert.ToDateTime(h.ShipDate.Value)) >= (Convert.ToDateTime(dtDate1.Value)))
-                                 //&& ((Convert.ToDateTime(h.ShipDate.Value)) <= (Convert.ToDateTime(dtDate2.Value)))
-                                 
+                                 && (h.ShipDate >= inclusiveStart
+                                        && h.ShipDate < exclusiveEnd)
+                             //&& ((Convert.ToDateTime(h.ShipDate.Value)) >= (Convert.ToDateTime(dtDate1.Value)))
+                             //&& ((Convert.ToDateTime(h.ShipDate.Value)) <= (Convert.ToDateTime(dtDate2.Value)))
+
                              select new
                              {
                                  ShippingNo = d.ShippingNo,

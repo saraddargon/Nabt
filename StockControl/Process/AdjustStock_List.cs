@@ -95,16 +95,22 @@ namespace StockControl
             {
               
                 int dgvNo = 0;
-                bool S = false; 
-               
-            
-                    var r = (from h in db.tb_StockAdjusts
+                bool S = false;
+                DateTime inclusiveStart = dtDate1.Value.Date;
+                // Include the *whole* of the day indicated by searchEndDate
+                DateTime exclusiveEnd = dtDate2.Value.Date.AddDays(1);
+
+
+                var r = (from h in db.tb_StockAdjusts
                              join d in db.tb_StockAdjustHs on h.AdjustNo equals d.ADNo
                              join i in db.tb_Items on h.CodeNo equals i.CodeNo
 
                              where //h.Status == "Waiting" //&& d.verticalID == VerticalID
                                
                                  h.AdjustNo.Contains(txtADNo.Text)
+                                   && (h.CreateDate >= inclusiveStart
+                                 && h.CreateDate < exclusiveEnd)
+
                              select new
                              {
                                  CodeNo = h.CodeNo,

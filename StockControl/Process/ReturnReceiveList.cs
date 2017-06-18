@@ -119,12 +119,22 @@ namespace StockControl
                     string VendorNo = "";
                     if (!cboVendorName.Text.Equals(""))
                         VendorNo = txtVendorNo.Text;
+
+                    DateTime inclusiveStart = dtDate1.Value.Date;
+                    // Include the *whole* of the day indicated by searchEndDate
+                    DateTime exclusiveEnd = dtDate2.Value.Date.AddDays(1);
+
+
                     try
                     {
                         var d = (from ix in db.tb_ReceiveHs select ix)
                             .Where(a => a.InvoiceNo.Contains(txtInvoiceNo.Text.Trim())
                                     && a.VendorNo.Contains(VendorNo)
-                                    && a.Status != "Cancel").ToList();
+                                    && a.Status != "Cancel"
+                                    && (a.RCDate >= inclusiveStart
+                                        && a.RCDate < exclusiveEnd)
+                                    )
+                                    .ToList();
                         if (d.Count() > 0)
                         {
                             

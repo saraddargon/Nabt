@@ -462,8 +462,8 @@ namespace StockControl
                 {
                     if (rowInfo.IsVisible)
                     {
-                        if (StockControl.dbClss.TInt(rowInfo.Cells["QTY"].Value) != (0))
-                        {
+                        //if (StockControl.dbClss.TInt(rowInfo.Cells["QTY"].Value) != (0))
+                        //{
                             c += 1;
                            
                             if (StockControl.dbClss.TSt(rowInfo.Cells["CodeNo"].Value).Equals(""))
@@ -473,7 +473,7 @@ namespace StockControl
                             if (StockControl.dbClss.TDe(rowInfo.Cells["Unit"].Value).Equals(""))
                                 err += "- “หน่วย:” เป็นค่าว่าง \n";
 
-                        }
+                        //}
                     }
                 }
 
@@ -522,8 +522,10 @@ namespace StockControl
                             DataLoad();
                             btnNew.Enabled = true;
                             btnDel_Item.Enabled = false;
+
                             ////insert Stock
-                            Insert_Stock();
+                            //Insert_Stock();
+                            Insert_Stock_new();
                         }
                         else
                         {
@@ -534,6 +536,92 @@ namespace StockControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             finally { this.Cursor = Cursors.Default; }
+        }
+        private void Insert_Stock_new()
+        {
+            try
+            {
+
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    DateTime? CalDate = null;
+                    DateTime? AppDate = DateTime.Now;
+                    int Seq = 0;
+
+                    //string Type = "";
+                    string Category = "Invoice"; //Temp,Invoice
+                    //if (rdoInvoice.IsChecked)
+                    //{
+                    //    Category = "Invoice";
+                    //    Type = "รับด้วยใบ Invoice";
+                    //}
+                    //else
+                    //{
+                    //    Category = "Temp";
+                    //    Type = "ใบส่งของชั่วคราว";
+                    //}
+
+                    //string CNNo = CNNo = StockControl.dbClss.GetNo(6, 2);
+                    var g = (from ix in db.tb_StockAdjusts
+                                 //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
+                             where ix.AdjustNo.Trim() == txtADNo.Text.Trim() && ix.Status != "Cancel"
+
+                             select ix).ToList();
+                    if (g.Count > 0)
+                    {
+                        //insert Stock
+
+                        foreach (var vv in g)
+                        {
+                            Seq += 1;
+
+                            tb_Stock gg = new tb_Stock();
+                            gg.AppDate = AppDate;
+                            gg.Seq = Seq;
+                            gg.App = "Adjust";
+                            gg.Appid = Seq;
+                            gg.CreateBy = ClassLib.Classlib.User;
+                            gg.CreateDate = DateTime.Now;
+                            gg.DocNo = txtADNo.Text;
+                            gg.RefNo = "";
+                            gg.Type = "Adjust";
+                            gg.QTY = Convert.ToDecimal(vv.Qty);
+                            if (Convert.ToDecimal(vv.Qty) < 0)
+                            {
+                                gg.Outbound = Convert.ToDecimal(vv.Qty);
+                                gg.Inbound = 0;
+                            }
+                            else
+                            {
+                                gg.Inbound = Convert.ToDecimal(vv.Qty);
+                                gg.Outbound = 0;
+                            }
+
+                            gg.AmountCost = (Convert.ToDecimal(vv.Qty)) * get_cost(vv.CodeNo);
+                            gg.UnitCost = get_cost(vv.CodeNo);
+                            gg.RemainQty = 0;
+                            gg.RemainUnitCost = 0;
+                            gg.RemainAmount = 0;
+                            gg.CalDate = CalDate;
+                            gg.Status = "Active";
+
+                            gg.Type_i = 5;  //Receive = 1,Cancel Receive 2,Shipping = 3,Cancel Shipping = 4,Adjust stock = 5,ClearTemp = 6
+                            gg.Category = Category;
+                            gg.Refid = vv.id;
+                            gg.Flag_ClearTemp = 0;   //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
+
+                            db.tb_Stocks.InsertOnSubmit(gg);
+                            db.SubmitChanges();
+
+                            //update item
+                            //dbClss.Insert_Stock(vv.CodeNo, (Convert.ToDecimal(vv.Qty)), "Adjust", "Inv");
+
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
         private void Insert_Stock()
         {

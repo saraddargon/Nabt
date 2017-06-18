@@ -932,6 +932,7 @@
             this.cboVendorName.TabIndex = 2;
             this.cboVendorName.TabStop = false;
             this.cboVendorName.SelectedIndexChanged += new System.EventHandler(this.cboVendor_SelectedIndexChanged);
+            this.cboVendorName.Leave += new System.EventHandler(this.cboVendorName_Leave);
             // 
             // radRibbonBarButtonGroup2
             // 

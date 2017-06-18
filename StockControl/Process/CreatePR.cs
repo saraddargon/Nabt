@@ -38,7 +38,7 @@ namespace StockControl
         private void radMenuItem2_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            HistoryView hw = new HistoryView(this.Name + txtTempNo.Text.Trim());
+            HistoryView hw = new HistoryView(this.Name,txtPRNo.Text);
             this.Cursor = Cursors.Default;
             hw.ShowDialog();
         }
@@ -303,6 +303,13 @@ namespace StockControl
                         gg.UpdateDate = DateTime.Now;
                         dbClss.AddHistory(this.Name,"แก้ไข CreatePR", "แก้ไข CreatePR โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtPRNo.Text);
 
+                        if (!txtPRNo.Text.Trim().Equals(row["PRNo"].ToString()))
+                        {
+                            gg.PRNo = txtPRNo.Text;
+                            
+                            dbClss.AddHistory(this.Name, "แก้ไข CreatePR", "แก้ไขเลขที่ใบสั่งซื้อ [" + txtPRNo.Text.Trim() + "]", txtPRNo.Text);
+                        }
+
                         if (StockControl.dbClss.TSt(gg.Barcode).Equals(""))
                             gg.Barcode = StockControl.dbClss.SaveQRCode2D(txtPRNo.Text.Trim());
 
@@ -484,7 +491,9 @@ namespace StockControl
                                         + " CodeNo :" + StockControl.dbClss.TSt(g.Cells["dgvCodeNo"].Value)
                                         + " แก้ไขโดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtPRNo.Text);
 
-                                        if (!StockControl.dbClss.TSt(g.Cells["dgvCodeNo"].Value).Equals(row["CodeNo"].ToString()))
+                                    u.PRNo = txtPRNo.Text.Trim();
+                                    
+                                    if (!StockControl.dbClss.TSt(g.Cells["dgvCodeNo"].Value).Equals(row["CodeNo"].ToString()))
                                         {
                                             u.CodeNo = StockControl.dbClss.TSt(g.Cells["dgvCodeNo"].Value);
                                             dbClss.AddHistory(this.Name , "แก้ไข Item PR", "แก้ไขรหัสพาร์ท [" + u.CodeNo + "]", txtPRNo.Text);
@@ -1308,6 +1317,11 @@ namespace StockControl
 
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void cboVendorName_Leave(object sender, EventArgs e)
+        {
+            cboVendor_SelectedIndexChanged(null, null);
         }
     }
 }

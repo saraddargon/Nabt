@@ -34,7 +34,7 @@ namespace StockControl
         private void radMenuItem2_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            HistoryView hw = new HistoryView(this.Name);
+            HistoryView hw = new HistoryView(this.Name,txtCodeNo.Text);
             this.Cursor = Cursors.Default;
             hw.ShowDialog();
         }
@@ -399,9 +399,12 @@ namespace StockControl
                         else
                             txtUpdateDate.Text = "";
 
-                        lblStock.Text = StockControl.dbClss.TDe(g.FirstOrDefault().StockInv).ToString("###,###,##0.00");
-                        lblTempStock.Text = StockControl.dbClss.TDe(g.FirstOrDefault().StockDL).ToString("###,###,##0.00");
-                        lblOrder.Text = StockControl.dbClss.TDe(g.FirstOrDefault().StockBackOrder).ToString("###,###,##0.00");
+                        //lblStock.Text = StockControl.dbClss.TDe(g.FirstOrDefault().StockInv).ToString("###,###,##0.00");
+                        //lblTempStock.Text = StockControl.dbClss.TDe(g.FirstOrDefault().StockDL).ToString("###,###,##0.00");
+                        //lblOrder.Text = StockControl.dbClss.TDe(g.FirstOrDefault().StockBackOrder).ToString("###,###,##0.00");
+                        lblStock.Text = (Convert.ToDecimal(db.Cal_QTY(txtCodeNo.Text, "Invoice", 0)).ToString("###,###,##0.00"));
+                        lblTempStock.Text = (Convert.ToDecimal(db.Cal_QTY(txtCodeNo.Text, "Temp", 0)).ToString("###,###,##0.00"));
+                        lblOrder.Text = (Convert.ToDecimal(db.Cal_QTY(txtCodeNo.Text, "BackOrder", 0)).ToString("###,###,##0.00"));
 
                         if (StockControl.dbClss.TSt(g.FirstOrDefault().Status).Equals("InActive"))
                         {
@@ -602,7 +605,7 @@ namespace StockControl
                             string File_temp = txtCodeNo.Text + "_" + ".pdf";//Path.GetExtension(AttachFile);  // IMG_IT-0123.jpg
                             File.Copy(FileName, tagetpart + File_temp, true);//ต้องทำเสมอ เป็นการ ก็อปปี้ Path เพื่อให้รูป มาว่างไว้ที่ path นี้ 
 
-                            dbClss.AddHistory(this.Name , txtCodeNo.Text, "เพิ่มไฟล์ Drawing [" + txtCodeNo.Text.Trim() + "]", "");
+                            dbClss.AddHistory(this.Name , "เพิ่ม Drawing", "เพิ่มไฟล์ Drawing [" + txtCodeNo.Text.Trim() + "]", txtCodeNo.Text);
                         }
                         
                         //
@@ -611,7 +614,7 @@ namespace StockControl
                         db.tb_Items.InsertOnSubmit(u);
                         db.SubmitChanges();
                         C += 1;
-                        dbClss.AddHistory(this.Name, txtCodeNo.Text, "Insert Part [" + u.CodeNo + "]", "");
+                        dbClss.AddHistory(this.Name,"เพิ่มทูล" , "Insert Part [" + u.CodeNo + "]", txtCodeNo.Text);
                     }
                     else  //Edit
                     {
@@ -629,7 +632,7 @@ namespace StockControl
                                 
                                     gg.UpdateBy = ClassLib.Classlib.User;
                                     gg.UpdateDate = DateTime.Now;
-                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขโดย [" + ClassLib.Classlib.User +" วันที่ :" +DateTime.Now.ToString("dd/MMM/yyyy")+ "]", "");
+                                    dbClss.AddHistory(this.Name , "แก้ไข ทูล", "แก้ไขโดย [" + ClassLib.Classlib.User +" วันที่ :" +DateTime.Now.ToString("dd/MMM/yyyy")+ "]", txtCodeNo.Text);
 
                                 //if(StockControl.dbClss.TSt(gg.BarCode).Equals(""))
                                 //    gg.BarCode = StockControl.dbClss.SaveQRCode2D(txtCodeNo.Text);
@@ -638,137 +641,137 @@ namespace StockControl
                                 if (!txtPartName.Text.Trim().Equals(row["ItemNo"].ToString()))
                                 {
                                     gg.ItemNo = txtPartName.Text.Trim();
-                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขชื่อพาร์ท [" + txtPartName.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name , "แก้ไข ทูล", "แก้ไขชื่อพาร์ท [" + txtPartName.Text.Trim() + "]", txtCodeNo.Text);
                                 }
                                 if (!txtDetailPart.Text.Trim().Equals(row["ItemDescription"].ToString()))
                                 {
                                     gg.ItemDescription = txtDetailPart.Text.Trim();
-                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขรายละเอียดพาร์ท [" + txtDetailPart.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name , "แก้ไข ทูล", "แก้ไขรายละเอียดพาร์ท [" + txtDetailPart.Text.Trim() + "]", txtCodeNo.Text);
                                 }
                                 if (!cboGroupType.Text.Trim().Equals(row["GroupCode"].ToString()))
                                 {
                                     gg.GroupCode = cboGroupType.Text.Trim();
-                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขประเภทกลุ่มสินค้า [" + cboGroupType.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name , "แก้ไข ทูล", "แก้ไขประเภทกลุ่มสินค้า [" + cboGroupType.Text.Trim() + "]", txtCodeNo.Text);
                                 }
                                 if (!cboTypeCode.Text.Trim().Equals(row["TypeCode"].ToString()))
                                 {
                                     gg.TypeCode = cboTypeCode.Text.Trim();
-                                    dbClss.AddHistory(this.Name, txtCodeNo.Text, "แก้ไขประเภทสินค้า [" + cboTypeCode.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name, "แก้ไข ทูล", "แก้ไขประเภทสินค้า [" + cboTypeCode.Text.Trim() + "]", txtCodeNo.Text);
                                 }
                                 if (!cboUnitBuy.Text.Trim().Equals(row["UnitBuy"].ToString()))
                                 {
                                     gg.UnitBuy = cboUnitBuy.Text.Trim();
-                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขหน่วยซื้อ [" + cboUnitBuy.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name , "แก้ไข ทูล", "แก้ไขหน่วยซื้อ [" + cboUnitBuy.Text.Trim() + "]", txtCodeNo.Text);
                                 }
                                 if (!cboUnitShipping.Text.Trim().Equals(row["UnitShip"].ToString()))
                                 {
                                     gg.UnitShip = cboUnitShipping.Text.Trim();
-                                    dbClss.AddHistory(this.Name, txtCodeNo.Text, "แก้ไขหน่วยขาย [" + cboUnitShipping.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name, "แก้ไข ทูล", "แก้ไขหน่วยขาย [" + cboUnitShipping.Text.Trim() + "]", txtCodeNo.Text);
                                 }
                                 if (!txtPCSUnit.Text.Trim().Equals(row["PCSUnit"].ToString()))
                                 {
                                     decimal PCSUnit = 0; decimal.TryParse(txtPCSUnit.Text, out PCSUnit);
                                     gg.PCSUnit = PCSUnit;
-                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไข ชิ้น/หน่วย [" + PCSUnit.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name , "แก้ไข ทูล", "แก้ไข ชิ้น/หน่วย [" + PCSUnit.ToString() + "]", txtCodeNo.Text);
                                 }
                                 if (!txtShelfNo.Text.Trim().Equals(row["ShelfNo"].ToString()))
                                 {
                                     gg.ShelfNo = txtShelfNo.Text.Trim();
-                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขหน่วยขาย [" + txtShelfNo.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name , "แก้ไข ทูล", "แก้ไขหน่วยขาย [" + txtShelfNo.Text.Trim() + "]", txtCodeNo.Text);
                                 }
                                 if (!txtStandCost.Text.Trim().Equals(row["StandardCost"].ToString()))
                                 {
                                     decimal StandardCost = 0; decimal.TryParse(txtStandCost.Text, out StandardCost);
                                     gg.StandardCost = StandardCost;
-                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไข ราคาซื้อ/หน่วย [" + StandardCost.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name , "แก้ไข ทูล", "แก้ไข ราคาซื้อ/หน่วย [" + StandardCost.ToString() + "]", txtCodeNo.Text);
                                 }
                                 if (!cboReplacement.Text.Trim().Equals(row["Replacement"].ToString()))
                                 {
                                     gg.Replacement = cboReplacement.Text.Trim();
-                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขทดแทนด้วย(Replecement) [" + cboReplacement.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name , "แก้ไข ทูล", "แก้ไขทดแทนด้วย(Replecement) [" + cboReplacement.Text.Trim() + "]", txtCodeNo.Text);
                                 }
                                 if (!txtVenderName.Text.Trim().Equals(row["VendorNo"].ToString()))
                                 {
                                     gg.VendorNo = txtVenderName.Text.Trim();
-                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขรหัสผู้ขาย [" + txtVenderName.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name , "แก้ไข ทูล", "แก้ไขรหัสผู้ขาย [" + txtVenderName.Text.Trim() + "]", txtCodeNo.Text);
                                 }
                                 if (!cboVendor.Text.Trim().Equals(row["VendorItemName"].ToString()))
                                 {
                                     gg.VendorItemName = cboVendor.Text.Trim();
-                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขชื่อผู้ขาย [" + cboVendor.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name , "แก้ไข ทูล", "แก้ไขชื่อผู้ขาย [" + cboVendor.Text.Trim() + "]", txtCodeNo.Text);
                                 }
                                 if (!ddlUseTacking.Text.Trim().Equals(row["UseTacking"].ToString()))
                                 {
                                     gg.UseTacking = ddlUseTacking.Text.Trim();
-                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไขควบคุม Lot (Use Tracking) [" + ddlUseTacking.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name , "แก้ไข ทูล", "แก้ไขควบคุม Lot (Use Tracking) [" + ddlUseTacking.Text.Trim() + "]", txtCodeNo.Text);
                                 }
                                 if (!txtLeadTime.Text.Trim().Equals(row["Leadtime"].ToString()))
                                 {
                                     decimal Leadtime = 0; decimal.TryParse(txtLeadTime.Text, out Leadtime);
                                     gg.Leadtime = Leadtime;
-                                    dbClss.AddHistory(this.Name, txtCodeNo.Text, "แก้ไข ระยะเวลาซื้อ [" + txtLeadTime.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name, "แก้ไข ทูล", "แก้ไข ระยะเวลาซื้อ [" + txtLeadTime.ToString() + "]", txtCodeNo.Text);
                                 }
                                 if (!txtMaximumStock.Text.Trim().Equals(row["MaximumStock"].ToString()))
                                 {
                                     decimal MaximumStock = 0; decimal.TryParse(txtMaximumStock.Text, out MaximumStock);
                                     gg.MaximumStock = MaximumStock;
-                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไข MaximumStock [" + txtMaximumStock.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name , "แก้ไข ทูล", "แก้ไข MaximumStock [" + txtMaximumStock.ToString() + "]", txtCodeNo.Text);
                                 }
                                 if (!txtMimimumStock.Text.Trim().Equals(row["MinimumStock"].ToString()))
                                 {
                                     decimal MinimumStock = 0; decimal.TryParse(txtMimimumStock.Text, out MinimumStock);
                                     gg.MinimumStock = MinimumStock;
-                                    dbClss.AddHistory(this.Name, txtCodeNo.Text, "แก้ไข MinimumStock [" + txtMimimumStock.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name, "แก้ไข ทูล", "แก้ไข MinimumStock [" + txtMimimumStock.ToString() + "]", txtCodeNo.Text);
                                 }
                                 if (!txtReOrderPoint.Text.Trim().Equals(row["ReOrderPoint"].ToString()))
                                 {
                                     decimal ReOrderPoint = 0; decimal.TryParse(txtReOrderPoint.Text, out ReOrderPoint);
                                     gg.ReOrderPoint = ReOrderPoint;
-                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไข ReOrder Point [" + txtReOrderPoint.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name , "แก้ไข ทูล", "แก้ไข ReOrder Point [" + txtReOrderPoint.ToString() + "]", txtCodeNo.Text);
                                 }
                                 if (!chkStopOrder.Checked.ToString().Trim().Equals(row["StopOrder"].ToString()))
                                 {
                                     bool StopOrder = chkStopOrder.Checked;
                                     gg.StopOrder = StopOrder;
-                                    dbClss.AddHistory(this.Name, txtCodeNo.Text, "แก้ไข หยุดสั่งซื้อ (Stop Order) [" + chkStopOrder.Checked.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name, "แก้ไข ทูล", "แก้ไข หยุดสั่งซื้อ (Stop Order) [" + chkStopOrder.Checked.ToString() + "]", txtCodeNo.Text);
                                 }
                                 if (!txtRemark.Text.Trim().Equals(row["Remark"].ToString()))
                                 {
                                     gg.Remark = txtRemark.Text.Trim();
-                                    dbClss.AddHistory(this.Name  , txtCodeNo.Text, "แก้ไข หมายเหตุ [" + txtRemark.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name  , "แก้ไข ทูล", "แก้ไข หมายเหตุ [" + txtRemark.Text.Trim() + "]", txtCodeNo.Text);
                                 }
                                 if (!txtSize.Text.Trim().Equals(row["Size"].ToString()))
                                 {
                                     gg.Size = txtSize.Text.Trim();
-                                    dbClss.AddHistory(this.Name  , txtCodeNo.Text, "แก้ไข ขนาด [" + txtSize.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name  , "แก้ไข ทูล", "แก้ไข ขนาด [" + txtSize.Text.Trim() + "]", txtCodeNo.Text);
                                 }
                                 if (!txtMaker.Text.Trim().Equals(row["Maker"].ToString()))
                                 {
                                     gg.Maker = txtMaker.Text.Trim();
-                                    dbClss.AddHistory(this.Name  , txtCodeNo.Text, "แก้ไข ผู้ผลิต [" + txtMaker.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name  , "แก้ไข ทูล", "แก้ไข ผู้ผลิต [" + txtMaker.Text.Trim() + "]", txtCodeNo.Text);
                                 }
                                 if (!txtToolLife.Text.Trim().Equals(row["Toollife"].ToString()))
                                 {
                                     decimal Toollife = 0; decimal.TryParse(txtToolLife.Text, out Toollife);
                                     gg.Toollife = Toollife;
-                                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "แก้ไข อายุการใช้งาน(Toollife)  [" + txtToolLife.Text.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name , "แก้ไข ทูล", "แก้ไข อายุการใช้งาน(Toollife)  [" + txtToolLife.Text.ToString() + "]", txtCodeNo.Text);
                                 }
                                 if (!txtErrorLeadtime.Text.Trim().Equals(row["SD"].ToString()))
                                 {
                                     decimal SD = 0; decimal.TryParse(txtErrorLeadtime.Text, out SD);
                                     gg.SD = SD;
-                                    dbClss.AddHistory(this.Name  , txtCodeNo.Text, "แก้ไข Error Lead time [" + txtErrorLeadtime.Text.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name  , "แก้ไข ทูล", "แก้ไข Error Lead time [" + txtErrorLeadtime.Text.ToString() + "]", txtCodeNo.Text);
                                 }
                                 if (!txtDwgfile.Text.Trim().Equals(row["DWGNo"].ToString()))
                                 {
                                     gg.DWGNo = txtDwgfile.Text.Trim();
-                                    dbClss.AddHistory(this.Name  , txtCodeNo.Text, "แก้ไข Drawing No [" + txtDwgfile.Text.Trim() + "]", "");
+                                    dbClss.AddHistory(this.Name  , "แก้ไข ทูล", "แก้ไข Drawing No [" + txtDwgfile.Text.Trim() + "]", txtCodeNo.Text);
                                 }
                                 if (!chkDWG.Checked.ToString().Trim().Equals(row["DWG"].ToString()))
                                 {
                                     bool DWG = chkDWG.Checked;
                                     gg.DWG = DWG;
-                                    dbClss.AddHistory(this.Name  , txtCodeNo.Text, "แก้ไข Drawing [" + chkDWG.Checked.ToString() + "]", "");
+                                    dbClss.AddHistory(this.Name  , "แก้ไข ทูล", "แก้ไข Drawing [" + chkDWG.Checked.ToString() + "]", txtCodeNo.Text);
                                 }
 
                                 //if (txtMimimumStock.Text.Trim().Equals(row["SafetyStock"].ToString()))
@@ -959,7 +962,7 @@ namespace StockControl
             txtMimimumStock.Text = "0.00";
             txtErrorLeadtime.Text = "0.00";
             txtReOrderPoint.Text = "0.00";
-            txtToolLife.Text = "0.00";
+            txtToolLife.Text = "1.00";
             txtSize.Text = "";
             txtRemark.Text = "";
             txtDwgfile.Text = "";
@@ -994,7 +997,7 @@ namespace StockControl
                                gg.Status = "InActive";
                                gg.UpdateBy = ClassLib.Classlib.User;
                                gg.UpdateDate = DateTime.Now;
-                            dbClss.AddHistory(this.Name  , txtCodeNo.Text, "Delete Part [" +txtCodeNo.Text.Trim() + "]", "");                              
+                            dbClss.AddHistory(this.Name  , "ลบทูล", "ลบทูล [" +txtCodeNo.Text.Trim() + "]", txtCodeNo.Text);                              
                             
                             db.SubmitChanges();
                             btnNew_Click(null, null);
@@ -1154,7 +1157,7 @@ namespace StockControl
                 }
                 if (dt_Import.Rows.Count > 0)
                 {
-                    dbClss.AddHistory(this.Name  , txtCodeNo.Text, "Import file CSV in to System", "");
+                    dbClss.AddHistory(this.Name  , "Import ทูล", "Import file CSV in to System", "Import ทูล");
                     //ImportData();
                     MessageBox.Show("Import Completed.");
 
@@ -1170,225 +1173,254 @@ namespace StockControl
             op.Filter = "Spread Sheet files (*.csv)|*.csv|All files (*.csv)|*.csv";
             if (op.ShowDialog() == DialogResult.OK)
             {
-                this.Cursor = Cursors.WaitCursor;
-                using (TextFieldParser parser = new TextFieldParser(op.FileName))
+                using (TextFieldParser parser = new TextFieldParser(op.FileName, Encoding.GetEncoding("windows-874")))
                 {
-                    dt_Import.Rows.Clear();
-                    parser.TextFieldType = FieldType.Delimited;
-                    parser.SetDelimiters(",");
-                    int a = 0;
-                    int c = 0;
+                    this.Cursor = Cursors.WaitCursor;
+                    //using (TextFieldParser parser = new TextFieldParser(op.FileName), Encoding.GetEncoding("windows-874")))
+                    //{
+                        dt_Import.Rows.Clear();
+                        parser.TextFieldType = FieldType.Delimited;
+                        parser.SetDelimiters(",");
+                        int a = 0;
+                        int c = 0;
 
-                    string CodeNo = "";
-                    string ItemNo = "";
-                    string ItemDescription = "";
-                    string GroupCode = "";
-                    string TypeCode = "";
-                    string VendorNo = "";
-                    string VendorItemName = "";
-                    string Maker = "";
-                    decimal StandardCost = 0;
-                    string UnitBuy = "";
-                    string UnitShip = "";
-                    decimal PCSUnit = 0;
-                    decimal Leadtime = 0;
-                    string UseTacking = "";
-                    string Replacement = "";
-                    bool StopOrder = false;
-                    string ShelfNo = "";
-                    decimal MaximumStock = 0;
-                    decimal MinimumStock = 0;
-                    decimal SD = 0;
-                    decimal ReOrderPoint = 0;
-                    decimal Toollife = 0;
-                    string Size = "";
-                    string Remark = "";
-                    string DWGNo = "";
-                    bool DWG = false;
-                    string CostingMethod = "";
-                    string ItemGroup = "";
-                    bool Critical = false;
-                    decimal SafetyStock = 0;
-                    string Status = "";
-                    string BarCode = "";
-                    string CreateBy = "";
-                    DateTime? CreateDate = DateTime.Now;
-                    string UpdateBy = "";
-                    DateTime? UpdateDate = DateTime.Now;
+                        string CodeNo = "";
+                        string ItemNo = "";
+                        string ItemDescription = "";
+                        string GroupCode = "";
+                        string TypeCode = "";
+                        string VendorNo = "";
+                        string VendorItemName = "";
+                        string Maker = "";
+                        decimal StandardCost = 0;
+                        string UnitBuy = "";
+                        string UnitShip = "";
+                        decimal PCSUnit = 0;
+                        decimal Leadtime = 0;
+                        string UseTacking = "";
+                        string Replacement = "";
+                        bool StopOrder = false;
+                        string ShelfNo = "";
+                        decimal MaximumStock = 0;
+                        decimal MinimumStock = 0;
+                        decimal SD = 0;
+                        decimal ReOrderPoint = 0;
+                        decimal Toollife = 0;
+                        string Size = "";
+                        string Remark = "";
+                        string DWGNo = "";
+                        bool DWG = false;
+                        string CostingMethod = "";
+                        string ItemGroup = "";
+                        bool Critical = false;
+                        decimal SafetyStock = 0;
+                        string Status = "";
+                        string BarCode = "";
+                        string CreateBy = "";
+                        DateTime? CreateDate = DateTime.Now;
+                        string UpdateBy = "";
+                        DateTime? UpdateDate = DateTime.Now;
 
-                    while (!parser.EndOfData)
-                    {
-                        //Processing row
-                        a += 1;
-                        //DataRow rd = dt_Kanban.NewRow();
-                        //// MessageBox.Show(a.ToString());
-                         CodeNo = "";
-                         ItemNo = "";
-                         ItemDescription = "";
-                         GroupCode = "";
-                         TypeCode = "";
-                         VendorNo = "";
-                         VendorItemName = "";
-                         Maker = "";
-                         StandardCost = 0;
-                         UnitBuy = "";
-                         UnitShip = "";
-                         PCSUnit = 0;
-                         Leadtime = 0;
-                         UseTacking = "";
-                         Replacement = "";
-                         StopOrder = false;
-                         ShelfNo = "";
-                         MaximumStock = 0;
-                         MinimumStock = 0;
-                         SD = 0;
-                         ReOrderPoint = 0;
-                         Toollife = 0;
-                         Size = "";
-                         Remark = "";
-                         DWGNo = "";
-                         DWG = false;
-                         CostingMethod = "";
-                         ItemGroup = "";
-                         Critical = false;
-                          SafetyStock = 0;
-                         Status = "";
-                         BarCode = "";
-                         CreateBy = "";
-                         CreateDate = DateTime.Now;
-                         UpdateBy = "";
-                         UpdateDate = DateTime.Now;
-
-                        string[] fields = parser.ReadFields();
-                        c = 0;
-                        foreach (string field in fields)
+                        while (!parser.EndOfData)
                         {
-                            c += 1;
-                            ////TODO: Process field
-                            //    // MessageBox.Show(field);
-                            if (a > 7)
-                            {
-                                if (c == 2 && Convert.ToString(field).Equals(""))
-                                {
-                                    break;
-                                }
+                            //Processing row
+                            a += 1;
+                            //DataRow rd = dt_Kanban.NewRow();
+                            //// MessageBox.Show(a.ToString());
+                            CodeNo = "";
+                            ItemNo = "";
+                            ItemDescription = "";
+                            GroupCode = "";
+                            TypeCode = "";
+                            VendorNo = "";
+                            VendorItemName = "";
+                            Maker = "";
+                            StandardCost = 0;
+                            UnitBuy = "";
+                            UnitShip = "";
+                            PCSUnit = 0;
+                            Leadtime = 0;
+                            UseTacking = "";
+                            Replacement = "";
+                            StopOrder = false;
+                            ShelfNo = "";
+                            MaximumStock = 0;
+                            MinimumStock = 0;
+                            SD = 0;
+                            ReOrderPoint = 0;
+                            Toollife = 0;
+                            Size = "";
+                            Remark = "";
+                            DWGNo = "";
+                            DWG = false;
+                            CostingMethod = "";
+                            ItemGroup = "";
+                            Critical = false;
+                            SafetyStock = 0;
+                            Status = "";
+                            BarCode = "";
+                            CreateBy = "";
+                            CreateDate = DateTime.Now;
+                            UpdateBy = "";
+                            UpdateDate = DateTime.Now;
 
-                                if (c == 2)
-                                    CodeNo = Convert.ToString(field);
-                                else if (c == 3)
-                                    ItemNo = StockControl.dbClss.TSt(field);
-                                else if (c == 4)
-                                    ItemDescription = Convert.ToString(field);
-                                else if (c == 5)
-                                    GroupCode = Convert.ToString(field);
-                                else if (c == 6)
-                                    TypeCode = Convert.ToString(field);
-                                else if (c == 7)
-                                    VendorNo = Convert.ToString(field);
-                                else if (c == 8)
-                                    VendorItemName = Convert.ToString(field);
-                                else if (c == 9)
-                                    Maker = Convert.ToString(field);
-                                else if (c == 10)
-                                    decimal.TryParse(Convert.ToString(field), out StandardCost); //StockControl.dbClss.TDe(field);
-                                else if (c == 11)
-                                    UnitBuy = Convert.ToString(field);
-                                else if (c == 12)
-                                    UnitShip = Convert.ToString(field);
-                                else if (c == 13)
-                                    decimal.TryParse(Convert.ToString(field), out PCSUnit); //StockControl.dbClss.TDe(field);
-                                else if (c == 14)
-                                    decimal.TryParse(Convert.ToString(field), out Leadtime);//= StockControl.dbClss.TDe(field);
-                                else if (c == 15)
-                                    UseTacking = Convert.ToString(field);
-                                else if (c == 16)
-                                    Replacement = Convert.ToString(field);
-                                else if (c == 17)
-                                    StopOrder = StockControl.dbClss.TBo(field);
-                                else if (c == 18)
-                                    ShelfNo = Convert.ToString(field);
-                                else if (c == 19)
-                                    decimal.TryParse(Convert.ToString(field), out MaximumStock);//= StockControl.dbClss.TDe(field);
-                                else if (c == 20)
-                                    decimal.TryParse(Convert.ToString(field), out MinimumStock);// = StockControl.dbClss.TDe(field);
-                                else if (c == 21)
-                                    decimal.TryParse(Convert.ToString(field), out SD);// = StockControl.dbClss.TDe(field);
-                                else if (c == 22)
-                                    decimal.TryParse(Convert.ToString(field), out ReOrderPoint);// = StockControl.dbClss.TDe(field);
-                                else if (c == 23)
-                                    decimal.TryParse(Convert.ToString(field), out Toollife);// = StockControl.dbClss.TDe(field);
-                                else if (c == 24)
-                                    Size = Convert.ToString(field);
-                                else if (c == 25)
-                                    Remark = Convert.ToString(field);
-                                else if (c == 26)
-                                    DWGNo = Convert.ToString(field);
-                                else if (c == 27)
-                                    DWG = StockControl.dbClss.TBo(field);
-                                else if (c == 28)
-                                    CostingMethod = Convert.ToString(field);
-                                else if (c == 29)
-                                    ItemGroup = Convert.ToString(field);
-                                else if (c == 30)
-                                    Critical = StockControl.dbClss.TBo(field);
-                                else if (c == 31)
-                                    decimal.TryParse(Convert.ToString(field), out SafetyStock);// = StockControl.dbClss.TDe(field);
-                                else if (c == 32)
-                                    Status = Convert.ToString(field);
-                                else if (c == 33)
-                                    BarCode = Convert.ToString(field);
-                                else if (c == 34)
-                                    CreateBy = Convert.ToString(field);
-                                else if (c == 35 && !Convert.ToString(field).Equals(""))
-                                    CreateDate = StockControl.dbClss.TDa(field);
-                                //else if (c == 36)
-                                //    rd["UpdateBy"] = Convert.ToString(field);
-                                //else if (c == 37)
-                                //    rd["UpdateDate"] = StockControl.dbClss.TDa(field);
+                            string[] fields = parser.ReadFields();
+                            c = 0;
+                            foreach (string field in fields)
+                            {
+                                c += 1;
+                                ////TODO: Process field
+                                //    // MessageBox.Show(field);
+                                if (a > 7)
+                                {
+                                    if (c == 3 && Convert.ToString(field).Equals(""))
+                                    {
+                                        break;
+                                    }
+
+                                    if (c == 2)
+                                        CodeNo = Convert.ToString(field);
+                                    else if (c == 3)
+                                        ItemNo = StockControl.dbClss.TSt(field);
+                                    else if (c == 4)
+                                        ItemDescription = Convert.ToString(field);
+                                    else if (c == 5)
+                                        GroupCode = Convert.ToString(field);
+                                    else if (c == 6)
+                                        TypeCode = Convert.ToString(field);
+                                    else if (c == 7)
+                                        VendorNo = Convert.ToString(field);
+                                    else if (c == 8)
+                                        VendorItemName = Convert.ToString(field);
+                                    else if (c == 9)
+                                        Maker = Convert.ToString(field);
+                                    else if (c == 10)
+                                        decimal.TryParse(Convert.ToString(field), out StandardCost); //StockControl.dbClss.TDe(field);
+                                    else if (c == 11)
+                                        UnitBuy = Convert.ToString(field);
+                                    else if (c == 12)
+                                        UnitShip = Convert.ToString(field);
+                                    else if (c == 13)
+                                        decimal.TryParse(Convert.ToString(field), out PCSUnit); //StockControl.dbClss.TDe(field);
+                                    else if (c == 14)
+                                        decimal.TryParse(Convert.ToString(field), out Leadtime);//= StockControl.dbClss.TDe(field);
+                                    else if (c == 15)
+                                        UseTacking = Convert.ToString(field);
+                                    else if (c == 16)
+                                        Replacement = Convert.ToString(field);
+                                    else if (c == 17)
+                                        StopOrder = StockControl.dbClss.TBo(field);
+                                    else if (c == 18)
+                                        ShelfNo = Convert.ToString(field);
+                                    else if (c == 19)
+                                        decimal.TryParse(Convert.ToString(field), out MaximumStock);//= StockControl.dbClss.TDe(field);
+                                    else if (c == 20)
+                                        decimal.TryParse(Convert.ToString(field), out MinimumStock);// = StockControl.dbClss.TDe(field);
+                                    else if (c == 21)
+                                        decimal.TryParse(Convert.ToString(field), out SD);// = StockControl.dbClss.TDe(field);
+                                    else if (c == 22)
+                                        decimal.TryParse(Convert.ToString(field), out ReOrderPoint);// = StockControl.dbClss.TDe(field);
+                                    else if (c == 23)
+                                        decimal.TryParse(Convert.ToString(field), out Toollife);// = StockControl.dbClss.TDe(field);
+                                    else if (c == 24)
+                                        Size = Convert.ToString(field);
+                                    else if (c == 25)
+                                        Remark = Convert.ToString(field);
+                                    else if (c == 26)
+                                        DWGNo = Convert.ToString(field);
+                                    else if (c == 27)
+                                        DWG = StockControl.dbClss.TBo(field);
+                                    else if (c == 28)
+                                        CostingMethod = Convert.ToString(field);
+                                    else if (c == 29)
+                                        ItemGroup = Convert.ToString(field);
+                                    else if (c == 30)
+                                        Critical = StockControl.dbClss.TBo(field);
+                                    else if (c == 31)
+                                        decimal.TryParse(Convert.ToString(field), out SafetyStock);// = StockControl.dbClss.TDe(field);
+                                    else if (c == 32)
+                                        Status = Convert.ToString(field);
+                                    else if (c == 33)
+                                        BarCode = Convert.ToString(field);
+                                    else if (c == 34)
+                                        CreateBy = Convert.ToString(field);
+                                    else if (c == 35 && !Convert.ToString(field).Equals(""))
+                                        CreateDate = StockControl.dbClss.TDa(field);
+                                    //else if (c == 36)
+                                    //    rd["UpdateBy"] = Convert.ToString(field);
+                                    //else if (c == 37)
+                                    //    rd["UpdateDate"] = StockControl.dbClss.TDa(field);
+
+                                }
 
                             }
 
+                        if (!GroupCode.Equals("")&& !TypeCode.Equals(""))
+                        {
+                            using (DataClasses1DataContext db = new DataClasses1DataContext())
+                            {
+                                var g = (from ix in db.tb_Items
+                                         where ix.CodeNo.Trim().ToUpper() == CodeNo.Trim().ToUpper() //&& ix.Status == "Active"
+                                         select ix).ToList();
+                                if (g.Count <= 0)
+                                {
+                                    //CodeNo = Get_CodeNo_GroupCode(GroupCode);
+                                    string Temp_codeno = CodeNo;
+                                    string temp_codeno2 = "";
+                                    if (CodeNo.Length > 5)
+                                    {
+                                        int c1 = txtCodeNo.Text.Length;
+
+                                        temp_codeno2 = Temp_codeno.Substring(5, c1 - 5);
+                                        CodeNo = Get_CodeNo_GroupCode(GroupCode);
+                                        CodeNo = CodeNo + temp_codeno2;
+                                    }
+                                    else
+                                        CodeNo = Get_CodeNo_GroupCode(GroupCode);
+
+                                }
+                            }
                         }
 
-                        //dt_Kanban.Rows.Add(rd);
+                            //dt_Kanban.Rows.Add(rd);
                         if (CodeNo.ToString().Equals("") || ItemNo.ToString().Equals("")
-                           || ItemDescription.ToString().Equals("") || GroupCode.ToString().Equals("")
-                           || TypeCode.ToString().Equals("") || VendorNo.ToString().Equals("") || VendorItemName.ToString().Equals("")
-                           || Maker.ToString().Equals("") || StandardCost.ToString().Equals("") || UnitBuy.ToString().Equals("")
-                           || UnitShip.ToString().Equals("") || PCSUnit.ToString().ToString().Equals("") || Leadtime.ToString().Equals("")
-                           || MaximumStock.ToString().Equals("") || MinimumStock.ToString().Equals("") || SD.ToString().Equals("")
-                           )
-                        {
+                               || ItemDescription.ToString().Equals("") || GroupCode.ToString().Equals("")
+                               || TypeCode.ToString().Equals("") || VendorNo.ToString().Equals("") || VendorItemName.ToString().Equals("")
+                               || Maker.ToString().Equals("") || StandardCost.ToString().Equals("") || UnitBuy.ToString().Equals("")
+                               || UnitShip.ToString().Equals("") || PCSUnit.ToString().ToString().Equals("") || Leadtime.ToString().Equals("")
+                               || MaximumStock.ToString().Equals("") || MinimumStock.ToString().Equals("") || SD.ToString().Equals("")
+                               )
+                            {
 
-                        }
-                        else
-                        {
-                            //if (Status.Equals(""))
-                            Status = "Active";
-                            if (CreateBy.Equals(""))
-                                CreateBy = ClassLib.Classlib.User;
+                            }
+                            else
+                            {
+                                //if (Status.Equals(""))
+                                Status = "Active";
+                                if (CreateBy.Equals(""))
+                                    CreateBy = ClassLib.Classlib.User;
 
-                            dt_Import.Rows.Add(CodeNo, ItemNo, ItemDescription, GroupCode
-                                                           , TypeCode, UnitBuy, UnitShip, PCSUnit, ShelfNo, StandardCost,
-                                                           CostingMethod, ItemGroup, Replacement, VendorNo, VendorItemName, UseTacking
-                                                           , Critical, Leadtime, MaximumStock, MinimumStock
-                                                           , SafetyStock, ReOrderPoint, Status, StopOrder, Remark
-                                                           , Size, DWGNo, DWG, Maker, Toollife, SD
-                                                           , BarCode, CreateBy, CreateDate, UpdateBy, UpdateDate);
+                                dt_Import.Rows.Add(CodeNo, ItemNo, ItemDescription, GroupCode
+                                                               , TypeCode, UnitBuy, UnitShip, PCSUnit, ShelfNo, StandardCost,
+                                                               CostingMethod, ItemGroup, Replacement, VendorNo, VendorItemName, UseTacking
+                                                               , Critical, Leadtime, MaximumStock, MinimumStock
+                                                               , SafetyStock, ReOrderPoint, Status, StopOrder, Remark
+                                                               , Size, DWGNo, DWG, Maker, Toollife, SD
+                                                               , BarCode, CreateBy, CreateDate, UpdateBy, UpdateDate);
+                            }
                         }
+
+
                     }
+                    if (dt_Import.Rows.Count > 0)
+                    {
+                        dbClss.AddHistory(this.Name, "Import ทูล", "Import file CSV in to System", "Import ทูล");
+                        ImportData();
+                        MessageBox.Show("Import Completed.");
 
-                   
-                }
-                if (dt_Import.Rows.Count > 0)
-                {
-                    dbClss.AddHistory(this.Name , txtCodeNo.Text, "Import file CSV in to System", "");
-                    ImportData();
-                    MessageBox.Show("Import Completed.");
-
-                    //DataLoad();
-                }
-
+                        //DataLoad();
+                    }
+                //}
             }
             this.Cursor = Cursors.Default;
 
@@ -1418,7 +1450,7 @@ namespace StockControl
 
                                 gg.UpdateBy = rd["CreateBy"].ToString().Trim();
                                 gg.UpdateDate = Convert.ToDateTime(rd["CreateDate"].ToString()); //DateTime.Now;
-                                dbClss.AddHistory(this.Name  , txtCodeNo.Text, " แก้ไข Part โดย Import โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", "");
+                                dbClss.AddHistory(this.Name  , "แก้ไข ทูล", " แก้ไข ทูล โดย Import โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", rd["CodeNo"].ToString());
 
                                 //if (StockControl.dbClss.TSt(gg.BarCode).Equals(""))
                                 //    gg.BarCode = StockControl.dbClss.SaveQRCode2D(rd["CodeNo"].ToString());
@@ -1463,7 +1495,10 @@ namespace StockControl
                             }
                             else   // Add ใหม่
                             {
-                               // byte[] barcode = StockControl.dbClss.SaveQRCode2D(rd["CodeNo"].ToString().Trim());
+                                // byte[] barcode = StockControl.dbClss.SaveQRCode2D(rd["CodeNo"].ToString().Trim());
+                                decimal StockDL = 0;
+                                decimal StockInv = 0;
+                                decimal StockBackOrder = 0;
 
                                 decimal StandardCost = 0;
                                 decimal MaximumStock = 0;
@@ -1489,6 +1524,9 @@ namespace StockControl
                                 decimal.TryParse(rd["PCSUnit"].ToString(), out PCSUnit);
                                 decimal.TryParse(rd["Leadtime"].ToString(), out Leadtime);
                                 decimal.TryParse(rd["Toollife"].ToString(), out Toollife);
+                                if (Toollife < 0)
+                                    Toollife = 1;
+
                                 decimal.TryParse(rd["SD"].ToString(), out SD);
 
                                 DateTime? UpdateDate = null;
@@ -1530,12 +1568,14 @@ namespace StockControl
                                 u.BarCode = null;// barcode;
                                 u.DWGNo = rd["DWGNo"].ToString();
                                 u.DWG = StockControl.dbClss.TBo(rd["DWG"]);
-
+                                u.StockDL = StockDL;
+                                u.StockInv = StockInv;
+                                u.StockBackOrder = StockBackOrder;
 
                                 db.tb_Items.InsertOnSubmit(u);
                                 db.SubmitChanges();
 
-                                dbClss.AddHistory(this.Name  , txtCodeNo.Text, "เพิ่ม Part โดย Import [" + u.CodeNo + "]", "");
+                                dbClss.AddHistory(this.Name  ,"เพิ่ม ทูล", "เพิ่ม ทูล โดย Import [" + u.CodeNo + "]", u.CodeNo);
 
                             }
                         }
@@ -1676,9 +1716,9 @@ namespace StockControl
                             File.Copy(FileName, tagetpart + File_temp, true);//ต้องทำเสมอ เป็นการ ก็อปปี้ Path เพื่อให้รูป มาว่างไว้ที่ path นี้ 
 
                             if(chkDWG.Checked)
-                                dbClss.AddHistory(this.Name  , txtCodeNo.Text, "แก้ไขไฟล์Drawing [" + txtCodeNo.Text.Trim() + "]", "");
+                                dbClss.AddHistory(this.Name  , "แก้ไข Drawing", "แก้ไขไฟล์Drawing [" + txtCodeNo.Text.Trim() + "]", txtCodeNo.Text);
                             else
-                                dbClss.AddHistory(this.Name , txtCodeNo.Text, "เพิ่มไฟล์ Drawing [" + txtCodeNo.Text.Trim() + "]", "");
+                                dbClss.AddHistory(this.Name , "แก้ไข Drawing", "เพิ่มไฟล์ Drawing [" + txtCodeNo.Text.Trim() + "]", txtCodeNo.Text);
 
 
                             chkDWG.Checked = true;
@@ -1723,7 +1763,7 @@ namespace StockControl
                 chkDWG.Checked = false;
 
 
-                dbClss.AddHistory(this.Name  , txtCodeNo.Text, "ลบไฟล์ Drawing [" + txtCodeNo.Text.Trim() + "]", "");
+                dbClss.AddHistory(this.Name  , "ลบไฟล์ Drawing", "ลบไฟล์ Drawing [" + txtCodeNo.Text.Trim() + "]", txtCodeNo.Text);
 
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
@@ -1834,10 +1874,49 @@ namespace StockControl
             this.Cursor = Cursors.Default;
             return re;
         }
+        private string Get_CodeNo_GroupCode(string GroupCode)
+        {
+            string re = "";
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    string Temp_Running = "";
+                    var I = (from ix in db.tb_GroupTypes select ix).Where(a => a.GroupCode == GroupCode).ToList();
+                    if (I.Count > 0)
+                        Temp_Running = I.FirstOrDefault().Running;
 
+                    if (!Temp_Running.Equals(""))
+                    {
+                        var g = (from ix in db.tb_Items select ix).Where(a => a.CodeNo.Contains(Temp_Running)).OrderByDescending(b => b.CodeNo).ToList();
+                        if (g.Count > 0)
+                        {
+                            //string temp = g.FirstOrDefault().CodeNo;
+                            int c = Convert.ToInt32(g.FirstOrDefault().CodeNo.Substring(1, 4)) + 1;
+                            if (c.ToString().Count().Equals(1))
+                                re = Temp_Running + "000" + c.ToString();
+                            else if (c.ToString().Count().Equals(2))
+                                re = Temp_Running + "00" + c.ToString();
+                            else if (c.ToString().Count().Equals(3))
+                                re = Temp_Running + "0" + c.ToString();
+                            else
+                                re = Temp_Running + c.ToString();
+                        }
+                        else
+                            re = Temp_Running + "0001";
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); dbClss.AddError("CreatePart", ex.Message + " : Get_CodeNo", this.Name); }
+            this.Cursor = Cursors.Default;
+            return re;
+        }
         private void cboGroupType_SelectedIndexChanged(object sender, EventArgs e)
         {
             DefaultType();
+            if (cboTypeCode.Text.Equals(""))
+                cboTypeCode.Text = cboGroupType.Text;
         }
 
         private void txtStandCost_KeyPress(object sender, KeyPressEventArgs e)
@@ -2089,6 +2168,56 @@ namespace StockControl
                         MessageBox.Show("not found.");
                 }
 
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            this.Cursor = Cursors.Default;
+        }
+
+        private void txtMimimumStock_TextChanged(object sender, EventArgs e)
+        {
+            txtReOrderPoint.Text = "0.00";
+        }
+
+        private void cboVendor_Leave(object sender, EventArgs e)
+        {
+            cboVendor_SelectedIndexChanged(null, null);
+        }
+
+        private void cboGroupType_Leave(object sender, EventArgs e)
+        {
+            cboGroupType_SelectedIndexChanged(null, null);
+        }
+
+        private void lblStock_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                Stock_List a = new Stock_List(txtCodeNo.Text, "Invoice");
+                a.Show();
+            }catch(Exception ex) { MessageBox.Show(ex.Message); }
+            this.Cursor = Cursors.Default;
+        }
+
+        private void lblTempStock_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                Stock_List a = new Stock_List(txtCodeNo.Text, "Temp");
+                a.Show();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            this.Cursor = Cursors.Default;
+        }
+
+        private void lblOrder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                Stock_List a = new Stock_List(txtCodeNo.Text, "BackOrder");
+                a.Show();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             this.Cursor = Cursors.Default;

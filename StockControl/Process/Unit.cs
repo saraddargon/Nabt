@@ -378,7 +378,7 @@ namespace StockControl
             {
 
 
-                using (TextFieldParser parser = new TextFieldParser(op.FileName, Encoding.GetEncoding("windows-874")))
+                using (TextFieldParser parser = new TextFieldParser(op.FileName))
                 {
                     dt.Rows.Clear();
                     parser.TextFieldType = FieldType.Delimited;

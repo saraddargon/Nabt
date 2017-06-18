@@ -481,7 +481,7 @@
             // txtADNo
             // 
             this.txtADNo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtADNo.Location = new System.Drawing.Point(84, 17);
+            this.txtADNo.Location = new System.Drawing.Point(115, 17);
             this.txtADNo.Name = "txtADNo";
             this.txtADNo.Size = new System.Drawing.Size(118, 19);
             this.txtADNo.TabIndex = 8;
@@ -492,7 +492,7 @@
             this.dtDate2.CustomFormat = "dd/MMM/yyyy";
             this.dtDate2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtDate2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDate2.Location = new System.Drawing.Point(231, 41);
+            this.dtDate2.Location = new System.Drawing.Point(262, 41);
             this.dtDate2.Name = "dtDate2";
             this.dtDate2.Size = new System.Drawing.Size(140, 19);
             this.dtDate2.TabIndex = 7;
@@ -506,7 +506,7 @@
             this.dtDate1.CustomFormat = "dd/MMM/yyyy";
             this.dtDate1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtDate1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDate1.Location = new System.Drawing.Point(84, 42);
+            this.dtDate1.Location = new System.Drawing.Point(115, 42);
             this.dtDate1.Name = "dtDate1";
             this.dtDate1.Size = new System.Drawing.Size(118, 19);
             this.dtDate1.TabIndex = 7;
@@ -528,7 +528,7 @@
             // 
             // radLabel4
             // 
-            this.radLabel4.Location = new System.Drawing.Point(206, 42);
+            this.radLabel4.Location = new System.Drawing.Point(237, 42);
             this.radLabel4.Name = "radLabel4";
             this.radLabel4.Size = new System.Drawing.Size(18, 18);
             this.radLabel4.TabIndex = 0;
@@ -538,7 +538,7 @@
             // 
             this.radLabel5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radLabel5.ForeColor = System.Drawing.Color.DimGray;
-            this.radLabel5.Location = new System.Drawing.Point(84, 64);
+            this.radLabel5.Location = new System.Drawing.Point(115, 64);
             this.radLabel5.Name = "radLabel5";
             this.radLabel5.Size = new System.Drawing.Size(165, 18);
             this.radLabel5.TabIndex = 0;
@@ -548,13 +548,13 @@
             // 
             this.radLabel3.Location = new System.Drawing.Point(19, 43);
             this.radLabel3.Name = "radLabel3";
-            this.radLabel3.Size = new System.Drawing.Size(63, 18);
+            this.radLabel3.Size = new System.Drawing.Size(90, 18);
             this.radLabel3.TabIndex = 0;
-            this.radLabel3.Text = "เลือกวันที่รับ";
+            this.radLabel3.Text = "เลือกวันที่รับสต็อก";
             // 
             // radLabel1
             // 
-            this.radLabel1.Location = new System.Drawing.Point(26, 17);
+            this.radLabel1.Location = new System.Drawing.Point(50, 19);
             this.radLabel1.Name = "radLabel1";
             this.radLabel1.Size = new System.Drawing.Size(59, 18);
             this.radLabel1.TabIndex = 0;

@@ -71,29 +71,17 @@ namespace StockControl
                     //dt = ClassLib.Classlib.LINQToDataTable(db.tb_Units.ToList());
                     //radGridView1.DataSource = db.tb_Histories.Where(s => s.ScreenName == ScreenSearch).OrderBy(o => o.CreateDate).ToList();
                     int c = 0;
-                    int  dateFrom = StockControl.dbClss.TInt(DateTime.Now.ToString("yyyyMMdd"));
-                    int dateTo = StockControl.dbClss.TInt(DateTime.Now.ToString("yyyyMMdd"));
-                    if(!dtDateFrom.Text.Equals(""))
-                        dateFrom = StockControl.dbClss.TInt(dtDateFrom.Value.ToString("yyyyMMdd"));
-                    if(!dtDateTo.Text.Equals(""))
-                        dateTo = StockControl.dbClss.TInt(dtDateTo.Value.ToString("yyyyMMdd"));
-
-                    //MessageBox.Show(Convert.ToInt32(DateTime.Now.ToString("yyyyMMdd")).ToString());
+                  
+                    DateTime inclusiveStart = dtDateFrom.Value.Date;
+                    // Include the *whole* of the day indicated by searchEndDate
+                    DateTime exclusiveEnd = dtDateTo.Value.Date.AddDays(1);
 
                     var g = (from ix in db.tb_PurchaseRequests select ix).Where(a => a.VendorNo.Contains(txtVendorNo.Text)
                         && a.TEMPNo.Contains(txtTempNo.Text)
                         && a.PRNo.Contains(txtPRNo.Text)
                         && a.VendorName.Contains(txtVendorName.Text)
-
-                        //&& (compart_date(Convert.ToDateTime(a.CreateDate), dtDateFrom.Value) >= 1 )
-                            
-                        //&& (
-                        //     (Convert.ToDateTime(a.CreateDate).ToString("yyyyMMdd") != "" &&
-                        //     (StockControl.dbClss.TInt(Convert.ToDateTime(a.CreateDate).ToString("yyyyMMdd"))  >= dateFrom)
-                        //     && (StockControl.dbClss.TInt(Convert.ToDateTime(a.CreateDate).ToString("yyyyMMdd")) <= dateTo)
-                        //    ))
-
-
+                        && (a.CreateDate >= inclusiveStart
+                                && a.CreateDate < exclusiveEnd)
                          )
                         .ToList();
                     if (g.Count > 0)
@@ -244,7 +232,7 @@ namespace StockControl
                 {
                     CreatePR a = new CreatePR(Convert.ToString(e.Row.Cells["TempNo"].Value));
                     a.ShowDialog();
-                    this.Close();
+                    //this.Close();
                 }
                
             }

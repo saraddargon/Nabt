@@ -564,6 +564,7 @@
             this.button1.TabIndex = 13;
             this.button1.Text = "...";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             // 
             // pictureBox1
             // 

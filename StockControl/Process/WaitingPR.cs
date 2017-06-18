@@ -99,7 +99,7 @@ namespace StockControl
         }
         private void DataLoad()
         {
-            //dt.Rows.Clear();
+            dgvData.Rows.Clear();
             
             try
             {
@@ -115,31 +115,55 @@ namespace StockControl
                             Vendorno = txtVendorNo.Text;
                         
                         var gd = (from a in db.tb_Items
+                                  where a.Status == "Active" 
+                                  && a.StopOrder == false
+                                  && (a.VendorNo.Contains(Vendorno))
 
+                                  && (Convert.ToDecimal(a.StockInv) + Convert.ToDecimal(a.StockDL)
+                                    + Convert.ToDecimal(a.StockBackOrder) <= Convert.ToDecimal(a.MinimumStock))
+                                 
                                   select new {
                                       CodeNo = a.CodeNo,
                                       ItemDescription = a.ItemDescription,
-                                      Order = 0,
+                                      Order = Convert.ToDecimal(a.MaximumStock),
                                       StockQty = Convert.ToDecimal(a.StockInv) + Convert.ToDecimal(a.StockDL),
-                                      BackOrder = a.StockBackOrder,
+                                      BackOrder = StockControl.dbClss.TSt(a.StockBackOrder),
                                       UnitBuy = a.UnitBuy,
-                                      PCSUnit = StockControl.dbClss.TDe(a.PCSUnit),
-                                      LeadTime = a.Leadtime,
-                                      MaxStock = a.MaximumStock,
-                                      MinStock = a.MinimumStock,
+                                      PCSUnit = StockControl.dbClss.TSt(a.PCSUnit),
+                                      LeadTime = StockControl.dbClss.TSt(a.Leadtime),
+                                      MaxStock = StockControl.dbClss.TSt(a.MaximumStock),
+                                      MinStock = StockControl.dbClss.TSt(a.MinimumStock),
                                       VendorNo = a.VendorNo,
-                                      VendorName = a.VendorItemName
-                                  }).Where(ab => ab.VendorNo.Contains(Vendorno))
+                                      VendorName = a.VendorItemName,
+                                      
+                                  })//.Where(ab => ab.VendorNo.Contains(Vendorno))
                                   .ToList();
-                        dgvData.DataSource = gd;
-
+                        //dgvData.DataSource = gd;
+                        if (gd.Count > 0)
+                        {
+                            foreach(var gg in gd)
+                            {
+                                dgvData.Rows.Add(false, "", gg.CodeNo,
+                                                gg.ItemDescription,
+                                                gg.Order,
+                                                gg.StockQty,
+                                                gg.BackOrder,
+                                                gg.UnitBuy,
+                                                gg.PCSUnit,
+                                                gg.LeadTime,
+                                                gg.MaxStock,
+                                                gg.MinStock,
+                                                gg.VendorNo,
+                                                gg.VendorName);
+                            }
+                        }
                         int rowcount = 0;
                         foreach (var x in dgvData.Rows)
                         {
                             rowcount += 1;
                             x.Cells["dgvNo"].Value = rowcount;
-                            x.Cells["dgvCodeTemp"].Value = x.Cells["CodeNo"].Value.ToString();
-                            x.Cells["dgvCodeTemp2"].Value = x.Cells["VendorNo"].Value.ToString();
+                            //x.Cells["dgvCodeTemp"].Value = x.Cells["CodeNo"].Value.ToString();
+                            //x.Cells["dgvCodeTemp2"].Value = x.Cells["VendorNo"].Value.ToString();
                             
                         }
                     }
@@ -491,6 +515,18 @@ namespace StockControl
                 }
             }
             catch(Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnCal_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                DataLoad();
+                MessageBox.Show("บันทึกสำเร็จ!");
+            }
+            catch (Exception ex) { }
+            this.Cursor = Cursors.Default;
         }
     }
 }

@@ -17,7 +17,15 @@ namespace StockControl
             ScreenSearch = Screen;
             this.Text = "ประวัติ "+ Screen;
         }
+        public HistoryView(string Screen,string Refno)
+        {
+            InitializeComponent();
+            ScreenSearch = Screen;
+            this.Text = "ประวัติ " + Screen;
+            RefNo = Refno;
+        }
         string ScreenSearch = "";
+        string RefNo = "";
         //private int RowView = 50;
         //private int ColView = 10;
         //DataTable dt = new DataTable();
@@ -52,8 +60,19 @@ namespace StockControl
                 this.Cursor = Cursors.WaitCursor;
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    //dt = ClassLib.Classlib.LINQToDataTable(db.tb_Units.ToList());
-                    radGridView1.DataSource = db.tb_Histories.Where(s => s.ScreenName == ScreenSearch).OrderBy(o => o.CreateDate).ToList();
+                    if (RefNo.Equals(""))
+                    {
+                        //dt = ClassLib.Classlib.LINQToDataTable(db.tb_Units.ToList());
+                        radGridView1.DataSource = db.tb_Histories.Where(s => s.ScreenName == ScreenSearch
+                        ).OrderBy(o => o.CreateDate).ToList();
+                    }
+                    else
+                    {
+                        radGridView1.DataSource = db.tb_Histories.Where(s => s.ScreenName == ScreenSearch
+                           && StockControl.dbClss.TSt(s.RefNo) == RefNo
+
+                        ).OrderBy(o => o.CreateDate).ToList();
+                    }
                     int c = 0;
                     foreach (var x in radGridView1.Rows)
                     {
