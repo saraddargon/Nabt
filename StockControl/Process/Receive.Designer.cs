@@ -421,6 +421,11 @@
             gridViewDecimalColumn1.FieldName = "QTY";
             gridViewDecimalColumn1.FormatString = "{0:N2}";
             gridViewDecimalColumn1.HeaderText = "จำนวนรับ";
+            gridViewDecimalColumn1.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             gridViewDecimalColumn1.Name = "QTY";
             gridViewDecimalColumn1.Width = 98;
             gridViewDecimalColumn2.EnableExpressionEditor = false;
@@ -554,6 +559,7 @@
             this.dgvData.ThemeName = "Office2010Blue";
             this.dgvData.CellEndEdit += new Telerik.WinControls.UI.GridViewCellEventHandler(this.radGridView1_CellEndEdit);
             this.dgvData.CellClick += new Telerik.WinControls.UI.GridViewCellEventHandler(this.radGridView1_CellClick);
+            this.dgvData.Click += new System.EventHandler(this.dgvData_Click);
             this.dgvData.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.radGridView1_PreviewKeyDown);
             // 
             // radPanel2

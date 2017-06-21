@@ -64,6 +64,7 @@ namespace StockControl
   
         private void Unit_Load(object sender, EventArgs e)
         {
+
             //radGridView1.ReadOnly = true;
             dgvData.AutoGenerateColumns = false;
             //GETDTRow();

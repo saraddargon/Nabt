@@ -847,15 +847,20 @@ namespace StockControl
 
                                 SaveHerder();
                                 AddPR_d();
-                                //string PRNo = txtPRNo.Text;
 
-                                MessageBox.Show("บันทึกสำเร็จ!");
+                                Ac = "View";
+                                btnEdit.Enabled = true;
+                                btnView.Enabled = false;
+                                btnNew.Enabled = true;
+                                Enable_Status(false, "View");
+                                
                                 DataLoad();
 
                                 //insert Stock temp
                                 Insert_Stock_temp();
 
-                                btnNew.Enabled = true;
+                                MessageBox.Show("บันทึกสำเร็จ!");
+
                             }
                         }
                     }

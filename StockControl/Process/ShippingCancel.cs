@@ -347,19 +347,45 @@ namespace StockControl
                     DateTime? CalDate = null;
                     DateTime? AppDate = DateTime.Now;
                     int Seq = 1;
-                    
+
+
                     //decimal Qty_Inv = 0;
                     //decimal Qty_DL = 0;
                     //decimal Qty_Remain = 0;
                     //decimal QTY = 0;
                     //decimal QTY_temp = 0;
-                    
+
                     //QTY = Convert.ToDecimal(g.QTY);
                     //QTY_temp = 0;
                     //Qty_Remain = (Convert.ToDecimal(db.Cal_QTY(g.CodeNo, "", 0)));  //sum ทั้งหมด
                     //Qty_Inv = (Convert.ToDecimal(db.Cal_QTY(g.CodeNo, "Invoice", 0))); //sum เฉพาะ Invoice
                     //Qty_DL = (Convert.ToDecimal(db.Cal_QTY(g.CodeNo, "Temp", 0))); // sum เฉพาะ DL
-                    
+
+                    string Type_in_out = "In";
+                    decimal RemainQty = 0;
+                    decimal Amount = 0;
+                    decimal RemainAmount = 0;
+                    decimal Avg = 0;
+                    decimal UnitCost = 0;
+                    decimal sum_Remain = 0;
+                    decimal sum_Qty = 0;
+
+                    UnitCost = get_cost(g.CodeNo);
+                    Amount = Convert.ToDecimal(txtQTY.Text) * UnitCost;
+
+                    //แบบที่ 1 จะไป sum ใหม่
+                    RemainQty = (Convert.ToDecimal(db.Cal_QTY(g.CodeNo, "", 0)));
+                    //แบบที่ 2 จะไปดึงล่าสุดมา
+                    //RemainQty = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "RemainQty"));
+
+                    sum_Remain = Convert.ToDecimal(dbClss.Get_Stock(g.CodeNo, "", "", "RemainAmount"))
+                        + Amount;
+
+                    sum_Qty = RemainQty + Convert.ToDecimal(txtQTY.Text);
+                    Avg = sum_Remain / sum_Qty;
+                    RemainAmount = sum_Qty * Avg;
+
+
                     tb_Stock gg = new tb_Stock();
                     gg.AppDate = AppDate;
                     gg.Seq = Seq;
@@ -370,14 +396,15 @@ namespace StockControl
                     gg.DocNo = txtCNNo.Text;
                     gg.RefNo = txtSHNo.Text;
                     gg.Type = ddlType.Text;
+                    gg.CodeNo = txtCodeNo.Text.Trim();
                     gg.QTY = Convert.ToDecimal(txtQTY.Text);
                     gg.Inbound = Convert.ToDecimal(txtQTY.Text);
                     gg.Outbound = 0;
-                    gg.AmountCost = Convert.ToDecimal(txtQTY.Text) * get_cost(g.CodeNo);
-                    gg.UnitCost = get_cost(g.CodeNo);
-                    gg.RemainQty = 0;
-                    gg.RemainUnitCost = 0;
-                    gg.RemainAmount = 0;
+                    //gg.AmountCost = Convert.ToDecimal(txtQTY.Text) * get_cost(g.CodeNo);
+                    //gg.UnitCost = get_cost(g.CodeNo);
+                    //gg.RemainQty = 0;
+                    //gg.RemainUnitCost = 0;
+                    //gg.RemainAmount = 0;
                     gg.CalDate = CalDate;
                     gg.Status = "Active";
 
@@ -385,6 +412,13 @@ namespace StockControl
                     gg.Category = Category;
                     gg.Refid = Convert.ToInt32(txtid.Text);
                     gg.Flag_ClearTemp = 0;   //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
+                    gg.Type_in_out = Type_in_out;
+                    gg.AmountCost = Amount;
+                    gg.UnitCost = UnitCost;
+                    gg.RemainQty = sum_Qty;
+                    gg.RemainUnitCost = 0;
+                    gg.RemainAmount = RemainAmount;
+                    gg.Avg = Avg;
 
                     db.tb_Stocks.InsertOnSubmit(gg);
                     db.SubmitChanges();
@@ -473,6 +507,15 @@ namespace StockControl
                 string Type = "CNShipping";
                 string Category = "Invoice"; //Temp,Invoice
 
+                string Type_in_out = "In";
+                decimal RemainQty = 0;
+                decimal Amount = 0;
+                decimal RemainAmount = 0;
+                decimal Avg = 0;
+                decimal UnitCost = 0;
+                decimal sum_Remain = 0;
+                decimal sum_Qty = 0;
+                
                 var g = (from ix in db.tb_Shippings
                              //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
                          where ix.ShippingNo.Trim() == SHNo.Trim() && ix.Status != "Cancel"
@@ -485,6 +528,21 @@ namespace StockControl
                 DateTime? CalDate = null;
                 DateTime? AppDate = DateTime.Now;
                 int Seq = seq;
+
+                UnitCost = get_cost(g.CodeNo);
+                Amount = Convert.ToDecimal(g.QTY) * UnitCost;
+
+                //แบบที่ 1 จะไป sum ใหม่
+                RemainQty = (Convert.ToDecimal(db.Cal_QTY(g.CodeNo, "", 0)));
+                //แบบที่ 2 จะไปดึงล่าสุดมา
+                //RemainQty = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "RemainQty"));
+
+                sum_Remain = Convert.ToDecimal(dbClss.Get_Stock(g.CodeNo, "", "", "RemainAmount"))
+                    + Amount;
+
+                sum_Qty = RemainQty + Convert.ToDecimal(g.QTY);
+                Avg = sum_Remain / sum_Qty;
+                RemainAmount = sum_Qty * Avg;
 
                 tb_Stock gg = new tb_Stock();
                 gg.AppDate = AppDate;
@@ -499,11 +557,7 @@ namespace StockControl
                 gg.QTY = Convert.ToDecimal(g.QTY);
                 gg.Inbound = Convert.ToDecimal(g.QTY);
                 gg.Outbound = 0;
-                gg.AmountCost = Convert.ToDecimal(g.QTY) * get_cost(g.CodeNo);
-                gg.UnitCost = get_cost(g.CodeNo);
-                gg.RemainQty = 0;
-                gg.RemainUnitCost = 0;
-                gg.RemainAmount = 0;
+
                 gg.CalDate = CalDate;
                 gg.Status = "Active";
 
@@ -511,6 +565,13 @@ namespace StockControl
                 gg.Category = Category;
                 gg.Refid = Convert.ToInt32(txtid.Text);
                 gg.Flag_ClearTemp = 0;   //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
+                gg.Type_in_out = Type_in_out;
+                gg.AmountCost = Amount;
+                gg.UnitCost = UnitCost;
+                gg.RemainQty = sum_Qty;
+                gg.RemainUnitCost = 0;
+                gg.RemainAmount = RemainAmount;
+                gg.Avg = Avg;
 
                 db.tb_Stocks.InsertOnSubmit(gg);
                 db.SubmitChanges();

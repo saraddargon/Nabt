@@ -76,6 +76,8 @@ namespace StockControl
   
         private void Unit_Load(object sender, EventArgs e)
         {
+            dtDate1.Value = DateTime.Now;
+            dtDate2.Value = DateTime.Now;
             //radGridView1.ReadOnly = true;
             dgvData.AutoGenerateColumns = false;
             //GETDTRow();

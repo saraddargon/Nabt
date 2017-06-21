@@ -93,12 +93,17 @@ namespace StockControl
 
                              select new
                              {
-                                 
+
+                                //x.Cells["StockInv"].Value = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(x.Cells["CodeNo"].Value), "Invoice", 0)));
+                                //x.Cells["StockDL"].Value = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(x.Cells["CodeNo"].Value), "Temp", 0)));
+                                //x.Cells["StockBackOrder"].Value = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(x.Cells["CodeNo"].Value), "BackOrder", 0)));
+
+
                                  CodeNo = i.CodeNo,
                                  ItemNo = i.ItemNo,
                                  ItemDescription = i.ItemDescription,
-                                 StockQty = StockControl.dbClss.TDe(i.StockInv),
-                                 StockTemp = StockControl.dbClss.TDe(i.StockDL),
+                                 StockQty = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(i.CodeNo), "Invoice", 0))), //StockControl.dbClss.TDe(i.StockInv),
+                                 StockTemp = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(i.CodeNo), "Temp", 0))),// StockControl.dbClss.TDe(i.StockDL),
                                  ShelfNo = i.ShelfNo,
                                  QTY = 0,//StockControl.dbClss.TDe(s.QTY),
                                  GroupCode = i.GroupCode,
@@ -684,12 +689,73 @@ namespace StockControl
             //    }
             //}
             //else
+            try
             {
-                AdjustStock a = new AdjustStock("",
-                    Convert.ToString(e.Row.Cells["CodeNo"].Value));
-                a.ShowDialog();
-                this.Close();
+                {
+                    AdjustStock a = new AdjustStock("",
+                        Convert.ToString(e.Row.Cells["CodeNo"].Value));
+                    a.ShowDialog();
+                    //this.Close();
+                }
             }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void stockคงเหลอToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string CodeNo = "";
+                if (dgvData.Rows.Count > 0)
+                {
+                    CodeNo = Convert.ToString(dgvData.CurrentRow.Cells["CodeNo"].Value);
+                    this.Cursor = Cursors.WaitCursor;
+                    Stock_List a = new Stock_List(CodeNo, "Invoice");
+                    a.Show();
+                }
+                else
+                    MessageBox.Show("ไม่พบรายการ");
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            this.Cursor = Cursors.Default;
+        }
+
+        private void tempคงเหลอToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string CodeNo = "";
+                if (dgvData.Rows.Count > 0)
+                {
+                    CodeNo = Convert.ToString(dgvData.CurrentRow.Cells["CodeNo"].Value);
+                    this.Cursor = Cursors.WaitCursor;
+                    Stock_List a = new Stock_List(CodeNo, "Temp");
+                    a.Show();
+                }
+                else
+                    MessageBox.Show("ไม่พบรายการ");
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            this.Cursor = Cursors.Default;
+        }
+
+        private void backOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string CodeNo = "";
+                if (dgvData.Rows.Count > 0)
+                {
+                    CodeNo = Convert.ToString(dgvData.CurrentRow.Cells["CodeNo"].Value);
+                    this.Cursor = Cursors.WaitCursor;
+                    Stock_List a = new Stock_List(CodeNo, "BackOrder");
+                    a.Show();
+                }
+                else
+                    MessageBox.Show("ไม่พบรายการ");
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            this.Cursor = Cursors.Default;
         }
     }
 }

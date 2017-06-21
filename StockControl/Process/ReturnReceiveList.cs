@@ -61,7 +61,9 @@ namespace StockControl
        
         private void Unit_Load(object sender, EventArgs e)
         {
-            
+            dtDate1.Value = DateTime.Now;
+            dtDate2.Value = DateTime.Now;
+
             dgvData.AutoGenerateColumns = false;
             //GETDTRow();
             DefaultItem();
