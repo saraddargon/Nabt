@@ -69,7 +69,7 @@ namespace StockControl
                     else
                     {
                         radGridView1.DataSource = db.tb_Histories.Where(s => s.ScreenName == ScreenSearch
-                           && StockControl.dbClss.TSt(s.RefNo) == RefNo
+                           && (s.RefNo) == RefNo
 
                         ).OrderBy(o => o.CreateDate).ToList();
                     }

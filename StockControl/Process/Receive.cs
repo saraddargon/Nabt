@@ -1304,6 +1304,17 @@ namespace StockControl
             {
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
+
+                    var p = (from ix in db.tb_PurchaseRequestLines select ix)
+                               .Where(a => a.PRNo == txtPRNo.Text.Trim() && a.SS == 1
+                               && (Convert.ToDecimal(a.RemainQty) > Convert.ToDecimal(0.00))
+                               ).ToList();
+                    if(p.Count <=0)
+                    {
+                        MessageBox.Show("ไม่พบรายการ");
+                        return;
+                    }
+
                     int No = 0;
                     string CodeNo = "";
                     string ItemNo = "";
@@ -1334,7 +1345,8 @@ namespace StockControl
                     string ShelfNo = "";
 
 
-                    var g = (from ix in db.tb_PurchaseRequests select ix).Where(a => a.PRNo == txtPRNo.Text.Trim()).ToList();
+                    var g = (from ix in db.tb_PurchaseRequests select ix)
+                        .Where(a => a.PRNo == txtPRNo.Text.Trim()).ToList();
                     if (g.Count() > 0)
                     {
                         if (txtVendorNo.Text.Equals(""))

@@ -538,6 +538,7 @@ namespace StockControl
             DateTime? UpdateDate = null;
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
+                decimal UnitCost = 0;
                 foreach (var g in dgvData.Rows)
                 {
                     string SS = "";
@@ -547,10 +548,10 @@ namespace StockControl
                         {
                             if (StockControl.dbClss.TInt(g.Cells["id"].Value) <= 0)  //New ใหม่
                             {
-                               
+
                                 //decimal RemainQty = 0;
 
-
+                                UnitCost = Convert.ToDecimal(dbClss.Get_Stock(StockControl.dbClss.TSt(g.Cells["CodeNo"].Value), "", "", "Avg"));
                                 Seq += 1;
                                 tb_Shipping u = new tb_Shipping();
                                 u.ShippingNo = txtSHNo.Text.Trim();
@@ -570,7 +571,7 @@ namespace StockControl
                                 u.ClearDate = UpdateDate;
                                 u.Seq = Seq;
                                 u.Status = "Completed";
-                                
+                                u.UnitCost = UnitCost;
                                 db.tb_Shippings.InsertOnSubmit(u);
                                 db.SubmitChanges();
                                 
@@ -823,7 +824,10 @@ namespace StockControl
 
                                 if (Qty_Inv >= QTY) //ถ้า จำนวน remain มีมากกว่าจำนวนที่จะลบ
                                 {
-                                    UnitCost = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "Avg"));
+                                    UnitCost = Convert.ToDecimal(vv.UnitCost);
+                                    if (UnitCost <= 0)
+                                        UnitCost = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "Avg"));
+
                                     Amount = (-QTY) * UnitCost;
 
                                     //แบบที่ 1 จะไป sum ใหม่
@@ -879,7 +883,10 @@ namespace StockControl
                                 {
                                     QTY_temp = QTY - Qty_Inv;
 
-                                    UnitCost = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "Avg"));
+                                    UnitCost = Convert.ToDecimal(vv.UnitCost);
+                                    if (UnitCost <= 0)
+                                        UnitCost = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "Avg"));
+                                    
                                     Amount = (-QTY) * UnitCost;
 
                                     //แบบที่ 1 จะไป sum ใหม่
@@ -930,7 +937,10 @@ namespace StockControl
 
                                     // --Stock ใน Invoice ไม่พอ ต้องเอาที่ Temp มา
 
-                                    UnitCost = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "Avg"));
+                                    UnitCost = Convert.ToDecimal(vv.UnitCost);
+                                    if (UnitCost <= 0)
+                                        UnitCost = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "Avg"));
+                                    
                                     Amount = (-QTY_temp) * UnitCost;
 
                                     //แบบที่ 1 จะไป sum ใหม่

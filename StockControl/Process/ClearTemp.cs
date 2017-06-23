@@ -495,6 +495,7 @@ namespace StockControl
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
                 int ID = 0;
+                decimal CostPerUnit = 0;
                 foreach (var g in dgvData.Rows)
                 {
 
@@ -517,15 +518,17 @@ namespace StockControl
 
                         db.SubmitChanges();
 
+                        CostPerUnit = Convert.ToDecimal(g.Cells["CostPerUnit"].Value);
+
                         //insert stock
-                        Save_Stock(ID, StockControl.dbClss.TSt(g.Cells["CodeNo"].Value), DocNo);
+                        Save_Stock(ID, StockControl.dbClss.TSt(g.Cells["CodeNo"].Value), DocNo, CostPerUnit);
 
 
                     }
                 }
             }
         }
-        private void Save_Stock(int ID,string CodeNo,string DocNo)
+        private void Save_Stock(int ID,string CodeNo,string DocNo,decimal CostPerUnit)
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
@@ -557,7 +560,7 @@ namespace StockControl
                         decimal.TryParse(vv.QTY.ToString(), out QTY);
                         QTY = -QTY;
 
-                        UnitCost = Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "Avg"));
+                        UnitCost = CostPerUnit;// Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "Avg"));
                         Amount = (QTY) * UnitCost;
 
                         //แบบที่ 1 จะไป sum ใหม่
@@ -614,8 +617,8 @@ namespace StockControl
                         vv.Flag_ClearTemp = 2;
                         db.SubmitChanges();
 
-                        decimal.TryParse(vv.QTY.ToString(), out QTY);                       
-                        UnitCost = Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "Avg"));
+                        decimal.TryParse(vv.QTY.ToString(), out QTY);
+                        UnitCost = CostPerUnit;//Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "Avg"));
                         Amount = (QTY) * UnitCost;
 
                         //แบบที่ 1 จะไป sum ใหม่

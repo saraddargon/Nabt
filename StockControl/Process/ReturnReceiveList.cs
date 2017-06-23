@@ -19,11 +19,13 @@ namespace StockControl
         }
         Telerik.WinControls.UI.RadTextBox RCNo_tt = new Telerik.WinControls.UI.RadTextBox();
         int screen = 0;
-        public ReturnReceiveList(Telerik.WinControls.UI.RadTextBox RCNoxxx)
+        string Screen = "";
+        public ReturnReceiveList(Telerik.WinControls.UI.RadTextBox RCNoxxx,string Screenxxx)
         {
             InitializeComponent();
             RCNo_tt = RCNoxxx;
             screen = 1;
+            Screen = Screenxxx;
         }
 
         //DataTable dt = new DataTable();
@@ -61,6 +63,19 @@ namespace StockControl
        
         private void Unit_Load(object sender, EventArgs e)
         {
+            if(Screen.Equals("ReturnReceive"))
+            {
+                radRibbonBar1.Text = "Receive List (รายการรับสินค้าแล้ว)";
+                btnSave.Text = "ทำคืนรายการ";
+                radRibbonBarGroup1.Text = "Order";
+            }
+            else //ChangeInvoice
+            {
+                radRibbonBar1.Text = "Receive List (รายการรับสินค้าแล้ว)";
+                btnSave.Text = "เปลี่ยน";
+                radRibbonBarGroup1.Text = "Invoice/DL No";
+            }
+
             dtDate1.Value = DateTime.Now;
             dtDate2.Value = DateTime.Now;
 
@@ -216,8 +231,16 @@ namespace StockControl
                 {
                     if (screen.Equals(1))
                     {
-                        RCNo_tt.Text = Convert.ToString(dgvData.CurrentRow.Cells["InvoiceNo"].Value);
-                        this.Close();
+                        //DateTime? Date = DateTime.Today;
+                        string yyyyMM = "";
+                        yyyyMM = Convert.ToDateTime(dgvData.CurrentRow.Cells["CreateDate"].Value).ToString("yyyyMM");
+                        if (Convert.ToInt32(yyyyMM) >= Convert.ToInt32(DateTime.Today.ToString("yyyyMM")))
+                        {
+                            RCNo_tt.Text = Convert.ToString(dgvData.CurrentRow.Cells["InvoiceNo"].Value);
+                            this.Close();
+                        }
+                        else
+                            MessageBox.Show("ไม่สามารถทำการคืนรายการรับเข้าย้อนหลังข้ามเดือนได้");
                     }
                 }
                 else
@@ -344,8 +367,16 @@ namespace StockControl
                 {
                     if (screen.Equals(1))
                     {
-                        RCNo_tt.Text = Convert.ToString(e.Row.Cells["InvoiceNo"].Value);
-                        this.Close();
+                        //DateTime? Date = DateTime.Today;
+                        string yyyyMM = "";
+                        yyyyMM = Convert.ToDateTime(e.Row.Cells["CreateDate"].Value).ToString("yyyyMM");
+                        if (Convert.ToInt32(yyyyMM) >= Convert.ToInt32(DateTime.Today.ToString("yyyyMM")))
+                        {
+                            RCNo_tt.Text = Convert.ToString(e.Row.Cells["InvoiceNo"].Value);
+                            this.Close();
+                        }
+                        else
+                            MessageBox.Show("ไม่สามารถทำการคืนรายการรับเข้าย้อนหลังข้ามเดือนได้");
                     }
                 }
 

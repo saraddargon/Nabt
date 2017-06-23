@@ -370,7 +370,7 @@ namespace StockControl
                     decimal sum_Remain = 0;
                     decimal sum_Qty = 0;
 
-                    UnitCost = get_cost(g.CodeNo);
+                    UnitCost = Convert.ToDecimal(g.UnitCost); //get_cost(g.CodeNo);
                     Amount = Convert.ToDecimal(txtQTY.Text) * UnitCost;
 
                     //แบบที่ 1 จะไป sum ใหม่
@@ -529,7 +529,7 @@ namespace StockControl
                 DateTime? AppDate = DateTime.Now;
                 int Seq = seq;
 
-                UnitCost = get_cost(g.CodeNo);
+                UnitCost = Convert.ToDecimal(g.UnitCost); //get_cost(g.CodeNo);
                 Amount = Convert.ToDecimal(g.QTY) * UnitCost;
 
                 //แบบที่ 1 จะไป sum ใหม่

@@ -1153,7 +1153,7 @@ namespace StockControl
                
 
                 this.Cursor = Cursors.WaitCursor;
-                ReturnReceiveList sc = new ReturnReceiveList(txtInvoiceNo);
+                ReturnReceiveList sc = new ReturnReceiveList(txtInvoiceNo,"ReturnReceive");
                 this.Cursor = Cursors.Default;
                 sc.ShowDialog();
                 GC.Collect();
