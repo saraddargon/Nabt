@@ -132,6 +132,18 @@
     <Compile Include="Process\ClearTempList.Designer.cs">
       <DependentUpon>ClearTempList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\ForecastConsumption.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ForecastConsumption.Designer.cs">
+      <DependentUpon>ForecastConsumption.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\MappingAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\MappingAdd.Designer.cs">
+      <DependentUpon>MappingAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\Stock_List.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -429,6 +441,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\ClearTempList.resx">
       <DependentUpon>ClearTempList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ForecastConsumption.resx">
+      <DependentUpon>ForecastConsumption.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\MappingAdd.resx">
+      <DependentUpon>MappingAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\Stock_List.resx">
       <DependentUpon>Stock_List.cs</DependentUpon>
