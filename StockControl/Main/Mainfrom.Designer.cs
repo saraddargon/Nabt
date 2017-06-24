@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Mainfrom));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Tooling Setting");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Part Setting");
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("ForeCasting");
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Purchase Request");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Receive Tooling");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Shipping Tooling");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Receive Part");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Shipping Part");
             System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Stock Balance");
             System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Report");
             this.office2010BlueTheme1 = new Telerik.WinControls.Themes.Office2010BlueTheme();
@@ -481,15 +481,15 @@
             this.TreeManu.Location = new System.Drawing.Point(0, 40);
             this.TreeManu.Name = "TreeManu";
             treeNode1.Name = "PartSetting";
-            treeNode1.Text = "Tooling Setting";
+            treeNode1.Text = "Part Setting";
             treeNode2.Name = "ForeCast";
             treeNode2.Text = "ForeCasting";
             treeNode3.Name = "PurchaseReq";
             treeNode3.Text = "Purchase Request";
             treeNode4.Name = "Receive";
-            treeNode4.Text = "Receive Tooling";
+            treeNode4.Text = "Receive Part";
             treeNode5.Name = "Shipping";
-            treeNode5.Text = "Shipping Tooling";
+            treeNode5.Text = "Shipping Part";
             treeNode6.Name = "Stock";
             treeNode6.Text = "Stock Balance";
             treeNode7.Name = "Report";

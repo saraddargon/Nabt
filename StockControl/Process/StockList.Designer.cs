@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockList));
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
@@ -92,6 +93,10 @@
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.stockคงเหลอToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tempคงเหลอToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -112,6 +117,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCodeNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel37)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -322,6 +328,7 @@
             // 
             this.dgvData.BackColor = System.Drawing.Color.White;
             this.dgvData.ColumnChooserSortOrder = Telerik.WinControls.UI.RadSortOrder.Ascending;
+            this.dgvData.ContextMenuStrip = this.contextMenuStrip1;
             this.dgvData.Cursor = System.Windows.Forms.Cursors.Default;
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvData.EnterKeyMode = Telerik.WinControls.UI.RadGridViewEnterKeyMode.EnterMovesToNextCell;
@@ -334,6 +341,7 @@
             // 
             this.dgvData.MasterTemplate.AddNewRowPosition = Telerik.WinControls.UI.SystemRowPosition.Bottom;
             this.dgvData.MasterTemplate.AllowAddNewRow = false;
+            this.dgvData.MasterTemplate.AllowCellContextMenu = false;
             this.dgvData.MasterTemplate.AllowColumnChooser = false;
             this.dgvData.MasterTemplate.AllowColumnHeaderContextMenu = false;
             this.dgvData.MasterTemplate.AllowDeleteRow = false;
@@ -687,6 +695,39 @@
             this.radRibbonBarButtonGroup5.ShowBorder = false;
             this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stockคงเหลอToolStripMenuItem,
+            this.tempคงเหลอToolStripMenuItem,
+            this.backOrderToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(145, 70);
+            // 
+            // stockคงเหลอToolStripMenuItem
+            // 
+            this.stockคงเหลอToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.stockคงเหลอToolStripMenuItem.Name = "stockคงเหลอToolStripMenuItem";
+            this.stockคงเหลอToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.stockคงเหลอToolStripMenuItem.Text = "Stock คงเหลือ";
+            this.stockคงเหลอToolStripMenuItem.Click += new System.EventHandler(this.stockคงเหลอToolStripMenuItem_Click);
+            // 
+            // tempคงเหลอToolStripMenuItem
+            // 
+            this.tempคงเหลอToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.tempคงเหลอToolStripMenuItem.Name = "tempคงเหลอToolStripMenuItem";
+            this.tempคงเหลอToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.tempคงเหลอToolStripMenuItem.Text = "Temp คงเหลือ";
+            this.tempคงเหลอToolStripMenuItem.Click += new System.EventHandler(this.tempคงเหลอToolStripMenuItem_Click);
+            // 
+            // backOrderToolStripMenuItem
+            // 
+            this.backOrderToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.backOrderToolStripMenuItem.Name = "backOrderToolStripMenuItem";
+            this.backOrderToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.backOrderToolStripMenuItem.Text = "BackOrder";
+            this.backOrderToolStripMenuItem.Click += new System.EventHandler(this.backOrderToolStripMenuItem_Click);
+            // 
             // StockList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -728,6 +769,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCodeNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel37)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -776,5 +818,9 @@
         private Telerik.WinControls.UI.RadLabel radLabel4;
         private Telerik.WinControls.UI.RadTextBox txtShelf;
         private Telerik.WinControls.UI.RadLabel radLabel5;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem stockคงเหลอToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tempคงเหลอToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem backOrderToolStripMenuItem;
     }
 }

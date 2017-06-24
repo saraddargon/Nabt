@@ -43,37 +43,20 @@ namespace StockControl
         }
         private void Unit_Load(object sender, EventArgs e)
         {
-            RMenu3.Click += RMenu3_Click;
-            RMenu4.Click += RMenu4_Click;
-            RMenu5.Click += RMenu5_Click;
-            RMenu6.Click += RMenu6_Click;
             radGridView1.ReadOnly = true;
             radGridView1.AutoGenerateColumns = false;
             GETDTRow();
-            
+            //for (int i = 0; i <= RowView; i++)
+            //{
+            //    DataRow rd = dt.NewRow();
+            //    rd["UnitCode"] = "";
+            //    rd["UnitDetail"] = "";
+            //    rd["UnitActive"] = false;
+            //    dt.Rows.Add(rd);
+            //}
+
 
             DataLoad();
-        }
-
-        private void RMenu6_Click(object sender, EventArgs e)
-        {
-            DeleteUnit();
-            DataLoad();
-        }
-
-        private void RMenu5_Click(object sender, EventArgs e)
-        {
-            EditClick(); 
-        }
-
-        private void RMenu4_Click(object sender, EventArgs e)
-        {
-            ViewClick();
-        }
-
-        private void RMenu3_Click(object sender, EventArgs e)
-        {
-            NewClick();
         }
 
         private void DataLoad()
@@ -115,20 +98,13 @@ namespace StockControl
                         {
                             //radGridView1.DataSource = db.tb_Models.Where(s => s.ModelName.Contains(txtModelName.Text.Trim())).ToList();
                         }
-                        int ck = 0;
+
                         foreach (var x in radGridView1.Rows)
                         {
                             x.Cells["dgvCodeTemp"].Value = x.Cells["ModelName"].Value.ToString();
                             //x.Cells["dgvCodeTemp2"].Value = x.Cells["MMM"].Value.ToString();
                             x.Cells["ModelName"].ReadOnly = true;
                             //x.Cells["MMM"].ReadOnly = true;
-                            if (row >= 0 && row == ck)
-                            {
-
-                                x.ViewInfo.CurrentRow = x;
-
-                            }
-                            ck += 1;
                         }
                     }
                     catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -309,9 +285,6 @@ namespace StockControl
 
             if (C > 0)
             {
-                row = row - 1;
-                if (radGridView1.Rows.Count == 1)
-                    row = 0;
                 MessageBox.Show("ลบรายการ สำเร็จ!");
             }
 
@@ -327,34 +300,12 @@ namespace StockControl
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            NewClick();
+            radGridView1.ReadOnly = false;
+            radGridView1.AllowAddNewRow = false;
+            radGridView1.Rows.AddNew();
         }
 
         private void btnView_Click(object sender, EventArgs e)
-        {
-            ViewClick();
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            EditClick();
-        }
-        private void NewClick()
-        {
-            radGridView1.ReadOnly = false;
-            radGridView1.AllowAddNewRow = false;
-            btnEdit.Enabled = false;
-            btnView.Enabled = true;
-            radGridView1.Rows.AddNew();
-        }
-        private void EditClick()
-        {
-            radGridView1.ReadOnly = false;
-            btnEdit.Enabled = false;
-            btnView.Enabled = true;
-            radGridView1.AllowAddNewRow = false;
-        }
-        private void ViewClick()
         {
             radGridView1.ReadOnly = true;
             btnView.Enabled = false;
@@ -362,6 +313,16 @@ namespace StockControl
             radGridView1.AllowAddNewRow = false;
             DataLoad();
         }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            radGridView1.ReadOnly = false;
+            btnEdit.Enabled = false;
+            btnView.Enabled = true;
+            radGridView1.AllowAddNewRow = false;
+            //DataLoad();
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -414,10 +375,6 @@ namespace StockControl
                     DataLoad();
                 }
             }
-            else if (e.KeyData == (Keys.Control | Keys.N))
-            {
-                NewClick();
-            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -453,7 +410,7 @@ namespace StockControl
                     using (TextFieldParser parser = new TextFieldParser(op.FileName))
                     {
                         dt.Rows.Clear();
-                        DateTime? d = DateTime.Now;
+                        DateTime? d = null;
                         DateTime d1 = DateTime.Now;
                         parser.TextFieldType = FieldType.Delimited;
                         parser.SetDelimiters(",");
@@ -488,18 +445,14 @@ namespace StockControl
                                         rd["Limit"] = Convert.ToBoolean(field);
                                     else if (c == 7)
                                     {
-                                        if (!field.Equals(""))
+                                        if (DateTime.TryParse(Convert.ToString(field), out d1))
                                         {
+                                            rd["ExpireDate"] = Convert.ToDateTime(field);
 
-                                            if (DateTime.TryParse(Convert.ToString(field), out d1))
-                                            {
-                                                rd["ExpireDate"] = d1;
-
-                                            }
-                                            else
-                                            {
-                                                rd["ExpireDate"] = DBNull.Value;
-                                            }
+                                        }
+                                        else
+                                        {
+                                            rd["ExpireDate"] = d;
                                         }
                                     }
 
@@ -519,7 +472,7 @@ namespace StockControl
                                     else if (c == 6)
                                         rd["Limit"] = false;
                                     else if (c == 7)
-                                        rd["ExpireDate"] = DBNull.Value;
+                                        rd["ExpireDate"] = d;
 
 
 
@@ -660,33 +613,25 @@ namespace StockControl
 
         private void radGridView1_CellFormatting(object sender, Telerik.WinControls.UI.CellFormattingEventArgs e)
         {
-            //if (e.CellElement.ColumnInfo.Name == "ModelName")
-            //{
-            //    if (e.CellElement.RowInfo.Cells["ModelName"].Value != null)
-            //    {
-            //        if (!e.CellElement.RowInfo.Cells["ModelName"].Value.Equals(""))
-            //        {
-            //            e.CellElement.DrawFill = true;
-            //            // e.CellElement.ForeColor = Color.Blue;
-            //            e.CellElement.NumberOfColors = 1;
-            //            e.CellElement.BackColor = Color.WhiteSmoke;
-            //        }
+            if (e.CellElement.ColumnInfo.Name == "ModelName")
+            {
+                if (e.CellElement.RowInfo.Cells["ModelName"].Value != null)
+                {
+                    if (!e.CellElement.RowInfo.Cells["ModelName"].Value.Equals(""))
+                    {
+                        e.CellElement.DrawFill = true;
+                        // e.CellElement.ForeColor = Color.Blue;
+                        e.CellElement.NumberOfColors = 1;
+                        e.CellElement.BackColor = Color.WhiteSmoke;
+                    }
 
-            //    }
-            //}
+                }
+            }
         }
 
         private void txtModelName_TextChanged(object sender, EventArgs e)
         {
-           
-        }
-
-        private void txtModelName_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if(e.KeyCode==Keys.Enter)
-            {
-                DataLoad();
-            }
+            DataLoad();
         }
     }
 }

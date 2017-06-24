@@ -993,6 +993,14 @@ namespace StockControl
                     string Type = "";
                     string Category = "";
                     int Flag_ClearTemp = 0;
+                    string Type_in_out = "In";
+                    decimal RemainQty = 0;
+                    decimal Amount = 0;
+                    decimal RemainAmount = 0;
+                    decimal Avg = 0;
+                    decimal UnitCost = 0;
+                    decimal sum_Remain = 0;
+                    decimal sum_Qty = 0;
                     if (rdoInvoice.IsChecked)
                     {
                         Category = "Invoice";
@@ -1005,10 +1013,7 @@ namespace StockControl
                         Type = "ใบส่งของชั่วคราว";
                         Flag_ClearTemp = 1;
                     }
-                    decimal Cost = 0;
-
-
-                   
+                  
                     var g = (from ix in db.tb_Receives
                                  //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
                              where ix.RCNo.Trim() == txtRCNo.Text.Trim() && ix.Status != "Cancel"
@@ -1021,6 +1026,29 @@ namespace StockControl
                         foreach (var vv in g)
                         {
                             Seq += 1;
+
+                            if (rdoDL.IsChecked)
+                            {
+                                Amount = 0;
+                                UnitCost = 0;
+                            }
+                            else
+                            {
+                                Amount = Convert.ToDecimal(vv.QTY) * Convert.ToDecimal(vv.CostPerUnit);
+                                UnitCost = Convert.ToDecimal(vv.CostPerUnit);
+                            }
+                            //แบบที่ 1 จะไป sum ใหม่
+                            RemainQty = (Convert.ToDecimal(db.Cal_QTY(vv.CodeNo, "", 0)));
+                            //แบบที่ 2 จะไปดึงล่าสุดมา
+                            //RemainQty = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "RemainQty"));
+                            
+                            sum_Remain = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "RemainAmount"))
+                                + Amount;
+
+                            sum_Qty = RemainQty + Convert.ToDecimal(vv.QTY);
+                            Avg = sum_Remain / sum_Qty;
+                            RemainAmount = sum_Qty * Avg;
+                            
 
                             tb_Stock gg = new tb_Stock();
                             gg.AppDate = AppDate;
@@ -1039,27 +1067,19 @@ namespace StockControl
                             gg.Type_i = 1;  //Receive = 1,Cancel Receive 2,Shipping = 3,Cancel Shipping = 4,Adjust stock = 5,ClearTemp = 6
                             gg.Category = Category;
                             gg.Refid = vv.ID;
-
-                            if (rdoDL.IsChecked)
-                            {
-                                gg.UnitCost = 0;
-                                gg.AmountCost = 0;
-                            }
-                            else
-                            {
-                                gg.AmountCost = Convert.ToDecimal(vv.QTY) * Convert.ToDecimal(vv.CostPerUnit);
-                                gg.UnitCost = Convert.ToDecimal(vv.CostPerUnit);
-                            }
-                            gg.RemainQty = 0;
+                            gg.Type_in_out = Type_in_out;
+                            gg.AmountCost = Amount;
+                            gg.UnitCost = UnitCost;
+                            gg.RemainQty = sum_Qty;
                             gg.RemainUnitCost = 0;
-                            gg.RemainAmount = 0;
+                            gg.RemainAmount = RemainAmount;
+                            gg.Avg = Avg;
                             gg.CalDate = CalDate;
                             gg.Status = "Active";
                             gg.Flag_ClearTemp = Flag_ClearTemp;   //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
 
                             db.tb_Stocks.InsertOnSubmit(gg);
                             db.SubmitChanges();
-
 
                         }
                     }
@@ -1284,6 +1304,17 @@ namespace StockControl
             {
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
+
+                    var p = (from ix in db.tb_PurchaseRequestLines select ix)
+                               .Where(a => a.PRNo == txtPRNo.Text.Trim() && a.SS == 1
+                               && (Convert.ToDecimal(a.RemainQty) > Convert.ToDecimal(0.00))
+                               ).ToList();
+                    if(p.Count <=0)
+                    {
+                        MessageBox.Show("ไม่พบรายการ");
+                        return;
+                    }
+
                     int No = 0;
                     string CodeNo = "";
                     string ItemNo = "";
@@ -1314,7 +1345,8 @@ namespace StockControl
                     string ShelfNo = "";
 
 
-                    var g = (from ix in db.tb_PurchaseRequests select ix).Where(a => a.PRNo == txtPRNo.Text.Trim()).ToList();
+                    var g = (from ix in db.tb_PurchaseRequests select ix)
+                        .Where(a => a.PRNo == txtPRNo.Text.Trim()).ToList();
                     if (g.Count() > 0)
                     {
                         if (txtVendorNo.Text.Equals(""))
@@ -1530,6 +1562,11 @@ namespace StockControl
 
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void dgvData_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

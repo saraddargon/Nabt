@@ -106,7 +106,8 @@ namespace StockControl
 
                             foreach (var vv in r)
                             {
-                                dgvData.Rows.Add(dgvNo.ToString(), vv.CodeNo, vv.App, vv.Type, vv.Category, vv.DocNo, vv.RefNo, vv.Qty, vv.UnitCost, vv.AmountCost, vv.CreateDate);
+                                dgvData.Rows.Add(dgvNo.ToString(), vv.CodeNo, vv.App, vv.Type, vv.Category
+                                    , vv.DocNo, vv.RefNo, vv.Qty, vv.UnitCost, vv.AmountCost, vv.CreateDate,"",0,0,0);
                             }
 
                         }

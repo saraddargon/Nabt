@@ -256,7 +256,7 @@ namespace StockControl
                             {
                                 int c = 0;
                                 dgvData.DataSource = d;
-                               
+                                int id = 0;
                                 dt_RCD = StockControl.dbClss.LINQToDataTable(d);
                                 string SS = "";
                                 foreach (var x in dgvData.Rows)
@@ -264,25 +264,18 @@ namespace StockControl
                                     c += 1;
                                     x.Cells["dgvNo"].Value = c;
 
-                                    //if (Convert.ToString(x.Cells["Status"].Value).Equals("Partial"))
-                                    //{
-                                    //    x.Cells["QTY"].ReadOnly = false;
-                                    //    x.Cells["Unit"].ReadOnly = false;
-                                    //    x.Cells["PCSUnit"].ReadOnly = false;
-                                    //    x.Cells["CostPerUnit"].ReadOnly = false;
-                                    //    x.Cells["Remark"].ReadOnly = false;
-                                    //    x.Cells["ShelfNo"].ReadOnly = false;
-                                    //}
-                                    //else if (Convert.ToString(x.Cells["Status"].Value).Equals("Completed")
-                                    //    || Convert.ToString(x.Cells["Status"].Value).Equals("Discon"))
-                                    //{
-                                    //    x.Cells["QTY"].ReadOnly = true;
-                                    //    x.Cells["Unit"].ReadOnly = true;
-                                    //    x.Cells["PCSUnit"].ReadOnly = true;
-                                    //    x.Cells["CostPerUnit"].ReadOnly = true;
-                                    //    x.Cells["Remark"].ReadOnly = true;
-                                    //    x.Cells["ShelfNo"].ReadOnly = false;
-                                    //}
+                                    id = Convert.ToInt32(x.Cells["id"].Value);
+
+                                    var s = (from ix in db.tb_Stocks select ix)
+                                       .Where(a => a.DocNo == txtRCNo.Text.Trim()
+                                            && a.Category == "Temp"
+                                           && a.Refid == id).FirstOrDefault();
+                                    if (s != null)
+                                    {
+                                        x.Cells["RemainQty"].Value = Convert.ToDecimal(s.RemainQty);
+                                        x.Cells["CostPerUnit"].Value = Convert.ToDecimal(s.UnitCost);
+                                        x.Cells["Amount"].Value = Math.Abs(Convert.ToDecimal(s.AmountCost));
+                                    }
                                 }
 
                                 Cal_Amount();
@@ -502,6 +495,7 @@ namespace StockControl
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
                 int ID = 0;
+                decimal CostPerUnit = 0;
                 foreach (var g in dgvData.Rows)
                 {
 
@@ -524,22 +518,31 @@ namespace StockControl
 
                         db.SubmitChanges();
 
+                        CostPerUnit = Convert.ToDecimal(g.Cells["CostPerUnit"].Value);
+
                         //insert stock
-                        Save_Stock(ID, StockControl.dbClss.TSt(g.Cells["CodeNo"].Value), DocNo);
+                        Save_Stock(ID, StockControl.dbClss.TSt(g.Cells["CodeNo"].Value), DocNo, CostPerUnit);
 
 
                     }
                 }
             }
         }
-        private void Save_Stock(int ID,string CodeNo,string DocNo)
+        private void Save_Stock(int ID,string CodeNo,string DocNo,decimal CostPerUnit)
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
                 string Type = "ClearTemp";
                 //string Category = "Invoice"; //Temp,Invoice
-                decimal QTY = 0;
-                
+                decimal QTY = 0;                
+                decimal RemainQty = 0;
+                decimal Amount = 0;
+                decimal RemainAmount = 0;
+                decimal Avg = 0;
+                decimal UnitCost = 0;
+                decimal sum_Remain = 0;
+                decimal sum_Qty = 0;
+
 
                 var g = (from ix in db.tb_Stocks
                              //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
@@ -557,8 +560,23 @@ namespace StockControl
                         decimal.TryParse(vv.QTY.ToString(), out QTY);
                         QTY = -QTY;
 
+                        UnitCost = CostPerUnit;// Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "Avg"));
+                        Amount = (QTY) * UnitCost;
+
+                        //แบบที่ 1 จะไป sum ใหม่
+                        RemainQty = (Convert.ToDecimal(db.Cal_QTY(CodeNo, "", 0)));
+                        //แบบที่ 2 จะไปดึงล่าสุดมา
+                        //RemainQty = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "RemainQty"));
+
+                        sum_Remain = Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "RemainAmount"))
+                            + Amount;
+
+                        sum_Qty = RemainQty + (QTY);
+                        Avg = UnitCost;//sum_Remain / sum_Qty;
+                        RemainAmount = sum_Remain;
+
                         //insert Stock
-                        DateTime? CalDate = null;
+                        //DateTime? CalDate = null;
                         DateTime? AppDate = DateTime.Now;
 
                         tb_Stock gg = new tb_Stock();
@@ -574,11 +592,11 @@ namespace StockControl
                         gg.QTY = QTY;
                         gg.Inbound = QTY;
                         gg.Outbound = vv.Outbound;
-                        gg.AmountCost = QTY * get_cost(vv.CodeNo);
-                        gg.UnitCost = get_cost(vv.CodeNo);
-                        gg.RemainQty = vv.RemainQty;
-                        gg.RemainUnitCost = vv.RemainUnitCost;
-                        gg.RemainAmount =vv.RemainAmount;
+                        //gg.AmountCost = QTY * get_cost(vv.CodeNo);
+                        //gg.UnitCost = get_cost(vv.CodeNo);
+                        //gg.RemainQty = vv.RemainQty;
+                        //gg.RemainUnitCost = vv.RemainUnitCost;
+                        //gg.RemainAmount =vv.RemainAmount;
                         gg.CalDate = vv.CalDate;
                         gg.Status = vv.Status;
                         gg.Flag_ClearTemp = 2;   //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
@@ -586,7 +604,34 @@ namespace StockControl
                         gg.Category = "Temp";
                         gg.Refid = Convert.ToInt32(vv.Refid);
                         gg.CodeNo = CodeNo;
+                        gg.Type_in_out = "Out";
+                        gg.AmountCost = Amount;
+                        gg.UnitCost = UnitCost;
+                        gg.RemainQty = sum_Qty;
+                        gg.RemainUnitCost = vv.RemainUnitCost;
+                        gg.RemainAmount = RemainAmount;
+                        gg.Avg = Avg;
+
                         db.tb_Stocks.InsertOnSubmit(gg);
+                        //ปรับให้เป็น ทำการ clear temp แล้ว
+                        vv.Flag_ClearTemp = 2;
+                        db.SubmitChanges();
+
+                        decimal.TryParse(vv.QTY.ToString(), out QTY);
+                        UnitCost = CostPerUnit;//Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "Avg"));
+                        Amount = (QTY) * UnitCost;
+
+                        //แบบที่ 1 จะไป sum ใหม่
+                        RemainQty = (Convert.ToDecimal(db.Cal_QTY(CodeNo, "", 0)));
+                        //แบบที่ 2 จะไปดึงล่าสุดมา
+                        //RemainQty = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "RemainQty"));
+
+                        sum_Remain = Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "RemainAmount"))
+                            + Amount;
+
+                        sum_Qty = RemainQty + Convert.ToDecimal(vv.QTY);
+                        Avg = sum_Remain / sum_Qty;
+                        RemainAmount = sum_Qty * Avg;
 
                         tb_Stock bb = new tb_Stock();
                         bb.AppDate = AppDate;
@@ -601,11 +646,11 @@ namespace StockControl
                         bb.QTY = vv.QTY;
                         bb.Inbound = vv.QTY;
                         bb.Outbound = vv.Outbound;
-                        bb.AmountCost = vv.QTY * get_cost(vv.CodeNo);
-                        bb.UnitCost = get_cost(vv.CodeNo);
-                        bb.RemainQty = vv.RemainQty;
-                        bb.RemainUnitCost = vv.RemainUnitCost;
-                        bb.RemainAmount = vv.RemainAmount;
+                        //bb.AmountCost = vv.QTY * get_cost(vv.CodeNo);
+                        //bb.UnitCost = get_cost(vv.CodeNo);
+                        //bb.RemainQty = vv.RemainQty;
+                        //bb.RemainUnitCost = vv.RemainUnitCost;
+                        //bb.RemainAmount = vv.RemainAmount;
                         bb.CalDate = vv.CalDate;
                         bb.Status = vv.Status;
                         bb.Flag_ClearTemp = 2;   //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
@@ -613,8 +658,15 @@ namespace StockControl
                         bb.Category = "Invoice";
                         bb.Refid = Convert.ToInt32(vv.Refid);
                         bb.CodeNo = CodeNo;
+                        bb.Type_in_out = "In";
+                        bb.AmountCost = Amount;
+                        bb.UnitCost = UnitCost;
+                        bb.RemainQty = sum_Qty;
+                        bb.RemainUnitCost = vv.RemainUnitCost;
+                        bb.RemainAmount = RemainAmount;
+                        bb.Avg = Avg;
 
-                        db.tb_Stocks.InsertOnSubmit(gg);
+                        //db.tb_Stocks.InsertOnSubmit(gg);
                         db.tb_Stocks.InsertOnSubmit(bb);
 
                         //ปรับให้เป็น ทำการ clear temp แล้ว

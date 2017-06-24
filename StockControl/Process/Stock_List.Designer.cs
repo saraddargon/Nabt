@@ -40,6 +40,10 @@
             Telerik.WinControls.UI.GridViewDecimalColumn gridViewDecimalColumn2 = new Telerik.WinControls.UI.GridViewDecimalColumn();
             Telerik.WinControls.UI.GridViewDecimalColumn gridViewDecimalColumn3 = new Telerik.WinControls.UI.GridViewDecimalColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn9 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewDecimalColumn gridViewDecimalColumn4 = new Telerik.WinControls.UI.GridViewDecimalColumn();
+            Telerik.WinControls.UI.GridViewDecimalColumn gridViewDecimalColumn5 = new Telerik.WinControls.UI.GridViewDecimalColumn();
+            Telerik.WinControls.UI.GridViewDecimalColumn gridViewDecimalColumn6 = new Telerik.WinControls.UI.GridViewDecimalColumn();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
@@ -287,7 +291,7 @@
             gridViewDecimalColumn1.Width = 70;
             gridViewDecimalColumn2.EnableExpressionEditor = false;
             gridViewDecimalColumn2.FieldName = "UnitCost";
-            gridViewDecimalColumn2.FormatString = "{0:N2}";
+            gridViewDecimalColumn2.FormatString = "{0:N6}";
             gridViewDecimalColumn2.HeaderText = "ราคา:หน่วย";
             gridViewDecimalColumn2.Name = "UnitCost";
             gridViewDecimalColumn2.ReadOnly = true;
@@ -298,12 +302,38 @@
             gridViewDecimalColumn3.HeaderText = "ราคารวม";
             gridViewDecimalColumn3.Name = "AmountCost";
             gridViewDecimalColumn3.ReadOnly = true;
-            gridViewDecimalColumn3.Width = 120;
+            gridViewDecimalColumn3.Width = 103;
             gridViewTextBoxColumn8.EnableExpressionEditor = false;
             gridViewTextBoxColumn8.FieldName = "CreateDate";
             gridViewTextBoxColumn8.HeaderText = "วันที่ (เวลา)";
             gridViewTextBoxColumn8.Name = "CreateDate";
             gridViewTextBoxColumn8.Width = 135;
+            gridViewTextBoxColumn9.EnableExpressionEditor = false;
+            gridViewTextBoxColumn9.FieldName = "Type_in_out";
+            gridViewTextBoxColumn9.HeaderText = "เข้า-ออก";
+            gridViewTextBoxColumn9.Name = "Type_in_out";
+            gridViewTextBoxColumn9.ReadOnly = true;
+            gridViewTextBoxColumn9.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn9.Width = 63;
+            gridViewDecimalColumn4.EnableExpressionEditor = false;
+            gridViewDecimalColumn4.FieldName = "RemainQty";
+            gridViewDecimalColumn4.FormatString = "{0:N2}";
+            gridViewDecimalColumn4.HeaderText = "สต็อกคงเหลือ ณ เวลา";
+            gridViewDecimalColumn4.Name = "RemainQty";
+            gridViewDecimalColumn4.Width = 117;
+            gridViewDecimalColumn5.EnableExpressionEditor = false;
+            gridViewDecimalColumn5.FieldName = "Avg";
+            gridViewDecimalColumn5.FormatString = "{0:N6}";
+            gridViewDecimalColumn5.HeaderText = "ค่าเฉลี่ย ณ เวลา";
+            gridViewDecimalColumn5.Name = "Avg";
+            gridViewDecimalColumn5.ReadOnly = true;
+            gridViewDecimalColumn5.Width = 94;
+            gridViewDecimalColumn6.EnableExpressionEditor = false;
+            gridViewDecimalColumn6.FieldName = "RemainAmount";
+            gridViewDecimalColumn6.FormatString = "{0:N6}";
+            gridViewDecimalColumn6.HeaderText = "ราคาคงเหลือ ณ เวลา";
+            gridViewDecimalColumn6.Name = "RemainAmount";
+            gridViewDecimalColumn6.Width = 118;
             this.dgvData.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
             gridViewTextBoxColumn1,
             gridViewTextBoxColumn2,
@@ -315,7 +345,11 @@
             gridViewDecimalColumn1,
             gridViewDecimalColumn2,
             gridViewDecimalColumn3,
-            gridViewTextBoxColumn8});
+            gridViewTextBoxColumn8,
+            gridViewTextBoxColumn9,
+            gridViewDecimalColumn4,
+            gridViewDecimalColumn5,
+            gridViewDecimalColumn6});
             this.dgvData.MasterTemplate.ViewDefinition = tableViewDefinition1;
             this.dgvData.Name = "dgvData";
             this.dgvData.ReadOnly = true;

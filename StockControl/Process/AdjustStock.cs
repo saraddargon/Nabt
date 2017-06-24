@@ -239,12 +239,12 @@ namespace StockControl
                                         
                                          QTY = d.Qty,
                                          
-                                         RemainQty = i.StockInv,
+                                         RemainQty = (Convert.ToDecimal(db.Cal_QTY(d.CodeNo, "", 0))),// i.StockInv,
                                          Unit = d.Unit,
                                          PCSUnit = d.PCSUnit,
                                          MaxStock = i.MaximumStock,
                                          MinStock = i.MinimumStock,
-                                         StandardCost = i.StandardCost,
+                                         StandardCost = d.StandardCost,//i.StandardCost,
                                          Amount =d.Amount,
                                          LotNo = d.LotNo,
                                          Remark = d.Reason,
@@ -517,7 +517,7 @@ namespace StockControl
                             string ADNo = txtADNo.Text;
                             ClearData();
                             txtADNo.Text = ADNo;
-                            MessageBox.Show("บันทึกสำเร็จ!");
+                            
 
                             DataLoad();
                             btnNew.Enabled = true;
@@ -526,6 +526,8 @@ namespace StockControl
                             ////insert Stock
                             //Insert_Stock();
                             Insert_Stock_new();
+                            MessageBox.Show("บันทึกสำเร็จ!");
+                            DataLoad();
                         }
                         else
                         {
@@ -547,6 +549,14 @@ namespace StockControl
                     DateTime? CalDate = null;
                     DateTime? AppDate = DateTime.Now;
                     int Seq = 0;
+                    string Type_in_out = "In";
+                    decimal RemainQty = 0;
+                    decimal Amount = 0;
+                    decimal RemainAmount = 0;
+                    decimal Avg = 0;
+                    decimal UnitCost = 0;
+                    decimal sum_Remain = 0;
+                    decimal sum_Qty = 0;
 
                     //string Type = "";
                     string Category = "Invoice"; //Temp,Invoice
@@ -576,6 +586,7 @@ namespace StockControl
                             Seq += 1;
 
                             tb_Stock gg = new tb_Stock();
+                            gg.CodeNo = vv.CodeNo;
                             gg.AppDate = AppDate;
                             gg.Seq = Seq;
                             gg.App = "Adjust";
@@ -590,18 +601,51 @@ namespace StockControl
                             {
                                 gg.Outbound = Convert.ToDecimal(vv.Qty);
                                 gg.Inbound = 0;
+                                Type_in_out = "Out";
+
+                                UnitCost = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "Avg"));
+                                Amount = Convert.ToDecimal(vv.Qty) * UnitCost;
+
+                                //แบบที่ 1 จะไป sum ใหม่
+                                RemainQty = (Convert.ToDecimal(db.Cal_QTY(vv.CodeNo, "", 0)));
+                                //แบบที่ 2 จะไปดึงล่าสุดมา
+                                //RemainQty = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "RemainQty"));
+                                sum_Remain = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "RemainAmount"))
+                                    + Amount;
+
+                                sum_Qty = RemainQty + Convert.ToDecimal(vv.Qty);
+                                Avg = UnitCost;//sum_Remain / sum_Qty;
+                                RemainAmount = sum_Remain;
+
                             }
                             else
                             {
                                 gg.Inbound = Convert.ToDecimal(vv.Qty);
                                 gg.Outbound = 0;
+                                Type_in_out = "In";
+
+                                Amount = Convert.ToDecimal(vv.Qty) * Convert.ToDecimal(vv.StandardCost);
+                                UnitCost = Convert.ToDecimal(vv.StandardCost);
+
+                                //แบบที่ 1 จะไป sum ใหม่
+                                RemainQty = (Convert.ToDecimal(db.Cal_QTY(vv.CodeNo, "", 0)));
+                                //แบบที่ 2 จะไปดึงล่าสุดมา
+                                //RemainQty = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "RemainQty"));
+
+                                sum_Remain = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "RemainAmount"))
+                                    + Amount;
+
+                                sum_Qty = RemainQty + Convert.ToDecimal(vv.Qty);
+                                Avg = sum_Remain / sum_Qty;
+                                RemainAmount = sum_Qty * Avg;
+
                             }
 
-                            gg.AmountCost = (Convert.ToDecimal(vv.Qty)) * get_cost(vv.CodeNo);
-                            gg.UnitCost = get_cost(vv.CodeNo);
-                            gg.RemainQty = 0;
-                            gg.RemainUnitCost = 0;
-                            gg.RemainAmount = 0;
+                            //gg.AmountCost = (Convert.ToDecimal(vv.Qty)) * get_cost(vv.CodeNo);
+                            //gg.UnitCost = get_cost(vv.CodeNo);
+                            //gg.RemainQty = 0;
+                            //gg.RemainUnitCost = 0;
+                            //gg.RemainAmount = 0;
                             gg.CalDate = CalDate;
                             gg.Status = "Active";
 
@@ -609,6 +653,14 @@ namespace StockControl
                             gg.Category = Category;
                             gg.Refid = vv.id;
                             gg.Flag_ClearTemp = 0;   //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
+
+                            gg.Type_in_out = Type_in_out;
+                            gg.AmountCost = Amount;
+                            gg.UnitCost = UnitCost;
+                            gg.RemainQty = sum_Qty;
+                            gg.RemainUnitCost = 0;
+                            gg.RemainAmount = RemainAmount;
+                            gg.Avg = Avg;
 
                             db.tb_Stocks.InsertOnSubmit(gg);
                             db.SubmitChanges();
@@ -826,17 +878,15 @@ namespace StockControl
                                 u.Qty = StockControl.dbClss.TDe(g.Cells["QTY"].Value);
                                 u.PCSUnit = StockControl.dbClss.TDe(g.Cells["PCSUnit"].Value);
                                 u.Unit = StockControl.dbClss.TSt(g.Cells["Unit"].Value);
-                               
                                 u.Amount = StockControl.dbClss.TDe(g.Cells["Amount"].Value);
-                                u.Reason = StockControl.dbClss.TSt(g.Cells["Remark"].Value);
-                               
-                               
+                                u.Reason = StockControl.dbClss.TSt(g.Cells["Remark"].Value);                              
                                 u.LotNo = StockControl.dbClss.TSt(g.Cells["LotNo"].Value);
                                
                                 //u.RCDate = RequireDate;
                                 u.Seq = Seq;
                                 u.Status = "Completed";
-                                
+                                u.StandardCost = StockControl.dbClss.TDe(g.Cells["StandardCost"].Value);
+
                                 u.CreateBy = ClassLib.Classlib.User;
                                 u.CreateDate = DateTime.Now;
                                
@@ -970,7 +1020,10 @@ namespace StockControl
                 dgvData.EndEdit();
                 if (e.RowIndex >= -1)
                 {
+                    //if (dgvData.Columns["CodeNo"].Index == e.ColumnIndex)
+                    //{
 
+                    //}
                     //if (dgvData.Columns["QTY"].Index == e.ColumnIndex)
                     //{
                     //    decimal QTY = 0; decimal.TryParse(StockControl.dbClss.TSt(e.Row.Cells["QTY"].Value), out QTY);
@@ -988,6 +1041,14 @@ namespace StockControl
                     {
                         decimal QTY = 0; decimal.TryParse(StockControl.dbClss.TSt(e.Row.Cells["QTY"].Value), out QTY);
                         decimal CostPerUnit = 0; decimal.TryParse(StockControl.dbClss.TSt(e.Row.Cells["StandardCost"].Value), out CostPerUnit);
+
+                        if (QTY<0)
+                        {
+                            CostPerUnit =  Convert.ToDecimal(dbClss.Get_Stock(StockControl.dbClss.TSt(e.Row.Cells["CodeNo"].Value), "", "", "Avg"));
+                            e.Row.Cells["StandardCost"].Value = CostPerUnit;
+                        }
+                        
+
                         e.Row.Cells["Amount"].Value = QTY * CostPerUnit;
                         //Cal_Amount();
                     }
@@ -1154,7 +1215,7 @@ namespace StockControl
 
                         ItemNo = d.ItemNo;
                         ItemDescription = d.ItemDescription;
-                        RemainQty = Convert.ToDecimal(d.StockInv);
+                        RemainQty = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(CodeNo), "", 0)));//Convert.ToDecimal(d.StockInv);
                         Unit = d.UnitBuy;
                         PCSUnit = Convert.ToDecimal(d.PCSUnit);
                         CostPerUnit = Convert.ToDecimal(d.StandardCost);

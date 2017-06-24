@@ -331,7 +331,7 @@
             // 
             this.radLabelElement1.Name = "radLabelElement1";
             this.radStatusStrip1.SetSpring(this.radLabelElement1, false);
-            this.radLabelElement1.Text = "Detail : ประเภททูล(กลุ่มย่อย)";
+            this.radLabelElement1.Text = "Detail : ประเภทสินค้า";
             this.radLabelElement1.TextWrap = true;
             // 
             // panel1

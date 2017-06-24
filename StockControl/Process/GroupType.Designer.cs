@@ -329,7 +329,7 @@
             // 
             this.radLabelElement1.Name = "radLabelElement1";
             this.radStatusStrip1.SetSpring(this.radLabelElement1, false);
-            this.radLabelElement1.Text = "Status : กลุ่มทูล";
+            this.radLabelElement1.Text = "Status : กลุ่มสินค้า";
             this.radLabelElement1.TextWrap = true;
             // 
             // panel1

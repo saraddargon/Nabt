@@ -157,6 +157,29 @@ namespace StockControl
 
                 return No;
         }
+        public static string Get_Stock(string CodeNo, string Category,string Type_in_out,string Condition)
+        {
+            string No = "0.00";
+
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                if (!CodeNo.Equals(""))
+                {
+                    var g = (from ix in db.sp_008_Stock_Select(CodeNo, Category, Type_in_out) select ix).OrderByDescending(ab => ab.id ).ToList();
+                    if (g.Count > 0)
+                    {
+                        if (Condition.Equals("RemainQty"))
+                            No = (g.FirstOrDefault().RemainQty).ToString();
+                        else if (Condition.Equals("RemainAmount"))
+                            No = (g.FirstOrDefault().RemainAmount).ToString();
+                        else if (Condition.Equals("Avg"))
+                            No = (g.FirstOrDefault().Avg).ToString();
+                    }
+                }
+            }
+
+            return No;
+        }
         public static decimal Insert_Stock(string CodeNo, decimal Qty,string Screen,string Type)
         {
             decimal re = 0;
@@ -276,6 +299,7 @@ namespace StockControl
 
             return re;
         }
+
         public static DateTime ChangeFormat(string ds)
         {
             CultureInfo c = new CultureInfo("en-us", true);
