@@ -529,7 +529,7 @@
             this.txtModelName.EditorControl.ShowGroupPanel = false;
             this.txtModelName.EditorControl.Size = new System.Drawing.Size(240, 150);
             this.txtModelName.EditorControl.TabIndex = 0;
-            this.txtModelName.Location = new System.Drawing.Point(89, 10);
+            this.txtModelName.Location = new System.Drawing.Point(89, 12);
             this.txtModelName.Name = "txtModelName";
             this.txtModelName.Size = new System.Drawing.Size(196, 20);
             this.txtModelName.TabIndex = 4;
@@ -540,7 +540,7 @@
             // radButton1
             // 
             this.radButton1.Image = ((System.Drawing.Image)(resources.GetObject("radButton1.Image")));
-            this.radButton1.Location = new System.Drawing.Point(309, 6);
+            this.radButton1.Location = new System.Drawing.Point(303, 7);
             this.radButton1.Name = "radButton1";
             this.radButton1.Size = new System.Drawing.Size(78, 30);
             this.radButton1.TabIndex = 3;
@@ -550,7 +550,7 @@
             // 
             // radLabel1
             // 
-            this.radLabel1.Location = new System.Drawing.Point(12, 10);
+            this.radLabel1.Location = new System.Drawing.Point(10, 14);
             this.radLabel1.Name = "radLabel1";
             this.radLabel1.Size = new System.Drawing.Size(71, 18);
             this.radLabel1.TabIndex = 0;
@@ -642,6 +642,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.radStatusStrip1);
             this.Controls.Add(this.radRibbonBar1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "ModelMapping";
             // 

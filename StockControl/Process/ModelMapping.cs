@@ -166,23 +166,20 @@ namespace StockControl
                             radGridView1.DataSource = dt;
                         }
 
-
-
-
                         int ck = 0;
                         foreach (var x in radGridView1.Rows)
                         {
                             x.Cells["dgvCodeTemp"].Value = x.Cells["ModelName"].Value.ToString();
                             x.Cells["dgvCodeTemp2"].Value = x.Cells["CodeNo"].Value.ToString();
+
                             //x.Cells["ModelName"].ReadOnly = true;
                             //x.Cells["CodeNo"].ReadOnly = true;
                             x.Cells["ItemDescription"].ReadOnly = true;
                             //x.Cells["MMM"].ReadOnly = true;
+
                             if (row >= 0 && row == ck)
                             {
-
                                 x.ViewInfo.CurrentRow = x;
-
                             }
                             ck += 1;
                         }

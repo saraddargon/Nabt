@@ -31,7 +31,7 @@ namespace StockControl
             {
                 case "PurchaseReq": { ShowName = "Purchase Request"; pictureBox1.Image = imageList4.Images[2]; }break;
                 case "ForeCast": { ShowName = "ForeCasting"; pictureBox1.Image = imageList4.Images[1]; } break;
-                case "PartSetting": { ShowName = "Part Setting"; pictureBox1.Image = imageList4.Images[0]; } break;
+                case "PartSetting": { ShowName = "Tooling Setting"; pictureBox1.Image = imageList4.Images[0]; } break;
                 case "Receive": { ShowName = "Receive"; pictureBox1.Image = imageList4.Images[3]; } break;
                 case "Shipping": { ShowName = "Shipping"; pictureBox1.Image = imageList4.Images[4]; } break;
                 case "Report": { ShowName = "Report"; pictureBox1.Image = imageList4.Images[5]; } break;

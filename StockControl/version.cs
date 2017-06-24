@@ -12,6 +12,9 @@ namespace StockControl
             //##04/JUN/2017//
             //1. Add Folder Report and Screen Report @13:35 PM.
             //2. Add Variable Report.CRRReport.dbPartReport to keep Path File Report @13:35 PM.
+            //##17/JUL/2017//
+            //1. Model Part
+            //2. Calculate
 
         }
         public void byTay()

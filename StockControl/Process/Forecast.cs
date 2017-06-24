@@ -18,9 +18,13 @@ namespace StockControl
             InitializeComponent();
         }
 
+
         //private int RowView = 50;
         //private int ColView = 10;
+
+
         DataTable dt = new DataTable();
+        DataTable dt2 = new DataTable();
         private void radMenuItem2_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
@@ -28,13 +32,13 @@ namespace StockControl
             this.Cursor = Cursors.Default;
             hw.ShowDialog();
         }
-
         private void radRibbonBar1_Click(object sender, EventArgs e)
         {
 
         }
         private void GETDTRow()
         {
+
             dt.Columns.Add(new DataColumn("YYYY", typeof(int)));
             dt.Columns.Add(new DataColumn("ModelName", typeof(string)));
             dt.Columns.Add(new DataColumn("JAN", typeof(decimal)));
@@ -50,11 +54,34 @@ namespace StockControl
             dt.Columns.Add(new DataColumn("NOV", typeof(decimal)));
             dt.Columns.Add(new DataColumn("DEC", typeof(decimal)));
             dt.Columns.Add(new DataColumn("Active", typeof(bool)));
-           
+            dt.Columns.Add(new DataColumn("id", typeof(int)));
+
+            dt2.Columns.Add(new DataColumn("YYYY", typeof(int)));
+            dt2.Columns.Add(new DataColumn("ModelName", typeof(string)));
+            dt2.Columns.Add(new DataColumn("JAN", typeof(string)));
+            dt2.Columns.Add(new DataColumn("FEB", typeof(string)));
+            dt2.Columns.Add(new DataColumn("MAR", typeof(string)));
+            dt2.Columns.Add(new DataColumn("APR", typeof(string)));
+            dt2.Columns.Add(new DataColumn("MAY", typeof(string)));
+            dt2.Columns.Add(new DataColumn("JUN", typeof(string)));
+            dt2.Columns.Add(new DataColumn("JUL", typeof(string)));
+            dt2.Columns.Add(new DataColumn("AUG", typeof(string)));
+            dt2.Columns.Add(new DataColumn("SEP", typeof(string)));
+            dt2.Columns.Add(new DataColumn("OCT", typeof(string)));
+            dt2.Columns.Add(new DataColumn("NOV", typeof(string)));
+            dt2.Columns.Add(new DataColumn("DEC", typeof(string)));
+            dt2.Columns.Add(new DataColumn("Active", typeof(bool)));
+            dt2.Columns.Add(new DataColumn("id", typeof(int)));
+
+
         }
         int crow = 99;
         private void Unit_Load(object sender, EventArgs e)
         {
+            RMenu3.Click += RMenu3_Click;
+            RMenu4.Click += RMenu4_Click;
+            RMenu5.Click += RMenu5_Click;
+            RMenu6.Click += RMenu6_Click;
             radGridView1.ReadOnly = true;
             radGridView1.AutoGenerateColumns = false;
             GETDTRow();
@@ -62,9 +89,31 @@ namespace StockControl
             DefaultItem();
             cboYear.Text = DateTime.Now.Year.ToString();
             DataLoad();
-
             crow = 0;
+
         }
+
+        private void RMenu6_Click(object sender, EventArgs e)
+        {
+            DeleteUnit();
+            DataLoad();
+        }
+
+        private void RMenu5_Click(object sender, EventArgs e)
+        {
+            EditClick();
+        }
+
+        private void RMenu4_Click(object sender, EventArgs e)
+        {
+            ViewClick();
+        }
+
+        private void RMenu3_Click(object sender, EventArgs e)
+        {
+            NewClick();
+        }
+
         private void DefaultItem()
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())
@@ -73,7 +122,7 @@ namespace StockControl
                 cboModelName.DisplayMember = "ModelName";
                 cboModelName.ValueMember = "ModelName";
                 cboModelName.DataSource = (from ix in db.tb_Models.Where(s => s.ModelActive == true)select new {ix.ModelName,ix.ModelDescription }).ToList();
-                cboModelName.SelectedIndex = 0;
+                cboModelName.SelectedIndex = -1;
 
 
                 try
@@ -122,15 +171,23 @@ namespace StockControl
                         int.TryParse(cboYear.Text, out year1);
                         radGridView1.DataSource = db.tb_ProductionForecasts.Where(s => s.ModelName.Contains(cboModelName.Text.Trim()) 
                         && s.YYYY== year1).ToList();
-                        
 
+                        int ck = 0;
                         foreach (var x in radGridView1.Rows)
                         {
                             x.Cells["dgvCodeTemp"].Value = x.Cells["ModelName"].Value.ToString();
                             x.Cells["dgvCodeTemp2"].Value = x.Cells["YYYY"].Value.ToString();
+                           
                             x.Cells["ModelName"].ReadOnly = true;
                             x.Cells["YYYY"].ReadOnly = true;
                             //x.Cells["MMM"].ReadOnly = true;
+                            if (row >= 0 && row == ck)
+                            {
+
+                                x.ViewInfo.CurrentRow = x;
+
+                            }
+                            ck += 1;
                         }
                     }
                     catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -281,15 +338,16 @@ namespace StockControl
                             {
                                 if (!CodeTemp.Equals(""))
                                 {
-
-                                    var unit1 = (from ix in db.tb_Models
-                                                 where ix.ModelName == Convert.ToString(CodeTemp)
+                                    int id = 0;
+                                    int.TryParse(Convert.ToString(radGridView1.Rows[row].Cells["id"].Value), out id);
+                                    var unit1 = (from ix in db.tb_ProductionForecasts
+                                                 where ix.id == id
 
                                                  select ix).ToList();
                                     foreach (var d in unit1)
                                     {
-                                        db.tb_Models.DeleteOnSubmit(d);
-                                        dbClss.AddHistory(this.Name, "ลบรายการ ModelName", "Delete Model [" + d.ModelName + "]", "");
+                                        db.tb_ProductionForecasts.DeleteOnSubmit(d);
+                                        dbClss.AddHistory(this.Name, "ลบรายการ ModelName", "Model [" + d.ModelName + "]", "");
                                     }
                                     C += 1;
 
@@ -307,11 +365,17 @@ namespace StockControl
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                
                 dbClss.AddError("DeleteUnit", ex.Message, this.Name);
             }
 
             if (C > 0)
             {
+                row = row - 1;
+                if (radGridView1.Rows.Count == 1)
+                    row = 0;
+                else if (row < 0 && radGridView1.Rows.Count > 1)
+                    row = 0;
                 MessageBox.Show("ลบรายการ สำเร็จ!");
             }
 
@@ -324,16 +388,25 @@ namespace StockControl
         {
             DataLoad();
         }
-
-        private void btnNew_Click(object sender, EventArgs e)
+        private void NewClick()
         {
-            return;
             radGridView1.ReadOnly = false;
             radGridView1.AllowAddNewRow = false;
-            radGridView1.Rows.AddNew();
+            btnEdit.Enabled = false;
+            btnView.Enabled = true;
+            ForecastConsumption md = new ForecastConsumption(cboYear.Text,cboModelName.Text);
+            md.ShowDialog();
+            DataLoad();
+            //  radGridView1.Rows.AddNew();
         }
-
-        private void btnView_Click(object sender, EventArgs e)
+        private void EditClick()
+        {
+            radGridView1.ReadOnly = false;
+            btnEdit.Enabled = false;
+            btnView.Enabled = true;
+            radGridView1.AllowAddNewRow = false;
+        }
+        private void ViewClick()
         {
             radGridView1.ReadOnly = true;
             btnView.Enabled = false;
@@ -341,21 +414,26 @@ namespace StockControl
             radGridView1.AllowAddNewRow = false;
             DataLoad();
         }
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            NewClick();
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            ViewClick();
+        }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            radGridView1.ReadOnly = false;
-            btnEdit.Enabled = false;
-            btnView.Enabled = true;
-            radGridView1.AllowAddNewRow = false;
-            //DataLoad();
+            EditClick();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                return;
+               
                 AddUnit();
                 DataLoad();
             }
@@ -409,7 +487,7 @@ namespace StockControl
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            return;
+           
             DeleteUnit();
             DataLoad();
 
@@ -431,7 +509,7 @@ namespace StockControl
         {
             try
             {
-                return;
+                
                 OpenFileDialog op = new OpenFileDialog();
                 op.Filter = "Spread Sheet files (*.csv)|*.csv|All files (*.csv)|*.csv";
                 if (op.ShowDialog() == DialogResult.OK)
@@ -440,9 +518,10 @@ namespace StockControl
 
                     using (TextFieldParser parser = new TextFieldParser(op.FileName))
                     {
-                        dt.Rows.Clear();
+                        dt2.Rows.Clear();
                         DateTime? d = null;
                         DateTime d1 = DateTime.Now;
+                        int id = 0;
                         parser.TextFieldType = FieldType.Delimited;
                         parser.SetDelimiters(",");
                         int a = 0;
@@ -451,7 +530,7 @@ namespace StockControl
                         {
                             //Processing row
                             a += 1;
-                            DataRow rd = dt.NewRow();
+                            DataRow rd = dt2.NewRow();
                             // MessageBox.Show(a.ToString());
                             string[] fields = parser.ReadFields();
                             c = 0;
@@ -463,60 +542,89 @@ namespace StockControl
                                 if (a > 1)
                                 {
                                     if (c == 1)
-                                        rd["ModelName"] = Convert.ToString(field).Trim();
+                                        rd["YYYY"] = Convert.ToString(field).Trim();
                                     else if (c == 2)
-                                        rd["ModelDescription"] = Convert.ToString(field);
+                                        rd["ModelName"] = Convert.ToString(field);
                                     else if (c == 3)
-                                        rd["ModelActive"] = Convert.ToBoolean(field);
+                                        rd["JAN"] = Convert.ToString(field);
                                     else if (c == 4)
-                                        rd["LineName"] = Convert.ToString(field).Trim();
+                                        rd["FEB"] = Convert.ToString(field).Trim();
                                     else if (c == 5)
-                                        rd["MCName"] = Convert.ToString(field);
+                                        rd["MAR"] = Convert.ToString(field);
                                     else if (c == 6)
-                                        rd["Limit"] = Convert.ToBoolean(field);
+                                        rd["APR"] = Convert.ToString(field);
                                     else if (c == 7)
+                                        rd["MAY"] = Convert.ToString(field);
+                                    else if (c == 8)
+                                        rd["JUN"] = Convert.ToString(field);
+                                    else if (c == 9)
+                                        rd["JUL"] = Convert.ToString(field);
+                                    else if (c == 10)
+                                        rd["AUG"] = Convert.ToString(field);
+                                    else if (c == 11)
+                                        rd["SEP"] = Convert.ToString(field);
+                                    else if (c == 12)
+                                        rd["OCT"] = Convert.ToString(field);
+                                    else if (c == 13)
+                                        rd["NOV"] = Convert.ToString(field);
+                                    else if (c == 14)
+                                        rd["DEC"] = Convert.ToString(field);
+                                    else if (c == 15)
+                                        rd["Active"] = Convert.ToBoolean(field);
+                                    else if (c == 16)
                                     {
-                                        if (DateTime.TryParse(Convert.ToString(field), out d1))
-                                        {
-                                            rd["ExpireDate"] = Convert.ToDateTime(field);
-
-                                        }
-                                        else
-                                        {
-                                            rd["ExpireDate"] = d;
-                                        }
+                                        id = 0;
+                                        int.TryParse(Convert.ToString(field), out id);
+                                        rd["id"] = id;
+                                        
                                     }
 
                                 }
                                 else
                                 {
                                     if (c == 1)
-                                        rd["ModelName"] = "";
+                                        rd["YYYY"] = 0;
                                     else if (c == 2)
-                                        rd["ModelDescription"] = "";
+                                        rd["ModelName"] = "";
                                     else if (c == 3)
-                                        rd["ModelActive"] = false;
+                                        rd["JAN"] = "";
                                     else if (c == 4)
-                                        rd["LineName"] = "";
+                                        rd["FEB"] = "";
                                     else if (c == 5)
-                                        rd["MCName"] = "";
+                                        rd["MAR"] = "";
                                     else if (c == 6)
-                                        rd["Limit"] = false;
+                                        rd["APR"] = "";
                                     else if (c == 7)
-                                        rd["ExpireDate"] = d;
-
-
+                                        rd["MAY"] = "";
+                                    else if (c == 8)
+                                        rd["JUN"] = "";
+                                    else if (c == 9)
+                                        rd["JUL"] = "";
+                                    else if (c == 10)
+                                        rd["AUG"] = "";
+                                    else if (c == 11)
+                                        rd["SEP"] = "";
+                                    else if (c == 12)
+                                        rd["OCT"] = "";
+                                    else if (c == 13)
+                                        rd["NOV"] = "";
+                                    else if (c == 14)
+                                        rd["DEC"] = "";
+                                    else if (c == 15)
+                                        rd["Active"] = false;
+                                    else if (c == 16)
+                                        rd["id"] = 0;
 
 
                                 }
 
 
                             }
-                            dt.Rows.Add(rd);
+                            dt2.Rows.Add(rd);
 
                         }
                     }
-                    if (dt.Rows.Count > 0)
+                    if (dt2.Rows.Count > 0)
                     {
 
                         dbClss.AddHistory(this.Name, "Import", "Import file CSV in to System", "");
@@ -538,57 +646,75 @@ namespace StockControl
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
 
-                    foreach (DataRow rd in dt.Rows)
+                    foreach (DataRow rd in dt2.Rows)
                     {
-                        if (!rd["ModelName"].ToString().Equals(""))
+                        if (!rd["ModelName"].ToString().Equals("") && !rd["YYYY"].ToString().Equals("0"))
                         {
 
-
-                            var x = (from ix in db.tb_Models where ix.ModelName == rd["ModelName"].ToString().Trim() select ix).FirstOrDefault();
-
-
+                            int id = 0;
+                            int.TryParse(rd["id"].ToString(), out id);
+                            var mp1 = (from ix in db.tb_ProductionForecasts
+                                       where ix.YYYY==Convert.ToInt32(rd["YYYY"].ToString())
+                                             && ix.ModelName==Convert.ToString(rd["ModelName"])
+                                       select ix).FirstOrDefault();
                             DateTime? d = null;
                             DateTime d1 = DateTime.Now;
-                            if (x == null)
+                            decimal a1 = 0, a2 = 0, a3 = 0, a4 = 0, a5 = 0, a6 = 0, a7 = 0, a8 = 0, a9 = 0, a10 = 0, a11 = 0, a12 = 0;
+                            decimal.TryParse(rd["JAN"].ToString(), out a1);
+                            decimal.TryParse(rd["FEB"].ToString(), out a2);
+                            decimal.TryParse(rd["MAR"].ToString(), out a3);
+                            decimal.TryParse(rd["APR"].ToString(), out a4);
+                            decimal.TryParse(rd["MAY"].ToString(), out a5);
+                            decimal.TryParse(rd["JUN"].ToString(), out a6);
+                            decimal.TryParse(rd["JUL"].ToString(), out a7);
+                            decimal.TryParse(rd["AUG"].ToString(), out a8);
+                            decimal.TryParse(rd["SEP"].ToString(), out a9);
+                            decimal.TryParse(rd["OCT"].ToString(), out a10);
+                            decimal.TryParse(rd["NOV"].ToString(), out a11);
+                            decimal.TryParse(rd["DEC"].ToString(), out a12);
+                            int yyyy = 0;
+                            int.TryParse(rd["YYYY"].ToString(), out yyyy);
+                            if (mp1 == null)
                             {
-                                tb_Model u = new tb_Model();
-                                u.ModelName = rd["ModelName"].ToString().Trim();
-                                u.ModelDescription = rd["ModelDescription"].ToString().Trim();
-                                u.ModelActive = Convert.ToBoolean(rd["ModelActive"].ToString());
-                                u.LineName = rd["LineName"].ToString().Trim();
-                                u.MCName = rd["MCName"].ToString().Trim();
-                                u.Limit = Convert.ToBoolean(rd["Limit"].ToString());
-                                if (DateTime.TryParse(rd["ExpireDate"].ToString(), out d1))
-                                {
 
-                                    u.ExpireDate = Convert.ToDateTime(rd["ExpireDate"].ToString());
-                                }
-                                else
-                                {
-                                    u.ExpireDate = d;
-                                }
-                                db.tb_Models.InsertOnSubmit(u);
+
+                                tb_ProductionForecast mp = new tb_ProductionForecast();
+                                mp.YYYY = yyyy;
+                                mp.ModelName = rd["ModelName"].ToString();
+                                mp.JAN = a1;
+                                mp.FEB = a2;
+                                mp.MAR = a3;
+                                mp.APR = a4;
+                                mp.MAY = a5;
+                                mp.JUN = a6;
+                                mp.JUL = a7;
+                                mp.AUG = a8;
+                                mp.SEP = a9;
+                                mp.OCT = a10;
+                                mp.NOV = a11;
+                                mp.DEC = a12;
+                                mp.Active = true;
+                                db.tb_ProductionForecasts.InsertOnSubmit(mp);
                                 db.SubmitChanges();
                             }
                             else
                             {
-                                x.ModelName = rd["ModelName"].ToString().Trim();
-                                x.ModelDescription = rd["ModelDescription"].ToString().Trim();
-                                x.ModelActive = Convert.ToBoolean(rd["ModelActive"].ToString());
-                                x.LineName = rd["LineName"].ToString().Trim();
-                                x.MCName = rd["MCName"].ToString().Trim();
-                                x.Limit = Convert.ToBoolean(rd["Limit"].ToString());
-                                if (DateTime.TryParse(rd["ExpireDate"].ToString(), out d1))
-                                {
 
-                                    x.ExpireDate = Convert.ToDateTime(rd["ExpireDate"].ToString());
-                                }
-                                else
-                                {
-                                    x.ExpireDate = d;
-                                }
-
-
+                                //mp1.YYYY = yyyy;
+                                //mp1.ModelName = rd["ModelName"].ToString();
+                                mp1.JAN = a1;
+                                mp1.FEB = a2;
+                                mp1.MAR = a3;
+                                mp1.APR = a4;
+                                mp1.MAY = a5;
+                                mp1.JUN = a6;
+                                mp1.JUL = a7;
+                                mp1.AUG = a8;
+                                mp1.SEP = a9;
+                                mp1.OCT = a10;
+                                mp1.NOV = a11;
+                                mp1.DEC = a12;
+                                mp1.Active = Convert.ToBoolean(rd["Active"].ToString()) ;
                                 db.SubmitChanges();
 
                             }

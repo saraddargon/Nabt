@@ -126,11 +126,23 @@
     <Compile Include="Process\AdjustStock_List.Designer.cs">
       <DependentUpon>AdjustStock_List.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\ClearTemp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ClearTemp.Designer.cs">
+      <DependentUpon>ClearTemp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\ClearTempList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Process\ClearTempList.Designer.cs">
       <DependentUpon>ClearTempList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ForecastConsumption.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ForecastConsumption.Designer.cs">
+      <DependentUpon>ForecastConsumption.cs</DependentUpon>
     </Compile>
     <Compile Include="Process\MappingAdd.cs">
       <SubType>Form</SubType>
@@ -294,6 +306,12 @@
     <Compile Include="Process\CreatePR.Designer.cs">
       <DependentUpon>CreatePR.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\Stock_List.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Stock_List.Designer.cs">
+      <DependentUpon>Stock_List.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\WaitingPR.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -421,8 +439,14 @@
     <EmbeddedResource Include="Process\AdjustStock_List.resx">
       <DependentUpon>AdjustStock_List.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Process\ClearTemp.resx">
+      <DependentUpon>ClearTemp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Process\ClearTempList.resx">
       <DependentUpon>ClearTempList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ForecastConsumption.resx">
+      <DependentUpon>ForecastConsumption.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\MappingAdd.resx">
       <DependentUpon>MappingAdd.cs</DependentUpon>
@@ -501,6 +525,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\CreatePR.resx">
       <DependentUpon>CreatePR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Stock_List.resx">
+      <DependentUpon>Stock_List.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\WaitingPR.resx">
       <DependentUpon>WaitingPR.cs</DependentUpon>
