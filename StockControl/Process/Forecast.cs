@@ -249,6 +249,7 @@ namespace StockControl
                                 if (Convert.ToString(g.Cells["dgvCodeTemp"].Value).Equals(""))
                                 {
 
+                                    /*
                                     tb_Model u = new tb_Model();
                                     u.ModelName = Convert.ToString(g.Cells["ModelName"].Value);
                                     u.ModelDescription = Convert.ToString(g.Cells["ModelDescription"].Value);
@@ -269,34 +270,53 @@ namespace StockControl
                                     db.SubmitChanges();
                                     C += 1;
                                     dbClss.AddHistory(this.Name, "เพิ่ม", "Insert Model [" + u.ModelName + "]", "");
+                                    */
+
 
                                 }
                                 else
                                 {
-
-                                    var u = (from ix in db.tb_Models
-                                             where ix.ModelName == Convert.ToString(g.Cells["dgvCodeTemp"].Value)
-
+                                    int id = 0;
+                                    int.TryParse(Convert.ToString(g.Cells["id"].Value), out id);
+                                    var u = (from ix in db.tb_ProductionForecasts
+                                             where ix.ModelName == Convert.ToString(g.Cells["ModelName"].Value)
+                                             && ix.YYYY == Convert.ToInt32(g.Cells["YYYY"].Value)
+                                             && ix.id == id
                                              select ix).First();
 
-                                    u.ModelDescription = Convert.ToString(g.Cells["ModelDescription"].Value);
-                                    u.ModelActive = Convert.ToBoolean(Convert.ToString(g.Cells["ModelActive"].Value));
-                                    u.LineName = Convert.ToString(g.Cells["LineName"].Value);
-                                    u.MCName = Convert.ToString(g.Cells["MCName"].Value);
-                                    u.Limit = Convert.ToBoolean(g.Cells["Limit"].Value);
+                                    decimal a1 = 0, a2 = 0, a3 = 0, a4 = 0, a5 = 0, a6 = 0, a7 = 0, a8 = 0, a9 = 0, a10 = 0, a11 = 0, a12 = 0;
+                                   
+                                    decimal.TryParse(Convert.ToString(g.Cells["JAN"].Value), out a1);
+                                    decimal.TryParse(Convert.ToString(g.Cells["FEB"].Value), out a2);
+                                    decimal.TryParse(Convert.ToString(g.Cells["MAR"].Value), out a3);
+                                    decimal.TryParse(Convert.ToString(g.Cells["APR"].Value), out a4);
+                                    decimal.TryParse(Convert.ToString(g.Cells["MAY"].Value), out a5);
+                                    decimal.TryParse(Convert.ToString(g.Cells["JUN"].Value), out a6);
+                                    decimal.TryParse(Convert.ToString(g.Cells["JUL"].Value), out a7);
+                                    decimal.TryParse(Convert.ToString(g.Cells["AUG"].Value), out a8);
+                                    decimal.TryParse(Convert.ToString(g.Cells["SEP"].Value), out a9);
+                                    decimal.TryParse(Convert.ToString(g.Cells["OCT"].Value), out a10);
+                                    decimal.TryParse(Convert.ToString(g.Cells["NOV"].Value), out a11);
+                                    decimal.TryParse(Convert.ToString(g.Cells["DEC"].Value), out a12);
 
-                                    if (DateTime.TryParse(Convert.ToString(g.Cells["ExpireDate"].Value), out d1))
-                                    {
-                                        d = dbClss.ChangeFormat(Convert.ToString(g.Cells["ExpireDate"].Value));
-                                        //Convert.ToDateTime(Convert.ToString(g.Cells["ExpireDate"].Value));
+                                    u.JAN = a1;
+                                    u.FEB = a2;
+                                    u.MAR = a3;
+                                    u.APR = a4;
+                                    u.MAY = a5;
+                                    u.JUN = a6;
+                                    u.JUL = a7;
+                                    u.AUG = a8;
+                                    u.SEP = a9;
+                                    u.OCT = a10;
+                                    u.NOV = a11;
+                                    u.DEC = a12;
 
-                                    }
-                                    u.ExpireDate = d;
 
                                     C += 1;
 
                                     db.SubmitChanges();
-                                    dbClss.AddHistory(this.Name, "แก้ไข", "Update Model [" + u.ModelName + "]", "");
+                                    dbClss.AddHistory(this.Name, "แก้ไข", "Update Model [" + u.ModelName +","+u.YYYY+ "]", "");
 
                                 }
                             }
@@ -307,7 +327,7 @@ namespace StockControl
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                dbClss.AddError("AddUnit", ex.Message, this.Name);
+                dbClss.AddError("Edit", ex.Message, this.Name);
             }
 
             if (C > 0)
