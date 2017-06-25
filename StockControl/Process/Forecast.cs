@@ -249,6 +249,7 @@ namespace StockControl
                                 if (Convert.ToString(g.Cells["dgvCodeTemp"].Value).Equals(""))
                                 {
 
+                                    /*
                                     tb_Model u = new tb_Model();
                                     u.ModelName = Convert.ToString(g.Cells["ModelName"].Value);
                                     u.ModelDescription = Convert.ToString(g.Cells["ModelDescription"].Value);
@@ -269,6 +270,8 @@ namespace StockControl
                                     db.SubmitChanges();
                                     C += 1;
                                     dbClss.AddHistory(this.Name, "เพิ่ม", "Insert Model [" + u.ModelName + "]", "");
+                                    */
+
 
                                 }
                                 else
