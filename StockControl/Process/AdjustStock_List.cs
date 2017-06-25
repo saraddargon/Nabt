@@ -251,7 +251,7 @@ namespace StockControl
                 {
                     if (!Convert.ToString(dgvData.CurrentRow.Cells["ADNo"].Value).Equals(""))
                     {
-                        ADNo_tt.Text = Convert.ToString(dgvData.CurrentRow.Cells["CodeNo"].Value);
+                        ADNo_tt.Text = Convert.ToString(dgvData.CurrentRow.Cells["ADNo"].Value);
                         this.Close();
                     }
                     else
@@ -400,6 +400,43 @@ namespace StockControl
                 a.ShowDialog();
                 this.Close();
             }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string AdNo1 = "";
+                string AdNo2 = "";
+
+                if (dgvData.Rows.Count > 0)
+                {
+                    AdNo1 = Convert.ToString(dgvData.CurrentRow.Cells["ADNo"].Value);
+
+                    AdNo2 = Convert.ToString(dgvData.CurrentRow.Cells["ADNo"].Value);
+                }
+                PrintPR a = new PrintPR(AdNo1, AdNo2, "AdjustStock");
+                a.ShowDialog();
+
+                //using (DataClasses1DataContext db = new DataClasses1DataContext())
+                //{
+                //    var g = (from ix in db.sp_R004_ReportShipping(txtSHNo.Text, DateTime.Now) select ix).ToList();
+                //    if (g.Count() > 0)
+                //    {
+
+                //        Report.Reportx1.Value = new string[2];
+                //        Report.Reportx1.Value[0] = txtSHNo.Text;
+                //        Report.Reportx1.WReport = "ReportShipping";
+                //        Report.Reportx1 op = new Report.Reportx1("ReportShipping.rpt");
+                //        op.Show();
+
+                //    }
+                //    else
+                //        MessageBox.Show("not found.");
+                //}
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

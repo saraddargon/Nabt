@@ -114,7 +114,7 @@ namespace StockControl
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
                     radGridView1.AutoGenerateColumns = true;
-                    radGridView1.DataSource = db.sp_R001_ReportPart(cboGroupType.Text, cboStatus.Text, cboVendor.Text);
+                    radGridView1.DataSource = db.sp_E001_ReportPart(cboGroupType.Text, cboStatus.Text, cboVendor.Text,txtCodeNo.Text,txtItemNo.Text);
                 }
                 dbClss.ExportGridXlSX2(radGridView1,FileName);
                 dbClss.AddHistory(this.Name, "ออกรายงาน", "เลือกออกรายงาน ", "");

@@ -1349,5 +1349,33 @@ namespace StockControl
                 i++;
             });
         }
+
+        private void radButtonElement1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PrintPR a = new PrintPR(txtADNo.Text, txtADNo.Text, "AdjustStock");
+                a.ShowDialog();
+
+                //using (DataClasses1DataContext db = new DataClasses1DataContext())
+                //{
+                //    var g = (from ix in db.sp_R004_ReportShipping(txtSHNo.Text, DateTime.Now) select ix).ToList();
+                //    if (g.Count() > 0)
+                //    {
+
+                //        Report.Reportx1.Value = new string[2];
+                //        Report.Reportx1.Value[0] = txtSHNo.Text;
+                //        Report.Reportx1.WReport = "ReportShipping";
+                //        Report.Reportx1 op = new Report.Reportx1("ReportShipping.rpt");
+                //        op.Show();
+
+                //    }
+                //    else
+                //        MessageBox.Show("not found.");
+                //}
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
     }
 }

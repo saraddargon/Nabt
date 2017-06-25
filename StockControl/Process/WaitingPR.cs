@@ -118,16 +118,21 @@ namespace StockControl
                                   where a.Status == "Active" 
                                   && a.StopOrder == false
                                   && (a.VendorNo.Contains(Vendorno))
-
-                                  && (Convert.ToDecimal(a.StockInv) + Convert.ToDecimal(a.StockDL)
-                                    + Convert.ToDecimal(a.StockBackOrder) <= Convert.ToDecimal(a.MinimumStock))
+                                  && ((
+                                        (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "Invoice", 0)))
+                                                  + (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "Temp", 0)))
+                                                   + (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "BackOrder", 0)))
+                                    ) <= Convert.ToDecimal(a.MinimumStock))
+                                  //&& (Convert.ToDecimal(a.StockInv) + Convert.ToDecimal(a.StockDL)
+                                  //  + Convert.ToDecimal(a.StockBackOrder) <= Convert.ToDecimal(a.MinimumStock))
                                  
                                   select new {
                                       CodeNo = a.CodeNo,
                                       ItemDescription = a.ItemDescription,
                                       Order = Convert.ToDecimal(a.MaximumStock),
-                                      StockQty = Convert.ToDecimal(a.StockInv) + Convert.ToDecimal(a.StockDL),
-                                      BackOrder = StockControl.dbClss.TSt(a.StockBackOrder),
+                                      StockQty = (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "Invoice", 0)))
+                                                  + (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "Temp", 0))) , //Convert.ToDecimal(a.StockInv) + Convert.ToDecimal(a.StockDL),
+                                      BackOrder = (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "BackOrder", 0))), //StockControl.dbClss.TSt(a.StockBackOrder),
                                       UnitBuy = a.UnitBuy,
                                       PCSUnit = StockControl.dbClss.TSt(a.PCSUnit),
                                       LeadTime = StockControl.dbClss.TSt(a.Leadtime),

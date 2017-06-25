@@ -55,10 +55,10 @@ namespace StockControl
         int crow = 99;
         private void Unit_Load(object sender, EventArgs e)
         {
-            //DateTime firstOfNextMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1);
-            //DateTime lastOfThisMonth = firstOfNextMonth.AddDays(-1);
-            //dtDate1.Value = firstOfNextMonth;
-            //dtDate2.Value = lastOfThisMonth;
+            DateTime firstOfNextMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1);
+            DateTime lastOfThisMonth = firstOfNextMonth.AddDays(-1);
+            dtDate1.Value = firstOfNextMonth;
+            dtDate2.Value = lastOfThisMonth;
             GETDTRow();
             DefaultItem();
 
@@ -107,20 +107,20 @@ namespace StockControl
             this.Cursor = Cursors.WaitCursor;
             try
             {
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    string date1 = "";
+                    string date2 = "";
+                    date1 = dtDate1.Value.ToString("yyyyMMdd");
+                    date2 = dtDate2.Value.ToString("yyyyMMdd");
 
-                //System.IO.File.Copy(Report.CRRReport.dbPartReport + "Account_Sheet.xls", FileName, true);
-                //System.Diagnostics.Process.Start();
-
-                //using (DataClasses1DataContext db = new DataClasses1DataContext())
-                //{
-                //    radGridView1.AutoGenerateColumns = true;
-                //    radGridView1.DataSource = db.sp_R001_ReportPart(cboGroupType.Text, cboStatus.Text, cboVendor.Text);
-                //}
-                //dbClss.ExportGridXlSX2(radGridView1,FileName);
-                //dbClss.AddHistory(this.Name, "ออกรายงาน", "เลือกออกรายงาน ", "");
-                System.IO.File.Copy(Report.CRRReport.dbPartReport + "waitingOrder.xls", FileName, true);
+                    radGridView1.AutoGenerateColumns = true;
+                    radGridView1.DataSource = db.sp_E006_ReportWaitingPR(date1,date2,"",cboVendor.Text,"",txtCodeNo.Text,txtItemNo.Text,cboGroupType.Text);
+                }
+                dbClss.ExportGridXlSX2(radGridView1, FileName);
+                dbClss.AddHistory(this.Name, "ออกรายงาน", "เลือกออกรายงาน ", "");
                 ck = true;
-                
+
             }
             catch { ck = false; }
             this.Cursor = Cursors.Default;

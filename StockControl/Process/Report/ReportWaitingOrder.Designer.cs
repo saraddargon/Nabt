@@ -50,16 +50,14 @@
             this.dtDate1 = new Telerik.WinControls.UI.RadDateTimePicker();
             this.radLabel6 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel7 = new Telerik.WinControls.UI.RadLabel();
-            this.radTextBox2 = new Telerik.WinControls.UI.RadTextBox();
-            this.radTextBox1 = new Telerik.WinControls.UI.RadTextBox();
+            this.txtItemNo = new Telerik.WinControls.UI.RadTextBox();
+            this.txtCodeNo = new Telerik.WinControls.UI.RadTextBox();
             this.radGridView1 = new Telerik.WinControls.UI.RadGridView();
             this.txtVendorNo = new Telerik.WinControls.UI.RadTextBox();
             this.radLabel5 = new Telerik.WinControls.UI.RadLabel();
             this.cboVendor = new Telerik.WinControls.UI.RadMultiColumnComboBox();
             this.radLabel4 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel3 = new Telerik.WinControls.UI.RadLabel();
-            this.cboStatus = new System.Windows.Forms.ComboBox();
-            this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
             this.cboGroupType = new System.Windows.Forms.ComboBox();
             this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
             this.label1 = new System.Windows.Forms.Label();
@@ -79,8 +77,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtDate1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtItemNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCodeNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVendorNo)).BeginInit();
@@ -90,7 +88,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.cboVendor.EditorControl.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
@@ -241,16 +238,14 @@
             this.radPanel1.Controls.Add(this.dtDate1);
             this.radPanel1.Controls.Add(this.radLabel6);
             this.radPanel1.Controls.Add(this.radLabel7);
-            this.radPanel1.Controls.Add(this.radTextBox2);
-            this.radPanel1.Controls.Add(this.radTextBox1);
+            this.radPanel1.Controls.Add(this.txtItemNo);
+            this.radPanel1.Controls.Add(this.txtCodeNo);
             this.radPanel1.Controls.Add(this.radGridView1);
             this.radPanel1.Controls.Add(this.txtVendorNo);
             this.radPanel1.Controls.Add(this.radLabel5);
             this.radPanel1.Controls.Add(this.cboVendor);
             this.radPanel1.Controls.Add(this.radLabel4);
             this.radPanel1.Controls.Add(this.radLabel3);
-            this.radPanel1.Controls.Add(this.cboStatus);
-            this.radPanel1.Controls.Add(this.radLabel1);
             this.radPanel1.Controls.Add(this.cboGroupType);
             this.radPanel1.Controls.Add(this.radLabel2);
             this.radPanel1.Controls.Add(this.label1);
@@ -306,19 +301,19 @@
             this.radLabel7.TabIndex = 13;
             this.radLabel7.Text = "เลือกช่วงวันที่ :";
             // 
-            // radTextBox2
+            // txtItemNo
             // 
-            this.radTextBox2.Location = new System.Drawing.Point(112, 177);
-            this.radTextBox2.Name = "radTextBox2";
-            this.radTextBox2.Size = new System.Drawing.Size(287, 20);
-            this.radTextBox2.TabIndex = 11;
+            this.txtItemNo.Location = new System.Drawing.Point(112, 149);
+            this.txtItemNo.Name = "txtItemNo";
+            this.txtItemNo.Size = new System.Drawing.Size(287, 20);
+            this.txtItemNo.TabIndex = 11;
             // 
-            // radTextBox1
+            // txtCodeNo
             // 
-            this.radTextBox1.Location = new System.Drawing.Point(112, 151);
-            this.radTextBox1.Name = "radTextBox1";
-            this.radTextBox1.Size = new System.Drawing.Size(111, 20);
-            this.radTextBox1.TabIndex = 11;
+            this.txtCodeNo.Location = new System.Drawing.Point(112, 123);
+            this.txtCodeNo.Name = "txtCodeNo";
+            this.txtCodeNo.Size = new System.Drawing.Size(111, 20);
+            this.txtCodeNo.TabIndex = 11;
             // 
             // radGridView1
             // 
@@ -352,7 +347,7 @@
             // radLabel5
             // 
             this.radLabel5.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel5.Location = new System.Drawing.Point(50, 179);
+            this.radLabel5.Location = new System.Drawing.Point(50, 151);
             this.radLabel5.Name = "radLabel5";
             this.radLabel5.Size = new System.Drawing.Size(59, 18);
             this.radLabel5.TabIndex = 7;
@@ -384,7 +379,7 @@
             this.cboVendor.EditorControl.ShowGroupPanel = false;
             this.cboVendor.EditorControl.Size = new System.Drawing.Size(240, 150);
             this.cboVendor.EditorControl.TabIndex = 0;
-            this.cboVendor.Location = new System.Drawing.Point(112, 123);
+            this.cboVendor.Location = new System.Drawing.Point(112, 95);
             this.cboVendor.Name = "cboVendor";
             this.cboVendor.Size = new System.Drawing.Size(287, 22);
             this.cboVendor.TabIndex = 8;
@@ -395,7 +390,7 @@
             // radLabel4
             // 
             this.radLabel4.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel4.Location = new System.Drawing.Point(45, 154);
+            this.radLabel4.Location = new System.Drawing.Point(45, 126);
             this.radLabel4.Name = "radLabel4";
             this.radLabel4.Size = new System.Drawing.Size(65, 18);
             this.radLabel4.TabIndex = 7;
@@ -404,33 +399,11 @@
             // radLabel3
             // 
             this.radLabel3.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel3.Location = new System.Drawing.Point(41, 125);
+            this.radLabel3.Location = new System.Drawing.Point(41, 97);
             this.radLabel3.Name = "radLabel3";
             this.radLabel3.Size = new System.Drawing.Size(70, 18);
             this.radLabel3.TabIndex = 7;
             this.radLabel3.Text = "เลือกผู้ขาย :";
-            // 
-            // cboStatus
-            // 
-            this.cboStatus.FormattingEnabled = true;
-            this.cboStatus.Items.AddRange(new object[] {
-            "ทั้งหมด",
-            "ใช้งาน",
-            "เลิกใช้งาน"});
-            this.cboStatus.Location = new System.Drawing.Point(112, 95);
-            this.cboStatus.Name = "cboStatus";
-            this.cboStatus.Size = new System.Drawing.Size(111, 21);
-            this.cboStatus.TabIndex = 3;
-            this.cboStatus.Text = "ทั้งหมด";
-            // 
-            // radLabel1
-            // 
-            this.radLabel1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel1.Location = new System.Drawing.Point(37, 95);
-            this.radLabel1.Name = "radLabel1";
-            this.radLabel1.Size = new System.Drawing.Size(75, 18);
-            this.radLabel1.TabIndex = 2;
-            this.radLabel1.Text = "เลือกสถานะ :";
             // 
             // cboGroupType
             // 
@@ -531,8 +504,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtDate1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtItemNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCodeNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtVendorNo)).EndInit();
@@ -542,7 +515,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.cboVendor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
@@ -577,14 +549,12 @@
         private Telerik.WinControls.UI.RadLabelElement lblStatus;
         private System.Windows.Forms.ComboBox cboGroupType;
         private Telerik.WinControls.UI.RadLabel radLabel2;
-        private System.Windows.Forms.ComboBox cboStatus;
-        private Telerik.WinControls.UI.RadLabel radLabel1;
         private Telerik.WinControls.UI.RadTextBox txtVendorNo;
         private Telerik.WinControls.UI.RadMultiColumnComboBox cboVendor;
         private Telerik.WinControls.UI.RadLabel radLabel3;
         private Telerik.WinControls.UI.RadGridView radGridView1;
-        private Telerik.WinControls.UI.RadTextBox radTextBox2;
-        private Telerik.WinControls.UI.RadTextBox radTextBox1;
+        private Telerik.WinControls.UI.RadTextBox txtItemNo;
+        private Telerik.WinControls.UI.RadTextBox txtCodeNo;
         private Telerik.WinControls.UI.RadLabel radLabel5;
         private Telerik.WinControls.UI.RadLabel radLabel4;
         private Telerik.WinControls.UI.RadDateTimePicker dtDate2;
