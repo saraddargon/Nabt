@@ -1377,7 +1377,7 @@ namespace StockControl
                                     }
                                     else
                                         CodeNo = Get_CodeNo_GroupCode(GroupCode);
-
+           
                                 }
                             }
                         }
