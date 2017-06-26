@@ -222,7 +222,15 @@ namespace Report
                         // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
                     }
                     break;
+                case "ReportAdjustStock":
+                    {
 
+                        rptDc.SetParameterValue("@AdjustNo1", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@AdjustNo2", Convert.ToString(Value[1].ToString()));
+                        rptDc.SetParameterValue("@DateTime", DateTime.Now);
+                        // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
+                    }
+                    break;
 
 
             }

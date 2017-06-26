@@ -57,12 +57,15 @@ namespace StockControl
         private void Unit_Load(object sender, EventArgs e)
         {
             if (Type.Equals("PR"))
+            {
                 lblName.Text = "เลขที่ใบสั่งซื้อ";
+            }
             else if (Type.Equals("Receive"))
                 lblName.Text = "เลขที่รับสินค้า";
             else if (Type.Equals("Shipping"))
                 lblName.Text = "เลขที่เบิกสินค้า";
-
+            else if (Type.Equals("AdjustStock"))
+                lblName.Text = "เลขที่ปรับปรุงสินค้า";
         }
 
         private void DataLoad()
@@ -282,6 +285,21 @@ namespace StockControl
                             Report.Reportx1.Value[1] = PRNo2;
                             Report.Reportx1.WReport = "ReportShipping2";
                             Report.Reportx1 op = new Report.Reportx1("ReportShipping2.rpt");
+                            op.Show();
+                        }
+                        else
+                            MessageBox.Show("not found.");
+                    }
+                    else if (Type.Equals("AdjustStock"))
+                    {
+                        var g = (from ix in db.sp_R008_ReportAdjustStock(PRNo1, PRNo2, DateTime.Now) select ix).ToList();
+                        if (g.Count() > 0)
+                        {
+                            Report.Reportx1.Value = new string[2];
+                            Report.Reportx1.Value[0] = PRNo1;
+                            Report.Reportx1.Value[1] = PRNo2;
+                            Report.Reportx1.WReport = "ReportAdjustStock";
+                            Report.Reportx1 op = new Report.Reportx1("ReportAdjustStock.rpt");
                             op.Show();
                         }
                         else

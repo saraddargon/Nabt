@@ -1345,7 +1345,7 @@ namespace StockControl
                                     else if (c == 34)
                                         CreateBy = Convert.ToString(field);
                                     else if (c == 35 && !Convert.ToString(field).Equals(""))
-                                        CreateDate = StockControl.dbClss.TDa(field);
+                                        CreateDate = Convert.ToDateTime(StockControl.dbClss.TDa(field));
                                     //else if (c == 36)
                                     //    rd["UpdateBy"] = Convert.ToString(field);
                                     //else if (c == 37)
@@ -1377,7 +1377,7 @@ namespace StockControl
                                     }
                                     else
                                         CodeNo = Get_CodeNo_GroupCode(GroupCode);
-
+           
                                 }
                             }
                         }

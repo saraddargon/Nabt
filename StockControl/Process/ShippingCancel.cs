@@ -779,5 +779,10 @@ namespace StockControl
             ClearData();
             ddlType.Text = temp;
         }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

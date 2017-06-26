@@ -97,10 +97,10 @@
             this.radRibbonBar1.StartMenuItems.AddRange(new Telerik.WinControls.RadItem[] {
             this.radMenuItem1});
             this.radRibbonBar1.TabIndex = 0;
-            this.radRibbonBar1.Text = "ListPart (รายการ Item ทั้งหมด)";
+            this.radRibbonBar1.Text = "ออกรายงาน";
             this.radRibbonBar1.ThemeName = "Office2010Blue";
             this.radRibbonBar1.Click += new System.EventHandler(this.radRibbonBar1_Click);
-            ((Telerik.WinControls.UI.RadRibbonBarElement)(this.radRibbonBar1.GetChildAt(0))).Text = "ListPart (รายการ Item ทั้งหมด)";
+            ((Telerik.WinControls.UI.RadRibbonBarElement)(this.radRibbonBar1.GetChildAt(0))).Text = "ออกรายงาน";
             ((Telerik.WinControls.UI.RadToggleButtonElement)(this.radRibbonBar1.GetChildAt(0).GetChildAt(6).GetChildAt(0))).AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.Auto;
             // 
             // ribbonTab1
@@ -285,7 +285,7 @@
             // txtPRNo1
             // 
             this.txtPRNo1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPRNo1.Location = new System.Drawing.Point(134, 27);
+            this.txtPRNo1.Location = new System.Drawing.Point(158, 27);
             this.txtPRNo1.Name = "txtPRNo1";
             this.txtPRNo1.Size = new System.Drawing.Size(147, 19);
             this.txtPRNo1.TabIndex = 5;
@@ -303,7 +303,7 @@
             // txtPRNo2
             // 
             this.txtPRNo2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPRNo2.Location = new System.Drawing.Point(134, 52);
+            this.txtPRNo2.Location = new System.Drawing.Point(158, 52);
             this.txtPRNo2.Name = "txtPRNo2";
             this.txtPRNo2.Size = new System.Drawing.Size(147, 19);
             this.txtPRNo2.TabIndex = 5;
@@ -368,7 +368,7 @@
             // 
             this.RootElement.ApplyShapeToControl = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ListPart (รายการ Item ทั้งหมด)";
+            this.Text = "ออกรายงาน";
             this.Load += new System.EventHandler(this.Unit_Load);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Unit_PreviewKeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).EndInit();

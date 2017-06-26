@@ -55,10 +55,11 @@ namespace StockControl
         int crow = 99;
         private void Unit_Load(object sender, EventArgs e)
         {
-            //DateTime firstOfNextMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1);
-            //DateTime lastOfThisMonth = firstOfNextMonth.AddDays(-1);
-            //dtDate1.Value = firstOfNextMonth;
-            //dtDate2.Value = lastOfThisMonth;
+            DateTime firstOfNextMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1);
+            DateTime lastOfThisMonth = firstOfNextMonth.AddDays(-1);
+            dtDate1.Value = firstOfNextMonth;
+            dtDate2.Value = lastOfThisMonth;
+            cboStatus.Text = "ทั้งหมด";
             GETDTRow();
             DefaultItem();
 
@@ -69,12 +70,12 @@ namespace StockControl
             
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    var gt = (from ix in db.tb_GroupTypes where ix.GroupActive == true select ix).ToList();
-                //GridViewComboBoxColumn comboBoxColumn = this.radGridView1.Columns["GroupCode"] as GridViewComboBoxColumn;
-                 cboGroupType.DisplayMember = "GroupCode";
-                 cboGroupType.ValueMember = "GroupCode";
-                 cboGroupType.DataSource = gt;
-                cboGroupType.SelectedIndex = -1;
+                    //var gt = (from ix in db.tb_GroupTypes where ix.GroupActive == true select ix).ToList();
+                ////GridViewComboBoxColumn comboBoxColumn = this.radGridView1.Columns["GroupCode"] as GridViewComboBoxColumn;
+                // cboGroupType.DisplayMember = "GroupCode";
+                // cboGroupType.ValueMember = "GroupCode";
+                // cboGroupType.DataSource = gt;
+                //cboGroupType.SelectedIndex = -1;
 
                 cboVendor.AutoCompleteMode = AutoCompleteMode.Append;
                 cboVendor.DisplayMember = "VendorName";
@@ -113,8 +114,13 @@ namespace StockControl
 
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
+                    string date1 = "";
+                    string date2 = "";
+                    date1 = dtDate1.Value.ToString("yyyyMMdd");
+                    date2 = dtDate2.Value.ToString("yyyyMMdd");
+
                     radGridView1.AutoGenerateColumns = true;
-                    radGridView1.DataSource = db.sp_R001_ReportPart(cboGroupType.Text, cboStatus.Text, cboVendor.Text);
+                    radGridView1.DataSource = db.sp_E002_ReportReceive("","",date1,date2,txtinvoice.Text,txtVendorNo.Text, cboStatus.Text);
                 }
                 dbClss.ExportGridXlSX2(radGridView1,FileName);
                 dbClss.AddHistory(this.Name, "ออกรายงาน", "เลือกออกรายงาน ", "");

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShippingCancel));
-            Telerik.WinControls.UI.RadListDataItem radListDataItem1 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem2 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem3 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem4 = new Telerik.WinControls.UI.RadListDataItem();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
             this.radRibbonBarGroup1 = new Telerik.WinControls.UI.RadRibbonBarGroup();
@@ -152,6 +152,7 @@
             this.btnPrint});
             this.radRibbonBarGroup2.Name = "radRibbonBarGroup2";
             this.radRibbonBarGroup2.Text = "Print Document";
+            this.radRibbonBarGroup2.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
             // 
             // btnPrint
             // 
@@ -161,6 +162,7 @@
             this.btnPrint.Text = "พิมพ์เอกสาร";
             this.btnPrint.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // radRibbonBarGroup3
             // 
@@ -274,10 +276,10 @@
             // 
             this.ddlType.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             this.ddlType.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            radListDataItem1.Text = "ทั้งใบ";
-            radListDataItem2.Text = "ตามรายการ";
-            this.ddlType.Items.Add(radListDataItem1);
-            this.ddlType.Items.Add(radListDataItem2);
+            radListDataItem3.Text = "ทั้งใบ";
+            radListDataItem4.Text = "ตามรายการ";
+            this.ddlType.Items.Add(radListDataItem3);
+            this.ddlType.Items.Add(radListDataItem4);
             this.ddlType.Location = new System.Drawing.Point(164, 26);
             this.ddlType.Name = "ddlType";
             this.ddlType.Size = new System.Drawing.Size(125, 19);
