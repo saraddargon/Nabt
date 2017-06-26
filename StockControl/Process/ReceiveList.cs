@@ -254,7 +254,7 @@ namespace StockControl
                 // Include the *whole* of the day indicated by searchEndDate
                 DateTime exclusiveEnd = dtDate2.Value.Date.AddDays(1);
 
-
+                
                 var r = (from d in db.tb_Receives
                          join c in db.tb_ReceiveHs on d.RCNo equals c.RCNo
                          join p in db.tb_PurchaseRequestLines on d.PRID equals p.id
