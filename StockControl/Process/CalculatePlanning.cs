@@ -35,19 +35,19 @@ namespace StockControl
         }
         private void GETDTRow()
         {
-            dt.Columns.Add(new DataColumn("YYYY", typeof(int)));
-            dt.Columns.Add(new DataColumn("MMM", typeof(int)));
-            dt.Columns.Add(new DataColumn("CodeNo", typeof(string)));
-            dt.Columns.Add(new DataColumn("ItemDescription", typeof(string)));
-            dt.Columns.Add(new DataColumn("ForeCastQty", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("Toolife_spc", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("SumQty", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("ExtendQty", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("UsePerDay", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("LeadTime", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("KeepStock", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("AddErrQty", typeof(decimal)));
-            dt.Columns.Add(new DataColumn("OrderQty", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("YYYY", typeof(int)));
+            //dt.Columns.Add(new DataColumn("MMM", typeof(int)));
+            //dt.Columns.Add(new DataColumn("CodeNo", typeof(string)));
+            //dt.Columns.Add(new DataColumn("ItemDescription", typeof(string)));
+            //dt.Columns.Add(new DataColumn("ForeCastQty", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("Toolife_spc", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("SumQty", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("ExtendQty", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("UsePerDay", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("LeadTime", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("KeepStock", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("AddErrQty", typeof(decimal)));
+            //dt.Columns.Add(new DataColumn("OrderQty", typeof(decimal)));
 
            
         }
@@ -112,14 +112,14 @@ namespace StockControl
         }
         private void DataLoad()
         {
-            //dt.Rows.Clear();
+           
             
             try
             {
 
                 this.Cursor = Cursors.WaitCursor;
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
-                {
+                {                    
                     //dt = ClassLib.Classlib.LINQToDataTable(db.tb_Units.ToList());
                     try
                     {
@@ -135,6 +135,8 @@ namespace StockControl
                                       ix.StockQty
                                   ,
                                       ix.RemainOrder
+                                  ,  ix.UsedPerMonth
+                                  ,  ix.Hold
                                   ,
                                       ix.ReOrderPoint
                                   ,
@@ -352,10 +354,10 @@ namespace StockControl
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            return;
-            radGridView1.ReadOnly = false;
-            radGridView1.AllowAddNewRow = false;
-            radGridView1.Rows.AddNew();
+            //return;
+            //radGridView1.ReadOnly = false;
+            //radGridView1.AllowAddNewRow = false;
+            //radGridView1.Rows.AddNew();
         }
 
         private void btnView_Click(object sender, EventArgs e)
@@ -375,14 +377,16 @@ namespace StockControl
             radGridView1.AllowAddNewRow = false;
             //DataLoad();
         }
+        private void Calculate()
+        {
 
+            MessageBox.Show("คำนวณเรียบร้อยแล้ว !");
+        }
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("ต้องการคำนวน หรือไม่?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                return;
-                //AddUnit();
-               // DataLoad();
+                Calculate();
             }
         }
 

@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CalculatePlanning));
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn1 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
@@ -68,10 +69,8 @@
             this.btnSave = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarGroup2 = new Telerik.WinControls.UI.RadRibbonBarGroup();
             this.radButtonElement1 = new Telerik.WinControls.UI.RadButtonElement();
-            this.radButtonElement2 = new Telerik.WinControls.UI.RadButtonElement();
             this.btnView = new Telerik.WinControls.UI.RadButtonElement();
             this.btnEdit = new Telerik.WinControls.UI.RadButtonElement();
-            this.btnDelete = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarGroup4 = new Telerik.WinControls.UI.RadRibbonBarGroup();
             this.btnExport = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarGroup3 = new Telerik.WinControls.UI.RadRibbonBarGroup();
@@ -185,10 +184,8 @@
             // 
             this.radRibbonBarGroup2.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.radButtonElement1,
-            this.radButtonElement2,
             this.btnView,
-            this.btnEdit,
-            this.btnDelete});
+            this.btnEdit});
             this.radRibbonBarGroup2.Name = "radRibbonBarGroup2";
             this.radRibbonBarGroup2.Text = "Manage";
             // 
@@ -199,12 +196,6 @@
             this.radButtonElement1.Text = "Apply";
             this.radButtonElement1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.radButtonElement1.Click += new System.EventHandler(this.radButtonElement1_Click);
-            // 
-            // radButtonElement2
-            // 
-            this.radButtonElement2.Name = "radButtonElement2";
-            this.radButtonElement2.Text = "xx";
-            this.radButtonElement2.Visibility = Telerik.WinControls.ElementVisibility.Hidden;
             // 
             // btnView
             // 
@@ -224,15 +215,6 @@
             this.btnEdit.Text = "แก้ไขรายการ";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
-            this.btnDelete.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Text = "ลบรายการ";
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // radRibbonBarGroup4
             // 
@@ -388,72 +370,91 @@
             this.radGridView1.MasterTemplate.AutoGenerateColumns = false;
             gridViewTextBoxColumn1.HeaderText = "No";
             gridViewTextBoxColumn1.Name = "dgvNo";
+            gridViewTextBoxColumn1.ReadOnly = true;
             gridViewTextBoxColumn1.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
             gridViewTextBoxColumn1.Width = 45;
+            gridViewCheckBoxColumn1.FieldName = "Hold";
+            gridViewCheckBoxColumn1.HeaderText = "Hold";
+            gridViewCheckBoxColumn1.Name = "Hold";
+            gridViewCheckBoxColumn1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             gridViewTextBoxColumn2.FieldName = "CodeNo";
             gridViewTextBoxColumn2.HeaderText = "รหัสพาร์ท";
             gridViewTextBoxColumn2.Name = "CodeNo";
+            gridViewTextBoxColumn2.ReadOnly = true;
             gridViewTextBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             gridViewTextBoxColumn2.Width = 90;
             gridViewTextBoxColumn3.FieldName = "ItemDescription";
             gridViewTextBoxColumn3.HeaderText = "รายละเอียดพาร์ท";
             gridViewTextBoxColumn3.Name = "ItemDescription";
+            gridViewTextBoxColumn3.ReadOnly = true;
             gridViewTextBoxColumn3.Width = 150;
             gridViewTextBoxColumn4.FieldName = "Toolife_spc";
             gridViewTextBoxColumn4.FormatString = "{0:N2}";
-            gridViewTextBoxColumn4.HeaderText = "Toolife";
+            gridViewTextBoxColumn4.HeaderText = "Toolife Avg";
             gridViewTextBoxColumn4.Name = "Toolife_spc";
+            gridViewTextBoxColumn4.ReadOnly = true;
             gridViewTextBoxColumn4.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
             gridViewTextBoxColumn4.Width = 110;
-            gridViewTextBoxColumn5.FieldName = "ForeCastQty";
-            gridViewTextBoxColumn5.HeaderText = "ประมาณการซื้อ";
-            gridViewTextBoxColumn5.Name = "ForeCastQty";
-            gridViewTextBoxColumn5.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn5.FieldName = "UsedPerMonth";
+            gridViewTextBoxColumn5.HeaderText = "การใช้ต่อเดือน";
+            gridViewTextBoxColumn5.Name = "UsedPerMonth";
+            gridViewTextBoxColumn5.ReadOnly = true;
+            gridViewTextBoxColumn5.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             gridViewTextBoxColumn5.Width = 120;
-            gridViewTextBoxColumn6.FieldName = "AddErrQty";
-            gridViewTextBoxColumn6.HeaderText = "% คลาดเคลื่อน (Qty)";
-            gridViewTextBoxColumn6.Name = "AddErrQty";
+            gridViewTextBoxColumn6.FieldName = "UsePerDay";
+            gridViewTextBoxColumn6.FormatString = "{0:N2}";
+            gridViewTextBoxColumn6.HeaderText = "ใช้ต่อวัน";
+            gridViewTextBoxColumn6.Name = "UsePerDay";
+            gridViewTextBoxColumn6.ReadOnly = true;
             gridViewTextBoxColumn6.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
             gridViewTextBoxColumn6.Width = 110;
-            gridViewTextBoxColumn7.FieldName = "ReOrderPoint";
+            gridViewTextBoxColumn7.FieldName = "LeadTime";
             gridViewTextBoxColumn7.FormatString = "{0:N2}";
-            gridViewTextBoxColumn7.HeaderText = "จุดสั่งซื้อ";
-            gridViewTextBoxColumn7.Name = "ReOrderPoint";
+            gridViewTextBoxColumn7.HeaderText = "ระยะเวลาซื้อ";
+            gridViewTextBoxColumn7.Name = "LeadTime";
+            gridViewTextBoxColumn7.ReadOnly = true;
             gridViewTextBoxColumn7.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn7.Width = 90;
-            gridViewTextBoxColumn8.FieldName = "UsePerDay";
-            gridViewTextBoxColumn8.HeaderText = "ใช้ต่อวัน";
-            gridViewTextBoxColumn8.Name = "UsePerDay";
+            gridViewTextBoxColumn7.Width = 110;
+            gridViewTextBoxColumn8.FieldName = "ReOrderPoint";
+            gridViewTextBoxColumn8.FormatString = "{0:N2}";
+            gridViewTextBoxColumn8.HeaderText = "จุดสั่งซื้อ";
+            gridViewTextBoxColumn8.Name = "ReOrderPoint";
+            gridViewTextBoxColumn8.ReadOnly = true;
             gridViewTextBoxColumn8.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn8.Width = 110;
-            gridViewTextBoxColumn9.FieldName = "LeadTime";
-            gridViewTextBoxColumn9.HeaderText = "ระยะเวลาซื้อ";
-            gridViewTextBoxColumn9.Name = "LeadTime";
+            gridViewTextBoxColumn8.Width = 90;
+            gridViewTextBoxColumn9.FieldName = "AddErrQty";
+            gridViewTextBoxColumn9.FormatString = "{0:N2}";
+            gridViewTextBoxColumn9.HeaderText = "% คลาดเคลื่อน (Qty)";
+            gridViewTextBoxColumn9.Name = "AddErrQty";
             gridViewTextBoxColumn9.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
             gridViewTextBoxColumn9.Width = 110;
-            gridViewTextBoxColumn10.FieldName = "KeepStock";
+            gridViewTextBoxColumn10.FieldName = "ForeCastQty";
             gridViewTextBoxColumn10.FormatString = "{0:N2}";
-            gridViewTextBoxColumn10.HeaderText = "จำนวนที่เก็บ (Max)";
-            gridViewTextBoxColumn10.Name = "KeepStock";
+            gridViewTextBoxColumn10.HeaderText = "รวมจุดสั่งซื้อ";
+            gridViewTextBoxColumn10.Name = "ForeCastQty";
             gridViewTextBoxColumn10.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn10.Width = 110;
-            gridViewTextBoxColumn11.FieldName = "OrderQty";
-            gridViewTextBoxColumn11.HeaderText = "รวมที่จะต้องซื้อ";
-            gridViewTextBoxColumn11.Name = "OrderQty";
+            gridViewTextBoxColumn10.Width = 120;
+            gridViewTextBoxColumn11.FieldName = "KeepStock";
+            gridViewTextBoxColumn11.FormatString = "{0:N2}";
+            gridViewTextBoxColumn11.HeaderText = "จำนวนที่เก็บ (Max)";
+            gridViewTextBoxColumn11.Name = "KeepStock";
+            gridViewTextBoxColumn11.ReadOnly = true;
             gridViewTextBoxColumn11.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
             gridViewTextBoxColumn11.Width = 110;
             gridViewTextBoxColumn12.FieldName = "StockQty";
             gridViewTextBoxColumn12.FormatString = "{0:N2}";
             gridViewTextBoxColumn12.HeaderText = "ALL Stock";
             gridViewTextBoxColumn12.Name = "StockQty";
+            gridViewTextBoxColumn12.ReadOnly = true;
             gridViewTextBoxColumn12.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn12.Width = 90;
+            gridViewTextBoxColumn12.Width = 120;
             gridViewTextBoxColumn13.FieldName = "RemainOrder";
             gridViewTextBoxColumn13.FormatString = "{0:N2}";
             gridViewTextBoxColumn13.HeaderText = "สินค้าค้างส่ง";
             gridViewTextBoxColumn13.Name = "RemainOrder";
+            gridViewTextBoxColumn13.ReadOnly = true;
             gridViewTextBoxColumn13.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn13.Width = 90;
+            gridViewTextBoxColumn13.Width = 100;
             gridViewTextBoxColumn14.EnableExpressionEditor = false;
             gridViewTextBoxColumn14.HeaderText = "xC";
             gridViewTextBoxColumn14.IsVisible = false;
@@ -484,6 +485,7 @@
             gridViewTextBoxColumn19.Name = "MMM";
             this.radGridView1.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
             gridViewTextBoxColumn1,
+            gridViewCheckBoxColumn1,
             gridViewTextBoxColumn2,
             gridViewTextBoxColumn3,
             gridViewTextBoxColumn4,
@@ -690,6 +692,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.radStatusStrip1);
             this.Controls.Add(this.radRibbonBar1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "CalculatePlanning";
             // 
@@ -738,7 +741,6 @@
         private Telerik.WinControls.UI.RadButtonElement btnExport;
         private Telerik.WinControls.UI.RadButtonElement btnView;
         private Telerik.WinControls.UI.RadButtonElement btnEdit;
-        private Telerik.WinControls.UI.RadButtonElement btnDelete;
         private Telerik.WinControls.UI.RadRibbonBarGroup radRibbonBarGroup3;
         private Telerik.WinControls.UI.RadButtonElement btnRefresh;
         private Telerik.WinControls.Themes.Office2010BlueTheme office2010BlueTheme1;
@@ -764,6 +766,5 @@
         private Telerik.WinControls.UI.RadDropDownList cboMonth;
         private Telerik.WinControls.UI.RadLabel radLabel3;
         private Telerik.WinControls.UI.RadButtonElement radButtonElement1;
-        private Telerik.WinControls.UI.RadButtonElement radButtonElement2;
     }
 }
