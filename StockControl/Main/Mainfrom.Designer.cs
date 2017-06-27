@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Mainfrom));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Part Setting");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Tooling Setting");
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("ForeCasting");
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Purchase Request");
             System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Receive Part");
@@ -481,7 +481,7 @@
             this.TreeManu.Location = new System.Drawing.Point(0, 40);
             this.TreeManu.Name = "TreeManu";
             treeNode1.Name = "PartSetting";
-            treeNode1.Text = "Part Setting";
+            treeNode1.Text = "Tooling Setting";
             treeNode2.Name = "ForeCast";
             treeNode2.Text = "ForeCasting";
             treeNode3.Name = "PurchaseReq";
