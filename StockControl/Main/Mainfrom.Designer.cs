@@ -421,6 +421,7 @@
             this.radMenuItem9.Image = ((System.Drawing.Image)(resources.GetObject("radMenuItem9.Image")));
             this.radMenuItem9.Name = "radMenuItem9";
             this.radMenuItem9.Text = "Manual";
+            this.radMenuItem9.Click += new System.EventHandler(this.radMenuItem9_Click);
             // 
             // radMenuItem10
             // 

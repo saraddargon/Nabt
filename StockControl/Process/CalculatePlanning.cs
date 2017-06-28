@@ -717,20 +717,39 @@ namespace StockControl
 
         private void radButtonElement1_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("ต้องการกำหนดค่าสั้งซื้อใหม่ หรือไม่?", "Apply", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)==DialogResult.OK)
+            try
             {
-                using (DataClasses1DataContext db = new DataClasses1DataContext())
-                {
-                    int yyyy = DateTime.Now.Year;
-                    int month = DateTime.Now.Month;
-                    yyyy=Convert.ToInt32(cboYear.Text);
-                    month = dbClss.getMonth(cboMonth.Text);
-                    db.sp_SelectProduction_Update(yyyy, month);
-                    dbClss.AddHistory(this.Name, "Apply", "อัพเดตจุดสั่งซื้อ โดย "+Environment.UserName, "");
 
+                this.Cursor = Cursors.WaitCursor;
+                if (MessageBox.Show("ต้องการกำหนดค่าสั้งซื้อใหม่ หรือไม่?", "Apply", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                {
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                        int yyyy = DateTime.Now.Year;
+                        int month = DateTime.Now.Month;
+                        yyyy = Convert.ToInt32(cboYear.Text);
+                        month = dbClss.getMonth(cboMonth.Text);
+                        //db.sp_SelectProduction_Update(yyyy, month);
+                        var db2 = (from ix in db.sp_SelectProduction_ListForcast(yyyy, month) select ix).ToList();
+                        if (db2.Count > 0)
+                        {
+                            foreach (var r in db2)
+                            {
+
+                                
+                                db.sp_SelectProduction_UpdateToItem(r.CodeNo, r.KeepStock, r.ForeCastQty, r.ForeCastQty);
+                               
+                            }
+
+                        }
+                        dbClss.AddHistory(this.Name, "Apply", "อัพเดตจุดสั่งซื้อ โดย " + Environment.UserName, "");
+                        this.Cursor = Cursors.Default;
+                    }
+                    MessageBox.Show("Apply เรียบร้อยแล้ว!");
                 }
-                MessageBox.Show("Apply เรียบร้อยแล้ว!");
             }
+            catch { }
+            this.Cursor = Cursors.Default;
         }
     }
 }
