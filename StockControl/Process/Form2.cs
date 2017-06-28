@@ -36,6 +36,7 @@ namespace StockControl
                             int month = DateTime.Now.Month;
                             yyyy = Convert.ToInt32(cboYear.Text);
                             month = dbClss.getMonth(cboMonth.Text);
+                        db.sp_SelectProduction_DeleteForeCast(yyyy, month);
                         var db1 = (from ix in db.sp_SelectProduction_Year(yyyy, month) select ix).ToList();
                         if(db1.Count>0)
                         {
@@ -49,7 +50,25 @@ namespace StockControl
                                 progressBar1.Value = value1;
                                 progressBar1.PerformStep();
                             }
-                           // dbClss.AddHistory("CalculatePlanning", "Calculate", "คำนวณจุดสั่งซื้อ โดย " + Environment.UserName + "Year=" + yyyy.ToString() + ",Month=" + month.ToString(), "");
+                            db.sp_SelectProduction_UpdateForeCast(yyyy, month);
+
+                            //progressBar1.Minimum = 0;
+                            //progressBar1.Maximum = 10;
+                            //value1 = 0;
+                            //var db2 = (from ix in db.sp_SelectProduction_ListForcast(yyyy, month) select ix).ToList();
+                            //if(db2.Count>0)
+                            //{
+                            //    foreach (var r in db2)
+                            //    {
+
+                            //        progressBar1.Maximum = db2.Count + 1;
+                            //        db.sp_SelectProduction_UpdateToItem(r.CodeNo, r.KeepStock, r.ForeCastQty, r.ForeCastQty);
+                            //        value1 += 1;
+                            //        progressBar1.PerformStep();
+                            //    }
+
+                            //}
+                            dbClss.AddHistory("CalculatePlanning", "Calculate", "คำนวณจุดสั่งซื้อ โดย " + Environment.UserName + "Year=" + yyyy.ToString() + ",Month=" + month.ToString(), "");
                             MessageBox.Show("Apply เรียบร้อยแล้ว!");
                         }
 

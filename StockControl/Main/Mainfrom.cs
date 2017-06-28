@@ -338,5 +338,14 @@ namespace StockControl
         {
             MessageBox.Show("Product is activated.");
         }
+
+        private void radMenuItem9_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@"Report\ManualHHL.pdf");
+            }
+            catch { }
+        }
     }
 }
