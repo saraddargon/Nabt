@@ -603,6 +603,13 @@ namespace StockControl
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), dateTime1, dateTime2, invoice, vendor, status, codeNo, itemno, group);
 			return ((ISingleResult<sp_E006_ReportWaitingPRResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_E008_ReportAccount")]
+		public ISingleResult<sp_E008_ReportAccountResult> sp_E008_ReportAccount([global::System.Data.Linq.Mapping.ParameterAttribute(Name="DateTime1", DbType="VarChar(10)")] string dateTime1, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="DateTime2", DbType="VarChar(10)")] string dateTime2, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Group", DbType="VarChar(50)")] string group)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), dateTime1, dateTime2, group);
+			return ((ISingleResult<sp_E008_ReportAccountResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_Unit")]
@@ -19139,6 +19146,212 @@ namespace StockControl
 				if ((this._CreateDate != value))
 				{
 					this._CreateDate = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_E008_ReportAccountResult
+	{
+		
+		private System.Nullable<long> _No;
+		
+		private string _CodeNo;
+		
+		private string _ItemNo;
+		
+		private string _Description;
+		
+		private string _GroupCode;
+		
+		private decimal _Qty;
+		
+		private decimal _UnitCost;
+		
+		private decimal _Amount;
+		
+		private decimal _Avg;
+		
+		private decimal _RemainQty;
+		
+		private decimal _RemainAmount;
+		
+		public sp_E008_ReportAccountResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_No", DbType="BigInt")]
+		public System.Nullable<long> No
+		{
+			get
+			{
+				return this._No;
+			}
+			set
+			{
+				if ((this._No != value))
+				{
+					this._No = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodeNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodeNo
+		{
+			get
+			{
+				return this._CodeNo;
+			}
+			set
+			{
+				if ((this._CodeNo != value))
+				{
+					this._CodeNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string ItemNo
+		{
+			get
+			{
+				return this._ItemNo;
+			}
+			set
+			{
+				if ((this._ItemNo != value))
+				{
+					this._ItemNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this._Description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroupCode", DbType="NVarChar(30)")]
+		public string GroupCode
+		{
+			get
+			{
+				return this._GroupCode;
+			}
+			set
+			{
+				if ((this._GroupCode != value))
+				{
+					this._GroupCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Qty", DbType="Decimal(38,6) NOT NULL")]
+		public decimal Qty
+		{
+			get
+			{
+				return this._Qty;
+			}
+			set
+			{
+				if ((this._Qty != value))
+				{
+					this._Qty = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitCost", DbType="Decimal(38,6) NOT NULL")]
+		public decimal UnitCost
+		{
+			get
+			{
+				return this._UnitCost;
+			}
+			set
+			{
+				if ((this._UnitCost != value))
+				{
+					this._UnitCost = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Decimal(38,6) NOT NULL")]
+		public decimal Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this._Amount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Avg", DbType="Decimal(38,6) NOT NULL")]
+		public decimal Avg
+		{
+			get
+			{
+				return this._Avg;
+			}
+			set
+			{
+				if ((this._Avg != value))
+				{
+					this._Avg = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RemainQty", DbType="Decimal(38,6) NOT NULL")]
+		public decimal RemainQty
+		{
+			get
+			{
+				return this._RemainQty;
+			}
+			set
+			{
+				if ((this._RemainQty != value))
+				{
+					this._RemainQty = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RemainAmount", DbType="Decimal(38,6) NOT NULL")]
+		public decimal RemainAmount
+		{
+			get
+			{
+				return this._RemainAmount;
+			}
+			set
+			{
+				if ((this._RemainAmount != value))
+				{
+					this._RemainAmount = value;
 				}
 			}
 		}

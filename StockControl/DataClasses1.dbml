@@ -1171,4 +1171,22 @@
       <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.sp_E008_ReportAccount" Method="sp_E008_ReportAccount">
+    <Parameter Name="DateTime1" Parameter="dateTime1" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="DateTime2" Parameter="dateTime2" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Group" Parameter="group" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="sp_E008_ReportAccountResult">
+      <Column Name="No" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="CodeNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="GroupCode" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Qty" Type="System.Decimal" DbType="Decimal(38,6) NOT NULL" CanBeNull="false" />
+      <Column Name="UnitCost" Type="System.Decimal" DbType="Decimal(38,6) NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(38,6) NOT NULL" CanBeNull="false" />
+      <Column Name="Avg" Type="System.Decimal" DbType="Decimal(38,6) NOT NULL" CanBeNull="false" />
+      <Column Name="RemainQty" Type="System.Decimal" DbType="Decimal(38,6) NOT NULL" CanBeNull="false" />
+      <Column Name="RemainAmount" Type="System.Decimal" DbType="Decimal(38,6) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>

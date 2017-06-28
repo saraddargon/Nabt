@@ -56,7 +56,9 @@ namespace StockControl
         private void Unit_Load(object sender, EventArgs e)
         {
             DateTime firstOfNextMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1);
+            
             DateTime lastOfThisMonth = firstOfNextMonth.AddDays(-1);
+            //firstOfNextMonth = Convert.ToDateTime(DateTime.Today.ToString("yyyy-mm-01"));
             dtDate1.Value = firstOfNextMonth;
             dtDate2.Value = lastOfThisMonth;
             GETDTRow();
@@ -172,12 +174,27 @@ namespace StockControl
             this.Cursor = Cursors.WaitCursor ;
             try
             {
-                
-                System.IO.File.Copy(Report.CRRReport.dbPartReport + "Account_Sheet.xls", FileName, true);
-                //System.Diagnostics.Process.Start();
-                dbClss.AddHistory(this.Name, "ออกรายงาน", "เลือกออกรายงาน "+dtDate1.Value.ToString("dd/MMM/yyyy")+"-"+dtDate2.Value.ToString("dd/MMM/yyyy"), "");
+
+                //System.IO.File.Copy(Report.CRRReport.dbPartReport + "Account_Sheet.xls", FileName, true);
+                ////System.Diagnostics.Process.Start();
+                //dbClss.AddHistory(this.Name, "ออกรายงาน", "เลือกออกรายงาน "+dtDate1.Value.ToString("dd/MMM/yyyy")+"-"+dtDate2.Value.ToString("dd/MMM/yyyy"), "");
+                //ck = true;
+
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    string date1 = "";
+                    string date2 = "";
+                    date1 = dtDate1.Value.ToString("yyyyMMdd");
+                    date2 = dtDate2.Value.ToString("yyyyMMdd");
+
+                    radGridView1.AutoGenerateColumns = true;
+                    radGridView1.DataSource = db.sp_E008_ReportAccount(date1, date2, cboGroupType.Text);
+                }
+                dbClss.ExportGridXlSX2(radGridView1, FileName);
+                dbClss.AddHistory(this.Name, "ออกรายงาน", "เลือกออกรายงาน ", "");
                 ck = true;
-                
+
+
             }
             catch { ck = false; }
             this.Cursor = Cursors.Default;

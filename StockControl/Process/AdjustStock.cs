@@ -603,7 +603,7 @@ namespace StockControl
                                 gg.Inbound = 0;
                                 Type_in_out = "Out";
 
-                                UnitCost = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "Avg"));
+                                UnitCost = Convert.ToDecimal(vv.StandardCost);//Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "Avg"));
                                 Amount = Convert.ToDecimal(vv.Qty) * UnitCost;
 
                                 //แบบที่ 1 จะไป sum ใหม่
@@ -1218,7 +1218,7 @@ namespace StockControl
                         RemainQty = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(CodeNo), "", 0)));//Convert.ToDecimal(d.StockInv);
                         Unit = d.UnitBuy;
                         PCSUnit = Convert.ToDecimal(d.PCSUnit);
-                        CostPerUnit = Convert.ToDecimal(d.StandardCost);
+                        CostPerUnit =  Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "Avg"));//Convert.ToDecimal(d.StandardCost);
 
                         No = dgvData.Rows.Count() + 1;
                         if (!check_Duppicate(CodeNo))
