@@ -191,7 +191,7 @@ namespace StockControl
                     radGridView1.DataSource = db.sp_E008_ReportAccount(date1, date2, cboGroupType.Text);
                 }
                 dbClss.ExportGridXlSX2(radGridView1, FileName);
-                dbClss.AddHistory(this.Name, "ออกรายงาน", "เลือกออกรายงาน ", "");
+                dbClss.AddHistory(this.Name, "ออกรายงาน", "เลือกออกรายงาน Report Account "+dtDate1.Value.ToString("dd/MMM/yyyy"), "");
                 ck = true;
 
 

@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MappingAdd));
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
             this.radRibbonBarGroup1 = new Telerik.WinControls.UI.RadRibbonBarGroup();
@@ -46,7 +46,9 @@
             this.radLabelElement1 = new Telerik.WinControls.UI.RadLabelElement();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
+            this.txtcodeNo = new Telerik.WinControls.UI.RadMultiColumnComboBox();
             this.txtRemark = new Telerik.WinControls.UI.RadTextBox();
+            this.txtModelName = new Telerik.WinControls.UI.RadMultiColumnComboBox();
             this.radLabel9 = new Telerik.WinControls.UI.RadLabel();
             this.txtQty = new Telerik.WinControls.UI.RadTextBox();
             this.radLabel8 = new Telerik.WinControls.UI.RadLabel();
@@ -74,14 +76,20 @@
             this.RMenu4 = new Telerik.WinControls.UI.RadMenuItem();
             this.RMenu5 = new Telerik.WinControls.UI.RadMenuItem();
             this.RMenu6 = new Telerik.WinControls.UI.RadMenuItem();
-            this.txtModelName = new Telerik.WinControls.UI.RadMultiColumnComboBox();
-            this.txtcodeNo = new Telerik.WinControls.UI.RadMultiColumnComboBox();
+            this.radLabel10 = new Telerik.WinControls.UI.RadLabel();
+            this.txtCorner = new Telerik.WinControls.UI.RadTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtcodeNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtcodeNo.EditorControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtcodeNo.EditorControl.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemark)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtModelName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtModelName.EditorControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtModelName.EditorControl.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel8)).BeginInit();
@@ -97,12 +105,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPartName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtModelName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtModelName.EditorControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtModelName.EditorControl.MasterTemplate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtcodeNo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtcodeNo.EditorControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtcodeNo.EditorControl.MasterTemplate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCorner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -252,6 +256,8 @@
             this.radPanel1.Controls.Add(this.txtItemNo);
             this.radPanel1.Controls.Add(this.radLabel7);
             this.radPanel1.Controls.Add(this.radLabel6);
+            this.radPanel1.Controls.Add(this.txtCorner);
+            this.radPanel1.Controls.Add(this.radLabel10);
             this.radPanel1.Controls.Add(this.txtToolLife);
             this.radPanel1.Controls.Add(this.radLabel5);
             this.radPanel1.Controls.Add(this.txtProcess);
@@ -268,9 +274,42 @@
             this.radPanel1.TabIndex = 0;
             this.radPanel1.ThemeName = "Office2010Blue";
             // 
+            // txtcodeNo
+            // 
+            this.txtcodeNo.AutoSize = true;
+            this.txtcodeNo.AutoSizeDropDownToBestFit = true;
+            // 
+            // txtcodeNo.NestedRadGridView
+            // 
+            this.txtcodeNo.EditorControl.BackColor = System.Drawing.SystemColors.Window;
+            this.txtcodeNo.EditorControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtcodeNo.EditorControl.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.txtcodeNo.EditorControl.Location = new System.Drawing.Point(0, 0);
+            // 
+            // 
+            // 
+            this.txtcodeNo.EditorControl.MasterTemplate.AllowAddNewRow = false;
+            this.txtcodeNo.EditorControl.MasterTemplate.AllowCellContextMenu = false;
+            this.txtcodeNo.EditorControl.MasterTemplate.AllowColumnChooser = false;
+            this.txtcodeNo.EditorControl.MasterTemplate.EnableGrouping = false;
+            this.txtcodeNo.EditorControl.MasterTemplate.ShowFilteringRow = false;
+            this.txtcodeNo.EditorControl.MasterTemplate.ViewDefinition = tableViewDefinition1;
+            this.txtcodeNo.EditorControl.Name = "NestedRadGridView";
+            this.txtcodeNo.EditorControl.ReadOnly = true;
+            this.txtcodeNo.EditorControl.ShowGroupPanel = false;
+            this.txtcodeNo.EditorControl.Size = new System.Drawing.Size(240, 150);
+            this.txtcodeNo.EditorControl.TabIndex = 0;
+            this.txtcodeNo.Location = new System.Drawing.Point(104, 179);
+            this.txtcodeNo.Name = "txtcodeNo";
+            this.txtcodeNo.Size = new System.Drawing.Size(196, 22);
+            this.txtcodeNo.TabIndex = 10;
+            this.txtcodeNo.TabStop = false;
+            this.txtcodeNo.ThemeName = "Office2010Blue";
+            this.txtcodeNo.SelectedIndexChanged += new System.EventHandler(this.txtcodeNo_TextChanged);
+            // 
             // txtRemark
             // 
-            this.txtRemark.Location = new System.Drawing.Point(104, 231);
+            this.txtRemark.Location = new System.Drawing.Point(104, 255);
             this.txtRemark.Name = "txtRemark";
             this.txtRemark.Size = new System.Drawing.Size(196, 20);
             this.txtRemark.TabIndex = 17;
@@ -278,9 +317,40 @@
             this.txtRemark.TextChanged += new System.EventHandler(this.txtModelName_TextChanged);
             this.txtRemark.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtModelName_PreviewKeyDown);
             // 
+            // txtModelName
+            // 
+            this.txtModelName.AutoSize = true;
+            this.txtModelName.AutoSizeDropDownToBestFit = true;
+            // 
+            // txtModelName.NestedRadGridView
+            // 
+            this.txtModelName.EditorControl.BackColor = System.Drawing.SystemColors.Window;
+            this.txtModelName.EditorControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.txtModelName.EditorControl.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.txtModelName.EditorControl.Location = new System.Drawing.Point(0, 0);
+            // 
+            // 
+            // 
+            this.txtModelName.EditorControl.MasterTemplate.AllowAddNewRow = false;
+            this.txtModelName.EditorControl.MasterTemplate.AllowCellContextMenu = false;
+            this.txtModelName.EditorControl.MasterTemplate.AllowColumnChooser = false;
+            this.txtModelName.EditorControl.MasterTemplate.EnableGrouping = false;
+            this.txtModelName.EditorControl.MasterTemplate.ShowFilteringRow = false;
+            this.txtModelName.EditorControl.MasterTemplate.ViewDefinition = tableViewDefinition2;
+            this.txtModelName.EditorControl.Name = "NestedRadGridView";
+            this.txtModelName.EditorControl.ReadOnly = true;
+            this.txtModelName.EditorControl.ShowGroupPanel = false;
+            this.txtModelName.EditorControl.Size = new System.Drawing.Size(240, 150);
+            this.txtModelName.EditorControl.TabIndex = 0;
+            this.txtModelName.Location = new System.Drawing.Point(104, 22);
+            this.txtModelName.Name = "txtModelName";
+            this.txtModelName.Size = new System.Drawing.Size(196, 20);
+            this.txtModelName.TabIndex = 1;
+            this.txtModelName.TabStop = false;
+            // 
             // radLabel9
             // 
-            this.radLabel9.Location = new System.Drawing.Point(49, 231);
+            this.radLabel9.Location = new System.Drawing.Point(49, 255);
             this.radLabel9.Name = "radLabel9";
             this.radLabel9.Size = new System.Drawing.Size(50, 18);
             this.radLabel9.TabIndex = 16;
@@ -288,7 +358,7 @@
             // 
             // txtQty
             // 
-            this.txtQty.Location = new System.Drawing.Point(104, 205);
+            this.txtQty.Location = new System.Drawing.Point(104, 229);
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(107, 20);
             this.txtQty.TabIndex = 15;
@@ -298,7 +368,7 @@
             // 
             // radLabel8
             // 
-            this.radLabel8.Location = new System.Drawing.Point(32, 203);
+            this.radLabel8.Location = new System.Drawing.Point(32, 227);
             this.radLabel8.Name = "radLabel8";
             this.radLabel8.Size = new System.Drawing.Size(66, 18);
             this.radLabel8.TabIndex = 14;
@@ -307,7 +377,7 @@
             // txtItemNo
             // 
             this.txtItemNo.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtItemNo.Location = new System.Drawing.Point(104, 179);
+            this.txtItemNo.Location = new System.Drawing.Point(104, 203);
             this.txtItemNo.Name = "txtItemNo";
             this.txtItemNo.ReadOnly = true;
             this.txtItemNo.Size = new System.Drawing.Size(196, 20);
@@ -319,7 +389,7 @@
             // 
             // radLabel7
             // 
-            this.radLabel7.Location = new System.Drawing.Point(3, 179);
+            this.radLabel7.Location = new System.Drawing.Point(3, 203);
             this.radLabel7.Name = "radLabel7";
             this.radLabel7.Size = new System.Drawing.Size(94, 18);
             this.radLabel7.TabIndex = 12;
@@ -327,7 +397,7 @@
             // 
             // radLabel6
             // 
-            this.radLabel6.Location = new System.Drawing.Point(45, 155);
+            this.radLabel6.Location = new System.Drawing.Point(45, 179);
             this.radLabel6.Name = "radLabel6";
             this.radLabel6.Size = new System.Drawing.Size(53, 18);
             this.radLabel6.TabIndex = 10;
@@ -492,68 +562,24 @@
             this.RMenu6.Name = "RMenu6";
             this.RMenu6.Text = "ลบรายการ";
             // 
-            // txtModelName
+            // radLabel10
             // 
-            this.txtModelName.AutoSize = true;
-            this.txtModelName.AutoSizeDropDownToBestFit = true;
+            this.radLabel10.Location = new System.Drawing.Point(51, 153);
+            this.radLabel10.Name = "radLabel10";
+            this.radLabel10.Size = new System.Drawing.Size(46, 18);
+            this.radLabel10.TabIndex = 8;
+            this.radLabel10.Text = "Corner :";
             // 
-            // txtModelName.NestedRadGridView
+            // txtCorner
             // 
-            this.txtModelName.EditorControl.BackColor = System.Drawing.SystemColors.Window;
-            this.txtModelName.EditorControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtModelName.EditorControl.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.txtModelName.EditorControl.Location = new System.Drawing.Point(0, 0);
-            // 
-            // 
-            // 
-            this.txtModelName.EditorControl.MasterTemplate.AllowAddNewRow = false;
-            this.txtModelName.EditorControl.MasterTemplate.AllowCellContextMenu = false;
-            this.txtModelName.EditorControl.MasterTemplate.AllowColumnChooser = false;
-            this.txtModelName.EditorControl.MasterTemplate.EnableGrouping = false;
-            this.txtModelName.EditorControl.MasterTemplate.ShowFilteringRow = false;
-            this.txtModelName.EditorControl.MasterTemplate.ViewDefinition = tableViewDefinition2;
-            this.txtModelName.EditorControl.Name = "NestedRadGridView";
-            this.txtModelName.EditorControl.ReadOnly = true;
-            this.txtModelName.EditorControl.ShowGroupPanel = false;
-            this.txtModelName.EditorControl.Size = new System.Drawing.Size(240, 150);
-            this.txtModelName.EditorControl.TabIndex = 0;
-            this.txtModelName.Location = new System.Drawing.Point(104, 22);
-            this.txtModelName.Name = "txtModelName";
-            this.txtModelName.Size = new System.Drawing.Size(196, 20);
-            this.txtModelName.TabIndex = 1;
-            this.txtModelName.TabStop = false;
-            // 
-            // txtcodeNo
-            // 
-            this.txtcodeNo.AutoSize = true;
-            this.txtcodeNo.AutoSizeDropDownToBestFit = true;
-            // 
-            // txtcodeNo.NestedRadGridView
-            // 
-            this.txtcodeNo.EditorControl.BackColor = System.Drawing.SystemColors.Window;
-            this.txtcodeNo.EditorControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.txtcodeNo.EditorControl.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.txtcodeNo.EditorControl.Location = new System.Drawing.Point(0, 0);
-            // 
-            // 
-            // 
-            this.txtcodeNo.EditorControl.MasterTemplate.AllowAddNewRow = false;
-            this.txtcodeNo.EditorControl.MasterTemplate.AllowCellContextMenu = false;
-            this.txtcodeNo.EditorControl.MasterTemplate.AllowColumnChooser = false;
-            this.txtcodeNo.EditorControl.MasterTemplate.EnableGrouping = false;
-            this.txtcodeNo.EditorControl.MasterTemplate.ShowFilteringRow = false;
-            this.txtcodeNo.EditorControl.MasterTemplate.ViewDefinition = tableViewDefinition1;
-            this.txtcodeNo.EditorControl.Name = "NestedRadGridView";
-            this.txtcodeNo.EditorControl.ReadOnly = true;
-            this.txtcodeNo.EditorControl.ShowGroupPanel = false;
-            this.txtcodeNo.EditorControl.Size = new System.Drawing.Size(240, 150);
-            this.txtcodeNo.EditorControl.TabIndex = 0;
-            this.txtcodeNo.Location = new System.Drawing.Point(104, 155);
-            this.txtcodeNo.Name = "txtcodeNo";
-            this.txtcodeNo.Size = new System.Drawing.Size(196, 22);
-            this.txtcodeNo.TabIndex = 10;
-            this.txtcodeNo.ThemeName = "Office2010Blue";
-            this.txtcodeNo.SelectedIndexChanged += new System.EventHandler(this.txtcodeNo_TextChanged);
+            this.txtCorner.Location = new System.Drawing.Point(104, 153);
+            this.txtCorner.Name = "txtCorner";
+            this.txtCorner.Size = new System.Drawing.Size(107, 20);
+            this.txtCorner.TabIndex = 9;
+            this.txtCorner.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCorner.ThemeName = "Office2010Blue";
+            this.txtCorner.TextChanged += new System.EventHandler(this.txtModelName_TextChanged);
+            this.txtCorner.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtModelName_PreviewKeyDown);
             // 
             // MappingAdd
             // 
@@ -580,7 +606,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).EndInit();
             this.radPanel1.ResumeLayout(false);
             this.radPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtcodeNo.EditorControl.MasterTemplate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtcodeNo.EditorControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtcodeNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemark)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtModelName.EditorControl.MasterTemplate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtModelName.EditorControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtModelName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQty)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel8)).EndInit();
@@ -596,12 +628,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPartName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtModelName.EditorControl.MasterTemplate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtModelName.EditorControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtModelName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtcodeNo.EditorControl.MasterTemplate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtcodeNo.EditorControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtcodeNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCorner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -654,5 +682,7 @@
         private Telerik.WinControls.UI.RadLabel radLabel2;
         private Telerik.WinControls.UI.RadMultiColumnComboBox txtModelName;
         private Telerik.WinControls.UI.RadMultiColumnComboBox txtcodeNo;
+        private Telerik.WinControls.UI.RadTextBox txtCorner;
+        private Telerik.WinControls.UI.RadLabel radLabel10;
     }
 }

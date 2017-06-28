@@ -172,11 +172,29 @@ namespace StockControl
             this.Cursor = Cursors.WaitCursor ;
             try
             {
-                
-                System.IO.File.Copy(Report.CRRReport.dbPartReport + "ForeCast.xls", FileName, true);
+
+                // System.IO.File.Copy(Report.CRRReport.dbPartReport + "ForeCast.xls", FileName, true);
                 //System.Diagnostics.Process.Start();
-               // dbClss.AddHistory(this.Name, "ออกรายงาน", "เลือกออกรายงาน "+dtDate1.Value.ToString("dd/MMM/yyyy")+"-"+dtDate2.Value.ToString("dd/MMM/yyyy"), "");
+                dbClss.AddHistory(this.Name, "ออกรายงาน", "เลือกออกรายงาน "+cboYear.Text+","+cboMonth.Text, "");
+                int yyyy = 0;
+                int mmm = 0;
+                int.TryParse(cboYear.Text, out yyyy);
+                mmm = dbClss.getMonth(cboMonth.Text);
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+
+                    var g = (from ix in db.sp_SelectProduction_Report(yyyy, mmm,cboGroupType.Text,txtCodeNo.Text,txtPartName.Text) select ix).ToList();
+                    radGridView1.DataSource = null;
+                    radGridView1.DataSource = g;
+                    int rowcount = 0;
+                    foreach (var x in radGridView1.Rows)
+                    {
+                        rowcount += 1;
+                        x.Cells["dgvNo"].Value = rowcount;
+                    }
+                }
                 ck = true;
+                dbClss.ExportGridXlSX2(radGridView1, FileName);
                 
             }
             catch { ck = false; }

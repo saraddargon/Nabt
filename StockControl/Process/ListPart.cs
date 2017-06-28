@@ -69,12 +69,13 @@ namespace StockControl
                     //dt = ClassLib.Classlib.LINQToDataTable(db.tb_Units.ToList());
                     //radGridView1.DataSource = db.tb_Histories.Where(s => s.ScreenName == ScreenSearch).OrderBy(o => o.CreateDate).ToList();
                     int c = 0;
-                   
-                    var g = (from ix in db.tb_Items select ix).Where(a => a.CodeNo.Contains(txtCodeNo.Text)
-                        && a.ItemNo.Contains(txtPartName.Text)
-                        && a.ItemDescription.Contains(txtDescription.Text)
-                        && a.VendorItemName.Contains(txtVendorName.Text))
-                        .ToList();
+
+                    //var g = (from ix in db.tb_Items select ix).Where(a => a.CodeNo.Contains(txtCodeNo.Text)
+                    //    && a.ItemNo.Contains(txtPartName.Text)
+                    //    && a.ItemDescription.Contains(txtDescription.Text)
+                    //    && a.VendorItemName.Contains(txtVendorName.Text))
+                    //    .ToList();
+                    var g=(from ix in db.sp_SelectItem() select ix).ToList();
                     if (g.Count > 0)
                     {
 
@@ -84,9 +85,9 @@ namespace StockControl
                             c += 1;
                             x.Cells["No"].Value = c;
 
-                            x.Cells["StockInv"].Value = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(x.Cells["CodeNo"].Value), "Invoice", 0)));
-                            x.Cells["StockDL"].Value = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(x.Cells["CodeNo"].Value), "Temp", 0)));
-                            x.Cells["StockBackOrder"].Value = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(x.Cells["CodeNo"].Value), "BackOrder", 0)));
+                           // x.Cells["StockInv"].Value = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(x.Cells["CodeNo"].Value), "Invoice", 0)));
+                           // x.Cells["StockDL"].Value = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(x.Cells["CodeNo"].Value), "Temp", 0)));
+                           // x.Cells["StockBackOrder"].Value = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(x.Cells["CodeNo"].Value), "BackOrder", 0)));
 
                         }
                     }

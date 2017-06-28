@@ -69,7 +69,7 @@ namespace StockControl
 
                             //}
                             dbClss.AddHistory("CalculatePlanning", "Calculate", "คำนวณจุดสั่งซื้อ โดย " + Environment.UserName + "Year=" + yyyy.ToString() + ",Month=" + month.ToString(), "");
-                            MessageBox.Show("Apply เรียบร้อยแล้ว!");
+                            MessageBox.Show("Calculate เรียบร้อยแล้ว!");
                         }
 
                         
@@ -86,6 +86,7 @@ namespace StockControl
                 cboYear.Items.Add(i.ToString());
 
             }
+            cboMonth.Text= dbClss.getMonthRevest(DateTime.Now.Month);
         }
     }
 }

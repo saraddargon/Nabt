@@ -43,6 +43,7 @@
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn11 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn12 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn13 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn14 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
@@ -415,53 +416,57 @@
             gridViewTextBoxColumn5.Name = "ToolLife";
             gridViewTextBoxColumn5.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
             gridViewTextBoxColumn5.Width = 91;
-            gridViewTextBoxColumn6.EnableExpressionEditor = false;
-            gridViewTextBoxColumn6.FieldName = "CodeNo";
-            gridViewTextBoxColumn6.HeaderText = "CodeNo";
-            gridViewTextBoxColumn6.Name = "CodeNo";
+            gridViewTextBoxColumn6.FieldName = "Corner";
+            gridViewTextBoxColumn6.HeaderText = "Corner";
+            gridViewTextBoxColumn6.Name = "Corner";
             gridViewTextBoxColumn6.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewTextBoxColumn6.Width = 97;
             gridViewTextBoxColumn7.EnableExpressionEditor = false;
-            gridViewTextBoxColumn7.FieldName = "ItemDescription";
-            gridViewTextBoxColumn7.HeaderText = "ItemDescription";
-            gridViewTextBoxColumn7.Name = "ItemDescription";
-            gridViewTextBoxColumn7.Width = 161;
+            gridViewTextBoxColumn7.FieldName = "CodeNo";
+            gridViewTextBoxColumn7.HeaderText = "CodeNo";
+            gridViewTextBoxColumn7.Name = "CodeNo";
+            gridViewTextBoxColumn7.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn7.Width = 97;
             gridViewTextBoxColumn8.EnableExpressionEditor = false;
-            gridViewTextBoxColumn8.ExcelExportType = Telerik.WinControls.UI.Export.DisplayFormatType.Standard;
-            gridViewTextBoxColumn8.FieldName = "QtyPerPCS";
-            gridViewTextBoxColumn8.FormatString = "{0:N2}";
-            gridViewTextBoxColumn8.HeaderText = "Qty/Model";
-            gridViewTextBoxColumn8.Name = "QtyPerPCS";
-            gridViewTextBoxColumn8.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn8.Width = 90;
+            gridViewTextBoxColumn8.FieldName = "ItemDescription";
+            gridViewTextBoxColumn8.HeaderText = "ItemDescription";
+            gridViewTextBoxColumn8.Name = "ItemDescription";
+            gridViewTextBoxColumn8.Width = 161;
             gridViewTextBoxColumn9.EnableExpressionEditor = false;
-            gridViewTextBoxColumn9.FieldName = "Remark";
-            gridViewTextBoxColumn9.HeaderText = "Remark";
-            gridViewTextBoxColumn9.Name = "Remark";
-            gridViewTextBoxColumn9.Width = 190;
+            gridViewTextBoxColumn9.ExcelExportType = Telerik.WinControls.UI.Export.DisplayFormatType.Standard;
+            gridViewTextBoxColumn9.FieldName = "QtyPerPCS";
+            gridViewTextBoxColumn9.FormatString = "{0:N2}";
+            gridViewTextBoxColumn9.HeaderText = "Qty/Model";
+            gridViewTextBoxColumn9.Name = "QtyPerPCS";
+            gridViewTextBoxColumn9.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn9.Width = 90;
             gridViewTextBoxColumn10.EnableExpressionEditor = false;
-            gridViewTextBoxColumn10.HeaderText = "xC";
-            gridViewTextBoxColumn10.IsVisible = false;
-            gridViewTextBoxColumn10.Name = "dgvC";
-            gridViewTextBoxColumn10.ReadOnly = true;
-            gridViewTextBoxColumn10.Width = 41;
+            gridViewTextBoxColumn10.FieldName = "Remark";
+            gridViewTextBoxColumn10.HeaderText = "Remark";
+            gridViewTextBoxColumn10.Name = "Remark";
+            gridViewTextBoxColumn10.Width = 190;
             gridViewTextBoxColumn11.EnableExpressionEditor = false;
-            gridViewTextBoxColumn11.HeaderText = "xCode";
+            gridViewTextBoxColumn11.HeaderText = "xC";
             gridViewTextBoxColumn11.IsVisible = false;
-            gridViewTextBoxColumn11.Name = "dgvCodetemp";
-            gridViewTextBoxColumn11.Width = 44;
+            gridViewTextBoxColumn11.Name = "dgvC";
+            gridViewTextBoxColumn11.ReadOnly = true;
+            gridViewTextBoxColumn11.Width = 41;
             gridViewTextBoxColumn12.EnableExpressionEditor = false;
-            gridViewTextBoxColumn12.HeaderText = "xCodetemp2";
+            gridViewTextBoxColumn12.HeaderText = "xCode";
             gridViewTextBoxColumn12.IsVisible = false;
-            gridViewTextBoxColumn12.Name = "dgvCodetemp2";
-            gridViewTextBoxColumn12.ReadOnly = true;
-            gridViewTextBoxColumn12.Width = 47;
+            gridViewTextBoxColumn12.Name = "dgvCodetemp";
+            gridViewTextBoxColumn12.Width = 44;
             gridViewTextBoxColumn13.EnableExpressionEditor = false;
-            gridViewTextBoxColumn13.FieldName = "id";
-            gridViewTextBoxColumn13.HeaderText = "id";
+            gridViewTextBoxColumn13.HeaderText = "xCodetemp2";
             gridViewTextBoxColumn13.IsVisible = false;
-            gridViewTextBoxColumn13.Name = "id";
+            gridViewTextBoxColumn13.Name = "dgvCodetemp2";
+            gridViewTextBoxColumn13.ReadOnly = true;
             gridViewTextBoxColumn13.Width = 47;
+            gridViewTextBoxColumn14.EnableExpressionEditor = false;
+            gridViewTextBoxColumn14.FieldName = "id";
+            gridViewTextBoxColumn14.HeaderText = "id";
+            gridViewTextBoxColumn14.IsVisible = false;
+            gridViewTextBoxColumn14.Name = "id";
+            gridViewTextBoxColumn14.Width = 47;
             this.radGridView1.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
             gridViewTextBoxColumn1,
             gridViewTextBoxColumn2,
@@ -475,7 +480,8 @@
             gridViewTextBoxColumn10,
             gridViewTextBoxColumn11,
             gridViewTextBoxColumn12,
-            gridViewTextBoxColumn13});
+            gridViewTextBoxColumn13,
+            gridViewTextBoxColumn14});
             this.radGridView1.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
             this.radGridView1.MasterTemplate.ViewDefinition = tableViewDefinition1;
             this.radGridView1.Name = "radGridView1";
@@ -603,7 +609,7 @@
             // RMenu3
             // 
             this.RMenu3.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.RMenu3.Image = ((System.Drawing.Image)(resources.GetObject("RMenu3.Image")));
+            this.RMenu3.Image = null;
             this.RMenu3.Name = "RMenu3";
             this.RMenu3.Text = "เพิ่มใหม่";
             // 
@@ -616,21 +622,21 @@
             // RMenu4
             // 
             this.RMenu4.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.RMenu4.Image = ((System.Drawing.Image)(resources.GetObject("RMenu4.Image")));
+            this.RMenu4.Image = null;
             this.RMenu4.Name = "RMenu4";
             this.RMenu4.Text = "แสดงรายการ";
             // 
             // RMenu5
             // 
             this.RMenu5.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.RMenu5.Image = ((System.Drawing.Image)(resources.GetObject("RMenu5.Image")));
+            this.RMenu5.Image = null;
             this.RMenu5.Name = "RMenu5";
             this.RMenu5.Text = "แก้ไข";
             // 
             // RMenu6
             // 
             this.RMenu6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.RMenu6.Image = ((System.Drawing.Image)(resources.GetObject("RMenu6.Image")));
+            this.RMenu6.Image = null;
             this.RMenu6.Name = "RMenu6";
             this.RMenu6.Text = "ลบรายการ";
             // 

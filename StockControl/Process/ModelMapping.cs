@@ -40,6 +40,7 @@ namespace StockControl
             dt.Columns.Add(new DataColumn("Process", typeof(string)));
             dt.Columns.Add(new DataColumn("CodeNo", typeof(string)));
             dt.Columns.Add(new DataColumn("ToolLife", typeof(decimal)));
+            dt.Columns.Add(new DataColumn("Corner", typeof(int)));
             dt.Columns.Add(new DataColumn("QtyPerPCS", typeof(decimal)));
             dt.Columns.Add(new DataColumn("ItemDescription", typeof(string)));
             dt.Columns.Add(new DataColumn("Remark", typeof(string)));
@@ -51,6 +52,7 @@ namespace StockControl
             dt2.Columns.Add(new DataColumn("Process", typeof(string)));
             dt2.Columns.Add(new DataColumn("CodeNo", typeof(string)));
             dt2.Columns.Add(new DataColumn("ToolLife", typeof(decimal)));
+            dt2.Columns.Add(new DataColumn("Corner", typeof(int)));
             dt2.Columns.Add(new DataColumn("QtyPerPCS", typeof(decimal)));
             dt2.Columns.Add(new DataColumn("ItemDescription", typeof(string)));
             dt2.Columns.Add(new DataColumn("Remark", typeof(string)));
@@ -137,6 +139,7 @@ namespace StockControl
                                            a.PartName,
                                            a.PartNo,
                                            a.Process,
+                                           a.Corner,
                                            a.id,
                                            ItemDescription = (from b in db.tb_Items.Where(s => s.CodeNo.Trim().Equals(a.CodeNo)) select b.ItemDescription).FirstOrDefault()
                                        }).ToList();
@@ -158,6 +161,7 @@ namespace StockControl
                                            a.PartName,
                                            a.PartNo,
                                            a.Process,
+                                           a.Corner,
                                            a.id,
                                            ItemDescription = (from b in db.tb_Items.Where(s => s.CodeNo.Trim().Equals(a.CodeNo)) select b.ItemDescription).FirstOrDefault()
                                        }).ToList();
@@ -275,6 +279,8 @@ namespace StockControl
                                     int.TryParse(id, out id2);
                                     decimal tl = 0;
                                     decimal qty = 0;
+                                    int co = 1;
+                                    int.TryParse(Convert.ToString(g.Cells["Corner"].Value), out co);
                                     decimal.TryParse(Convert.ToString(g.Cells["ToolLife"].Value), out tl);
                                     decimal.TryParse(Convert.ToString(g.Cells["QtyPerPCS"].Value), out qty);
                                     var u = (from ix in db.tb_Mappings
@@ -288,6 +294,7 @@ namespace StockControl
                                     u.Process = Convert.ToString(g.Cells["Process"].Value);
                                     u.ModelName = Convert.ToString(g.Cells["ModelName"].Value);
                                     u.CodeNo = Convert.ToString(g.Cells["CodeNo"].Value);
+                                    u.Corner = co;
 
 
                                     C += 1;
@@ -526,6 +533,7 @@ namespace StockControl
                         int c = 0;
                         decimal tl = 0;
                         decimal qty = 0;
+                        int co = 1;
                         while (!parser.EndOfData)
                         {
                             //Processing row
@@ -557,18 +565,28 @@ namespace StockControl
                                         rd["ToolLife"] = tl;
                                     }
                                     else if (c == 6)
-                                        rd["CodeNo"] = Convert.ToString(field);
+                                    {
+                                        co = 1;
+                                        int.TryParse(Convert.ToString(field), out co);
+                                        rd["Corner"] = co;
+                                    }
+                                       
                                     else if(c==7)
                                     {
-                                        qty = 0;
-                                        decimal.TryParse(Convert.ToString(field).Replace(",","").Trim(), out qty);
-                                        rd["QtyPerPCS"] = qty;
+                                        rd["CodeNo"] = Convert.ToString(field);
+                                       
                                     }
-                                    else if (c == 8)
+                                    else if(c==8)
                                     {
                                         
                                     }
-                                    else if(c==9)
+                                    else if (c == 9)
+                                    {
+                                        qty = 0;
+                                        decimal.TryParse(Convert.ToString(field).Replace(",", "").Trim(), out qty);
+                                        rd["QtyPerPCS"] = qty;
+                                    }
+                                    else if(c==10)
                                         rd["Remark"] = Convert.ToString(field);
 
                                 }
@@ -585,17 +603,19 @@ namespace StockControl
                                     else if (c == 5)
                                         rd["ToolLife"] = 1;
                                     else if (c == 6)
+                                        rd["Corner"] = 1;
+                                    else if (c == 7)
                                         rd["CodeNo"] = "";
-                                    else if(c==7)
+                                    else if (c==8)
+                                    {
+                                        
+                                    }
+                                    else if (c == 9)
                                     {
                                         rd["QtyPerPCS"] = 0;
                                     }
-                                    else if (c == 8)
-                                    {
-
-                                    }
                                     
-                                    else if (c == 9)
+                                    else if (c == 10)
                                         rd["Remark"] = "";
 
 
@@ -644,6 +664,8 @@ namespace StockControl
                             string Remark = rd["Remark"].ToString().Trim();
                             decimal qty = 0;
                             decimal tl = 1;
+                            int co = 1;
+                            int.TryParse(rd["Corner"].ToString(), out co);
                             decimal.TryParse(rd["QtyPerPCS"].ToString().Trim(), out qty);
                             decimal.TryParse(rd["ToolLife"].ToString().Trim(), out tl);
                             var x = (from ix in db.tb_Mappings where ix.ModelName.Equals(Model)
@@ -664,6 +686,7 @@ namespace StockControl
                                 u.CodeNo = CodeNo;
                                 u.QtyPerPCS = qty;
                                 u.ToolLife = tl;
+                                u.Corner = co;
                                 
                                 db.tb_Mappings.InsertOnSubmit(u);
                                 db.SubmitChanges();
@@ -678,6 +701,7 @@ namespace StockControl
                                 x.CodeNo = CodeNo;
                                 x.QtyPerPCS = qty;
                                 x.ToolLife = tl;
+                                x.Corner = co;
                                 db.SubmitChanges();
 
                             }

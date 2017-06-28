@@ -67,7 +67,7 @@ namespace StockControl
                     ddlType.DisplayMember = "TypeCode";
                     ddlType.Text = "";
 
-                    ddlType.Items.Add("");//การ add ค่าเข้าไปต่อท้าย
+                   // ddlType.Items.Add("");//การ add ค่าเข้าไปต่อท้าย
               
                    
             }
@@ -102,8 +102,8 @@ namespace StockControl
                                  CodeNo = i.CodeNo,
                                  ItemNo = i.ItemNo,
                                  ItemDescription = i.ItemDescription,
-                                 StockQty = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(i.CodeNo), "Invoice", 0))), //StockControl.dbClss.TDe(i.StockInv),
-                                 StockTemp = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(i.CodeNo), "Temp", 0))),// StockControl.dbClss.TDe(i.StockDL),
+                                 StockQty = i.StockInv,//(Convert.ToDecimal(db.Cal_QTY(Convert.ToString(i.CodeNo), "Invoice", 0))), //StockControl.dbClss.TDe(i.StockInv),
+                                 StockTemp = i.StockDL,//(Convert.ToDecimal(db.Cal_QTY(Convert.ToString(i.CodeNo), "Temp", 0))),// StockControl.dbClss.TDe(i.StockDL),
                                  ShelfNo = i.ShelfNo,
                                  QTY = 0,//StockControl.dbClss.TDe(s.QTY),
                                  GroupCode = i.GroupCode,
