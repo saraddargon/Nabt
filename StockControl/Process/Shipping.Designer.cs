@@ -405,6 +405,11 @@
             gridViewDecimalColumn2.FieldName = "QTY";
             gridViewDecimalColumn2.FormatString = "{0:N2}";
             gridViewDecimalColumn2.HeaderText = "จำนวนเบิก";
+            gridViewDecimalColumn2.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             gridViewDecimalColumn2.Name = "QTY";
             gridViewDecimalColumn2.Width = 91;
             gridViewTextBoxColumn5.EnableExpressionEditor = false;

@@ -1215,7 +1215,7 @@ namespace StockControl
 
                         ItemNo = d.ItemNo;
                         ItemDescription = d.ItemDescription;
-                        RemainQty = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(CodeNo), "", 0)));//Convert.ToDecimal(d.StockInv);
+                        RemainQty = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(CodeNo), "Invoice", 0)));//Convert.ToDecimal(d.StockInv);
                         Unit = d.UnitBuy;
                         PCSUnit = Convert.ToDecimal(d.PCSUnit);
                         CostPerUnit =  Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "Avg"));//Convert.ToDecimal(d.StandardCost);
