@@ -11,13 +11,13 @@ using Telerik.WinControls.UI;
 
 namespace StockControl
 {
-    public partial class ShippingList : Telerik.WinControls.UI.RadRibbonForm
+    public partial class ShippingCancelList : Telerik.WinControls.UI.RadRibbonForm
     {
-        public ShippingList()
+        public ShippingCancelList()
         {
             InitializeComponent();
         }
-        public ShippingList(Telerik.WinControls.UI.RadTextBox SHNoxxx
+        public ShippingCancelList(Telerik.WinControls.UI.RadTextBox SHNoxxx
                     , Telerik.WinControls.UI.RadTextBox CodeNoxxx)
         {
             InitializeComponent();
@@ -134,8 +134,8 @@ namespace StockControl
                              join h in db.tb_ShippingHs on d.ShippingNo equals h.ShippingNo
                              join i in db.tb_Items on d.CodeNo equals i.CodeNo
 
-                             where h.Status != "Cancel" //&& d.verticalID == VerticalID
-                                   &&  d.Status != "Cancel"
+                             where //h.Status == "Cancel" //&& d.verticalID == VerticalID
+                                     d.Status == "Cancel"
                                  &&  d.ShippingNo.Contains(txtSHNo.Text.Trim())
                                  && (h.ShipDate >= inclusiveStart
                                         && h.ShipDate < exclusiveEnd)
@@ -578,32 +578,32 @@ namespace StockControl
 
         private void MasterTemplate_CellDoubleClick(object sender, GridViewCellEventArgs e)
         {
-            try
-            {
-                if (screen.Equals(1))
-                {
-                    if (!Convert.ToString(e.Row.Cells["ShippingNo"].Value).Equals(""))
-                    {
-                        SHNo_tt.Text = Convert.ToString(e.Row.Cells["ShippingNo"].Value);
-                        this.Close();
-                    }
-                    else
-                    {
-                        SHNo_tt.Text = Convert.ToString(e.Row.Cells["ShippingNo"].Value);
-                        CodeNo_tt.Text = Convert.ToString(e.Row.Cells["CodeNo"].Value);
-                        this.Close();
-                    }
-                }
-                else
-                {
-                    Shipping a = new Shipping(Convert.ToString(e.Row.Cells["ShippingNo"].Value),
-                        Convert.ToString(e.Row.Cells["CodeNo"].Value));
-                    a.ShowDialog();
-                    this.Close();
-                }
+            //try
+            //{
+            //    if (screen.Equals(1))
+            //    {
+            //        if (!Convert.ToString(e.Row.Cells["ShippingNo"].Value).Equals(""))
+            //        {
+            //            SHNo_tt.Text = Convert.ToString(e.Row.Cells["ShippingNo"].Value);
+            //            this.Close();
+            //        }
+            //        else
+            //        {
+            //            SHNo_tt.Text = Convert.ToString(e.Row.Cells["ShippingNo"].Value);
+            //            CodeNo_tt.Text = Convert.ToString(e.Row.Cells["CodeNo"].Value);
+            //            this.Close();
+            //        }
+            //    }
+            //    else
+            //    {
+            //        Shipping a = new Shipping(Convert.ToString(e.Row.Cells["ShippingNo"].Value),
+            //            Convert.ToString(e.Row.Cells["CodeNo"].Value));
+            //        a.ShowDialog();
+            //        this.Close();
+            //    }
 
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            //}
+            //catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

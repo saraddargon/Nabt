@@ -11,22 +11,22 @@ using Telerik.WinControls.UI;
 
 namespace StockControl
 {
-    public partial class ClearTempList : Telerik.WinControls.UI.RadRibbonForm
+    public partial class ReturnReceiveList_Del : Telerik.WinControls.UI.RadRibbonForm
     {
-        public ClearTempList()
+        public ReturnReceiveList_Del()
         {
             InitializeComponent();
         }
         Telerik.WinControls.UI.RadTextBox RCNo_tt = new Telerik.WinControls.UI.RadTextBox();
-       // Telerik.WinControls.UI.RadTextBox PRNo_tt = new Telerik.WinControls.UI.RadTextBox();
+        Telerik.WinControls.UI.RadTextBox PRNo_tt = new Telerik.WinControls.UI.RadTextBox();
         int screen = 0;
-        public ClearTempList(Telerik.WinControls.UI.RadTextBox RCNoxxx
-                 
+        public ReturnReceiveList_Del(Telerik.WinControls.UI.RadTextBox RCNoxxx
+                    , Telerik.WinControls.UI.RadTextBox PRNoxxx
                 )
         {
             InitializeComponent();
             RCNo_tt = RCNoxxx;
-           
+            PRNo_tt = PRNoxxx;
             screen = 1;
         }
 
@@ -159,6 +159,7 @@ namespace StockControl
                              where //h.Status == "Waiting" //&& d.verticalID == VerticalID
                                 Convert.ToDecimal(d.OrderQty ) == Convert.ToDecimal(d.RemainQty)
                                 && h.VendorNo.Contains(VendorNo_ss)
+                                && d.SS == 1
                              select new
                              {
                                  CodeNo = d.CodeNo,
@@ -188,7 +189,7 @@ namespace StockControl
 
                         foreach (var vv in r)
                         {
-                            dgvData.Rows.Add(dgvNo.ToString(), S,"", vv.RCNo, vv.PRNo, vv.CodeNo, vv.ItemNo, vv.ItemDescription
+                            dgvData.Rows.Add(dgvNo.ToString(), S, vv.RCNo, vv.PRNo, vv.CodeNo, vv.ItemNo, vv.ItemDescription
                                         , vv.DeliveryDate, vv.QTY, vv.BackOrder, vv.RemainQty, vv.Unit, vv.PCSUnit, vv.MaxStock,
                                         vv.MinStock, vv.VendorNo, vv.VendorName, vv.CreateBy, vv.CreateDate, vv.Status
                                         );
@@ -219,7 +220,7 @@ namespace StockControl
                 //}
             }
         }
-        private void Load_PratitalReceive() //รับเข้าบางส่วน
+        private void Load_Data()
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
@@ -230,32 +231,23 @@ namespace StockControl
                 int dgvNo = 0;
                 bool S = false;
                 string RCNo = "";
-                //string PRNo = "";
-                //string CodeNo = "";
-                //string ItemName = "";
-                //string ItemNo = "";
-                //string ItemDescription = "";
-                //DateTime? DeliveryDate = null;
-                //decimal QTY = 0;
-                //decimal BackOrder = 0;
-                //decimal RemainQty = 0;
-                //string Unit = "";
-                //decimal PCSUnit = 0;
-                //decimal Leadtime = 0;
-                //decimal MaxStock = 0;
-                //decimal MinStock = 0;
-                //string VendorNo = "";
-                //string VendorName = "";
-                //DateTime? CreateDate = null;
-                //string CreateBy = "";
-                //string Status = "รอรับเข้า";
+             
+                DateTime inclusiveStart = dtDate1.Value.Date;
+                // Include the *whole* of the day indicated by searchEndDate
+                DateTime exclusiveEnd = dtDate2.Value.Date.AddDays(1);
+                DateTime? DeliveryDate = null;
 
-                var r = (from d in db.tb_Receives
-                         join c in db.tb_ReceiveHs on d.RCNo equals c.RCNo
-                         join p in db.tb_PurchaseRequestLines on d.PRID equals p.id
+
+                var r = (from d in db.tb_Receive_Dels
+                         join c in db.tb_ReceiveH_Dels on d.RCNo equals c.RCNo
+                        // join p in db.tb_PurchaseRequestLines on d.PRID equals p.id
                          join i in db.tb_Items on d.CodeNo equals i.CodeNo
 
-                         where d.Status == "Partial" && c.VendorNo.Contains(VendorNo_ss)
+                         where  c.VendorNo.Contains(VendorNo_ss)
+                             
+                             && (c.RCDate >= inclusiveStart
+                                        && c.RCDate < exclusiveEnd)
+
                          select new
                          {
                              CodeNo = d.CodeNo,
@@ -264,7 +256,7 @@ namespace StockControl
                              ItemDescription = d.ItemDescription,
                              RCNo = d.RCNo,
                              PRNo = d.PRNo,
-                             DeliveryDate = p.DeliveryDate,
+                             DeliveryDate = DeliveryDate, //p.DeliveryDate,
                              QTY = d.QTY,
                              BackOrder = d.RemainQty,
                              RemainQty = d.RemainQty,
@@ -277,6 +269,10 @@ namespace StockControl
                             ,CreateBy = d.CreateBy
                             ,CreateDate = d.RCDate
                             ,Status = "รับเข้าบางส่วน"//d.Status
+                            ,InvNo = c.InvoiceNo
+                            ,SerialNo =  d.SerialNo
+                            ,LotNo = d.LotNo
+                            ,ShelfNo = d.ShelfNo
                          }
                 ).ToList();
                 //dgvData.DataSource = StockControl.dbClss.LINQToDataTable(r);
@@ -286,9 +282,9 @@ namespace StockControl
 
                     foreach (var vv in r)
                     {
-                        dgvData.Rows.Add(dgvNo.ToString(), S,"", vv.RCNo, vv.PRNo, vv.CodeNo, vv.ItemNo, vv.ItemDescription
-                                    , vv.DeliveryDate, vv.QTY, vv.BackOrder, vv.RemainQty,vv.Unit,vv.PCSUnit,vv.MaxStock,
-                                    vv.MinStock,vv.VendorNo,vv.VendorName,vv.CreateBy,vv.CreateDate,vv.Status
+                        dgvData.Rows.Add(dgvNo.ToString(), S, vv.RCNo, vv.PRNo, vv.InvNo ,vv.CodeNo, vv.ItemNo, vv.ItemDescription
+                                    ,vv.DeliveryDate, vv.QTY, vv.BackOrder, vv.RemainQty,vv.Unit,vv.PCSUnit,vv.MaxStock,
+                                    vv.MinStock,vv.VendorNo,vv.VendorName,vv.LotNo,vv.SerialNo,vv.ShelfNo,vv.CreateBy,vv.CreateDate,vv.Status
                                     );
                     }
 
@@ -304,96 +300,7 @@ namespace StockControl
 
             }
         }
-        private void Load_CompletedReceive()//รับเข้าแล้ว
-        {
-            using (DataClasses1DataContext db = new DataClasses1DataContext())
-            {
-                string VendorNo_ss = "";
-                if (!cboVendorName.Text.Equals(""))
-                    VendorNo_ss = txtVendorNo.Text;
-
-                int dgvNo = 0;
-                bool S = false;
-                string RCNo = "";
-                //string PRNo = "";
-                //string CodeNo = "";
-                //string ItemName = "";
-                //string ItemNo = "";
-                //string ItemDescription = "";
-                //DateTime? DeliveryDate = null;
-                //decimal QTY = 0;
-                //decimal BackOrder = 0;
-                //decimal RemainQty = 0;
-                //string Unit = "";
-                //decimal PCSUnit = 0;
-                //decimal Leadtime = 0;
-                //decimal MaxStock = 0;
-                //decimal MinStock = 0;
-                //string VendorNo = "";
-                //string VendorName = "";
-                //DateTime? CreateDate = null;
-                //string CreateBy = "";
-                //string Status = "รับเข้าแล้ว";
-
-                var r = (from d in db.tb_Receives
-                         join c in db.tb_ReceiveHs on d.RCNo equals c.RCNo
-                         join p in db.tb_PurchaseRequestLines on d.PRID equals p.id
-                         join i in db.tb_Items on d.CodeNo equals i.CodeNo
-
-                         where d.Status == "Completed" && c.VendorNo.Contains(VendorNo_ss)
-                         select new
-                         {
-                             CodeNo = d.CodeNo,
-                             S = false,
-                             ItemNo = d.ItemNo,
-                             ItemDescription = d.ItemDescription,
-                             RCNo = d.RCNo,
-                             PRNo = d.PRNo,
-                             DeliveryDate = p.DeliveryDate,
-                             QTY = d.QTY,
-                             BackOrder = d.RemainQty,
-                             RemainQty = d.RemainQty,
-                             Unit = d.Unit,
-                             PCSUnit = d.PCSUnit,
-                             MaxStock = i.MaximumStock
-                             ,
-                             MinStock = i.MinimumStock
-                            ,
-                             VendorNo = c.VendorNo
-                            ,
-                             VendorName = c.VendorName
-                            ,
-                             CreateBy = d.CreateBy
-                            ,
-                             CreateDate = d.RCDate
-                            ,
-                             Status = "รับเข้าแล้ว"//d.Status
-                         }
-                ).ToList();
-                //dgvData.DataSource = StockControl.dbClss.LINQToDataTable(r);
-                if (r.Count > 0)
-                {
-                    dgvNo = dgvData.Rows.Count() + 1;
-
-                    foreach (var vv in r)
-                    {
-                        dgvData.Rows.Add(dgvNo.ToString(), S,"", vv.RCNo, vv.PRNo, vv.CodeNo, vv.ItemNo, vv.ItemDescription
-                                    , vv.DeliveryDate, vv.QTY, vv.BackOrder, vv.RemainQty, vv.Unit, vv.PCSUnit, vv.MaxStock,
-                                    vv.MinStock, vv.VendorNo, vv.VendorName, vv.CreateBy, vv.CreateDate, vv.Status
-                                    );
-                    }
-
-                }
-
-                //int rowcount = 0;
-                //foreach (var x in dgvData.Rows)
-                //{
-                //    rowcount += 1;
-                //    x.Cells["dgvNo"].Value = rowcount;
-                //}
-
-            }
-        }
+       
         private void DataLoad()
         {
             //dt.Rows.Clear();
@@ -408,84 +315,17 @@ namespace StockControl
                     
                     try
                     {
-                        //if (cboStatus.Text.Equals("รอรับเข้า"))
-                        //    Load_WaitingReceive();
-                        // if (cboStatus.Text.Equals("รับเข้าบางส่วน"))
-                        //    Load_PratitalReceive();
-                        //else if (cboStatus.Text.Equals("รับเข้าแล้ว"))
-                        //    Load_CompletedReceive();
-                        //else
-                        //{
-                        //Load_WaitingReceive();
-                        //Load_PratitalReceive();
-                        //    Load_CompletedReceive();
-                        //}
-                        string VendorNo_ss = "";
-                        if (!cboVendorName.Text.Equals(""))
-                            VendorNo_ss = txtVendorNo.Text;
-                        int dgvNo = 0;
-                        bool S = false;
-                        DateTime inclusiveStart = dtDate1.Value.Date;
-                        // Include the *whole* of the day indicated by searchEndDate
-                        DateTime exclusiveEnd = dtDate2.Value.Date.AddDays(1);
+                       
+                        Load_Data();
+                        
 
-
-                        var r = (from d in db.tb_ReceiveHs
-                                     //join c in db.tb_ReceiveHs on d.RCNo equals c.RCNo
-                                     //join p in db.tb_PurchaseRequestLines on d.PRID equals p.id
-                                     //join i in db.tb_Items on d.CodeNo equals i.CodeNo
-
-                                 where d.VendorNo.Contains(VendorNo_ss)
-                                    && d.Flag_Temp == true && d.TempNo.Contains(txtDLNo.Text)
-                                    && d.Status != "Cancel"
-                                    && (d.CreateDate >= inclusiveStart
-                                        && d.CreateDate < exclusiveEnd)
-                                 select new
-                                 {
-                                    
-                                     RCNo = d.RCNo,
-                                     VendorNo = d.VendorNo
-                                    ,
-                                     VendorName = d.VendorName
-                                     ,RemarkHD = d.RemarkHD
-                                     ,
-                                     TempNo = d.TempNo
-                                     ,
-                                     RCDate = d.RCDate
-                                    ,
-                                     CreateBy = d.CreateBy
-                                    ,
-                                     CreateDate = d.CreateDate
-                                    ,
-                                     Status = d.Status
-                                 }
-                ).ToList();
-                        //dgvData.DataSource = StockControl.dbClss.LINQToDataTable(r);
-                        if (r.Count > 0)
+                        int rowcount = 0;
+                        foreach (var x in dgvData.Rows)
                         {
-                            dgvNo = dgvData.Rows.Count() + 1;
-                            string status = "";
-                            foreach (var vv in r)
-                            {
-                                if (vv.Status.Equals("Partial"))
-                                    status = "รับเข้าบางส่วน";
-                                else
-                                    status = "รับเข้าครบแล้ว";
-
-                                dgvData.Rows.Add(dgvNo.ToString(),vv.RCNo,vv.TempNo,vv.VendorNo,vv.VendorName,vv.RemarkHD
-                                    ,vv.CreateBy,vv.RCDate,vv.CreateDate, status
-                                            );
-                            }
-
-                        }
-
-                        //int rowcount = 0;
-                        //foreach (var x in dgvData.Rows)
-                        //{
-                        //    rowcount += 1;
-                        //    x.Cells["dgvNo"].Value = rowcount;
+                            rowcount += 1;
+                            x.Cells["dgvNo"].Value = rowcount;
                             
-                        //}
+                        }
                     }
                     catch (Exception ex) { MessageBox.Show(ex.Message); }
 
@@ -556,12 +396,19 @@ namespace StockControl
                         RCNo_tt.Text = Convert.ToString(dgvData.CurrentRow.Cells["RCNo"].Value);
                         this.Close();
                     }
+                    else
+                    {
+                        RCNo_tt.Text = Convert.ToString(dgvData.CurrentRow.Cells["RCNo"].Value);
+                        PRNo_tt.Text = Convert.ToString(dgvData.CurrentRow.Cells["PRNo"].Value);
+                        this.Close();
+                    }
                 }
                 else
                 {
-                    ClearTemp a = new ClearTemp(Convert.ToString(dgvData.CurrentRow.Cells["RCNo"].Value));
+                    Receive a = new Receive(Convert.ToString(dgvData.CurrentRow.Cells["RCNo"].Value),
+                        Convert.ToString(dgvData.CurrentRow.Cells["PRNo"].Value));
                     a.ShowDialog();
-
+                    //this.Close();
                 }
 
             }
@@ -672,32 +519,60 @@ namespace StockControl
                 txtVendorNo.Text = "";
         }
 
-    
-
-        private void dgvData_CellDoubleClick(object sender, GridViewCellEventArgs e)
+        private void MasterTemplate_CellDoubleClick(object sender, GridViewCellEventArgs e)
         {
-            try
-
-            {
-                if (screen.Equals(1))
-                {
-                    RCNo_tt.Text = Convert.ToString(e.Row.Cells["RCNo"].Value);
-                    this.Close();
-                }
-                else
-
-                {
-                    ClearTemp a = new ClearTemp(Convert.ToString(e.Row.Cells["RCNo"].Value));
-                    a.ShowDialog();
-                }
-                
-            }
-            catch { }
+            //if (screen.Equals(1))
+            //{
+            //    if (!Convert.ToString(e.Row.Cells["RCNo"].Value).Equals(""))
+            //    {
+            //        RCNo_tt.Text = Convert.ToString(e.Row.Cells["RCNo"].Value);
+            //        this.Close();
+            //    }
+            //    else
+            //    {
+            //        RCNo_tt.Text = Convert.ToString(e.Row.Cells["RCNo"].Value);
+            //        PRNo_tt.Text = Convert.ToString(e.Row.Cells["PRNo"].Value);
+            //        this.Close();
+            //    }
+            //}
+            //else
+            //{
+            //    Receive a = new Receive(Convert.ToString(e.Row.Cells["RCNo"].Value),
+            //        Convert.ToString(e.Row.Cells["PRNo"].Value));
+            //    a.ShowDialog();
+            //   // this.Close();
+            //}
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
+            try
+            {
+                //dt_ShelfTag.Rows.Clear();
+                string RCNo = "";
+                RCNo = StockControl.dbClss.TSt(dgvData.CurrentRow.Cells["RCNo"].Value);
+                PrintPR a = new PrintPR(RCNo, RCNo, "Receive");
+                a.ShowDialog();
 
+                //using (DataClasses1DataContext db = new DataClasses1DataContext())
+                //{
+                //    var g = (from ix in db.sp_R003_ReportReceive(RCNo, DateTime.Now) select ix).ToList();
+                //    if (g.Count() > 0)
+                //    {
+
+                //        Report.Reportx1.Value = new string[2];
+                //        Report.Reportx1.Value[0] = RCNo;
+                //        Report.Reportx1.WReport = "ReportReceive";
+                //        Report.Reportx1 op = new Report.Reportx1("ReportReceive.rpt");
+                //        op.Show();
+
+                //    }
+                //    else
+                //        MessageBox.Show("not found.");
+                //}
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

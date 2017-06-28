@@ -57,10 +57,12 @@ namespace StockControl
         {
             DateTime firstOfNextMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1);
             DateTime lastOfThisMonth = firstOfNextMonth.AddDays(-1);
-            dtDate1.Value = firstOfNextMonth;
+            //dtDate1.Value = firstOfNextMonth;
+            string aa = DateTime.Today.ToString("yyyy-MM-01");
+            dtDate1.Value = Convert.ToDateTime(aa);
             dtDate2.Value = lastOfThisMonth;
             cboStatus.Text = "ทั้งหมด";
-            GETDTRow();
+            //GETDTRow();
             DefaultItem();
 
             crow = 0;

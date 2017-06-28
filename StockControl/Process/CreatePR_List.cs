@@ -293,9 +293,12 @@ namespace StockControl
         {
             try
             {
+                
                 //dt_ShelfTag.Rows.Clear();
                 string PRNo = "";
-                PRNo = StockControl.dbClss.TSt(radGridView1.CurrentRow.Cells["PRNo"].Value);
+                if(radGridView1.Rows.Count<= 0)
+                    PRNo = StockControl.dbClss.TSt(radGridView1.CurrentRow.Cells["PRNo"].Value);
+
                 PrintPR a = new PrintPR(PRNo, PRNo,"PR");
                 a.ShowDialog();
 

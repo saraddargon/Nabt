@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShippingCancel));
-            Telerik.WinControls.UI.RadListDataItem radListDataItem3 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem4 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem1 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem2 = new Telerik.WinControls.UI.RadListDataItem();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
             this.radRibbonBarGroup1 = new Telerik.WinControls.UI.RadRibbonBarGroup();
@@ -65,6 +65,8 @@
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
+            this.radRibbonBarGroup4 = new Telerik.WinControls.UI.RadRibbonBarGroup();
+            this.btnListItem = new Telerik.WinControls.UI.RadButtonElement();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -126,7 +128,8 @@
             this.ribbonTab1.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.radRibbonBarGroup1,
             this.radRibbonBarGroup2,
-            this.radRibbonBarGroup3});
+            this.radRibbonBarGroup3,
+            this.radRibbonBarGroup4});
             this.ribbonTab1.Name = "ribbonTab1";
             this.ribbonTab1.Text = "Action";
             // 
@@ -276,10 +279,10 @@
             // 
             this.ddlType.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             this.ddlType.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            radListDataItem3.Text = "ทั้งใบ";
-            radListDataItem4.Text = "ตามรายการ";
-            this.ddlType.Items.Add(radListDataItem3);
-            this.ddlType.Items.Add(radListDataItem4);
+            radListDataItem1.Text = "ทั้งใบ";
+            radListDataItem2.Text = "ตามรายการ";
+            this.ddlType.Items.Add(radListDataItem1);
+            this.ddlType.Items.Add(radListDataItem2);
             this.ddlType.Location = new System.Drawing.Point(164, 26);
             this.ddlType.Name = "ddlType";
             this.ddlType.Size = new System.Drawing.Size(125, 19);
@@ -421,6 +424,22 @@
             this.radRibbonBarButtonGroup5.ShowBorder = false;
             this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
+            // radRibbonBarGroup4
+            // 
+            this.radRibbonBarGroup4.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.btnListItem});
+            this.radRibbonBarGroup4.Name = "radRibbonBarGroup4";
+            this.radRibbonBarGroup4.Text = "List Item";
+            // 
+            // btnListItem
+            // 
+            this.btnListItem.Image = ((System.Drawing.Image)(resources.GetObject("btnListItem.Image")));
+            this.btnListItem.ImageAlignment = System.Drawing.ContentAlignment.TopCenter;
+            this.btnListItem.Name = "btnListItem";
+            this.btnListItem.Text = "รายการ";
+            this.btnListItem.TextAlignment = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnListItem.Click += new System.EventHandler(this.btnListItem_Click);
+            // 
             // ShippingCancel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -501,5 +520,7 @@
         private Telerik.WinControls.UI.RadDropDownList ddlType;
         private Telerik.WinControls.UI.RadLabel radLabel6;
         private Telerik.WinControls.UI.RadTextBox txtid;
+        private Telerik.WinControls.UI.RadRibbonBarGroup radRibbonBarGroup4;
+        private Telerik.WinControls.UI.RadButtonElement btnListItem;
     }
 }

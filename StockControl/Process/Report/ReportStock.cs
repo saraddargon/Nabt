@@ -60,7 +60,7 @@ namespace StockControl
             //dtDate1.Value = firstOfNextMonth;
             //dtDate2.Value = lastOfThisMonth;
             cboStatus.Text = "ทั้งหมด";
-            GETDTRow();
+            //GETDTRow();
             DefaultItem();
 
             crow = 0;

@@ -59,9 +59,10 @@ namespace StockControl
             
             DateTime lastOfThisMonth = firstOfNextMonth.AddDays(-1);
             //firstOfNextMonth = Convert.ToDateTime(DateTime.Today.ToString("yyyy-mm-01"));
-            dtDate1.Value = firstOfNextMonth;
+            string aa = DateTime.Today.ToString("yyyy-MM-01");
+            dtDate1.Value = Convert.ToDateTime(aa);
             dtDate2.Value = lastOfThisMonth;
-            GETDTRow();
+           // GETDTRow();
             DefaultItem();
 
             crow = 0;

@@ -383,5 +383,10 @@ namespace StockControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
+
+        private void btnView_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

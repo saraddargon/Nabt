@@ -133,6 +133,11 @@ namespace StockControl
                 this.Cursor = Cursors.WaitCursor;
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
+                    DateTime inclusiveStart = dtDate1.Value.Date;
+                    // Include the *whole* of the day indicated by searchEndDate
+                    DateTime exclusiveEnd = dtDate2.Value.Date.AddDays(1);
+                    
+
                     var r = (from d in db.tb_Shippings
                              join h in db.tb_ShippingHs on d.ShippingNo equals h.ShippingNo
                              join i in db.tb_Items on d.CodeNo equals i.CodeNo
@@ -141,6 +146,9 @@ namespace StockControl
                                     && d.Status != "Cancel"
                                  && d.ShippingNo.Contains(txtSHNo.Text.Trim())
                                  && d.CodeNo.Contains(txtCodeNo.Text.Trim())
+
+                                  && (h.ShipDate >= inclusiveStart
+                                        && h.ShipDate < exclusiveEnd)
                              select new
                              {
                                  ShippingNo = d.ShippingNo,

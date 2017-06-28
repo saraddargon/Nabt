@@ -678,6 +678,9 @@ namespace StockControl
         {
             try
             {
+                if (dgvData.Rows.Count <= 0)
+                    return;
+
                 //dt_ShelfTag.Rows.Clear();
                 string RCNo = "";
                 RCNo = StockControl.dbClss.TSt(dgvData.CurrentRow.Cells["RCNo"].Value);

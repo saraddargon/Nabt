@@ -46,13 +46,15 @@
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
             this.txtInvoiceNo = new Telerik.WinControls.UI.RadTextBox();
             this.radButton1 = new Telerik.WinControls.UI.RadButton();
+            this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
             this.office2010BlueTheme1 = new Telerik.WinControls.Themes.Office2010BlueTheme();
             this.radRibbonBarButtonGroup2 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
-            this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
+            this.radRibbonBarGroup4 = new Telerik.WinControls.UI.RadRibbonBarGroup();
+            this.btnListItem = new Telerik.WinControls.UI.RadButtonElement();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -60,8 +62,8 @@
             this.radPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtInvoiceNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButton1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -104,7 +106,8 @@
             this.ribbonTab1.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.radRibbonBarGroup1,
             this.radRibbonBarGroup2,
-            this.radRibbonBarGroup3});
+            this.radRibbonBarGroup3,
+            this.radRibbonBarGroup4});
             this.ribbonTab1.Name = "ribbonTab1";
             this.ribbonTab1.Text = "Action";
             // 
@@ -243,6 +246,17 @@
             this.radButton1.ThemeName = "Office2010Blue";
             this.radButton1.Click += new System.EventHandler(this.radButton1_Click_1);
             // 
+            // radLabel2
+            // 
+            this.radLabel2.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.radLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.radLabel2.Location = new System.Drawing.Point(50, 66);
+            this.radLabel2.Name = "radLabel2";
+            this.radLabel2.Size = new System.Drawing.Size(171, 32);
+            this.radLabel2.TabIndex = 0;
+            this.radLabel2.Text = "<html><p>*** กรณีคืนรายการรับสินค้า    </p><p>                   จะไม่สามารถคืนรา" +
+    "ยการข้ามเดือนได้</p></html>";
+            // 
             // radLabel1
             // 
             this.radLabel1.Location = new System.Drawing.Point(38, 15);
@@ -285,16 +299,21 @@
             this.radRibbonBarButtonGroup5.ShowBorder = false;
             this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
-            // radLabel2
+            // radRibbonBarGroup4
             // 
-            this.radLabel2.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.radLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.radLabel2.Location = new System.Drawing.Point(50, 66);
-            this.radLabel2.Name = "radLabel2";
-            this.radLabel2.Size = new System.Drawing.Size(171, 32);
-            this.radLabel2.TabIndex = 0;
-            this.radLabel2.Text = "<html><p>*** กรณีคืนรายการรับสินค้า    </p><p>                   จะไม่สามารถคืนรา" +
-    "ยการข้ามเดือนได้</p></html>";
+            this.radRibbonBarGroup4.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.btnListItem});
+            this.radRibbonBarGroup4.Name = "radRibbonBarGroup4";
+            this.radRibbonBarGroup4.Text = "List Item";
+            // 
+            // btnListItem
+            // 
+            this.btnListItem.Image = ((System.Drawing.Image)(resources.GetObject("btnListItem.Image")));
+            this.btnListItem.ImageAlignment = System.Drawing.ContentAlignment.TopCenter;
+            this.btnListItem.Name = "btnListItem";
+            this.btnListItem.Text = "รายการ";
+            this.btnListItem.TextAlignment = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnListItem.Click += new System.EventHandler(this.btnListItem_Click);
             // 
             // ReturnReceive
             // 
@@ -322,8 +341,8 @@
             this.radPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtInvoiceNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButton1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -356,5 +375,7 @@
         private Telerik.WinControls.UI.RadLabel radLabel1;
         private Telerik.WinControls.UI.RadTextBox txtInvoiceNo;
         private Telerik.WinControls.UI.RadLabel radLabel2;
+        private Telerik.WinControls.UI.RadRibbonBarGroup radRibbonBarGroup4;
+        private Telerik.WinControls.UI.RadButtonElement btnListItem;
     }
 }

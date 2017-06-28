@@ -59,7 +59,7 @@ namespace StockControl
             //DateTime lastOfThisMonth = firstOfNextMonth.AddDays(-1);
             //dtDate1.Value = firstOfNextMonth;
             //dtDate2.Value = lastOfThisMonth;
-            GETDTRow();
+           // GETDTRow();
             DefaultItem();
 
             crow = 0;

@@ -1210,5 +1210,11 @@ namespace StockControl
         {
 
         }
+
+        private void btnListItem_Click(object sender, EventArgs e)
+        {
+            ReturnReceiveList_Del a = new ReturnReceiveList_Del();
+            a.ShowDialog();
+        }
     }
 }

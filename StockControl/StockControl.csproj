@@ -144,6 +144,18 @@
     <Compile Include="Process\MappingAdd.Designer.cs">
       <DependentUpon>MappingAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\ReturnReceiveList_Del.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ReturnReceiveList_Del.Designer.cs">
+      <DependentUpon>ReturnReceiveList_Del.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ShippingCancelList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ShippingCancelList.Designer.cs">
+      <DependentUpon>ShippingCancelList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\Stock_List.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -447,6 +459,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\MappingAdd.resx">
       <DependentUpon>MappingAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ReturnReceiveList_Del.resx">
+      <DependentUpon>ReturnReceiveList_Del.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ShippingCancelList.resx">
+      <DependentUpon>ShippingCancelList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\Stock_List.resx">
       <DependentUpon>Stock_List.cs</DependentUpon>

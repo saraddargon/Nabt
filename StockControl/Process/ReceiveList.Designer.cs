@@ -170,7 +170,7 @@
             this.radRibbonBarGroup1.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.btnSave});
             this.radRibbonBarGroup1.Name = "radRibbonBarGroup1";
-            this.radRibbonBarGroup1.Text = "Order";
+            this.radRibbonBarGroup1.Text = "Receive";
             // 
             // btnSave
             // 

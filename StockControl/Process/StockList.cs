@@ -655,7 +655,7 @@ namespace StockControl
                     AdjustStock a = new AdjustStock("",
                         Convert.ToString(dgvData.CurrentRow.Cells["CodeNo"].Value));
                     a.ShowDialog();
-                    this.Close();
+                    //this.Close();
                 }
 
             }

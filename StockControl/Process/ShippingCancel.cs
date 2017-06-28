@@ -557,8 +557,7 @@ namespace StockControl
                 gg.QTY = Convert.ToDecimal(g.QTY);
                 gg.Inbound = Convert.ToDecimal(g.QTY);
                 gg.Outbound = 0;
-
-                gg.CalDate = CalDate;
+                gg.CodeNo = g.CodeNo;
                 gg.Status = "Active";
 
                 gg.Type_i = 4;  //Receive = 1,Cancel Receive 2,Shipping = 3,Cancel Shipping = 4,Adjust stock = 5,ClearTemp = 6
@@ -783,6 +782,12 @@ namespace StockControl
         private void btnPrint_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnListItem_Click(object sender, EventArgs e)
+        {
+            ShippingCancelList a = new ShippingCancelList();
+            a.Show();
         }
     }
 }

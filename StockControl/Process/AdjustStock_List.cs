@@ -266,7 +266,7 @@ namespace StockControl
                     AdjustStock a = new AdjustStock(Convert.ToString(dgvData.CurrentRow.Cells["ADNo"].Value),
                         Convert.ToString(dgvData.CurrentRow.Cells["CodeNo"].Value));
                     a.ShowDialog();
-                    this.Close();
+                    //this.Close();
                 }
 
             }
@@ -398,7 +398,7 @@ namespace StockControl
                 AdjustStock a = new AdjustStock(Convert.ToString(e.Row.Cells["ADNo"].Value),
                     Convert.ToString(e.Row.Cells["CodeNo"].Value));
                 a.ShowDialog();
-                this.Close();
+                //this.Close();
             }
         }
 

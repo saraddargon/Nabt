@@ -74,6 +74,10 @@
             this.radLabelElement1 = new Telerik.WinControls.UI.RadLabelElement();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvData = new Telerik.WinControls.UI.RadGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.stockคงเหลอToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tempคงเหลอToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
             this.ddlType = new Telerik.WinControls.UI.RadDropDownList();
             this.btnSearch = new Telerik.WinControls.UI.RadButton();
@@ -93,15 +97,12 @@
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.stockคงเหลอToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tempคงเหลอToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData.MasterTemplate)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ddlType)).BeginInit();
@@ -117,7 +118,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCodeNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel37)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -519,6 +519,39 @@
             this.dgvData.ThemeName = "Office2010Blue";
             this.dgvData.CellDoubleClick += new Telerik.WinControls.UI.GridViewCellEventHandler(this.dgvData_CellDoubleClick);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stockคงเหลอToolStripMenuItem,
+            this.tempคงเหลอToolStripMenuItem,
+            this.backOrderToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(145, 70);
+            // 
+            // stockคงเหลอToolStripMenuItem
+            // 
+            this.stockคงเหลอToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.stockคงเหลอToolStripMenuItem.Name = "stockคงเหลอToolStripMenuItem";
+            this.stockคงเหลอToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.stockคงเหลอToolStripMenuItem.Text = "Stock คงเหลือ";
+            this.stockคงเหลอToolStripMenuItem.Click += new System.EventHandler(this.stockคงเหลอToolStripMenuItem_Click);
+            // 
+            // tempคงเหลอToolStripMenuItem
+            // 
+            this.tempคงเหลอToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.tempคงเหลอToolStripMenuItem.Name = "tempคงเหลอToolStripMenuItem";
+            this.tempคงเหลอToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.tempคงเหลอToolStripMenuItem.Text = "Temp คงเหลือ";
+            this.tempคงเหลอToolStripMenuItem.Click += new System.EventHandler(this.tempคงเหลอToolStripMenuItem_Click);
+            // 
+            // backOrderToolStripMenuItem
+            // 
+            this.backOrderToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.backOrderToolStripMenuItem.Name = "backOrderToolStripMenuItem";
+            this.backOrderToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.backOrderToolStripMenuItem.Text = "BackOrder";
+            this.backOrderToolStripMenuItem.Click += new System.EventHandler(this.backOrderToolStripMenuItem_Click);
+            // 
             // radPanel1
             // 
             this.radPanel1.BackColor = System.Drawing.Color.Lavender;
@@ -695,39 +728,6 @@
             this.radRibbonBarButtonGroup5.ShowBorder = false;
             this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.stockคงเหลอToolStripMenuItem,
-            this.tempคงเหลอToolStripMenuItem,
-            this.backOrderToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(145, 70);
-            // 
-            // stockคงเหลอToolStripMenuItem
-            // 
-            this.stockคงเหลอToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.stockคงเหลอToolStripMenuItem.Name = "stockคงเหลอToolStripMenuItem";
-            this.stockคงเหลอToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.stockคงเหลอToolStripMenuItem.Text = "Stock คงเหลือ";
-            this.stockคงเหลอToolStripMenuItem.Click += new System.EventHandler(this.stockคงเหลอToolStripMenuItem_Click);
-            // 
-            // tempคงเหลอToolStripMenuItem
-            // 
-            this.tempคงเหลอToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.tempคงเหลอToolStripMenuItem.Name = "tempคงเหลอToolStripMenuItem";
-            this.tempคงเหลอToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.tempคงเหลอToolStripMenuItem.Text = "Temp คงเหลือ";
-            this.tempคงเหลอToolStripMenuItem.Click += new System.EventHandler(this.tempคงเหลอToolStripMenuItem_Click);
-            // 
-            // backOrderToolStripMenuItem
-            // 
-            this.backOrderToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.backOrderToolStripMenuItem.Name = "backOrderToolStripMenuItem";
-            this.backOrderToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.backOrderToolStripMenuItem.Text = "BackOrder";
-            this.backOrderToolStripMenuItem.Click += new System.EventHandler(this.backOrderToolStripMenuItem_Click);
-            // 
             // StockList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -753,6 +753,7 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvData.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).EndInit();
             this.radPanel1.ResumeLayout(false);
             this.radPanel1.PerformLayout();
@@ -769,7 +770,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCodeNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel37)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
