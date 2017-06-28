@@ -112,7 +112,7 @@ namespace StockControl
         }
         private void DataLoad()
         {
-           
+            
             
             try
             {
@@ -125,6 +125,7 @@ namespace StockControl
                     {
                         int year1 = 2017;
                         int.TryParse(cboYear.Text, out year1);
+                        /*
                         var gd = (from ix in db.tb_ForcastCalculates
                                   where ix.MMM == dbClss.getMonth(cboMonth.Text) && ix.YYYY == year1
                                   select new { ix.YYYY, ix.MMM, Month = dbClss.getMonthRevest(ix.MMM)
@@ -142,7 +143,10 @@ namespace StockControl
                                   ,
                                       ix.LeadTime,ix.KeepStock,ix.AddErrQty,ix.OrderQty}).ToList();
                         //MessageBox.Show(gd.Count().ToString());
-                        radGridView1.DataSource = gd;
+                        */
+                        var dt3 = (from ix in db.sp_SelectProduction_ListForcast(year1, dbClss.getMonth(cboMonth.Text)) select ix).ToList();
+
+                        radGridView1.DataSource = dt3;
 
                         int rowcount = 0;
                         foreach (var x in radGridView1.Rows)
@@ -399,6 +403,7 @@ namespace StockControl
             try
             {
                 radGridView1.Rows[e.RowIndex].Cells["dgvC"].Value = "T";
+                
                 //string TM1 = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["ModelName"].Value);
                 ////string TM2 = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["MMM"].Value);
                 //string Chk = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["dgvCodeTemp"].Value);
@@ -736,8 +741,8 @@ namespace StockControl
                             foreach (var r in db2)
                             {
 
-                                
-                                db.sp_SelectProduction_UpdateToItem(r.CodeNo, r.KeepStock, r.ForeCastQty, r.ForeCastQty);
+                                if(!Convert.ToBoolean(r.Hold))
+                                    db.sp_SelectProduction_UpdateToItem(r.CodeNo, r.KeepStock, r.ForeCastQty, r.ForeCastQty);
                                
                             }
 
@@ -750,6 +755,45 @@ namespace StockControl
             }
             catch { }
             this.Cursor = Cursors.Default;
+        }
+
+        private void radButtonElement4_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            if (MessageBox.Show("ต้องการบันทึก หรือไม่?", "Save", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            {
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    try
+                    {
+
+
+                        decimal OrderPoint = 0;
+                        decimal Maxstock = 0;
+                        bool hold = false;
+                        int id = 0;
+
+                        foreach (var x in radGridView1.Rows)
+                        {
+                            if (x.Cells["dgvC"].Value.Equals("T"))
+                            {
+
+                                int.TryParse(x.Cells["id"].Value.ToString(), out id);
+                                hold = Convert.ToBoolean(x.Cells["Hold"].Value);
+                                decimal.TryParse(Convert.ToString(x.Cells["ForeCastQty"].Value), out OrderPoint);
+                                decimal.TryParse(Convert.ToString(x.Cells["KeepStock"].Value), out Maxstock);
+                                db.sp_SelectProduction_updateHold(id, hold, Maxstock, OrderPoint);
+                            }
+
+                        }
+
+                        MessageBox.Show("บันทึกเรียบร้อย");
+                    }
+                    catch { }
+                }
+            }
+            this.Cursor = Cursors.Default;
+        
         }
     }
 }

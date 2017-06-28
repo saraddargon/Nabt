@@ -37,7 +37,7 @@ namespace StockControl
         private void GETDTRow()
         {
             dt.Columns.Add(new DataColumn("VendorNo", typeof(string)));
-            dt.Columns.Add(new DataColumn("VendorNme", typeof(string)));
+            dt.Columns.Add(new DataColumn("VendorName", typeof(string)));
             dt.Columns.Add(new DataColumn("Address", typeof(string)));
             dt.Columns.Add(new DataColumn("CRRNCY", typeof(string)));
             dt.Columns.Add(new DataColumn("Remark", typeof(string)));

@@ -231,6 +231,7 @@ namespace StockControl
                 {
                     decimal tl = 1;
                     decimal qty = 0;
+                    int co = 1;
                     tb_Mapping mp = new tb_Mapping();
                     mp.ModelName = txtModelName.Text;
                     mp.PartName = txtPartName.Text;
@@ -240,7 +241,9 @@ namespace StockControl
                     mp.CodeNo = txtcodeNo.Text;
                     decimal.TryParse(txtQty.Text, out qty);
                     decimal.TryParse(txtToolLife.Text, out tl);
+                    int.TryParse(txtCorner.Text, out co);
                     mp.ToolLife = tl;
+                    mp.Corner = co;
                     mp.QtyPerPCS = qty;
                     db.tb_Mappings.InsertOnSubmit(mp);
                     db.SubmitChanges();

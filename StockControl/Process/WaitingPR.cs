@@ -118,10 +118,11 @@ namespace StockControl
                                   where a.Status == "Active" 
                                   && a.StopOrder == false
                                   && (a.VendorNo.Contains(Vendorno))
-                                  && ((
-                                        (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "Invoice", 0)))
-                                                  + (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "Temp", 0)))
-                                                   + (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "BackOrder", 0)))
+                                  && (( a.StockInv+a.StockDL+a.StockBackOrder
+                                  
+                                       // (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "Invoice", 0)))
+                                                  //+ (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "Temp", 0)))
+                                                   //+ (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "BackOrder", 0)))
                                     ) <= Convert.ToDecimal(a.MinimumStock))
                                   //&& (Convert.ToDecimal(a.StockInv) + Convert.ToDecimal(a.StockDL)
                                   //  + Convert.ToDecimal(a.StockBackOrder) <= Convert.ToDecimal(a.MinimumStock))

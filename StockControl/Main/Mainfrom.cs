@@ -229,6 +229,7 @@ namespace StockControl
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
                     db.sp_RunJOB();
+                    db.sp_SelectItemUpdate();
                 }
                     MessageBox.Show("Script Run StoreProcedure Agent Completed.");
             }
