@@ -668,10 +668,7 @@ namespace StockControl
                         db.SubmitChanges();
 
                         dbClss.AddHistory(this.Name, "ClearTemp", "ClearTemp [" + txtInvoiceNo.Text + " id : " + vv.id.ToString() + " CodeNo : " + vv.CodeNo + " จำนวน : " + QTY.ToString() + "]", DocNo);
-
-
-
-
+                        
                     }
                 }
                 //Clear temp shipping
@@ -681,7 +678,7 @@ namespace StockControl
                                && ix.Category == "Temp"
                                && ix.Type != "ClearTemp"
                                && ix.Flag_ClearTemp == 1
-                              
+                               && ix.Type == "Shipping"
                          select ix).ToList();
                 if (s.Count > 0)
                 {
