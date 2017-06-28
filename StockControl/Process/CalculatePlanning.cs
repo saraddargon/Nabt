@@ -57,7 +57,7 @@ namespace StockControl
             radGridView1.ReadOnly = true;
             radGridView1.AutoGenerateColumns = false;
             GETDTRow();
-            for (int i = 2017; i < 2030; i++)
+            for (int i = 2017; i < DateTime.Now.Year + 10; i++)
             {
                 cboYear.Items.Add(i.ToString());
 
@@ -386,7 +386,11 @@ namespace StockControl
         {
             if (MessageBox.Show("ต้องการคำนวน หรือไม่?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Calculate();
+                // Calculate();
+                //
+                StockControl.Form2 f2 = new Form2();
+                f2.ShowDialog();
+                DataLoad();
             }
         }
 
@@ -713,8 +717,18 @@ namespace StockControl
 
         private void radButtonElement1_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("ต้องการกำหนดค่าสั้งซื้อใหม่ ?", "Apply", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)==DialogResult.OK)
+            if(MessageBox.Show("ต้องการกำหนดค่าสั้งซื้อใหม่ หรือไม่?", "Apply", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)==DialogResult.OK)
             {
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    int yyyy = DateTime.Now.Year;
+                    int month = DateTime.Now.Month;
+                    yyyy=Convert.ToInt32(cboYear.Text);
+                    month = dbClss.getMonth(cboMonth.Text);
+                    db.sp_SelectProduction_Update(yyyy, month);
+                    dbClss.AddHistory(this.Name, "Apply", "อัพเดตจุดสั่งซื้อ โดย "+Environment.UserName, "");
+
+                }
                 MessageBox.Show("Apply เรียบร้อยแล้ว!");
             }
         }

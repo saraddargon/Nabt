@@ -138,6 +138,12 @@
     <Compile Include="Process\ForecastConsumption.Designer.cs">
       <DependentUpon>ForecastConsumption.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\MappingAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -456,6 +462,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\ForecastConsumption.resx">
       <DependentUpon>ForecastConsumption.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\MappingAdd.resx">
       <DependentUpon>MappingAdd.cs</DependentUpon>
