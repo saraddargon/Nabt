@@ -563,8 +563,9 @@ namespace StockControl
             try
             {
                 string SHNo = "";
-                if (dgvData.Rows.Count <= 0)
+                if (dgvData.Rows.Count > 0)
                     SHNo = StockControl.dbClss.TSt(dgvData.CurrentRow.Cells["ShippingNo"].Value);
+
                 PrintPR a = new PrintPR(SHNo, SHNo, "Shipping");
                 a.ShowDialog();
             }

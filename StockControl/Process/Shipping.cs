@@ -402,7 +402,11 @@ namespace StockControl
                 {
                     if (rowInfo.IsVisible)
                     {
-                        if (StockControl.dbClss.TInt(rowInfo.Cells["QTY"].Value) != (0))
+                        if (StockControl.dbClss.TInt(rowInfo.Cells["QTY"].Value) <= (0))
+                        {
+                            err += "- “จำนวนเบิก:” ต้องมากกว่า 0 \n";
+                        }
+                        else  if (StockControl.dbClss.TInt(rowInfo.Cells["QTY"].Value) != (0))
                         {
                             c += 1;
                             //if (StockControl.dbClss.TSt(rowInfo.Cells["PRNo"].Value).Equals(""))
@@ -921,7 +925,7 @@ namespace StockControl
                                     
                                     gg.CalDate = CalDate;
                                     gg.Status = "Active";
-                                    gg.Flag_ClearTemp = 0; //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
+                                    gg.Flag_ClearTemp = 1; //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
                                     gg.Type_in_out = Type_in_out;
                                     gg.AmountCost = Amount;
                                     gg.UnitCost = UnitCost;
@@ -935,57 +939,57 @@ namespace StockControl
                                     dbClss.AddHistory(this.Name, "เบิกสินค้า", " เบิกสินค้าเลขที่ : " + txtSHNo.Text + " เบิก : " + Category + " CodeNo : " + vv.CodeNo + " จำนวน : " + (-QTY).ToString() + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtSHNo.Text);
 
 
-                                    // --Stock ใน Invoice ไม่พอ ต้องเอาที่ Temp มา
+                                    //// --Stock ใน Invoice ไม่พอ ต้องเอาที่ Temp มา
 
-                                    UnitCost = Convert.ToDecimal(vv.UnitCost);
-                                    if (UnitCost <= 0)
-                                        UnitCost = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "Avg"));
+                                    //UnitCost = Convert.ToDecimal(vv.UnitCost);
+                                    //if (UnitCost <= 0)
+                                    //    UnitCost = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "Avg"));
                                     
-                                    Amount = (-QTY_temp) * UnitCost;
+                                    //Amount = (-QTY_temp) * UnitCost;
 
-                                    //แบบที่ 1 จะไป sum ใหม่
-                                    RemainQty = (Convert.ToDecimal(db.Cal_QTY(vv.CodeNo, "", 0)));
-                                    //แบบที่ 2 จะไปดึงล่าสุดมา
-                                    //RemainQty = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "RemainQty"));
-                                    sum_Remain = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "RemainAmount"))
-                                        + Amount;
-                                    sum_Qty = RemainQty + (-QTY_temp);
-                                    Avg = UnitCost;//sum_Remain / sum_Qty;
-                                    RemainAmount = sum_Remain;
+                                    ////แบบที่ 1 จะไป sum ใหม่
+                                    //RemainQty = (Convert.ToDecimal(db.Cal_QTY(vv.CodeNo, "", 0)));
+                                    ////แบบที่ 2 จะไปดึงล่าสุดมา
+                                    ////RemainQty = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "RemainQty"));
+                                    //sum_Remain = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "RemainAmount"))
+                                    //    + Amount;
+                                    //sum_Qty = RemainQty + (-QTY_temp);
+                                    //Avg = UnitCost;//sum_Remain / sum_Qty;
+                                    //RemainAmount = sum_Remain;
 
-                                    Category = "Invoice";
-                                    tb_Stock aa = new tb_Stock();
-                                    aa.AppDate = AppDate;
-                                    aa.Seq = Seq;
-                                    aa.App = "Shipping";
-                                    aa.Appid = Seq;
-                                    aa.CreateBy = ClassLib.Classlib.User;
-                                    aa.CreateDate = DateTime.Now;
-                                    aa.DocNo = txtSHNo.Text;
-                                    aa.RefNo = "";
-                                    aa.CodeNo = vv.CodeNo;
-                                    aa.Type = Type;
-                                    aa.QTY = -Convert.ToDecimal(QTY_temp);
-                                    aa.Inbound = 0;
-                                    aa.Outbound = -Convert.ToDecimal(QTY_temp);
-                                    aa.Type_i = 3;  //Receive = 1,Cancel Receive 2,Shipping = 3,Cancel Shipping = 4,Adjust stock = 5,ClearTemp = 6
-                                    aa.Category = Category;
-                                    aa.Refid = vv.id;
+                                    //Category = "Invoice";
+                                    //tb_Stock aa = new tb_Stock();
+                                    //aa.AppDate = AppDate;
+                                    //aa.Seq = Seq;
+                                    //aa.App = "Shipping";
+                                    //aa.Appid = Seq;
+                                    //aa.CreateBy = ClassLib.Classlib.User;
+                                    //aa.CreateDate = DateTime.Now;
+                                    //aa.DocNo = txtSHNo.Text;
+                                    //aa.RefNo = "";
+                                    //aa.CodeNo = vv.CodeNo;
+                                    //aa.Type = Type;
+                                    //aa.QTY = -Convert.ToDecimal(QTY_temp);
+                                    //aa.Inbound = 0;
+                                    //aa.Outbound = -Convert.ToDecimal(QTY_temp);
+                                    //aa.Type_i = 3;  //Receive = 1,Cancel Receive 2,Shipping = 3,Cancel Shipping = 4,Adjust stock = 5,ClearTemp = 6
+                                    //aa.Category = Category;
+                                    //aa.Refid = vv.id;
                                    
-                                    aa.CalDate = CalDate;
-                                    aa.Status = "Active";
-                                    aa.Flag_ClearTemp = 1; //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
-                                    aa.Type_in_out = Type_in_out;
-                                    aa.AmountCost = Amount;
-                                    aa.UnitCost = UnitCost;
-                                    aa.RemainQty = sum_Qty;
-                                    aa.RemainUnitCost = 0;
-                                    aa.RemainAmount = RemainAmount;
-                                    aa.Avg = Avg;
+                                    //aa.CalDate = CalDate;
+                                    //aa.Status = "Active";
+                                    //aa.Flag_ClearTemp = 1; //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
+                                    //aa.Type_in_out = Type_in_out;
+                                    //aa.AmountCost = Amount;
+                                    //aa.UnitCost = UnitCost;
+                                    //aa.RemainQty = sum_Qty;
+                                    //aa.RemainUnitCost = 0;
+                                    //aa.RemainAmount = RemainAmount;
+                                    //aa.Avg = Avg;
 
-                                    db.tb_Stocks.InsertOnSubmit(aa);
-                                    db.SubmitChanges();
-                                    dbClss.AddHistory(this.Name, "เบิกสินค้า", " เบิกสินค้าเลขที่ : " + txtSHNo.Text + " เบิก : " + Category + " CodeNo : " + vv.CodeNo + " จำนวน : " + (-QTY_temp).ToString() + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtSHNo.Text);
+                                    //db.tb_Stocks.InsertOnSubmit(aa);
+                                    //db.SubmitChanges();
+                                    //dbClss.AddHistory(this.Name, "เบิกสินค้า", " เบิกสินค้าเลขที่ : " + txtSHNo.Text + " เบิก : " + Category + " CodeNo : " + vv.CodeNo + " จำนวน : " + (-QTY_temp).ToString() + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtSHNo.Text);
 
                                 }
 

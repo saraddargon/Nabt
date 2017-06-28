@@ -22,11 +22,11 @@ namespace StockControl
         {
             InitializeComponent();
             RCNo_L = RCNo;
-          
+
         }
         string Ac = "";
         string RCNo_L = "";
-        
+
         DataTable dt_RCH = new DataTable();
         DataTable dt_RCD = new DataTable();
         private void radMenuItem2_Click(object sender, EventArgs e)
@@ -50,7 +50,7 @@ namespace StockControl
             dt_RCH.Columns.Add(new DataColumn("VendorName", typeof(string)));
             dt_RCH.Columns.Add(new DataColumn("RemarkHD", typeof(string)));
             dt_RCH.Columns.Add(new DataColumn("InvoiceNo", typeof(string)));
-            dt_RCH.Columns.Add(new DataColumn("Type", typeof(string)));          
+            dt_RCH.Columns.Add(new DataColumn("Type", typeof(string)));
             dt_RCH.Columns.Add(new DataColumn("RCDate", typeof(DateTime)));
 
             dt_RCD.Columns.Add(new DataColumn("CodeNo", typeof(string)));
@@ -104,10 +104,10 @@ namespace StockControl
                     dgvData.ReadOnly = false;
 
                 }
-                
-                    
-                
-            }catch(Exception ex) { MessageBox.Show(ex.Message); }
+
+
+
+            } catch (Exception ex) { MessageBox.Show(ex.Message); }
             finally { this.Cursor = Cursors.Default; }
         }
         private void DefaultItem()
@@ -125,7 +125,7 @@ namespace StockControl
                 try
                 {
 
-                    
+
 
                     //GridViewMultiComboBoxColumn col = (GridViewMultiComboBoxColumn)radGridView1.Columns["CodeNo"];
                     //col.DataSource = (from ix in db.tb_Items.Where(s => s.Status.Equals("Active")) select new { ix.CodeNo, ix.ItemDescription }).ToList();
@@ -150,7 +150,7 @@ namespace StockControl
         }
         private void DataLoad()
         {
-            
+
             dt_RCD.Rows.Clear();
             dt_RCH.Rows.Clear();
             try
@@ -187,13 +187,13 @@ namespace StockControl
                             else
                                 dtRequire.Value = Convert.ToDateTime(temp_date);
 
-                           
+
                             txtReceiveBy.Text = StockControl.dbClss.TSt(g.FirstOrDefault().CreateBy);
-                            if(!StockControl.dbClss.TSt(g.FirstOrDefault().UpdateBy).Equals(""))
+                            if (!StockControl.dbClss.TSt(g.FirstOrDefault().UpdateBy).Equals(""))
                                 txtReceiveBy.Text = StockControl.dbClss.TSt(g.FirstOrDefault().UpdateBy);
                             if (!StockControl.dbClss.TSt(g.FirstOrDefault().CreateDate).Equals(""))
                             {
-                                if(!StockControl.dbClss.TSt(g.FirstOrDefault().UpdateDate).Equals(""))
+                                if (!StockControl.dbClss.TSt(g.FirstOrDefault().UpdateDate).Equals(""))
                                     txtReceiveDate.Text = Convert.ToDateTime(g.FirstOrDefault().UpdateDate).ToString("dd/MMM/yyyy");
                                 else
                                     txtReceiveDate.Text = Convert.ToDateTime(g.FirstOrDefault().CreateDate).ToString("dd/MMM/yyyy");
@@ -250,7 +250,7 @@ namespace StockControl
 
                             //Detail
                             var d = (from ix in db.tb_Receives select ix)
-                            .Where(a => a.RCNo == txtRCNo.Text.Trim() 
+                            .Where(a => a.RCNo == txtRCNo.Text.Trim()
                                 && a.Status != "Cancel").ToList();
                             if (d.Count() > 0)
                             {
@@ -291,7 +291,7 @@ namespace StockControl
 
             //    radGridView1.DataSource = dt;
         }
-        
+
         private bool CheckDuplicate(string code, string Code2)
         {
             bool ck = false;
@@ -316,7 +316,7 @@ namespace StockControl
             txtDLNo.Text = "";
             txtDLNo.Enabled = false;
             txtRCNo.Text = "";
-            
+
             dtRequire.Value = DateTime.Now;
             txtReceiveBy.Text = ClassLib.Classlib.User;
             txtReceiveDate.Text = DateTime.Now.ToString("dd/MMM/yyyy");
@@ -356,7 +356,7 @@ namespace StockControl
                 rdoInvoice.Enabled = ss;
                 rdoDL.Enabled = ss;
             }
-            
+
             else if (Condition.Equals("Edit"))
             {
                 txtPRNo.Enabled = ss;
@@ -409,10 +409,10 @@ namespace StockControl
             string err = "";
             try
             {
-               
-                 if (txtInvoiceNo.Text.Equals(""))
-                     err += "- “Invoice No:” เป็นค่าว่าง \n";
-               
+
+                if (txtInvoiceNo.Text.Equals(""))
+                    err += "- “Invoice No:” เป็นค่าว่าง \n";
+
 
 
                 if (!err.Equals(""))
@@ -447,23 +447,23 @@ namespace StockControl
 
                         gg.UpdateBy = ClassLib.Classlib.User;
                         gg.UpdateDate = DateTime.Now;
-                        dbClss.AddHistory(this.Name , "แก้ไข Receive", "Clear Temp : "+ DocNo + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtRCNo.Text.Trim());
+                        dbClss.AddHistory(this.Name, "แก้ไข Receive", "Clear Temp : " + DocNo + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtRCNo.Text.Trim());
                         gg.Flag_Temp = false;
                         gg.InvoiceNo = txtInvoiceNo.Text.Trim();
                         gg.Type = "รับด้วยใบ Invoice";
-                                                 
-                        dbClss.AddHistory(this.Name , "แก้ไข Receive", "Clear Temp : " + DocNo + "[" + txtInvoiceNo.Text.Trim() + " DL No :" + txtDLNo.Text + "]", txtRCNo.Text.Trim());
-                        
+
+                        dbClss.AddHistory(this.Name, "แก้ไข Receive", "Clear Temp : " + DocNo + "[" + txtInvoiceNo.Text.Trim() + " DL No :" + txtDLNo.Text + "]", txtRCNo.Text.Trim());
+
                         db.SubmitChanges();
                     }
                 }
-               
+
             }
         }
         private string Cal_Status()
         {
             string re = "Completed";
-          
+
             decimal QTY = 0;
             decimal RemainQty = 0;
             foreach (var rd1 in dgvData.Rows)
@@ -478,20 +478,20 @@ namespace StockControl
                         break;
                     }
                 }
-               
+
             }
             return re;
         }
         private void SaveDetail(string DocNo)
         {
             dgvData.EndEdit();
-            
-                string RCNo = txtRCNo.Text;
-                //DateTime? RequireDate = DateTime.Now;
-                //if (!dtRequire.Text.Equals(""))
-                //    RequireDate = dtRequire.Value;
-                //int Seq = 0;
-                //DateTime? UpdateDate = null;
+
+            string RCNo = txtRCNo.Text;
+            //DateTime? RequireDate = DateTime.Now;
+            //if (!dtRequire.Text.Equals(""))
+            //    RequireDate = dtRequire.Value;
+            //int Seq = 0;
+            //DateTime? UpdateDate = null;
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
                 int ID = 0;
@@ -512,7 +512,7 @@ namespace StockControl
                         gg.UpdateBy = ClassLib.Classlib.User;
                         gg.UpdateDate = DateTime.Now;
 
-                        dbClss.AddHistory(this.Name , "แก้ไขรายการ Receive", "Clear Temp : "+ DocNo + "ID :" + StockControl.dbClss.TSt(g.Cells["ID"].Value)
+                        dbClss.AddHistory(this.Name, "แก้ไขรายการ Receive", "Clear Temp : " + DocNo + "ID :" + StockControl.dbClss.TSt(g.Cells["ID"].Value)
                        + " CodeNo :" + StockControl.dbClss.TSt(g.Cells["CodeNo"].Value)
                        + " แก้ไขโดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtRCNo.Text);
 
@@ -528,13 +528,13 @@ namespace StockControl
                 }
             }
         }
-        private void Save_Stock(int ID,string CodeNo,string DocNo,decimal CostPerUnit)
+        private void Save_Stock(int ID, string CodeNo, string DocNo, decimal CostPerUnit)
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
                 string Type = "ClearTemp";
                 //string Category = "Invoice"; //Temp,Invoice
-                decimal QTY = 0;                
+                decimal QTY = 0;
                 decimal RemainQty = 0;
                 decimal Amount = 0;
                 decimal RemainAmount = 0;
@@ -556,6 +556,10 @@ namespace StockControl
                 {
                     foreach (var vv in g)
                     {
+
+                        //ปรับให้เป็น ทำการ clear temp แล้ว
+                        vv.Flag_ClearTemp = 2;
+                        db.SubmitChanges();
 
                         decimal.TryParse(vv.QTY.ToString(), out QTY);
                         QTY = -QTY;
@@ -592,11 +596,6 @@ namespace StockControl
                         gg.QTY = QTY;
                         gg.Inbound = QTY;
                         gg.Outbound = vv.Outbound;
-                        //gg.AmountCost = QTY * get_cost(vv.CodeNo);
-                        //gg.UnitCost = get_cost(vv.CodeNo);
-                        //gg.RemainQty = vv.RemainQty;
-                        //gg.RemainUnitCost = vv.RemainUnitCost;
-                        //gg.RemainAmount =vv.RemainAmount;
                         gg.CalDate = vv.CalDate;
                         gg.Status = vv.Status;
                         gg.Flag_ClearTemp = 2;   //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
@@ -613,8 +612,8 @@ namespace StockControl
                         gg.Avg = Avg;
 
                         db.tb_Stocks.InsertOnSubmit(gg);
-                        //ปรับให้เป็น ทำการ clear temp แล้ว
-                        vv.Flag_ClearTemp = 2;
+                        ////ปรับให้เป็น ทำการ clear temp แล้ว
+                        //vv.Flag_ClearTemp = 2;
                         db.SubmitChanges();
 
                         decimal.TryParse(vv.QTY.ToString(), out QTY);
@@ -630,7 +629,10 @@ namespace StockControl
                             + Amount;
 
                         sum_Qty = RemainQty + Convert.ToDecimal(vv.QTY);
-                        Avg = sum_Remain / sum_Qty;
+                        if (sum_Qty > 0)
+                            Avg = sum_Remain / sum_Qty;
+                        else
+                            Avg = 0;
                         RemainAmount = sum_Qty * Avg;
 
                         tb_Stock bb = new tb_Stock();
@@ -646,11 +648,6 @@ namespace StockControl
                         bb.QTY = vv.QTY;
                         bb.Inbound = vv.QTY;
                         bb.Outbound = vv.Outbound;
-                        //bb.AmountCost = vv.QTY * get_cost(vv.CodeNo);
-                        //bb.UnitCost = get_cost(vv.CodeNo);
-                        //bb.RemainQty = vv.RemainQty;
-                        //bb.RemainUnitCost = vv.RemainUnitCost;
-                        //bb.RemainAmount = vv.RemainAmount;
                         bb.CalDate = vv.CalDate;
                         bb.Status = vv.Status;
                         bb.Flag_ClearTemp = 2;   //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
@@ -668,17 +665,165 @@ namespace StockControl
 
                         //db.tb_Stocks.InsertOnSubmit(gg);
                         db.tb_Stocks.InsertOnSubmit(bb);
+                        db.SubmitChanges();
 
+                        dbClss.AddHistory(this.Name, "ClearTemp", "ClearTemp [" + txtInvoiceNo.Text + " id : " + vv.id.ToString() + " CodeNo : " + vv.CodeNo + " จำนวน : " + QTY.ToString() + "]", DocNo);
+
+
+
+
+                    }
+                }
+                //Clear temp shipping
+                var s = (from ix in db.tb_Stocks
+                             //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
+                         where ix.CodeNo.Trim() == CodeNo.Trim() && ix.Status != "Cancel"
+                               && ix.Category == "Temp"
+                               && ix.Type != "ClearTemp"
+                               && ix.Flag_ClearTemp == 1
+                              
+                         select ix).ToList();
+                if (s.Count > 0)
+                {
+                    foreach (var vv in s)
+                    {
                         //ปรับให้เป็น ทำการ clear temp แล้ว
                         vv.Flag_ClearTemp = 2;
+                        db.SubmitChanges();
 
+                        decimal.TryParse(vv.QTY.ToString(), out QTY);
+                        QTY = -QTY;
+
+
+                        var sh = (from ix in db.tb_Shippings
+                                      //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
+                                  where ix.CodeNo.Trim() == CodeNo.Trim() //&& ix.Status != "Cancel"
+                                        && ix.id == Convert.ToInt32(vv.Refid)
+                                  select ix).First();
+
+                        //เริ่มต้นเอา cost จาก Stock ก่อน
+                        decimal.TryParse(Convert.ToString(vv.UnitCost), out CostPerUnit);
+                        //เอา cost tb_shipping 
+                        decimal.TryParse(Convert.ToString(sh.UnitCost), out CostPerUnit);
+
+                        UnitCost = CostPerUnit;// Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "Avg"));
+                        Amount = (QTY) * UnitCost;
+
+                        //แบบที่ 1 จะไป sum ใหม่
+                        RemainQty = (Convert.ToDecimal(db.Cal_QTY(CodeNo, "", 0)));
+                        //แบบที่ 2 จะไปดึงล่าสุดมา
+                        //RemainQty = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "RemainQty"));
+
+                        sum_Remain = Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "RemainAmount"))
+                            + Amount;
+
+                        sum_Qty = RemainQty + (QTY);
+                        Avg = UnitCost;//sum_Remain / sum_Qty;
+                        RemainAmount = sum_Remain;
+
+                        //insert Stock
+                        //DateTime? CalDate = null;
+                        DateTime? AppDate = DateTime.Now;
+
+                        tb_Stock gg = new tb_Stock();
+                        gg.AppDate = AppDate;
+                        gg.Seq = vv.Seq;
+                        gg.App = vv.App;
+                        gg.Appid = vv.Appid;
+                        gg.CreateBy = ClassLib.Classlib.User;
+                        gg.CreateDate = DateTime.Now;
+                        gg.DocNo = DocNo;
+                        gg.RefNo = txtRCNo.Text;
+                        gg.Type = Type;
+                        gg.QTY = QTY;
+                        gg.Inbound = QTY;
+                        gg.Outbound = vv.Outbound;
+                        gg.CalDate = vv.CalDate;
+                        gg.Status = vv.Status;
+                        gg.Flag_ClearTemp = 2;   //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
+                        gg.Type_i = vv.Type_i;  //Receive = 1,Cancel Receive 2,Shipping = 3,Cancel Shipping = 4,Adjust stock = 5,ClearTemp = 6
+                        gg.Category = "Temp";
+                        gg.Refid = Convert.ToInt32(vv.Refid);
+                        gg.CodeNo = CodeNo;
+                        gg.Type_in_out = "Out";
+                        gg.AmountCost = Amount;
+                        gg.UnitCost = UnitCost;
+                        gg.RemainQty = sum_Qty;
+                        gg.RemainUnitCost = vv.RemainUnitCost;
+                        gg.RemainAmount = RemainAmount;
+                        gg.Avg = Avg;
+
+                        db.tb_Stocks.InsertOnSubmit(gg);
+                        ////ปรับให้เป็น ทำการ clear temp แล้ว
+                        //vv.Flag_ClearTemp = 2;
+                        db.SubmitChanges();
+
+                        decimal.TryParse(vv.QTY.ToString(), out QTY);
+
+
+                        //เริ่มต้นเอา cost จาก Stock ก่อน
+                        decimal.TryParse(Convert.ToString(vv.UnitCost), out CostPerUnit);
+                        //เอา cost tb_shipping 
+                        decimal.TryParse(Convert.ToString(sh.UnitCost), out CostPerUnit);
+
+                        UnitCost = CostPerUnit;//Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "Avg"));
+
+                        Amount = (QTY) * UnitCost;
+
+                        //แบบที่ 1 จะไป sum ใหม่
+                        RemainQty = (Convert.ToDecimal(db.Cal_QTY(CodeNo, "", 0)));
+                        //แบบที่ 2 จะไปดึงล่าสุดมา
+                        //RemainQty = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "RemainQty"));
+
+                        sum_Remain = Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "RemainAmount"))
+                            + Amount;
+
+                        sum_Qty = RemainQty + Convert.ToDecimal(vv.QTY);
+                        if (sum_Qty > 0)
+                            Avg = sum_Remain / sum_Qty;
+                        else
+                            Avg = 0;
+                        RemainAmount = sum_Qty * Avg;
+
+                        tb_Stock bb = new tb_Stock();
+                        bb.AppDate = AppDate;
+                        bb.Seq = vv.Seq;
+                        bb.App = vv.App;
+                        bb.Appid = vv.Appid;
+                        bb.CreateBy = ClassLib.Classlib.User;
+                        bb.CreateDate = DateTime.Now;
+                        bb.DocNo = DocNo;
+                        bb.RefNo = txtRCNo.Text;
+                        bb.Type = Type;
+                        bb.QTY = vv.QTY;
+                        bb.Inbound = vv.QTY;
+                        bb.Outbound = vv.Outbound;
+                        bb.CalDate = vv.CalDate;
+                        bb.Status = vv.Status;
+                        bb.Flag_ClearTemp = 2;   //0 คือ invoice,1 คือ Temp , 2 คือ clear temp แล้ว
+                        bb.Type_i = vv.Type_i;  //Receive = 1,Cancel Receive 2,Shipping = 3,Cancel Shipping = 4,Adjust stock = 5,ClearTemp = 6
+                        bb.Category = "Invoice";
+                        bb.Refid = Convert.ToInt32(vv.Refid);
+                        bb.CodeNo = CodeNo;
+                        bb.Type_in_out = "In";
+                        bb.AmountCost = Amount;
+                        bb.UnitCost = UnitCost;
+                        bb.RemainQty = sum_Qty;
+                        bb.RemainUnitCost = vv.RemainUnitCost;
+                        bb.RemainAmount = RemainAmount;
+                        bb.Avg = Avg;
+
+                        //db.tb_Stocks.InsertOnSubmit(gg);
+                        db.tb_Stocks.InsertOnSubmit(bb);
                         db.SubmitChanges();
 
                         dbClss.AddHistory(this.Name, "ClearTemp", "ClearTemp [" + txtInvoiceNo.Text + " id : " + vv.id.ToString() + " CodeNo : " + vv.CodeNo + " จำนวน : " + QTY.ToString() + "]", DocNo);
                     }
                 }
             }
+
         }
+
         private decimal get_cost(string Code)
         {
             decimal re = 0;
