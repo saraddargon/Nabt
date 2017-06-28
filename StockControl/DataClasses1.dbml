@@ -1358,11 +1358,6 @@
     <Parameter Name="MMM" Parameter="mMM" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.sp_SelectProduction_UpdateForeCast" Method="sp_SelectProduction_UpdateForeCast">
-    <Parameter Name="YYYY" Parameter="yYYY" Type="System.Int32" DbType="Int" />
-    <Parameter Name="MMM" Parameter="mMM" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
   <Function Name="dbo.sp_SelectProduction_updateHold" Method="sp_SelectProduction_updateHold">
     <Parameter Name="id" Type="System.Int32" DbType="Int" />
     <Parameter Name="hold" Type="System.Boolean" DbType="Bit" />
@@ -1445,5 +1440,10 @@
       <Column Name="StockBackOrder" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="AvgCost" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.sp_SelectProduction_UpdateForeCast" Method="sp_SelectProduction_UpdateForeCast">
+    <Parameter Name="YYYY" Parameter="yYYY" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MMM" Parameter="mMM" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
   </Function>
 </Database>

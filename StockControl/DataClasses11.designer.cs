@@ -724,13 +724,6 @@ namespace StockControl
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SelectProduction_UpdateForeCast")]
-		public int sp_SelectProduction_UpdateForeCast([global::System.Data.Linq.Mapping.ParameterAttribute(Name="YYYY", DbType="Int")] System.Nullable<int> yYYY, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MMM", DbType="Int")] System.Nullable<int> mMM)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), yYYY, mMM);
-			return ((int)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SelectProduction_updateHold")]
 		public int sp_SelectProduction_updateHold([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> hold)
 		{
@@ -757,6 +750,13 @@ namespace StockControl
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codeNo, max, min, sumROP);
 			return ((ISingleResult<sp_SelectProduction_UpdateToItemResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SelectProduction_UpdateForeCast")]
+		public int sp_SelectProduction_UpdateForeCast([global::System.Data.Linq.Mapping.ParameterAttribute(Name="YYYY", DbType="Int")] System.Nullable<int> yYYY, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MMM", DbType="Int")] System.Nullable<int> mMM)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), yYYY, mMM);
+			return ((int)(result.ReturnValue));
 		}
 	}
 	

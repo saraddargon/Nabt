@@ -415,10 +415,10 @@
             gridViewTextBoxColumn7.ReadOnly = true;
             gridViewTextBoxColumn7.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
             gridViewTextBoxColumn7.Width = 110;
-            gridViewTextBoxColumn8.FieldName = "ReOrderPoint";
+            gridViewTextBoxColumn8.FieldName = "SumQty";
             gridViewTextBoxColumn8.FormatString = "{0:N2}";
             gridViewTextBoxColumn8.HeaderText = "จุดสั่งซื้อ";
-            gridViewTextBoxColumn8.Name = "ReOrderPoint";
+            gridViewTextBoxColumn8.Name = "SumQty";
             gridViewTextBoxColumn8.ReadOnly = true;
             gridViewTextBoxColumn8.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
             gridViewTextBoxColumn8.Width = 90;
