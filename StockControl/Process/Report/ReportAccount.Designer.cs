@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportAccount));
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
             this.radRibbonBarGroup2 = new Telerik.WinControls.UI.RadRibbonBarGroup();
@@ -44,6 +45,7 @@
             this.lblStatus = new Telerik.WinControls.UI.RadLabelElement();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
+            this.radGridView1 = new Telerik.WinControls.UI.RadGridView();
             this.dtDate2 = new Telerik.WinControls.UI.RadDateTimePicker();
             this.dtDate1 = new Telerik.WinControls.UI.RadDateTimePicker();
             this.cboGroupType = new System.Windows.Forms.ComboBox();
@@ -63,6 +65,8 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtDate2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtDate1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
@@ -212,6 +216,7 @@
             // radPanel1
             // 
             this.radPanel1.BackColor = System.Drawing.Color.Ivory;
+            this.radPanel1.Controls.Add(this.radGridView1);
             this.radPanel1.Controls.Add(this.dtDate2);
             this.radPanel1.Controls.Add(this.dtDate1);
             this.radPanel1.Controls.Add(this.cboGroupType);
@@ -226,6 +231,23 @@
             this.radPanel1.Size = new System.Drawing.Size(538, 269);
             this.radPanel1.TabIndex = 0;
             this.radPanel1.ThemeName = "Office2010Blue";
+            // 
+            // radGridView1
+            // 
+            this.radGridView1.Location = new System.Drawing.Point(267, 135);
+            // 
+            // 
+            // 
+            this.radGridView1.MasterTemplate.AllowAddNewRow = false;
+            this.radGridView1.MasterTemplate.AllowColumnReorder = false;
+            this.radGridView1.MasterTemplate.ViewDefinition = tableViewDefinition1;
+            this.radGridView1.Name = "radGridView1";
+            this.radGridView1.ReadOnly = true;
+            this.radGridView1.Size = new System.Drawing.Size(234, 149);
+            this.radGridView1.TabIndex = 11;
+            this.radGridView1.Text = "radGridView1";
+            this.radGridView1.ThemeName = "Office2010Blue";
+            this.radGridView1.Visible = false;
             // 
             // dtDate2
             // 
@@ -298,6 +320,7 @@
             this.label1.Size = new System.Drawing.Size(61, 14);
             this.label1.TabIndex = 1;
             this.label1.Text = "แถบสถานะ";
+            this.label1.Visible = false;
             // 
             // progressBar1
             // 
@@ -305,6 +328,7 @@
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(262, 19);
             this.progressBar1.TabIndex = 0;
+            this.progressBar1.Visible = false;
             // 
             // radRibbonBarButtonGroup2
             // 
@@ -364,6 +388,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).EndInit();
             this.radPanel1.ResumeLayout(false);
             this.radPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtDate2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtDate1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
@@ -406,5 +432,6 @@
         private Telerik.WinControls.UI.RadDateTimePicker dtDate2;
         private Telerik.WinControls.UI.RadDateTimePicker dtDate1;
         private Telerik.WinControls.UI.RadLabel radLabel3;
+        private Telerik.WinControls.UI.RadGridView radGridView1;
     }
 }

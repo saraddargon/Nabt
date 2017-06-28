@@ -33,5 +33,15 @@ namespace StockControl.Properties {
                 return ((string)(this["dbStockControlConnectionString3"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=mac-pc;Initial Catalog=dbStockControl;User ID=sa")]
+        public string dbStockControlConnectionString2 {
+            get {
+                return ((string)(this["dbStockControlConnectionString2"]));
+            }
+        }
     }
 }

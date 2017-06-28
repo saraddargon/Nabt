@@ -135,8 +135,8 @@ namespace StockControl
                                       ix.StockQty
                                   ,
                                       ix.RemainOrder
-                                  ,  ix.UsedPerMonth
-                                  ,  ix.Hold
+                                  //,  ix.UsedPerMonth
+                                  //,  ix.Hold
                                   ,
                                       ix.ReOrderPoint
                                   ,
