@@ -75,12 +75,12 @@ namespace StockControl
             {
                
                 this.Cursor = Cursors.WaitCursor;
-                using (DataClasses1DataContext db = new DataClasses1DataContext())
-                {
+                //using (DataClasses1DataContext db = new DataClasses1DataContext())
+                //{
                    
                     
                        
-                }
+                //}
             }
             catch(Exception ex) { MessageBox.Show(ex.Message); }
             this.Cursor = Cursors.Default;
@@ -209,7 +209,7 @@ namespace StockControl
             try
             {
                 dt_Kanban.Rows.Clear();
-
+               
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
                     var g = (from ix in db.tb_Items select ix).Where(a => a.CodeNo == txtPRNo2.Text).ToList();
@@ -247,6 +247,7 @@ namespace StockControl
                 {
                     if (Type.Equals("PR"))
                     {
+                       
                         var g = (from ix in db.sp_R005_ReportPR(PRNo1, PRNo2, DateTime.Now) select ix).ToList();
                         if (g.Count() > 0)
                         {

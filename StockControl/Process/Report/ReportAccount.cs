@@ -186,7 +186,6 @@ namespace StockControl
                     string date2 = "";
                     date1 = dtDate1.Value.ToString("yyyyMMdd");
                     date2 = dtDate2.Value.ToString("yyyyMMdd");
-
                     radGridView1.AutoGenerateColumns = true;
                     radGridView1.DataSource = db.sp_E008_ReportAccount(date1, date2, cboGroupType.Text);
                 }
