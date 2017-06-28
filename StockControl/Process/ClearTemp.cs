@@ -818,7 +818,6 @@ namespace StockControl
                     }
                 }
             }
-
         }
 
         private decimal get_cost(string Code)
