@@ -602,10 +602,10 @@ namespace StockControl
 			return ((ISingleResult<sp_E006_ReportWaitingPRResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_009_Update_Stock")]
-		public void sp_009_Update_Stock([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppDate1", DbType="DateTime")] System.Nullable<System.DateTime> appDate1, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppDate2", DbType="DateTime")] System.Nullable<System.DateTime> appDate2)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_009_Update_Stock", IsComposable=true)]
+		public object sp_009_Update_Stock([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppDate1", DbType="DateTime")] System.Nullable<System.DateTime> appDate1, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppDate2", DbType="DateTime")] System.Nullable<System.DateTime> appDate2)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), appDate1, appDate2);
+			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), appDate1, appDate2).ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_001_Print_Kanban_Part")]
@@ -687,6 +687,62 @@ namespace StockControl
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codeNo, category, type_in_out);
 			return ((ISingleResult<sp_008_Stock_SelectResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_RunJOB")]
+		public int sp_RunJOB()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_E008_ReportAccount")]
+		public ISingleResult<sp_E008_ReportAccountResult> sp_E008_ReportAccount([global::System.Data.Linq.Mapping.ParameterAttribute(Name="DateTime1", DbType="VarChar(10)")] string dateTime1, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="DateTime2", DbType="VarChar(10)")] string dateTime2, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Group", DbType="VarChar(50)")] string group)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), dateTime1, dateTime2, group);
+			return ((ISingleResult<sp_E008_ReportAccountResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SelectProduction_Cal")]
+		public int sp_SelectProduction_Cal([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ModelName", DbType="NVarChar(50)")] string modelName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Year", DbType="Int")] System.Nullable<int> year, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MMM", DbType="Int")] System.Nullable<int> mMM, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Consump", DbType="Decimal(18,2)")] System.Nullable<decimal> consump)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), modelName, year, mMM, consump);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SelectProduction_Year")]
+		public ISingleResult<sp_SelectProduction_YearResult> sp_SelectProduction_Year([global::System.Data.Linq.Mapping.ParameterAttribute(Name="YYYY", DbType="Int")] System.Nullable<int> yYYY, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MMM", DbType="Int")] System.Nullable<int> mMM)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), yYYY, mMM);
+			return ((ISingleResult<sp_SelectProduction_YearResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SelectProduction_DeleteForeCast")]
+		public int sp_SelectProduction_DeleteForeCast([global::System.Data.Linq.Mapping.ParameterAttribute(Name="YYYY", DbType="Int")] System.Nullable<int> yYYY, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MMM", DbType="Int")] System.Nullable<int> mMM)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), yYYY, mMM);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SelectProduction_Update")]
+		public int sp_SelectProduction_Update([global::System.Data.Linq.Mapping.ParameterAttribute(Name="YYYY", DbType="Int")] System.Nullable<int> yYYY, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MMM", DbType="Int")] System.Nullable<int> mMM)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), yYYY, mMM);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SelectProduction_UpdateForeCast")]
+		public int sp_SelectProduction_UpdateForeCast([global::System.Data.Linq.Mapping.ParameterAttribute(Name="YYYY", DbType="Int")] System.Nullable<int> yYYY, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MMM", DbType="Int")] System.Nullable<int> mMM)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), yYYY, mMM);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SelectProduction_updateHold")]
+		public int sp_SelectProduction_updateHold([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> hold)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, hold);
+			return ((int)(result.ReturnValue));
 		}
 	}
 	
@@ -21937,6 +21993,274 @@ namespace StockControl
 				if ((this._Type_in_out != value))
 				{
 					this._Type_in_out = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_E008_ReportAccountResult
+	{
+		
+		private System.Nullable<long> _No;
+		
+		private string _CodeNo;
+		
+		private string _ItemNo;
+		
+		private string _Description;
+		
+		private string _GroupCode;
+		
+		private decimal _Qty;
+		
+		private decimal _UnitCost;
+		
+		private decimal _Amount;
+		
+		private decimal _Avg;
+		
+		private decimal _RemainQty;
+		
+		private decimal _RemainAmount;
+		
+		public sp_E008_ReportAccountResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_No", DbType="BigInt")]
+		public System.Nullable<long> No
+		{
+			get
+			{
+				return this._No;
+			}
+			set
+			{
+				if ((this._No != value))
+				{
+					this._No = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodeNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodeNo
+		{
+			get
+			{
+				return this._CodeNo;
+			}
+			set
+			{
+				if ((this._CodeNo != value))
+				{
+					this._CodeNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string ItemNo
+		{
+			get
+			{
+				return this._ItemNo;
+			}
+			set
+			{
+				if ((this._ItemNo != value))
+				{
+					this._ItemNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this._Description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroupCode", DbType="NVarChar(30)")]
+		public string GroupCode
+		{
+			get
+			{
+				return this._GroupCode;
+			}
+			set
+			{
+				if ((this._GroupCode != value))
+				{
+					this._GroupCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Qty", DbType="Decimal(38,6) NOT NULL")]
+		public decimal Qty
+		{
+			get
+			{
+				return this._Qty;
+			}
+			set
+			{
+				if ((this._Qty != value))
+				{
+					this._Qty = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitCost", DbType="Decimal(38,6) NOT NULL")]
+		public decimal UnitCost
+		{
+			get
+			{
+				return this._UnitCost;
+			}
+			set
+			{
+				if ((this._UnitCost != value))
+				{
+					this._UnitCost = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Decimal(38,6) NOT NULL")]
+		public decimal Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this._Amount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Avg", DbType="Decimal(38,6) NOT NULL")]
+		public decimal Avg
+		{
+			get
+			{
+				return this._Avg;
+			}
+			set
+			{
+				if ((this._Avg != value))
+				{
+					this._Avg = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RemainQty", DbType="Decimal(38,6) NOT NULL")]
+		public decimal RemainQty
+		{
+			get
+			{
+				return this._RemainQty;
+			}
+			set
+			{
+				if ((this._RemainQty != value))
+				{
+					this._RemainQty = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RemainAmount", DbType="Decimal(38,6) NOT NULL")]
+		public decimal RemainAmount
+		{
+			get
+			{
+				return this._RemainAmount;
+			}
+			set
+			{
+				if ((this._RemainAmount != value))
+				{
+					this._RemainAmount = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_SelectProduction_YearResult
+	{
+		
+		private int _YYYY;
+		
+		private string _ModelName;
+		
+		private System.Nullable<decimal> _Consump;
+		
+		public sp_SelectProduction_YearResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_YYYY", DbType="Int NOT NULL")]
+		public int YYYY
+		{
+			get
+			{
+				return this._YYYY;
+			}
+			set
+			{
+				if ((this._YYYY != value))
+				{
+					this._YYYY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModelName", DbType="NVarChar(25) NOT NULL", CanBeNull=false)]
+		public string ModelName
+		{
+			get
+			{
+				return this._ModelName;
+			}
+			set
+			{
+				if ((this._ModelName != value))
+				{
+					this._ModelName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Consump", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> Consump
+		{
+			get
+			{
+				return this._Consump;
+			}
+			set
+			{
+				if ((this._Consump != value))
+				{
+					this._Consump = value;
 				}
 			}
 		}

@@ -226,7 +226,11 @@ namespace StockControl
            
             if (MessageBox.Show("ต้องการที่จะ Run Job Query หรือไม่ ?", "Run Job", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                MessageBox.Show("Script Run StoreProcedure Agent Completed.");
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    db.sp_RunJOB();
+                }
+                    MessageBox.Show("Script Run StoreProcedure Agent Completed.");
             }
         }
 
@@ -251,7 +255,8 @@ namespace StockControl
         {
             if (MessageBox.Show("ต้องการที่จะ Update หรือไม่ ?", "Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                MessageBox.Show("Update Completed.");
+                System.Diagnostics.Process.Start("AutoUpdate.exe");
+                Application.Exit();
             }
         }
 
