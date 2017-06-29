@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dbStockControl" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=XTH-TOO\SQLEXPRESS;Initial Catalog=dbStockControl;User ID=sa" SettingsObjectName="StockControl.Properties.Settings" SettingsPropertyName="dbStockControlConnectionString2" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=mac-pc;Initial Catalog=dbStockControl;User ID=sa" SettingsObjectName="StockControl.Properties.Settings" SettingsPropertyName="dbStockControlConnectionString3" Provider="System.Data.SqlClient" />
   <Table Name="dbo.ErrorLog" Member="ErrorLogs">
     <Type Name="ErrorLog">
       <Column Name="ErrorLogNo" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -1528,5 +1528,10 @@
     <Parameter Name="Category" Parameter="category" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="Type_i" Parameter="type_i" Type="System.Int32" DbType="Int" />
     <Return Type="System.Decimal" />
+  </Function>
+  <Function Name="dbo.sp_010_Update_StockItem" Method="sp_010_Update_StockItem">
+    <Parameter Name="CodeNo" Parameter="codeNo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Category" Parameter="category" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
   </Function>
 </Database>

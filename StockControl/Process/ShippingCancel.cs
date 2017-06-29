@@ -386,6 +386,32 @@ namespace StockControl
                     RemainAmount = sum_Qty * Avg;
 
 
+                    //กรณีที่ Shipping แบบ Temp แล้ว cancel ให้มาปรับ Flag ด้วย
+
+                    var s1 = (from ix in db.tb_Stocks
+                                 //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
+                             where ix.RefNo.Trim() == txtSHNo.Text.Trim() && ix.Status != "Cancel"
+                             && ix.Refid == Convert.ToInt32(txtid.Text)
+                             && ix.Category == "Temp"
+                             && ix.Flag_ClearTemp == 1
+                             && ix.Type == "Shipping"
+                             select ix).ToList();
+                    if (s1.Count > 0)
+                    {
+                        var s = (from ix in db.tb_Stocks
+                                     //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
+                                 where ix.RefNo.Trim() == txtSHNo.Text.Trim() && ix.Status != "Cancel"
+                                 && ix.Refid == Convert.ToInt32(txtid.Text)
+                                 && ix.Category == "Temp"
+                                 && ix.Flag_ClearTemp == 1
+                                 && ix.Type == "Shipping"
+                                 select ix).First();
+                        if (s != null)
+                        {
+                            s.Flag_ClearTemp = 2;
+                            db.SubmitChanges();
+                        }
+                    }
                     tb_Stock gg = new tb_Stock();
                     gg.AppDate = AppDate;
                     gg.Seq = Seq;
@@ -424,7 +450,10 @@ namespace StockControl
                     db.SubmitChanges();
 
                     dbClss.AddHistory(this.Name, "เพิ่ม Stock", "Cancel รายการ Shipping [" + txtSHNo.Text.Trim() + " id : " + g.id.ToString() + " CodeNo : " + g.CodeNo + " จำนวน : " + txtQTY.Text +"]", txtCNNo.Text);
-                   
+
+                    //update Stock เข้า item
+                    db.sp_010_Update_StockItem(Convert.ToString(txtCodeNo.Text.Trim()), "");
+
                     //update Status
                     db.sp_007_Update_SH_Status(g.ShippingNo, Convert.ToString(g.id));
                 }
@@ -523,7 +552,6 @@ namespace StockControl
                          select ix).First();
 
                 g.Status = "Cancel";
-
                 //insert Stock
                 DateTime? CalDate = null;
                 DateTime? AppDate = DateTime.Now;
@@ -544,6 +572,34 @@ namespace StockControl
                 Avg = sum_Remain / sum_Qty;
                 RemainAmount = sum_Qty * Avg;
 
+                //กรณีที่ Shipping แบบ Temp แล้ว cancel ให้มาปรับ Flag ด้วย
+
+                var s1 = (from ix in db.tb_Stocks
+                             //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
+                         where ix.DocNo.Trim() == SHNo.Trim()
+                         && ix.Status != "Cancel"
+                         && ix.Refid == id
+                         && ix.Category == "Temp"
+                         && ix.Flag_ClearTemp == 1
+                         && ix.Type == "Shipping"
+                         select ix).ToList();
+                if (s1.Count > 0)
+                {
+                    var s = (from ix in db.tb_Stocks
+                                 //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
+                             where ix.DocNo.Trim() == SHNo.Trim()
+                             && ix.Status != "Cancel"
+                             && ix.Refid == id
+                             && ix.Category == "Temp"
+                             && ix.Flag_ClearTemp == 1
+                             && ix.Type == "Shipping"
+                             select ix).First();
+                    if (s != null)
+                    {
+                        s.Flag_ClearTemp = 2;
+                        db.SubmitChanges();
+                    }
+                }
                 tb_Stock gg = new tb_Stock();
                 gg.AppDate = AppDate;
                 gg.Seq = Seq;
@@ -576,6 +632,9 @@ namespace StockControl
                 db.SubmitChanges();
 
                 dbClss.AddHistory(this.Name, "เพิ่ม Stock", "Cancel รายการ Shipping [" + txtSHNo.Text.Trim() + " id : " + g.id.ToString() + " CodeNo : " + g.CodeNo + " จำนวน : " + g.QTY.ToString() + "]", txtCNNo.Text);
+
+                //update Stock เข้า item
+                db.sp_010_Update_StockItem(Convert.ToString(g.CodeNo), "");
 
             }
         }

@@ -668,7 +668,8 @@ namespace StockControl
                             //update item
                             //dbClss.Insert_Stock(vv.CodeNo, (Convert.ToDecimal(vv.Qty)), "Adjust", "Inv");
 
-
+                            //update Stock เข้า item
+                            db.sp_010_Update_StockItem(Convert.ToString(vv.CodeNo), "");
                         }
                     }
                 }

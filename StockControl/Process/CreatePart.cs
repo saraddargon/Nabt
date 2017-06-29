@@ -399,12 +399,13 @@ namespace StockControl
                         else
                             txtUpdateDate.Text = "";
 
-                        //lblStock.Text = StockControl.dbClss.TDe(g.FirstOrDefault().StockInv).ToString("###,###,##0.00");
-                        //lblTempStock.Text = StockControl.dbClss.TDe(g.FirstOrDefault().StockDL).ToString("###,###,##0.00");
-                        //lblOrder.Text = StockControl.dbClss.TDe(g.FirstOrDefault().StockBackOrder).ToString("###,###,##0.00");
-                        lblStock.Text = (Convert.ToDecimal(db.Cal_QTY(txtCodeNo.Text, "Invoice", 0)).ToString("###,###,##0.00"));
-                        lblTempStock.Text = (Convert.ToDecimal(db.Cal_QTY(txtCodeNo.Text, "Temp", 0)).ToString("###,###,##0.00"));
-                        lblOrder.Text = (Convert.ToDecimal(db.Cal_QTY(txtCodeNo.Text, "BackOrder", 0)).ToString("###,###,##0.00"));
+                        lblStock.Text = StockControl.dbClss.TDe(g.FirstOrDefault().StockInv).ToString("###,###,##0.00");
+                        lblTempStock.Text = StockControl.dbClss.TDe(g.FirstOrDefault().StockDL).ToString("###,###,##0.00");
+                        lblOrder.Text = StockControl.dbClss.TDe(g.FirstOrDefault().StockBackOrder).ToString("###,###,##0.00");
+
+                        //lblStock.Text = (Convert.ToDecimal(db.Cal_QTY(txtCodeNo.Text, "Invoice", 0)).ToString("###,###,##0.00"));
+                        //lblTempStock.Text = (Convert.ToDecimal(db.Cal_QTY(txtCodeNo.Text, "Temp", 0)).ToString("###,###,##0.00"));
+                        //lblOrder.Text = (Convert.ToDecimal(db.Cal_QTY(txtCodeNo.Text, "BackOrder", 0)).ToString("###,###,##0.00"));
 
                         if (StockControl.dbClss.TSt(g.FirstOrDefault().Status).Equals("InActive"))
                         {
@@ -884,8 +885,13 @@ namespace StockControl
                     {
                         AddPart();
                         DataLoad();
-                        btnGET.Enabled = false;
+                       
+                        Ac = "View";
+                        btnView.Enabled = false;
+                        btnEdit.Enabled = true;
                         btnNew.Enabled = true;
+                        Enable_Status(false, "View");
+
                     }
                 }
             }catch(Exception ex) { MessageBox.Show(ex.Message); }

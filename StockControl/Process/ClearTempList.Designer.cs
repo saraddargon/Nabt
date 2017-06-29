@@ -463,7 +463,7 @@
             // txtVendorNo
             // 
             this.txtVendorNo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtVendorNo.Location = new System.Drawing.Point(298, 33);
+            this.txtVendorNo.Location = new System.Drawing.Point(311, 33);
             this.txtVendorNo.Name = "txtVendorNo";
             this.txtVendorNo.Size = new System.Drawing.Size(67, 19);
             this.txtVendorNo.TabIndex = 8;
@@ -475,9 +475,9 @@
             this.dtDate2.CustomFormat = "dd/MMM/yyyy";
             this.dtDate2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtDate2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDate2.Location = new System.Drawing.Point(225, 58);
+            this.dtDate2.Location = new System.Drawing.Point(209, 58);
             this.dtDate2.Name = "dtDate2";
-            this.dtDate2.Size = new System.Drawing.Size(140, 19);
+            this.dtDate2.Size = new System.Drawing.Size(100, 19);
             this.dtDate2.TabIndex = 7;
             this.dtDate2.TabStop = false;
             this.dtDate2.Text = "16/May/2017";
@@ -491,7 +491,7 @@
             this.dtDate1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtDate1.Location = new System.Drawing.Point(78, 59);
             this.dtDate1.Name = "dtDate1";
-            this.dtDate1.Size = new System.Drawing.Size(118, 19);
+            this.dtDate1.Size = new System.Drawing.Size(100, 19);
             this.dtDate1.TabIndex = 7;
             this.dtDate1.TabStop = false;
             this.dtDate1.Text = "16/May/2017";
@@ -544,7 +544,7 @@
             this.cboVendorName.EditorControl.TabIndex = 0;
             this.cboVendorName.Location = new System.Drawing.Point(78, 31);
             this.cboVendorName.Name = "cboVendorName";
-            this.cboVendorName.Size = new System.Drawing.Size(214, 22);
+            this.cboVendorName.Size = new System.Drawing.Size(231, 22);
             this.cboVendorName.TabIndex = 5;
             this.cboVendorName.TabStop = false;
             this.cboVendorName.ThemeName = "Office2010Blue";
@@ -563,7 +563,7 @@
             // 
             // radLabel4
             // 
-            this.radLabel4.Location = new System.Drawing.Point(200, 59);
+            this.radLabel4.Location = new System.Drawing.Point(184, 59);
             this.radLabel4.Name = "radLabel4";
             this.radLabel4.Size = new System.Drawing.Size(18, 18);
             this.radLabel4.TabIndex = 0;

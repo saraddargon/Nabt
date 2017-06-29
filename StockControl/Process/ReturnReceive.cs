@@ -224,69 +224,84 @@ namespace StockControl
                     {
                         db.sp_006_Update_PR_Remain(PRID, PRNo);
                     }
-                }
-                
-                        //foreach (DataRow dr in dt_PRID.Rows)
-                        //{
-                        //    PRID =  Convert.ToInt32(dr["PRID"]);
-                        //    PRNo =  Convert.ToString(dr["PRNo"]);
-                        //    OrderQty = Convert.ToDecimal(dr["OrderQty"]);
-                        //    if (PRID > 0)
-                        //    {
-                        //        var vv = (from ix in db.tb_Receives
-                        //                  where  //ix.InvoiceNo.Trim() == txtInvoiceNo.Text.Trim() && ix.Status != "Cancel"
-                        //                    ix.PRID == PRID
 
-                        //                  select ix).ToList();
-                        //        if (vv.Count > 0)
-                        //        {
-                        //            foreach (var vvd in vv)
-                        //            {
-                        //                vvd.RemainQty = OrderQty-Cal_RemainQty(PRID);
-                        //                if(vvd.RemainQty >0)
-                        //                    vvd.Status = "Partial";
-                        //                else
-                        //                    vvd.Status = "Completed";
 
-                        //                db.SubmitChanges();
-                        //            }
-                        //        }
-                        //    }
-
-                        //}
-
-                        //var distinctRows = (from DataRow dRow in dt_PRID.Rows
-                        //                    select dRow["PRNo"]).Distinct();
-
-                        //if (distinctRows.Count() > 0)
-                        //{
-                        //    foreach (var gg in distinctRows)
-                        //    {
-                        //        //update Status pr
-
-                        //        var hh = (from ix in db.tb_PurchaseRequestLines
-                        //                  where ix.PRNo == gg.ToString()
-                        //                        && ix.RemainQty < ix.OrderQty
-                        //                  select ix).ToList();
-                        //        if (hh.Count > 0)
-                        //        {
-                        //            var pp = (from ix in db.tb_PurchaseRequests
-                        //                      where ix.PRNo == gg.ToString()
-                        //                      select ix).First();
-                        //            pp.Status = "Completed";
-                        //        }
-                        //        else
-                        //        {
-                        //            var pp = (from ix in db.tb_PurchaseRequests
-                        //                      where ix.PRNo == gg.ToString()
-                        //                      select ix).First();
-                        //            pp.Status = "Waiting";
-                        //        }
-
-                        //        db.SubmitChanges();
-                        //    }
-                        //}
+                    var g = (from ix in db.tb_PurchaseRequestLines
+                              where  //ix.InvoiceNo.Trim() == txtInvoiceNo.Text.Trim() && ix.Status != "Cancel"
+                                ix.id == PRID
+                                && ix.PRNo == PRNo
+                              select ix).ToList();
+                    if(g.Count>0)
+                    {
+                        foreach( var gg in g)
+                        {
+                            db.sp_010_Update_StockItem(Convert.ToString(gg.CodeNo), "");
+                        }
                     }
+
+                }
+
+                //foreach (DataRow dr in dt_PRID.Rows)
+                //{
+                //    PRID =  Convert.ToInt32(dr["PRID"]);
+                //    PRNo =  Convert.ToString(dr["PRNo"]);
+                //    OrderQty = Convert.ToDecimal(dr["OrderQty"]);
+                //    if (PRID > 0)
+                //    {
+                //        var vv = (from ix in db.tb_Receives
+                //                  where  //ix.InvoiceNo.Trim() == txtInvoiceNo.Text.Trim() && ix.Status != "Cancel"
+                //                    ix.PRID == PRID
+
+                //                  select ix).ToList();
+                //        if (vv.Count > 0)
+                //        {
+                //            foreach (var vvd in vv)
+                //            {
+                //                vvd.RemainQty = OrderQty-Cal_RemainQty(PRID);
+                //                if(vvd.RemainQty >0)
+                //                    vvd.Status = "Partial";
+                //                else
+                //                    vvd.Status = "Completed";
+
+                //                db.SubmitChanges();
+                //            }
+                //        }
+                //    }
+
+                //}
+
+                //var distinctRows = (from DataRow dRow in dt_PRID.Rows
+                //                    select dRow["PRNo"]).Distinct();
+
+                //if (distinctRows.Count() > 0)
+                //{
+                //    foreach (var gg in distinctRows)
+                //    {
+                //        //update Status pr
+
+                //        var hh = (from ix in db.tb_PurchaseRequestLines
+                //                  where ix.PRNo == gg.ToString()
+                //                        && ix.RemainQty < ix.OrderQty
+                //                  select ix).ToList();
+                //        if (hh.Count > 0)
+                //        {
+                //            var pp = (from ix in db.tb_PurchaseRequests
+                //                      where ix.PRNo == gg.ToString()
+                //                      select ix).First();
+                //            pp.Status = "Completed";
+                //        }
+                //        else
+                //        {
+                //            var pp = (from ix in db.tb_PurchaseRequests
+                //                      where ix.PRNo == gg.ToString()
+                //                      select ix).First();
+                //            pp.Status = "Waiting";
+                //        }
+
+                //        db.SubmitChanges();
+                //    }
+                //}
+            }
             return re;
         }
         
@@ -521,8 +536,7 @@ namespace StockControl
 
                                     //New Stock
                                     InsertStock_new(seq, Convert.ToInt32(vvd.ID), vvd.RCNo, CRNo, vvd.InvoiceNo, Type);
-
-
+                                    
                                 }
 
 
@@ -539,6 +553,8 @@ namespace StockControl
                             {
                                 update_RemainQty();
                             }
+
+
 
                             dbClss.AddHistory(this.Name, "คืนการรับ Receive", " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtInvoiceNo.Text.Trim());
                             dbClss.AddHistory(this.Name, "คืนการรับ Receive", " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", RCNo);
@@ -885,6 +901,7 @@ namespace StockControl
                                             dbClss.AddHistory(this.Name, "คืนการรับสินค้า", " คืนการรับเลขที่ : " + inv + " ประเภท : " + "ใบส่งของชั่วคราว" + " CodeNo : " + vv.CodeNo + " จำนวน : " + (-Qty_temp).ToString() + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", inv);
 
                                         }
+
                                     }
                                     else
                                     {
@@ -1046,6 +1063,8 @@ namespace StockControl
                                             dbClss.AddHistory(this.Name, "คืนการรับสินค้า", " คืนการรับเลขที่ : " + inv + " ประเภท : " + "ใบส่งของชั่วคราว" + " CodeNo : " + vv.CodeNo + " จำนวน : " + (-Qty_temp).ToString() + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", inv);
                                             
                                         }
+
+                                     
                                     }
                                     
                                 }
