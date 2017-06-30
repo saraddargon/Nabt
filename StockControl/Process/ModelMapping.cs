@@ -77,12 +77,17 @@ namespace StockControl
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
+                try
+                {
 
-                txtModelName.AutoCompleteMode = AutoCompleteMode.Append;
-                txtModelName.DisplayMember = "ModelName";
-                txtModelName.ValueMember = "ModelName";
-                txtModelName.DataSource = (from ix in db.tb_Models.Where(s => s.ModelActive == true) select new { ix.ModelName, ix.ModelDescription }).ToList();
-                txtModelName.SelectedIndex = 0;
+
+                    txtModelName.AutoCompleteMode = AutoCompleteMode.Append;
+                    txtModelName.DisplayMember = "ModelName";
+                    txtModelName.ValueMember = "ModelName";
+                    txtModelName.DataSource = (from ix in db.tb_Models.Where(s => s.ModelActive == true) select new { ix.ModelName, ix.ModelDescription }).ToList();
+                    txtModelName.SelectedIndex = 0;
+                }
+                catch { }
 
              
             }

@@ -779,6 +779,20 @@ namespace StockControl
 		{
 			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codeNo, category, type_i).ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SS_Account_Insert")]
+		public int sp_SS_Account_Insert([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodeNo", DbType="VarChar(50)")] string codeNo)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codeNo);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SS_Account_SelectItem")]
+		public ISingleResult<sp_SS_Account_SelectItemResult> sp_SS_Account_SelectItem()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<sp_SS_Account_SelectItemResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ErrorLog")]
@@ -24584,6 +24598,500 @@ namespace StockControl
 				if ((this._AvgCost != value))
 				{
 					this._AvgCost = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_SS_Account_SelectItemResult
+	{
+		
+		private string _CodeNo;
+		
+		private string _ItemNo;
+		
+		private string _ItemDescription;
+		
+		private string _Area;
+		
+		private string _ShelfNo;
+		
+		private string _Maker;
+		
+		private string _Plan;
+		
+		private string _VenderName;
+		
+		private System.Nullable<decimal> _StandardCost;
+		
+		private System.Nullable<decimal> _Leadtime;
+		
+		private System.Nullable<decimal> _MaximumStock;
+		
+		private System.Nullable<decimal> _MinimumStock;
+		
+		private int _StockALLQTY;
+		
+		private int _StockALLAmount;
+		
+		private int _ReceiveQty;
+		
+		private int _ReceiveAmount;
+		
+		private int _BackOrderQty;
+		
+		private int _BackOrderAmount;
+		
+		private int _SuppliedQty;
+		
+		private int _SuppliedAmount;
+		
+		private int _Balance;
+		
+		private int _GrandTotal;
+		
+		private int _Remark;
+		
+		private int _ShipQty;
+		
+		private int _ShipAmt;
+		
+		private int _Atofqty;
+		
+		private int _AtofAmt;
+		
+		public sp_SS_Account_SelectItemResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodeNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CodeNo
+		{
+			get
+			{
+				return this._CodeNo;
+			}
+			set
+			{
+				if ((this._CodeNo != value))
+				{
+					this._CodeNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string ItemNo
+		{
+			get
+			{
+				return this._ItemNo;
+			}
+			set
+			{
+				if ((this._ItemNo != value))
+				{
+					this._ItemNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemDescription", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string ItemDescription
+		{
+			get
+			{
+				return this._ItemDescription;
+			}
+			set
+			{
+				if ((this._ItemDescription != value))
+				{
+					this._ItemDescription = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Area", DbType="VarChar(1) NOT NULL", CanBeNull=false)]
+		public string Area
+		{
+			get
+			{
+				return this._Area;
+			}
+			set
+			{
+				if ((this._Area != value))
+				{
+					this._Area = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShelfNo", DbType="NVarChar(20)")]
+		public string ShelfNo
+		{
+			get
+			{
+				return this._ShelfNo;
+			}
+			set
+			{
+				if ((this._ShelfNo != value))
+				{
+					this._ShelfNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Maker", DbType="NVarChar(150)")]
+		public string Maker
+		{
+			get
+			{
+				return this._Maker;
+			}
+			set
+			{
+				if ((this._Maker != value))
+				{
+					this._Maker = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Plan]", Storage="_Plan", DbType="VarChar(1) NOT NULL", CanBeNull=false)]
+		public string Plan
+		{
+			get
+			{
+				return this._Plan;
+			}
+			set
+			{
+				if ((this._Plan != value))
+				{
+					this._Plan = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VenderName", DbType="NVarChar(250)")]
+		public string VenderName
+		{
+			get
+			{
+				return this._VenderName;
+			}
+			set
+			{
+				if ((this._VenderName != value))
+				{
+					this._VenderName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StandardCost", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> StandardCost
+		{
+			get
+			{
+				return this._StandardCost;
+			}
+			set
+			{
+				if ((this._StandardCost != value))
+				{
+					this._StandardCost = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Leadtime", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Leadtime
+		{
+			get
+			{
+				return this._Leadtime;
+			}
+			set
+			{
+				if ((this._Leadtime != value))
+				{
+					this._Leadtime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaximumStock", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> MaximumStock
+		{
+			get
+			{
+				return this._MaximumStock;
+			}
+			set
+			{
+				if ((this._MaximumStock != value))
+				{
+					this._MaximumStock = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MinimumStock", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> MinimumStock
+		{
+			get
+			{
+				return this._MinimumStock;
+			}
+			set
+			{
+				if ((this._MinimumStock != value))
+				{
+					this._MinimumStock = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StockALLQTY", DbType="Int NOT NULL")]
+		public int StockALLQTY
+		{
+			get
+			{
+				return this._StockALLQTY;
+			}
+			set
+			{
+				if ((this._StockALLQTY != value))
+				{
+					this._StockALLQTY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StockALLAmount", DbType="Int NOT NULL")]
+		public int StockALLAmount
+		{
+			get
+			{
+				return this._StockALLAmount;
+			}
+			set
+			{
+				if ((this._StockALLAmount != value))
+				{
+					this._StockALLAmount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceiveQty", DbType="Int NOT NULL")]
+		public int ReceiveQty
+		{
+			get
+			{
+				return this._ReceiveQty;
+			}
+			set
+			{
+				if ((this._ReceiveQty != value))
+				{
+					this._ReceiveQty = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceiveAmount", DbType="Int NOT NULL")]
+		public int ReceiveAmount
+		{
+			get
+			{
+				return this._ReceiveAmount;
+			}
+			set
+			{
+				if ((this._ReceiveAmount != value))
+				{
+					this._ReceiveAmount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BackOrderQty", DbType="Int NOT NULL")]
+		public int BackOrderQty
+		{
+			get
+			{
+				return this._BackOrderQty;
+			}
+			set
+			{
+				if ((this._BackOrderQty != value))
+				{
+					this._BackOrderQty = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BackOrderAmount", DbType="Int NOT NULL")]
+		public int BackOrderAmount
+		{
+			get
+			{
+				return this._BackOrderAmount;
+			}
+			set
+			{
+				if ((this._BackOrderAmount != value))
+				{
+					this._BackOrderAmount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SuppliedQty", DbType="Int NOT NULL")]
+		public int SuppliedQty
+		{
+			get
+			{
+				return this._SuppliedQty;
+			}
+			set
+			{
+				if ((this._SuppliedQty != value))
+				{
+					this._SuppliedQty = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SuppliedAmount", DbType="Int NOT NULL")]
+		public int SuppliedAmount
+		{
+			get
+			{
+				return this._SuppliedAmount;
+			}
+			set
+			{
+				if ((this._SuppliedAmount != value))
+				{
+					this._SuppliedAmount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Balance", DbType="Int NOT NULL")]
+		public int Balance
+		{
+			get
+			{
+				return this._Balance;
+			}
+			set
+			{
+				if ((this._Balance != value))
+				{
+					this._Balance = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GrandTotal", DbType="Int NOT NULL")]
+		public int GrandTotal
+		{
+			get
+			{
+				return this._GrandTotal;
+			}
+			set
+			{
+				if ((this._GrandTotal != value))
+				{
+					this._GrandTotal = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Remark", DbType="Int NOT NULL")]
+		public int Remark
+		{
+			get
+			{
+				return this._Remark;
+			}
+			set
+			{
+				if ((this._Remark != value))
+				{
+					this._Remark = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShipQty", DbType="Int NOT NULL")]
+		public int ShipQty
+		{
+			get
+			{
+				return this._ShipQty;
+			}
+			set
+			{
+				if ((this._ShipQty != value))
+				{
+					this._ShipQty = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShipAmt", DbType="Int NOT NULL")]
+		public int ShipAmt
+		{
+			get
+			{
+				return this._ShipAmt;
+			}
+			set
+			{
+				if ((this._ShipAmt != value))
+				{
+					this._ShipAmt = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Atofqty", DbType="Int NOT NULL")]
+		public int Atofqty
+		{
+			get
+			{
+				return this._Atofqty;
+			}
+			set
+			{
+				if ((this._Atofqty != value))
+				{
+					this._Atofqty = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AtofAmt", DbType="Int NOT NULL")]
+		public int AtofAmt
+		{
+			get
+			{
+				return this._AtofAmt;
+			}
+			set
+			{
+				if ((this._AtofAmt != value))
+				{
+					this._AtofAmt = value;
 				}
 			}
 		}

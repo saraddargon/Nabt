@@ -183,20 +183,39 @@ namespace StockControl
 
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    string date1 = "";
-                    string date2 = "";
-                    date1 = dtDate1.Value.ToString("yyyyMMdd");
-                    date2 = dtDate2.Value.ToString("yyyyMMdd");
-                    radGridView1.AutoGenerateColumns = true;
-                    radGridView1.DataSource = db.sp_E008_ReportAccount(date1, date2, cboGroupType.Text);
+                    //    string date1 = "";
+                    //    string date2 = "";
+                    //    date1 = dtDate1.Value.ToString("yyyyMMdd");
+                    //    date2 = dtDate2.Value.ToString("yyyyMMdd");
+                    //    radGridView1.AutoGenerateColumns = true;
+                    //    radGridView1.DataSource = db.sp_E008_ReportAccount(date1, date2, cboGroupType.Text);
+                    //}
+                    //dbClss.ExportGridXlSX2(radGridView1, FileName);
+
+                    var g = (from ix in db.sp_SS_Account_SelectItem() select ix).ToList().ToList();
+                    if (g.Count > 0)
+                    {
+                        progressBar1.Visible = true;
+                        progressBar1.Minimum = 0;
+                        progressBar1.Maximum = g.Count;
+                        int value = 0;
+                        foreach (var r in g)
+                        {
+                            value += 1;
+                            progressBar1.Value = value;
+                            progressBar1.PerformStep();
+                            db.sp_SS_Account_Insert(r.CodeNo);
+                        }
+                    }
                 }
-                dbClss.ExportGridXlSX2(radGridView1, FileName);
+                System.Diagnostics.Process.Start(@"Report\FM-EN-23 Rev. 01Tool Inventory Control .xlsx");
                 dbClss.AddHistory(this.Name, "ออกรายงาน", "เลือกออกรายงาน Report Account "+dtDate1.Value.ToString("dd/MMM/yyyy"), "");
                 ck = true;
 
 
             }
             catch { ck = false; }
+            progressBar1.Visible = false;
             this.Cursor = Cursors.Default;
             return ck;
         }

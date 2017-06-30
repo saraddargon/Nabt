@@ -321,7 +321,6 @@
             this.label1.Size = new System.Drawing.Size(61, 14);
             this.label1.TabIndex = 1;
             this.label1.Text = "แถบสถานะ";
-            this.label1.Visible = false;
             // 
             // progressBar1
             // 

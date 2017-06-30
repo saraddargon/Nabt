@@ -1529,4 +1529,39 @@
     <Parameter Name="Type_i" Parameter="type_i" Type="System.Int32" DbType="Int" />
     <Return Type="System.Decimal" />
   </Function>
+  <Function Name="dbo.sp_SS_Account_Insert" Method="sp_SS_Account_Insert">
+    <Parameter Name="CodeNo" Parameter="codeNo" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_SS_Account_SelectItem" Method="sp_SS_Account_SelectItem">
+    <ElementType Name="sp_SS_Account_SelectItemResult">
+      <Column Name="CodeNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemDescription" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Area" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="ShelfNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Maker" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="[Plan]" Member="Plan" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="VenderName" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="StandardCost" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Leadtime" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="MaximumStock" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="MinimumStock" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="StockALLQTY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StockALLAmount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ReceiveQty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ReceiveAmount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BackOrderQty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BackOrderAmount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SuppliedQty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SuppliedAmount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Balance" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GrandTotal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Remark" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShipQty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShipAmt" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Atofqty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AtofAmt" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>
