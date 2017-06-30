@@ -1081,6 +1081,8 @@ namespace StockControl
                             db.tb_Stocks.InsertOnSubmit(gg);
                             db.SubmitChanges();
 
+                            //update Stock เข้า item
+                            db.sp_010_Update_StockItem(Convert.ToString(vv.CodeNo), "");
                         }
                     }
                 }

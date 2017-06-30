@@ -994,6 +994,9 @@ namespace StockControl
                                 }
 
                             }
+
+                            //update Stock เข้า item
+                            db.sp_010_Update_StockItem(Convert.ToString(vv.CodeNo), "");
                         }
                     }
                 }

@@ -731,18 +731,38 @@ namespace StockControl
                 Ac = "Del";
                 if (MessageBox.Show("ต้องการลบรายการ ( " + txtPRNo.Text + " ) หรือไม่ ?", "ลบรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    this.Cursor = Cursors.WaitCursor;
                     using (DataClasses1DataContext db = new DataClasses1DataContext())
                     {
                         var g = (from ix in db.tb_PurchaseRequests
-                                 where ix.TEMPNo.Trim() == txtTempNo.Text.Trim() && ix.Status != "Cancel" 
+                                 where ix.TEMPNo.Trim() == txtTempNo.Text.Trim() && ix.Status != "Cancel"
                                  //&& ix.TEMPNo.Trim() == txtTempNo.Text.Trim()
                                  select ix).ToList();
                         if (g.Count > 0)  //มีรายการในระบบ
                         {
                             var gg = (from ix in db.tb_PurchaseRequests
-                                      where ix.TEMPNo.Trim() == txtTempNo.Text.Trim() 
+                                      where ix.TEMPNo.Trim() == txtTempNo.Text.Trim()
                                       //&& ix.TEMPNo.Trim() == txtTempNo.Text.Trim()
                                       select ix).First();
+
+
+                            //update Stock backorder
+                            try
+                            {
+                                var s = (from ix in db.tb_PurchaseRequestLines
+                                         where ix.TempNo.Trim() == txtTempNo.Text.Trim()
+
+                                         select ix).ToList();
+                                if (s.Count > 0)
+                                {
+                                    foreach (var ss in s)
+                                    {
+                                        db.sp_010_Update_StockItem(Convert.ToString(ss.CodeNo), "");
+                                    }
+                                }
+                            }
+                            catch (Exception ex) { MessageBox.Show(ex.Message); }
+                            //----------------------//
 
 
                             gg.Status = "Cancel";
@@ -768,6 +788,7 @@ namespace StockControl
 
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
             
         }
         private bool Check_Save()
@@ -888,7 +909,8 @@ namespace StockControl
                         //insert Stock
                         foreach (var vv in g)
                         {
-                            dbClss.Insert_StockTemp(vv.CodeNo, Convert.ToDecimal(vv.OrderQty), "PR_Temp", "Inv");
+                            db.sp_010_Update_StockItem(Convert.ToString(vv.CodeNo),"");
+                            //dbClss.Insert_StockTemp(vv.CodeNo, Convert.ToDecimal(vv.OrderQty), "PR_Temp", "Inv");
                         }
                     }
                 }

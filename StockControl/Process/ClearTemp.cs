@@ -502,27 +502,33 @@ namespace StockControl
                     ID = StockControl.dbClss.TInt(g.Cells["ID"].Value);
                     if (StockControl.dbClss.TInt(g.Cells["ID"].Value) > 0)
                     {
-                        var gg = (from ix in db.tb_Receives
+                        var g1 = (from ix in db.tb_Receives
                                   where ix.RCNo.Trim() == txtRCNo.Text.Trim() && ix.Status != "Cancel"
                                   && ix.ID == ID
-                                  select ix).First();
+                                  select ix).ToList();
+                        if (g1.Count > 0)
+                        {
+                            var gg = (from ix in db.tb_Receives
+                                      where ix.RCNo.Trim() == txtRCNo.Text.Trim() && ix.Status != "Cancel"
+                                      && ix.ID == ID
+                                      select ix).First();
 
-                        gg.InvoiceNo = txtInvoiceNo.Text.Trim();
-                        //gg.TempInvNo = txtDLNo.Text;
-                        gg.UpdateBy = ClassLib.Classlib.User;
-                        gg.UpdateDate = DateTime.Now;
+                            gg.InvoiceNo = txtInvoiceNo.Text.Trim();
+                            //gg.TempInvNo = txtDLNo.Text;
+                            gg.UpdateBy = ClassLib.Classlib.User;
+                            gg.UpdateDate = DateTime.Now;
 
-                        dbClss.AddHistory(this.Name, "แก้ไขรายการ Receive", "Clear Temp : " + DocNo + "ID :" + StockControl.dbClss.TSt(g.Cells["ID"].Value)
-                       + " CodeNo :" + StockControl.dbClss.TSt(g.Cells["CodeNo"].Value)
-                       + " แก้ไขโดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtRCNo.Text);
+                            dbClss.AddHistory(this.Name, "แก้ไขรายการ Receive", "Clear Temp : " + DocNo + "ID :" + StockControl.dbClss.TSt(g.Cells["ID"].Value)
+                           + " CodeNo :" + StockControl.dbClss.TSt(g.Cells["CodeNo"].Value)
+                           + " แก้ไขโดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtRCNo.Text);
 
-                        db.SubmitChanges();
+                            db.SubmitChanges();
 
-                        CostPerUnit = Convert.ToDecimal(g.Cells["CostPerUnit"].Value);
+                            CostPerUnit = Convert.ToDecimal(g.Cells["CostPerUnit"].Value);
 
-                        //insert stock
-                        Save_Stock(ID, StockControl.dbClss.TSt(g.Cells["CodeNo"].Value), DocNo, CostPerUnit);
-
+                            //insert stock
+                            Save_Stock(ID, StockControl.dbClss.TSt(g.Cells["CodeNo"].Value), DocNo, CostPerUnit);
+                        }
 
                     }
                 }
@@ -670,10 +676,11 @@ namespace StockControl
                         dbClss.AddHistory(this.Name, "ClearTemp", "ClearTemp [" + txtInvoiceNo.Text + " id : " + vv.id.ToString() + " CodeNo : " + vv.CodeNo + " จำนวน : " + QTY.ToString() + "]", DocNo);
 
 
-
-
+                        //update Stock เข้า item
+                        db.sp_010_Update_StockItem(Convert.ToString(CodeNo), "");
                     }
                 }
+
                 //Clear temp shipping
                 var s = (from ix in db.tb_Stocks
                              //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
@@ -681,7 +688,8 @@ namespace StockControl
                                && ix.Category == "Temp"
                                && ix.Type != "ClearTemp"
                                && ix.Flag_ClearTemp == 1
-                              
+                               && ix.Type == "Shipping"
+                               && ix.RefNo != txtRCNo.Text.Trim()
                          select ix).ToList();
                 if (s.Count > 0)
                 {
@@ -695,17 +703,27 @@ namespace StockControl
                         QTY = -QTY;
 
 
-                        var sh = (from ix in db.tb_Shippings
+                        var sh1 = (from ix in db.tb_Shippings
                                       //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
                                   where ix.CodeNo.Trim() == CodeNo.Trim() //&& ix.Status != "Cancel"
                                         && ix.id == Convert.ToInt32(vv.Refid)
-                                  select ix).First();
-
-                        //เริ่มต้นเอา cost จาก Stock ก่อน
-                        decimal.TryParse(Convert.ToString(vv.UnitCost), out CostPerUnit);
-                        //เอา cost tb_shipping 
-                        decimal.TryParse(Convert.ToString(sh.UnitCost), out CostPerUnit);
-
+                                  select ix).ToList();
+                        if (sh1.Count > 0)
+                        {
+                            var sh = (from ix in db.tb_Shippings
+                                          //join i in db.tb_Items on ix.CodeNo equals i.CodeNo
+                                      where ix.CodeNo.Trim() == CodeNo.Trim() //&& ix.Status != "Cancel"
+                                            && ix.id == Convert.ToInt32(vv.Refid)
+                                      select ix).First();
+                            //เอา cost tb_shipping 
+                            decimal.TryParse(Convert.ToString(sh.UnitCost), out CostPerUnit);
+                        }
+                        else
+                        {
+                            //เริ่มต้นเอา cost จาก Stock ก่อน
+                            decimal.TryParse(Convert.ToString(vv.UnitCost), out CostPerUnit);
+                        }
+                        
                         UnitCost = CostPerUnit;// Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "Avg"));
                         Amount = (QTY) * UnitCost;
 
@@ -761,10 +779,11 @@ namespace StockControl
                         decimal.TryParse(vv.QTY.ToString(), out QTY);
 
 
-                        //เริ่มต้นเอา cost จาก Stock ก่อน
-                        decimal.TryParse(Convert.ToString(vv.UnitCost), out CostPerUnit);
-                        //เอา cost tb_shipping 
-                        decimal.TryParse(Convert.ToString(sh.UnitCost), out CostPerUnit);
+                       
+                        ////เริ่มต้นเอา cost จาก Stock ก่อน
+                        //decimal.TryParse(Convert.ToString(vv.UnitCost), out CostPerUnit);
+                        ////เอา cost tb_shipping 
+                        //decimal.TryParse(Convert.ToString(sh.UnitCost), out CostPerUnit);
 
                         UnitCost = CostPerUnit;//Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "Avg"));
 
@@ -818,10 +837,12 @@ namespace StockControl
                         db.SubmitChanges();
 
                         dbClss.AddHistory(this.Name, "ClearTemp", "ClearTemp [" + txtInvoiceNo.Text + " id : " + vv.id.ToString() + " CodeNo : " + vv.CodeNo + " จำนวน : " + QTY.ToString() + "]", DocNo);
+
+                        //update Stock เข้า item
+                        db.sp_010_Update_StockItem(Convert.ToString(CodeNo), "");
                     }
                 }
             }
-
         }
 
         private decimal get_cost(string Code)

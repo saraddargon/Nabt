@@ -131,9 +131,14 @@ namespace StockControl
                                       CodeNo = a.CodeNo,
                                       ItemDescription = a.ItemDescription,
                                       Order = Convert.ToDecimal(a.MaximumStock),
-                                      StockQty = (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "Invoice", 0)))
-                                                  + (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "Temp", 0))) , //Convert.ToDecimal(a.StockInv) + Convert.ToDecimal(a.StockDL),
-                                      BackOrder = (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "BackOrder", 0))), //StockControl.dbClss.TSt(a.StockBackOrder),
+
+                                      //StockQty = (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "Invoice", 0)))
+                                      //            + (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "Temp", 0))) ,
+                                      StockQty = Convert.ToDecimal(a.StockInv) + Convert.ToDecimal(a.StockDL),
+                                      //BackOrder = (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "BackOrder", 0))),
+                                      BackOrder = StockControl.dbClss.TSt(a.StockBackOrder),
+
+
                                       UnitBuy = a.UnitBuy,
                                       PCSUnit = StockControl.dbClss.TSt(a.PCSUnit),
                                       LeadTime = StockControl.dbClss.TSt(a.Leadtime),
@@ -168,9 +173,6 @@ namespace StockControl
                         {
                             rowcount += 1;
                             x.Cells["dgvNo"].Value = rowcount;
-                            //x.Cells["dgvCodeTemp"].Value = x.Cells["CodeNo"].Value.ToString();
-                            //x.Cells["dgvCodeTemp2"].Value = x.Cells["VendorNo"].Value.ToString();
-                            
                         }
                     }
                     catch (Exception ex) { MessageBox.Show(ex.Message); }
