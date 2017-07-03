@@ -1195,11 +1195,6 @@
       <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.sp_009_Update_Stock" Method="sp_009_Update_Stock" IsComposable="true">
-    <Parameter Name="AppDate1" Parameter="appDate1" Type="System.DateTime" DbType="DateTime" />
-    <Parameter Name="AppDate2" Parameter="appDate2" Type="System.DateTime" DbType="DateTime" />
-    <Return Type="object" />
-  </Function>
   <Function Name="dbo.sp_001_Print_Kanban_Part" Method="sp_001_Print_Kanban_Part">
     <Parameter Name="User" Parameter="user" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="DateTime" Parameter="dateTime" Type="System.DateTime" DbType="DateTime" />
@@ -1523,12 +1518,6 @@
   <Function Name="dbo.sp_SelectItemUpdate" Method="sp_SelectItemUpdate">
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.Cal_QTY" Method="Cal_QTY" IsComposable="true">
-    <Parameter Name="CodeNo" Parameter="codeNo" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="Category" Parameter="category" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="Type_i" Parameter="type_i" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Decimal" />
-  </Function>
   <Function Name="dbo.sp_SS_Account_Insert" Method="sp_SS_Account_Insert">
     <Parameter Name="CodeNo" Parameter="codeNo" Type="System.String" DbType="VarChar(50)" />
     <Return Type="System.Int32" />
@@ -1563,5 +1552,16 @@
       <Column Name="Atofqty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="AtofAmt" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.sp_010_Update_StockItem" Method="sp_010_Update_StockItem">
+    <Parameter Name="CodeNo" Parameter="codeNo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Category" Parameter="category" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Cal_QTY" Method="Cal_QTY" IsComposable="true">
+    <Parameter Name="CodeNo" Parameter="codeNo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Category" Parameter="category" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Type_i" Parameter="type_i" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Decimal" />
   </Function>
 </Database>

@@ -214,7 +214,8 @@ namespace StockControl
 
                 btnAddDWG.Enabled = ss;
                 btnDeleteDWG.Enabled = ss;
-                btnGET.Enabled = true;
+                chkGET.Checked = true;
+                //btnGET.Enabled = true;
             }
             else if (Condition.Equals("View"))
             {
@@ -250,6 +251,7 @@ namespace StockControl
                 btnAddDWG.Enabled = ss;
                 btnDeleteDWG.Enabled = ss;
                 btnGET.Enabled = false;
+                chkGET.Checked = false;
             }
             else if (Condition.Equals("Edit"))
             {
@@ -285,6 +287,7 @@ namespace StockControl
                 btnAddDWG.Enabled = ss;
                 btnDeleteDWG.Enabled = ss;
                 btnGET.Enabled = false;
+                chkGET.Checked = false;
             }
         }
         private void LoadDefault()
@@ -464,7 +467,9 @@ namespace StockControl
             //radGridView1.AllowAddNewRow = false;
             //radGridView1.Rows.AddNew();
             Enable_Status(true, "New");
-            btnGET.Enabled = true;
+            //btnGET.Enabled = true;
+            chkGET.Enabled = true;
+
             Ac = "New";
             
         }
@@ -477,7 +482,7 @@ namespace StockControl
             btnNew.Enabled = true;
             Enable_Status(false, "View");
             btnGET.Enabled = false;
-
+            chkGET.Enabled = false;
 
         }
 
@@ -495,6 +500,7 @@ namespace StockControl
                 lbStatus.Text = "Edit";
                 Enable_Status(true, "Edit");
                 btnGET.Enabled = false;
+                chkGET.Enabled = false;
                 Ac = "Edit";
             }
         }
@@ -513,17 +519,19 @@ namespace StockControl
                         
                         string Temp_codeno = txtCodeNo.Text;
                         string temp_codeno2 = "";
-                        if (txtCodeNo.Text.Length > 5)
+                        if (chkGET.Checked.Equals(false))// ให้ระบบ Gen ให้
                         {
-                            int c = txtCodeNo.Text.Length;
+                            if (txtCodeNo.Text.Length > 5)
+                            {
+                                int c = txtCodeNo.Text.Length;
 
-                            temp_codeno2 = Temp_codeno.Substring(5, c-5);
-                            txtCodeNo.Text = Get_CodeNo();
-                            txtCodeNo.Text = txtCodeNo.Text + temp_codeno2;
+                                temp_codeno2 = Temp_codeno.Substring(5, c - 5);
+                                txtCodeNo.Text = Get_CodeNo();
+                                txtCodeNo.Text = txtCodeNo.Text + temp_codeno2;
+                            }
+                            else
+                                txtCodeNo.Text = Get_CodeNo();
                         }
-                        else
-                            txtCodeNo.Text = Get_CodeNo();
-
                         //byte[] barcode = StockControl.dbClss.SaveQRCode2D(txtCodeNo.Text);
                          byte[] barcode = null; 
 
@@ -857,6 +865,45 @@ namespace StockControl
                 if (txtToolLife.Text.Equals(""))
                     err += "- “อายุการใช้งาน:” เป็นค่าว่าง \n";
 
+                //---------------check codeno -------------------//
+                if (Ac.Equals("New"))  //New
+                {
+                    if (chkGET.Checked)
+                    {
+                        if (txtCodeNo.Text.Trim().Equals(""))
+                        {
+                            err += " “รหัสทูล:” เป็นค่าว่าง \n";
+                        }
+                        else //เช็คว่า เลข Gen ด้านหน้าเป็น เลข Group เดียวกันหรือไม่ ถ้าไม่ใช่จะขึ้น Error
+                        {
+                            using (DataClasses1DataContext db = new DataClasses1DataContext())
+                            {
+                                string Temp_Running = "";
+                                var I = (from ix in db.tb_GroupTypes select ix).Where(a => a.GroupCode == cboGroupType.Text).ToList();
+                                if (I.Count > 0)
+                                    Temp_Running = I.FirstOrDefault().Running;
+
+                                if (!Temp_Running.Equals(""))
+                                {
+                                    string cut_string = "";
+                                    cut_string = txtCodeNo.Text.Trim().Substring(0, 1);
+                                    if (!cut_string.ToUpper().Equals(Temp_Running.ToUpper()))
+                                        err += "- “รหัสทูล เริ่มต้นไม่ตรงกับประเภทกลุ่มสินค้า:”  \n";
+                                    else//เช็คว่าเป็น CodeNo ที่มีในระบบหรือไม่ ถ้ามีแล้วจะ New เลขใหม่ไม่ได้ เพราะซ้ำ
+                                    {
+                                        var g1 = (from ix in db.tb_Items select ix).Where(a => a.CodeNo == txtCodeNo.Text.Trim()).ToList();
+                                        if (g1.Count() > 0)
+                                        {
+                                            err += "- “รหัสทูล ซ้ำ:”มีรหัสทูล ในระบบแล้ว  \n";
+                                        }
+                                    }
+                                }
+                                //err += "- “ประเภทกลุ่ม สินค้า:” เป็นค่าว่าง \n";
+                            }
+                        }
+                    }
+                }
+                //-----------------------------------------------//
 
 
 
@@ -891,7 +938,8 @@ namespace StockControl
                         btnEdit.Enabled = true;
                         btnNew.Enabled = true;
                         Enable_Status(false, "View");
-
+                        chkGET.Enabled = false;
+                        btnGET.Enabled = false;
                     }
                 }
             }catch(Exception ex) { MessageBox.Show(ex.Message); }
@@ -942,7 +990,8 @@ namespace StockControl
 
         private void Cleardata()
         {
-
+            chkGET.Checked = true;
+            btnGET.Enabled = false;
             lblStock.Text = "0.00";
             lblTempStock.Text = "0.00";
             lblOrder.Text = "0.00";
@@ -1009,13 +1058,15 @@ namespace StockControl
                             btnNew_Click(null, null);
                             btnSave.Enabled = true;
                             btnGET.Enabled = false;
+                            chkGET.Checked = false;
                         }
                         else // ไม่มีในระบบ
                         {
+                            //btnGET.Enabled = true;
+                            chkGET.Checked = true;
                             Cleardata();
                             Enable_Status(true, "New");
                             btnSave.Enabled = true;
-                            btnGET.Enabled = true;
                         }
                     }
 
@@ -1821,6 +1872,7 @@ namespace StockControl
                 DataLoad();
                 btnGET.Enabled = false;
                 btnView.Enabled = false;
+                chkGET.Enabled = false;
             }
             catch(Exception ex) { MessageBox.Show(ex.Message); dbClss.AddError("CreatePart", ex.Message + " : radButtonElement1_Click", this.Name); }
 
@@ -2024,6 +2076,8 @@ namespace StockControl
             txtCodeNo.Text = CodeNo;
             DataLoad();
             Ac = "View";
+            btnGET.Enabled = false;
+            chkGET.Enabled = false;
         }
 
         private void btnOpenDWG_Click(object sender, EventArgs e)
@@ -2227,6 +2281,20 @@ namespace StockControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             this.Cursor = Cursors.Default;
+        }
+
+        private void chkGET_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
+        {
+            if (chkGET.Checked.Equals(true))
+            {
+                btnGET.Enabled = false;
+                txtCodeNo.Enabled = true;
+            }
+            else
+            {
+                btnGET.Enabled = true;
+                txtCodeNo.Enabled = false;
+            }
         }
     }
 }
