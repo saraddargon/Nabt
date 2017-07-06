@@ -1209,35 +1209,42 @@ namespace StockControl
                         int duppicate_CodeNo = 0;
                         //string Status = "Waiting";
 
-                        var d = (from ix in db.tb_Items select ix)
+                        var d1 = (from ix in db.tb_Items select ix)
+                            .Where(a => a.CodeNo == CodeNo.Trim() && a.Status == "Active"
+
+                            ).ToList();
+                        if (d1.Count > 0)
+                        {
+                            var d = (from ix in db.tb_Items select ix)
                             .Where(a => a.CodeNo == CodeNo.Trim() && a.Status == "Active"
 
                             ).First();
 
-                        ItemNo = d.ItemNo;
-                        ItemDescription = d.ItemDescription;
-                        RemainQty = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(CodeNo), "Invoice", 0)));//Convert.ToDecimal(d.StockInv);
-                        Unit = d.UnitBuy;
-                        PCSUnit = Convert.ToDecimal(d.PCSUnit);
-                        CostPerUnit =  Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "Avg"));//Convert.ToDecimal(d.StandardCost);
+                            ItemNo = d.ItemNo;
+                            ItemDescription = d.ItemDescription;
+                            RemainQty = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(CodeNo), "Invoice", 0)));//Convert.ToDecimal(d.StockInv);
+                            Unit = d.UnitBuy;
+                            PCSUnit = Convert.ToDecimal(d.PCSUnit);
+                            CostPerUnit = Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "Avg"));//Convert.ToDecimal(d.StandardCost);
 
-                        No = dgvData.Rows.Count() + 1;
-                        if (!check_Duppicate(CodeNo))
-                        {
-                            dgvData.Rows.Add(No,
-                                                CodeNo,
-                                                ItemNo,
-                                                ItemDescription,
-                                                RemainQty,
-                                                QTY,
-                                                Unit,
-                                                PCSUnit,
-                                                CostPerUnit,
-                                                Amount,
-                                                LotNo,
-                                                Remark,
-                                                "0"
-                                                );
+                            No = dgvData.Rows.Count() + 1;
+                            if (!check_Duppicate(CodeNo))
+                            {
+                                dgvData.Rows.Add(No,
+                                                    CodeNo,
+                                                    ItemNo,
+                                                    ItemDescription,
+                                                    RemainQty,
+                                                    QTY,
+                                                    Unit,
+                                                    PCSUnit,
+                                                    CostPerUnit,
+                                                    Amount,
+                                                    LotNo,
+                                                    Remark,
+                                                    "0"
+                                                    );
+                            }
                         }
                     }
                 }
