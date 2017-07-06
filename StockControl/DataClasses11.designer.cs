@@ -602,12 +602,6 @@ namespace StockControl
 			return ((ISingleResult<sp_E006_ReportWaitingPRResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_009_Update_Stock", IsComposable=true)]
-		public object sp_009_Update_Stock([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppDate1", DbType="DateTime")] System.Nullable<System.DateTime> appDate1, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppDate2", DbType="DateTime")] System.Nullable<System.DateTime> appDate2)
-		{
-			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), appDate1, appDate2).ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_001_Print_Kanban_Part")]
 		public ISingleResult<sp_001_Print_Kanban_PartResult> sp_001_Print_Kanban_Part([global::System.Data.Linq.Mapping.ParameterAttribute(Name="User", DbType="VarChar(50)")] string user, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="DateTime", DbType="DateTime")] System.Nullable<System.DateTime> dateTime)
 		{
@@ -774,12 +768,6 @@ namespace StockControl
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Cal_QTY", IsComposable=true)]
-		public System.Nullable<decimal> Cal_QTY([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodeNo", DbType="VarChar(50)")] string codeNo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Category", DbType="VarChar(50)")] string category, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Type_i", DbType="Int")] System.Nullable<int> type_i)
-		{
-			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codeNo, category, type_i).ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SS_Account_Insert")]
 		public int sp_SS_Account_Insert([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodeNo", DbType="VarChar(50)")] string codeNo)
 		{
@@ -792,6 +780,19 @@ namespace StockControl
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((ISingleResult<sp_SS_Account_SelectItemResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_010_Update_StockItem")]
+		public int sp_010_Update_StockItem([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodeNo", DbType="VarChar(50)")] string codeNo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Category", DbType="VarChar(50)")] string category)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codeNo, category);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Cal_QTY", IsComposable=true)]
+		public System.Nullable<decimal> Cal_QTY([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CodeNo", DbType="VarChar(50)")] string codeNo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Category", DbType="VarChar(50)")] string category, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Type_i", DbType="Int")] System.Nullable<int> type_i)
+		{
+			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), codeNo, category, type_i).ReturnValue));
 		}
 	}
 	
