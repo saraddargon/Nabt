@@ -1564,4 +1564,48 @@
     <Parameter Name="Type_i" Parameter="type_i" Type="System.Int32" DbType="Int" />
     <Return Type="System.Decimal" />
   </Function>
+  <Function Name="dbo.sp_013_Select_ReportAccount" Method="sp_013_Select_ReportAccount">
+    <Parameter Name="DateFrom" Parameter="dateFrom" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="DateTo" Parameter="dateTo" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="sp_013_Select_ReportAccountResult">
+      <Column Name="InventoryID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DateFrom" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateTo" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(512)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(512)" CanBeNull="true" />
+      <Column Name="Area" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+      <Column Name="ShelfBin" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+      <Column Name="Maker" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+      <Column Name="Supplier" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="Leadtime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MinStock" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="[Plan]" Member="Plan" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="CurrentInventory_Qty" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="CurrentInventory_Velue" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="OnOrder_Qty" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="OnOrder_Value" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="Receive_Qty" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="Receive_Value" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="BackOrder_Qty" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="BackOrder_Value" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="Supplied_Qty" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="Supplied_Value" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="Balance_Value" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="GrandTotal_Value" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="VarChar(512)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_011_update_ReportAccount" Method="sp_011_update_ReportAccount">
+    <Parameter Name="InventoryID" Parameter="inventoryID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Remark" Parameter="remark" Type="System.String" DbType="VarChar(512)" />
+    <Parameter Name="DateFrom" Parameter="dateFrom" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="DateTo" Parameter="dateTo" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_012_Del_ReportAccount" Method="sp_012_Del_ReportAccount">
+    <Parameter Name="DateFrom" Parameter="dateFrom" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="DateTo" Parameter="dateTo" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>
