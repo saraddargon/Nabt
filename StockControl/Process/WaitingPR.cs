@@ -114,7 +114,9 @@ namespace StockControl
                         if (!cboVendor.Text.Equals(""))
                             Vendorno = txtVendorNo.Text;
                         
+
                         var gd = (from a in db.tb_Items
+                                  join b in db.tb_Vendors on a.VendorNo equals b.VendorNo
                                   where a.Status == "Active" 
                                   && a.StopOrder == false
                                   && (a.VendorNo.Contains(Vendorno))
@@ -145,7 +147,7 @@ namespace StockControl
                                       MaxStock = StockControl.dbClss.TSt(a.MaximumStock),
                                       MinStock = StockControl.dbClss.TSt(a.MinimumStock),
                                       VendorNo = a.VendorNo,
-                                      VendorName = a.VendorItemName,
+                                      VendorName = b.VendorName,
                                       
                                   })//.Where(ab => ab.VendorNo.Contains(Vendorno))
                                   .ToList();
