@@ -171,7 +171,6 @@ namespace StockControl
                     if (g.Count > 0)
                     {
                         dgvData.DataSource = g;
-                     
                     }
                 }
             }
