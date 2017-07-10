@@ -103,7 +103,6 @@ namespace StockControl
             
             try
             {
-
                 this.Cursor = Cursors.WaitCursor;
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
