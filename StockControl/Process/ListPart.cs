@@ -70,8 +70,35 @@ namespace StockControl
                     //radGridView1.DataSource = db.tb_Histories.Where(s => s.ScreenName == ScreenSearch).OrderBy(o => o.CreateDate).ToList();
                     int c = 0;
 
-                    var g = (from ix in db.tb_Items select ix).Where(a => a.CodeNo.Contains(txtCodeNo.Text)
+                    var g = (from ix in db.tb_Items
+                             select new {
+                                 ix.CodeNo,
+                                 ix.ItemNo,
+                                 ix.ItemDescription,
+                                 ix.ShelfNo,
+                                 ix.GroupCode,
+                                 ix.TypeCode,
+                                 ix.StandardCost,
+                                 ix.UnitBuy,
+                                 ix.VendorNo,
+                                 ix.VendorItemName,
+                                 ix.StockInv,
+                                 ix.StockDL,
+                                 ix.StockBackOrder,
+                                 ix.Leadtime,
+                                 ix.MaximumStock,
+                                 ix.MinimumStock,
+                                 ix.Toollife,
+                                 ix.SD,
+                                 ix.Status,
+                                 ix.StopOrder
+                                 //,VendorName = (from oo in db.tb_Vendors where oo.VendorNo == ix.VendorNo select new { oo.VendorName }).FirstOrDefault()
+                                    
+                                        
+
+                    }).Where(a => a.CodeNo.Contains(txtCodeNo.Text)
                         && a.ItemNo.Contains(txtPartName.Text)
+                       
                         && a.ItemDescription.Contains(txtDescription.Text)
                         && a.VendorItemName.Contains(txtVendorName.Text))
                         .ToList();
