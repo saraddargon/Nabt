@@ -84,8 +84,10 @@ namespace StockControl
                     txtModelName.AutoCompleteMode = AutoCompleteMode.Append;
                     txtModelName.DisplayMember = "ModelName";
                     txtModelName.ValueMember = "ModelName";
-                    txtModelName.DataSource = (from ix in db.tb_Models.Where(s => s.ModelActive == true) select new { ix.ModelName, ix.ModelDescription }).ToList();
-                    txtModelName.SelectedIndex = 0;
+                    var g = (from ix in db.tb_Models.Where(s => s.ModelActive == true) select new { ix.ModelName, ix.ModelDescription }).ToList();
+                    txtModelName.DataSource = g; 
+                   if(g.Count>0)
+                       txtModelName.SelectedIndex = 0;
                 }
                 catch { }
 

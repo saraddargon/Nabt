@@ -410,7 +410,7 @@ namespace StockControl
                     using (TextFieldParser parser = new TextFieldParser(op.FileName))
                     {
                         dt.Rows.Clear();
-                        DateTime? d = null;
+                        DateTime d = DateTime.Now;
                         DateTime d1 = DateTime.Now;
                         parser.TextFieldType = FieldType.Delimited;
                         parser.SetDelimiters(",");
@@ -442,9 +442,11 @@ namespace StockControl
                                     else if (c == 5)
                                         rd["MCName"] = Convert.ToString(field);
                                     else if (c == 6)
-                                        rd["Limit"] = Convert.ToBoolean(field);
+                                        rd["Limit"] = false;// Convert.ToBoolean(field);
                                     else if (c == 7)
                                     {
+                                        rd["ExpireDate"] = DateTime.Now;
+                                        /*
                                         if (DateTime.TryParse(Convert.ToString(field), out d1))
                                         {
                                             rd["ExpireDate"] = Convert.ToDateTime(field);
@@ -454,6 +456,7 @@ namespace StockControl
                                         {
                                             rd["ExpireDate"] = d;
                                         }
+                                        */
                                     }
 
                                 }
@@ -516,7 +519,7 @@ namespace StockControl
                             var x = (from ix in db.tb_Models where ix.ModelName == rd["ModelName"].ToString().Trim() select ix).FirstOrDefault();
 
 
-                            DateTime? d = null;
+                            DateTime d = DateTime.Now;
                             DateTime d1 = DateTime.Now;
                             if (x == null)
                             {
@@ -526,16 +529,18 @@ namespace StockControl
                                 u.ModelActive = Convert.ToBoolean(rd["ModelActive"].ToString());
                                 u.LineName = rd["LineName"].ToString().Trim();
                                 u.MCName = rd["MCName"].ToString().Trim();
-                                u.Limit = Convert.ToBoolean(rd["Limit"].ToString());
-                                if (DateTime.TryParse(rd["ExpireDate"].ToString(), out d1))
-                                {
+                                /*
+                                    u.Limit = Convert.ToBoolean(rd["Limit"].ToString());
+                                    if (DateTime.TryParse(rd["ExpireDate"].ToString(), out d1))
+                                    {
 
-                                    u.ExpireDate = Convert.ToDateTime(rd["ExpireDate"].ToString());
-                                }
-                                else
-                                {
-                                    u.ExpireDate = d;
-                                }
+                                        u.ExpireDate = Convert.ToDateTime(rd["ExpireDate"].ToString());
+                                    }
+                                    else
+                                    {
+                                        u.ExpireDate = d;
+                                    }
+                                */
                                 db.tb_Models.InsertOnSubmit(u);
                                 db.SubmitChanges();
                             }
@@ -546,16 +551,19 @@ namespace StockControl
                                 x.ModelActive = Convert.ToBoolean(rd["ModelActive"].ToString());
                                 x.LineName = rd["LineName"].ToString().Trim();
                                 x.MCName = rd["MCName"].ToString().Trim();
-                                x.Limit = Convert.ToBoolean(rd["Limit"].ToString());
-                                if (DateTime.TryParse(rd["ExpireDate"].ToString(), out d1))
-                                {
+                                /*
 
-                                    x.ExpireDate = Convert.ToDateTime(rd["ExpireDate"].ToString());
-                                }
-                                else
-                                {
-                                    x.ExpireDate = d;
-                                }
+                                    x.Limit = Convert.ToBoolean(rd["Limit"].ToString());
+                                    if (DateTime.TryParse(rd["ExpireDate"].ToString(), out d1))
+                                    {
+
+                                        x.ExpireDate = Convert.ToDateTime(rd["ExpireDate"].ToString());
+                                    }
+                                    else
+                                    {
+                                        x.ExpireDate = d;
+                                    }
+                                */
 
 
                                 db.SubmitChanges();
