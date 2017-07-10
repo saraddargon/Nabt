@@ -70,58 +70,28 @@ namespace StockControl
                     //radGridView1.DataSource = db.tb_Histories.Where(s => s.ScreenName == ScreenSearch).OrderBy(o => o.CreateDate).ToList();
                     int c = 0;
 
-                    var g = (from ix in db.tb_Items
-                             select new {
-                                 ix.CodeNo,
-                                 ix.ItemNo,
-                                 ix.ItemDescription,
-                                 ix.ShelfNo,
-                                 ix.GroupCode,
-                                 ix.TypeCode,
-                                 ix.StandardCost,
-                                 ix.UnitBuy,
-                                 ix.VendorNo,
-                                 ix.VendorItemName,
-                                 ix.StockInv,
-                                 ix.StockDL,
-                                 ix.StockBackOrder,
-                                 ix.Leadtime,
-                                 ix.MaximumStock,
-                                 ix.MinimumStock,
-                                 ix.Toollife,
-                                 ix.SD,
-                                 ix.Status,
-                                 ix.StopOrder
-                                 //,VendorName = (from oo in db.tb_Vendors where oo.VendorNo == ix.VendorNo select new { oo.VendorName }).FirstOrDefault()
-                                    
-                                        
-
-                    }).Where(a => a.CodeNo.Contains(txtCodeNo.Text)
-                        && a.ItemNo.Contains(txtPartName.Text)
-                       
-                        && a.ItemDescription.Contains(txtDescription.Text)
-                        && a.VendorItemName.Contains(txtVendorName.Text))
-                        .ToList();
+                    //var g = (from ix in db.tb_Items select ix).Where(a => a.CodeNo.Contains(txtCodeNo.Text)
+                    //    && a.ItemNo.Contains(txtPartName.Text)
+                    //    && a.ItemDescription.Contains(txtDescription.Text)
+                    //    && a.VendorItemName.Contains(txtVendorName.Text))
+                    //    .ToList();
 
 
-                    //var g=(from ix in db.sp_SelectItem() select ix).ToList();
-                    //if (g.Count > 0)
-                    //{
-
-                    radGridView1.DataSource = g;
-                    foreach (var x in radGridView1.Rows)
+                    var g = (from ix in db.sp_014_Select_PartList(txtCodeNo.Text,txtPartName.Text,txtDescription.Text,"",txtVendorName.Text,"") select ix).ToList();
+                    if (g.Count > 0)
                     {
-                        c += 1;
-                        x.Cells["No"].Value = c;
+                        radGridView1.DataSource = g;
+                        foreach (var x in radGridView1.Rows)
+                        {
+                            c += 1;
+                            x.Cells["No"].Value = c;
+                            //       // x.Cells["StockInv"].Value = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(x.Cells["CodeNo"].Value), "Invoice", 0)));
+                            //       // x.Cells["StockDL"].Value = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(x.Cells["CodeNo"].Value), "Temp", 0)));
+                            //       // x.Cells["StockBackOrder"].Value = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(x.Cells["CodeNo"].Value), "BackOrder", 0)));
 
-                        //       // x.Cells["StockInv"].Value = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(x.Cells["CodeNo"].Value), "Invoice", 0)));
-                        //       // x.Cells["StockDL"].Value = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(x.Cells["CodeNo"].Value), "Temp", 0)));
-                        //       // x.Cells["StockBackOrder"].Value = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(x.Cells["CodeNo"].Value), "BackOrder", 0)));
-
-                        //    }
+                            //    }
+                        }
                     }
-
-
 
 
                 }

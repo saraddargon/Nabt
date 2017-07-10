@@ -83,11 +83,12 @@ namespace StockControl
                 {
                     
                     var g = (from i in db.tb_Items
+                             join b in db.tb_Vendors on i.VendorNo equals b.VendorNo
                              where 
                                   i.CodeNo.Contains(txtCodeNo.Text.Trim())
                                  && i.ItemNo.Contains(txtItemNo.Text.Trim())
                                  && i.ItemDescription.Contains(txtItemDescription.Text.Trim())
-                                 && i.VendorItemName.Contains(txtVendorName.Text.Trim())
+                                 && b.VendorName.Contains(txtVendorName.Text.Trim())
                                  && i.ShelfNo.Contains(txtShelf.Text.Trim())
                                  && i.TypeCode.Contains(ddlType.Text)
                                  
@@ -113,7 +114,7 @@ namespace StockControl
                                  UnitBuy = i.UnitBuy,
                                  Amount = 0,//StockControl.dbClss.TDe(i.StockInv) * Convert.ToDecimal(i.StandardCost),
                                  VendorNo = i.VendorNo,
-                                 VendorItemName = i.VendorItemName,
+                                 VendorItemName =b.VendorName,
                                  Leadtime = i.Leadtime,
                                  MaximumStock = i.MaximumStock,
                                  MinimumStock = i.MinimumStock,
@@ -155,6 +156,24 @@ namespace StockControl
                                     gg.Status,
                                     gg.StopOrder);
                         }
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            this.Cursor = Cursors.Default;
+        }
+        private void Load_Item2()
+        {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    var g = (from ix in db.sp_015_Stock_List(txtCodeNo.Text,txtItemNo.Text,txtItemDescription.Text,"",txtVendorName.Text,"Active",txtShelf.Text,ddlType.Text) select ix).ToList();
+                    if (g.Count > 0)
+                    {
+                        dgvData.DataSource = g;
                     }
                 }
             }
@@ -487,7 +506,9 @@ namespace StockControl
             {
                 this.Cursor = Cursors.WaitCursor;
 
-                Load_Item();
+                //Load_Item();
+                Load_Item2();
+
                 //if (ddlType.Text.Equals("รับสินค้า"))
                 //    Load_Receive();
                 //else if (ddlType.Text.Equals("ยกเลิกรับสินค้า"))

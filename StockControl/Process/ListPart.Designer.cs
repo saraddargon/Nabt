@@ -409,9 +409,9 @@
             gridViewTextBoxColumn10.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             gridViewTextBoxColumn10.Width = 80;
             gridViewTextBoxColumn11.EnableExpressionEditor = false;
-            gridViewTextBoxColumn11.FieldName = "VendorName";
+            gridViewTextBoxColumn11.FieldName = "VendorItemName";
             gridViewTextBoxColumn11.HeaderText = "ผู้ขายสินค้า";
-            gridViewTextBoxColumn11.Name = "VendorName";
+            gridViewTextBoxColumn11.Name = "VendorItemName";
             gridViewTextBoxColumn11.ReadOnly = true;
             gridViewTextBoxColumn11.Width = 280;
             gridViewDecimalColumn1.EnableExpressionEditor = false;

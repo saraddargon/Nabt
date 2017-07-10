@@ -76,7 +76,8 @@ namespace StockControl
                     // Include the *whole* of the day indicated by searchEndDate
                     DateTime exclusiveEnd = dtDateTo.Value.Date.AddDays(1);
 
-                    var g = (from ix in db.tb_PurchaseRequests select ix).Where(a => a.VendorNo.Contains(txtVendorNo.Text)
+                    var g = (from ix in db.tb_PurchaseRequests select ix)
+                        .Where(a => a.VendorNo.Contains(txtVendorNo.Text)
                         && a.TEMPNo.Contains(txtTempNo.Text)
                         && a.PRNo.Contains(txtPRNo.Text)
                         && a.VendorName.Contains(txtVendorName.Text)

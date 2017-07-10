@@ -134,10 +134,10 @@
             this.radRibbonBar1.StartMenuItems.AddRange(new Telerik.WinControls.RadItem[] {
             this.radMenuItem1});
             this.radRibbonBar1.TabIndex = 0;
-            this.radRibbonBar1.Text = "ListTool (รายการ Item ทั้งหมด)";
+            this.radRibbonBar1.Text = "List Create (P/R) (รายการ Item ทั้งหมด)";
             this.radRibbonBar1.ThemeName = "Office2010Blue";
             this.radRibbonBar1.Click += new System.EventHandler(this.radRibbonBar1_Click);
-            ((Telerik.WinControls.UI.RadRibbonBarElement)(this.radRibbonBar1.GetChildAt(0))).Text = "ListTool (รายการ Item ทั้งหมด)";
+            ((Telerik.WinControls.UI.RadRibbonBarElement)(this.radRibbonBar1.GetChildAt(0))).Text = "List Create (P/R) (รายการ Item ทั้งหมด)";
             ((Telerik.WinControls.UI.RadToggleButtonElement)(this.radRibbonBar1.GetChildAt(0).GetChildAt(6).GetChildAt(0))).AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.Auto;
             // 
             // ribbonTab1
@@ -429,7 +429,7 @@
             gridViewTextBoxColumn11.Name = "CreateBy";
             gridViewTextBoxColumn11.Width = 91;
             gridViewDateTimeColumn2.EnableExpressionEditor = false;
-            gridViewDateTimeColumn2.FieldName = "UpdateDate";
+            gridViewDateTimeColumn2.FieldName = "CreateDate";
             gridViewDateTimeColumn2.Format = System.Windows.Forms.DateTimePickerFormat.Long;
             gridViewDateTimeColumn2.FormatString = "{0:dd/MMM/yyyy}";
             gridViewDateTimeColumn2.HeaderText = "สร้างวันที่";
