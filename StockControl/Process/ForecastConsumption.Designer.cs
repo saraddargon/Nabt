@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ForecastConsumption));
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
             this.radRibbonBarGroup1 = new Telerik.WinControls.UI.RadRibbonBarGroup();
@@ -45,7 +45,33 @@
             this.radLabelElement1 = new Telerik.WinControls.UI.RadLabelElement();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
+            this.txtDec = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel14 = new Telerik.WinControls.UI.RadLabel();
+            this.txtSep = new Telerik.WinControls.UI.RadTextBox();
+            this.txtNov = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel11 = new Telerik.WinControls.UI.RadLabel();
+            this.radLabel13 = new Telerik.WinControls.UI.RadLabel();
+            this.txtAug = new Telerik.WinControls.UI.RadTextBox();
+            this.txtOct = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel10 = new Telerik.WinControls.UI.RadLabel();
+            this.radLabel12 = new Telerik.WinControls.UI.RadLabel();
+            this.txtJul = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel9 = new Telerik.WinControls.UI.RadLabel();
+            this.txtJun = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel8 = new Telerik.WinControls.UI.RadLabel();
+            this.txtMay = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel7 = new Telerik.WinControls.UI.RadLabel();
+            this.txtApr = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel6 = new Telerik.WinControls.UI.RadLabel();
+            this.txtMar = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel5 = new Telerik.WinControls.UI.RadLabel();
+            this.txtFeb = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel4 = new Telerik.WinControls.UI.RadLabel();
+            this.txtJan = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel3 = new Telerik.WinControls.UI.RadLabel();
+            this.txtYear = new System.Windows.Forms.TextBox();
             this.txtModelName = new Telerik.WinControls.UI.RadMultiColumnComboBox();
+            this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
             this.office2010BlueTheme1 = new Telerik.WinControls.Themes.Office2010BlueTheme();
             this.radRibbonBarButtonGroup2 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
@@ -59,66 +85,52 @@
             this.RMenu4 = new Telerik.WinControls.UI.RadMenuItem();
             this.RMenu5 = new Telerik.WinControls.UI.RadMenuItem();
             this.RMenu6 = new Telerik.WinControls.UI.RadMenuItem();
-            this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
-            this.txtYear = new System.Windows.Forms.TextBox();
-            this.radLabel3 = new Telerik.WinControls.UI.RadLabel();
-            this.txtJan = new Telerik.WinControls.UI.RadTextBox();
-            this.radLabel4 = new Telerik.WinControls.UI.RadLabel();
-            this.txtFeb = new Telerik.WinControls.UI.RadTextBox();
-            this.radLabel5 = new Telerik.WinControls.UI.RadLabel();
-            this.txtMar = new Telerik.WinControls.UI.RadTextBox();
-            this.radLabel6 = new Telerik.WinControls.UI.RadLabel();
-            this.txtApr = new Telerik.WinControls.UI.RadTextBox();
-            this.radLabel7 = new Telerik.WinControls.UI.RadLabel();
-            this.txtMay = new Telerik.WinControls.UI.RadTextBox();
-            this.radLabel8 = new Telerik.WinControls.UI.RadLabel();
-            this.txtJun = new Telerik.WinControls.UI.RadTextBox();
-            this.radLabel9 = new Telerik.WinControls.UI.RadLabel();
-            this.txtJul = new Telerik.WinControls.UI.RadTextBox();
-            this.radLabel10 = new Telerik.WinControls.UI.RadLabel();
-            this.txtAug = new Telerik.WinControls.UI.RadTextBox();
-            this.radLabel11 = new Telerik.WinControls.UI.RadLabel();
-            this.txtSep = new Telerik.WinControls.UI.RadTextBox();
-            this.radLabel12 = new Telerik.WinControls.UI.RadLabel();
-            this.txtOct = new Telerik.WinControls.UI.RadTextBox();
-            this.radLabel13 = new Telerik.WinControls.UI.RadLabel();
-            this.txtNov = new Telerik.WinControls.UI.RadTextBox();
-            this.radLabel14 = new Telerik.WinControls.UI.RadLabel();
-            this.txtDec = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel15 = new Telerik.WinControls.UI.RadLabel();
+            this.txtPartName = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel16 = new Telerik.WinControls.UI.RadLabel();
+            this.txtPartNo = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel17 = new Telerik.WinControls.UI.RadLabel();
+            this.txtProcess = new Telerik.WinControls.UI.RadTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDec)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSep)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNov)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAug)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOct)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtJul)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtJun)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtApr)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFeb)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtJan)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModelName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModelName.EditorControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModelName.EditorControl.MasterTemplate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtJan)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFeb)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtApr)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMay)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtJun)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtJul)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAug)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSep)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOct)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNov)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDec)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPartName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPartNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel17)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProcess)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -232,7 +244,7 @@
             // 
             this.radStatusStrip1.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.radLabelElement1});
-            this.radStatusStrip1.Location = new System.Drawing.Point(0, 626);
+            this.radStatusStrip1.Location = new System.Drawing.Point(0, 673);
             this.radStatusStrip1.Name = "radStatusStrip1";
             this.radStatusStrip1.Size = new System.Drawing.Size(681, 26);
             this.radStatusStrip1.SizingGrip = false;
@@ -253,12 +265,18 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 161);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(681, 465);
+            this.panel1.Size = new System.Drawing.Size(681, 512);
             this.panel1.TabIndex = 2;
             // 
             // radPanel1
             // 
             this.radPanel1.BackColor = System.Drawing.Color.GhostWhite;
+            this.radPanel1.Controls.Add(this.txtProcess);
+            this.radPanel1.Controls.Add(this.radLabel17);
+            this.radPanel1.Controls.Add(this.txtPartNo);
+            this.radPanel1.Controls.Add(this.radLabel16);
+            this.radPanel1.Controls.Add(this.txtPartName);
+            this.radPanel1.Controls.Add(this.radLabel15);
             this.radPanel1.Controls.Add(this.txtDec);
             this.radPanel1.Controls.Add(this.radLabel14);
             this.radPanel1.Controls.Add(this.txtSep);
@@ -290,9 +308,213 @@
             this.radPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radPanel1.Location = new System.Drawing.Point(0, 0);
             this.radPanel1.Name = "radPanel1";
-            this.radPanel1.Size = new System.Drawing.Size(681, 465);
+            this.radPanel1.Size = new System.Drawing.Size(681, 512);
             this.radPanel1.TabIndex = 0;
             this.radPanel1.ThemeName = "Office2010Blue";
+            // 
+            // txtDec
+            // 
+            this.txtDec.Location = new System.Drawing.Point(102, 446);
+            this.txtDec.Name = "txtDec";
+            this.txtDec.Size = new System.Drawing.Size(100, 20);
+            this.txtDec.TabIndex = 33;
+            this.txtDec.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // radLabel14
+            // 
+            this.radLabel14.Location = new System.Drawing.Point(70, 446);
+            this.radLabel14.Name = "radLabel14";
+            this.radLabel14.Size = new System.Drawing.Size(31, 18);
+            this.radLabel14.TabIndex = 32;
+            this.radLabel14.Text = "Dec :";
+            // 
+            // txtSep
+            // 
+            this.txtSep.Location = new System.Drawing.Point(102, 367);
+            this.txtSep.Name = "txtSep";
+            this.txtSep.Size = new System.Drawing.Size(100, 20);
+            this.txtSep.TabIndex = 27;
+            this.txtSep.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtNov
+            // 
+            this.txtNov.Location = new System.Drawing.Point(102, 420);
+            this.txtNov.Name = "txtNov";
+            this.txtNov.Size = new System.Drawing.Size(100, 20);
+            this.txtNov.TabIndex = 30;
+            this.txtNov.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // radLabel11
+            // 
+            this.radLabel11.Location = new System.Drawing.Point(70, 367);
+            this.radLabel11.Name = "radLabel11";
+            this.radLabel11.Size = new System.Drawing.Size(30, 18);
+            this.radLabel11.TabIndex = 26;
+            this.radLabel11.Text = "Sep :";
+            // 
+            // radLabel13
+            // 
+            this.radLabel13.Location = new System.Drawing.Point(68, 421);
+            this.radLabel13.Name = "radLabel13";
+            this.radLabel13.Size = new System.Drawing.Size(32, 18);
+            this.radLabel13.TabIndex = 31;
+            this.radLabel13.Text = "Nov :";
+            // 
+            // txtAug
+            // 
+            this.txtAug.Location = new System.Drawing.Point(102, 341);
+            this.txtAug.Name = "txtAug";
+            this.txtAug.Size = new System.Drawing.Size(100, 20);
+            this.txtAug.TabIndex = 25;
+            this.txtAug.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtOct
+            // 
+            this.txtOct.Location = new System.Drawing.Point(102, 394);
+            this.txtOct.Name = "txtOct";
+            this.txtOct.Size = new System.Drawing.Size(100, 20);
+            this.txtOct.TabIndex = 29;
+            this.txtOct.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // radLabel10
+            // 
+            this.radLabel10.Location = new System.Drawing.Point(68, 342);
+            this.radLabel10.Name = "radLabel10";
+            this.radLabel10.Size = new System.Drawing.Size(32, 18);
+            this.radLabel10.TabIndex = 24;
+            this.radLabel10.Text = "Aug :";
+            // 
+            // radLabel12
+            // 
+            this.radLabel12.Location = new System.Drawing.Point(71, 395);
+            this.radLabel12.Name = "radLabel12";
+            this.radLabel12.Size = new System.Drawing.Size(29, 18);
+            this.radLabel12.TabIndex = 28;
+            this.radLabel12.Text = "Oct :";
+            // 
+            // txtJul
+            // 
+            this.txtJul.Location = new System.Drawing.Point(102, 315);
+            this.txtJul.Name = "txtJul";
+            this.txtJul.Size = new System.Drawing.Size(100, 20);
+            this.txtJul.TabIndex = 23;
+            this.txtJul.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // radLabel9
+            // 
+            this.radLabel9.Location = new System.Drawing.Point(75, 316);
+            this.radLabel9.Name = "radLabel9";
+            this.radLabel9.Size = new System.Drawing.Size(25, 18);
+            this.radLabel9.TabIndex = 22;
+            this.radLabel9.Text = "Jul :";
+            // 
+            // txtJun
+            // 
+            this.txtJun.Location = new System.Drawing.Point(102, 289);
+            this.txtJun.Name = "txtJun";
+            this.txtJun.Size = new System.Drawing.Size(100, 20);
+            this.txtJun.TabIndex = 21;
+            this.txtJun.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // radLabel8
+            // 
+            this.radLabel8.Location = new System.Drawing.Point(71, 291);
+            this.radLabel8.Name = "radLabel8";
+            this.radLabel8.Size = new System.Drawing.Size(29, 18);
+            this.radLabel8.TabIndex = 20;
+            this.radLabel8.Text = "Jun :";
+            // 
+            // txtMay
+            // 
+            this.txtMay.Location = new System.Drawing.Point(102, 263);
+            this.txtMay.Name = "txtMay";
+            this.txtMay.Size = new System.Drawing.Size(100, 20);
+            this.txtMay.TabIndex = 19;
+            this.txtMay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // radLabel7
+            // 
+            this.radLabel7.Location = new System.Drawing.Point(67, 264);
+            this.radLabel7.Name = "radLabel7";
+            this.radLabel7.Size = new System.Drawing.Size(33, 18);
+            this.radLabel7.TabIndex = 18;
+            this.radLabel7.Text = "May :";
+            // 
+            // txtApr
+            // 
+            this.txtApr.Location = new System.Drawing.Point(102, 237);
+            this.txtApr.Name = "txtApr";
+            this.txtApr.Size = new System.Drawing.Size(100, 20);
+            this.txtApr.TabIndex = 17;
+            this.txtApr.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // radLabel6
+            // 
+            this.radLabel6.Location = new System.Drawing.Point(70, 238);
+            this.radLabel6.Name = "radLabel6";
+            this.radLabel6.Size = new System.Drawing.Size(30, 18);
+            this.radLabel6.TabIndex = 16;
+            this.radLabel6.Text = "Apr :";
+            // 
+            // txtMar
+            // 
+            this.txtMar.Location = new System.Drawing.Point(102, 211);
+            this.txtMar.Name = "txtMar";
+            this.txtMar.Size = new System.Drawing.Size(100, 20);
+            this.txtMar.TabIndex = 15;
+            this.txtMar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // radLabel5
+            // 
+            this.radLabel5.Location = new System.Drawing.Point(68, 212);
+            this.radLabel5.Name = "radLabel5";
+            this.radLabel5.Size = new System.Drawing.Size(32, 18);
+            this.radLabel5.TabIndex = 14;
+            this.radLabel5.Text = "Mar :";
+            // 
+            // txtFeb
+            // 
+            this.txtFeb.Location = new System.Drawing.Point(102, 185);
+            this.txtFeb.Name = "txtFeb";
+            this.txtFeb.Size = new System.Drawing.Size(100, 20);
+            this.txtFeb.TabIndex = 13;
+            this.txtFeb.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // radLabel4
+            // 
+            this.radLabel4.Location = new System.Drawing.Point(70, 185);
+            this.radLabel4.Name = "radLabel4";
+            this.radLabel4.Size = new System.Drawing.Size(30, 18);
+            this.radLabel4.TabIndex = 12;
+            this.radLabel4.Text = "Feb :";
+            // 
+            // txtJan
+            // 
+            this.txtJan.Location = new System.Drawing.Point(102, 159);
+            this.txtJan.Name = "txtJan";
+            this.txtJan.Size = new System.Drawing.Size(100, 20);
+            this.txtJan.TabIndex = 11;
+            this.txtJan.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtJan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtJan_KeyPress);
+            // 
+            // radLabel3
+            // 
+            this.radLabel3.Location = new System.Drawing.Point(72, 160);
+            this.radLabel3.Name = "radLabel3";
+            this.radLabel3.Size = new System.Drawing.Size(28, 18);
+            this.radLabel3.TabIndex = 10;
+            this.radLabel3.Text = "Jan :";
+            // 
+            // txtYear
+            // 
+            this.txtYear.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtYear.Location = new System.Drawing.Point(102, 22);
+            this.txtYear.Name = "txtYear";
+            this.txtYear.ReadOnly = true;
+            this.txtYear.Size = new System.Drawing.Size(100, 20);
+            this.txtYear.TabIndex = 1;
+            this.txtYear.TabStop = false;
+            this.txtYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtModelName
             // 
@@ -313,7 +535,7 @@
             this.txtModelName.EditorControl.MasterTemplate.AllowColumnChooser = false;
             this.txtModelName.EditorControl.MasterTemplate.EnableGrouping = false;
             this.txtModelName.EditorControl.MasterTemplate.ShowFilteringRow = false;
-            this.txtModelName.EditorControl.MasterTemplate.ViewDefinition = tableViewDefinition2;
+            this.txtModelName.EditorControl.MasterTemplate.ViewDefinition = tableViewDefinition1;
             this.txtModelName.EditorControl.Name = "NestedRadGridView";
             this.txtModelName.EditorControl.ReadOnly = true;
             this.txtModelName.EditorControl.ShowGroupPanel = false;
@@ -324,6 +546,14 @@
             this.txtModelName.Size = new System.Drawing.Size(196, 20);
             this.txtModelName.TabIndex = 3;
             this.txtModelName.TabStop = false;
+            // 
+            // radLabel2
+            // 
+            this.radLabel2.Location = new System.Drawing.Point(65, 23);
+            this.radLabel2.Name = "radLabel2";
+            this.radLabel2.Size = new System.Drawing.Size(34, 18);
+            this.radLabel2.TabIndex = 0;
+            this.radLabel2.Text = "Year :";
             // 
             // radLabel1
             // 
@@ -411,223 +641,59 @@
             this.RMenu6.Name = "RMenu6";
             this.RMenu6.Text = "ลบรายการ";
             // 
-            // radLabel2
+            // radLabel15
             // 
-            this.radLabel2.Location = new System.Drawing.Point(65, 23);
-            this.radLabel2.Name = "radLabel2";
-            this.radLabel2.Size = new System.Drawing.Size(34, 18);
-            this.radLabel2.TabIndex = 0;
-            this.radLabel2.Text = "Year :";
+            this.radLabel15.Location = new System.Drawing.Point(37, 78);
+            this.radLabel15.Name = "radLabel15";
+            this.radLabel15.Size = new System.Drawing.Size(62, 18);
+            this.radLabel15.TabIndex = 4;
+            this.radLabel15.Text = "PartName :";
             // 
-            // txtYear
+            // txtPartName
             // 
-            this.txtYear.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtYear.Location = new System.Drawing.Point(102, 22);
-            this.txtYear.Name = "txtYear";
-            this.txtYear.ReadOnly = true;
-            this.txtYear.Size = new System.Drawing.Size(100, 20);
-            this.txtYear.TabIndex = 1;
-            this.txtYear.TabStop = false;
-            this.txtYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPartName.Location = new System.Drawing.Point(102, 79);
+            this.txtPartName.Name = "txtPartName";
+            this.txtPartName.Size = new System.Drawing.Size(100, 20);
+            this.txtPartName.TabIndex = 5;
+            this.txtPartName.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // radLabel3
+            // radLabel16
             // 
-            this.radLabel3.Location = new System.Drawing.Point(71, 78);
-            this.radLabel3.Name = "radLabel3";
-            this.radLabel3.Size = new System.Drawing.Size(28, 18);
-            this.radLabel3.TabIndex = 4;
-            this.radLabel3.Text = "Jan :";
+            this.radLabel16.Location = new System.Drawing.Point(52, 106);
+            this.radLabel16.Name = "radLabel16";
+            this.radLabel16.Size = new System.Drawing.Size(47, 18);
+            this.radLabel16.TabIndex = 6;
+            this.radLabel16.Text = "PartNo :";
             // 
-            // txtJan
+            // txtPartNo
             // 
-            this.txtJan.Location = new System.Drawing.Point(101, 77);
-            this.txtJan.Name = "txtJan";
-            this.txtJan.Size = new System.Drawing.Size(100, 20);
-            this.txtJan.TabIndex = 5;
-            this.txtJan.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtJan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtJan_KeyPress);
+            this.txtPartNo.Location = new System.Drawing.Point(102, 105);
+            this.txtPartNo.Name = "txtPartNo";
+            this.txtPartNo.Size = new System.Drawing.Size(100, 20);
+            this.txtPartNo.TabIndex = 7;
+            this.txtPartNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // radLabel4
+            // radLabel17
             // 
-            this.radLabel4.Location = new System.Drawing.Point(69, 103);
-            this.radLabel4.Name = "radLabel4";
-            this.radLabel4.Size = new System.Drawing.Size(30, 18);
-            this.radLabel4.TabIndex = 6;
-            this.radLabel4.Text = "Feb :";
+            this.radLabel17.Location = new System.Drawing.Point(50, 132);
+            this.radLabel17.Name = "radLabel17";
+            this.radLabel17.Size = new System.Drawing.Size(49, 18);
+            this.radLabel17.TabIndex = 8;
+            this.radLabel17.Text = "Process :";
             // 
-            // txtFeb
+            // txtProcess
             // 
-            this.txtFeb.Location = new System.Drawing.Point(101, 103);
-            this.txtFeb.Name = "txtFeb";
-            this.txtFeb.Size = new System.Drawing.Size(100, 20);
-            this.txtFeb.TabIndex = 7;
-            this.txtFeb.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radLabel5
-            // 
-            this.radLabel5.Location = new System.Drawing.Point(67, 130);
-            this.radLabel5.Name = "radLabel5";
-            this.radLabel5.Size = new System.Drawing.Size(32, 18);
-            this.radLabel5.TabIndex = 8;
-            this.radLabel5.Text = "Mar :";
-            // 
-            // txtMar
-            // 
-            this.txtMar.Location = new System.Drawing.Point(101, 129);
-            this.txtMar.Name = "txtMar";
-            this.txtMar.Size = new System.Drawing.Size(100, 20);
-            this.txtMar.TabIndex = 9;
-            this.txtMar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radLabel6
-            // 
-            this.radLabel6.Location = new System.Drawing.Point(69, 156);
-            this.radLabel6.Name = "radLabel6";
-            this.radLabel6.Size = new System.Drawing.Size(30, 18);
-            this.radLabel6.TabIndex = 10;
-            this.radLabel6.Text = "Apr :";
-            // 
-            // txtApr
-            // 
-            this.txtApr.Location = new System.Drawing.Point(101, 155);
-            this.txtApr.Name = "txtApr";
-            this.txtApr.Size = new System.Drawing.Size(100, 20);
-            this.txtApr.TabIndex = 11;
-            this.txtApr.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radLabel7
-            // 
-            this.radLabel7.Location = new System.Drawing.Point(66, 182);
-            this.radLabel7.Name = "radLabel7";
-            this.radLabel7.Size = new System.Drawing.Size(33, 18);
-            this.radLabel7.TabIndex = 12;
-            this.radLabel7.Text = "May :";
-            // 
-            // txtMay
-            // 
-            this.txtMay.Location = new System.Drawing.Point(101, 181);
-            this.txtMay.Name = "txtMay";
-            this.txtMay.Size = new System.Drawing.Size(100, 20);
-            this.txtMay.TabIndex = 13;
-            this.txtMay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radLabel8
-            // 
-            this.radLabel8.Location = new System.Drawing.Point(70, 209);
-            this.radLabel8.Name = "radLabel8";
-            this.radLabel8.Size = new System.Drawing.Size(29, 18);
-            this.radLabel8.TabIndex = 14;
-            this.radLabel8.Text = "Jun :";
-            // 
-            // txtJun
-            // 
-            this.txtJun.Location = new System.Drawing.Point(101, 207);
-            this.txtJun.Name = "txtJun";
-            this.txtJun.Size = new System.Drawing.Size(100, 20);
-            this.txtJun.TabIndex = 15;
-            this.txtJun.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radLabel9
-            // 
-            this.radLabel9.Location = new System.Drawing.Point(74, 234);
-            this.radLabel9.Name = "radLabel9";
-            this.radLabel9.Size = new System.Drawing.Size(25, 18);
-            this.radLabel9.TabIndex = 16;
-            this.radLabel9.Text = "Jul :";
-            // 
-            // txtJul
-            // 
-            this.txtJul.Location = new System.Drawing.Point(101, 233);
-            this.txtJul.Name = "txtJul";
-            this.txtJul.Size = new System.Drawing.Size(100, 20);
-            this.txtJul.TabIndex = 17;
-            this.txtJul.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radLabel10
-            // 
-            this.radLabel10.Location = new System.Drawing.Point(67, 260);
-            this.radLabel10.Name = "radLabel10";
-            this.radLabel10.Size = new System.Drawing.Size(32, 18);
-            this.radLabel10.TabIndex = 18;
-            this.radLabel10.Text = "Aug :";
-            // 
-            // txtAug
-            // 
-            this.txtAug.Location = new System.Drawing.Point(101, 259);
-            this.txtAug.Name = "txtAug";
-            this.txtAug.Size = new System.Drawing.Size(100, 20);
-            this.txtAug.TabIndex = 19;
-            this.txtAug.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radLabel11
-            // 
-            this.radLabel11.Location = new System.Drawing.Point(69, 285);
-            this.radLabel11.Name = "radLabel11";
-            this.radLabel11.Size = new System.Drawing.Size(30, 18);
-            this.radLabel11.TabIndex = 20;
-            this.radLabel11.Text = "Sep :";
-            // 
-            // txtSep
-            // 
-            this.txtSep.Location = new System.Drawing.Point(101, 285);
-            this.txtSep.Name = "txtSep";
-            this.txtSep.Size = new System.Drawing.Size(100, 20);
-            this.txtSep.TabIndex = 21;
-            this.txtSep.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radLabel12
-            // 
-            this.radLabel12.Location = new System.Drawing.Point(70, 313);
-            this.radLabel12.Name = "radLabel12";
-            this.radLabel12.Size = new System.Drawing.Size(29, 18);
-            this.radLabel12.TabIndex = 22;
-            this.radLabel12.Text = "Oct :";
-            // 
-            // txtOct
-            // 
-            this.txtOct.Location = new System.Drawing.Point(101, 312);
-            this.txtOct.Name = "txtOct";
-            this.txtOct.Size = new System.Drawing.Size(100, 20);
-            this.txtOct.TabIndex = 23;
-            this.txtOct.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radLabel13
-            // 
-            this.radLabel13.Location = new System.Drawing.Point(67, 339);
-            this.radLabel13.Name = "radLabel13";
-            this.radLabel13.Size = new System.Drawing.Size(32, 18);
-            this.radLabel13.TabIndex = 24;
-            this.radLabel13.Text = "Nov :";
-            // 
-            // txtNov
-            // 
-            this.txtNov.Location = new System.Drawing.Point(101, 338);
-            this.txtNov.Name = "txtNov";
-            this.txtNov.Size = new System.Drawing.Size(100, 20);
-            this.txtNov.TabIndex = 25;
-            this.txtNov.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // radLabel14
-            // 
-            this.radLabel14.Location = new System.Drawing.Point(69, 364);
-            this.radLabel14.Name = "radLabel14";
-            this.radLabel14.Size = new System.Drawing.Size(31, 18);
-            this.radLabel14.TabIndex = 26;
-            this.radLabel14.Text = "Dec :";
-            // 
-            // txtDec
-            // 
-            this.txtDec.Location = new System.Drawing.Point(101, 364);
-            this.txtDec.Name = "txtDec";
-            this.txtDec.Size = new System.Drawing.Size(100, 20);
-            this.txtDec.TabIndex = 27;
-            this.txtDec.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtProcess.Location = new System.Drawing.Point(102, 131);
+            this.txtProcess.Name = "txtProcess";
+            this.txtProcess.Size = new System.Drawing.Size(100, 20);
+            this.txtProcess.TabIndex = 9;
+            this.txtProcess.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // ForecastConsumption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(681, 652);
+            this.ClientSize = new System.Drawing.Size(681, 699);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.radStatusStrip1);
             this.Controls.Add(this.radRibbonBar1);
@@ -648,35 +714,41 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).EndInit();
             this.radPanel1.ResumeLayout(false);
             this.radPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDec)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSep)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNov)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAug)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOct)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtJul)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtJun)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtApr)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFeb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtJan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModelName.EditorControl.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModelName.EditorControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtModelName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtJan)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFeb)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtApr)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMay)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtJun)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtJul)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAug)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSep)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOct)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNov)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDec)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPartName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPartNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel17)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProcess)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -739,5 +811,11 @@
         private Telerik.WinControls.UI.RadTextBox txtFeb;
         private Telerik.WinControls.UI.RadLabel radLabel4;
         private Telerik.WinControls.UI.RadTextBox txtJan;
+        private Telerik.WinControls.UI.RadTextBox txtProcess;
+        private Telerik.WinControls.UI.RadLabel radLabel17;
+        private Telerik.WinControls.UI.RadTextBox txtPartNo;
+        private Telerik.WinControls.UI.RadLabel radLabel16;
+        private Telerik.WinControls.UI.RadTextBox txtPartName;
+        private Telerik.WinControls.UI.RadLabel radLabel15;
     }
 }

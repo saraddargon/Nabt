@@ -81,7 +81,6 @@ namespace StockControl
 
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    
                     var g = (from i in db.tb_Items
                              join b in db.tb_Vendors on i.VendorNo equals b.VendorNo
                              where 
@@ -124,8 +123,6 @@ namespace StockControl
                                  StopOrder = i.StopOrder
 
                              }).ToList();
-                    */
-                    //var g = (from i in db.sp_015_Stock_List()
                     //dgvData.DataSource = g;
                     if (g.Count > 0)
                     {

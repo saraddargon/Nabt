@@ -41,6 +41,9 @@ namespace StockControl
 
             dt.Columns.Add(new DataColumn("YYYY", typeof(int)));
             dt.Columns.Add(new DataColumn("ModelName", typeof(string)));
+            dt.Columns.Add(new DataColumn("PartName", typeof(string)));
+            dt.Columns.Add(new DataColumn("PartNo", typeof(string)));
+            dt.Columns.Add(new DataColumn("Process", typeof(string)));
             dt.Columns.Add(new DataColumn("JAN", typeof(decimal)));
             dt.Columns.Add(new DataColumn("FEB", typeof(decimal)));
             dt.Columns.Add(new DataColumn("MAR", typeof(decimal)));
@@ -58,6 +61,9 @@ namespace StockControl
 
             dt2.Columns.Add(new DataColumn("YYYY", typeof(int)));
             dt2.Columns.Add(new DataColumn("ModelName", typeof(string)));
+            dt2.Columns.Add(new DataColumn("PartName", typeof(string)));
+            dt2.Columns.Add(new DataColumn("PartNo", typeof(string)));
+            dt2.Columns.Add(new DataColumn("Process", typeof(string)));
             dt2.Columns.Add(new DataColumn("JAN", typeof(string)));
             dt2.Columns.Add(new DataColumn("FEB", typeof(string)));
             dt2.Columns.Add(new DataColumn("MAR", typeof(string)));
@@ -281,6 +287,7 @@ namespace StockControl
                                     var u = (from ix in db.tb_ProductionForecasts
                                              where ix.ModelName == Convert.ToString(g.Cells["ModelName"].Value)
                                              && ix.YYYY == Convert.ToInt32(g.Cells["YYYY"].Value)
+                                            // && ix.PartNo== Convert.ToString(g.Cells["PartNo"].Value)
                                              && ix.id == id
                                              select ix).First();
 
@@ -311,7 +318,7 @@ namespace StockControl
                                     u.OCT = a10;
                                     u.NOV = a11;
                                     u.DEC = a12;
-
+                                   
 
                                     C += 1;
 
@@ -566,32 +573,38 @@ namespace StockControl
                                     else if (c == 2)
                                         rd["ModelName"] = Convert.ToString(field);
                                     else if (c == 3)
-                                        rd["JAN"] = Convert.ToString(field);
+                                        rd["PartName"] = Convert.ToString(field);
                                     else if (c == 4)
-                                        rd["FEB"] = Convert.ToString(field).Trim();
+                                        rd["PartNo"] = Convert.ToString(field);
                                     else if (c == 5)
-                                        rd["MAR"] = Convert.ToString(field);
+                                        rd["Process"] = Convert.ToString(field);
                                     else if (c == 6)
-                                        rd["APR"] = Convert.ToString(field);
+                                        rd["JAN"] = Convert.ToString(field);
                                     else if (c == 7)
-                                        rd["MAY"] = Convert.ToString(field);
+                                        rd["FEB"] = Convert.ToString(field).Trim();
                                     else if (c == 8)
-                                        rd["JUN"] = Convert.ToString(field);
+                                        rd["MAR"] = Convert.ToString(field);
                                     else if (c == 9)
-                                        rd["JUL"] = Convert.ToString(field);
+                                        rd["APR"] = Convert.ToString(field);
                                     else if (c == 10)
-                                        rd["AUG"] = Convert.ToString(field);
+                                        rd["MAY"] = Convert.ToString(field);
                                     else if (c == 11)
-                                        rd["SEP"] = Convert.ToString(field);
+                                        rd["JUN"] = Convert.ToString(field);
                                     else if (c == 12)
-                                        rd["OCT"] = Convert.ToString(field);
+                                        rd["JUL"] = Convert.ToString(field);
                                     else if (c == 13)
-                                        rd["NOV"] = Convert.ToString(field);
+                                        rd["AUG"] = Convert.ToString(field);
                                     else if (c == 14)
-                                        rd["DEC"] = Convert.ToString(field);
+                                        rd["SEP"] = Convert.ToString(field);
                                     else if (c == 15)
-                                        rd["Active"] = Convert.ToBoolean(field);
+                                        rd["OCT"] = Convert.ToString(field);
                                     else if (c == 16)
+                                        rd["NOV"] = Convert.ToString(field);
+                                    else if (c == 17)
+                                        rd["DEC"] = Convert.ToString(field);
+                                    else if (c == 18)
+                                        rd["Active"] = Convert.ToBoolean(field);
+                                    else if (c == 19)
                                     {
                                         id = 0;
                                         int.TryParse(Convert.ToString(field), out id);
@@ -607,32 +620,38 @@ namespace StockControl
                                     else if (c == 2)
                                         rd["ModelName"] = "";
                                     else if (c == 3)
-                                        rd["JAN"] = "";
+                                        rd["PartName"] = "";
                                     else if (c == 4)
-                                        rd["FEB"] = "";
+                                        rd["PartNo"] = "";
                                     else if (c == 5)
-                                        rd["MAR"] = "";
+                                        rd["Process"] = "";
                                     else if (c == 6)
-                                        rd["APR"] = "";
+                                        rd["JAN"] = "";
                                     else if (c == 7)
-                                        rd["MAY"] = "";
+                                        rd["FEB"] = "";
                                     else if (c == 8)
-                                        rd["JUN"] = "";
+                                        rd["MAR"] = "";
                                     else if (c == 9)
-                                        rd["JUL"] = "";
+                                        rd["APR"] = "";
                                     else if (c == 10)
-                                        rd["AUG"] = "";
+                                        rd["MAY"] = "";
                                     else if (c == 11)
-                                        rd["SEP"] = "";
+                                        rd["JUN"] = "";
                                     else if (c == 12)
-                                        rd["OCT"] = "";
+                                        rd["JUL"] = "";
                                     else if (c == 13)
-                                        rd["NOV"] = "";
+                                        rd["AUG"] = "";
                                     else if (c == 14)
-                                        rd["DEC"] = "";
+                                        rd["SEP"] = "";
                                     else if (c == 15)
-                                        rd["Active"] = false;
+                                        rd["OCT"] = "";
                                     else if (c == 16)
+                                        rd["NOV"] = "";
+                                    else if (c == 17)
+                                        rd["DEC"] = "";
+                                    else if (c == 18)
+                                        rd["Active"] = false;
+                                    else if (c == 19)
                                         rd["id"] = 0;
 
 
@@ -676,6 +695,7 @@ namespace StockControl
                             var mp1 = (from ix in db.tb_ProductionForecasts
                                        where ix.YYYY==Convert.ToInt32(rd["YYYY"].ToString())
                                              && ix.ModelName==Convert.ToString(rd["ModelName"])
+                                             //&& ix.PartNo==Convert.ToString(rd["PartNo"])
                                        select ix).FirstOrDefault();
                             DateTime? d = null;
                             DateTime d1 = DateTime.Now;
@@ -713,6 +733,9 @@ namespace StockControl
                                 mp.OCT = a10;
                                 mp.NOV = a11;
                                 mp.DEC = a12;
+                                mp.PartName = rd["PartName"].ToString();
+                                mp.PartNo = rd["PartNo"].ToString();
+                                mp.Process = rd["Process"].ToString();
                                 mp.Active = true;
                                 db.tb_ProductionForecasts.InsertOnSubmit(mp);
                                 db.SubmitChanges();
@@ -734,6 +757,7 @@ namespace StockControl
                                 mp1.OCT = a10;
                                 mp1.NOV = a11;
                                 mp1.DEC = a12;
+                               
                                 mp1.Active = Convert.ToBoolean(rd["Active"].ToString()) ;
                                 db.SubmitChanges();
 

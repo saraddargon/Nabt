@@ -247,6 +247,9 @@ namespace StockControl
                     tb_ProductionForecast mp = new tb_ProductionForecast();
                     mp.YYYY = yyyy;
                     mp.ModelName = txtModelName.Text;
+                    mp.PartName = txtPartName.Text;
+                    mp.PartNo = txtPartNo.Text;
+                    mp.Process = txtProcess.Text;
                     mp.JAN = a1;
                     mp.FEB = a2;
                     mp.MAR = a3;
