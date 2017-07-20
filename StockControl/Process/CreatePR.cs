@@ -101,8 +101,9 @@ namespace StockControl
                 dgvData.AutoGenerateColumns = false;
                 GETDTRow();
                 DefaultItem();
-
+               
                 ClearData();
+                btnNew_Click(null, null);
 
                 if (RetDT != null)
                 {
@@ -176,7 +177,10 @@ namespace StockControl
                
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    var g = (from ix in db.tb_PurchaseRequests select ix).Where(a => a.TEMPNo == txtTempNo.Text.Trim()).ToList();
+                    var g = (from ix in db.tb_PurchaseRequests select ix)
+                        .Where(a => a.TEMPNo == txtTempNo.Text.Trim()
+                         && (a.Status != "Cancel")
+                         ).ToList();
                     if (g.Count() > 0)
                     {
 
@@ -247,7 +251,7 @@ namespace StockControl
                             btnNew.Enabled = true;
                             btnSave.Enabled = true;
                             btnDelete.Enabled = true;
-                            btnView.Enabled = true;
+                            btnView.Enabled = false;
                             btnEdit.Enabled = true;
                             lblStatus.Text = StockControl.dbClss.TSt(g.FirstOrDefault().Status);
                             dgvData.ReadOnly = false;
@@ -757,8 +761,12 @@ namespace StockControl
                                 {
                                     foreach (var ss in s)
                                     {
+                                        ss.SS = 0;
+                                        db.SubmitChanges();
+
                                         db.sp_010_Update_StockItem(Convert.ToString(ss.CodeNo), "");
                                     }
+
                                 }
                             }
                             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -773,11 +781,13 @@ namespace StockControl
 
                             db.SubmitChanges();
                             btnNew_Click(null, null);
+                            Ac = "New";
                             btnSave.Enabled = true;
                         }
                         else // ไม่มีในระบบ
                         {
                             btnNew_Click(null, null);
+                            Ac = "New";
                             btnSave.Enabled = true;
                         }
                     }
@@ -1216,6 +1226,7 @@ namespace StockControl
                 btnView.Enabled = false;
                 btnNew.Enabled = true;
                 ClearData();
+                Ac = "View";
                 Enable_Status(false, "View");
 
                 this.Cursor = Cursors.WaitCursor;
@@ -1254,7 +1265,10 @@ namespace StockControl
             {
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    var g = (from ix in db.tb_PurchaseRequests select ix).Where(a => a.PRNo == txtPRNo.Text.Trim()).ToList();
+                    var g = (from ix in db.tb_PurchaseRequests select ix)
+                        .Where(a => a.PRNo == txtPRNo.Text.Trim()
+                        && (a.Status != "Cancel")
+                        ).ToList();
                     if (g.Count() > 0)
                     {
                         txtTempNo.Text = StockControl.dbClss.TSt(g.FirstOrDefault().TEMPNo);

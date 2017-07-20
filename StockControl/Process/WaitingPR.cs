@@ -110,8 +110,8 @@ namespace StockControl
                     try
                     {
                         string Vendorno = "";
-                        if (!cboVendor.Text.Equals(""))
-                            Vendorno = txtVendorNo.Text;
+                        //if (!cboVendor.Text.Equals(""))
+                        Vendorno = txtVendorNo.Text;
                         
 
                         var gd = (from a in db.tb_Items
@@ -119,6 +119,7 @@ namespace StockControl
                                   where a.Status == "Active" 
                                   && a.StopOrder == false
                                   && (a.VendorNo.Contains(Vendorno))
+                                  && (b.VendorName.Contains(cboVendor.Text))
                                   && (( a.StockInv+a.StockDL+a.StockBackOrder
                                   
                                        // (Convert.ToDecimal(db.Cal_QTY(a.CodeNo, "Invoice", 0)))
