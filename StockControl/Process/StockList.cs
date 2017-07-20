@@ -124,7 +124,7 @@ namespace StockControl
                                  StopOrder = i.StopOrder
 
                              }).ToList();
-                    */
+                    
                     //var g = (from i in db.sp_015_Stock_List()
                     //dgvData.DataSource = g;
                     if (g.Count > 0)

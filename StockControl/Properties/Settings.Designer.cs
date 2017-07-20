@@ -26,7 +26,7 @@ namespace StockControl.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=XTH-TOO\\SQLEXPRESS;Initial Catalog=dbStockControl;User ID=sa")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=mac-pc;Initial Catalog=dbStockControl_Test;User ID=sa;Password=;")]
         public string dbStockControlConnectionString3 {
             get {
                 return ((string)(this["dbStockControlConnectionString3"]));
@@ -36,11 +36,21 @@ namespace StockControl.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=XTH-TOO\\SQLEXPRESS;Initial Catalog=dbStockControl;User ID=sa;Password" +
-            "=;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=mac-pc\\SQLEXPRESS;Initial Catalog=dbStockControl_Test;User ID=sa;Pass" +
+            "word=;")]
         public string dbStockControlConnectionString2 {
             get {
                 return ((string)(this["dbStockControlConnectionString2"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=mac-pc;Initial Catalog=dbStockControl;User ID=sa")]
+        public string dbStockControlConnectionString {
+            get {
+                return ((string)(this["dbStockControlConnectionString"]));
             }
         }
     }
