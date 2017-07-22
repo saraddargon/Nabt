@@ -1377,7 +1377,7 @@ namespace StockControl
 
                 }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); dbClss.AddError("CreatePart", ex.Message + " : radButtonElement1_Click", this.Name); }
+            catch (Exception ex) { MessageBox.Show(ex.Message); dbClss.AddError("Shipping", ex.Message + " : radButtonElement1_Click", this.Name); }
 
         }
 

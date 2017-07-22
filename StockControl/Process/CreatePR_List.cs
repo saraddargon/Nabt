@@ -78,6 +78,7 @@ namespace StockControl
 
                     var g = (from ix in db.tb_PurchaseRequests select ix)
                         .Where(a => a.VendorNo.Contains(txtVendorNo.Text)
+                        && (a.Status != "Cancel")
                         && a.TEMPNo.Contains(txtTempNo.Text)
                         && a.PRNo.Contains(txtPRNo.Text)
                         && a.VendorName.Contains(txtVendorName.Text)
