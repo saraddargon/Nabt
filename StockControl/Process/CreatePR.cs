@@ -870,10 +870,41 @@ namespace StockControl
                         {
                             this.Cursor = Cursors.WaitCursor;
 
-                            if (Ac.Equals("New"))
-                                txtTempNo.Text = StockControl.dbClss.GetNo(3, 2);
+                            using (DataClasses1DataContext db = new DataClasses1DataContext())
+                            {
+                                if (Ac.Equals("New"))
+                                {
+                                    //ถ้ามีการใส่เลขที่ PR เช็คดูว่ามีการใส่เลขนี้แล้วหรือไม่ ถ้ามีให้ใส่เลขอื่น
+                                    if (!txtPRNo.Text.Equals(""))
+                                    {
 
-                            if (!txtTempNo.Text.Equals(""))
+                                        var p = (from ix in db.tb_PurchaseRequests
+                                                 where ix.PRNo.ToUpper().Trim() == txtPRNo.Text.Trim() && ix.Status != "Cancel"
+                                                                                                       //&& ix.TEMPNo.Trim() == txtTempNo.Text.Trim()
+                                                 select ix).ToList();
+                                        if (p.Count > 0)  //มีรายการในระบบ
+                                        {
+                                            MessageBox.Show("เลขที่ใบสั่งซื้อถูกใช้ไปแล้ว กรุณาใส่เลขใหม่");
+                                            return;
+                                        }
+                                    }
+
+                                    txtTempNo.Text = StockControl.dbClss.GetNo(3, 2);
+                                }
+
+
+                                var ggg = (from ix in db.tb_PurchaseRequests
+                                           where ix.TEMPNo.Trim() == txtTempNo.Text.Trim() //&& ix.Status != "Cancel"
+                                           //&& ix.TEMPNo.Trim() == txtTempNo.Text.Trim()
+                                           select ix).ToList();
+                                if (ggg.Count > 1)  //มีรายการในระบบ
+                                {
+                                    MessageBox.Show("เลขที่อ้างอิงถูกใช้แล้ว กรุณาสร้างเลขใหม่");
+                                    return;
+                                }
+                            }
+
+                                if (!txtTempNo.Text.Equals(""))
                             {
 
                                 SaveHerder();

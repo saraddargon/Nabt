@@ -450,6 +450,9 @@ namespace StockControl
                         dbClss.AddHistory(this.Name, "แก้ไข Receive", "Clear Temp : " + DocNo + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtRCNo.Text.Trim());
                         gg.Flag_Temp = false;
                         gg.InvoiceNo = txtInvoiceNo.Text.Trim();
+
+                        if (!dtRequire.Text.Equals(""))
+                            gg.RCDate = Convert.ToDateTime(dtRequire.Value);
                         gg.Type = "รับด้วยใบ Invoice";
 
                         dbClss.AddHistory(this.Name, "แก้ไข Receive", "Clear Temp : " + DocNo + "[" + txtInvoiceNo.Text.Trim() + " DL No :" + txtDLNo.Text + "]", txtRCNo.Text.Trim());
@@ -512,6 +515,9 @@ namespace StockControl
                                       where ix.RCNo.Trim() == txtRCNo.Text.Trim() && ix.Status != "Cancel"
                                       && ix.ID == ID
                                       select ix).First();
+
+                            if(!dtRequire.Text.Equals(""))
+                                gg.RCDate = Convert.ToDateTime(dtRequire.Value);
 
                             gg.InvoiceNo = txtInvoiceNo.Text.Trim();
                             //gg.TempInvNo = txtDLNo.Text;
