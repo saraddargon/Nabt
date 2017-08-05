@@ -144,9 +144,9 @@ namespace StockControl
                                       ix.LeadTime,ix.KeepStock,ix.AddErrQty,ix.OrderQty}).ToList();
                         //MessageBox.Show(gd.Count().ToString());
                         */
-                        var dt3 = (from ix in db.sp_SelectProduction_ListForcast(year1, dbClss.getMonth(cboMonth.Text)) select ix).ToList();
+                        var g3 = (from ix in db.sp_SelectProduction_ListForcast(year1, dbClss.getMonth(cboMonth.Text)) select ix).ToList();
 
-                        radGridView1.DataSource = dt3;
+                        radGridView1.DataSource = g3;
 
                         int rowcount = 0;
                         foreach (var x in radGridView1.Rows)
