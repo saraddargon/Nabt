@@ -373,6 +373,7 @@
             gridViewTextBoxColumn5.Width = 180;
             gridViewDecimalColumn1.EnableExpressionEditor = false;
             gridViewDecimalColumn1.FieldName = "QTY";
+            gridViewDecimalColumn1.FormatString = "{0:N2}";
             gridViewDecimalColumn1.HeaderText = "จำนวนเบิก";
             gridViewDecimalColumn1.Name = "QTY";
             gridViewDecimalColumn1.ReadOnly = true;

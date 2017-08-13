@@ -1043,11 +1043,11 @@ namespace StockControl
                         decimal QTY = 0; decimal.TryParse(StockControl.dbClss.TSt(e.Row.Cells["QTY"].Value), out QTY);
                         decimal CostPerUnit = 0; decimal.TryParse(StockControl.dbClss.TSt(e.Row.Cells["StandardCost"].Value), out CostPerUnit);
 
-                        if (QTY<0)
-                        {
-                            CostPerUnit =  Convert.ToDecimal(dbClss.Get_Stock(StockControl.dbClss.TSt(e.Row.Cells["CodeNo"].Value), "", "", "Avg"));
-                            e.Row.Cells["StandardCost"].Value = CostPerUnit;
-                        }
+                        //if (QTY<0)
+                        //{
+                        //    CostPerUnit =  Convert.ToDecimal(dbClss.Get_Stock(StockControl.dbClss.TSt(e.Row.Cells["CodeNo"].Value), "", "", "Avg"));
+                        //    e.Row.Cells["StandardCost"].Value = CostPerUnit;
+                        //}
                         
 
                         e.Row.Cells["Amount"].Value = QTY * CostPerUnit;
@@ -1225,7 +1225,7 @@ namespace StockControl
                             RemainQty = (Convert.ToDecimal(db.Cal_QTY(Convert.ToString(CodeNo), "Invoice", 0)));//Convert.ToDecimal(d.StockInv);
                             Unit = d.UnitBuy;
                             PCSUnit = Convert.ToDecimal(d.PCSUnit);
-                            CostPerUnit = Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "Avg"));//Convert.ToDecimal(d.StandardCost);
+                            CostPerUnit = Convert.ToDecimal(d.StandardCost); // Convert.ToDecimal(dbClss.Get_Stock(CodeNo, "", "", "Avg"));//Convert.ToDecimal(d.StandardCost);
 
                             No = dgvData.Rows.Count() + 1;
                             if (!check_Duppicate(CodeNo))

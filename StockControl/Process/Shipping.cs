@@ -555,7 +555,7 @@ namespace StockControl
 
                                 //decimal RemainQty = 0;
 
-                                UnitCost = Convert.ToDecimal(dbClss.Get_Stock(StockControl.dbClss.TSt(g.Cells["CodeNo"].Value), "", "", "Avg"));
+                                UnitCost = StockControl.dbClss.TDe(g.Cells["StandardCost"].Value);//Convert.ToDecimal(dbClss.Get_Stock(StockControl.dbClss.TSt(g.Cells["CodeNo"].Value), "", "", "Avg"));
                                 Seq += 1;
                                 tb_Shipping u = new tb_Shipping();
                                 u.ShippingNo = txtSHNo.Text.Trim();
@@ -829,8 +829,8 @@ namespace StockControl
                                 if (Qty_Inv >= QTY) //ถ้า จำนวน remain มีมากกว่าจำนวนที่จะลบ
                                 {
                                     UnitCost = Convert.ToDecimal(vv.UnitCost);
-                                    if (UnitCost <= 0)
-                                        UnitCost = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "Avg"));
+                                    //if (UnitCost <= 0)
+                                    //    UnitCost = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "Avg"));
 
                                     Amount = (-QTY) * UnitCost;
 
@@ -888,8 +888,8 @@ namespace StockControl
                                     QTY_temp = QTY - Qty_Inv;
 
                                     UnitCost = Convert.ToDecimal(vv.UnitCost);
-                                    if (UnitCost <= 0)
-                                        UnitCost = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "Avg"));
+                                    //if (UnitCost <= 0)
+                                    //    UnitCost = Convert.ToDecimal(dbClss.Get_Stock(vv.CodeNo, "", "", "Avg"));
                                     
                                     Amount = (-QTY) * UnitCost;
 
@@ -1046,7 +1046,7 @@ namespace StockControl
                     Amount = StockControl.dbClss.TDe(rd1.Cells["Amount"].Value);
                     Total += Amount;
                 }
-                txtTotal.Text = Total.ToString();
+                txtTotal.Text = Total.ToString("###,###,##0.00");
             }
         }
         private void Unit_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -1248,7 +1248,7 @@ namespace StockControl
                                  RemainQty = (Convert.ToDecimal(db.Cal_QTY(i.CodeNo, "", 0))),
                                  UnitShip = i.UnitShip,
                                  PCSUnit = i.PCSUnit,
-                                 StandardCodt = Convert.ToDecimal(dbClss.Get_Stock(i.CodeNo, "", "", "Avg")),//i.StandardCost
+                                 StandardCodt = i.StandardCost,//Convert.ToDecimal(dbClss.Get_Stock(i.CodeNo, "", "", "Avg")),//i.StandardCost
                                  Amount = 0,
                                  QTY = 0,
                                  LotNo = "",
