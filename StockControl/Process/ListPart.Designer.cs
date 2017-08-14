@@ -423,6 +423,7 @@
             gridViewDecimalColumn1.Width = 68;
             gridViewDecimalColumn2.EnableExpressionEditor = false;
             gridViewDecimalColumn2.FieldName = "StockDL";
+            gridViewDecimalColumn2.FormatString = "{0:N2}";
             gridViewDecimalColumn2.HeaderText = "StockDL";
             gridViewDecimalColumn2.Name = "StockDL";
             gridViewDecimalColumn2.ReadOnly = true;

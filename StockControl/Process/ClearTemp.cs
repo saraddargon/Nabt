@@ -266,6 +266,7 @@ namespace StockControl
 
                                     id = Convert.ToInt32(x.Cells["id"].Value);
 
+                                    //สำหรับเป็น Temp
                                     var s = (from ix in db.tb_Stocks select ix)
                                        .Where(a => a.DocNo == txtRCNo.Text.Trim()
                                             && a.Category == "Temp"
@@ -273,8 +274,8 @@ namespace StockControl
                                     if (s != null)
                                     {
                                         x.Cells["RemainQty"].Value = Convert.ToDecimal(s.RemainQty);
-                                        x.Cells["CostPerUnit"].Value = Convert.ToDecimal(s.UnitCost);
-                                        x.Cells["Amount"].Value = Math.Abs(Convert.ToDecimal(s.AmountCost));
+                                        x.Cells["CostPerUnit"].Value = get_cost(Convert.ToString(x.Cells["CodeNo"].Value)); //Convert.ToDecimal(s.UnitCost);
+                                        x.Cells["Amount"].Value = Convert.ToDecimal(x.Cells["CostPerUnit"].Value) * Convert.ToDecimal(x.Cells["RemainQty"].Value); //Math.Abs(Convert.ToDecimal(s.AmountCost));
                                     }
                                 }
 
@@ -291,7 +292,7 @@ namespace StockControl
 
             //    radGridView1.DataSource = dt;
         }
-
+        
         private bool CheckDuplicate(string code, string Code2)
         {
             bool ck = false;
@@ -450,6 +451,9 @@ namespace StockControl
                         dbClss.AddHistory(this.Name, "แก้ไข Receive", "Clear Temp : " + DocNo + " โดย [" + ClassLib.Classlib.User + " วันที่ :" + DateTime.Now.ToString("dd/MMM/yyyy") + "]", txtRCNo.Text.Trim());
                         gg.Flag_Temp = false;
                         gg.InvoiceNo = txtInvoiceNo.Text.Trim();
+
+                        if (!dtRequire.Text.Equals(""))
+                            gg.RCDate = Convert.ToDateTime(dtRequire.Value);
                         gg.Type = "รับด้วยใบ Invoice";
 
                         dbClss.AddHistory(this.Name, "แก้ไข Receive", "Clear Temp : " + DocNo + "[" + txtInvoiceNo.Text.Trim() + " DL No :" + txtDLNo.Text + "]", txtRCNo.Text.Trim());
@@ -512,6 +516,9 @@ namespace StockControl
                                       where ix.RCNo.Trim() == txtRCNo.Text.Trim() && ix.Status != "Cancel"
                                       && ix.ID == ID
                                       select ix).First();
+
+                            if(!dtRequire.Text.Equals(""))
+                                gg.RCDate = Convert.ToDateTime(dtRequire.Value);
 
                             gg.InvoiceNo = txtInvoiceNo.Text.Trim();
                             //gg.TempInvNo = txtDLNo.Text;
@@ -1398,7 +1405,7 @@ namespace StockControl
                     Amount = StockControl.dbClss.TDe(rd1.Cells["Amount"].Value);
                     Total += Amount;
                 }
-                txtTotal.Text = Total.ToString();
+                txtTotal.Text = Total.ToString("###,###,##0.00");
             }
         }
         private bool check_Duppicate(string CodeNo)

@@ -418,6 +418,7 @@
             gridViewDecimalColumn4.Width = 84;
             gridViewDecimalColumn5.EnableExpressionEditor = false;
             gridViewDecimalColumn5.FieldName = "Amount";
+            gridViewDecimalColumn5.FormatString = "{0:N2}";
             gridViewDecimalColumn5.HeaderText = "ยอดรวม";
             gridViewDecimalColumn5.Name = "Amount";
             gridViewDecimalColumn5.ReadOnly = true;

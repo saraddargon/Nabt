@@ -420,12 +420,14 @@
             gridViewTextBoxColumn5.Width = 80;
             gridViewDecimalColumn3.EnableExpressionEditor = false;
             gridViewDecimalColumn3.FieldName = "PCSUnit";
+            gridViewDecimalColumn3.FormatString = "{0:N2}";
             gridViewDecimalColumn3.HeaderText = "จำนวน/หน่วย";
             gridViewDecimalColumn3.Name = "PCSUnit";
             gridViewDecimalColumn3.ReadOnly = true;
             gridViewDecimalColumn3.Width = 92;
             gridViewDecimalColumn4.EnableExpressionEditor = false;
             gridViewDecimalColumn4.FieldName = "StandardCost";
+            gridViewDecimalColumn4.FormatString = "{0:N2}";
             gridViewDecimalColumn4.HeaderText = "ราคา/หน่วย";
             gridViewDecimalColumn4.Name = "StandardCost";
             gridViewDecimalColumn4.ReadOnly = true;

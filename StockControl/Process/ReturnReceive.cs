@@ -230,6 +230,7 @@ namespace StockControl
                               where  //ix.InvoiceNo.Trim() == txtInvoiceNo.Text.Trim() && ix.Status != "Cancel"
                                 ix.id == PRID
                                 && ix.PRNo == PRNo
+                                && ix.SS != 0
                               select ix).ToList();
                     if(g.Count>0)
                     {
@@ -469,6 +470,7 @@ namespace StockControl
                                     PRID = Convert.ToInt32(vvd.PRID);
                                     var pp = (from ix in db.tb_PurchaseRequestLines
                                               where ix.id == PRID
+                                                    && ix.SS != 0
                                               select ix).ToList();
 
                                     if (pp.Count > 0)

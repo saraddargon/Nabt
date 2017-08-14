@@ -724,6 +724,7 @@ namespace StockControl
                                 //update รายการใน PR
                                 var p = (from ix in db.tb_PurchaseRequestLines
                                          where ix.id == StockControl.dbClss.TInt(g.Cells["PRID"].Value)
+                                            && ix.SS != 0
                                          // && ix.TempNo == StockControl.dbClss.TSt(g.Cells["TempNo"].Value)
                                          //&& ix.PRNo == StockControl.dbClss.TSt(g.Cells["PRNo"].Value)
                                          //&& ix.CodeNo == StockControl.dbClss.TSt(g.Cells["CodeNo"].Value)
@@ -734,6 +735,7 @@ namespace StockControl
                                 //update herder pr
                                 var h = (from ix in db.tb_PurchaseRequests
                                          where ix.PRNo == StockControl.dbClss.TSt(g.Cells["PRNo"].Value)
+                                         && ix.Status != "Cancel"
                                          // && ix.TempNo == StockControl.dbClss.TSt(g.Cells["TempNo"].Value)
                                          //&& ix.PRNo == StockControl.dbClss.TSt(g.Cells["PRNo"].Value)
                                          //&& ix.CodeNo == StockControl.dbClss.TSt(g.Cells["CodeNo"].Value)
@@ -1371,7 +1373,7 @@ namespace StockControl
 
                         if (duppicate_vendor <=0)
                         {
-                            No = dgvData.Rows.Count() + 1;
+                            
 
                             var d = (from ix in db.tb_PurchaseRequestLines select ix)
                                 .Where(a => a.PRNo == txtPRNo.Text.Trim() && a.SS == 1 
@@ -1384,6 +1386,8 @@ namespace StockControl
                             {
                                 foreach (var gg in d)
                                 {
+                                    No = dgvData.Rows.Count() + 1;
+
                                     CodeNo = StockControl.dbClss.TSt(gg.CodeNo);
                                     if (!check_Duppicate(CodeNo))
                                     {
@@ -1443,7 +1447,7 @@ namespace StockControl
                     Amount = StockControl.dbClss.TDe(rd1.Cells["Amount"].Value);
                     Total += Amount;
                 }
-                txtTotal.Text = Total.ToString();
+                txtTotal.Text = Total.ToString("###,###,##0.00");
             }
         }
         private bool check_Duppicate(string CodeNo)
