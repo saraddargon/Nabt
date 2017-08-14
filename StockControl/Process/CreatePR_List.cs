@@ -324,5 +324,19 @@ namespace StockControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
+
+        private void radButtonElement2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string PRNo = "";
+                if (radGridView1.Rows.Count > 0)
+                    PRNo = StockControl.dbClss.TSt(radGridView1.CurrentRow.Cells["PRNo"].Value);
+
+                PrintPR a = new PrintPR(PRNo, PRNo, "PR");
+                a.ShowDialog();
+            }
+            catch { }
+        }
     }
 }

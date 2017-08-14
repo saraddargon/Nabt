@@ -489,9 +489,9 @@
             this.dtDateTo.CustomFormat = "dd/MMM/yyyy";
             this.dtDateTo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDateTo.Location = new System.Drawing.Point(263, 56);
+            this.dtDateTo.Location = new System.Drawing.Point(322, 58);
             this.dtDateTo.Name = "dtDateTo";
-            this.dtDateTo.Size = new System.Drawing.Size(140, 19);
+            this.dtDateTo.Size = new System.Drawing.Size(133, 19);
             this.dtDateTo.TabIndex = 10;
             this.dtDateTo.TabStop = false;
             this.dtDateTo.Text = "16/May/2017";
@@ -505,7 +505,7 @@
             this.dtDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtDateFrom.Location = new System.Drawing.Point(116, 57);
             this.dtDateFrom.Name = "dtDateFrom";
-            this.dtDateFrom.Size = new System.Drawing.Size(118, 19);
+            this.dtDateFrom.Size = new System.Drawing.Size(124, 19);
             this.dtDateFrom.TabIndex = 11;
             this.dtDateFrom.TabStop = false;
             this.dtDateFrom.Text = "16/May/2017";
@@ -514,7 +514,7 @@
             // 
             // radLabel4
             // 
-            this.radLabel4.Location = new System.Drawing.Point(238, 57);
+            this.radLabel4.Location = new System.Drawing.Point(297, 59);
             this.radLabel4.Name = "radLabel4";
             this.radLabel4.Size = new System.Drawing.Size(18, 18);
             this.radLabel4.TabIndex = 8;
