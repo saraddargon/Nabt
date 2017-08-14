@@ -599,7 +599,7 @@
             // 
             this.RootElement.ApplyShapeToControl = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Part Management 1.0.3";
+            this.Text = "Part Management 1.0.4";
             this.ThemeName = "Office2010Blue";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.MaximumSizeChanged += new System.EventHandler(this.Mainfrom_MaximumSizeChanged);
