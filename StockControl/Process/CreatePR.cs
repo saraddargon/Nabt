@@ -9,7 +9,7 @@ using System.Linq;
 using Microsoft.VisualBasic.FileIO;
 using Telerik.WinControls.UI;
 using System.Globalization;
-
+using Microsoft.VisualBasic;
 namespace StockControl
 {
     public partial class CreatePR : Telerik.WinControls.UI.RadRibbonForm
@@ -1394,6 +1394,27 @@ namespace StockControl
         private void cboVendorName_Leave(object sender, EventArgs e)
         {
             cboVendor_SelectedIndexChanged(null, null);
+        }
+
+        private void radButtonElement3_Click(object sender, EventArgs e)
+        {
+            string RefPO = "";
+            string TempNo = txtTempNo.Text;
+            if (!txtTempNo.Text.Equals(""))
+            {
+                string GetMarkup = Interaction.InputBox("ใส่เลขที่ P/O ใหม่!", "P/O New : ", "", 400, 250);
+                if (!GetMarkup.Trim().Equals(""))
+                {
+                    RefPO = GetMarkup;
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                        db.sp_UpdatePO(TempNo, RefPO);
+                    }
+                    MessageBox.Show("Update Completed.");
+                    btnRefresh_Click(sender, e);
+                }
+            }
+
         }
     }
 }

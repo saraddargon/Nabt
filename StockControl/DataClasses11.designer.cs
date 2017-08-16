@@ -829,6 +829,13 @@ namespace StockControl
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pRNoFrom, pRNoTo, dateTime);
 			return ((ISingleResult<sp_R005_ReportPRResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_UpdatePO")]
+		public int sp_UpdatePO([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TempNo", DbType="NVarChar(30)")] string tempNo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PRNo", DbType="NVarChar(30)")] string pRNo)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tempNo, pRNo);
+			return ((int)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ErrorLog")]
