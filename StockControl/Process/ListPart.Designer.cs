@@ -35,6 +35,7 @@
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn5 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn2 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
@@ -50,7 +51,6 @@
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn15 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn16 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn17 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn2 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
@@ -372,6 +372,13 @@
             gridViewTextBoxColumn5.ReadOnly = true;
             gridViewTextBoxColumn5.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             gridViewTextBoxColumn5.Width = 60;
+            gridViewCheckBoxColumn2.EnableExpressionEditor = false;
+            gridViewCheckBoxColumn2.FieldName = "StopOrder";
+            gridViewCheckBoxColumn2.HeaderText = "หยุดสั่งซื้อ";
+            gridViewCheckBoxColumn2.MinWidth = 20;
+            gridViewCheckBoxColumn2.Name = "StopOrder";
+            gridViewCheckBoxColumn2.ReadOnly = true;
+            gridViewCheckBoxColumn2.Width = 90;
             gridViewTextBoxColumn6.EnableExpressionEditor = false;
             gridViewTextBoxColumn6.FieldName = "GroupCode";
             gridViewTextBoxColumn6.HeaderText = "กลุ่มประเภท";
@@ -481,13 +488,6 @@
             gridViewTextBoxColumn17.Name = "Status";
             gridViewTextBoxColumn17.ReadOnly = true;
             gridViewTextBoxColumn17.Width = 55;
-            gridViewCheckBoxColumn2.EnableExpressionEditor = false;
-            gridViewCheckBoxColumn2.FieldName = "StopOrder";
-            gridViewCheckBoxColumn2.HeaderText = "หยุดสั่งซื้อ";
-            gridViewCheckBoxColumn2.MinWidth = 20;
-            gridViewCheckBoxColumn2.Name = "StopOrder";
-            gridViewCheckBoxColumn2.ReadOnly = true;
-            gridViewCheckBoxColumn2.Width = 90;
             this.radGridView1.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
             gridViewTextBoxColumn1,
             gridViewCheckBoxColumn1,
@@ -495,6 +495,7 @@
             gridViewTextBoxColumn3,
             gridViewTextBoxColumn4,
             gridViewTextBoxColumn5,
+            gridViewCheckBoxColumn2,
             gridViewTextBoxColumn6,
             gridViewTextBoxColumn7,
             gridViewTextBoxColumn8,
@@ -509,8 +510,7 @@
             gridViewTextBoxColumn14,
             gridViewTextBoxColumn15,
             gridViewTextBoxColumn16,
-            gridViewTextBoxColumn17,
-            gridViewCheckBoxColumn2});
+            gridViewTextBoxColumn17});
             this.radGridView1.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
             this.radGridView1.MasterTemplate.ViewDefinition = tableViewDefinition1;
             this.radGridView1.Name = "radGridView1";
