@@ -22,6 +22,9 @@ namespace StockControl
             // #update by TAY 29/08/2017 20:17
             //เพิ่มให้สามารถ Freezz ตาม Row and Column ได้ทุกหน้าที่สามารถค้นหาได้
 
+            // #update by too 29/08/2017 20:57
+            //แก้ไขเพิ่มส่วน Create P/R , Model,Forcasting เรื่องของ Row Refresh
+
         }
     }
 }

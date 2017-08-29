@@ -87,7 +87,7 @@ namespace StockControl
 
                     x.Cells["dgvCodeTemp"].Value = x.Cells["UnitCode"].Value.ToString();
                     x.Cells["UnitCode"].ReadOnly = true;
-                    if(row>=0 && row==ck)
+                    if(row>=0 && row==ck && radGridView1.Rows.Count > 0)
                     {
 
                         x.ViewInfo.CurrentRow = x;

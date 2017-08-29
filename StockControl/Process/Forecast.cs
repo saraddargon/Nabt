@@ -191,7 +191,7 @@ namespace StockControl
                             x.Cells["ModelName"].ReadOnly = true;
                             x.Cells["YYYY"].ReadOnly = true;
                             //x.Cells["MMM"].ReadOnly = true;
-                            if (row >= 0 && row == ck)
+                            if (row >= 0 && row == ck && radGridView1.Rows.Count>0)
                             {
 
                                 x.ViewInfo.CurrentRow = x;
@@ -342,7 +342,13 @@ namespace StockControl
             }
 
             if (C > 0)
+            {
+                
+                if (radGridView1.Rows.Count == 1)
+                    row = 0;
                 MessageBox.Show("บันทึกสำเร็จ!");
+            }
+               
 
             return ck;
         }
@@ -427,6 +433,9 @@ namespace StockControl
             btnView.Enabled = true;
             ForecastConsumption md = new ForecastConsumption(cboYear.Text,cboModelName.Text);
             md.ShowDialog();
+            row = radGridView1.Rows.Count - 1;
+            if (row < 0)
+                row = 0;
             DataLoad();
             //  radGridView1.Rows.AddNew();
         }

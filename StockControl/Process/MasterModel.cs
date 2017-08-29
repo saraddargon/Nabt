@@ -98,13 +98,20 @@ namespace StockControl
                         {
                             //radGridView1.DataSource = db.tb_Models.Where(s => s.ModelName.Contains(txtModelName.Text.Trim())).ToList();
                         }
-
+                        int ck = 0;
                         foreach (var x in radGridView1.Rows)
                         {
                             x.Cells["dgvCodeTemp"].Value = x.Cells["ModelName"].Value.ToString();
                             //x.Cells["dgvCodeTemp2"].Value = x.Cells["MMM"].Value.ToString();
                             x.Cells["ModelName"].ReadOnly = true;
                             //x.Cells["MMM"].ReadOnly = true;
+                            if (row >= 0 && row == ck && radGridView1.Rows.Count > 0)
+                            {
+
+                                x.ViewInfo.CurrentRow = x;
+
+                            }
+                            ck += 1;
                         }
                     }
                     catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -227,7 +234,12 @@ namespace StockControl
             }
 
             if (C > 0)
+            {
+                if (radGridView1.Rows.Count == 1)
+                    row = 0;
                 MessageBox.Show("บันทึกสำเร็จ!");
+            }
+                
 
             return ck;
         }
@@ -285,6 +297,9 @@ namespace StockControl
 
             if (C > 0)
             {
+                row = row - 1;
+                if (radGridView1.Rows.Count == 1)
+                    row = 0;
                 MessageBox.Show("ลบรายการ สำเร็จ!");
             }
 
@@ -300,6 +315,9 @@ namespace StockControl
 
         private void btnNew_Click(object sender, EventArgs e)
         {
+            row = radGridView1.Rows.Count - 1;
+            if (row < 0)
+                row = 0;
             radGridView1.ReadOnly = false;
             radGridView1.AllowAddNewRow = false;
             radGridView1.Rows.AddNew();

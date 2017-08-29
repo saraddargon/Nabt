@@ -174,7 +174,7 @@ namespace StockControl
                 this.Cursor = Cursors.WaitCursor;
                 dt_PRD.Rows.Clear();
                 dt_PRH.Rows.Clear();
-               
+                int ck = 0;
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
                     var g = (from ix in db.tb_PurchaseRequests select ix)
@@ -258,7 +258,20 @@ namespace StockControl
                             btnAdd_Item.Enabled = false;
                             btnDel_Item.Enabled = false;
                         }
-                       
+
+                        foreach (var x in dgvData.Rows)
+                        {
+
+
+                            if (row >= 0 && row == ck && dgvData.Rows.Count>0)
+                            {
+
+                                x.ViewInfo.CurrentRow = x;
+
+                            }
+                            ck += 1;
+                        }
+
                     }
                 }
             }
@@ -694,7 +707,9 @@ namespace StockControl
             Enable_Status(true, "New");
             lblStatus.Text = "New";
             Ac = "New";
-
+            row = dgvData.Rows.Count - 1;
+            if (row < 0)
+                row = 0;
             //getมาไว้ก่อน แต่ยังไมได้ save 
             txtTempNo.Text = StockControl.dbClss.GetNo(3, 0);
             
@@ -793,6 +808,9 @@ namespace StockControl
                     }
 
                     MessageBox.Show("ลบรายการ สำเร็จ!");
+                    row = row - 1;
+                    if (dgvData.Rows.Count <= 0)
+                        row = -1;
                 }
 
 
