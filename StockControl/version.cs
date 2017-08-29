@@ -19,7 +19,9 @@ namespace StockControl
         }
         public void byTay()
         {
-            //...
+            // #update by TAY 29/08/2017 20:17
+            //เพิ่มให้สามารถ Freezz ตาม Row and Column ได้ทุกหน้าที่สามารถค้นหาได้
+
         }
     }
 }
