@@ -618,5 +618,43 @@ namespace StockControl
             String data = SystemNo;
             return qrCodeEncoder.Encode(data);
         }
+        public static void Set_Freeze_Row(RadGridView Grid,int index)
+        {
+            foreach (var rd in Grid.Rows)
+            {
+                if (rd.Index <= index)
+                {
+                    Grid.Rows[rd.Index].PinPosition = PinnedRowPosition.Top;
+                }
+                else
+                    break;
+            }
+        }
+        public static void Set_Freeze_Column(RadGridView Grid, int index)
+        {
+            foreach (var rd in Grid.Columns)
+            {
+                if (rd.Index <= index)
+                {
+                    Grid.Columns[rd.Index].PinPosition = PinnedColumnPosition.Left;
+                }
+                else
+                    break;
+            }
+        }
+        public static void Set_Freeze_UnColumn(RadGridView Grid)
+        {
+            foreach (var rd in Grid.Columns)
+            {
+                Grid.Columns[rd.Index].IsPinned = false;
+            }
+        }
+        public static void Set_Freeze_UnRows(RadGridView Grid)
+        {
+            foreach (var rd in Grid.Rows)
+            {
+                Grid.Rows[rd.Index].IsPinned = false;
+            }
+        }
     }
 }

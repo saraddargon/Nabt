@@ -80,6 +80,11 @@
             this.radLabelElement1 = new Telerik.WinControls.UI.RadLabelElement();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radGridView1 = new Telerik.WinControls.UI.RadGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.frezzRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.frezzColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.unFrezzToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
             this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
             this.cboModelName = new Telerik.WinControls.UI.RadMultiColumnComboBox();
@@ -98,11 +103,15 @@
             this.RMenu4 = new Telerik.WinControls.UI.RadMenuItem();
             this.RMenu5 = new Telerik.WinControls.UI.RadMenuItem();
             this.RMenu6 = new Telerik.WinControls.UI.RadMenuItem();
+            this.RFrezzRow = new Telerik.WinControls.UI.RadMenuItem();
+            this.RFrezzColumn = new Telerik.WinControls.UI.RadMenuItem();
+            this.RUnFrezz = new Telerik.WinControls.UI.RadMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
@@ -380,6 +389,7 @@
             // 
             this.radGridView1.MasterTemplate.AddNewRowPosition = Telerik.WinControls.UI.SystemRowPosition.Bottom;
             this.radGridView1.MasterTemplate.AllowAddNewRow = false;
+            this.radGridView1.MasterTemplate.AllowCellContextMenu = false;
             this.radGridView1.MasterTemplate.AllowColumnChooser = false;
             this.radGridView1.MasterTemplate.AllowColumnHeaderContextMenu = false;
             this.radGridView1.MasterTemplate.AllowColumnReorder = false;
@@ -552,6 +562,45 @@
             this.radGridView1.Click += new System.EventHandler(this.radGridView1_Click);
             this.radGridView1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.radGridView1_PreviewKeyDown);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.frezzRowToolStripMenuItem,
+            this.frezzColumnToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.unFrezzToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(150, 76);
+            // 
+            // frezzRowToolStripMenuItem
+            // 
+            this.frezzRowToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.frezzRowToolStripMenuItem.Name = "frezzRowToolStripMenuItem";
+            this.frezzRowToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.frezzRowToolStripMenuItem.Text = " Frezz Row";
+            this.frezzRowToolStripMenuItem.Click += new System.EventHandler(this.frezzRowToolStripMenuItem_Click);
+            // 
+            // frezzColumnToolStripMenuItem
+            // 
+            this.frezzColumnToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.frezzColumnToolStripMenuItem.Name = "frezzColumnToolStripMenuItem";
+            this.frezzColumnToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.frezzColumnToolStripMenuItem.Text = " Frezz Column";
+            this.frezzColumnToolStripMenuItem.Click += new System.EventHandler(this.frezzColumnToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(146, 6);
+            // 
+            // unFrezzToolStripMenuItem
+            // 
+            this.unFrezzToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.unFrezzToolStripMenuItem.Name = "unFrezzToolStripMenuItem";
+            this.unFrezzToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.unFrezzToolStripMenuItem.Text = "UnFrezz";
+            this.unFrezzToolStripMenuItem.Click += new System.EventHandler(this.unFrezzToolStripMenuItem_Click);
+            // 
             // radPanel1
             // 
             this.radPanel1.BackColor = System.Drawing.Color.AliceBlue;
@@ -677,7 +726,10 @@
             this.radMenuSeparatorItem2,
             this.RMenu4,
             this.RMenu5,
-            this.RMenu6});
+            this.RMenu6,
+            this.RFrezzRow,
+            this.RFrezzColumn,
+            this.RUnFrezz});
             this.radContextMenu1.ThemeName = "Office2010Blue";
             // 
             // RMenu3
@@ -714,6 +766,21 @@
             this.RMenu6.Name = "RMenu6";
             this.RMenu6.Text = "ลบรายการ";
             // 
+            // RFrezzRow
+            // 
+            this.RFrezzRow.Name = "RFrezzRow";
+            this.RFrezzRow.Text = "Frezz Row";
+            // 
+            // RFrezzColumn
+            // 
+            this.RFrezzColumn.Name = "RFrezzColumn";
+            this.RFrezzColumn.Text = "Frezz Column";
+            // 
+            // RUnFrezz
+            // 
+            this.RUnFrezz.Name = "RUnFrezz";
+            this.RUnFrezz.Text = "UnFrezz";
+            // 
             // Forecast
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -739,6 +806,7 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGridView1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).EndInit();
             this.radPanel1.ResumeLayout(false);
             this.radPanel1.PerformLayout();
@@ -801,5 +869,13 @@
         private Telerik.WinControls.UI.RadMenuItem RMenu4;
         private Telerik.WinControls.UI.RadMenuItem RMenu5;
         private Telerik.WinControls.UI.RadMenuItem RMenu6;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem frezzRowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem frezzColumnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem unFrezzToolStripMenuItem;
+        private Telerik.WinControls.UI.RadMenuItem RFrezzRow;
+        private Telerik.WinControls.UI.RadMenuItem RFrezzColumn;
+        private Telerik.WinControls.UI.RadMenuItem RUnFrezz;
     }
 }

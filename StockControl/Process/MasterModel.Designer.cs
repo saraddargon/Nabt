@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MasterModel));
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
@@ -68,16 +69,21 @@
             this.radLabelElement1 = new Telerik.WinControls.UI.RadLabelElement();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radGridView1 = new Telerik.WinControls.UI.RadGridView();
+            this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
+            this.radButton1 = new Telerik.WinControls.UI.RadButton();
+            this.txtModelName = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
+            this.chkActive = new Telerik.WinControls.UI.RadCheckBox();
             this.office2010BlueTheme1 = new Telerik.WinControls.Themes.Office2010BlueTheme();
             this.radRibbonBarButtonGroup2 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
-            this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
-            this.chkActive = new Telerik.WinControls.UI.RadCheckBox();
-            this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
-            this.txtModelName = new Telerik.WinControls.UI.RadTextBox();
-            this.radButton1 = new Telerik.WinControls.UI.RadButton();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.frezzRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.frezzColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.unFrezzToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -85,10 +91,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chkActive)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtModelName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButton1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtModelName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkActive)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -354,6 +361,7 @@
             // 
             this.radGridView1.BackColor = System.Drawing.Color.White;
             this.radGridView1.ColumnChooserSortOrder = Telerik.WinControls.UI.RadSortOrder.Ascending;
+            this.radGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.radGridView1.Cursor = System.Windows.Forms.Cursors.Default;
             this.radGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radGridView1.EnterKeyMode = Telerik.WinControls.UI.RadGridViewEnterKeyMode.EnterMovesToNextCell;
@@ -366,6 +374,7 @@
             // 
             this.radGridView1.MasterTemplate.AddNewRowPosition = Telerik.WinControls.UI.SystemRowPosition.Bottom;
             this.radGridView1.MasterTemplate.AllowAddNewRow = false;
+            this.radGridView1.MasterTemplate.AllowCellContextMenu = false;
             this.radGridView1.MasterTemplate.AllowColumnChooser = false;
             this.radGridView1.MasterTemplate.AllowColumnHeaderContextMenu = false;
             this.radGridView1.MasterTemplate.AllowColumnReorder = false;
@@ -463,6 +472,59 @@
             this.radGridView1.Click += new System.EventHandler(this.radGridView1_Click);
             this.radGridView1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.radGridView1_PreviewKeyDown);
             // 
+            // radPanel1
+            // 
+            this.radPanel1.BackColor = System.Drawing.Color.AliceBlue;
+            this.radPanel1.Controls.Add(this.radButton1);
+            this.radPanel1.Controls.Add(this.txtModelName);
+            this.radPanel1.Controls.Add(this.radLabel1);
+            this.radPanel1.Controls.Add(this.chkActive);
+            this.radPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.radPanel1.Location = new System.Drawing.Point(0, 0);
+            this.radPanel1.Name = "radPanel1";
+            this.radPanel1.Size = new System.Drawing.Size(815, 40);
+            this.radPanel1.TabIndex = 0;
+            // 
+            // radButton1
+            // 
+            this.radButton1.Image = ((System.Drawing.Image)(resources.GetObject("radButton1.Image")));
+            this.radButton1.Location = new System.Drawing.Point(309, 6);
+            this.radButton1.Name = "radButton1";
+            this.radButton1.Size = new System.Drawing.Size(78, 30);
+            this.radButton1.TabIndex = 3;
+            this.radButton1.Text = "ค้นหา";
+            this.radButton1.ThemeName = "Office2010Blue";
+            this.radButton1.Click += new System.EventHandler(this.radButton1_Click_1);
+            // 
+            // txtModelName
+            // 
+            this.txtModelName.Location = new System.Drawing.Point(89, 10);
+            this.txtModelName.Name = "txtModelName";
+            this.txtModelName.Size = new System.Drawing.Size(122, 20);
+            this.txtModelName.TabIndex = 1;
+            this.txtModelName.ThemeName = "Office2010Blue";
+            this.txtModelName.TextChanged += new System.EventHandler(this.txtModelName_TextChanged);
+            // 
+            // radLabel1
+            // 
+            this.radLabel1.Location = new System.Drawing.Point(12, 10);
+            this.radLabel1.Name = "radLabel1";
+            this.radLabel1.Size = new System.Drawing.Size(71, 18);
+            this.radLabel1.TabIndex = 0;
+            this.radLabel1.Text = "Model Name";
+            // 
+            // chkActive
+            // 
+            this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkActive.Location = new System.Drawing.Point(217, 11);
+            this.chkActive.Name = "chkActive";
+            this.chkActive.Size = new System.Drawing.Size(77, 18);
+            this.chkActive.TabIndex = 2;
+            this.chkActive.Text = "Active Only";
+            this.chkActive.ThemeName = "Office2010Blue";
+            this.chkActive.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
+            this.chkActive.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.chkActive_ToggleStateChanged);
+            // 
             // radRibbonBarButtonGroup2
             // 
             this.radRibbonBarButtonGroup2.Items.AddRange(new Telerik.WinControls.RadItem[] {
@@ -497,58 +559,44 @@
             this.radRibbonBarButtonGroup5.ShowBorder = false;
             this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
-            // radPanel1
+            // contextMenuStrip1
             // 
-            this.radPanel1.BackColor = System.Drawing.Color.AliceBlue;
-            this.radPanel1.Controls.Add(this.radButton1);
-            this.radPanel1.Controls.Add(this.txtModelName);
-            this.radPanel1.Controls.Add(this.radLabel1);
-            this.radPanel1.Controls.Add(this.chkActive);
-            this.radPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.radPanel1.Location = new System.Drawing.Point(0, 0);
-            this.radPanel1.Name = "radPanel1";
-            this.radPanel1.Size = new System.Drawing.Size(815, 40);
-            this.radPanel1.TabIndex = 0;
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.frezzRowToolStripMenuItem,
+            this.frezzColumnToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.unFrezzToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(150, 76);
             // 
-            // chkActive
+            // frezzRowToolStripMenuItem
             // 
-            this.chkActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActive.Location = new System.Drawing.Point(217, 11);
-            this.chkActive.Name = "chkActive";
-            this.chkActive.Size = new System.Drawing.Size(77, 18);
-            this.chkActive.TabIndex = 2;
-            this.chkActive.Text = "Active Only";
-            this.chkActive.ThemeName = "Office2010Blue";
-            this.chkActive.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
-            this.chkActive.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.chkActive_ToggleStateChanged);
+            this.frezzRowToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.frezzRowToolStripMenuItem.Name = "frezzRowToolStripMenuItem";
+            this.frezzRowToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.frezzRowToolStripMenuItem.Text = " Frezz Row";
+            this.frezzRowToolStripMenuItem.Click += new System.EventHandler(this.frezzRowToolStripMenuItem_Click);
             // 
-            // radLabel1
+            // frezzColumnToolStripMenuItem
             // 
-            this.radLabel1.Location = new System.Drawing.Point(12, 10);
-            this.radLabel1.Name = "radLabel1";
-            this.radLabel1.Size = new System.Drawing.Size(71, 18);
-            this.radLabel1.TabIndex = 0;
-            this.radLabel1.Text = "Model Name";
+            this.frezzColumnToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.frezzColumnToolStripMenuItem.Name = "frezzColumnToolStripMenuItem";
+            this.frezzColumnToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.frezzColumnToolStripMenuItem.Text = " Frezz Column";
+            this.frezzColumnToolStripMenuItem.Click += new System.EventHandler(this.frezzColumnToolStripMenuItem_Click);
             // 
-            // txtModelName
+            // toolStripSeparator1
             // 
-            this.txtModelName.Location = new System.Drawing.Point(89, 10);
-            this.txtModelName.Name = "txtModelName";
-            this.txtModelName.Size = new System.Drawing.Size(122, 20);
-            this.txtModelName.TabIndex = 1;
-            this.txtModelName.ThemeName = "Office2010Blue";
-            this.txtModelName.TextChanged += new System.EventHandler(this.txtModelName_TextChanged);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(146, 6);
             // 
-            // radButton1
+            // unFrezzToolStripMenuItem
             // 
-            this.radButton1.Image = ((System.Drawing.Image)(resources.GetObject("radButton1.Image")));
-            this.radButton1.Location = new System.Drawing.Point(309, 6);
-            this.radButton1.Name = "radButton1";
-            this.radButton1.Size = new System.Drawing.Size(78, 30);
-            this.radButton1.TabIndex = 3;
-            this.radButton1.Text = "ค้นหา";
-            this.radButton1.ThemeName = "Office2010Blue";
-            this.radButton1.Click += new System.EventHandler(this.radButton1_Click_1);
+            this.unFrezzToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.unFrezzToolStripMenuItem.Name = "unFrezzToolStripMenuItem";
+            this.unFrezzToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.unFrezzToolStripMenuItem.Text = "UnFrezz";
+            this.unFrezzToolStripMenuItem.Click += new System.EventHandler(this.unFrezzToolStripMenuItem_Click);
             // 
             // MasterModel
             // 
@@ -577,10 +625,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).EndInit();
             this.radPanel1.ResumeLayout(false);
             this.radPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chkActive)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtModelName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButton1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtModelName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkActive)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -626,5 +675,10 @@
         private Telerik.WinControls.UI.RadLabel radLabel1;
         private Telerik.WinControls.UI.RadCheckBox chkActive;
         private Telerik.WinControls.UI.RadButton radButton1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem frezzRowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem frezzColumnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem unFrezzToolStripMenuItem;
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListPart));
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn1 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
@@ -88,6 +89,11 @@
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.frezzRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.frezzColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unFrezzToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -104,6 +110,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCodeNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel37)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -315,6 +322,7 @@
             // 
             this.radGridView1.BackColor = System.Drawing.Color.White;
             this.radGridView1.ColumnChooserSortOrder = Telerik.WinControls.UI.RadSortOrder.Ascending;
+            this.radGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.radGridView1.Cursor = System.Windows.Forms.Cursors.Default;
             this.radGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radGridView1.EnterKeyMode = Telerik.WinControls.UI.RadGridViewEnterKeyMode.EnterMovesToNextCell;
@@ -327,6 +335,7 @@
             // 
             this.radGridView1.MasterTemplate.AddNewRowPosition = Telerik.WinControls.UI.SystemRowPosition.Bottom;
             this.radGridView1.MasterTemplate.AllowAddNewRow = false;
+            this.radGridView1.MasterTemplate.AllowCellContextMenu = false;
             this.radGridView1.MasterTemplate.AllowColumnChooser = false;
             this.radGridView1.MasterTemplate.AllowColumnHeaderContextMenu = false;
             this.radGridView1.MasterTemplate.AllowDeleteRow = false;
@@ -659,6 +668,45 @@
             this.radRibbonBarButtonGroup5.ShowBorder = false;
             this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.frezzRowToolStripMenuItem,
+            this.frezzColumnToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.unFrezzToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(150, 76);
+            // 
+            // frezzRowToolStripMenuItem
+            // 
+            this.frezzRowToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.frezzRowToolStripMenuItem.Name = "frezzRowToolStripMenuItem";
+            this.frezzRowToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.frezzRowToolStripMenuItem.Text = " Frezz Row";
+            this.frezzRowToolStripMenuItem.Click += new System.EventHandler(this.frezzRowToolStripMenuItem_Click);
+            // 
+            // frezzColumnToolStripMenuItem
+            // 
+            this.frezzColumnToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.frezzColumnToolStripMenuItem.Name = "frezzColumnToolStripMenuItem";
+            this.frezzColumnToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.frezzColumnToolStripMenuItem.Text = " Frezz Column";
+            this.frezzColumnToolStripMenuItem.Click += new System.EventHandler(this.frezzColumnToolStripMenuItem_Click);
+            // 
+            // unFrezzToolStripMenuItem
+            // 
+            this.unFrezzToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.unFrezzToolStripMenuItem.Name = "unFrezzToolStripMenuItem";
+            this.unFrezzToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.unFrezzToolStripMenuItem.Text = "UnFrezz";
+            this.unFrezzToolStripMenuItem.Click += new System.EventHandler(this.unFrezzToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(146, 6);
+            // 
             // ListPart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -696,6 +744,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCodeNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel37)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -740,5 +789,10 @@
         private Telerik.WinControls.UI.RadRibbonBarGroup radRibbonBarGroup2;
         private Telerik.WinControls.UI.RadButtonElement btn_PrintShelfTag;
         private Telerik.WinControls.UI.RadButtonElement btn_Print_Barcode;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem frezzRowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem frezzColumnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem unFrezzToolStripMenuItem;
     }
 }

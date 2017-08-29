@@ -605,5 +605,50 @@ namespace StockControl
             //}
             //catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
+
+        private void frezzRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvData.Rows.Count > 0)
+                {
+
+                    int Row = 0;
+                    Row = dgvData.CurrentRow.Index;
+                    dbClss.Set_Freeze_Row(dgvData, Row);
+
+
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void frezzColumnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvData.Columns.Count > 0)
+                {
+
+                    int Col = 0;
+                    Col = dgvData.CurrentColumn.Index;
+                    dbClss.Set_Freeze_Column(dgvData, Col);
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void unFrezzToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                dbClss.Set_Freeze_UnColumn(dgvData);
+                dbClss.Set_Freeze_UnRows(dgvData);
+
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
     }
 }

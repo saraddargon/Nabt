@@ -538,5 +538,74 @@ namespace StockControl
             catch (Exception ex) { }
             this.Cursor = Cursors.Default;
         }
+
+        private void frezzRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvData.Rows.Count > 0)
+                {
+
+                    int Row = 0;
+                    Row = dgvData.CurrentRow.Index;
+                    dbClss.Set_Freeze_Row(dgvData, Row);
+
+                    //foreach (var rd in radGridView1.Rows)
+                    //{
+                    //    if (rd.Index <= Row)
+                    //    {
+                    //        radGridView1.Rows[rd.Index].PinPosition = PinnedRowPosition.Top;
+                    //    }
+                    //    else
+                    //        break;
+                    //}
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void frezzColumnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvData.Columns.Count > 0)
+                {
+                    int Col = 0;
+                    Col = dgvData.CurrentColumn.Index;
+                    dbClss.Set_Freeze_Column(dgvData, Col);
+
+                    //foreach (var rd in radGridView1.Columns)
+                    //{
+                    //    if (rd.Index <= Col)
+                    //    {
+                    //        radGridView1.Columns[rd.Index].PinPosition = PinnedColumnPosition.Left;
+                    //    }
+                    //    else
+                    //        break;
+                    //}
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void unFrezzToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                dbClss.Set_Freeze_UnColumn(dgvData);
+                dbClss.Set_Freeze_UnRows(dgvData);
+                //foreach (var rd in radGridView1.Rows)
+                //{
+                //    radGridView1.Rows[rd.Index].IsPinned = false;
+                //}
+                //foreach (var rd in radGridView1.Columns)
+                //{
+                //    radGridView1.Columns[rd.Index].IsPinned = false;                   
+                //}
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
     }
 }

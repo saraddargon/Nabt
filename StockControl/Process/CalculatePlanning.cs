@@ -795,5 +795,65 @@ namespace StockControl
             this.Cursor = Cursors.Default;
         
         }
+
+        private void frezzRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (radGridView1.Rows.Count > 0)
+                {
+
+                    int Row = 0;
+                    Row = radGridView1.CurrentRow.Index;
+                    dbClss.Set_Freeze_Row(radGridView1, Row);
+
+                    //foreach (var rd in radGridView1.Rows)
+                    //{
+                    //    if (rd.Index <= Row)
+                    //    {
+                    //        radGridView1.Rows[rd.Index].PinPosition = PinnedRowPosition.Top;
+                    //    }
+                    //    else
+                    //        break;
+                    //}
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void frezzColumnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (radGridView1.Columns.Count > 0)
+                {
+
+                    int Col = 0;
+                    Col = radGridView1.CurrentColumn.Index;
+                    dbClss.Set_Freeze_Column(radGridView1, Col);
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void unFrezzToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                dbClss.Set_Freeze_UnColumn(radGridView1);
+                dbClss.Set_Freeze_UnRows(radGridView1);
+                //foreach (var rd in radGridView1.Rows)
+                //{
+                //    radGridView1.Rows[rd.Index].IsPinned = false;
+                //}
+                //foreach (var rd in radGridView1.Columns)
+                //{
+                //    radGridView1.Columns[rd.Index].IsPinned = false;                   
+                //}
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
     }
 }

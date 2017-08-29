@@ -66,6 +66,10 @@ namespace StockControl
             RMenu4.Click += RMenu4_Click;
             RMenu5.Click += RMenu5_Click;
             RMenu6.Click += RMenu6_Click;
+            RFrezzRow.Click += RFrezzRow_Click;
+            RFrezzColumn.Click += RFrezzColumn_Click;
+            RUnFrezz.Click += RUnFrezz_Click;
+
             radGridView1.ReadOnly = true;
             radGridView1.AutoGenerateColumns = false;
             GETDTRow();
@@ -792,5 +796,61 @@ namespace StockControl
                 DataLoad();
             }
         }
+
+        private void frezzRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (radGridView1.Rows.Count > 0)
+                {
+
+                    int Row = 0;
+                    Row = radGridView1.CurrentRow.Index;
+                    dbClss.Set_Freeze_Row(radGridView1, Row);
+
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void frezzColumnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (radGridView1.Columns.Count > 0)
+                {
+                    int Col = 0;
+                    Col = radGridView1.CurrentColumn.Index;
+                    dbClss.Set_Freeze_Column(radGridView1, Col);
+
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void unFrezzToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                dbClss.Set_Freeze_UnColumn(radGridView1);
+                dbClss.Set_Freeze_UnRows(radGridView1);
+               
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+        private void RFrezzRow_Click(object sender, EventArgs e)
+        {
+            frezzRowToolStripMenuItem_Click(null, null);
+        }
+        private void RFrezzColumn_Click(object sender, EventArgs e)
+        {
+            frezzColumnToolStripMenuItem_Click(null, null);
+        }
+        private void RUnFrezz_Click(object sender, EventArgs e)
+        {
+            unFrezzToolStripMenuItem_Click(null, null);
+        }
+    
     }
 }
