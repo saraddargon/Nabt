@@ -62,5 +62,11 @@
         <elementListCompartment Id="31900c7a-8e38-4da9-9ea7-ab299344b909" absoluteBounds="2.6399999999999997, 4.085, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="dbde3639-f2be-432a-bdb5-d2ce51a4b404" isExpanded="false" absoluteBounds="0.5, 4.75, 2, 0.45">
+      <DataClassMoniker Name="/DataClasses1DataContext/tb_ReceiveHD" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b75e6cfa-0430-4733-bfba-ac92eb3c86aa" absoluteBounds="0.51500000000000012, 5.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

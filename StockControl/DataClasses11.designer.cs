@@ -48,6 +48,9 @@ namespace StockControl
     partial void Inserttb_LocationlWH(tb_LocationlWH instance);
     partial void Updatetb_LocationlWH(tb_LocationlWH instance);
     partial void Deletetb_LocationlWH(tb_LocationlWH instance);
+    partial void Inserttb_ReceiveHD(tb_ReceiveHD instance);
+    partial void Updatetb_ReceiveHD(tb_ReceiveHD instance);
+    partial void Deletetb_ReceiveHD(tb_ReceiveHD instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -157,6 +160,14 @@ namespace StockControl
 			get
 			{
 				return this.GetTable<tb_ListQueue>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tb_ReceiveHD> tb_ReceiveHDs
+		{
+			get
+			{
+				return this.GetTable<tb_ReceiveHD>();
 			}
 		}
 		
@@ -1740,6 +1751,260 @@ namespace StockControl
 				{
 					this._CreateBy = value;
 				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_ReceiveHD")]
+	public partial class tb_ReceiveHD : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _RCNo;
+		
+		private string _RCVendorNo;
+		
+		private string _RCVendorName;
+		
+		private string _RCInvoiceNo;
+		
+		private string _RCStatus;
+		
+		private string _RCRemark;
+		
+		private System.Nullable<System.DateTime> _CreateDate;
+		
+		private string _CreateBy;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnRCNoChanging(string value);
+    partial void OnRCNoChanged();
+    partial void OnRCVendorNoChanging(string value);
+    partial void OnRCVendorNoChanged();
+    partial void OnRCVendorNameChanging(string value);
+    partial void OnRCVendorNameChanged();
+    partial void OnRCInvoiceNoChanging(string value);
+    partial void OnRCInvoiceNoChanged();
+    partial void OnRCStatusChanging(string value);
+    partial void OnRCStatusChanged();
+    partial void OnRCRemarkChanging(string value);
+    partial void OnRCRemarkChanged();
+    partial void OnCreateDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreateDateChanged();
+    partial void OnCreateByChanging(string value);
+    partial void OnCreateByChanged();
+    #endregion
+		
+		public tb_ReceiveHD()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RCNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string RCNo
+		{
+			get
+			{
+				return this._RCNo;
+			}
+			set
+			{
+				if ((this._RCNo != value))
+				{
+					this.OnRCNoChanging(value);
+					this.SendPropertyChanging();
+					this._RCNo = value;
+					this.SendPropertyChanged("RCNo");
+					this.OnRCNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RCVendorNo", DbType="NVarChar(50)")]
+		public string RCVendorNo
+		{
+			get
+			{
+				return this._RCVendorNo;
+			}
+			set
+			{
+				if ((this._RCVendorNo != value))
+				{
+					this.OnRCVendorNoChanging(value);
+					this.SendPropertyChanging();
+					this._RCVendorNo = value;
+					this.SendPropertyChanged("RCVendorNo");
+					this.OnRCVendorNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RCVendorName", DbType="NVarChar(50)")]
+		public string RCVendorName
+		{
+			get
+			{
+				return this._RCVendorName;
+			}
+			set
+			{
+				if ((this._RCVendorName != value))
+				{
+					this.OnRCVendorNameChanging(value);
+					this.SendPropertyChanging();
+					this._RCVendorName = value;
+					this.SendPropertyChanged("RCVendorName");
+					this.OnRCVendorNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RCInvoiceNo", DbType="NVarChar(50)")]
+		public string RCInvoiceNo
+		{
+			get
+			{
+				return this._RCInvoiceNo;
+			}
+			set
+			{
+				if ((this._RCInvoiceNo != value))
+				{
+					this.OnRCInvoiceNoChanging(value);
+					this.SendPropertyChanging();
+					this._RCInvoiceNo = value;
+					this.SendPropertyChanged("RCInvoiceNo");
+					this.OnRCInvoiceNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RCStatus", DbType="NVarChar(50)")]
+		public string RCStatus
+		{
+			get
+			{
+				return this._RCStatus;
+			}
+			set
+			{
+				if ((this._RCStatus != value))
+				{
+					this.OnRCStatusChanging(value);
+					this.SendPropertyChanging();
+					this._RCStatus = value;
+					this.SendPropertyChanged("RCStatus");
+					this.OnRCStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RCRemark", DbType="NVarChar(50)")]
+		public string RCRemark
+		{
+			get
+			{
+				return this._RCRemark;
+			}
+			set
+			{
+				if ((this._RCRemark != value))
+				{
+					this.OnRCRemarkChanging(value);
+					this.SendPropertyChanging();
+					this._RCRemark = value;
+					this.SendPropertyChanged("RCRemark");
+					this.OnRCRemarkChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreateDate
+		{
+			get
+			{
+				return this._CreateDate;
+			}
+			set
+			{
+				if ((this._CreateDate != value))
+				{
+					this.OnCreateDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreateDate = value;
+					this.SendPropertyChanged("CreateDate");
+					this.OnCreateDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateBy", DbType="NVarChar(50)")]
+		public string CreateBy
+		{
+			get
+			{
+				return this._CreateBy;
+			}
+			set
+			{
+				if ((this._CreateBy != value))
+				{
+					this.OnCreateByChanging(value);
+					this.SendPropertyChanging();
+					this._CreateBy = value;
+					this.SendPropertyChanged("CreateBy");
+					this.OnCreateByChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
