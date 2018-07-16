@@ -29,13 +29,13 @@ namespace StockControl
             string ShowName = "";
             switch(sqlname1)
             {
-                case "PurchaseReq": { ShowName = "Purchase Request"; pictureBox1.Image = imageList4.Images[2]; }break;
-                case "ForeCast": { ShowName = "ForeCasting"; pictureBox1.Image = imageList4.Images[1]; } break;
-                case "PartSetting": { ShowName = "Tooling Setting"; pictureBox1.Image = imageList4.Images[0]; } break;
+                case "Production": { ShowName = "Production"; pictureBox1.Image = imageList4.Images[2]; }break;
+                case "TPIC": { ShowName = "TPIC List"; pictureBox1.Image = imageList4.Images[1]; } break;
+                case "MasterList": { ShowName = "Master List"; pictureBox1.Image = imageList4.Images[0]; } break;
                 case "Receive": { ShowName = "Receive"; pictureBox1.Image = imageList4.Images[3]; } break;
-                case "Shipping": { ShowName = "Shipping"; pictureBox1.Image = imageList4.Images[4]; } break;
-                case "Report": { ShowName = "Report"; pictureBox1.Image = imageList4.Images[5]; } break;
-                case "Stock": { ShowName = "Stock Balance"; pictureBox1.Image = imageList4.Images[7]; } break;
+                case "Export": { ShowName = "Export"; pictureBox1.Image = imageList4.Images[4]; } break;
+                case "Local": { ShowName = "Local"; pictureBox1.Image = imageList4.Images[5]; } break;
+                case "CheckStock": { ShowName = "CheckStock"; pictureBox1.Image = imageList4.Images[7]; } break;
 
             }
             lblModule.Text = ShowName;
@@ -121,7 +121,11 @@ namespace StockControl
                         {
                             ListItem.ImageIndex = 7;
                         }
-                        else if (c.LinkNode.ToString().Equals("ReportForeCast"))
+                        else if (c.LinkNode.ToString().Equals("ReportRC")
+                            || c.LinkNode.ToString().Equals("ReportExport")
+                             || c.LinkNode.ToString().Equals("Report Local")
+                              || c.LinkNode.ToString().Equals("ReportPD")
+                            )
                         {
                             ListItem.ImageIndex = 8;
                         }
@@ -153,7 +157,26 @@ namespace StockControl
                         {
                             ListItem.ImageIndex = 15;
                         }
-                        else if (c.LinkNode.ToString().Equals("ListPart"))
+                        else if (c.LinkNode.ToString().Equals("UserList") ||
+                            c.LinkNode.ToString().Equals("UserSetup") ||
+                            c.LinkNode.ToString().Equals("LocationWH") ||
+                            c.LinkNode.ToString().Equals("ListItem") ||
+                            c.LinkNode.ToString().Equals("ListPO") ||
+                            c.LinkNode.ToString().Equals("ListQueue") ||
+                            c.LinkNode.ToString().Equals("ReceiveList") ||
+                            c.LinkNode.ToString().Equals("Receive") ||
+                            c.LinkNode.ToString().Equals("UploadExList") ||
+                            c.LinkNode.ToString().Equals("ExportList") ||
+                            c.LinkNode.ToString().Equals("ExShipment") ||
+                            c.LinkNode.ToString().Equals("GuidelineLot") ||
+                            c.LinkNode.ToString().Equals("LocalList")  ||
+                            c.LinkNode.ToString().Equals("LocalShipment") ||
+                                c.LinkNode.ToString().Equals("UploadLocal") ||
+                                c.LinkNode.ToString().Equals("CheckStockList") ||
+                                    c.LinkNode.ToString().Equals("CheckStock") ||
+                                        c.LinkNode.ToString().Equals("ProductionBom") ||
+                                            c.LinkNode.ToString().Equals("PrintRW") 
+                            )
                         {
                             ListItem.ImageIndex = 16;
                         }

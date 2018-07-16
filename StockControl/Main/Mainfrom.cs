@@ -92,28 +92,28 @@ namespace StockControl
 
         private void radMenuItem15_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
-            Unit unit = new Unit();
-            this.Cursor = Cursors.Default;
-            unit.ShowDialog();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            //this.Cursor = Cursors.WaitCursor;
+            //Unit unit = new Unit();
+            //this.Cursor = Cursors.Default;
+            //unit.ShowDialog();
+            //GC.Collect();
+            //GC.WaitForPendingFinalizers();
 
-            ClassLib.Memory.SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
-            ClassLib.Memory.Heap();
+            //ClassLib.Memory.SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
+            //ClassLib.Memory.Heap();
         }
 
         private void radMenuItem17_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
-            Types tb = new Types();
-            this.Cursor = Cursors.Default;
-            tb.ShowDialog();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            //this.Cursor = Cursors.WaitCursor;
+            //Types tb = new Types();
+            //this.Cursor = Cursors.Default;
+            //tb.ShowDialog();
+            //GC.Collect();
+            //GC.WaitForPendingFinalizers();
 
-            ClassLib.Memory.SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
-            ClassLib.Memory.Heap();
+            //ClassLib.Memory.SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
+            //ClassLib.Memory.Heap();
         }
 
         private void Mainfrom_MaximumSizeChanged(object sender, EventArgs e)
@@ -184,28 +184,28 @@ namespace StockControl
         private void radMenuItem16_Click(object sender, EventArgs e)
         {
 
-            this.Cursor = Cursors.WaitCursor;
-            GroupType gy = new GroupType();
-            this.Cursor = Cursors.Default;
-            gy.ShowDialog();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            //this.Cursor = Cursors.WaitCursor;
+            //GroupType gy = new GroupType();
+            //this.Cursor = Cursors.Default;
+            //gy.ShowDialog();
+            //GC.Collect();
+            //GC.WaitForPendingFinalizers();
 
-            ClassLib.Memory.SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
-            ClassLib.Memory.Heap();
+            //ClassLib.Memory.SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
+            //ClassLib.Memory.Heap();
         }
 
         private void radMenuItem22_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
-            HistoryScreen gy = new HistoryScreen("");
-            this.Cursor = Cursors.Default;
-            gy.ShowDialog();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            //this.Cursor = Cursors.WaitCursor;
+            //HistoryScreen gy = new HistoryScreen("");
+            //this.Cursor = Cursors.Default;
+            //gy.ShowDialog();
+            //GC.Collect();
+            //GC.WaitForPendingFinalizers();
 
-            ClassLib.Memory.SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
-            ClassLib.Memory.Heap();
+            //ClassLib.Memory.SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
+            //ClassLib.Memory.Heap();
         }
 
         private void radMenuItem21_Click(object sender, EventArgs e)
@@ -226,11 +226,11 @@ namespace StockControl
            
             if (MessageBox.Show("ต้องการที่จะ Run Job Query หรือไม่ ?", "Run Job", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                using (DataClasses1DataContext db = new DataClasses1DataContext())
-                {
-                    db.sp_RunJOB();
-                    db.sp_SelectItemUpdate();
-                }
+                //using (DataClasses1DataContext db = new DataClasses1DataContext())
+                //{
+                //    db.sp_RunJOB();
+                //    db.sp_SelectItemUpdate();
+                //}
                     MessageBox.Show("Script Run StoreProcedure Agent Completed.");
             }
         }
@@ -266,15 +266,15 @@ namespace StockControl
            
           
 
-            this.Cursor = Cursors.WaitCursor;
-            ServerConfig sc = new ServerConfig();
-            this.Cursor = Cursors.Default;
-            sc.ShowDialog();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            //this.Cursor = Cursors.WaitCursor;
+            //ServerConfig sc = new ServerConfig();
+            //this.Cursor = Cursors.Default;
+            //sc.ShowDialog();
+            //GC.Collect();
+            //GC.WaitForPendingFinalizers();
 
-            ClassLib.Memory.SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
-            ClassLib.Memory.Heap();
+            //ClassLib.Memory.SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
+            //ClassLib.Memory.Heap();
         }
 
         private void radMenuItem12_Click(object sender, EventArgs e)
@@ -297,14 +297,14 @@ namespace StockControl
 
         private void radMenuItem18_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
-            Vendor sc = new Vendor();
-            this.Cursor = Cursors.Default;
-            sc.ShowDialog();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            ClassLib.Memory.SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
-            ClassLib.Memory.Heap();
+            //this.Cursor = Cursors.WaitCursor;
+            //Vendor sc = new Vendor();
+            //this.Cursor = Cursors.Default;
+            //sc.ShowDialog();
+            //GC.Collect();
+            //GC.WaitForPendingFinalizers();
+            //ClassLib.Memory.SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
+            //ClassLib.Memory.Heap();
 
 
             

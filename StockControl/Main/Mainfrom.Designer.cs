@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Mainfrom));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Tooling Setting");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("ForeCasting");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Purchase Request");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Receive Part");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Shipping Part");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Stock Balance");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Report");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Master List");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("T-PIC List");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Receive List");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Production List");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Export List");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Local Delivery List");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Check Stock List");
             this.office2010BlueTheme1 = new Telerik.WinControls.Themes.Office2010BlueTheme();
             this.radStatusStrip1 = new Telerik.WinControls.UI.RadStatusStrip();
             this.radLabelElement1 = new Telerik.WinControls.UI.RadLabelElement();
@@ -67,10 +67,6 @@
             this.radMenuItem7 = new Telerik.WinControls.UI.RadMenuItem();
             this.radMenuItem8 = new Telerik.WinControls.UI.RadMenuItem();
             this.radMenuSeparatorItem3 = new Telerik.WinControls.UI.RadMenuSeparatorItem();
-            this.radMenuItem15 = new Telerik.WinControls.UI.RadMenuItem();
-            this.radMenuItem16 = new Telerik.WinControls.UI.RadMenuItem();
-            this.radMenuItem17 = new Telerik.WinControls.UI.RadMenuItem();
-            this.radMenuItem18 = new Telerik.WinControls.UI.RadMenuItem();
             this.radMenuItem20 = new Telerik.WinControls.UI.RadMenuItem();
             this.radMenuSeparatorItem4 = new Telerik.WinControls.UI.RadMenuSeparatorItem();
             this.radMenuItem21 = new Telerik.WinControls.UI.RadMenuItem();
@@ -120,7 +116,6 @@
             this.radStatusStrip1.Name = "radStatusStrip1";
             this.radStatusStrip1.Size = new System.Drawing.Size(1072, 23);
             this.radStatusStrip1.TabIndex = 0;
-            this.radStatusStrip1.Text = "radStatusStrip1";
             this.radStatusStrip1.ThemeName = "Office2010Blue";
             // 
             // radLabelElement1
@@ -139,7 +134,7 @@
             this.lblStatusconnect.TextWrap = true;
             ((Telerik.WinControls.Primitives.FillPrimitive)(this.lblStatusconnect.GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(129)))), ((int)(((byte)(4)))));
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.lblStatusconnect.GetChildAt(2).GetChildAt(1))).TextWrap = true;
-            ((Telerik.WinControls.Primitives.TextPrimitive)(this.lblStatusconnect.GetChildAt(2).GetChildAt(1))).TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            ((Telerik.WinControls.Primitives.TextPrimitive)(this.lblStatusconnect.GetChildAt(2).GetChildAt(1))).TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.lblStatusconnect.GetChildAt(2).GetChildAt(1))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(129)))), ((int)(((byte)(4)))));
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.lblStatusconnect.GetChildAt(2).GetChildAt(1))).Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
@@ -163,7 +158,7 @@
             this.lblServer.Text = "(local)";
             this.lblServer.TextWrap = true;
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.lblServer.GetChildAt(2).GetChildAt(1))).TextWrap = true;
-            ((Telerik.WinControls.Primitives.TextPrimitive)(this.lblServer.GetChildAt(2).GetChildAt(1))).TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            ((Telerik.WinControls.Primitives.TextPrimitive)(this.lblServer.GetChildAt(2).GetChildAt(1))).TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.lblServer.GetChildAt(2).GetChildAt(1))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(0)))), ((int)(((byte)(129)))));
             // 
             // commandBarSeparator2
@@ -186,7 +181,7 @@
             this.lblDomain.Text = "WorkGroup";
             this.lblDomain.TextWrap = true;
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.lblDomain.GetChildAt(2).GetChildAt(1))).TextWrap = true;
-            ((Telerik.WinControls.Primitives.TextPrimitive)(this.lblDomain.GetChildAt(2).GetChildAt(1))).TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            ((Telerik.WinControls.Primitives.TextPrimitive)(this.lblDomain.GetChildAt(2).GetChildAt(1))).TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.lblDomain.GetChildAt(2).GetChildAt(1))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(4)))), ((int)(((byte)(129)))));
             // 
             // commandBarSeparator3
@@ -209,7 +204,7 @@
             this.lblUser.Text = "None";
             this.lblUser.TextWrap = true;
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.lblUser.GetChildAt(2).GetChildAt(1))).TextWrap = true;
-            ((Telerik.WinControls.Primitives.TextPrimitive)(this.lblUser.GetChildAt(2).GetChildAt(1))).TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            ((Telerik.WinControls.Primitives.TextPrimitive)(this.lblUser.GetChildAt(2).GetChildAt(1))).TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.lblUser.GetChildAt(2).GetChildAt(1))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(6)))), ((int)(((byte)(197)))));
             ((Telerik.WinControls.Primitives.TextPrimitive)(this.lblUser.GetChildAt(2).GetChildAt(1))).Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
@@ -312,10 +307,6 @@
             this.radMenuItem7,
             this.radMenuItem8,
             this.radMenuSeparatorItem3,
-            this.radMenuItem15,
-            this.radMenuItem16,
-            this.radMenuItem17,
-            this.radMenuItem18,
             this.radMenuItem20,
             this.radMenuSeparatorItem4,
             this.radMenuItem21,
@@ -342,34 +333,6 @@
             this.radMenuSeparatorItem3.Name = "radMenuSeparatorItem3";
             this.radMenuSeparatorItem3.Text = "radMenuSeparatorItem3";
             this.radMenuSeparatorItem3.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // radMenuItem15
-            // 
-            this.radMenuItem15.Image = ((System.Drawing.Image)(resources.GetObject("radMenuItem15.Image")));
-            this.radMenuItem15.Name = "radMenuItem15";
-            this.radMenuItem15.Text = "Master Unit";
-            this.radMenuItem15.Click += new System.EventHandler(this.radMenuItem15_Click);
-            // 
-            // radMenuItem16
-            // 
-            this.radMenuItem16.Image = ((System.Drawing.Image)(resources.GetObject("radMenuItem16.Image")));
-            this.radMenuItem16.Name = "radMenuItem16";
-            this.radMenuItem16.Text = "Master GroupType";
-            this.radMenuItem16.Click += new System.EventHandler(this.radMenuItem16_Click);
-            // 
-            // radMenuItem17
-            // 
-            this.radMenuItem17.Image = ((System.Drawing.Image)(resources.GetObject("radMenuItem17.Image")));
-            this.radMenuItem17.Name = "radMenuItem17";
-            this.radMenuItem17.Text = "Master Type";
-            this.radMenuItem17.Click += new System.EventHandler(this.radMenuItem17_Click);
-            // 
-            // radMenuItem18
-            // 
-            this.radMenuItem18.Image = ((System.Drawing.Image)(resources.GetObject("radMenuItem18.Image")));
-            this.radMenuItem18.Name = "radMenuItem18";
-            this.radMenuItem18.Text = "Master Vendor";
-            this.radMenuItem18.Click += new System.EventHandler(this.radMenuItem18_Click);
             // 
             // radMenuItem20
             // 
@@ -447,7 +410,7 @@
             // 
             this.radMenuItem12.Image = ((System.Drawing.Image)(resources.GetObject("radMenuItem12.Image")));
             this.radMenuItem12.Name = "radMenuItem12";
-            this.radMenuItem12.Text = "About Stock Control";
+            this.radMenuItem12.Text = "About Barcode System";
             this.radMenuItem12.Click += new System.EventHandler(this.radMenuItem12_Click);
             // 
             // panel1
@@ -479,22 +442,22 @@
             this.TreeManu.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TreeManu.ImageIndex = 3;
             this.TreeManu.ImageList = this.ImageList;
-            this.TreeManu.Location = new System.Drawing.Point(0, 40);
+            this.TreeManu.Location = new System.Drawing.Point(0, 31);
             this.TreeManu.Name = "TreeManu";
-            treeNode1.Name = "PartSetting";
-            treeNode1.Text = "Tooling Setting";
-            treeNode2.Name = "ForeCast";
-            treeNode2.Text = "ForeCasting";
-            treeNode3.Name = "PurchaseReq";
-            treeNode3.Text = "Purchase Request";
-            treeNode4.Name = "Receive";
-            treeNode4.Text = "Receive Part";
-            treeNode5.Name = "Shipping";
-            treeNode5.Text = "Shipping Part";
-            treeNode6.Name = "Stock";
-            treeNode6.Text = "Stock Balance";
-            treeNode7.Name = "Report";
-            treeNode7.Text = "Report";
+            treeNode1.Name = "MasterList";
+            treeNode1.Text = "Master List";
+            treeNode2.Name = "TPIC";
+            treeNode2.Text = "T-PIC List";
+            treeNode3.Name = "Receive";
+            treeNode3.Text = "Receive List";
+            treeNode4.Name = "Production";
+            treeNode4.Text = "Production List";
+            treeNode5.Name = "Export";
+            treeNode5.Text = "Export List";
+            treeNode6.Name = "Local";
+            treeNode6.Text = "Local Delivery List";
+            treeNode7.Name = "CheckStock";
+            treeNode7.Text = "Check Stock List";
             this.TreeManu.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1,
             treeNode2,
@@ -505,7 +468,7 @@
             treeNode7});
             this.TreeManu.SelectedImageIndex = 4;
             this.TreeManu.ShowNodeToolTips = true;
-            this.TreeManu.Size = new System.Drawing.Size(212, 486);
+            this.TreeManu.Size = new System.Drawing.Size(212, 495);
             this.TreeManu.TabIndex = 4;
             this.TreeManu.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeManu_AfterSelect);
             // 
@@ -534,10 +497,10 @@
             this.linkLabel1.LinkColor = System.Drawing.Color.Black;
             this.linkLabel1.Location = new System.Drawing.Point(0, 0);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(212, 40);
+            this.linkLabel1.Size = new System.Drawing.Size(212, 31);
             this.linkLabel1.TabIndex = 2;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "        OGUSU (THAILAND) CO.,LTD.";
+            this.linkLabel1.Text = "        NABTESCO";
             this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.linkLabel1.VisitedLinkColor = System.Drawing.Color.Black;
             this.linkLabel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.linkLabel1_MouseClick);
@@ -573,7 +536,6 @@
             this.radMenu1.Name = "radMenu1";
             this.radMenu1.Size = new System.Drawing.Size(1072, 29);
             this.radMenu1.TabIndex = 1;
-            this.radMenu1.Text = "radMenu1";
             this.radMenu1.ThemeName = "Office2010Blue";
             ((Telerik.WinControls.UI.RadMenuElement)(this.radMenu1.GetChildAt(0))).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             ((Telerik.WinControls.Primitives.FillPrimitive)(this.radMenu1.GetChildAt(0).GetChildAt(1))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(4)))), ((int)(((byte)(129)))));
@@ -592,14 +554,13 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.MaximizeBox = false;
             this.Name = "Mainfrom";
             // 
             // 
             // 
             this.RootElement.ApplyShapeToControl = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Part Management 1.0.4";
+            this.Text = "Barcode System 1.0.0";
             this.ThemeName = "Office2010Blue";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.MaximumSizeChanged += new System.EventHandler(this.Mainfrom_MaximumSizeChanged);
@@ -656,10 +617,6 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ImageList ImageList;
         private Telerik.WinControls.UI.RadMenuSeparatorItem radMenuSeparatorItem3;
-        private Telerik.WinControls.UI.RadMenuItem radMenuItem15;
-        private Telerik.WinControls.UI.RadMenuItem radMenuItem16;
-        private Telerik.WinControls.UI.RadMenuItem radMenuItem17;
-        private Telerik.WinControls.UI.RadMenuItem radMenuItem18;
         private Telerik.WinControls.UI.RadMenuItem radMenuItem19;
         private Telerik.WinControls.UI.RadMenuSeparatorItem radMenuSeparatorItem4;
         private Telerik.WinControls.UI.RadMenuItem radMenuItem21;

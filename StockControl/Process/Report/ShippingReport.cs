@@ -176,5 +176,53 @@ namespace StockControl
             else
                 txtVendorNo.Text = "";
         }
+
+        private void radButtonElement1_Click(object sender, EventArgs e)
+        {
+
+            if (MessageBox.Show("ต้องการออกรายงาน หรือไม่ ?", "ออกรายงาน", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                saveFileDialog1.Filter = "Excel|*.xls";
+                saveFileDialog1.Title = "Save an Excel File";
+                saveFileDialog1.ShowDialog();
+                if (saveFileDialog1.FileName != "")
+                {
+                    if (ExportshippingGroup(saveFileDialog1.FileName))
+                        MessageBox.Show("Export Report Completed.");
+
+                }
+
+            }
+            
+        }
+        private bool ExportshippingGroup(string FileName)
+        {
+            bool ck = false;
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+
+                //System.IO.File.Copy(Report.CRRReport.dbPartReport + "Account_Sheet.xls", FileName, true);
+                //System.Diagnostics.Process.Start();
+
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    string date1 = "";
+                    string date2 = "";
+                    date1 = dtDate1.Value.ToString("yyyyMMdd");
+                    date2 = dtDate2.Value.ToString("yyyyMMdd");
+
+                    radGridView1.AutoGenerateColumns = true;
+                    radGridView1.DataSource = db.sp_E003_ReportShipping2(date1, date2, "");
+                }
+                dbClss.ExportGridXlSX2(radGridView1, FileName);
+                dbClss.AddHistory(this.Name, "ออกรายงาน", "เลือกออกรายงาน ", "ShippingGroup");
+                ck = true;
+
+            }
+            catch { ck = false; }
+            this.Cursor = Cursors.Default;
+            return ck;
+        }
     }
 }

@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Data;
 using Telerik.WinControls.UI.Export;
 using Telerik.WinControls.UI;
-using Telerik.WinControls.Data;
 using System.Globalization;
 using System.Threading;
 using System.Reflection;
@@ -54,6 +51,7 @@ namespace StockControl
             {
 
 
+                
                 ExportToCSV exporter = new ExportToCSV(rv);
                 exporter.FileExtension = "csv";
                 exporter.ColumnDelimiter = ",";
@@ -146,37 +144,29 @@ namespace StockControl
         {
             string No = "";
 
-            using (DataClasses1DataContext db = new DataClasses1DataContext())
-            {
-                var g = (from ix in db.Sp_GetNameControl_001(ControlNo, Ac) select ix).ToList();
-                if(g.Count>0)
-                {
-                    No = g.FirstOrDefault().GetNo;
-                }
-            }
-
+            
                 return No;
         }
         public static string Get_Stock(string CodeNo, string Category,string Type_in_out,string Condition)
         {
             string No = "0.00";
 
-            using (DataClasses1DataContext db = new DataClasses1DataContext())
-            {
-                if (!CodeNo.Equals(""))
-                {
-                    var g = (from ix in db.sp_008_Stock_Select(CodeNo, Category, Type_in_out) select ix).OrderByDescending(ab => ab.id ).ToList();
-                    if (g.Count > 0)
-                    {
-                        if (Condition.Equals("RemainQty"))
-                            No = (g.FirstOrDefault().RemainQty).ToString();
-                        else if (Condition.Equals("RemainAmount"))
-                            No = (g.FirstOrDefault().RemainAmount).ToString();
-                        else if (Condition.Equals("Avg"))
-                            No = (g.FirstOrDefault().Avg).ToString();
-                    }
-                }
-            }
+            //using (DataClasses1DataContext db = new DataClasses1DataContext())
+            //{
+            //    if (!CodeNo.Equals(""))
+            //    {
+            //        var g = (from ix in db.sp_008_Stock_Select(CodeNo, Category, Type_in_out) select ix).OrderByDescending(ab => ab.id ).ToList();
+            //        if (g.Count > 0)
+            //        {
+            //            if (Condition.Equals("RemainQty"))
+            //                No = (g.FirstOrDefault().RemainQty).ToString();
+            //            else if (Condition.Equals("RemainAmount"))
+            //                No = (g.FirstOrDefault().RemainAmount).ToString();
+            //            else if (Condition.Equals("Avg"))
+            //                No = (g.FirstOrDefault().Avg).ToString();
+            //        }
+            //    }
+            //}
 
             return No;
         }
@@ -184,76 +174,7 @@ namespace StockControl
         {
             decimal re = 0;
 
-            using (DataClasses1DataContext db = new DataClasses1DataContext())
-            {
-                decimal qty_can = 0;
-                string tt = "";
-                if (Qty < 0)
-                {
-                    tt = "ลบ";
-                    qty_can = -Qty;   //-(-10)   =>>> 10   เพื่อไปเปรียบเทียบ
-                }
-                else
-                {
-                    tt = "เพิ่ม";
-                }
-                decimal Remain_Inv = 0;
-                decimal Remain_Dl = 0;
-                decimal Remain_Temp = 0;
-                
-
-
-
-                var g = (from ix in db.tb_Items
-                         where ix.CodeNo.Trim() == CodeNo.Trim() //&& ix.Status == "Active"
-                         select ix).ToList();
-                if (g.Count > 0)  //มีรายการในระบบ
-                {
-                    var gg = (from ix in db.tb_Items
-                              where ix.CodeNo.Trim() == CodeNo.Trim()
-                              select ix).First();
-
-                    decimal.TryParse(StockControl.dbClss.TSt(gg.StockInv), out Remain_Inv);
-                    decimal.TryParse(StockControl.dbClss.TSt(gg.StockDL), out Remain_Dl);
-
-                    if(Type.Equals("Inv"))
-                    {
-                        if(Qty<0) //เบิกของออก  Shipping,Cancel Receive
-                        {
-                            if (qty_can > Remain_Inv) //เบิกของออกจะตัดที่ stock ปกติก่อน แต่ถ้าไม่พอจะไปเอาที่ Temp (DL)
-                            {
-                                Remain_Temp = qty_can - Remain_Inv;
-                                gg.StockInv = 0;            //ตัด Stock ปกติให้เป็น 0
-                                gg.StockDL = Remain_Dl - Remain_Temp;   //แล้วมาตัดที่ temp 
-                            }
-                            else//ใน Stock ปกติมีของพอสำหรับการเบิกก็จะตัดเพียง Stock inv เดียว
-                            {
-                                gg.StockInv = Remain_Inv + Qty;
-                            }
-                        }
-                        else //ของเข้า Receive,Cancel Shipping
-                        {
-                            gg.StockInv = Remain_Inv + Qty;
-                        }
-                    }
-                    else //DL
-                    {
-                        //if (Qty < 0) //เบิกของออก  Shipping,Cancel Receive
-                        //{
-
-                        //}
-                        //else //ของเข้า Receive,Cancel Shipping
-                        //{
-                            gg.StockDL = Remain_Dl + Qty;
-                        //}
-                    }
-
-                    dbClss.AddHistory(Screen, CodeNo, tt + " Stock [" + CodeNo +  " จำนวน "+ Qty.ToString()+"]", "");
-
-                    db.SubmitChanges();
-                   
-                }
-            }
+            
 
             return re;
         }
@@ -261,41 +182,7 @@ namespace StockControl
         {
             decimal re = 0;
 
-            using (DataClasses1DataContext db = new DataClasses1DataContext())
-            {
-                decimal qty_can = 0;
-                string tt = "";
-                if (Qty < 0)
-                {
-                    tt = "ลบ";
-                    qty_can = -Qty;   //-(-10)   =>>> 10   เพื่อไปเปรียบเทียบ
-                }
-                else
-                {
-                    tt = "เพิ่ม";
-                }
-                decimal Remain_BackOrder = 0;
-                
-                var g = (from ix in db.tb_Items
-                         where ix.CodeNo.Trim() == CodeNo.Trim() //&& ix.Status == "Active"
-                         select ix).ToList();
-                if (g.Count > 0)  //มีรายการในระบบ
-                {
-                    var gg = (from ix in db.tb_Items
-                              where ix.CodeNo.Trim() == CodeNo.Trim()
-                              select ix).First();
-
-                    decimal.TryParse(StockControl.dbClss.TSt(gg.StockBackOrder), out Remain_BackOrder);
-                   
-                   gg.StockBackOrder = Remain_BackOrder + Qty;
-                     
-
-                    dbClss.AddHistory(Screen, CodeNo, tt + " Stock BackOrder [" + CodeNo + " จำนวน " + Qty.ToString() + "]", "");
-
-                    db.SubmitChanges();
-
-                }
-            }
+      
 
             return re;
         }

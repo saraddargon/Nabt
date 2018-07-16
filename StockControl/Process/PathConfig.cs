@@ -22,9 +22,9 @@ namespace StockControl
         private void radMenuItem2_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            HistoryView hw = new HistoryView(this.Name);
+           // HistoryView hw = new HistoryView(this.Name);
             this.Cursor = Cursors.Default;
-            hw.ShowDialog();
+           // hw.ShowDialog();
         }
 
         private void radRibbonBar1_Click(object sender, EventArgs e)
@@ -95,14 +95,14 @@ namespace StockControl
         {
             bool ck = false;
 
-            using (DataClasses1DataContext db = new DataClasses1DataContext())
-            {
-                int i = (from ix in db.tb_GroupTypes where ix.GroupCode == code select ix).Count();
-                if (i > 0)
-                    ck = false;
-                else
-                    ck = true;
-            }
+            //using (DataClasses1DataContext db = new DataClasses1DataContext())
+            //{
+            //    int i = (from ix in db.tb_GroupTypes where ix.GroupCode == code select ix).Count();
+            //    if (i > 0)
+            //        ck = false;
+            //    else
+            //        ck = true;
+            //}
             return ck;
         }
 
@@ -169,61 +169,10 @@ namespace StockControl
         private bool DeleteUnit()
         {
             return false;
-            bool ck = false;
-         
-            int C = 0;
-            try
-            {
-
-                if (row >= 0)
-                {
-                    string CodeDelete = Convert.ToString(radGridView1.Rows[row].Cells["PathCode"].Value);
-                    string CodeTemp = Convert.ToString(radGridView1.Rows[row].Cells["dgvCodeTemp"].Value);
-                    radGridView1.EndEdit();
-                    if (MessageBox.Show("ต้องการลบรายการ ( "+ CodeDelete+" ) หรือไม่ ?", "ลบรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        using (DataClasses1DataContext db = new DataClasses1DataContext())
-                        {
-
-                            if (!CodeDelete.Equals(""))
-                            {
-                                if (!CodeTemp.Equals(""))
-                                {
-
-                                    var unit1 = (from ix in db.tb_GroupTypes
-                                                 where ix.GroupCode == CodeDelete
-                                                 select ix).ToList();
-                                    foreach (var d in unit1)
-                                    {
-                                        db.tb_GroupTypes.DeleteOnSubmit(d);
-                                        dbClss.AddHistory(this.Name, "ลบประเภทกลุ่ม", "Delete Group Code ["+d.GroupName+"]","");
-                                    }
-                                    C += 1;
-
-
-
-                                    db.SubmitChanges();
-                                }
-                            }
-
-                        }
-                    }
-                }
-            }
-
-            catch (Exception ex) { MessageBox.Show(ex.Message);
-                dbClss.AddError("ลบประเภทกลุ่ม", ex.Message, this.Name);
-            }
-
-            if (C > 0)
-            {
-                    MessageBox.Show("ลบรายการ สำเร็จ!");
-            }
-              
-
+           
            
 
-            return ck;
+            
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -408,45 +357,7 @@ namespace StockControl
 
         private void ImportData()
         {
-            try
-            {
-                using (DataClasses1DataContext db = new DataClasses1DataContext())
-                {
-                   
-                    foreach (DataRow rd in dt.Rows)
-                    {
-                        if (!rd["GroupCode"].ToString().Equals(""))
-                        {
-
-                            var x = (from ix in db.tb_GroupTypes where ix.GroupCode.ToLower().Trim() == rd["GroupCode"].ToString().ToLower().Trim() select ix).FirstOrDefault();
-
-                            if(x==null)
-                            {
-                                
-                                tb_GroupType ts = new tb_GroupType();
-                                ts.GroupCode= Convert.ToString(rd["GroupCode"].ToString());
-                                ts.GroupName = Convert.ToString(rd["GroupName"].ToString());
-                                ts.GroupActive = Convert.ToBoolean(rd["GroupActive"].ToString());
-                                db.tb_GroupTypes.InsertOnSubmit(ts);
-                                db.SubmitChanges();
-                            }
-                            else
-                            {
-                                x.GroupName = Convert.ToString(rd["GroupName"].ToString());
-                                x.GroupActive = Convert.ToBoolean(rd["GroupActive"].ToString());
-                                db.SubmitChanges();
-
-                            }
-
-                       
-                        }
-                    }
-                   
-                }
-            }
-            catch(Exception ex) { MessageBox.Show(ex.Message);
-                dbClss.AddError("InportData", ex.Message, this.Name);
-            }
+            
         }
 
         private void btnFilter1_Click(object sender, EventArgs e)

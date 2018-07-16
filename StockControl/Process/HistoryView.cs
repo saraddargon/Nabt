@@ -88,20 +88,7 @@ namespace StockControl
 
             //    radGridView1.DataSource = dt;
         }
-        private bool CheckDuplicate(string code)
-        {
-            bool ck = false;
-
-            using (DataClasses1DataContext db = new DataClasses1DataContext())
-            {
-                int i = (from ix in db.tb_Units where ix.UnitCode == code select ix).Count();
-                if (i > 0)
-                    ck = false;
-                else
-                    ck = true;
-            }
-            return ck;
-        }
+      
 
         private void btnCancel_Click(object sender, EventArgs e)
         {

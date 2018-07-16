@@ -69,6 +69,7 @@ namespace StockControl
                 view.ColumnGroups.Add(new GridViewColumnGroup(""));
 
                 view.ColumnGroups[0].Rows.Add(new GridViewColumnGroupRow());
+                /*
                 view.ColumnGroups[0].Rows[0].Columns.Add(this.dgvData.Columns["No"]);
                 view.ColumnGroups[0].Rows[0].Columns.Add(this.dgvData.Columns["InventoryID"]);
                 view.ColumnGroups[0].Rows[0].Columns.Add(this.dgvData.Columns["Name"]);
@@ -108,6 +109,8 @@ namespace StockControl
                 view.ColumnGroups[7].Rows[0].Columns.Add(this.dgvData.Columns["Balance_Value"]);
                 view.ColumnGroups[7].Rows[0].Columns.Add(this.dgvData.Columns["GrandTotal_Value"]);
                 view.ColumnGroups[7].Rows[0].Columns.Add(this.dgvData.Columns["Remark"]);
+                */
+                
 
                 dgvData.ViewDefinition = view;
             }catch(Exception ex) { MessageBox.Show(ex.Message); }
@@ -116,6 +119,7 @@ namespace StockControl
         int crow = 99;
         private void Unit_Load(object sender, EventArgs e)
         {
+
             DateTime firstOfNextMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1);
             
             DateTime lastOfThisMonth = firstOfNextMonth.AddDays(-1);
@@ -220,16 +224,17 @@ namespace StockControl
         {
             if(MessageBox.Show("ต้องการออกรายงาน หรือไม่ ?","ออกรายงาน",MessageBoxButtons.OKCancel,MessageBoxIcon.Question)==DialogResult.OK)
             {
-                //saveFileDialog1.Filter = "Excel|*.xls";
-                //saveFileDialog1.Title = "Save an Excel File";
-                //saveFileDialog1.ShowDialog();
-                //if(saveFileDialog1.FileName!="")
-                //{
-                    if (GetData2())
-                        MessageBox.Show("Export Report Completed.");
-                    
-                //}
-                
+                saveFileDialog1.Filter = "Excel|*.xls";
+                saveFileDialog1.Title = "Save an Excel File";
+                saveFileDialog1.ShowDialog();
+                if (saveFileDialog1.FileName != "")
+                {
+                    dbClss.ExportGridXlSX2(dgvData, saveFileDialog1.FileName);
+                    //if (GetData2())
+                       MessageBox.Show("Export Report Completed.");
+
+                }
+
             }
         }
         private bool GetData(string FileName)
@@ -519,6 +524,144 @@ namespace StockControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); dbClss.AddError("ReportAccount", ex.Message, this.Name); }
             finally { this.Cursor = Cursors.Default; }
+        }
+
+        private void radButtonElement1_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("ต้องการออกรายงาน Shipment หรือไม่ ?", "ออกรายงาน", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                saveFileDialog1.Filter = "Excel|*.xls";
+                saveFileDialog1.Title = "Save an Excel File";
+                saveFileDialog1.ShowDialog();
+                if (saveFileDialog1.FileName != "")
+                {
+                    if (ExportshippingGroup(saveFileDialog1.FileName))
+                        MessageBox.Show("Export Report Completed.");
+
+                }
+
+            }
+        }
+        private bool ExportshippingGroup(string FileName)
+        {
+            bool ck = false;
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+
+                //System.IO.File.Copy(Report.CRRReport.dbPartReport + "Account_Sheet.xls", FileName, true);
+                //System.Diagnostics.Process.Start();
+                radGridView1.DataSource = null;
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    string date1 = "";
+                    string date2 = "";
+                    date1 = dtDate1.Value.ToString("yyyyMMdd");
+                    date2 = dtDate2.Value.ToString("yyyyMMdd");
+
+                    radGridView1.AutoGenerateColumns = true;
+                    radGridView1.DataSource = db.sp_E003_ReportShipping3(date1, date2, "");
+                }
+                dbClss.ExportGridXlSX2(radGridView1, FileName);
+               // dbClss.AddHistory(this.Name, "ออกรายงาน", "เลือกออกรายงาน ", "ShippingGroup");
+                ck = true;
+
+            }
+            catch { ck = false; }
+            this.Cursor = Cursors.Default;
+            return ck;
+        }
+
+        private void radButtonElement2_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("ต้องการออกรายงาน Receive หรือไม่ ?", "ออกรายงาน", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                saveFileDialog1.Filter = "Excel|*.xls";
+                saveFileDialog1.Title = "Save an Excel File";
+                saveFileDialog1.ShowDialog();
+                if (saveFileDialog1.FileName != "")
+                {
+                    if (ExportshippingGroup2(saveFileDialog1.FileName))
+                        MessageBox.Show("Export Report Completed.");
+
+                }
+
+            }
+        }
+        private bool ExportshippingGroup2(string FileName)
+        {
+            bool ck = false;
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+
+                //System.IO.File.Copy(Report.CRRReport.dbPartReport + "Account_Sheet.xls", FileName, true);
+                //System.Diagnostics.Process.Start();
+                radGridView1.DataSource = null;
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    string date1 = "";
+                    string date2 = "";
+                    date1 = dtDate1.Value.ToString("yyyyMMdd");
+                    date2 = dtDate2.Value.ToString("yyyyMMdd");
+
+                    radGridView1.AutoGenerateColumns = true;
+                    radGridView1.DataSource = db.sp_E003_ReportReceive4(date1, date2, "");
+                }
+                dbClss.ExportGridXlSX2(radGridView1, FileName);
+                // dbClss.AddHistory(this.Name, "ออกรายงาน", "เลือกออกรายงาน ", "ShippingGroup");
+                ck = true;
+
+            }
+            catch { ck = false; }
+            this.Cursor = Cursors.Default;
+            return ck;
+        }
+
+        private void radButtonElement3_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("ต้องการออกรายงาน List Item หรือไม่ ?", "ออกรายงาน", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                saveFileDialog1.Filter = "Excel|*.xls";
+                saveFileDialog1.Title = "Save an Excel File";
+                saveFileDialog1.ShowDialog();
+                if (saveFileDialog1.FileName != "")
+                {
+                    if (ExportshippingGroup3(saveFileDialog1.FileName))
+                        MessageBox.Show("Export Report Completed.");
+
+                }
+
+            }
+        }
+        private bool ExportshippingGroup3(string FileName)
+        {
+            bool ck = false;
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+
+                //System.IO.File.Copy(Report.CRRReport.dbPartReport + "Account_Sheet.xls", FileName, true);
+                //System.Diagnostics.Process.Start();
+                radGridView1.DataSource = null;
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    string date1 = "";
+                    string date2 = "";
+                    date1 = dtDate1.Value.ToString("yyyyMMdd");
+                    date2 = dtDate2.Value.ToString("yyyyMMdd");
+
+                    radGridView1.AutoGenerateColumns = true;
+                    radGridView1.DataSource = db.sp_E003_ReportITemList();
+                }
+                dbClss.ExportGridXlSX2(radGridView1, FileName);
+                // dbClss.AddHistory(this.Name, "ออกรายงาน", "เลือกออกรายงาน ", "ShippingGroup");
+                ck = true;
+
+            }
+            catch { ck = false; }
+            this.Cursor = Cursors.Default;
+            return ck;
         }
     }
 }
