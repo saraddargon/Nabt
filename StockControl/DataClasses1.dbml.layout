@@ -50,16 +50,16 @@
         <elementListCompartment Id="4a6cf063-2569-488e-b879-f4ec4a8b1409" absoluteBounds="0.51500000000000012, 4.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="04a5b91a-d60c-4af7-9e90-b5539665e838" isExpanded="false" absoluteBounds="2.625, 4.125, 2, 0.45">
+    <classShape Id="04a5b91a-d60c-4af7-9e90-b5539665e838" isExpanded="false" absoluteBounds="2.875, 2.75, 2, 0.45">
       <DataClassMoniker Name="/DataClasses1DataContext/tb_User" />
       <nestedChildShapes>
-        <elementListCompartment Id="aeb61a0a-a301-461c-a5d4-b3358586cf80" absoluteBounds="2.6399999999999997, 4.585, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="aeb61a0a-a301-461c-a5d4-b3358586cf80" absoluteBounds="2.8899999999999997, 3.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="409853a7-109d-43d9-95b7-fc346bd6b77b" isExpanded="false" absoluteBounds="2.625, 3.625, 2, 0.45">
+    <classShape Id="409853a7-109d-43d9-95b7-fc346bd6b77b" isExpanded="false" absoluteBounds="2.875, 2.125, 2, 0.45">
       <DataClassMoniker Name="/DataClasses1DataContext/tb_ListQueue" />
       <nestedChildShapes>
-        <elementListCompartment Id="31900c7a-8e38-4da9-9ea7-ab299344b909" absoluteBounds="2.6399999999999997, 4.085, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="31900c7a-8e38-4da9-9ea7-ab299344b909" absoluteBounds="2.8899999999999997, 2.585, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="dbde3639-f2be-432a-bdb5-d2ce51a4b404" isExpanded="false" absoluteBounds="0.5, 4.75, 2, 0.45">

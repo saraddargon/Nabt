@@ -9,9 +9,9 @@ using System.Linq;
 using Microsoft.VisualBasic.FileIO;
 namespace StockControl
 {
-    public partial class ListItem : Telerik.WinControls.UI.RadRibbonForm
+    public partial class ProductionBom : Telerik.WinControls.UI.RadRibbonForm
     {
-        public ListItem()
+        public ProductionBom()
         {
             InitializeComponent();
         }
@@ -46,11 +46,9 @@ namespace StockControl
             RMenu4.Click += RMenu4_Click;
             RMenu5.Click += RMenu5_Click;
             RMenu6.Click += RMenu6_Click;
-           // radGridView1.ReadOnly = true;
-            radGridView1.AutoGenerateColumns = false;
-            GETDTRow();
-           
-            
+            //radGridView1.ReadOnly = true;
+           // radGridView1.AutoGenerateColumns = false;
+            GETDTRow();   
             DataLoad();
         }
 
@@ -84,22 +82,21 @@ namespace StockControl
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
 
-                radGridView1.DataSource = db.sp_001_TPIC_SelectItem().ToList();
-                foreach (var x in radGridView1.Rows)
-                {
+               // radGridView1.DataSource = db.tb_LocationlWHs.ToList();
+                //foreach(var x in radGridView1.Rows)
+                //{
 
-                   // x.Cells["dgvCodeTemp"].Value = x.Cells["UnitCode"].Value.ToString();
-                  //  x.Cells["UnitCode"].ReadOnly = true;
-                    //if (row >= 0 && row == ck && radGridView1.Rows.Count > 0)
-                    //{
+                //    x.Cells["dgvCodeTemp"].Value = x.Cells["UnitCode"].Value.ToString();
+                //    x.Cells["UnitCode"].ReadOnly = true;
+                //    if(row>=0 && row==ck && radGridView1.Rows.Count > 0)
+                //    {
 
-                    //    x.ViewInfo.CurrentRow = x;
-
-                    //}
-                    ck += 1;
-                    x.Cells["No"].Value = ck;
-                }
-
+                //        x.ViewInfo.CurrentRow = x;
+                        
+                //    }
+                //    ck += 1;
+                //}
+               
             }
 
 
@@ -245,25 +242,25 @@ namespace StockControl
         }
         private void NewClick()
         {
-            radGridView1.ReadOnly = false;
-            radGridView1.AllowAddNewRow = false;
+           // radGridView1.ReadOnly = false;
+         //   radGridView1.AllowAddNewRow = false;
             //btnEdit.Enabled = false;
             btnView.Enabled = true;
-            radGridView1.Rows.AddNew();
+           // radGridView1.Rows.AddNew();
         }
         private void EditClick()
         {
-            radGridView1.ReadOnly = false;
-            //btnEdit.Enabled = false;
+           // radGridView1.ReadOnly = false;
+           // btnEdit.Enabled = false;
             btnView.Enabled = true;
-            radGridView1.AllowAddNewRow = false;
+           // radGridView1.AllowAddNewRow = false;
         }
         private void ViewClick()
         {
-           // radGridView1.ReadOnly = true;
+            //radGridView1.ReadOnly = true;
             btnView.Enabled = false;
-            //btnEdit.Enabled = true;
-            radGridView1.AllowAddNewRow = false;
+           // btnEdit.Enabled = true;
+           // radGridView1.AllowAddNewRow = false;
             DataLoad();
         }
 
@@ -369,7 +366,7 @@ namespace StockControl
         private void btnExport_Click(object sender, EventArgs e)
         {
             //dbClss.ExportGridCSV(radGridView1);
-           dbClss.ExportGridXlSX(radGridView1);
+          // dbClss.ExportGridXlSX(radGridView1);
         }
 
         private void btnImport_Click(object sender, EventArgs e)
@@ -488,12 +485,12 @@ namespace StockControl
 
         private void btnFilter1_Click(object sender, EventArgs e)
         {
-            radGridView1.EnableFiltering = true;
+            //radGridView1.EnableFiltering = true;
         }
 
         private void btnUnfilter1_Click(object sender, EventArgs e)
         {
-            radGridView1.EnableFiltering = false;
+            //radGridView1.EnableFiltering = false;
         }
 
         private void radMenuItem1_Click(object sender, EventArgs e)
@@ -501,16 +498,21 @@ namespace StockControl
             this.Close();
         }
 
-        private void radButtonElement2_Click(object sender, EventArgs e)
+        private void radButton1_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "excel files (*.xlsx)|*.xlsx";
-            openFileDialog1.FilterIndex = 2;
-            openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.FileName = "";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
+            ReceiveCheck rc = new ReceiveCheck();
+            rc.ShowDialog();
+        }
 
-            }
+        private void ProductionBom_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radButtonElement1_Click(object sender, EventArgs e)
+        {
+
+            radPageView1.SelectedPage = radPageViewPage1;
         }
     }
 }

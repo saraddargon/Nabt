@@ -9,9 +9,9 @@ using System.Linq;
 using Microsoft.VisualBasic.FileIO;
 namespace StockControl
 {
-    public partial class ListItem : Telerik.WinControls.UI.RadRibbonForm
+    public partial class CheckStockList : Telerik.WinControls.UI.RadRibbonForm
     {
-        public ListItem()
+        public CheckStockList()
         {
             InitializeComponent();
         }

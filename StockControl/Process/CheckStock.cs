@@ -9,9 +9,9 @@ using System.Linq;
 using Microsoft.VisualBasic.FileIO;
 namespace StockControl
 {
-    public partial class ListItem : Telerik.WinControls.UI.RadRibbonForm
+    public partial class CheckStock : Telerik.WinControls.UI.RadRibbonForm
     {
-        public ListItem()
+        public CheckStock()
         {
             InitializeComponent();
         }
@@ -84,7 +84,7 @@ namespace StockControl
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
 
-                radGridView1.DataSource = db.sp_001_TPIC_SelectItem().ToList();
+                radGridView1.DataSource = db.tb_ReceiveHDs.ToList();
                 foreach (var x in radGridView1.Rows)
                 {
 
@@ -499,18 +499,6 @@ namespace StockControl
         private void radMenuItem1_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void radButtonElement2_Click(object sender, EventArgs e)
-        {
-            openFileDialog1.Filter = "excel files (*.xlsx)|*.xlsx";
-            openFileDialog1.FilterIndex = 2;
-            openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.FileName = "";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-
-            }
         }
     }
 }

@@ -132,6 +132,78 @@
     <Compile Include="Process\HistoryView.Designer.cs">
       <DependentUpon>HistoryView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\CheckStockList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\CheckStockList.Designer.cs">
+      <DependentUpon>CheckStockList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\PCCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\PCCheck.Designer.cs">
+      <DependentUpon>PCCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ProductionBom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ProductionBom.Designer.cs">
+      <DependentUpon>ProductionBom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\Receive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Receive.Designer.cs">
+      <DependentUpon>Receive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ReceiveCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ReceiveCheck.Designer.cs">
+      <DependentUpon>ReceiveCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\CheckStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\CheckStock.Designer.cs">
+      <DependentUpon>CheckStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ReportLocal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ReportLocal.Designer.cs">
+      <DependentUpon>ReportLocal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ReportExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ReportExport.Designer.cs">
+      <DependentUpon>ReportExport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\PrintRW.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\PrintRW.Designer.cs">
+      <DependentUpon>PrintRW.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ReportPD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ReportPD.Designer.cs">
+      <DependentUpon>ReportPD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\UploadLocal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\UploadLocal.Designer.cs">
+      <DependentUpon>UploadLocal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\UploadExList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\UploadExList.Designer.cs">
+      <DependentUpon>UploadExList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\ReportRC.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,6 +285,42 @@
     <Compile Include="version.cs" />
     <EmbeddedResource Include="Process\HistoryView.resx">
       <DependentUpon>HistoryView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\CheckStockList.resx">
+      <DependentUpon>CheckStockList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\PCCheck.resx">
+      <DependentUpon>PCCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ProductionBom.resx">
+      <DependentUpon>ProductionBom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Receive.resx">
+      <DependentUpon>Receive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ReceiveCheck.resx">
+      <DependentUpon>ReceiveCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\CheckStock.resx">
+      <DependentUpon>CheckStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ReportLocal.resx">
+      <DependentUpon>ReportLocal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ReportExport.resx">
+      <DependentUpon>ReportExport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\PrintRW.resx">
+      <DependentUpon>PrintRW.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ReportPD.resx">
+      <DependentUpon>ReportPD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\UploadLocal.resx">
+      <DependentUpon>UploadLocal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\UploadExList.resx">
+      <DependentUpon>UploadExList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\ReportRC.resx">
       <DependentUpon>ReportRC.cs</DependentUpon>

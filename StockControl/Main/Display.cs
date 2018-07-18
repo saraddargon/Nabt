@@ -123,7 +123,7 @@ namespace StockControl
                         }
                         else if (c.LinkNode.ToString().Equals("ReportRC")
                             || c.LinkNode.ToString().Equals("ReportExport")
-                             || c.LinkNode.ToString().Equals("Report Local")
+                             || c.LinkNode.ToString().Equals("ReportLocal")
                               || c.LinkNode.ToString().Equals("ReportPD")
                             )
                         {
@@ -175,7 +175,8 @@ namespace StockControl
                                 c.LinkNode.ToString().Equals("CheckStockList") ||
                                     c.LinkNode.ToString().Equals("CheckStock") ||
                                         c.LinkNode.ToString().Equals("ProductionBom") ||
-                                            c.LinkNode.ToString().Equals("PrintRW") 
+                                        c.LinkNode.ToString().Equals("PrintRW") ||
+                                            c.LinkNode.ToString().Equals("PCCheck") 
                             )
                         {
                             ListItem.ImageIndex = 16;
