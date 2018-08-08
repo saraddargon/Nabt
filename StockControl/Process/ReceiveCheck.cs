@@ -48,9 +48,21 @@ namespace StockControl
         }
         private void Unit_Load(object sender, EventArgs e)
         {
-            
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                radGridView1.DataSource = db.tb_ReceiveTemps.ToList();
+                int ck = 1;
+                foreach(var rd in radGridView1.Rows)
+                {
+                    rd.Cells["No"].Value = ck;
+                    ck += 1;
+                }
+            }
         }
 
-        
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

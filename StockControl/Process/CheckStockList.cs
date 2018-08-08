@@ -84,7 +84,7 @@ namespace StockControl
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
 
-                radGridView1.DataSource = db.sp_001_TPIC_SelectItem().ToList();
+                radGridView1.DataSource = db.tb_CheckStocks.ToList();
                 foreach (var x in radGridView1.Rows)
                 {
 

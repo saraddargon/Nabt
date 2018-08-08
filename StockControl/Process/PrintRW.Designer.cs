@@ -40,11 +40,6 @@
             this.radLabelElement1 = new Telerik.WinControls.UI.RadLabelElement();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
-            this.office2010BlueTheme1 = new Telerik.WinControls.Themes.Office2010BlueTheme();
-            this.radRibbonBarButtonGroup2 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
-            this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
-            this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
-            this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
             this.radTextBox14 = new Telerik.WinControls.UI.RadTextBox();
             this.radTextBox1 = new Telerik.WinControls.UI.RadTextBox();
             this.radTextBox13 = new Telerik.WinControls.UI.RadTextBox();
@@ -65,6 +60,11 @@
             this.radLabel13 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel9 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel7 = new Telerik.WinControls.UI.RadLabel();
+            this.office2010BlueTheme1 = new Telerik.WinControls.Themes.Office2010BlueTheme();
+            this.radRibbonBarButtonGroup2 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
+            this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
+            this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
+            this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -115,7 +115,7 @@
             // 
             // 
             this.radRibbonBar1.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.WrapAroundChildren;
-            this.radRibbonBar1.Size = new System.Drawing.Size(650, 161);
+            this.radRibbonBar1.Size = new System.Drawing.Size(650, 160);
             this.radRibbonBar1.StartButtonImage = ((System.Drawing.Image)(resources.GetObject("radRibbonBar1.StartButtonImage")));
             this.radRibbonBar1.StartMenuItems.AddRange(new Telerik.WinControls.RadItem[] {
             this.radMenuItem1});
@@ -201,9 +201,9 @@
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.radPanel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 161);
+            this.panel1.Location = new System.Drawing.Point(0, 160);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(650, 420);
+            this.panel1.Size = new System.Drawing.Size(650, 421);
             this.panel1.TabIndex = 2;
             // 
             // radPanel1
@@ -232,43 +232,9 @@
             this.radPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radPanel1.Location = new System.Drawing.Point(0, 0);
             this.radPanel1.Name = "radPanel1";
-            this.radPanel1.Size = new System.Drawing.Size(650, 420);
+            this.radPanel1.Size = new System.Drawing.Size(650, 421);
             this.radPanel1.TabIndex = 1;
             this.radPanel1.ThemeName = "Office2010Blue";
-            // 
-            // radRibbonBarButtonGroup2
-            // 
-            this.radRibbonBarButtonGroup2.Items.AddRange(new Telerik.WinControls.RadItem[] {
-            this.btnFilter,
-            this.Unfilter});
-            this.radRibbonBarButtonGroup2.Name = "radRibbonBarButtonGroup2";
-            this.radRibbonBarButtonGroup2.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.radRibbonBarButtonGroup2.Padding = new System.Windows.Forms.Padding(1);
-            this.radRibbonBarButtonGroup2.ShowBackColor = false;
-            this.radRibbonBarButtonGroup2.Text = "radRibbonBarButtonGroup2";
-            // 
-            // btnFilter
-            // 
-            this.btnFilter.Image = ((System.Drawing.Image)(resources.GetObject("btnFilter.Image")));
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Text = "Filter";
-            this.btnFilter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            // 
-            // Unfilter
-            // 
-            this.Unfilter.Image = ((System.Drawing.Image)(resources.GetObject("Unfilter.Image")));
-            this.Unfilter.Name = "Unfilter";
-            this.Unfilter.Text = "Un Filter";
-            this.Unfilter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            // 
-            // radRibbonBarButtonGroup5
-            // 
-            this.radRibbonBarButtonGroup5.Name = "radRibbonBarButtonGroup5";
-            this.radRibbonBarButtonGroup5.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.radRibbonBarButtonGroup5.Padding = new System.Windows.Forms.Padding(1);
-            this.radRibbonBarButtonGroup5.ShowBackColor = false;
-            this.radRibbonBarButtonGroup5.ShowBorder = false;
-            this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
             // radTextBox14
             // 
@@ -277,6 +243,7 @@
             this.radTextBox14.Name = "radTextBox14";
             this.radTextBox14.Size = new System.Drawing.Size(88, 20);
             this.radTextBox14.TabIndex = 21;
+            this.radTextBox14.Text = "1";
             this.radTextBox14.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // radTextBox1
@@ -286,6 +253,7 @@
             this.radTextBox1.Name = "radTextBox1";
             this.radTextBox1.Size = new System.Drawing.Size(167, 20);
             this.radTextBox1.TabIndex = 19;
+            this.radTextBox1.Text = "30/07/2018";
             this.radTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // radTextBox13
@@ -295,6 +263,7 @@
             this.radTextBox13.Name = "radTextBox13";
             this.radTextBox13.Size = new System.Drawing.Size(88, 20);
             this.radTextBox13.TabIndex = 18;
+            this.radTextBox13.Text = "20";
             this.radTextBox13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // radTextBox12
@@ -304,6 +273,7 @@
             this.radTextBox12.Name = "radTextBox12";
             this.radTextBox12.Size = new System.Drawing.Size(167, 20);
             this.radTextBox12.TabIndex = 16;
+            this.radTextBox12.Text = "WK";
             this.radTextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // radLabel16
@@ -331,6 +301,7 @@
             this.radTextBox10.Name = "radTextBox10";
             this.radTextBox10.Size = new System.Drawing.Size(167, 20);
             this.radTextBox10.TabIndex = 20;
+            this.radTextBox10.Text = "P001112211";
             this.radTextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // radLabel15
@@ -349,6 +320,7 @@
             this.radTextBox9.Name = "radTextBox9";
             this.radTextBox9.Size = new System.Drawing.Size(267, 20);
             this.radTextBox9.TabIndex = 12;
+            this.radTextBox9.Text = "Customer Name Test";
             this.radTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // radLabel14
@@ -367,6 +339,7 @@
             this.radTextBox8.Name = "radTextBox8";
             this.radTextBox8.Size = new System.Drawing.Size(167, 20);
             this.radTextBox8.TabIndex = 13;
+            this.radTextBox8.Text = "Part TEST";
             this.radTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // radLabel12
@@ -385,6 +358,7 @@
             this.radTextBox11.Name = "radTextBox11";
             this.radTextBox11.Size = new System.Drawing.Size(167, 20);
             this.radTextBox11.TabIndex = 14;
+            this.radTextBox11.Text = "20/07/2018";
             this.radTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // radTextBox7
@@ -394,6 +368,7 @@
             this.radTextBox7.Name = "radTextBox7";
             this.radTextBox7.Size = new System.Drawing.Size(167, 20);
             this.radTextBox7.TabIndex = 15;
+            this.radTextBox7.Text = "4556674";
             this.radTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // radLabel11
@@ -413,6 +388,7 @@
             this.radTextBox6.NullText = "Scan Barcode";
             this.radTextBox6.Size = new System.Drawing.Size(167, 20);
             this.radTextBox6.TabIndex = 17;
+            this.radTextBox6.Text = "OR00001";
             this.radTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // radLabel10
@@ -450,6 +426,40 @@
             this.radLabel7.Size = new System.Drawing.Size(60, 18);
             this.radLabel7.TabIndex = 9;
             this.radLabel7.Text = "Order No.";
+            // 
+            // radRibbonBarButtonGroup2
+            // 
+            this.radRibbonBarButtonGroup2.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.btnFilter,
+            this.Unfilter});
+            this.radRibbonBarButtonGroup2.Name = "radRibbonBarButtonGroup2";
+            this.radRibbonBarButtonGroup2.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.radRibbonBarButtonGroup2.Padding = new System.Windows.Forms.Padding(1);
+            this.radRibbonBarButtonGroup2.ShowBackColor = false;
+            this.radRibbonBarButtonGroup2.Text = "radRibbonBarButtonGroup2";
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.Image = ((System.Drawing.Image)(resources.GetObject("btnFilter.Image")));
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Text = "Filter";
+            this.btnFilter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            // 
+            // Unfilter
+            // 
+            this.Unfilter.Image = ((System.Drawing.Image)(resources.GetObject("Unfilter.Image")));
+            this.Unfilter.Name = "Unfilter";
+            this.Unfilter.Text = "Un Filter";
+            this.Unfilter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            // 
+            // radRibbonBarButtonGroup5
+            // 
+            this.radRibbonBarButtonGroup5.Name = "radRibbonBarButtonGroup5";
+            this.radRibbonBarButtonGroup5.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.radRibbonBarButtonGroup5.Padding = new System.Windows.Forms.Padding(1);
+            this.radRibbonBarButtonGroup5.ShowBackColor = false;
+            this.radRibbonBarButtonGroup5.ShowBorder = false;
+            this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
             // PrintRW
             // 

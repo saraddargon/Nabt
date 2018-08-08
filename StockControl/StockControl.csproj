@@ -69,23 +69,29 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Telerik.WinControls, Version=2018.2.515.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
-      <HintPath>..\lib\RCWF\2018.2.515.40\Telerik.WinControls.dll</HintPath>
+    <Reference Include="Telerik.WinControls, Version=2018.2.621.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2018.2.621.40\Telerik.WinControls.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Telerik.WinControls.GridView, Version=2018.2.515.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.WinControls.Themes.Office2010Blue, Version=2018.2.515.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.WinControls.UI, Version=2018.2.515.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
-      <HintPath>..\lib\RCWF\2018.2.515.40\Telerik.WinControls.UI.dll</HintPath>
+    <Reference Include="Telerik.WinControls.GridView, Version=2018.2.621.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2018.2.621.40\Telerik.WinControls.GridView.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="TelerikCommon, Version=2018.2.515.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
-      <HintPath>..\lib\RCWF\2018.2.515.40\TelerikCommon.dll</HintPath>
+    <Reference Include="Telerik.WinControls.Themes.Office2010Blue, Version=2018.2.621.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2018.2.621.40\Telerik.WinControls.Themes.Office2010Blue.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="TelerikData, Version=2018.2.515.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\RCWF\2018.2.515.40\TelerikData.dll</HintPath>
+    <Reference Include="Telerik.WinControls.UI, Version=2018.2.621.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2018.2.621.40\Telerik.WinControls.UI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TelerikCommon, Version=2018.2.621.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2018.2.621.40\TelerikCommon.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TelerikData, Version=2018.2.621.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2018.2.621.40\TelerikData.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="ThoughtWorks.QRCode, Version=1.0.2774.19990, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -126,6 +132,24 @@
     <Compile Include="Process\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\LocalShipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\LocalShipment.Designer.cs">
+      <DependentUpon>LocalShipment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\GuidelineLot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\GuidelineLot.Designer.cs">
+      <DependentUpon>GuidelineLot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\LocalList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\LocalList.Designer.cs">
+      <DependentUpon>LocalList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\HistoryView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +161,12 @@
     </Compile>
     <Compile Include="Process\CheckStockList.Designer.cs">
       <DependentUpon>CheckStockList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ExShipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ExShipment.Designer.cs">
+      <DependentUpon>ExShipment.cs</DependentUpon>
     </Compile>
     <Compile Include="Process\PCCheck.cs">
       <SubType>Form</SubType>
@@ -167,6 +197,12 @@
     </Compile>
     <Compile Include="Process\CheckStock.Designer.cs">
       <DependentUpon>CheckStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ExportList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ExportList.Designer.cs">
+      <DependentUpon>ExportList.cs</DependentUpon>
     </Compile>
     <Compile Include="Process\ReportLocal.cs">
       <SubType>Form</SubType>
@@ -283,11 +319,23 @@
       <DependentUpon>test.cs</DependentUpon>
     </Compile>
     <Compile Include="version.cs" />
+    <EmbeddedResource Include="Process\LocalShipment.resx">
+      <DependentUpon>LocalShipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\GuidelineLot.resx">
+      <DependentUpon>GuidelineLot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\LocalList.resx">
+      <DependentUpon>LocalList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Process\HistoryView.resx">
       <DependentUpon>HistoryView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\CheckStockList.resx">
       <DependentUpon>CheckStockList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ExShipment.resx">
+      <DependentUpon>ExShipment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\PCCheck.resx">
       <DependentUpon>PCCheck.cs</DependentUpon>
@@ -303,6 +351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\CheckStock.resx">
       <DependentUpon>CheckStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ExportList.resx">
+      <DependentUpon>ExportList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\ReportLocal.resx">
       <DependentUpon>ReportLocal.cs</DependentUpon>

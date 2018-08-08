@@ -38,6 +38,7 @@
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn9 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
@@ -404,7 +405,7 @@
             gridViewTextBoxColumn2.Name = "Code";
             gridViewTextBoxColumn2.Width = 96;
             gridViewTextBoxColumn3.EnableExpressionEditor = false;
-            gridViewTextBoxColumn3.FieldName = "ItemName";
+            gridViewTextBoxColumn3.FieldName = "PartName";
             gridViewTextBoxColumn3.HeaderText = "ItemName";
             gridViewTextBoxColumn3.Name = "ItemName";
             gridViewTextBoxColumn3.Width = 121;
@@ -414,25 +415,31 @@
             gridViewTextBoxColumn4.Name = "Location";
             gridViewTextBoxColumn4.Width = 97;
             gridViewTextBoxColumn5.EnableExpressionEditor = false;
-            gridViewTextBoxColumn5.FieldName = "RCStatus";
-            gridViewTextBoxColumn5.HeaderText = "RCStatus";
-            gridViewTextBoxColumn5.Name = "RCStatus";
+            gridViewTextBoxColumn5.FieldName = "Status";
+            gridViewTextBoxColumn5.HeaderText = "Status";
+            gridViewTextBoxColumn5.Name = "Status";
             gridViewTextBoxColumn5.Width = 91;
             gridViewTextBoxColumn6.EnableExpressionEditor = false;
-            gridViewTextBoxColumn6.FieldName = "RCRemark";
-            gridViewTextBoxColumn6.HeaderText = "RCRemark";
-            gridViewTextBoxColumn6.Name = "RCRemark";
+            gridViewTextBoxColumn6.FieldName = "Remark";
+            gridViewTextBoxColumn6.HeaderText = "Remark";
+            gridViewTextBoxColumn6.Name = "Remark";
             gridViewTextBoxColumn6.Width = 118;
             gridViewTextBoxColumn7.EnableExpressionEditor = false;
-            gridViewTextBoxColumn7.FieldName = "QtySystem";
+            gridViewTextBoxColumn7.FieldName = "Quantity";
             gridViewTextBoxColumn7.HeaderText = "Qty-System";
-            gridViewTextBoxColumn7.Name = "QtySystem";
+            gridViewTextBoxColumn7.Name = "Quantity";
             gridViewTextBoxColumn7.Width = 91;
             gridViewTextBoxColumn8.EnableExpressionEditor = false;
             gridViewTextBoxColumn8.FieldName = "InputQty";
             gridViewTextBoxColumn8.HeaderText = "InputQty";
             gridViewTextBoxColumn8.Name = "InputQty";
             gridViewTextBoxColumn8.Width = 100;
+            gridViewTextBoxColumn9.EnableExpressionEditor = false;
+            gridViewTextBoxColumn9.FieldName = "Diff";
+            gridViewTextBoxColumn9.HeaderText = "Diff";
+            gridViewTextBoxColumn9.Name = "diff";
+            gridViewTextBoxColumn9.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn9.Width = 84;
             this.radGridView1.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
             gridViewTextBoxColumn1,
             gridViewTextBoxColumn2,
@@ -441,7 +448,8 @@
             gridViewTextBoxColumn5,
             gridViewTextBoxColumn6,
             gridViewTextBoxColumn7,
-            gridViewTextBoxColumn8});
+            gridViewTextBoxColumn8,
+            gridViewTextBoxColumn9});
             this.radGridView1.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
             this.radGridView1.MasterTemplate.ViewDefinition = tableViewDefinition1;
             this.radGridView1.Name = "radGridView1";
@@ -473,6 +481,7 @@
             this.radTextBox1.Name = "radTextBox1";
             this.radTextBox1.Size = new System.Drawing.Size(113, 20);
             this.radTextBox1.TabIndex = 2;
+            this.radTextBox1.Text = "CK-000001";
             // 
             // radLabel1
             // 

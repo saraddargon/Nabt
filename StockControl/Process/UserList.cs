@@ -80,22 +80,23 @@ namespace StockControl
             int ck = 0;
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
-               
-                //radGridView1.DataSource = db.tb_Units.ToList();// dt;
-                //foreach(var x in radGridView1.Rows)
-                //{
 
-                //    x.Cells["dgvCodeTemp"].Value = x.Cells["UnitCode"].Value.ToString();
-                //    x.Cells["UnitCode"].ReadOnly = true;
-                //    if(row>=0 && row==ck && radGridView1.Rows.Count > 0)
-                //    {
+                radGridView1.DataSource = db.tb_Users.ToList();
+                foreach (var x in radGridView1.Rows)
+                {
 
-                //        x.ViewInfo.CurrentRow = x;
-                        
-                //    }
-                //    ck += 1;
-                //}
-               
+                    
+                    //x.Cells["dgvCodeTemp"].Value = x.Cells["UnitCode"].Value.ToString();
+                    //x.Cells["UnitCode"].ReadOnly = true;
+                    //if (row >= 0 && row == ck && radGridView1.Rows.Count > 0)
+                    //{
+
+                    //    x.ViewInfo.CurrentRow = x;
+
+                    //}
+                    ck += 1;
+                }
+
             }
 
 

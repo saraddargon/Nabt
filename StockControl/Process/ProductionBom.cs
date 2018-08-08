@@ -266,7 +266,8 @@ namespace StockControl
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            NewClick();
+            //NewClick();
+            radPageView1.SelectedPage = radPageViewPage2;
         }
 
         private void btnView_Click(object sender, EventArgs e)

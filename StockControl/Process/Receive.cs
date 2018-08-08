@@ -82,25 +82,18 @@ namespace StockControl
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
 
-               // radGridView1.DataSource = db.tb_LocationlWHs.ToList();
-                //foreach(var x in radGridView1.Rows)
-                //{
+                radGridView1.DataSource = db.tb_ReceiveLines.ToList();
+                foreach (var x in radGridView1.Rows)
+                {
 
-                //    x.Cells["dgvCodeTemp"].Value = x.Cells["UnitCode"].Value.ToString();
-                //    x.Cells["UnitCode"].ReadOnly = true;
-                //    if(row>=0 && row==ck && radGridView1.Rows.Count > 0)
-                //    {
+                    x.Cells["No"].Value = ck + 1;
+                    ck += 1;
+                }
 
-                //        x.ViewInfo.CurrentRow = x;
-                        
-                //    }
-                //    ck += 1;
-                //}
-               
             }
 
 
-            
+
         }
         private bool CheckDuplicate(string code)
         {

@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserList));
+            Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn1 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewCalculatorColumn gridViewCalculatorColumn1 = new Telerik.WinControls.UI.GridViewCalculatorColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn5 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
@@ -368,56 +368,50 @@
             this.radGridView1.MasterTemplate.AllowRowResize = false;
             this.radGridView1.MasterTemplate.AutoGenerateColumns = false;
             this.radGridView1.MasterTemplate.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
-            gridViewTextBoxColumn1.DataType = typeof(bool);
+            gridViewCheckBoxColumn1.FieldName = "Edit";
+            gridViewCheckBoxColumn1.HeaderText = "Edit";
+            gridViewCheckBoxColumn1.Name = "Edit";
+            gridViewCheckBoxColumn1.Width = 53;
             gridViewTextBoxColumn1.EnableExpressionEditor = false;
-            gridViewTextBoxColumn1.FieldName = "Edit";
-            gridViewTextBoxColumn1.HeaderText = "edit";
-            gridViewTextBoxColumn1.Name = "dgvEdit";
-            gridViewTextBoxColumn1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewTextBoxColumn1.Width = 49;
+            gridViewTextBoxColumn1.FieldName = "UserID";
+            gridViewTextBoxColumn1.HeaderText = "UserID";
+            gridViewTextBoxColumn1.Name = "dgvUserID";
+            gridViewTextBoxColumn1.Width = 135;
             gridViewTextBoxColumn2.EnableExpressionEditor = false;
-            gridViewTextBoxColumn2.FieldName = "UserID";
-            gridViewTextBoxColumn2.HeaderText = "UserID";
-            gridViewTextBoxColumn2.Name = "dgvUserID";
-            gridViewTextBoxColumn2.Width = 134;
+            gridViewTextBoxColumn2.FieldName = "UserName";
+            gridViewTextBoxColumn2.HeaderText = "UserName";
+            gridViewTextBoxColumn2.Name = "UserName";
+            gridViewTextBoxColumn2.Width = 127;
             gridViewTextBoxColumn3.EnableExpressionEditor = false;
-            gridViewTextBoxColumn3.FieldName = "UserName";
-            gridViewTextBoxColumn3.HeaderText = "UserName";
-            gridViewTextBoxColumn3.Name = "UserName";
-            gridViewTextBoxColumn3.Width = 126;
+            gridViewTextBoxColumn3.FieldName = "Password";
+            gridViewTextBoxColumn3.HeaderText = "Password";
+            gridViewTextBoxColumn3.Name = "Password";
+            gridViewTextBoxColumn3.Width = 165;
+            gridViewCalculatorColumn1.FieldName = "Active";
+            gridViewCalculatorColumn1.HeaderText = "Active";
+            gridViewCalculatorColumn1.Name = "Active";
+            gridViewCalculatorColumn1.Width = 51;
             gridViewTextBoxColumn4.EnableExpressionEditor = false;
-            gridViewTextBoxColumn4.FieldName = "Password";
-            gridViewTextBoxColumn4.HeaderText = "Password";
-            gridViewTextBoxColumn4.Name = "Password";
-            gridViewTextBoxColumn4.Width = 164;
-            gridViewTextBoxColumn5.DataType = typeof(bool);
+            gridViewTextBoxColumn4.FieldName = "CreateDate";
+            gridViewTextBoxColumn4.HeaderText = "CreateDate";
+            gridViewTextBoxColumn4.Name = "dgvCreateDate";
+            gridViewTextBoxColumn4.ReadOnly = true;
+            gridViewTextBoxColumn4.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn4.Width = 108;
             gridViewTextBoxColumn5.EnableExpressionEditor = false;
-            gridViewTextBoxColumn5.FieldName = "Active";
-            gridViewTextBoxColumn5.HeaderText = "Active";
-            gridViewTextBoxColumn5.Name = "Active";
+            gridViewTextBoxColumn5.FieldName = "CreateBy";
+            gridViewTextBoxColumn5.HeaderText = "CreateBy";
+            gridViewTextBoxColumn5.Name = "dgvCreateBy";
             gridViewTextBoxColumn5.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewTextBoxColumn5.Width = 60;
-            gridViewTextBoxColumn6.EnableExpressionEditor = false;
-            gridViewTextBoxColumn6.FieldName = "CreateDate";
-            gridViewTextBoxColumn6.HeaderText = "CreateDate";
-            gridViewTextBoxColumn6.Name = "dgvCreateDate";
-            gridViewTextBoxColumn6.ReadOnly = true;
-            gridViewTextBoxColumn6.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewTextBoxColumn6.Width = 107;
-            gridViewTextBoxColumn7.EnableExpressionEditor = false;
-            gridViewTextBoxColumn7.FieldName = "CreateBy";
-            gridViewTextBoxColumn7.HeaderText = "CreateBy";
-            gridViewTextBoxColumn7.Name = "dgvCreateBy";
-            gridViewTextBoxColumn7.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewTextBoxColumn7.Width = 108;
+            gridViewTextBoxColumn5.Width = 109;
             this.radGridView1.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
+            gridViewCheckBoxColumn1,
             gridViewTextBoxColumn1,
             gridViewTextBoxColumn2,
             gridViewTextBoxColumn3,
+            gridViewCalculatorColumn1,
             gridViewTextBoxColumn4,
-            gridViewTextBoxColumn5,
-            gridViewTextBoxColumn6,
-            gridViewTextBoxColumn7});
+            gridViewTextBoxColumn5});
             this.radGridView1.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
             this.radGridView1.MasterTemplate.ViewDefinition = tableViewDefinition1;
             this.radGridView1.Name = "radGridView1";
