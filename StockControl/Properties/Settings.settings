@@ -10,5 +10,13 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=XTH-TOO\SQLEXPRESS;Initial Catalog=dbBarcodeNab;Persist Security Info=True;User ID=z;Password=Abc017146</Value>
     </Setting>
+    <Setting Name="dbBarcodeNabConnectionString1" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=1.179.133.222,2018;Initial Catalog=dbBarcodeNab;User ID=sa&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=1.179.133.222,2018;Initial Catalog=dbBarcodeNab;User ID=sa</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

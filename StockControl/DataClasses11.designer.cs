@@ -84,16 +84,16 @@ namespace StockControl
     partial void Inserttb_User(tb_User instance);
     partial void Updatetb_User(tb_User instance);
     partial void Deletetb_User(tb_User instance);
-    partial void Inserttb_UserPermission(tb_UserPermission instance);
-    partial void Updatetb_UserPermission(tb_UserPermission instance);
-    partial void Deletetb_UserPermission(tb_UserPermission instance);
     partial void Inserttb_ItemList(tb_ItemList instance);
     partial void Updatetb_ItemList(tb_ItemList instance);
     partial void Deletetb_ItemList(tb_ItemList instance);
+    partial void Inserttb_UserPermission(tb_UserPermission instance);
+    partial void Updatetb_UserPermission(tb_UserPermission instance);
+    partial void Deletetb_UserPermission(tb_UserPermission instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::StockControl.Properties.Settings.Default.dbBarcodeNabConnectionString, mappingSource)
+				base(global::StockControl.Properties.Settings.Default.dbBarcodeNabConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -298,19 +298,19 @@ namespace StockControl
 			}
 		}
 		
-		public System.Data.Linq.Table<tb_UserPermission> tb_UserPermissions
-		{
-			get
-			{
-				return this.GetTable<tb_UserPermission>();
-			}
-		}
-		
 		public System.Data.Linq.Table<tb_ItemList> tb_ItemLists
 		{
 			get
 			{
 				return this.GetTable<tb_ItemList>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tb_UserPermission> tb_UserPermissions
+		{
+			get
+			{
+				return this.GetTable<tb_UserPermission>();
 			}
 		}
 		
@@ -373,6 +373,13 @@ namespace StockControl
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pONo, code, vendor, ck, date1, date2);
 			return ((ISingleResult<sp_002_TPIC_SelectPOResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Sp_GetNameControl_001")]
+		public ISingleResult<Sp_GetNameControl_001Result> Sp_GetNameControl_001([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ControlNo", DbType="Int")] System.Nullable<int> controlNo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Action", DbType="Int")] System.Nullable<int> action)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), controlNo, action);
+			return ((ISingleResult<Sp_GetNameControl_001Result>)(result.ReturnValue));
 		}
 	}
 	
@@ -5356,116 +5363,6 @@ namespace StockControl
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_UserPermission")]
-	public partial class tb_UserPermission : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _UserID;
-		
-		private string _LayoutName;
-		
-		private string _ScreenName;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUserIDChanging(string value);
-    partial void OnUserIDChanged();
-    partial void OnLayoutNameChanging(string value);
-    partial void OnLayoutNameChanged();
-    partial void OnScreenNameChanging(string value);
-    partial void OnScreenNameChanged();
-    #endregion
-		
-		public tb_UserPermission()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string UserID
-		{
-			get
-			{
-				return this._UserID;
-			}
-			set
-			{
-				if ((this._UserID != value))
-				{
-					this.OnUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._UserID = value;
-					this.SendPropertyChanged("UserID");
-					this.OnUserIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LayoutName", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string LayoutName
-		{
-			get
-			{
-				return this._LayoutName;
-			}
-			set
-			{
-				if ((this._LayoutName != value))
-				{
-					this.OnLayoutNameChanging(value);
-					this.SendPropertyChanging();
-					this._LayoutName = value;
-					this.SendPropertyChanged("LayoutName");
-					this.OnLayoutNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ScreenName", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string ScreenName
-		{
-			get
-			{
-				return this._ScreenName;
-			}
-			set
-			{
-				if ((this._ScreenName != value))
-				{
-					this.OnScreenNameChanging(value);
-					this.SendPropertyChanging();
-					this._ScreenName = value;
-					this.SendPropertyChanged("ScreenName");
-					this.OnScreenNameChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_ItemList")]
 	public partial class tb_ItemList : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -5695,6 +5592,116 @@ namespace StockControl
 					this._Barcode = value;
 					this.SendPropertyChanged("Barcode");
 					this.OnBarcodeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_UserPermission")]
+	public partial class tb_UserPermission : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _UserID;
+		
+		private string _LayoutName;
+		
+		private string _ScreenName;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUserIDChanging(string value);
+    partial void OnUserIDChanged();
+    partial void OnLayoutNameChanging(string value);
+    partial void OnLayoutNameChanged();
+    partial void OnScreenNameChanging(string value);
+    partial void OnScreenNameChanged();
+    #endregion
+		
+		public tb_UserPermission()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string UserID
+		{
+			get
+			{
+				return this._UserID;
+			}
+			set
+			{
+				if ((this._UserID != value))
+				{
+					this.OnUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LayoutName", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string LayoutName
+		{
+			get
+			{
+				return this._LayoutName;
+			}
+			set
+			{
+				if ((this._LayoutName != value))
+				{
+					this.OnLayoutNameChanging(value);
+					this.SendPropertyChanging();
+					this._LayoutName = value;
+					this.SendPropertyChanged("LayoutName");
+					this.OnLayoutNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ScreenName", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string ScreenName
+		{
+			get
+			{
+				return this._ScreenName;
+			}
+			set
+			{
+				if ((this._ScreenName != value))
+				{
+					this.OnScreenNameChanging(value);
+					this.SendPropertyChanging();
+					this._ScreenName = value;
+					this.SendPropertyChanged("ScreenName");
+					this.OnScreenNameChanged();
 				}
 			}
 		}
@@ -6149,6 +6156,8 @@ namespace StockControl
 		
 		private string _INC;
 		
+		private int _CurrentStock;
+		
 		public sp_001_TPIC_SelectItemResult()
 		{
 		}
@@ -6488,6 +6497,22 @@ namespace StockControl
 				}
 			}
 		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CurrentStock", DbType="Int NOT NULL")]
+		public int CurrentStock
+		{
+			get
+			{
+				return this._CurrentStock;
+			}
+			set
+			{
+				if ((this._CurrentStock != value))
+				{
+					this._CurrentStock = value;
+				}
+			}
+		}
 	}
 	
 	public partial class sp_002_TPIC_SelectPOResult
@@ -6503,7 +6528,7 @@ namespace StockControl
 		
 		private string _Unit;
 		
-		private System.Nullable<decimal> _LotSize_SNP_;
+		private System.Nullable<decimal> _LotSize;
 		
 		private string _Location;
 		
@@ -6621,18 +6646,18 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[LotSize(SNP)]", Storage="_LotSize_SNP_", DbType="Decimal(29,2)")]
-		public System.Nullable<decimal> LotSize_SNP_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LotSize", DbType="Decimal(29,2)")]
+		public System.Nullable<decimal> LotSize
 		{
 			get
 			{
-				return this._LotSize_SNP_;
+				return this._LotSize;
 			}
 			set
 			{
-				if ((this._LotSize_SNP_ != value))
+				if ((this._LotSize != value))
 				{
-					this._LotSize_SNP_ = value;
+					this._LotSize = value;
 				}
 			}
 		}
@@ -6889,6 +6914,32 @@ namespace StockControl
 				if ((this._INPUTUSER != value))
 				{
 					this._INPUTUSER = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Sp_GetNameControl_001Result
+	{
+		
+		private string _GetNo;
+		
+		public Sp_GetNameControl_001Result()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GetNo", DbType="VarChar(15)")]
+		public string GetNo
+		{
+			get
+			{
+				return this._GetNo;
+			}
+			set
+			{
+				if ((this._GetNo != value))
+				{
+					this._GetNo = value;
 				}
 			}
 		}

@@ -145,12 +145,20 @@ namespace StockControl
             catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        public static string GetNo(int ControlNo,int Ac)
+        public static string GetSeriesNo(int ControlNo,int Ac)
         {
             string No = "";
 
-            
-                return No;
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                var g = (from ix in db.Sp_GetNameControl_001(ControlNo, Ac) select ix).ToList();
+                if (g.Count > 0)
+                {
+                    No = g.FirstOrDefault().GetNo;
+                }
+            }
+
+            return No;
         }
         public static string Get_Stock(string CodeNo, string Category,string Type_in_out,string Condition)
         {

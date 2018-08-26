@@ -33,5 +33,15 @@ namespace StockControl.Properties {
                 return ((string)(this["dbBarcodeNabConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=1.179.133.222,2018;Initial Catalog=dbBarcodeNab;User ID=sa")]
+        public string dbBarcodeNabConnectionString1 {
+            get {
+                return ((string)(this["dbBarcodeNabConnectionString1"]));
+            }
+        }
     }
 }

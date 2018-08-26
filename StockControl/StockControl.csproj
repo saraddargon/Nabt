@@ -183,6 +183,12 @@
     <Compile Include="Process\PCCheck.Designer.cs">
       <DependentUpon>PCCheck.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\CheckStockUpload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\CheckStockUpload.Designer.cs">
+      <DependentUpon>CheckStockUpload.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\ProductionBom.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -369,6 +375,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\PCCheck.resx">
       <DependentUpon>PCCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\CheckStockUpload.resx">
+      <DependentUpon>CheckStockUpload.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\ProductionBom.resx">
       <DependentUpon>ProductionBom.cs</DependentUpon>

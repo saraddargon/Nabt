@@ -7,12 +7,14 @@ using System.Text;
 using System.Windows.Forms;
 using System.Linq;
 using Microsoft.VisualBasic.FileIO;
+using Telerik.WinControls.UI;
 namespace StockControl
 {
     public partial class CheckStockList : Telerik.WinControls.UI.RadRibbonForm
     {
         public CheckStockList()
         {
+            this.Name = "CheckStockList";
             InitializeComponent();
         }
 
@@ -42,23 +44,23 @@ namespace StockControl
         }
         private void Unit_Load(object sender, EventArgs e)
         {
-            RMenu3.Click += RMenu3_Click;
-            RMenu4.Click += RMenu4_Click;
-            RMenu5.Click += RMenu5_Click;
+            //RMenu3.Click += RMenu3_Click;
+            //RMenu4.Click += RMenu4_Click;
+            //RMenu5.Click += RMenu5_Click;
             RMenu6.Click += RMenu6_Click;
-           // radGridView1.ReadOnly = true;
+            // radGridView1.ReadOnly = true;
             radGridView1.AutoGenerateColumns = false;
-            GETDTRow();
+            //GETDTRow();
            
             
-            DataLoad();
+            //DataLoad();
         }
 
         private void RMenu6_Click(object sender, EventArgs e)
         {
            
             DeleteUnit();
-            DataLoad();
+            LoadDefault();
         }
 
         private void RMenu5_Click(object sender, EventArgs e)
@@ -183,59 +185,48 @@ namespace StockControl
         private bool DeleteUnit()
         {
             bool ck = false;
-         
-            //int C = 0;
-            //try
-            //{
-                
-            //    if (row >= 0)
-            //    {
-            //        string CodeDelete = Convert.ToString(radGridView1.Rows[row].Cells["UnitCode"].Value);
-            //        string CodeTemp = Convert.ToString(radGridView1.Rows[row].Cells["dgvCodeTemp"].Value);
-            //        radGridView1.EndEdit();
-            //        if (MessageBox.Show("ต้องการลบรายการ ( "+ CodeDelete+" ) หรือไม่ ?", "ลบรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            //        {
-            //            using (DataClasses1DataContext db = new DataClasses1DataContext())
-            //            {
 
-            //                if (!CodeDelete.Equals(""))
-            //                {
-            //                    if (!CodeTemp.Equals(""))
-            //                    {
+            int C = 0;
+            try
+            {
 
-            //                        var unit1 = (from ix in db.tb_Units
-            //                                     where ix.UnitCode == CodeDelete
-            //                                     select ix).ToList();
-            //                        foreach (var d in unit1)
-            //                        {
-            //                            db.tb_Units.DeleteOnSubmit(d);
-            //                            dbClss.AddHistory(this.Name, "ลบ Unit", "Delete Unit Code ["+d.UnitCode+"]","");
-            //                        }
-            //                        C += 1;
+                if (row >= 0)
+                {
+                    string CheckNo = Convert.ToString(radGridView1.Rows[row].Cells["CheckNo"].Value);
+                  //  string CodeTemp = Convert.ToString(radGridView1.Rows[row].Cells["dgvCodeTemp"].Value);
+                    radGridView1.EndEdit();
+                    if (MessageBox.Show("ต้องการลบรายการ ( " + CheckNo + " ) หรือไม่ ?", "ลบรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        using (DataClasses1DataContext db = new DataClasses1DataContext())
+                        {
+                            tb_CheckStock cd = db.tb_CheckStocks.Where(c => c.CheckNo == CheckNo && !c.Status.Equals("Completed")).FirstOrDefault();
+                            if (cd != null)
+                            {
+                                db.tb_CheckStocks.DeleteOnSubmit(cd);
+                                db.SubmitChanges();
+                                C = 1;
+                                dbClss.AddHistory(this.Name, "ลบรายการ", "Delete Check No [" + CheckNo + "]", "");
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                dbClss.AddError("DeleteUnit", ex.Message, this.Name);
+            }
+
+            if (C > 0)
+            {
+                row = row - 1;
+                MessageBox.Show("ลบรายการ สำเร็จ!");
+            }
 
 
 
-            //                        db.SubmitChanges();
-            //                    }
-            //                }
-
-            //            }
-            //        }
-            //    }
-            //}
-
-            //catch (Exception ex) { MessageBox.Show(ex.Message);
-            //    dbClss.AddError("DeleteUnit", ex.Message, this.Name);
-            //}
-
-            //if (C > 0)
-            //{
-            //        row = row - 1;
-            //        MessageBox.Show("ลบรายการ สำเร็จ!");
-            //}
-              
-
-           
 
             return ck;
         }
@@ -245,26 +236,26 @@ namespace StockControl
         }
         private void NewClick()
         {
-            radGridView1.ReadOnly = false;
-            radGridView1.AllowAddNewRow = false;
-            //btnEdit.Enabled = false;
-            btnView.Enabled = true;
-            radGridView1.Rows.AddNew();
+            //radGridView1.ReadOnly = false;
+            //radGridView1.AllowAddNewRow = false;
+            ////btnEdit.Enabled = false;
+            //btnView.Enabled = true;
+            //radGridView1.Rows.AddNew();
         }
         private void EditClick()
         {
-            radGridView1.ReadOnly = false;
-            //btnEdit.Enabled = false;
-            btnView.Enabled = true;
-            radGridView1.AllowAddNewRow = false;
+            //radGridView1.ReadOnly = false;
+            ////btnEdit.Enabled = false;
+            //btnView.Enabled = true;
+            //radGridView1.AllowAddNewRow = false;
         }
         private void ViewClick()
         {
-           // radGridView1.ReadOnly = true;
-            btnView.Enabled = false;
-            //btnEdit.Enabled = true;
-            radGridView1.AllowAddNewRow = false;
-            DataLoad();
+           //// radGridView1.ReadOnly = true;
+           // btnView.Enabled = false;
+           // //btnEdit.Enabled = true;
+           // radGridView1.AllowAddNewRow = false;
+           // DataLoad();
         }
 
         private void btnNew_Click(object sender, EventArgs e)
@@ -284,10 +275,33 @@ namespace StockControl
         }
         private void Saveclick()
         {
-            if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("ต้องการสร้าง List สำหรับเช็ค Stock ?", "สร้าง List", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                AddUnit();
-                DataLoad();
+                try
+                {
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                        tb_CheckStock cl = db.tb_CheckStocks.Where(c => !c.Status.Equals("Completed")).FirstOrDefault();
+                        if (cl != null)
+                        {
+                            MessageBox.Show("เลขเช็คสต๊อค เก่ายังไม่ได้ ปิดสถานะ!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+                        else
+                        {
+                            tb_CheckStock list1 = new tb_CheckStock();
+                            list1.CheckNo = dbClss.GetSeriesNo(1, 2);
+                            list1.CreateBy = dbClss.UserID;
+                            list1.CheckDate = DateTime.Now;
+                            list1.Status = "Waiting Upload";
+                            db.tb_CheckStocks.InsertOnSubmit(list1);
+                            db.SubmitChanges();
+                            LoadDefault();
+                        }
+                    }
+
+                }
+                catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);  }
             }
         }
         private void DeleteClick()
@@ -334,21 +348,21 @@ namespace StockControl
         private void radGridView1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
 
-            if (e.KeyData == (Keys.Control | Keys.S))
-            {
-                if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    AddUnit();
-                    DataLoad();
-                }
-            }
-            else if (e.KeyData == (Keys.Control | Keys.N))
-            {
-                if (MessageBox.Show("ต้องการสร้างใหม่ ?", "สร้างใหม่", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    NewClick();
-                }
-            }
+            //if (e.KeyData == (Keys.Control | Keys.S))
+            //{
+            //    if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //    {
+            //        AddUnit();
+            //        DataLoad();
+            //    }
+            //}
+            //else if (e.KeyData == (Keys.Control | Keys.N))
+            //{
+            //    if (MessageBox.Show("ต้องการสร้างใหม่ ?", "สร้างใหม่", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //    {
+            //        NewClick();
+            //    }
+            //}
 
         }
 
@@ -511,6 +525,44 @@ namespace StockControl
             {
 
             }
+        }
+
+        private void CheckStockList_Load(object sender, EventArgs e)
+        {
+            RMenu6.Click += RMenu6_Click;
+             radGridView1.ReadOnly = true;
+            radGridView1.AutoGenerateColumns = false;
+            LoadDefault();
+
+        }
+
+        private void LoadDefault()
+        {
+            try
+            {
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    radGridView1.AutoGenerateColumns = false;
+                    radGridView1.ReadOnly = true;   
+                    var ListData = db.tb_CheckStocks.Where(ck => ck.Status != "Deleted").ToList();
+                    radGridView1.DataSource = ListData;
+                    int rowNo = 0;
+                    foreach(GridViewRowInfo rd in radGridView1.Rows)
+                    {
+                        rd.Cells["No"].Value = rowNo + 1;
+                        rowNo += 1;
+                    }
+
+                }
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private void radButtonElement2_Click_1(object sender, EventArgs e)
+        {
+            //Call Screen Upload from TPICS
+
+            /////////////////////////////////
         }
     }
 }
