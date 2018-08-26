@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Linq;
 using Microsoft.VisualBasic.FileIO;
+using Telerik.WinControls.UI;
 namespace StockControl
 {
     public partial class UserSetup : Telerik.WinControls.UI.RadRibbonForm
@@ -33,55 +34,73 @@ namespace StockControl
         }
         private void GETDTRow()
         {
-            dt.Columns.Add(new DataColumn("UnitCode", typeof(string)));
-            dt.Columns.Add(new DataColumn("UnitDetail", typeof(string)));
-            dt.Columns.Add(new DataColumn("UnitActive", typeof(bool)));
+            //dt.Columns.Add(new DataColumn("UnitCode", typeof(string)));
+            //dt.Columns.Add(new DataColumn("UnitDetail", typeof(string)));
+            //dt.Columns.Add(new DataColumn("UnitActive", typeof(bool)));
         }
         private void Unit_Load(object sender, EventArgs e)
         {
-            //RMenu3.Click += RMenu3_Click;
-            //RMenu4.Click += RMenu4_Click;
-            //RMenu5.Click += RMenu5_Click;
-            //RMenu6.Click += RMenu6_Click;
-            //radGridView1.ReadOnly = true;
-            //radGridView1.AutoGenerateColumns = false;
+            LoadDefault();
             GETDTRow();
-           
-            
-            DataLoad();
+            //DataLoad(dbClss.UserID);
+           // DataLoad2(dbClss.UserID);
+        }
+        int countSelect = 0;
+        private void LoadDefault()
+        {
+            try
+            {
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    var userSelect = db.tb_Users.Where(u => u.Active == true).ToList();
+                    cboUserSelect1.Items.Clear();
+                    cboUserSelect2.Items.Clear();
+                    cboUserSelect1.Items.Add("");
+                    cboUserSelect2.Items.Add("");
+                    foreach (var ur in userSelect)
+                    {
+                        cboUserSelect1.Items.Add(ur.UserID);
+                        cboUserSelect2.Items.Add(ur.UserID);
+                    }
+                    countSelect = 1;
+                    cboUserSelect1.SelectedValue = dbClss.UserID;
+                }
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void RMenu6_Click(object sender, EventArgs e)
         {
            
-            DeleteUnit();
-            DataLoad();
+          //  DeleteUnit();
+          //  DataLoad();
         }
 
         private void RMenu5_Click(object sender, EventArgs e)
         {
-            EditClick();
+            //EditClick();
         }
 
         private void RMenu4_Click(object sender, EventArgs e)
         {
-            ViewClick();
+            //ViewClick();
         }
 
         private void RMenu3_Click(object sender, EventArgs e)
         {
-            NewClick();
+           // NewClick();
 
         }
 
-        private void DataLoad()
+        private void DataLoad(string UserID)
         {
             
             int ck = 1;
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
 
-                radGridView1.DataSource = db.sp_SC_001_SelectScreen().ToList().OrderBy(m=>m.Layout);
+                radGridView1.DataSource = db.sp_SC_001_SelectScreen(UserID).ToList().OrderBy(m=>m.Layout);
+
                 foreach (var x in radGridView1.Rows)
                 {
 
@@ -93,6 +112,26 @@ namespace StockControl
 
 
             
+        }
+        private void  DataLoad2(string UserID)
+        {
+            try
+            {
+                int ck = 1;
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+
+                    radGridView2.DataSource = db.tb_UserPermissions.Where(p => p.UserID == UserID).ToList();
+                    foreach (var x in radGridView2.Rows)
+                    {
+
+                        x.Cells["dgvNo"].Value = ck;
+                        ck += 1;
+                    }
+
+                }
+            }
+            catch { }
         }
         private bool CheckDuplicate(string code)
         {
@@ -230,7 +269,9 @@ namespace StockControl
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            DataLoad();
+            //DataLoad();
+            DataLoad(cboUserSelect1.Text);
+            DataLoad2(cboUserSelect1.Text);
         }
         private void NewClick()
         {
@@ -244,40 +285,42 @@ namespace StockControl
         {
           //  radGridView1.ReadOnly = false;
             //btnEdit.Enabled = false;
-            btnView.Enabled = true;
+           // btnView.Enabled = true;
            // radGridView1.AllowAddNewRow = false;
         }
         private void ViewClick()
         {
-           // radGridView1.ReadOnly = true;
-            btnView.Enabled = false;
+            radGridView1.ReadOnly = true;
+          //  btnView.Enabled = false;
             //btnEdit.Enabled = true;
            // radGridView1.AllowAddNewRow = false;
-            DataLoad();
+          //  DataLoad();
         }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            NewClick();
+           // NewClick();
         }
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            ViewClick();
+            //ViewClick();
+            DataLoad(cboUserSelect1.Text);
+            DataLoad2(cboUserSelect1.Text);
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
 
-            EditClick();
+           // EditClick();
         }
         private void Saveclick()
         {
-            if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                AddUnit();
-                DataLoad();
-            }
+            //if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //{
+            //    AddUnit();
+            //    DataLoad();
+            //}
         }
         private void DeleteClick()
         {
@@ -323,29 +366,29 @@ namespace StockControl
         private void radGridView1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
 
-            if (e.KeyData == (Keys.Control | Keys.S))
-            {
-                if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    AddUnit();
-                    DataLoad();
-                }
-            }
-            else if (e.KeyData == (Keys.Control | Keys.N))
-            {
-                if (MessageBox.Show("ต้องการสร้างใหม่ ?", "สร้างใหม่", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    NewClick();
-                }
-            }
+            //if (e.KeyData == (Keys.Control | Keys.S))
+            //{
+            //    if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //    {
+            //       // AddUnit();
+            //        //DataLoad();
+            //    }
+            //}
+            //else if (e.KeyData == (Keys.Control | Keys.N))
+            //{
+            //    if (MessageBox.Show("ต้องการสร้างใหม่ ?", "สร้างใหม่", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //    {
+            //        NewClick();
+            //    }
+            //}
 
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
             
-                DeleteUnit();
-                DataLoad();
+              //  DeleteUnit();
+               // DataLoad();
             
         }
 
@@ -427,7 +470,7 @@ namespace StockControl
                     ImportData();
                     MessageBox.Show("Import Completed.");
 
-                    DataLoad();
+                   // DataLoad();
                 }
                
             }
@@ -477,17 +520,145 @@ namespace StockControl
 
         private void btnFilter1_Click(object sender, EventArgs e)
         {
-            //radGridView1.EnableFiltering = true;
+            radGridView1.EnableFiltering = true;
+            radGridView2.EnableFiltering = true;
         }
 
         private void btnUnfilter1_Click(object sender, EventArgs e)
         {
-           // radGridView1.EnableFiltering = false;
+          radGridView1.EnableFiltering = false;
+            radGridView2.EnableFiltering = true;
         }
 
         private void radMenuItem1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("ต้องการเพิ่มสิทธิ์!", "เพิ่ม", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                        foreach (GridViewRowInfo rd in radGridView1.Rows)
+                        {
+                            if (rd.IsSelected)
+                            {
+                                tb_UserPermission pm = new tb_UserPermission();
+                                pm.LayoutName = rd.Cells["dgvLayout"].Value.ToString();
+                                pm.ScreenName = rd.Cells["dgvTextNode"].Value.ToString();
+                                pm.UserID = cboUserSelect1.Text.Trim();
+                                db.tb_UserPermissions.InsertOnSubmit(pm);
+                                db.SubmitChanges();
+
+                            }
+                        }
+                        dbClss.AddHistory(this.Name, "เพิ่มสิทธ์", "ทำการเพิ่มสิทธ์  [" + cboUserSelect1.Text + "] เข้าระบบ", "จากเครื่อง " + System.Environment.MachineName);
+
+                        DataLoad2(cboUserSelect1.Text);
+                        DataLoad(cboUserSelect1.Text);
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private void cboUserSelect1_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+           if(countSelect==1)
+            {
+                DataLoad(cboUserSelect1.Text);
+                DataLoad2(cboUserSelect1.Text);
+            }
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("ต้องการ ลบ สิทธิ์!", "ลบ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                        //string TextName = "";
+                        //string Layout = "";
+                        foreach (GridViewRowInfo rd in radGridView2.Rows)
+                        {
+                            if (rd.IsSelected)
+                            {
+                               tb_UserPermission pm = db.tb_UserPermissions.Where(p => p.UserID == cboUserSelect1.Text 
+                               && p.ScreenName == rd.Cells["dgvTextNode"].Value.ToString() 
+                               && p.LayoutName == rd.Cells["dgvLayout"].Value.ToString()).FirstOrDefault();
+                                if (pm != null)
+                                {
+                                    db.tb_UserPermissions.DeleteOnSubmit(pm);
+                                    db.SubmitChanges();
+                                }
+
+                            }
+                        }
+
+                        dbClss.AddHistory(this.Name, "ลบ สิทธิ์!", "ทำการลบ สิทธิ์!  [" + cboUserSelect1.Text + "] ในระบบ", "จากเครื่อง " + System.Environment.MachineName);
+                        DataLoad2(cboUserSelect1.Text);
+                        DataLoad(cboUserSelect1.Text);
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private void btnCopy_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("ต้องการ copy สิทธิ์!", "copy", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    if (!cboUserSelect2.Text.Equals("") && !cboUserSelect2.Text.Equals(cboUserSelect1.Text))
+                    {
+                        using (DataClasses1DataContext db = new DataClasses1DataContext())
+                        {
+                            var de = db.tb_UserPermissions.Where(p => p.UserID == cboUserSelect1.Text).ToList();
+                            foreach (var rd in de)
+                            {
+                                tb_UserPermission ps = db.tb_UserPermissions.Where(p1 => p1.UserID == rd.UserID && p1.ScreenName == rd.ScreenName && p1.LayoutName == rd.LayoutName).FirstOrDefault();
+                                if (ps != null)
+                                {
+                                    db.tb_UserPermissions.DeleteOnSubmit(ps);
+                                    db.SubmitChanges();
+                                }
+                            }
+
+                            var copy = db.tb_UserPermissions.Where(p => p.UserID == cboUserSelect2.Text).ToList();
+                            foreach (var rd in copy)
+                            {
+                                tb_UserPermission ps = new tb_UserPermission();
+                                ps.UserID = cboUserSelect1.Text;
+                                ps.ScreenName = rd.ScreenName;
+                                ps.LayoutName = rd.LayoutName;
+                                db.tb_UserPermissions.InsertOnSubmit(ps);
+                                db.SubmitChanges();
+                            }
+                        }
+                        dbClss.AddHistory(this.Name, "copy สิทธิ์!", "copy Screen  [" + cboUserSelect1.Text + "] ในระบบ", "จากเครื่อง " + System.Environment.MachineName);
+
+                        DataLoad2(cboUserSelect1.Text);
+                        DataLoad(cboUserSelect1.Text);
+                    }
+                    else
+                    {
+                        MessageBox.Show("เลือกข้อมูลไม่ถูกต้อง !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private void radGridView2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

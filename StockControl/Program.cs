@@ -23,7 +23,7 @@ namespace StockControl
             Report.CRRReport.dbPartReport = "";
      
             Report.CRRReport.dbPartReport = AppDomain.CurrentDomain.BaseDirectory + @"Report\";
-            string apc = Properties.Settings.Default.dbStockControlConnectionString3;
+            string apc = Properties.Settings.Default.dbBarcodeNabConnectionString;
             try
             {
                 if (!apc.Equals(""))
@@ -51,7 +51,7 @@ namespace StockControl
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Mainfrom());
+            Application.Run(new Login());
         }
     }
 }

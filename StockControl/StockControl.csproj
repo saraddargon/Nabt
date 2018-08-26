@@ -53,6 +53,9 @@
   <PropertyGroup>
     <ApplicationIcon>Barcode-scanner.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -119,6 +122,12 @@
     </Compile>
     <Compile Include="Main\Home1600x900.Designer.cs">
       <DependentUpon>Home1600x900.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Main\Mainfrom.cs">
       <SubType>Form</SubType>
@@ -288,6 +297,24 @@
     <Compile Include="Process\LocationWH.Designer.cs">
       <DependentUpon>LocationWH.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\LocationWHAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\LocationWHAdd.Designer.cs">
+      <DependentUpon>LocationWHAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ItemListImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ItemListImage.Designer.cs">
+      <DependentUpon>ItemListImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\UserAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\UserAdd.Designer.cs">
+      <DependentUpon>UserAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\UserSetup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -319,6 +346,9 @@
       <DependentUpon>test.cs</DependentUpon>
     </Compile>
     <Compile Include="version.cs" />
+    <EmbeddedResource Include="Main\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Process\LocalShipment.resx">
       <DependentUpon>LocalShipment.cs</DependentUpon>
     </EmbeddedResource>
@@ -396,6 +426,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\LocationWH.resx">
       <DependentUpon>LocationWH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\LocationWHAdd.resx">
+      <DependentUpon>LocationWHAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ItemListImage.resx">
+      <DependentUpon>ItemListImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\UserAdd.resx">
+      <DependentUpon>UserAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\UserSetup.resx">
       <DependentUpon>UserSetup.cs</DependentUpon>

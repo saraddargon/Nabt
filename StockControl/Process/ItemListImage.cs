@@ -9,13 +9,18 @@ using System.Linq;
 using Microsoft.VisualBasic.FileIO;
 namespace StockControl
 {
-    public partial class ListPO : Telerik.WinControls.UI.RadRibbonForm
+    public partial class ItemListImage : Telerik.WinControls.UI.RadRibbonForm
     {
-        public ListPO()
+        public ItemListImage()
         {
             InitializeComponent();
         }
-
+        public ItemListImage(string UserIDx)
+        {
+            InitializeComponent();
+            UserIDEdit = UserIDx;
+        }
+        string UserIDEdit = "";
         //private int RowView = 50;
         //private int ColView = 10;
         DataTable dt = new DataTable();
@@ -33,84 +38,66 @@ namespace StockControl
         }
         private void GETDTRow()
         {
-            dt.Columns.Add(new DataColumn("edit", typeof(bool)));
-            dt.Columns.Add(new DataColumn("code", typeof(string)));
-            dt.Columns.Add(new DataColumn("Name", typeof(string)));
-            dt.Columns.Add(new DataColumn("Active", typeof(bool)));
-            dt.Columns.Add(new DataColumn("CreateDate", typeof(DateTime)));
-            dt.Columns.Add(new DataColumn("CreateBy", typeof(string)));
+            //dt.Columns.Add(new DataColumn("UnitCode", typeof(string)));
+            //dt.Columns.Add(new DataColumn("UnitDetail", typeof(string)));
+            //dt.Columns.Add(new DataColumn("UnitActive", typeof(bool)));
         }
         private void Unit_Load(object sender, EventArgs e)
         {
-            //RMenu3.Click += RMenu3_Click;
-            //RMenu4.Click += RMenu4_Click;
-            //RMenu5.Click += RMenu5_Click;
-            //RMenu6.Click += RMenu6_Click;
-            // radGridView1.ReadOnly = true;
-            dtDate1.Value = DateTime.Now;
-            dtDate2.Value = DateTime.Now;
-            radGridView1.AutoGenerateColumns = false;
-           // GETDTRow();
-           
-            
-            DataLoad();
+
+            try
+            {
+                if (!UserIDEdit.Equals(""))
+                {
+                    // txtItemNo.Enabled = false;
+                    txtItemNo.ReadOnly = true;
+                    txtItemNo.Text = UserIDEdit;
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                       tb_ItemList  ur = db.tb_ItemLists.Where(u => u.CodeNo == UserIDEdit).FirstOrDefault();
+                        if (ur != null)
+                        {
+                            txtItemNo.Text = UserIDEdit;
+                            txtPathImage.Text = ur.PathImage.ToString();
+                        }
+                        else
+                        {
+                            //MessageBox.Show("Item No. Not Found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            //this.Close();
+                        }
+                    }
+                }
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void RMenu6_Click(object sender, EventArgs e)
         {
            
-            //DeleteUnit();
+           // DeleteUnit();
             //DataLoad();
         }
 
         private void RMenu5_Click(object sender, EventArgs e)
         {
-            EditClick();
+            //EditClick();
         }
 
         private void RMenu4_Click(object sender, EventArgs e)
         {
-            ViewClick();
+           // ViewClick();
         }
 
         private void RMenu3_Click(object sender, EventArgs e)
         {
-            NewClick();
+           // NewClick();
 
         }
 
         private void DataLoad()
         {
-            try
-            {
-                this.Cursor = Cursors.WaitCursor;
-                int ck = 0;
-                using (DataClasses1DataContext db = new DataClasses1DataContext())
-                {
-
-                    radGridView1.DataSource = db.sp_002_TPIC_SelectPO(txtPONo.Text, txtItemNo.Text, txtVendorCode.Text, chkUseDate.Checked, dtDate1.Value, dtDate2.Value).ToList();
-                    foreach (var x in radGridView1.Rows)
-                    {
-
-                        // x.Cells["dgvCodeTemp"].Value = x.Cells["UnitCode"].Value.ToString();
-                        //  x.Cells["UnitCode"].ReadOnly = true;
-                        //if (row >= 0 && row == ck && radGridView1.Rows.Count > 0)
-                        //{
-
-                        //    x.ViewInfo.CurrentRow = x;
-
-                        //}
-                        ck += 1;
-                        x.Cells["No"].Value = ck;
-                    }
-
-                }
-            }
-            catch { }
-            this.Cursor = Cursors.Default;
-
-
-
+           
+            
         }
         private bool CheckDuplicate(string code)
         {
@@ -248,54 +235,108 @@ namespace StockControl
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            DataLoad();
+            //DataLoad();
         }
         private void NewClick()
         {
             //radGridView1.ReadOnly = false;
             //radGridView1.AllowAddNewRow = false;
-            ////btnEdit.Enabled = false;
-            //btnView.Enabled = true;
-            //radGridView1.Rows.AddNew();
+            //btnEdit.Enabled = false;
+           // btnView.Enabled = true;
+           // radGridView1.Rows.AddNew();
         }
         private void EditClick()
         {
-            //radGridView1.ReadOnly = false;
-            ////btnEdit.Enabled = false;
+          //  radGridView1.ReadOnly = false;
+            //btnEdit.Enabled = false;
             //btnView.Enabled = true;
-            //radGridView1.AllowAddNewRow = false;
+           // radGridView1.AllowAddNewRow = false;
         }
         private void ViewClick()
         {
            // radGridView1.ReadOnly = true;
-            //btnView.Enabled = false;
-            ////btnEdit.Enabled = true;
-            //radGridView1.AllowAddNewRow = false;
+           // btnView.Enabled = false;
+            //btnEdit.Enabled = true;
+           // radGridView1.AllowAddNewRow = false;
             DataLoad();
         }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            NewClick();
+            //NewClick();
         }
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            ViewClick();
+            //ViewClick();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
 
-            EditClick();
+            //EditClick();
         }
         private void Saveclick()
         {
-            //if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            //{
-            //    AddUnit();
-            //    DataLoad();
-            //}
+            if(!txtItemNo.Text.Equals("") && !txtPathImage.Text.Equals("") )
+            {
+                if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        string Path = "";
+                        using (DataClasses1DataContext db = new DataClasses1DataContext())
+                        {
+                            tb_Path ph = db.tb_Paths.Where(p => p.PathCode == "Image").FirstOrDefault();
+                            if(ph!=null)
+                            {
+                                Path = ph.PathFile;
+                            }
+                            tb_ItemList uck = db.tb_ItemLists.Where(u => u.CodeNo == txtItemNo.Text).FirstOrDefault();
+                            if (uck != null)
+                            {
+                                //un.UserID = txtUserID.Text;
+                                UploadImage(Path);
+                                uck.PathImage = txtImage.Text;
+                                db.SubmitChanges();
+                                dbClss.AddHistory("ListItem", "แก้ไขรูป", "แก้ไขรายละเอียด  [" + txtItemNo.Text + "] ", "จากเครื่อง " + System.Environment.MachineName);
+
+                            }
+                            else
+                            {
+                                UploadImage(Path);
+                                tb_ItemList im = new tb_ItemList();
+                                im.CodeNo = txtItemNo.Text;
+                                im.PathImage = txtImage.Text;
+                                db.tb_ItemLists.InsertOnSubmit(im);
+                                db.SubmitChanges();                                
+                                dbClss.AddHistory("ListItem", "เพิ่มรูป", "ทำการเพิ่มรายการชื่อ  [" + txtItemNo.Text + "] เข้าระบบ", "จากเครื่อง " + System.Environment.MachineName);
+
+
+                            }
+                            MessageBox.Show("Save Completed!");
+                        }
+                    }
+                    catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Path Image is Empty!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void UploadImage(string Path)
+        {
+            try
+            {
+                if (!txtPathImage.Text.Equals("") && !Path.Equals(""))
+                {
+                    System.IO.File.Copy(txtPathImage.Text, Path + txtImage.Text, true);
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+
         }
         private void DeleteClick()
         {
@@ -304,7 +345,13 @@ namespace StockControl
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Saveclick();
+            if (!txtItemNo.Text.Equals("") && !txtImage.Text.Equals("") && !txtPathInput.Text.Equals(""))
+            {
+                Saveclick();
+            }else
+            {
+                MessageBox.Show("ต้องเลือกรูปใหม่!");
+            }
         }
 
 
@@ -341,29 +388,29 @@ namespace StockControl
         private void radGridView1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
 
-            //if (e.KeyData == (Keys.Control | Keys.S))
-            //{
-            //    if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            //    {
-            //        AddUnit();
-            //        DataLoad();
-            //    }
-            //}
-            //else if (e.KeyData == (Keys.Control | Keys.N))
-            //{
-            //    if (MessageBox.Show("ต้องการสร้างใหม่ ?", "สร้างใหม่", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            //    {
-            //        NewClick();
-            //    }
-            //}
+            if (e.KeyData == (Keys.Control | Keys.S))
+            {
+                //if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                //{
+                //    //AddUnit();
+                //    //DataLoad();
+                //}
+            }
+            else if (e.KeyData == (Keys.Control | Keys.N))
+            {
+                //if (MessageBox.Show("ต้องการสร้างใหม่ ?", "สร้างใหม่", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                //{
+                //    //NewClick();
+                //}
+            }
 
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
             
-                //DeleteUnit();
-                //DataLoad();
+                DeleteUnit();
+                DataLoad();
             
         }
 
@@ -376,7 +423,7 @@ namespace StockControl
         private void btnExport_Click(object sender, EventArgs e)
         {
             //dbClss.ExportGridCSV(radGridView1);
-           dbClss.ExportGridXlSX(radGridView1);
+          // dbClss.ExportGridXlSX(radGridView1);
         }
 
         private void btnImport_Click(object sender, EventArgs e)
@@ -495,12 +542,12 @@ namespace StockControl
 
         private void btnFilter1_Click(object sender, EventArgs e)
         {
-            radGridView1.EnableFiltering = true;
+            //radGridView1.EnableFiltering = true;
         }
 
         private void btnUnfilter1_Click(object sender, EventArgs e)
         {
-            radGridView1.EnableFiltering = false;
+           // radGridView1.EnableFiltering = false;
         }
 
         private void radMenuItem1_Click(object sender, EventArgs e)
@@ -508,15 +555,18 @@ namespace StockControl
             this.Close();
         }
 
-        private void btnSave_Click_1(object sender, EventArgs e)
+        private void btnImage_Click(object sender, EventArgs e)
         {
-            //Example01.pdf
-         //   System.Diagnostics.Process.Start(Environment.CurrentDirectory+@"\Example\Example01.pdf");
-        }
-
-        private void radButton1_Click(object sender, EventArgs e)
-        {
-            DataLoad();
+            OpenFileDialog op = new OpenFileDialog();
+            op.Filter = "Image files (*.PNG)|*.PNG|JPEG files (*.JPEG)|*.JPEG";
+            if (op.ShowDialog() == DialogResult.OK)
+            {
+                txtPathImage.Text = op.FileName;
+                txtPathInput.Text = op.FileName;
+                string Ex = System.IO.Path.GetExtension(txtPathImage.Text);
+                txtImage.Text = txtItemNo.Text + "" + Ex;
+                
+            }
         }
     }
 }

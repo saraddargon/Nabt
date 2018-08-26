@@ -42,13 +42,13 @@ namespace StockControl
         }
         private void Unit_Load(object sender, EventArgs e)
         {
-            RMenu3.Click += RMenu3_Click;
-            RMenu4.Click += RMenu4_Click;
-            RMenu5.Click += RMenu5_Click;
-            RMenu6.Click += RMenu6_Click;
-            radGridView1.ReadOnly = true;
-            radGridView1.AutoGenerateColumns = false;
-            GETDTRow();
+            //RMenu3.Click += RMenu3_Click;
+            //RMenu4.Click += RMenu4_Click;
+            //RMenu5.Click += RMenu5_Click;
+            //RMenu6.Click += RMenu6_Click;
+            //radGridView1.ReadOnly = true;
+            //radGridView1.AutoGenerateColumns = false;
+            //GETDTRow();
            
             
             DataLoad();
@@ -57,23 +57,23 @@ namespace StockControl
         private void RMenu6_Click(object sender, EventArgs e)
         {
            
-            DeleteUnit();
-            DataLoad();
+            //DeleteUnit();
+            //DataLoad();
         }
 
         private void RMenu5_Click(object sender, EventArgs e)
         {
-            EditClick();
+            //EditClick();
         }
 
         private void RMenu4_Click(object sender, EventArgs e)
         {
-            ViewClick();
+            //ViewClick();
         }
 
         private void RMenu3_Click(object sender, EventArgs e)
         {
-            NewClick();
+            //NewClick();
 
         }
 
@@ -84,7 +84,7 @@ namespace StockControl
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
 
-                radGridView1.DataSource = db.tb_ListQueues.ToList();
+                radGridView1.DataSource = db.sp_SC_002_SelectListQueue().ToList();
                 //foreach(var x in radGridView1.Rows)
                 //{
 
@@ -244,26 +244,26 @@ namespace StockControl
         }
         private void NewClick()
         {
-            radGridView1.ReadOnly = false;
-            radGridView1.AllowAddNewRow = false;
-            btnEdit.Enabled = false;
-            btnView.Enabled = true;
-            radGridView1.Rows.AddNew();
+            //radGridView1.ReadOnly = false;
+            //radGridView1.AllowAddNewRow = false;
+            //btnEdit.Enabled = false;
+            //btnView.Enabled = true;
+            //radGridView1.Rows.AddNew();
         }
         private void EditClick()
         {
-            radGridView1.ReadOnly = false;
-            btnEdit.Enabled = false;
-            btnView.Enabled = true;
-            radGridView1.AllowAddNewRow = false;
+            //radGridView1.ReadOnly = false;
+            //btnEdit.Enabled = false;
+            //btnView.Enabled = true;
+            //radGridView1.AllowAddNewRow = false;
         }
         private void ViewClick()
         {
-            radGridView1.ReadOnly = true;
-            btnView.Enabled = false;
-            btnEdit.Enabled = true;
-            radGridView1.AllowAddNewRow = false;
-            DataLoad();
+            //radGridView1.ReadOnly = true;
+            //btnView.Enabled = false;
+            //btnEdit.Enabled = true;
+            //radGridView1.AllowAddNewRow = false;
+            //DataLoad();
         }
 
         private void btnNew_Click(object sender, EventArgs e)
@@ -283,11 +283,11 @@ namespace StockControl
         }
         private void Saveclick()
         {
-            if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                AddUnit();
-                DataLoad();
-            }
+            //if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //{
+            //    AddUnit();
+            //    DataLoad();
+            //}
         }
         private void DeleteClick()
         {
@@ -333,29 +333,29 @@ namespace StockControl
         private void radGridView1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
 
-            if (e.KeyData == (Keys.Control | Keys.S))
-            {
-                if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    AddUnit();
-                    DataLoad();
-                }
-            }
-            else if (e.KeyData == (Keys.Control | Keys.N))
-            {
-                if (MessageBox.Show("ต้องการสร้างใหม่ ?", "สร้างใหม่", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    NewClick();
-                }
-            }
+            //if (e.KeyData == (Keys.Control | Keys.S))
+            //{
+            //    if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //    {
+            //        AddUnit();
+            //        DataLoad();
+            //    }
+            //}
+            //else if (e.KeyData == (Keys.Control | Keys.N))
+            //{
+            //    if (MessageBox.Show("ต้องการสร้างใหม่ ?", "สร้างใหม่", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //    {
+            //        NewClick();
+            //    }
+            //}
 
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
             
-                DeleteUnit();
-                DataLoad();
+                //DeleteUnit();
+                //DataLoad();
             
         }
 

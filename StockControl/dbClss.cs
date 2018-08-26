@@ -14,9 +14,14 @@ using ThoughtWorks.QRCode.Codec;
 
 namespace StockControl
 {
-    class dbClss
+   public static class dbClss
     {
-        public string versioin = "ss2";
+        //MessageBox.Show(ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+        //if (MessageBox.Show("คุณต้องการลบหรือไม่ ?", "ลบรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+
+        public static string versioin = "v 1.0";
+        public static string UserID = "";
+        public static string UserName = "";
         public static Telerik.WinControls.UI.RadRibbonForm CreateForm(string form)
         {
             try
@@ -130,7 +135,7 @@ namespace StockControl
                     hy.ApplicationNme = App;
                     hy.Detail = Detail;
                     hy.RefNo = Ref;
-                    hy.CreateBy = System.Environment.UserName;
+                    hy.CreateBy = dbClss.UserID;
                     hy.CreateDate = DateTime.Now;
                     db.tb_Histories.InsertOnSubmit(hy);
                     db.SubmitChanges();

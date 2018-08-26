@@ -19,6 +19,7 @@ namespace StockControl
         //private int RowView = 50;
         //private int ColView = 10;
         DataTable dt = new DataTable();
+        string PathFile = "";
         private void radMenuItem2_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
@@ -33,25 +34,40 @@ namespace StockControl
         }
         private void GETDTRow()
         {
-            dt.Columns.Add(new DataColumn("edit", typeof(bool)));
-            dt.Columns.Add(new DataColumn("code", typeof(string)));
-            dt.Columns.Add(new DataColumn("Name", typeof(string)));
-            dt.Columns.Add(new DataColumn("Active", typeof(bool)));
-            dt.Columns.Add(new DataColumn("CreateDate", typeof(DateTime)));
-            dt.Columns.Add(new DataColumn("CreateBy", typeof(string)));
+            //dt.Columns.Add(new DataColumn("edit", typeof(bool)));
+            //dt.Columns.Add(new DataColumn("code", typeof(string)));
+            //dt.Columns.Add(new DataColumn("Name", typeof(string)));
+            //dt.Columns.Add(new DataColumn("Active", typeof(bool)));
+            //dt.Columns.Add(new DataColumn("CreateDate", typeof(DateTime)));
+            //dt.Columns.Add(new DataColumn("CreateBy", typeof(string)));
         }
         private void Unit_Load(object sender, EventArgs e)
         {
             RMenu3.Click += RMenu3_Click;
             RMenu4.Click += RMenu4_Click;
-            RMenu5.Click += RMenu5_Click;
+            // RMenu5.Click += RMenu5_Click;
             RMenu6.Click += RMenu6_Click;
-           // radGridView1.ReadOnly = true;
+            radGridView1.ReadOnly = true;
             radGridView1.AutoGenerateColumns = false;
-            GETDTRow();
-           
-            
+            // GETDTRow();
+
+            LoadDataDefault();
             DataLoad();
+        }
+        private void LoadDataDefault()
+        {
+            try
+            {
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    tb_Path ph = db.tb_Paths.Where(p => p.PathCode == "Image").FirstOrDefault();
+                    if(ph!=null)
+                    {
+                        PathFile = ph.PathFile;
+                    }
+                }
+            }
+            catch { }
         }
 
         private void RMenu6_Click(object sender, EventArgs e)
@@ -76,32 +92,36 @@ namespace StockControl
             NewClick();
 
         }
-
+        
         private void DataLoad()
         {
-            
-            int ck = 0;
-            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            this.Cursor = Cursors.WaitCursor;
+            try
             {
-
-                radGridView1.DataSource = db.sp_001_TPIC_SelectItem().ToList();
-                foreach (var x in radGridView1.Rows)
+                int ck = 0;
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
 
-                   // x.Cells["dgvCodeTemp"].Value = x.Cells["UnitCode"].Value.ToString();
-                  //  x.Cells["UnitCode"].ReadOnly = true;
-                    //if (row >= 0 && row == ck && radGridView1.Rows.Count > 0)
-                    //{
+                    radGridView1.DataSource = db.sp_001_TPIC_SelectItem(txtItemNo.Text).ToList();
+                    foreach (var x in radGridView1.Rows)
+                    {
 
-                    //    x.ViewInfo.CurrentRow = x;
+                        // x.Cells["dgvCodeTemp"].Value = x.Cells["UnitCode"].Value.ToString();
+                        //  x.Cells["UnitCode"].ReadOnly = true;
+                        //if (row >= 0 && row == ck && radGridView1.Rows.Count > 0)
+                        //{
 
-                    //}
-                    ck += 1;
-                    x.Cells["No"].Value = ck;
+                        //    x.ViewInfo.CurrentRow = x;
+
+                        //}
+                        ck += 1;
+                        x.Cells["No"].Value = ck;
+                    }
+
                 }
-
             }
-
+            catch { }
+            this.Cursor = Cursors.Default;
 
             
         }
@@ -245,25 +265,25 @@ namespace StockControl
         }
         private void NewClick()
         {
-            radGridView1.ReadOnly = false;
-            radGridView1.AllowAddNewRow = false;
-            //btnEdit.Enabled = false;
-            btnView.Enabled = true;
-            radGridView1.Rows.AddNew();
+            //radGridView1.ReadOnly = false;
+            //radGridView1.AllowAddNewRow = false;
+            ////btnEdit.Enabled = false;
+            //btnView.Enabled = true;
+            //radGridView1.Rows.AddNew();
         }
         private void EditClick()
         {
-            radGridView1.ReadOnly = false;
-            //btnEdit.Enabled = false;
-            btnView.Enabled = true;
-            radGridView1.AllowAddNewRow = false;
+            //radGridView1.ReadOnly = false;
+            ////btnEdit.Enabled = false;
+            //btnView.Enabled = true;
+            //radGridView1.AllowAddNewRow = false;
         }
         private void ViewClick()
         {
            // radGridView1.ReadOnly = true;
-            btnView.Enabled = false;
-            //btnEdit.Enabled = true;
-            radGridView1.AllowAddNewRow = false;
+            //btnView.Enabled = false;
+            ////btnEdit.Enabled = true;
+            //radGridView1.AllowAddNewRow = false;
             DataLoad();
         }
 
@@ -284,11 +304,11 @@ namespace StockControl
         }
         private void Saveclick()
         {
-            if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                AddUnit();
-                DataLoad();
-            }
+            //if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //{
+            //    AddUnit();
+            //    DataLoad();
+            //}
         }
         private void DeleteClick()
         {
@@ -334,21 +354,21 @@ namespace StockControl
         private void radGridView1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
 
-            if (e.KeyData == (Keys.Control | Keys.S))
-            {
-                if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    AddUnit();
-                    DataLoad();
-                }
-            }
-            else if (e.KeyData == (Keys.Control | Keys.N))
-            {
-                if (MessageBox.Show("ต้องการสร้างใหม่ ?", "สร้างใหม่", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    NewClick();
-                }
-            }
+            //if (e.KeyData == (Keys.Control | Keys.S))
+            //{
+            //    if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //    {
+            //        AddUnit();
+            //        DataLoad();
+            //    }
+            //}
+            //else if (e.KeyData == (Keys.Control | Keys.N))
+            //{
+            //    if (MessageBox.Show("ต้องการสร้างใหม่ ?", "สร้างใหม่", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //    {
+            //        NewClick();
+            //    }
+            //}
 
         }
 
@@ -503,13 +523,41 @@ namespace StockControl
 
         private void radButtonElement2_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "excel files (*.xlsx)|*.xlsx";
-            openFileDialog1.FilterIndex = 2;
-            openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.FileName = "";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
 
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            DataLoad();
+        }
+
+        private void radButtonElement2_Click_1(object sender, EventArgs e)
+        {
+            if (row >= 0)
+            {
+                string code = radGridView1.Rows[row].Cells["Code"].Value.ToString();
+                ItemListImage im = new ItemListImage(code);
+                im.ShowDialog();
+            }
+
+        }
+
+        private void radGridView1_CellDoubleClick(object sender, Telerik.WinControls.UI.GridViewCellEventArgs e)
+        {
+            if(e.RowIndex>=0)
+            {
+                if(!radGridView1.Rows[e.RowIndex].Cells["PahtImage"].Value.ToString().Equals("") && !PathFile.Equals(""))
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start(PathFile+"" +radGridView1.Rows[e.RowIndex].Cells["PahtImage"].Value.ToString());
+                    }
+                    catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);  }
+                }
+                else
+                {
+                    MessageBox.Show("Path file Empty!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }

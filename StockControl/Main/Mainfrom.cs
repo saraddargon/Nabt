@@ -46,6 +46,7 @@ namespace StockControl
             SqlGetName = "home";
             txtposition.Text = "x0:y0";
             CallDisplayHome();
+            this.Text = "Barcode System " + dbClss.versioin ;
         }
         private void CallDisplayHome()
         {
