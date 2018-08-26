@@ -18,7 +18,7 @@ namespace StockControl
 
         private void About_Load(object sender, EventArgs e)
         {
-
+            //a
         }
     }
 }
