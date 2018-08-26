@@ -158,6 +158,7 @@
             this.radButtonElement1.Name = "radButtonElement1";
             this.radButtonElement1.Text = "บันทึกรายการ";
             this.radButtonElement1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.radButtonElement1.Click += new System.EventHandler(this.radButtonElement1_Click);
             // 
             // radRibbonBarGroup2
             // 

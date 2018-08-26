@@ -500,5 +500,10 @@ namespace StockControl
         {
             this.Close();
         }
+
+        private void radButtonElement1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

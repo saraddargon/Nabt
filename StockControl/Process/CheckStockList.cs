@@ -49,7 +49,7 @@ namespace StockControl
             //RMenu5.Click += RMenu5_Click;
             RMenu6.Click += RMenu6_Click;
             // radGridView1.ReadOnly = true;
-            radGridView1.AutoGenerateColumns = false;
+            dgvData.AutoGenerateColumns = false;
             //GETDTRow();
            
             
@@ -86,8 +86,8 @@ namespace StockControl
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
 
-                radGridView1.DataSource = db.tb_CheckStocks.ToList();
-                foreach (var x in radGridView1.Rows)
+                dgvData.DataSource = db.tb_CheckStocks.ToList();
+                foreach (var x in dgvData.Rows)
                 {
 
                    // x.Cells["dgvCodeTemp"].Value = x.Cells["UnitCode"].Value.ToString();
@@ -192,9 +192,9 @@ namespace StockControl
 
                 if (row >= 0)
                 {
-                    string CheckNo = Convert.ToString(radGridView1.Rows[row].Cells["CheckNo"].Value);
+                    string CheckNo = Convert.ToString(dgvData.Rows[row].Cells["CheckNo"].Value);
                   //  string CodeTemp = Convert.ToString(radGridView1.Rows[row].Cells["dgvCodeTemp"].Value);
-                    radGridView1.EndEdit();
+                    dgvData.EndEdit();
                     if (MessageBox.Show("ต้องการลบรายการ ( " + CheckNo + " ) หรือไม่ ?", "ลบรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         using (DataClasses1DataContext db = new DataClasses1DataContext())
@@ -383,7 +383,7 @@ namespace StockControl
         private void btnExport_Click(object sender, EventArgs e)
         {
             //dbClss.ExportGridCSV(radGridView1);
-           dbClss.ExportGridXlSX(radGridView1);
+           dbClss.ExportGridXlSX(dgvData);
         }
 
         private void btnImport_Click(object sender, EventArgs e)
@@ -502,12 +502,12 @@ namespace StockControl
 
         private void btnFilter1_Click(object sender, EventArgs e)
         {
-            radGridView1.EnableFiltering = true;
+            dgvData.EnableFiltering = true;
         }
 
         private void btnUnfilter1_Click(object sender, EventArgs e)
         {
-            radGridView1.EnableFiltering = false;
+            dgvData.EnableFiltering = false;
         }
 
         private void radMenuItem1_Click(object sender, EventArgs e)
@@ -530,8 +530,8 @@ namespace StockControl
         private void CheckStockList_Load(object sender, EventArgs e)
         {
             RMenu6.Click += RMenu6_Click;
-             radGridView1.ReadOnly = true;
-            radGridView1.AutoGenerateColumns = false;
+             dgvData.ReadOnly = true;
+            dgvData.AutoGenerateColumns = false;
             LoadDefault();
 
         }
@@ -542,12 +542,12 @@ namespace StockControl
             {
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    radGridView1.AutoGenerateColumns = false;
-                    radGridView1.ReadOnly = true;   
+                    dgvData.AutoGenerateColumns = false;
+                    dgvData.ReadOnly = true;   
                     var ListData = db.tb_CheckStocks.Where(ck => ck.Status != "Deleted").ToList();
-                    radGridView1.DataSource = ListData;
+                    dgvData.DataSource = ListData;
                     int rowNo = 0;
-                    foreach(GridViewRowInfo rd in radGridView1.Rows)
+                    foreach(GridViewRowInfo rd in dgvData.Rows)
                     {
                         rd.Cells["No"].Value = rowNo + 1;
                         rowNo += 1;
@@ -562,7 +562,34 @@ namespace StockControl
         {
             //Call Screen Upload from TPICS
 
+            if (dgvData.Rows.Count <= 0)
+                return;
+
+            string CheckNo = "";
+            if(dbClss.TSt(dgvData.CurrentRow.Cells["CheckNo"].Value) == "Completed")
+            {
+                MessageBox.Show("สถานะไม่ถูกต้อง");
+                return;
+            }
+            CheckNo = dbClss.TSt(dgvData.CurrentRow.Cells["CheckNo"].Value);
+
+            try
+            {
+                CheckStockUpload a = new CheckStockUpload(CheckNo);
+                a.ShowDialog();
+                
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             /////////////////////////////////
+        }
+
+        private void radButtonElement1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //ReportCheckStock.rpt
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

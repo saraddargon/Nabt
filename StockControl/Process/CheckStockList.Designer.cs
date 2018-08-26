@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckStockList));
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn9 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn10 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn5 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
             this.radRibbonBarGroup1 = new Telerik.WinControls.UI.RadRibbonBarGroup();
@@ -51,13 +51,15 @@
             this.ribbonBarGroupSeparator1 = new Telerik.WinControls.UI.RibbonBarGroupSeparator();
             this.radRibbonBarGroup6 = new Telerik.WinControls.UI.RadRibbonBarGroup();
             this.radButtonElement1 = new Telerik.WinControls.UI.RadButtonElement();
+            this.radRibbonBarGroup7 = new Telerik.WinControls.UI.RadRibbonBarGroup();
+            this.radButtonElement2 = new Telerik.WinControls.UI.RadButtonElement();
             this.radMenuItem1 = new Telerik.WinControls.UI.RadMenuItem();
             this.radMenuSeparatorItem1 = new Telerik.WinControls.UI.RadMenuSeparatorItem();
             this.radMenuItem2 = new Telerik.WinControls.UI.RadMenuItem();
             this.radStatusStrip1 = new Telerik.WinControls.UI.RadStatusStrip();
             this.radLabelElement1 = new Telerik.WinControls.UI.RadLabelElement();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.radGridView1 = new Telerik.WinControls.UI.RadGridView();
+            this.dgvData = new Telerik.WinControls.UI.RadGridView();
             this.office2010BlueTheme1 = new Telerik.WinControls.Themes.Office2010BlueTheme();
             this.radRibbonBarButtonGroup2 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
@@ -67,13 +69,11 @@
             this.RMenu6 = new Telerik.WinControls.UI.RadMenuItem();
             this.radContextMenuManager1 = new Telerik.WinControls.UI.RadContextMenuManager();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.radRibbonBarGroup7 = new Telerik.WinControls.UI.RadRibbonBarGroup();
-            this.radButtonElement2 = new Telerik.WinControls.UI.RadButtonElement();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvData.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -235,6 +235,24 @@
             this.radButtonElement1.Name = "radButtonElement1";
             this.radButtonElement1.Text = "Print List Check";
             this.radButtonElement1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.radButtonElement1.Click += new System.EventHandler(this.radButtonElement1_Click);
+            // 
+            // radRibbonBarGroup7
+            // 
+            this.radRibbonBarGroup7.Alignment = System.Drawing.ContentAlignment.TopLeft;
+            this.radRibbonBarGroup7.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.radButtonElement2});
+            this.radRibbonBarGroup7.Name = "radRibbonBarGroup7";
+            this.radRibbonBarGroup7.Text = "From TPICS";
+            // 
+            // radButtonElement2
+            // 
+            this.radButtonElement2.Image = ((System.Drawing.Image)(resources.GetObject("radButtonElement2.Image")));
+            this.radButtonElement2.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radButtonElement2.Name = "radButtonElement2";
+            this.radButtonElement2.Text = "Upload Excel";
+            this.radButtonElement2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.radButtonElement2.Click += new System.EventHandler(this.radButtonElement2_Click_1);
             // 
             // radMenuItem1
             // 
@@ -276,80 +294,84 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.radGridView1);
+            this.panel1.Controls.Add(this.dgvData);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 160);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(677, 403);
             this.panel1.TabIndex = 2;
             // 
-            // radGridView1
+            // dgvData
             // 
-            this.radGridView1.BackColor = System.Drawing.Color.White;
-            this.radGridView1.ColumnChooserSortOrder = Telerik.WinControls.UI.RadSortOrder.Ascending;
-            this.radGridView1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.radGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radGridView1.EnterKeyMode = Telerik.WinControls.UI.RadGridViewEnterKeyMode.EnterMovesToNextCell;
-            this.radGridView1.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.radGridView1.ForeColor = System.Drawing.Color.Black;
-            this.radGridView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.radGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dgvData.BackColor = System.Drawing.Color.White;
+            this.dgvData.ColumnChooserSortOrder = Telerik.WinControls.UI.RadSortOrder.Ascending;
+            this.dgvData.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvData.EnterKeyMode = Telerik.WinControls.UI.RadGridViewEnterKeyMode.EnterMovesToNextCell;
+            this.dgvData.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.dgvData.ForeColor = System.Drawing.Color.Black;
+            this.dgvData.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dgvData.Location = new System.Drawing.Point(0, 0);
             // 
             // 
             // 
-            this.radGridView1.MasterTemplate.AddNewRowPosition = Telerik.WinControls.UI.SystemRowPosition.Bottom;
-            this.radGridView1.MasterTemplate.AllowAddNewRow = false;
-            this.radGridView1.MasterTemplate.AllowCellContextMenu = false;
-            this.radGridView1.MasterTemplate.AllowColumnChooser = false;
-            this.radGridView1.MasterTemplate.AllowColumnHeaderContextMenu = false;
-            this.radGridView1.MasterTemplate.AllowDragToGroup = false;
-            this.radGridView1.MasterTemplate.AllowRowHeaderContextMenu = false;
-            this.radGridView1.MasterTemplate.AllowRowResize = false;
-            this.radGridView1.MasterTemplate.AutoGenerateColumns = false;
-            gridViewTextBoxColumn6.EnableExpressionEditor = false;
-            gridViewTextBoxColumn6.FieldName = "No";
-            gridViewTextBoxColumn6.HeaderText = "No.";
-            gridViewTextBoxColumn6.Name = "No";
-            gridViewTextBoxColumn7.EnableExpressionEditor = false;
-            gridViewTextBoxColumn7.FieldName = "CheckNo";
-            gridViewTextBoxColumn7.HeaderText = "CheckNo";
-            gridViewTextBoxColumn7.Name = "CheckNo";
-            gridViewTextBoxColumn7.Width = 124;
-            gridViewTextBoxColumn8.EnableExpressionEditor = false;
-            gridViewTextBoxColumn8.FieldName = "Status";
-            gridViewTextBoxColumn8.HeaderText = "Status";
-            gridViewTextBoxColumn8.Name = "Status";
-            gridViewTextBoxColumn8.Width = 150;
-            gridViewTextBoxColumn9.EnableExpressionEditor = false;
-            gridViewTextBoxColumn9.FieldName = "CheckDate";
-            gridViewTextBoxColumn9.HeaderText = "CheckDate";
-            gridViewTextBoxColumn9.Name = "CheckDate";
-            gridViewTextBoxColumn9.Width = 145;
-            gridViewTextBoxColumn10.EnableExpressionEditor = false;
-            gridViewTextBoxColumn10.FieldName = "CreateBy";
-            gridViewTextBoxColumn10.HeaderText = "CreateBy";
-            gridViewTextBoxColumn10.Name = "dgvCreateBy";
-            gridViewTextBoxColumn10.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewTextBoxColumn10.Width = 110;
-            this.radGridView1.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn6,
-            gridViewTextBoxColumn7,
-            gridViewTextBoxColumn8,
-            gridViewTextBoxColumn9,
-            gridViewTextBoxColumn10});
-            this.radGridView1.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
-            this.radGridView1.MasterTemplate.ViewDefinition = tableViewDefinition2;
-            this.radGridView1.Name = "radGridView1";
-            this.radContextMenuManager1.SetRadContextMenu(this.radGridView1, this.radContextMenu1);
-            this.radGridView1.ReadOnly = true;
-            this.radGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.radGridView1.ShowGroupPanel = false;
-            this.radGridView1.Size = new System.Drawing.Size(677, 403);
-            this.radGridView1.TabIndex = 0;
-            this.radGridView1.ThemeName = "Office2010Blue";
-            this.radGridView1.CellEndEdit += new Telerik.WinControls.UI.GridViewCellEventHandler(this.radGridView1_CellEndEdit);
-            this.radGridView1.CellClick += new Telerik.WinControls.UI.GridViewCellEventHandler(this.radGridView1_CellClick);
-            this.radGridView1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.radGridView1_PreviewKeyDown);
+            this.dgvData.MasterTemplate.AddNewRowPosition = Telerik.WinControls.UI.SystemRowPosition.Bottom;
+            this.dgvData.MasterTemplate.AllowAddNewRow = false;
+            this.dgvData.MasterTemplate.AllowCellContextMenu = false;
+            this.dgvData.MasterTemplate.AllowColumnChooser = false;
+            this.dgvData.MasterTemplate.AllowColumnHeaderContextMenu = false;
+            this.dgvData.MasterTemplate.AllowDragToGroup = false;
+            this.dgvData.MasterTemplate.AllowRowHeaderContextMenu = false;
+            this.dgvData.MasterTemplate.AllowRowResize = false;
+            this.dgvData.MasterTemplate.AutoGenerateColumns = false;
+            gridViewTextBoxColumn1.EnableExpressionEditor = false;
+            gridViewTextBoxColumn1.FieldName = "No";
+            gridViewTextBoxColumn1.HeaderText = "No.";
+            gridViewTextBoxColumn1.Name = "No";
+            gridViewTextBoxColumn2.EnableExpressionEditor = false;
+            gridViewTextBoxColumn2.FieldName = "CheckNo";
+            gridViewTextBoxColumn2.HeaderText = "CheckNo";
+            gridViewTextBoxColumn2.Name = "CheckNo";
+            gridViewTextBoxColumn2.ReadOnly = true;
+            gridViewTextBoxColumn2.Width = 124;
+            gridViewTextBoxColumn3.EnableExpressionEditor = false;
+            gridViewTextBoxColumn3.FieldName = "Status";
+            gridViewTextBoxColumn3.HeaderText = "Status";
+            gridViewTextBoxColumn3.Name = "Status";
+            gridViewTextBoxColumn3.ReadOnly = true;
+            gridViewTextBoxColumn3.Width = 150;
+            gridViewTextBoxColumn4.EnableExpressionEditor = false;
+            gridViewTextBoxColumn4.FieldName = "CheckDate";
+            gridViewTextBoxColumn4.HeaderText = "CheckDate";
+            gridViewTextBoxColumn4.Name = "CheckDate";
+            gridViewTextBoxColumn4.ReadOnly = true;
+            gridViewTextBoxColumn4.Width = 145;
+            gridViewTextBoxColumn5.EnableExpressionEditor = false;
+            gridViewTextBoxColumn5.FieldName = "CreateBy";
+            gridViewTextBoxColumn5.HeaderText = "CreateBy";
+            gridViewTextBoxColumn5.Name = "dgvCreateBy";
+            gridViewTextBoxColumn5.ReadOnly = true;
+            gridViewTextBoxColumn5.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn5.Width = 110;
+            this.dgvData.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
+            gridViewTextBoxColumn1,
+            gridViewTextBoxColumn2,
+            gridViewTextBoxColumn3,
+            gridViewTextBoxColumn4,
+            gridViewTextBoxColumn5});
+            this.dgvData.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
+            this.dgvData.MasterTemplate.ViewDefinition = tableViewDefinition1;
+            this.dgvData.Name = "dgvData";
+            this.radContextMenuManager1.SetRadContextMenu(this.dgvData, this.radContextMenu1);
+            this.dgvData.ReadOnly = true;
+            this.dgvData.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dgvData.ShowGroupPanel = false;
+            this.dgvData.Size = new System.Drawing.Size(677, 403);
+            this.dgvData.TabIndex = 0;
+            this.dgvData.ThemeName = "Office2010Blue";
+            this.dgvData.CellEndEdit += new Telerik.WinControls.UI.GridViewCellEventHandler(this.radGridView1_CellEndEdit);
+            this.dgvData.CellClick += new Telerik.WinControls.UI.GridViewCellEventHandler(this.radGridView1_CellClick);
+            this.dgvData.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.radGridView1_PreviewKeyDown);
             // 
             // radRibbonBarButtonGroup2
             // 
@@ -402,23 +424,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // radRibbonBarGroup7
-            // 
-            this.radRibbonBarGroup7.Alignment = System.Drawing.ContentAlignment.TopLeft;
-            this.radRibbonBarGroup7.Items.AddRange(new Telerik.WinControls.RadItem[] {
-            this.radButtonElement2});
-            this.radRibbonBarGroup7.Name = "radRibbonBarGroup7";
-            this.radRibbonBarGroup7.Text = "From TPICS";
-            // 
-            // radButtonElement2
-            // 
-            this.radButtonElement2.Image = ((System.Drawing.Image)(resources.GetObject("radButtonElement2.Image")));
-            this.radButtonElement2.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radButtonElement2.Name = "radButtonElement2";
-            this.radButtonElement2.Text = "Upload Excel";
-            this.radButtonElement2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.radButtonElement2.Click += new System.EventHandler(this.radButtonElement2_Click_1);
-            // 
             // CheckStockList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -440,8 +445,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).EndInit();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvData.MasterTemplate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -465,7 +470,7 @@
         private Telerik.WinControls.UI.RadButtonElement btnSave;
         private Telerik.WinControls.UI.RadMenuSeparatorItem radMenuSeparatorItem1;
         private Telerik.WinControls.UI.RadMenuItem radMenuItem2;
-        private Telerik.WinControls.UI.RadGridView radGridView1;
+        private Telerik.WinControls.UI.RadGridView dgvData;
         private Telerik.WinControls.UI.RadRibbonBarGroup radRibbonBarGroup5;
         private Telerik.WinControls.UI.RadRibbonBarButtonGroup radRibbonBarButtonGroup3;
         private Telerik.WinControls.UI.RadButtonElement btnFilter1;

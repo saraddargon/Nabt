@@ -40,22 +40,32 @@
             this.radLabelElement1 = new Telerik.WinControls.UI.RadLabelElement();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.lblSS = new Telerik.WinControls.UI.RadLabel();
+            this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
+            this.txtCheckNo = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
+            this.btnSelectFile = new Telerik.WinControls.UI.RadButton();
+            this.txtFileName = new Telerik.WinControls.UI.RadTextBox();
             this.office2010BlueTheme1 = new Telerik.WinControls.Themes.Office2010BlueTheme();
             this.radRibbonBarButtonGroup2 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
-            this.radTextBox1 = new Telerik.WinControls.UI.RadTextBox();
-            this.radButton1 = new Telerik.WinControls.UI.RadButton();
-            this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.commandBarSeparator1 = new Telerik.WinControls.UI.CommandBarSeparator();
+            this.radProgressBarElement1 = new Telerik.WinControls.UI.RadProgressBarElement();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radButton1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblSS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCheckNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSelectFile)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFileName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,7 +91,7 @@
             // 
             // 
             this.radRibbonBar1.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.WrapAroundChildren;
-            this.radRibbonBar1.Size = new System.Drawing.Size(489, 161);
+            this.radRibbonBar1.Size = new System.Drawing.Size(489, 160);
             this.radRibbonBar1.StartButtonImage = ((System.Drawing.Image)(resources.GetObject("radRibbonBar1.StartButtonImage")));
             this.radRibbonBar1.StartMenuItems.AddRange(new Telerik.WinControls.RadItem[] {
             this.radMenuItem1});
@@ -113,7 +123,6 @@
             this.btnExport});
             this.radRibbonBarGroup4.Name = "radRibbonBarGroup4";
             this.radRibbonBarGroup4.Text = "Upload";
-            this.radRibbonBarGroup4.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
             // 
             // btnExport
             // 
@@ -151,7 +160,9 @@
             // radStatusStrip1
             // 
             this.radStatusStrip1.Items.AddRange(new Telerik.WinControls.RadItem[] {
-            this.radLabelElement1});
+            this.radLabelElement1,
+            this.commandBarSeparator1,
+            this.radProgressBarElement1});
             this.radStatusStrip1.Location = new System.Drawing.Point(0, 419);
             this.radStatusStrip1.Name = "radStatusStrip1";
             this.radStatusStrip1.Size = new System.Drawing.Size(489, 26);
@@ -171,23 +182,87 @@
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.radPanel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 161);
+            this.panel1.Location = new System.Drawing.Point(0, 160);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(489, 258);
+            this.panel1.Size = new System.Drawing.Size(489, 259);
             this.panel1.TabIndex = 2;
             // 
             // radPanel1
             // 
             this.radPanel1.BackColor = System.Drawing.Color.AliceBlue;
+            this.radPanel1.Controls.Add(this.progressBar1);
+            this.radPanel1.Controls.Add(this.lblSS);
+            this.radPanel1.Controls.Add(this.radLabel2);
+            this.radPanel1.Controls.Add(this.txtCheckNo);
             this.radPanel1.Controls.Add(this.radLabel1);
-            this.radPanel1.Controls.Add(this.radButton1);
-            this.radPanel1.Controls.Add(this.radTextBox1);
+            this.radPanel1.Controls.Add(this.btnSelectFile);
+            this.radPanel1.Controls.Add(this.txtFileName);
             this.radPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radPanel1.Location = new System.Drawing.Point(0, 0);
             this.radPanel1.Name = "radPanel1";
-            this.radPanel1.Size = new System.Drawing.Size(489, 258);
+            this.radPanel1.Size = new System.Drawing.Size(489, 259);
             this.radPanel1.TabIndex = 1;
             this.radPanel1.ThemeName = "Office2010Blue";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(50, 124);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(316, 14);
+            this.progressBar1.TabIndex = 5;
+            this.progressBar1.Visible = false;
+            // 
+            // lblSS
+            // 
+            this.lblSS.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.lblSS.Location = new System.Drawing.Point(50, 134);
+            this.lblSS.Name = "lblSS";
+            this.lblSS.Size = new System.Drawing.Size(108, 18);
+            this.lblSS.TabIndex = 4;
+            this.lblSS.Text = "Load data complete.";
+            this.lblSS.Visible = false;
+            // 
+            // radLabel2
+            // 
+            this.radLabel2.Location = new System.Drawing.Point(50, 30);
+            this.radLabel2.Name = "radLabel2";
+            this.radLabel2.Size = new System.Drawing.Size(57, 18);
+            this.radLabel2.TabIndex = 4;
+            this.radLabel2.Text = "Check No.";
+            // 
+            // txtCheckNo
+            // 
+            this.txtCheckNo.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtCheckNo.Location = new System.Drawing.Point(50, 54);
+            this.txtCheckNo.Name = "txtCheckNo";
+            this.txtCheckNo.ReadOnly = true;
+            this.txtCheckNo.Size = new System.Drawing.Size(116, 20);
+            this.txtCheckNo.TabIndex = 3;
+            // 
+            // radLabel1
+            // 
+            this.radLabel1.Location = new System.Drawing.Point(50, 78);
+            this.radLabel1.Name = "radLabel1";
+            this.radLabel1.Size = new System.Drawing.Size(131, 18);
+            this.radLabel1.TabIndex = 2;
+            this.radLabel1.Text = "Select file to Check Stock";
+            // 
+            // btnSelectFile
+            // 
+            this.btnSelectFile.Location = new System.Drawing.Point(372, 98);
+            this.btnSelectFile.Name = "btnSelectFile";
+            this.btnSelectFile.Size = new System.Drawing.Size(71, 24);
+            this.btnSelectFile.TabIndex = 1;
+            this.btnSelectFile.Text = "select...";
+            this.btnSelectFile.Click += new System.EventHandler(this.radButton1_Click);
+            // 
+            // txtFileName
+            // 
+            this.txtFileName.Location = new System.Drawing.Point(50, 100);
+            this.txtFileName.Name = "txtFileName";
+            this.txtFileName.ReadOnly = true;
+            this.txtFileName.Size = new System.Drawing.Size(316, 20);
+            this.txtFileName.TabIndex = 0;
             // 
             // radRibbonBarButtonGroup2
             // 
@@ -223,30 +298,33 @@
             this.radRibbonBarButtonGroup5.ShowBorder = false;
             this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
-            // radTextBox1
+            // openFileDialog1
             // 
-            this.radTextBox1.Location = new System.Drawing.Point(50, 63);
-            this.radTextBox1.Name = "radTextBox1";
-            this.radTextBox1.ReadOnly = true;
-            this.radTextBox1.Size = new System.Drawing.Size(316, 20);
-            this.radTextBox1.TabIndex = 0;
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // radButton1
+            // commandBarSeparator1
             // 
-            this.radButton1.Location = new System.Drawing.Point(372, 61);
-            this.radButton1.Name = "radButton1";
-            this.radButton1.Size = new System.Drawing.Size(71, 24);
-            this.radButton1.TabIndex = 1;
-            this.radButton1.Text = "select...";
-            this.radButton1.Click += new System.EventHandler(this.radButton1_Click);
+            this.commandBarSeparator1.Name = "commandBarSeparator1";
+            this.radStatusStrip1.SetSpring(this.commandBarSeparator1, false);
+            this.commandBarSeparator1.Text = "";
+            this.commandBarSeparator1.VisibleInOverflowMenu = false;
             // 
-            // radLabel1
+            // radProgressBarElement1
             // 
-            this.radLabel1.Location = new System.Drawing.Point(50, 39);
-            this.radLabel1.Name = "radLabel1";
-            this.radLabel1.Size = new System.Drawing.Size(131, 18);
-            this.radLabel1.TabIndex = 2;
-            this.radLabel1.Text = "Select file to Check Stock";
+            this.radProgressBarElement1.Name = "radProgressBarElement1";
+            this.radProgressBarElement1.SeparatorColor1 = System.Drawing.Color.White;
+            this.radProgressBarElement1.SeparatorColor2 = System.Drawing.Color.White;
+            this.radProgressBarElement1.SeparatorColor3 = System.Drawing.Color.White;
+            this.radProgressBarElement1.SeparatorColor4 = System.Drawing.Color.White;
+            this.radProgressBarElement1.SeparatorGradientAngle = 0;
+            this.radProgressBarElement1.SeparatorGradientPercentage1 = 0.4F;
+            this.radProgressBarElement1.SeparatorGradientPercentage2 = 0.6F;
+            this.radProgressBarElement1.SeparatorNumberOfColors = 2;
+            this.radStatusStrip1.SetSpring(this.radProgressBarElement1, false);
+            this.radProgressBarElement1.StepWidth = 14;
+            this.radProgressBarElement1.SweepAngle = 90;
+            this.radProgressBarElement1.Text = "";
+            this.radProgressBarElement1.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
             // 
             // CheckStockUpload
             // 
@@ -272,9 +350,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).EndInit();
             this.radPanel1.ResumeLayout(false);
             this.radPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radButton1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblSS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCheckNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSelectFile)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFileName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -300,7 +381,14 @@
         private Telerik.WinControls.UI.RadRibbonBarButtonGroup radRibbonBarButtonGroup5;
         private Telerik.WinControls.UI.RadPanel radPanel1;
         private Telerik.WinControls.UI.RadLabel radLabel1;
-        private Telerik.WinControls.UI.RadButton radButton1;
-        private Telerik.WinControls.UI.RadTextBox radTextBox1;
+        private Telerik.WinControls.UI.RadButton btnSelectFile;
+        private Telerik.WinControls.UI.RadTextBox txtFileName;
+        private Telerik.WinControls.UI.RadLabel radLabel2;
+        private Telerik.WinControls.UI.RadTextBox txtCheckNo;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private Telerik.WinControls.UI.RadLabel lblSS;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private Telerik.WinControls.UI.CommandBarSeparator commandBarSeparator1;
+        private Telerik.WinControls.UI.RadProgressBarElement radProgressBarElement1;
     }
 }

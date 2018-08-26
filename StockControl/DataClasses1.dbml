@@ -142,20 +142,6 @@
       <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.tb_CheckStockList" Member="tb_CheckStockLists">
-    <Type Name="tb_CheckStockList">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CheckNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Code" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="PartName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Location" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Status" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="InputQty" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="Remark" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Diff" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.tb_GuideLineLot" Member="tb_GuideLineLots">
     <Type Name="tb_GuideLineLot">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -291,6 +277,30 @@
       <Column Name="UserID" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="LayoutName" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ScreenName" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_CheckStockList" Member="tb_CheckStockLists">
+    <Type Name="tb_CheckStockList">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CheckNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Code" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PartName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Location" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="InputQty" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Diff" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Revision" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExclusionClass" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StorageWorkCenter" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="StorageWorkCenterName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="CurrentInventory" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="InventoryValue" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="StockBeforeInventory" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="PhysicalInventoryValue" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="UnitOfMeasure" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.Sp_ADM03_OpenFormSelect" Method="Sp_ADM03_OpenFormSelect">
