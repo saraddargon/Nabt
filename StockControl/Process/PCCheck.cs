@@ -48,9 +48,23 @@ namespace StockControl
         }
         private void Unit_Load(object sender, EventArgs e)
         {
-            
+            LoadDefault();
+            txtCheckNo.Text = "";
+            ddlLocation.Text = "";
+            txtItemCount.Text = "0";
+            txtCheckBy.Text = dbClss.UserID;
+        }
+        private void LoadDefault()
+        {
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                
+            }
         }
 
-        
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
