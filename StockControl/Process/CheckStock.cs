@@ -7,6 +7,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Linq;
 using Microsoft.VisualBasic.FileIO;
+using System.Globalization;
+
 namespace StockControl
 {
     public partial class CheckStock : Telerik.WinControls.UI.RadRibbonForm
@@ -94,11 +96,9 @@ namespace StockControl
                     radGridView1.DataSource = db.tb_CheckStockLists.Where(c => c.CheckNo == txtCheckNo.Text).ToList();
                     foreach (var x in radGridView1.Rows)
                     {
-
                         ck += 1;
                         x.Cells["No"].Value = ck;
                     }
-
                 }
             }
             catch { }
@@ -125,60 +125,54 @@ namespace StockControl
         private bool AddUnit()
         {
             bool ck = false;
-            //int C = 0;
-            //try
-            //{
+            int C = 0;
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                radGridView1.EndEdit();
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    foreach (var g in radGridView1.Rows)
+                    {
+                        if (!Convert.ToString(g.Cells["Code"].Value).Equals("") && dbClss.TBo(g.Cells["C"].Value))
+                        {
+                            C += 1;
+                            var h = (from ix in db.tb_CheckStockLists
+                                         where ix.CheckNo == txtCheckNo.Text.Trim()
+                                         && ix.Code == dbClss.TSt(g.Cells["Code"].Value)
+                                         && ix.id == dbClss.TInt(g.Cells["id"].Value)
+                                         && ix.Status != "Cancel"
+                                         select ix).ToList();
+                            if (h.Count > 0)
+                            {
+                                var hh = (from ix in db.tb_CheckStockLists
+                                          where ix.CheckNo == txtCheckNo.Text.Trim()
+                                          && ix.Code == dbClss.TSt(g.Cells["Code"].Value)
+                                          && ix.id == dbClss.TInt(g.Cells["id"].Value)
+                                          && ix.Status != "Cancel"
+                                          select ix).First();
+                                //unit1.Status = "";
+                                //hh.CheckDate = Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"));
+                                //hh.CreateBy = dbClss.UserID;
+                                hh.InputQty = dbClss.TDe(g.Cells["InputQty"].Value);
+                                hh.Remark = dbClss.TSt(g.Cells["Remark"].Value);
+           
+                                db.SubmitChanges();
+                                dbClss.AddHistory(this.Name, "แก้ไข", "Update CheckStock [" + hh.CheckNo +" จำนวน Input Qty" +dbClss.TDe(g.Cells["InputQty"].Value).ToString() + "]", "");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                dbClss.AddError(this.Name, ex.Message, this.Name);
+                this.Cursor = Cursors.Default;
+            }
 
-
-            //    radGridView1.EndEdit();
-            //    using (DataClasses1DataContext db = new DataClasses1DataContext())
-            //    {
-            //        foreach (var g in radGridView1.Rows)
-            //        {
-            //            if (!Convert.ToString(g.Cells["UnitCode"].Value).Equals(""))
-            //            {
-            //                if (Convert.ToString(g.Cells["dgvC"].Value).Equals("T"))
-            //                {
-                               
-            //                    if (Convert.ToString(g.Cells["dgvCodeTemp"].Value).Equals(""))
-            //                    {
-            //                       // MessageBox.Show("11");
-                                    
-            //                        tb_Unit u = new tb_Unit();
-            //                        u.UnitCode = Convert.ToString(g.Cells["UnitCode"].Value);
-            //                        u.UnitActive = Convert.ToBoolean(g.Cells["UnitActive"].Value);
-            //                        u.UnitDetail= Convert.ToString(g.Cells["UnitDetail"].Value);
-            //                        db.tb_Units.InsertOnSubmit(u);
-            //                        db.SubmitChanges();
-            //                        C += 1;
-            //                        dbClss.AddHistory(this.Name, "เพิ่ม", "Insert Unit Code [" + u.UnitCode+"]","");
-            //                    }
-            //                    else
-            //                    {
-                                   
-            //                        var unit1 = (from ix in db.tb_Units
-            //                                     where ix.UnitCode == Convert.ToString(g.Cells["dgvCodeTemp"].Value)
-            //                                     select ix).First();
-            //                           unit1.UnitDetail = Convert.ToString(g.Cells["UnitDetail"].Value);
-            //                           unit1.UnitActive = Convert.ToBoolean(g.Cells["UnitActive"].Value);
-                                    
-            //                        C += 1;
-
-            //                        db.SubmitChanges();
-            //                        dbClss.AddHistory(this.Name, "แก้ไข", "Update Unit Code [" + unit1.UnitCode+"]","");
-
-            //                    }
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
-            //catch (Exception ex) { MessageBox.Show(ex.Message);
-            //    dbClss.AddError("AddUnit", ex.Message, this.Name);
-            //}
-
-            //if (C > 0)
-            //    MessageBox.Show("บันทึกสำเร็จ!");
+            if (C > 0)
+                MessageBox.Show("บันทึกสำเร็จ!");
 
             return ck;
         }
@@ -307,12 +301,12 @@ namespace StockControl
         {
             try
             {
-                //radGridView1.Rows[e.RowIndex].Cells["dgvC"].Value = "T";
+                radGridView1.Rows[e.RowIndex].Cells["C"].Value = true;
                 //string check1 = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["UnitCode"].Value);
                 //string TM= Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["dgvCodeTemp"].Value);
                 //if (!check1.Trim().Equals("") && TM.Equals(""))
                 //{
-                    
+
                 //    if (!CheckDuplicate(check1.Trim()))
                 //    {
                 //        MessageBox.Show("ข้อมูล รหัสหน่วย ซ้ำ");
@@ -321,7 +315,8 @@ namespace StockControl
 
                 //    }
                 //}
-        
+
+
 
             }
             catch(Exception ex) { }
@@ -505,7 +500,15 @@ namespace StockControl
 
         private void radButtonElement1_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (MessageBox.Show("ต้องการบันทึก ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    AddUnit();
+                    DataLoad();
+                }
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void txtCheckNo_KeyPress(object sender, KeyPressEventArgs e)
@@ -514,6 +517,61 @@ namespace StockControl
             {
                 DataLoad();
             }
+        }
+
+        private void radButtonElement2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("ต้องการ Compare ใช่หรือไม่?", "Compare", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Compare();
+                    DataLoad();
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+        private void Compare()
+        {
+            try
+            {
+                int C = 0;
+                this.Cursor = Cursors.WaitCursor;
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+
+                    db.sp_003_Compare_CheckStock(txtCheckNo.Text);
+
+                    //var h = (from ix in db.tb_CheckStockLists
+                    //         where ix.CheckNo == txtCheckNo.Text.Trim()
+                    //         //&& ix.Code == dbClss.TSt(g.Cells["Code"].Value)
+                    //         //&& ix.id == dbClss.TInt(g.Cells["id"].Value)
+                    //         && ix.Status != "Cancel"
+                    //         select ix).ToList();
+                    //if (h.Count > 0)
+                    //{
+                    //    foreach (var gg in h)
+                    //    {
+                    //        C += 1;
+                    //        var hh = (from ix in db.tb_CheckStockLists
+                    //                  where ix.CheckNo == txtCheckNo.Text.Trim()
+                    //                  && ix.Code == dbClss.TSt(gg.Code)
+                    //                  && ix.id == dbClss.TInt(gg.id)
+                    //                  && ix.Status != "Cancel"
+                    //                  select ix).First();
+
+                    //        hh.Diff = dbClss.TDe(hh.Quantity) - dbClss.TDe(hh.InputQty);
+                    //        db.SubmitChanges();
+                    //        //dbClss.AddHistory(this.Name, "แก้ไข", "Update CheckStock [" + hh.CheckNo + " จำนวน Input Qty" + dbClss.TDe(g.Cells["InputQty"].Value).ToString() + "]", "");
+                    //    }
+                    //}
+
+                    if (C > 0)
+                        MessageBox.Show("Compare complete.");
+                }
+            }
+            catch (Exception ex) { dbClss.AddError(this.Name, ex.Message, this.Name); }
+            finally { this.Cursor = Cursors.Default; }
         }
     }
 }

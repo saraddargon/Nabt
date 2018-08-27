@@ -37,9 +37,13 @@
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn5 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.ConditionalFormattingObject conditionalFormattingObject1 = new Telerik.WinControls.UI.ConditionalFormattingObject();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewDecimalColumn gridViewDecimalColumn1 = new Telerik.WinControls.UI.GridViewDecimalColumn();
+            Telerik.WinControls.UI.ConditionalFormattingObject conditionalFormattingObject2 = new Telerik.WinControls.UI.ConditionalFormattingObject();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn9 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn10 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn1 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
@@ -192,6 +196,7 @@
             this.radButtonElement2.Name = "radButtonElement2";
             this.radButtonElement2.Text = "Compare";
             this.radButtonElement2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.radButtonElement2.Click += new System.EventHandler(this.radButtonElement2_Click);
             // 
             // radRibbonBarGroup7
             // 
@@ -414,10 +419,12 @@
             gridViewTextBoxColumn3.Name = "ItemName";
             gridViewTextBoxColumn3.ReadOnly = true;
             gridViewTextBoxColumn3.Width = 180;
+            gridViewTextBoxColumn4.EnableExpressionEditor = false;
             gridViewTextBoxColumn4.FieldName = "Type";
             gridViewTextBoxColumn4.HeaderText = "Type";
             gridViewTextBoxColumn4.Name = "Type";
             gridViewTextBoxColumn4.ReadOnly = true;
+            gridViewTextBoxColumn4.Width = 97;
             gridViewTextBoxColumn5.EnableExpressionEditor = false;
             gridViewTextBoxColumn5.FieldName = "Location";
             gridViewTextBoxColumn5.HeaderText = "Location";
@@ -430,6 +437,16 @@
             gridViewTextBoxColumn6.Name = "Status";
             gridViewTextBoxColumn6.ReadOnly = true;
             gridViewTextBoxColumn6.Width = 96;
+            conditionalFormattingObject1.CellBackColor = System.Drawing.Color.Honeydew;
+            conditionalFormattingObject1.CellFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            conditionalFormattingObject1.CellForeColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject1.ConditionType = Telerik.WinControls.UI.ConditionTypes.NotEqual;
+            conditionalFormattingObject1.Name = "NewCondition";
+            conditionalFormattingObject1.RowBackColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject1.RowFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            conditionalFormattingObject1.RowForeColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject1.TValue1 = "\"\"";
+            gridViewTextBoxColumn7.ConditionalFormattingObjectList.Add(conditionalFormattingObject1);
             gridViewTextBoxColumn7.EnableExpressionEditor = false;
             gridViewTextBoxColumn7.FieldName = "Remark";
             gridViewTextBoxColumn7.HeaderText = "Remark";
@@ -441,18 +458,41 @@
             gridViewTextBoxColumn8.Name = "Quantity";
             gridViewTextBoxColumn8.ReadOnly = true;
             gridViewTextBoxColumn8.Width = 91;
+            conditionalFormattingObject2.CellBackColor = System.Drawing.Color.Honeydew;
+            conditionalFormattingObject2.CellFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            conditionalFormattingObject2.CellForeColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject2.ConditionType = Telerik.WinControls.UI.ConditionTypes.NotEqual;
+            conditionalFormattingObject2.Name = "NewCondition";
+            conditionalFormattingObject2.RowBackColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject2.RowFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            conditionalFormattingObject2.RowForeColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject2.TValue1 = "\"\"";
+            gridViewDecimalColumn1.ConditionalFormattingObjectList.Add(conditionalFormattingObject2);
+            gridViewDecimalColumn1.EnableExpressionEditor = false;
+            gridViewDecimalColumn1.FieldName = "InputQty";
+            gridViewDecimalColumn1.FormatString = "{0:N2}";
+            gridViewDecimalColumn1.HeaderText = "Input Q\'ty";
+            gridViewDecimalColumn1.Name = "InputQty";
+            gridViewDecimalColumn1.Width = 90;
             gridViewTextBoxColumn9.EnableExpressionEditor = false;
-            gridViewTextBoxColumn9.FieldName = "InputQty";
-            gridViewTextBoxColumn9.HeaderText = "InputQty";
-            gridViewTextBoxColumn9.Name = "InputQty";
-            gridViewTextBoxColumn9.Width = 100;
+            gridViewTextBoxColumn9.FieldName = "Diff";
+            gridViewTextBoxColumn9.HeaderText = "Diff";
+            gridViewTextBoxColumn9.Name = "Diff";
+            gridViewTextBoxColumn9.ReadOnly = true;
+            gridViewTextBoxColumn9.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            gridViewTextBoxColumn9.Width = 84;
             gridViewTextBoxColumn10.EnableExpressionEditor = false;
-            gridViewTextBoxColumn10.FieldName = "Diff";
-            gridViewTextBoxColumn10.HeaderText = "Diff";
-            gridViewTextBoxColumn10.Name = "diff";
+            gridViewTextBoxColumn10.FieldName = "id";
+            gridViewTextBoxColumn10.HeaderText = "id";
+            gridViewTextBoxColumn10.IsVisible = false;
+            gridViewTextBoxColumn10.Name = "id";
             gridViewTextBoxColumn10.ReadOnly = true;
-            gridViewTextBoxColumn10.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            gridViewTextBoxColumn10.Width = 84;
+            gridViewCheckBoxColumn1.EnableExpressionEditor = false;
+            gridViewCheckBoxColumn1.FieldName = "C";
+            gridViewCheckBoxColumn1.HeaderText = "C";
+            gridViewCheckBoxColumn1.IsVisible = false;
+            gridViewCheckBoxColumn1.MinWidth = 20;
+            gridViewCheckBoxColumn1.Name = "C";
             this.radGridView1.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
             gridViewTextBoxColumn1,
             gridViewTextBoxColumn2,
@@ -462,12 +502,13 @@
             gridViewTextBoxColumn6,
             gridViewTextBoxColumn7,
             gridViewTextBoxColumn8,
+            gridViewDecimalColumn1,
             gridViewTextBoxColumn9,
-            gridViewTextBoxColumn10});
+            gridViewTextBoxColumn10,
+            gridViewCheckBoxColumn1});
             this.radGridView1.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
             this.radGridView1.MasterTemplate.ViewDefinition = tableViewDefinition1;
             this.radGridView1.Name = "radGridView1";
-            this.radGridView1.ReadOnly = true;
             this.radGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.radGridView1.ShowGroupPanel = false;
             this.radGridView1.Size = new System.Drawing.Size(895, 358);
