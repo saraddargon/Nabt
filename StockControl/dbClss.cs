@@ -19,7 +19,7 @@ namespace StockControl
         //MessageBox.Show(ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
         //if (MessageBox.Show("คุณต้องการลบหรือไม่ ?", "ลบรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
 
-        public static string versioin = "v 1.0";
+        public static string versioin = "v 1.0.0";
         public static string UserID = "";
         public static string UserName = "";
         public static Telerik.WinControls.UI.RadRibbonForm CreateForm(string form)

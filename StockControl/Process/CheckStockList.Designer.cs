@@ -371,6 +371,7 @@
             this.dgvData.ThemeName = "Office2010Blue";
             this.dgvData.CellEndEdit += new Telerik.WinControls.UI.GridViewCellEventHandler(this.radGridView1_CellEndEdit);
             this.dgvData.CellClick += new Telerik.WinControls.UI.GridViewCellEventHandler(this.radGridView1_CellClick);
+            this.dgvData.CellDoubleClick += new Telerik.WinControls.UI.GridViewCellEventHandler(this.dgvData_CellDoubleClick);
             this.dgvData.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.radGridView1_PreviewKeyDown);
             // 
             // radRibbonBarButtonGroup2

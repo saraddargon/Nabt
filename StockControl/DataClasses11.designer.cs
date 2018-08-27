@@ -54,9 +54,6 @@ namespace StockControl
     partial void Inserttb_ExportList(tb_ExportList instance);
     partial void Updatetb_ExportList(tb_ExportList instance);
     partial void Deletetb_ExportList(tb_ExportList instance);
-    partial void Inserttb_CheckStock(tb_CheckStock instance);
-    partial void Updatetb_CheckStock(tb_CheckStock instance);
-    partial void Deletetb_CheckStock(tb_CheckStock instance);
     partial void Inserttb_GuideLineLot(tb_GuideLineLot instance);
     partial void Updatetb_GuideLineLot(tb_GuideLineLot instance);
     partial void Deletetb_GuideLineLot(tb_GuideLineLot instance);
@@ -87,6 +84,9 @@ namespace StockControl
     partial void Inserttb_UserPermission(tb_UserPermission instance);
     partial void Updatetb_UserPermission(tb_UserPermission instance);
     partial void Deletetb_UserPermission(tb_UserPermission instance);
+    partial void Inserttb_CheckStock(tb_CheckStock instance);
+    partial void Updatetb_CheckStock(tb_CheckStock instance);
+    partial void Deletetb_CheckStock(tb_CheckStock instance);
     partial void Inserttb_CheckStockList(tb_CheckStockList instance);
     partial void Updatetb_CheckStockList(tb_CheckStockList instance);
     partial void Deletetb_CheckStockList(tb_CheckStockList instance);
@@ -218,14 +218,6 @@ namespace StockControl
 			}
 		}
 		
-		public System.Data.Linq.Table<tb_CheckStock> tb_CheckStocks
-		{
-			get
-			{
-				return this.GetTable<tb_CheckStock>();
-			}
-		}
-		
 		public System.Data.Linq.Table<tb_GuideLineLot> tb_GuideLineLots
 		{
 			get
@@ -306,6 +298,14 @@ namespace StockControl
 			}
 		}
 		
+		public System.Data.Linq.Table<tb_CheckStock> tb_CheckStocks
+		{
+			get
+			{
+				return this.GetTable<tb_CheckStock>();
+			}
+		}
+		
 		public System.Data.Linq.Table<tb_CheckStockList> tb_CheckStockLists
 		{
 			get
@@ -354,13 +354,6 @@ namespace StockControl
 			return ((ISingleResult<sp_SC_001_SelectScreenResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SC_002_SelectListQueue")]
-		public ISingleResult<sp_SC_002_SelectListQueueResult> sp_SC_002_SelectListQueue()
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<sp_SC_002_SelectListQueueResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_001_TPIC_SelectItem")]
 		public ISingleResult<sp_001_TPIC_SelectItemResult> sp_001_TPIC_SelectItem([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Code", DbType="NVarChar(50)")] string code)
 		{
@@ -380,6 +373,13 @@ namespace StockControl
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), controlNo, action);
 			return ((ISingleResult<Sp_GetNameControl_001Result>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SC_002_SelectListQueue")]
+		public ISingleResult<sp_SC_002_SelectListQueueResult> sp_SC_002_SelectListQueue()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<sp_SC_002_SelectListQueueResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -2579,164 +2579,6 @@ namespace StockControl
 				{
 					this._id = value;
 				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_CheckStock")]
-	public partial class tb_CheckStock : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _CheckNo;
-		
-		private string _Status;
-		
-		private System.Nullable<System.DateTime> _CheckDate;
-		
-		private string _CreateBy;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnCheckNoChanging(string value);
-    partial void OnCheckNoChanged();
-    partial void OnStatusChanging(string value);
-    partial void OnStatusChanged();
-    partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCheckDateChanged();
-    partial void OnCreateByChanging(string value);
-    partial void OnCreateByChanged();
-    #endregion
-		
-		public tb_CheckStock()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckNo", DbType="NVarChar(50)")]
-		public string CheckNo
-		{
-			get
-			{
-				return this._CheckNo;
-			}
-			set
-			{
-				if ((this._CheckNo != value))
-				{
-					this.OnCheckNoChanging(value);
-					this.SendPropertyChanging();
-					this._CheckNo = value;
-					this.SendPropertyChanged("CheckNo");
-					this.OnCheckNoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NVarChar(50)")]
-		public string Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this.OnStatusChanging(value);
-					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CheckDate
-		{
-			get
-			{
-				return this._CheckDate;
-			}
-			set
-			{
-				if ((this._CheckDate != value))
-				{
-					this.OnCheckDateChanging(value);
-					this.SendPropertyChanging();
-					this._CheckDate = value;
-					this.SendPropertyChanged("CheckDate");
-					this.OnCheckDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateBy", DbType="NVarChar(50)")]
-		public string CreateBy
-		{
-			get
-			{
-				return this._CreateBy;
-			}
-			set
-			{
-				if ((this._CreateBy != value))
-				{
-					this.OnCreateByChanging(value);
-					this.SendPropertyChanging();
-					this._CreateBy = value;
-					this.SendPropertyChanged("CreateBy");
-					this.OnCreateByChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -5449,6 +5291,164 @@ namespace StockControl
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_CheckStock")]
+	public partial class tb_CheckStock : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _CheckNo;
+		
+		private string _Status;
+		
+		private System.Nullable<System.DateTime> _CheckDate;
+		
+		private string _CreateBy;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnCheckNoChanging(string value);
+    partial void OnCheckNoChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
+    partial void OnCheckDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCheckDateChanged();
+    partial void OnCreateByChanging(string value);
+    partial void OnCreateByChanged();
+    #endregion
+		
+		public tb_CheckStock()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckNo", DbType="NVarChar(50)")]
+		public string CheckNo
+		{
+			get
+			{
+				return this._CheckNo;
+			}
+			set
+			{
+				if ((this._CheckNo != value))
+				{
+					this.OnCheckNoChanging(value);
+					this.SendPropertyChanging();
+					this._CheckNo = value;
+					this.SendPropertyChanged("CheckNo");
+					this.OnCheckNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NVarChar(50)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CheckDate
+		{
+			get
+			{
+				return this._CheckDate;
+			}
+			set
+			{
+				if ((this._CheckDate != value))
+				{
+					this.OnCheckDateChanging(value);
+					this.SendPropertyChanging();
+					this._CheckDate = value;
+					this.SendPropertyChanged("CheckDate");
+					this.OnCheckDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateBy", DbType="NVarChar(50)")]
+		public string CreateBy
+		{
+			get
+			{
+				return this._CreateBy;
+			}
+			set
+			{
+				if ((this._CreateBy != value))
+				{
+					this.OnCreateByChanging(value);
+					this.SendPropertyChanging();
+					this._CreateBy = value;
+					this.SendPropertyChanged("CreateBy");
+					this.OnCreateByChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_CheckStockList")]
 	public partial class tb_CheckStockList : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -6176,176 +6176,6 @@ namespace StockControl
 				if ((this._ID != value))
 				{
 					this._ID = value;
-				}
-			}
-		}
-	}
-	
-	public partial class sp_SC_002_SelectListQueueResult
-	{
-		
-		private int _id;
-		
-		private string _ListType;
-		
-		private string _ListApp;
-		
-		private string _ListName;
-		
-		private string _ListDescription;
-		
-		private string _Status;
-		
-		private string _ListRefNo;
-		
-		private System.Nullable<System.DateTime> _Createdate;
-		
-		private string _CreateBy;
-		
-		public sp_SC_002_SelectListQueueResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this._id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListType", DbType="NVarChar(50)")]
-		public string ListType
-		{
-			get
-			{
-				return this._ListType;
-			}
-			set
-			{
-				if ((this._ListType != value))
-				{
-					this._ListType = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListApp", DbType="NVarChar(50)")]
-		public string ListApp
-		{
-			get
-			{
-				return this._ListApp;
-			}
-			set
-			{
-				if ((this._ListApp != value))
-				{
-					this._ListApp = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListName", DbType="NVarChar(100)")]
-		public string ListName
-		{
-			get
-			{
-				return this._ListName;
-			}
-			set
-			{
-				if ((this._ListName != value))
-				{
-					this._ListName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListDescription", DbType="NVarChar(50)")]
-		public string ListDescription
-		{
-			get
-			{
-				return this._ListDescription;
-			}
-			set
-			{
-				if ((this._ListDescription != value))
-				{
-					this._ListDescription = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NVarChar(50)")]
-		public string Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this._Status = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListRefNo", DbType="NVarChar(50)")]
-		public string ListRefNo
-		{
-			get
-			{
-				return this._ListRefNo;
-			}
-			set
-			{
-				if ((this._ListRefNo != value))
-				{
-					this._ListRefNo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Createdate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Createdate
-		{
-			get
-			{
-				return this._Createdate;
-			}
-			set
-			{
-				if ((this._Createdate != value))
-				{
-					this._Createdate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateBy", DbType="NVarChar(50)")]
-		public string CreateBy
-		{
-			get
-			{
-				return this._CreateBy;
-			}
-			set
-			{
-				if ((this._CreateBy != value))
-				{
-					this._CreateBy = value;
 				}
 			}
 		}
@@ -7180,6 +7010,176 @@ namespace StockControl
 				if ((this._GetNo != value))
 				{
 					this._GetNo = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_SC_002_SelectListQueueResult
+	{
+		
+		private int _id;
+		
+		private string _ListType;
+		
+		private string _ListApp;
+		
+		private string _ListName;
+		
+		private string _ListDescription;
+		
+		private string _Status;
+		
+		private string _ListRefNo;
+		
+		private System.Nullable<System.DateTime> _Createdate;
+		
+		private string _CreateBy;
+		
+		public sp_SC_002_SelectListQueueResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListType", DbType="NVarChar(50)")]
+		public string ListType
+		{
+			get
+			{
+				return this._ListType;
+			}
+			set
+			{
+				if ((this._ListType != value))
+				{
+					this._ListType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListApp", DbType="NVarChar(50)")]
+		public string ListApp
+		{
+			get
+			{
+				return this._ListApp;
+			}
+			set
+			{
+				if ((this._ListApp != value))
+				{
+					this._ListApp = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListName", DbType="NVarChar(100)")]
+		public string ListName
+		{
+			get
+			{
+				return this._ListName;
+			}
+			set
+			{
+				if ((this._ListName != value))
+				{
+					this._ListName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListDescription", DbType="NVarChar(50)")]
+		public string ListDescription
+		{
+			get
+			{
+				return this._ListDescription;
+			}
+			set
+			{
+				if ((this._ListDescription != value))
+				{
+					this._ListDescription = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NVarChar(50)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this._Status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListRefNo", DbType="NVarChar(50)")]
+		public string ListRefNo
+		{
+			get
+			{
+				return this._ListRefNo;
+			}
+			set
+			{
+				if ((this._ListRefNo != value))
+				{
+					this._ListRefNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Createdate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Createdate
+		{
+			get
+			{
+				return this._Createdate;
+			}
+			set
+			{
+				if ((this._Createdate != value))
+				{
+					this._Createdate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateBy", DbType="NVarChar(50)")]
+		public string CreateBy
+		{
+			get
+			{
+				return this._CreateBy;
+			}
+			set
+			{
+				if ((this._CreateBy != value))
+				{
+					this._CreateBy = value;
 				}
 			}
 		}

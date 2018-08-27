@@ -203,6 +203,8 @@ namespace StockControl
                             if (cd != null)
                             {
                                 db.tb_CheckStocks.DeleteOnSubmit(cd);
+                                var DeleteStockList = db.tb_CheckStockLists.Where(s => s.CheckNo == CheckNo).ToList();
+                                db.tb_CheckStockLists.DeleteAllOnSubmit(DeleteStockList);
                                 db.SubmitChanges();
                                 C = 1;
                                 dbClss.AddHistory(this.Name, "ลบรายการ", "Delete Check No [" + CheckNo + "]", "");
@@ -590,6 +592,16 @@ namespace StockControl
                 //ReportCheckStock.rpt
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void dgvData_CellDoubleClick(object sender, GridViewCellEventArgs e)
+        {
+            if (row >= 0)
+            {
+                string ckNo = dgvData.Rows[row].Cells["CheckNo"].Value.ToString();
+                CheckStock ck = new CheckStock(ckNo);
+                ck.ShowDialog();
+            }
         }
     }
 }

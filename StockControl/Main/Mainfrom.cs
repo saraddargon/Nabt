@@ -255,9 +255,9 @@ namespace StockControl
 
         private void radMenuItem19_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("ต้องการที่จะ Update หรือไม่ ?", "Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("ต้องการที่จะ Update (FTP) หรือไม่ ?", "Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                System.Diagnostics.Process.Start("AutoUpdate.exe");
+                System.Diagnostics.Process.Start("AutoUpdateFTP.exe");
                 Application.Exit();
             }
         }

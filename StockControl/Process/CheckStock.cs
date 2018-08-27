@@ -15,6 +15,11 @@ namespace StockControl
         {
             InitializeComponent();
         }
+        public CheckStock(string CheckNo1)
+        {
+            InitializeComponent();
+            txtCheckNo.Text = CheckNo1;
+        }
 
         //private int RowView = 50;
         //private int ColView = 10;
@@ -48,7 +53,7 @@ namespace StockControl
             RMenu6.Click += RMenu6_Click;
            // radGridView1.ReadOnly = true;
             radGridView1.AutoGenerateColumns = false;
-            GETDTRow();
+            //GETDTRow();
            
             
             DataLoad();
@@ -79,31 +84,28 @@ namespace StockControl
 
         private void DataLoad()
         {
-            
-            int ck = 0;
-            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            try
             {
-
-                radGridView1.DataSource = db.tb_CheckStockLists.ToList();
-                foreach (var x in radGridView1.Rows)
+                this.Cursor = Cursors.WaitCursor;
+                int ck = 0;
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
 
-                   // x.Cells["dgvCodeTemp"].Value = x.Cells["UnitCode"].Value.ToString();
-                  //  x.Cells["UnitCode"].ReadOnly = true;
-                    //if (row >= 0 && row == ck && radGridView1.Rows.Count > 0)
-                    //{
+                    radGridView1.DataSource = db.tb_CheckStockLists.Where(c => c.CheckNo == txtCheckNo.Text).ToList();
+                    foreach (var x in radGridView1.Rows)
+                    {
 
-                    //    x.ViewInfo.CurrentRow = x;
+                        ck += 1;
+                        x.Cells["No"].Value = ck;
+                    }
 
-                    //}
-                    ck += 1;
-                    x.Cells["No"].Value = ck;
                 }
-
             }
+            catch { }
+            this.Cursor = Cursors.Default;
 
 
-            
+
         }
         private bool CheckDuplicate(string code)
         {
@@ -504,6 +506,14 @@ namespace StockControl
         private void radButtonElement1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtCheckNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar==13)
+            {
+                DataLoad();
+            }
         }
     }
 }

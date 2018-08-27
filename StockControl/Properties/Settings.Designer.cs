@@ -26,18 +26,8 @@ namespace StockControl.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=XTH-TOO\\SQLEXPRESS;Initial Catalog=dbBarcodeNab;Persist Security Info" +
-            "=True;User ID=z;Password=Abc017146")]
-        public string dbBarcodeNabConnectionString {
-            get {
-                return ((string)(this["dbBarcodeNabConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=1.179.133.222,2018;Initial Catalog=dbBarcodeNab;User ID=sa")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=1.179.133.222,2018;Initial Catalog=dbBarcodeNab;User ID=sa;Password=;" +
+            "")]
         public string dbBarcodeNabConnectionString1 {
             get {
                 return ((string)(this["dbBarcodeNabConnectionString1"]));

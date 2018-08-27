@@ -133,15 +133,6 @@
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.tb_CheckStock" Member="tb_CheckStocks">
-    <Type Name="tb_CheckStock">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CheckNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Status" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="CheckDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.tb_GuideLineLot" Member="tb_GuideLineLots">
     <Type Name="tb_GuideLineLot">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -279,6 +270,15 @@
       <Column Name="ScreenName" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.tb_CheckStock" Member="tb_CheckStocks">
+    <Type Name="tb_CheckStock">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CheckNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CheckDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.tb_CheckStockList" Member="tb_CheckStockLists">
     <Type Name="tb_CheckStockList">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -333,19 +333,6 @@
       <Column Name="Layout" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="TextNode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.sp_SC_002_SelectListQueue" Method="sp_SC_002_SelectListQueue">
-    <ElementType Name="sp_SC_002_SelectListQueueResult">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ListType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ListApp" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ListName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="ListDescription" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Status" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ListRefNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Createdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </ElementType>
   </Function>
   <Function Name="dbo.sp_001_TPIC_SelectItem" Method="sp_001_TPIC_SelectItem">
@@ -412,6 +399,19 @@
     <Parameter Name="Action" Parameter="action" Type="System.Int32" DbType="Int" />
     <ElementType Name="Sp_GetNameControl_001Result">
       <Column Name="GetNo" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_SC_002_SelectListQueue" Method="sp_SC_002_SelectListQueue">
+    <ElementType Name="sp_SC_002_SelectListQueueResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ListType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ListApp" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ListName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ListDescription" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ListRefNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Createdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>
