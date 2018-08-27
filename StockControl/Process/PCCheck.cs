@@ -113,7 +113,7 @@ namespace StockControl
                     }
                     txtScanCode.Text = "";
                 }
-            }catch(Exception ex) { MessageBox.Show(ex.Message); }
+            }catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void LoadCode(string Code)
         {
@@ -234,7 +234,23 @@ namespace StockControl
 
         private void radButtonElement1_Click(object sender, EventArgs e)
         {
-
+            if (txtCheckNo.Text != "")
+            {
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    var h = (from ix in db.tb_CheckStocks
+                             where ix.CheckNo == txtCheckNo.Text.Trim()
+                             && ix.Status == "Waiting Upload"
+                             select ix).ToList();
+                    if (h.Count > 0)
+                    {
+                        txtScanCode.Enabled = true;
+                        txtCheckNo.Enabled = false;
+                    }
+                    else
+                        MessageBox.Show("เลข Check No สถานะไม่ถูกต้อง !");
+                }
+            }
         }
 
         private void radButtonElement3_Click(object sender, EventArgs e)
