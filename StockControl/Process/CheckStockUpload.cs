@@ -424,7 +424,7 @@ namespace StockControl
                             u.StockBeforeInventory = dbClss.TDe(dr["StockBeforeInventory"]);
                             u.PhysicalInventoryValue = dbClss.TDe(dr["PhysicalInventoryValue"]);
                             u.UnitOfMeasure = dbClss.TSt(dr["UnitOfMeasure"]);
-                            u.Quantity = 0;
+                            u.Quantity = dbClss.TDe(dr["CurrentInventory"]);
                             u.InputQty = 0;
                             u.Remark = "";
                             u.Diff = 0;
