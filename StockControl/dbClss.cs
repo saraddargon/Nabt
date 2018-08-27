@@ -22,6 +22,31 @@ namespace StockControl
         public static string versioin = "v 1.0.0";
         public static string UserID = "";
         public static string UserName = "";
+        public static bool PermissionScreen(string ScreenName)
+        {
+            bool ck = false;
+            try
+            {
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    OpenForm op = db.OpenForms.Where(o => o.LinkNode == ScreenName).FirstOrDefault();
+                    if(op!=null)
+                    {
+                        tb_UserPermission up = db.tb_UserPermissions.Where(u => u.ScreenName == op.TextNode && u.UserID == dbClss.UserID).FirstOrDefault();
+                        if(up!=null)
+                        {
+                            ck = true;
+                        }
+                    }
+                    //TextNode
+                }
+
+            }
+            catch { }
+
+
+            return ck;
+        }
         public static Telerik.WinControls.UI.RadRibbonForm CreateForm(string form)
         {
             try

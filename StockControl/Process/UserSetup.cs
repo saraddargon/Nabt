@@ -14,7 +14,14 @@ namespace StockControl
     {
         public UserSetup()
         {
+            this.Name = "UserSetup";
+            if (!dbClss.PermissionScreen(this.Name))
+            {
+                MessageBox.Show("Access denied", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
             InitializeComponent();
+            
         }
 
         //private int RowView = 50;

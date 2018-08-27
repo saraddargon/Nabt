@@ -13,6 +13,12 @@ namespace StockControl
     {
         public ListItem()
         {
+            this.Name = "ListItem";
+            if (!dbClss.PermissionScreen(this.Name))
+            {
+                MessageBox.Show("Access denied", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
             InitializeComponent();
         }
 

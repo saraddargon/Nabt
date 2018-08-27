@@ -13,6 +13,12 @@ namespace StockControl
     {
         public LocationWH()
         {
+            this.Name = "LocationWH";
+            if (!dbClss.PermissionScreen(this.Name))
+            {
+                MessageBox.Show("Access denied", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
             InitializeComponent();
         }
 
