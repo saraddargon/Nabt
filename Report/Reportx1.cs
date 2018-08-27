@@ -68,6 +68,7 @@ namespace Report
                     SetDataSourceConnection(CRRReport.rptSourceX);
                     SetParameter(CRRReport.rptSourceX);
                     crystalReportViewer1.ReportSource = CRRReport.rptSourceX;
+                    crystalReportViewer1.Refresh();
                     crystalReportViewer1.Zoom(100);
                 }
                 else
