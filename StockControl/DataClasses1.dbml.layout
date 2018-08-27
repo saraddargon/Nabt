@@ -146,11 +146,5 @@
         <elementListCompartment Id="ade1c93e-3f1e-4c90-a407-69fcfdeae3b6" absoluteBounds="5.14, 1.96, 1.9700000000000002, 4.095418294270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="23614195-6cd8-4ed5-b353-905ee1a5f388" isExpanded="false" absoluteBounds="5.25, 5, 2, 0.45">
-      <DataClassMoniker Name="/DataClasses1DataContext/tb_CheckStockTempCheck" />
-      <nestedChildShapes>
-        <elementListCompartment Id="504f0a8e-56cc-47ad-a96f-6ce0555e8cf8" absoluteBounds="5.265, 5.46, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

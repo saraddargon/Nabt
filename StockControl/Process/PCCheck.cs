@@ -8,7 +8,6 @@ using System.Windows.Forms;
 using System.Linq;
 using Microsoft.VisualBasic.FileIO;
 using Telerik.WinControls.UI;
-using System.Globalization;
 
 namespace StockControl
 {
@@ -137,7 +136,6 @@ namespace StockControl
                 string Type = "";
                 decimal Quantity = 0;
                 int id = 0;
-                string Location = "";
 
                 int i = Code.IndexOf('/');
                 if (i > 0)
@@ -157,10 +155,10 @@ namespace StockControl
                     ItemName = dbClss.TSt(h.FirstOrDefault().PartName);
                     Type = dbClss.TSt(h.FirstOrDefault().Type);
                     id = dbClss.TInt(h.FirstOrDefault().id);
-                    Location = dbClss.TSt(h.FirstOrDefault().Location);
+
                     if (!duplicate(CodeNo))
                     {
-                        Add_Item((dgvData.Rows.Count() + 1).ToString(), Status, CodeNo, ItemName, Type, Quantity, id, Location);
+                        Add_Item((dgvData.Rows.Count() + 1).ToString(), Status, CodeNo, ItemName, Type, Quantity, id);
                         Count_Item();
                     }
                 }
@@ -178,7 +176,7 @@ namespace StockControl
             return re;
         }
         private void Add_Item(string No, string Status, string CodeNo, string ItemName
-           , string Type, decimal Quantity,int id,string Location)
+           , string Type, decimal Quantity,int id)
         {
             try
             {
@@ -198,7 +196,6 @@ namespace StockControl
                 ee.Cells["Type"].Value = Type;
                 ee.Cells["Quantity"].Value = Quantity;
                 ee.Cells["id"].Value = id;
-                 ee.Cells["Location"].Value = Location;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); dbClss.AddError(this.Name, ex.Message + " : Add_Item", this.Name); }
 
@@ -237,98 +234,8 @@ namespace StockControl
 
         private void radButtonElement1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (txtCheckNo.Text == "")
-                {
-                    MessageBox.Show("Check No. is null !");
-                    return;
-                }
-                if (ddlLocation.Text =="")
-                {
-                    MessageBox.Show("Location is null !");
-                    return;
-                }
-                if (txtCheckBy.Text == "")
-                {
-                    MessageBox.Show("Check By is null !");
-                    return;
-                }
 
-                if (MessageBox.Show("ต้องการบันทึกรายการ ?", "บันทึก", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    this.Cursor = Cursors.WaitCursor;
-                    int c = 0;
-                    using (DataClasses1DataContext db = new DataClasses1DataContext())
-                    {
-                        foreach (var g in dgvData.Rows)
-                        {
-                            if (dbClss.TSt(g.Cells["Code"].Value) != "")
-                            {
-                                c += 1;
-                                var h = (from ix in db.tb_CheckStockTempChecks
-                                         where ix.CheckNo == txtCheckNo.Text.Trim()
-                                         && ix.Code == dbClss.TSt(g.Cells["Code"].Value)
-                                         && ix.Location == ddlLocation.Text
-                                         //&& ix.CheckMachine == ""
-                                         && ix.Status != "Cancel"
-                                         select ix).ToList();
-                                if (h.Count > 0)
-                                {
-                                    var hh = (from ix in db.tb_CheckStockTempChecks
-                                              where ix.CheckNo == txtCheckNo.Text.Trim()
-                                              && ix.Location == ddlLocation.Text
-                                              && ix.Code == dbClss.TSt(g.Cells["Code"].Value)
-                                               //&& ix.CheckMachine == ""
-                                               && ix.Status != "Cancel"
-                                              select ix).First();
-                                    //unit1.Status = "";
-                                    hh.CreateDate = Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"));
-                                    hh.CheckBy = dbClss.UserID;
-                                    //hh.Status = "Waiting Check";
-                                    hh.Location = ddlLocation.Text;
-                                    hh.CheckBy = txtCheckBy.Text;
-                                    hh.ItemName = dbClss.TSt(g.Cells["ItemName"].Value);
-                                    hh.Quantity = dbClss.TDe(g.Cells["Quantity"].Value);
-                                    hh.Remark = "";
-                                    hh.Package = "";
-                                    hh.Type = dbClss.TSt(g.Cells["Type"].Value);
-
-                                    db.SubmitChanges();
-                                    dbClss.AddHistory(this.Name, "แก้ไข", "PCCheck [" + hh.Code + "]", hh.CheckNo);
-                                }
-                                else
-                                {
-
-                                    tb_CheckStockTempCheck u = new tb_CheckStockTempCheck();
-                                    u.CheckNo = txtCheckNo.Text.Trim();
-                                    u.Status = "Waiting";
-                                    u.CheckMachine = "";
-                                    u.Location = ddlLocation.Text;
-                                    u.CheckBy = txtCheckBy.Text;
-                                    u.CreateDate = Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"));
-                                    u.CreateBy = dbClss.UserID;
-                                    u.Code = dbClss.TSt(g.Cells["Code"].Value);
-                                    u.ItemName = dbClss.TSt(g.Cells["ItemName"].Value);
-                                    u.Quantity = dbClss.TDe(g.Cells["Quantity"].Value);
-                                    u.Remark = "";
-                                    u.Package = "";
-                                    u.Type = dbClss.TSt(g.Cells["Type"].Value);
-
-                                    db.tb_CheckStockTempChecks.InsertOnSubmit(u);
-                                    db.SubmitChanges();
-
-                                    dbClss.AddHistory(this.Name, "เพิ่ม", "PCCheck [" + u.Code + "]", u.CheckNo);
-                                }
-                            }
-                        }
-                    }
-                    if (c > 0)
-                        MessageBox.Show("Import data Complete.");
-                }
-            }catch(Exception ex) { MessageBox.Show(ex.Message); }
-            finally { this.Cursor = Cursors.Default; }
-            }
+        }
 
         private void radButtonElement3_Click(object sender, EventArgs e)
         {
