@@ -529,6 +529,7 @@ namespace StockControl
                 else
                     break;
             }
+
         }
         public static void Set_Freeze_Column(RadGridView Grid, int index)
         {
