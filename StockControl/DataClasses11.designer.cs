@@ -6049,6 +6049,8 @@ namespace StockControl
 		
 		private string _RefNo;
 		
+		private string _SP;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -6089,6 +6091,8 @@ namespace StockControl
     partial void OnofTAGChanged();
     partial void OnRefNoChanging(string value);
     partial void OnRefNoChanged();
+    partial void OnSPChanging(string value);
+    partial void OnSPChanged();
     #endregion
 		
 		public tb_CheckStockTempCheck()
@@ -6452,6 +6456,26 @@ namespace StockControl
 					this._RefNo = value;
 					this.SendPropertyChanged("RefNo");
 					this.OnRefNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SP", DbType="NVarChar(50)")]
+		public string SP
+		{
+			get
+			{
+				return this._SP;
+			}
+			set
+			{
+				if ((this._SP != value))
+				{
+					this.OnSPChanging(value);
+					this.SendPropertyChanging();
+					this._SP = value;
+					this.SendPropertyChanged("SP");
+					this.OnSPChanged();
 				}
 			}
 		}

@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Linq;
 using Microsoft.VisualBasic.FileIO;
 using Telerik.WinControls.UI;
+using System.Globalization;
 
 namespace StockControl
 {
@@ -75,6 +76,7 @@ namespace StockControl
         {
             if (txtCheckNo.Text != "")
             {
+                txtCheckNo.Text = txtCheckNo.Text.ToUpper();
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
                     var h = (from ix in db.tb_CheckStocks
@@ -86,10 +88,13 @@ namespace StockControl
                         txtScanCode.Enabled = true;
                         txtCheckNo.Enabled = false;
                     }
-                    else
-                        MessageBox.Show("เลข Check No สถานะไม่ถูกต้อง !");
+                    //else
+                    //    MessageBox.Show("เลข Check No สถานะไม่ถูกต้อง !");
+
+                    LoadData(txtCheckNo.Text);
                 }
             }
+            
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -103,13 +108,12 @@ namespace StockControl
             {
                 if(e.KeyChar==13)
                 {                    
-                    string CodeNo = txtScanCode.Text;                   
-                    //0180100021001N/10
-                    if (CodeNo != "")
+                    string CodeNo = txtScanCode.Text;
+                    //SP/PONo/Quantity/SPN/LotNo/TAGof/ItemNo
+                    if (CodeNo != "" && txtCheckNo.Text !="" && ddlLocation.Text !="")
                     {
                         LoadCode(CodeNo);
                         
-
                     }
                     txtScanCode.Text = "";
                 }
@@ -117,52 +121,175 @@ namespace StockControl
         }
         private void LoadCode(string Code)
         {
-            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            try
             {
-                //0180100021001N/10
-
-                string Status = "";
-                string CodeNo = Code;
-
-                int index = Code.IndexOf('/');
-                if(index>0)
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    CodeNo = Code.Substring(0, index);
-                }
-                else
-                 CodeNo = Code;
+                    //SP/PONo/Quantity/SPN/LotNo/TAGof/ItemNo
 
-                string ItemName = "";
-                string Type = "";
-                decimal Quantity = 0;
-                int id = 0;
+                    string Status = "";
+                    string CodeNo = Code;
 
-                int i = Code.IndexOf('/');
-                if (i > 0)
-                {
-                    string d = Code.Substring(i + 1);
-                    Quantity = dbClss.TDe(d);
-                }
+                    //int index = Code.IndexOf('/');
+                    //if(index>0)
+                    //{
+                    //    CodeNo = Code.Substring(0, index);
+                    //}
+                    //else
+                    // CodeNo = Code;
+                    string SP = "";
+                    string PONo = "";
+                    int SPN = 0;
+                    string LotNo = "";
+                    string TAGof = "";
+                    string ItemName = "";
+                    string Type = "" ;
+                    decimal Quantity = 0;
+                    int id = 0;
+                    //int i = Code.IndexOf('/');
+                    //if (i > 0)
+                    //{
+                    //    string d = Code.Substring(i + 1);
+                    //    Quantity = dbClss.TDe(d);
+                    //}
+                    string phrase = Code;//"SP/PONo/Quantity/SPN/LotNo/TAGof/ItemNo";
+                    string[] words = phrase.Split('/');
+                    SP = dbClss.TSt(words[0]);
+                    PONo = dbClss.TSt(words[1]);
+                    Quantity = dbClss.TDe(words[2]);
+                    SPN = dbClss.TInt(words[3]);
+                    LotNo = dbClss.TSt(words[4]);
+                    TAGof = dbClss.TSt(words[5]);
+                    CodeNo = dbClss.TSt(words[6]);
 
-                var h = (from ix in db.tb_CheckStockLists
-                         where ix.CheckNo == txtCheckNo.Text.Trim()
-                         //&& ix.Location == ddlLocation.Text
-                         && ix.Code == CodeNo
-                         //&& ix.Status == "Waiting"
-                         select ix).ToList();
-                if (h.Count > 0)
-                {
-                    ItemName = dbClss.TSt(h.FirstOrDefault().PartName);
-                    Type = dbClss.TSt(h.FirstOrDefault().Type);
-                    id = dbClss.TInt(h.FirstOrDefault().id);
-
-                    if (!duplicate(CodeNo))
+                    var h = (from ix in db.tb_CheckStockLists
+                             where ix.CheckNo == txtCheckNo.Text.Trim()
+                             //&& ix.Location == ddlLocation.Text
+                             && ix.Code == CodeNo
+                             //&& ix.Status == "Waiting"
+                             select ix).ToList();
+                    if (h.Count > 0)
                     {
-                        Add_Item((dgvData.Rows.Count() + 1).ToString(), Status, CodeNo, ItemName, Type, Quantity, id);
-                        Count_Item();
+                        ItemName = dbClss.TSt(h.FirstOrDefault().PartName);
+                        Type = dbClss.TSt(h.FirstOrDefault().Type);
+                        id = dbClss.TInt(h.FirstOrDefault().id);
+
+                        InsertData(txtCheckNo.Text.ToUpper(), CodeNo.ToUpper(), ItemName, PONo, SP, Quantity, SPN, LotNo, TAGof, Type);
+                        LoadData(txtCheckNo.Text);
+                        //if (!duplicate(CodeNo))
+                        //{
+                        //    Add_Item((dgvData.Rows.Count() + 1).ToString(), Status, CodeNo, ItemName, Type, Quantity, id);
+                        //    Count_Item();
+                        //}
                     }
                 }
+            }catch(Exception ex) { MessageBox.Show(ex.Message); }
+        }
+        private void InsertData(string CheckNo,string Code,string ItemName,string PONo,string SP,decimal Quantity,int SPN,string LotNo,string TAGof,string Type)
+        {
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                var g = (from ix in db.tb_CheckStockTempChecks
+                         where ix.CheckNo.Trim() == CheckNo
+                         && ix.Status != "Cancel"
+                         //&& ix.Status != "Completed"
+                         && ix.Code == Code
+                         select ix).ToList();
+                if (g.Count > 0)  //มีรายการในระบบ
+                {
+
+                    var g1 = (from ix in db.tb_CheckStockTempChecks
+                              where ix.CheckNo.Trim() == CheckNo
+                             && ix.Status != "Cancel"
+                             && ix.Status != "Completed"
+                             && ix.Code == Code
+                              select ix).ToList();
+                    if (g1.Count > 0)
+                    {
+                        var gg = (from ix in db.tb_CheckStockTempChecks
+                                  where ix.CheckNo.Trim() == CheckNo
+                                 && ix.Status != "Cancel"
+                                 && ix.Status != "Completed"
+                                 && ix.Code == Code
+                                 && ix.id == Convert.ToInt16(g1.FirstOrDefault().id)
+                                  select ix).First();
+
+                        gg.CreateBy = dbClss.UserID;
+                        gg.CreateDate = Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"));
+                        gg.CheckMachine = "";
+                        gg.Location = ddlLocation.Text;
+                        gg.CheckBy = txtCheckBy.Text;
+                        gg.Code = Code;
+                        gg.ItemName = ItemName;
+                        gg.Quantity = Quantity;
+                        gg.Status = "Waiting";
+                        gg.Remark = "";
+                        gg.Package = "";
+                        gg.Type = Type;
+                        gg.LotNo = LotNo;
+                        gg.SNP = SPN;
+                        gg.ofTAG = TAGof;
+                        gg.RefNo = PONo;
+                        gg.SP = SP;
+                        db.SubmitChanges();
+
+                    }
+                }
+                else
+                {
+                    tb_CheckStockTempCheck u = new tb_CheckStockTempCheck();
+                    u.CheckNo = CheckNo;
+                    u.CreateBy = dbClss.UserID;
+                    u.CreateDate = Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"));
+                    u.CheckMachine = "";
+                    u.Location = ddlLocation.Text;
+                    u.CheckBy = txtCheckBy.Text;
+                    u.Code = Code;
+                    u.ItemName = ItemName;
+                    u.Quantity = Quantity;
+                    u.Status = "Waiting";
+                    u.Remark = "";
+                    u.Package = "";
+                    u.Type = Type;
+                    u.LotNo = LotNo;
+                    u.SNP = SPN;
+                    u.ofTAG = TAGof;
+                    u.RefNo = PONo;
+                    u.SP = SP;
+                    db.tb_CheckStockTempChecks.InsertOnSubmit(u);
+                    db.SubmitChanges();
+                }
             }
+        }
+        private void LoadData(string checkNo)
+        {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                dgvData.Rows.Clear();
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    var g = (from ix in db.tb_CheckStockTempChecks
+                             where ix.CheckNo.Trim() == checkNo
+                             && ix.Status != "Cancel"                             
+                             select ix).ToList();
+                    if(g.Count>0)
+                    {
+                        txtCheckNo.Text = txtCheckNo.Text.ToUpper();
+                        dgvData.DataSource = g;
+                        int c = 0;
+                        foreach (var x in dgvData.Rows)
+                        {
+                            c += 1;
+                            x.Cells["No"].Value = c;
+                        }
+                            txtItemCount.Text = dgvData.Rows.Count().ToString();
+                    }
+
+                }
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
         }
         private bool duplicate(string Code)
         {
@@ -211,16 +338,42 @@ namespace StockControl
                     string Code = dbClss.TSt(dgvData.CurrentRow.Cells["Code"].Value);
                     if (MessageBox.Show("ต้องการลบรายการ "+ Code +" ?", "ลบ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        dgvData.CurrentRow.Delete();
-                         Count_Item();
-                    }
+                        using (DataClasses1DataContext db = new DataClasses1DataContext())
+                        {
+                            var g = (from ix in db.tb_CheckStockTempChecks
+                                     where ix.CheckNo.Trim() == txtCheckNo.Text
+                                     && ix.Status != "Cancel"
+                                     && ix.Status != "Completed"
+                                     && ix.Code == Code
+                                     select ix).ToList();
+                            if (g.Count > 0)  //มีรายการในระบบ
+                            {
+                                var gg = (from ix in db.tb_CheckStockTempChecks
+                                          where ix.CheckNo.Trim() == txtCheckNo.Text
+                                         && ix.Status != "Cancel"
+                                         && ix.Status != "Completed"
+                                         && ix.Code == Code
+                                         && ix.id == Convert.ToInt16(g.FirstOrDefault().id)
+                                          select ix).First();
 
-                    int ck = 0;
-                    foreach (var x in dgvData.Rows)
-                    {
-                        ck += 1;
-                        x.Cells["No"].Value = ck;
+                                gg.CreateBy = dbClss.UserID;
+                                gg.CreateDate = Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"));
+                                gg.Status = "Cancel";
+                                db.SubmitChanges();
+
+                                LoadData(txtCheckNo.Text);
+                            }
+                        }                            
+                        //dgvData.CurrentRow.Delete();
+                        // Count_Item();
                     }
+                   
+                    //int ck = 0;
+                    //foreach (var x in dgvData.Rows)
+                    //{
+                    //    ck += 1;
+                    //    x.Cells["No"].Value = ck;
+                    //}
                 }
 
             }catch(Exception ex) { MessageBox.Show(ex.Message); }
@@ -256,6 +409,27 @@ namespace StockControl
         private void radButtonElement3_Click(object sender, EventArgs e)
         {
             dbClss.ExportGridXlSX(dgvData);
+        }
+
+        private void txtCheckNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar==13)
+            {
+                btnLoad_Click(null, null);
+            }
+        }
+
+        private void radButtonElement2_Click(object sender, EventArgs e)
+        {
+            txtCheckNo.Text = "";
+            ddlLocation.Text = "";
+            txtCheckBy.Text = dbClss.UserID;
+            txtItemCount.Text = "";
+            txtScanCode.Text = "";
+            txtScanCode.Enabled = false;
+            txtCheckNo.Enabled = true;
+            dgvData.Rows.Clear();
+
         }
     }
 }
