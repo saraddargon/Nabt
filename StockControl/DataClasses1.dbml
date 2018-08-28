@@ -323,6 +323,7 @@
       <Column Name="SNP" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ofTAG" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="RefNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.Sp_ADM03_OpenFormSelect" Method="Sp_ADM03_OpenFormSelect">
