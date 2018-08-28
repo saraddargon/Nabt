@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListItem));
+            Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn1 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
@@ -365,6 +366,12 @@
             this.radGridView1.MasterTemplate.AllowRowHeaderContextMenu = false;
             this.radGridView1.MasterTemplate.AllowRowResize = false;
             this.radGridView1.MasterTemplate.AutoGenerateColumns = false;
+            gridViewCheckBoxColumn1.FieldName = "chk";
+            gridViewCheckBoxColumn1.HeaderText = "Select";
+            gridViewCheckBoxColumn1.IsVisible = false;
+            gridViewCheckBoxColumn1.Name = "chk";
+            gridViewCheckBoxColumn1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewCheckBoxColumn1.Width = 45;
             gridViewTextBoxColumn1.EnableExpressionEditor = false;
             gridViewTextBoxColumn1.FieldName = "No";
             gridViewTextBoxColumn1.HeaderText = "No.";
@@ -372,7 +379,7 @@
             gridViewTextBoxColumn1.Width = 53;
             gridViewTextBoxColumn2.EnableExpressionEditor = false;
             gridViewTextBoxColumn2.FieldName = "Code";
-            gridViewTextBoxColumn2.HeaderText = "Item No.";
+            gridViewTextBoxColumn2.HeaderText = "Part No.";
             gridViewTextBoxColumn2.Name = "Code";
             gridViewTextBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             gridViewTextBoxColumn2.Width = 137;
@@ -466,6 +473,7 @@
             gridViewTextBoxColumn18.HeaderText = "INC";
             gridViewTextBoxColumn18.Name = "INC";
             this.radGridView1.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
+            gridViewCheckBoxColumn1,
             gridViewTextBoxColumn1,
             gridViewTextBoxColumn2,
             gridViewTextBoxColumn3,
@@ -526,6 +534,7 @@
             this.txtItemNo.Name = "txtItemNo";
             this.txtItemNo.Size = new System.Drawing.Size(135, 20);
             this.txtItemNo.TabIndex = 1;
+            this.txtItemNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtItemNo_KeyPress);
             // 
             // radLabel1
             // 
@@ -617,6 +626,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.radStatusStrip1);
             this.Controls.Add(this.radRibbonBar1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "ListItem";
             // 
