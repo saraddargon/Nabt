@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using System.Linq;
 using Microsoft.VisualBasic.FileIO;
 using Telerik.WinControls.UI;
+using System.Globalization;
+
 namespace StockControl
 {
     public partial class CheckStockList : Telerik.WinControls.UI.RadRibbonForm
@@ -589,7 +591,26 @@ namespace StockControl
         {
             try
             {
+                if (dgvData.Rows.Count <= 0)
+                    return;
                 //ReportCheckStock.rpt
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    string CheckNo = dbClss.TSt(dgvData.CurrentRow.Cells["CheckNo"].Value);
+
+                    var g = (from ix in db.sp_R_001_Report_CheckStock(CheckNo, CheckNo,Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"))) select ix).ToList();
+                    if (g.Count() > 0)
+                    {
+                        Report.Reportx1.Value = new string[2];
+                        Report.Reportx1.Value[0] = CheckNo;
+                        Report.Reportx1.Value[1] = CheckNo;
+                        Report.Reportx1.WReport = "ReportCheckStock";
+                        Report.Reportx1 op = new Report.Reportx1("ReportCheckStock.rpt");
+                        op.Show();
+                    }
+                    else
+                        MessageBox.Show("not found.");
+                }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

@@ -177,6 +177,12 @@
     <Compile Include="Process\ExShipment.Designer.cs">
       <DependentUpon>ExShipment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\CheckStock_ListCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\CheckStock_ListCode.Designer.cs">
+      <DependentUpon>CheckStock_ListCode.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\PCCheck.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -372,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\ExShipment.resx">
       <DependentUpon>ExShipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\CheckStock_ListCode.resx">
+      <DependentUpon>CheckStock_ListCode.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\PCCheck.resx">
       <DependentUpon>PCCheck.cs</DependentUpon>

@@ -573,5 +573,21 @@ namespace StockControl
             catch (Exception ex) { dbClss.AddError(this.Name, ex.Message, this.Name); }
             finally { this.Cursor = Cursors.Default; }
         }
+
+        private void openHistoryCheckToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                if(radGridView1.Rows.Count>0)
+                {
+                    string Code = dbClss.TSt(radGridView1.CurrentRow.Cells["Code"].Value);
+                    CheckStock_ListCode op = new CheckStock_ListCode(Code);
+                    op.Show();
+                }
+
+            }catch(Exception ex) { MessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
+        }
     }
 }
