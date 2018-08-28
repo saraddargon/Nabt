@@ -167,8 +167,8 @@ namespace Report
                 case "001_Kanban_Part":
                     {
 
-                        rptDc.SetParameterValue("@User", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@DateTime", DateTime.Now);
+                        rptDc.SetParameterValue("@UserID", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
 
                     }
                     break;

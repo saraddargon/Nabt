@@ -319,24 +319,36 @@ namespace StockControl
         {
             try
             {
-                //radGridView1.Rows[e.RowIndex].Cells["dgvC"].Value = "T";
-                //string check1 = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["UnitCode"].Value);
-                //string TM= Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["dgvCodeTemp"].Value);
-                //if (!check1.Trim().Equals("") && TM.Equals(""))
-                //{
-                    
-                //    if (!CheckDuplicate(check1.Trim()))
-                //    {
-                //        MessageBox.Show("ข้อมูล รหัสหน่วย ซ้ำ");
-                //        radGridView1.Rows[e.RowIndex].Cells["UnitCode"].Value = "";
-                //        radGridView1.Rows[e.RowIndex].Cells["UnitCode"].IsSelected = true;
+                if (e.ColumnIndex == radGridView1.Columns["LotNo"].Index)
+                {
+                    string LotNo = radGridView1.Rows[e.RowIndex].Cells["LotNo"].Value.ToString();
+                    string PONo = radGridView1.Rows[e.RowIndex].Cells["PORDER"].Value.ToString();
+                    DateTime date1 = Convert.ToDateTime(radGridView1.Rows[e.RowIndex].Cells["DeliveryDate"].Value.ToString());
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                        tb_HistoryPrintSupplier tp = db.tb_HistoryPrintSuppliers.Where(t => t.PONo == PONo).FirstOrDefault();
+                        if (tp != null)
+                        {
+                            tp.LotNo = LotNo;
+                            db.SubmitChanges();
+                        }
+                        else
+                        {
+                            tb_HistoryPrintSupplier tn = new tb_HistoryPrintSupplier();
+                            tn.PONo = PONo;
+                            tn.LotNo = LotNo;
+                            tn.PrintTAG = false;
+                            tn.DeliveryDate = date1;
+                            db.tb_HistoryPrintSuppliers.InsertOnSubmit(tn);
+                            db.SubmitChanges();
 
-                //    }
-                //}
+                        }
+                    }
+                }
         
 
             }
-            catch(Exception ex) { }
+            catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void Unit_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -519,6 +531,7 @@ namespace StockControl
         {
             //Example01.pdf
          //   System.Diagnostics.Process.Start(Environment.CurrentDirectory+@"\Example\Example01.pdf");
+
         }
 
         private void radButton1_Click(object sender, EventArgs e)
@@ -541,6 +554,106 @@ namespace StockControl
                 {
                     rd.Cells["chk"].Value = false;
                 }
+            }
+        }
+
+        private void btnSave_Click_2(object sender, EventArgs e)
+        {
+            //Print TAG Barcode//
+            PrintTAG();
+
+        }
+        private void PrintTAG()
+        {
+            try
+            {
+               
+                //Supplier_TAG.rpt
+                //@UserID
+                //@Datex
+                //WP=> SupplierTAG
+                int chkAdd = 0;
+                int Qty = 0;
+                int Snp = 0;
+                int TAG = 0;
+                DateTime dl = DateTime.Now;
+                string QrCode = "";
+                string OfTAG = "";
+
+                //   DateTime DateDl = DateTime.Now;
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    var td = db.TempPrintSuppliers.Where(t => t.UserID == dbClss.UserID);
+                    db.TempPrintSuppliers.DeleteAllOnSubmit(td);
+                    foreach(GridViewRowInfo rd in radGridView1.Rows)
+                    {
+                        if (Convert.ToBoolean(rd.Cells["chk"].Value))
+                        {
+                            Snp = Convert.ToInt32(rd.Cells["LotSize"].Value);
+                            Qty = Convert.ToInt32(rd.Cells["OrderQty"].Value);
+                            dl = Convert.ToDateTime(rd.Cells["DeliveryDate"].Value);
+                            ////////////////////////////////////////////////
+                            for (int i = 1; i <= TAG; i++)
+                            {
+                                OfTAG = i + "of" + TAG;
+                                QrCode = "";
+                                QrCode = "EX," + rd.Cells["PORDER"].Value.ToString() + "," + Qty + "," + Snp + "," + rd.Cells["LotNo"].Value.ToString() + "," + OfTAG + "," + rd.Cells["Code"].Value.ToString();
+                                byte[] barcode = dbClss.SaveQRCode2D(QrCode);
+                               
+                                TempPrintSupplier ts = new TempPrintSupplier();
+                                ts.UserID = dbClss.UserID;
+                                ts.PONo = rd.Cells["PORDER"].Value.ToString();
+                                ts.LotNo = rd.Cells["LotNo"].Value.ToString();
+                                ts.TAGRemark = dl.ToString("dd/MM/yyyy");
+                                ts.QRCode = barcode;
+                                ts.PartName = rd.Cells["NAME"].Value.ToString();
+                                ts.ItemNo = rd.Cells["Code"].Value.ToString();
+                                ts.SNP = Convert.ToInt32(rd.Cells["LotSize"].Value);
+                                ts.Company = rd.Cells["VendorName"].Value.ToString();
+                                ts.OfTAG = i+" / "+TAG;
+                                ///////////////////////////////////////////////
+                                db.TempPrintSuppliers.InsertOnSubmit(ts);
+                            }
+
+                            tb_HistoryPrintSupplier tp = db.tb_HistoryPrintSuppliers.Where(t => t.PONo == rd.Cells["PORDER"].Value.ToString()).FirstOrDefault();
+                            if (tp != null)
+                            {
+                                tp.LotNo = rd.Cells["LotNo"].Value.ToString();
+                                tp.PrintTAG = true;
+                                db.SubmitChanges();
+                            }
+                            else
+                            {
+                                tb_HistoryPrintSupplier tn = new tb_HistoryPrintSupplier();
+                                tn.PONo = rd.Cells["PORDER"].Value.ToString();
+                                tn.LotNo = rd.Cells["LotNo"].Value.ToString();
+                                tn.PrintTAG = true;
+                                tn.DeliveryDate = dl;
+                                db.tb_HistoryPrintSuppliers.InsertOnSubmit(tn);
+                                db.SubmitChanges();
+
+                            }
+
+                            chkAdd += 1;
+                        }
+                    }
+                }
+
+                Report.Reportx1.WReport = "SupplierTAG";
+                Report.Reportx1.Value = new string[1];
+                Report.Reportx1.Value[0] = dbClss.UserID;               
+                Report.Reportx1 op = new Report.Reportx1("Supplier_TAG.rpt");
+                op.Show();
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private void txtItemNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar==13)
+            {
+                DataLoad();
             }
         }
     }

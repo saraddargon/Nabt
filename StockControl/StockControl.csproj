@@ -195,6 +195,12 @@
     <Compile Include="Process\CheckStockUpload.Designer.cs">
       <DependentUpon>CheckStockUpload.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\PrintPOSelectLot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\PrintPOSelectLot.Designer.cs">
+      <DependentUpon>PrintPOSelectLot.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\ProductionBom.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -387,6 +393,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\CheckStockUpload.resx">
       <DependentUpon>CheckStockUpload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\PrintPOSelectLot.resx">
+      <DependentUpon>PrintPOSelectLot.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\ProductionBom.resx">
       <DependentUpon>ProductionBom.cs</DependentUpon>

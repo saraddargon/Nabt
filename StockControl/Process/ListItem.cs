@@ -566,5 +566,13 @@ namespace StockControl
                 }
             }
         }
+
+        private void txtItemNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar==13)
+            {
+                DataLoad();
+            }
+        }
     }
 }
