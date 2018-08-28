@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Linq;
 using Microsoft.VisualBasic.FileIO;
+using Telerik.WinControls.UI;
 namespace StockControl
 {
     public partial class ListPO : Telerik.WinControls.UI.RadRibbonForm
@@ -523,6 +524,24 @@ namespace StockControl
         private void radButton1_Click(object sender, EventArgs e)
         {
             DataLoad();
+        }
+
+        private void chkSelect_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
+        {
+            if(chkSelect.Checked)
+            {
+                foreach(GridViewRowInfo rd in radGridView1.Rows)
+                {
+                    rd.Cells["chk"].Value = true;
+                }
+
+            }else
+            {
+                foreach (GridViewRowInfo rd in radGridView1.Rows)
+                {
+                    rd.Cells["chk"].Value = false;
+                }
+            }
         }
     }
 }
