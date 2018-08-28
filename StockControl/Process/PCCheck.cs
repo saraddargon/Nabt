@@ -99,7 +99,7 @@ namespace StockControl
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            LoadData(txtCheckBy.Text);
+            LoadData(txtCheckNo.Text);
         }
 
         private void txtScanCode_KeyPress(object sender, KeyPressEventArgs e)
