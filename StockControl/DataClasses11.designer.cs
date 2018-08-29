@@ -102,15 +102,18 @@ namespace StockControl
     partial void InsertTEMPTAG(TEMPTAG instance);
     partial void UpdateTEMPTAG(TEMPTAG instance);
     partial void DeleteTEMPTAG(TEMPTAG instance);
-    partial void Inserttb_ProductTAG(tb_ProductTAG instance);
-    partial void Updatetb_ProductTAG(tb_ProductTAG instance);
-    partial void Deletetb_ProductTAG(tb_ProductTAG instance);
     partial void Inserttb_LotNo(tb_LotNo instance);
     partial void Updatetb_LotNo(tb_LotNo instance);
     partial void Deletetb_LotNo(tb_LotNo instance);
     partial void Inserttb_GenerateLotMap(tb_GenerateLotMap instance);
     partial void Updatetb_GenerateLotMap(tb_GenerateLotMap instance);
     partial void Deletetb_GenerateLotMap(tb_GenerateLotMap instance);
+    partial void Inserttb_ProductTAG(tb_ProductTAG instance);
+    partial void Updatetb_ProductTAG(tb_ProductTAG instance);
+    partial void Deletetb_ProductTAG(tb_ProductTAG instance);
+    partial void Inserttb_MapItemTPIC(tb_MapItemTPIC instance);
+    partial void Updatetb_MapItemTPIC(tb_MapItemTPIC instance);
+    partial void Deletetb_MapItemTPIC(tb_MapItemTPIC instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -367,14 +370,6 @@ namespace StockControl
 			}
 		}
 		
-		public System.Data.Linq.Table<tb_ProductTAG> tb_ProductTAGs
-		{
-			get
-			{
-				return this.GetTable<tb_ProductTAG>();
-			}
-		}
-		
 		public System.Data.Linq.Table<tb_LotNo> tb_LotNos
 		{
 			get
@@ -388,6 +383,22 @@ namespace StockControl
 			get
 			{
 				return this.GetTable<tb_GenerateLotMap>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tb_ProductTAG> tb_ProductTAGs
+		{
+			get
+			{
+				return this.GetTable<tb_ProductTAG>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tb_MapItemTPIC> tb_MapItemTPICs
+		{
+			get
+			{
+				return this.GetTable<tb_MapItemTPIC>();
 			}
 		}
 		
@@ -473,6 +484,13 @@ namespace StockControl
 			return ((ISingleResult<sp_R_001_Report_CheckStockResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_E_001_Excel_tb_CheckStockTempCheck")]
+		public ISingleResult<sp_E_001_Excel_tb_CheckStockTempCheckResult> sp_E_001_Excel_tb_CheckStockTempCheck([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CheckNo", DbType="NVarChar(30)")] string checkNo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Location", DbType="VarChar(100)")] string location, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Code", DbType="VarChar(100)")] string code)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), checkNo, location, code);
+			return ((ISingleResult<sp_E_001_Excel_tb_CheckStockTempCheckResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_003_TPIC_GETBOMNo")]
 		public ISingleResult<sp_003_TPIC_GETBOMNoResult> sp_003_TPIC_GETBOMNo([global::System.Data.Linq.Mapping.ParameterAttribute(Name="BOMNo", DbType="NVarChar(50)")] string bOMNo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AC", DbType="Int")] System.Nullable<int> aC)
 		{
@@ -485,6 +503,13 @@ namespace StockControl
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pONo, code, vendor, ck, date1, date2);
 			return ((ISingleResult<sp_004_TPIC_SelectWOResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_005_TPIC_SelectMapping")]
+		public ISingleResult<sp_005_TPIC_SelectMappingResult> sp_005_TPIC_SelectMapping([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Code", DbType="NVarChar(30)")] string code)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), code);
+			return ((ISingleResult<sp_005_TPIC_SelectMappingResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -7400,6 +7425,178 @@ namespace StockControl
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_LotNo")]
+	public partial class tb_LotNo : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.DateTime _LotDate;
+		
+		private string _LotNo;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnLotDateChanging(System.DateTime value);
+    partial void OnLotDateChanged();
+    partial void OnLotNoChanging(string value);
+    partial void OnLotNoChanged();
+    #endregion
+		
+		public tb_LotNo()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LotDate", DbType="Date NOT NULL", IsPrimaryKey=true)]
+		public System.DateTime LotDate
+		{
+			get
+			{
+				return this._LotDate;
+			}
+			set
+			{
+				if ((this._LotDate != value))
+				{
+					this.OnLotDateChanging(value);
+					this.SendPropertyChanging();
+					this._LotDate = value;
+					this.SendPropertyChanged("LotDate");
+					this.OnLotDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LotNo", DbType="NVarChar(10)")]
+		public string LotNo
+		{
+			get
+			{
+				return this._LotNo;
+			}
+			set
+			{
+				if ((this._LotNo != value))
+				{
+					this.OnLotNoChanging(value);
+					this.SendPropertyChanging();
+					this._LotNo = value;
+					this.SendPropertyChanged("LotNo");
+					this.OnLotNoChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_GenerateLotMap")]
+	public partial class tb_GenerateLotMap : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Daysx;
+		
+		private string _KeyLot;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnDaysxChanging(int value);
+    partial void OnDaysxChanged();
+    partial void OnKeyLotChanging(string value);
+    partial void OnKeyLotChanged();
+    #endregion
+		
+		public tb_GenerateLotMap()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Daysx", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Daysx
+		{
+			get
+			{
+				return this._Daysx;
+			}
+			set
+			{
+				if ((this._Daysx != value))
+				{
+					this.OnDaysxChanging(value);
+					this.SendPropertyChanging();
+					this._Daysx = value;
+					this.SendPropertyChanged("Daysx");
+					this.OnDaysxChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KeyLot", DbType="NVarChar(10)")]
+		public string KeyLot
+		{
+			get
+			{
+				return this._KeyLot;
+			}
+			set
+			{
+				if ((this._KeyLot != value))
+				{
+					this.OnKeyLotChanging(value);
+					this.SendPropertyChanging();
+					this._KeyLot = value;
+					this.SendPropertyChanged("KeyLot");
+					this.OnKeyLotChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_ProductTAG")]
 	public partial class tb_ProductTAG : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -7577,7 +7774,7 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CSTMShot", DbType="NVarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CSTMShot", DbType="NVarChar(60)")]
 		public string CSTMShot
 		{
 			get
@@ -7597,7 +7794,7 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CSTMItem", DbType="NVarChar(30)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CSTMItem", DbType="NVarChar(50)")]
 		public string CSTMItem
 		{
 			get
@@ -7617,7 +7814,7 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustItem2", DbType="NVarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustItem2", DbType="NVarChar(50)")]
 		public string CustItem2
 		{
 			get
@@ -7637,7 +7834,7 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LotNo", DbType="NVarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LotNo", DbType="NVarChar(30)")]
 		public string LotNo
 		{
 			get
@@ -7798,153 +7995,163 @@ namespace StockControl
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_LotNo")]
-	public partial class tb_LotNo : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_MapItemTPICS")]
+	public partial class tb_MapItemTPIC : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private System.DateTime _LotDate;
+		private string _Code;
 		
-		private string _LotNo;
+		private int _Ac;
+		
+		private string _CustItemNo;
+		
+		private string _CustItemName;
+		
+		private string _CustomerNo;
+		
+		private string _DWG;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnLotDateChanging(System.DateTime value);
-    partial void OnLotDateChanged();
-    partial void OnLotNoChanging(string value);
-    partial void OnLotNoChanged();
+    partial void OnCodeChanging(string value);
+    partial void OnCodeChanged();
+    partial void OnAcChanging(int value);
+    partial void OnAcChanged();
+    partial void OnCustItemNoChanging(string value);
+    partial void OnCustItemNoChanged();
+    partial void OnCustItemNameChanging(string value);
+    partial void OnCustItemNameChanged();
+    partial void OnCustomerNoChanging(string value);
+    partial void OnCustomerNoChanged();
+    partial void OnDWGChanging(string value);
+    partial void OnDWGChanged();
     #endregion
 		
-		public tb_LotNo()
+		public tb_MapItemTPIC()
 		{
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LotDate", DbType="Date NOT NULL", IsPrimaryKey=true)]
-		public System.DateTime LotDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Code", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Code
 		{
 			get
 			{
-				return this._LotDate;
+				return this._Code;
 			}
 			set
 			{
-				if ((this._LotDate != value))
+				if ((this._Code != value))
 				{
-					this.OnLotDateChanging(value);
+					this.OnCodeChanging(value);
 					this.SendPropertyChanging();
-					this._LotDate = value;
-					this.SendPropertyChanged("LotDate");
-					this.OnLotDateChanged();
+					this._Code = value;
+					this.SendPropertyChanged("Code");
+					this.OnCodeChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LotNo", DbType="NVarChar(10)")]
-		public string LotNo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ac", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Ac
 		{
 			get
 			{
-				return this._LotNo;
+				return this._Ac;
 			}
 			set
 			{
-				if ((this._LotNo != value))
+				if ((this._Ac != value))
 				{
-					this.OnLotNoChanging(value);
+					this.OnAcChanging(value);
 					this.SendPropertyChanging();
-					this._LotNo = value;
-					this.SendPropertyChanged("LotNo");
-					this.OnLotNoChanged();
+					this._Ac = value;
+					this.SendPropertyChanged("Ac");
+					this.OnAcChanged();
 				}
 			}
 		}
 		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_GenerateLotMap")]
-	public partial class tb_GenerateLotMap : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Daysx;
-		
-		private string _KeyLot;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnDaysxChanging(int value);
-    partial void OnDaysxChanged();
-    partial void OnKeyLotChanging(string value);
-    partial void OnKeyLotChanged();
-    #endregion
-		
-		public tb_GenerateLotMap()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Daysx", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Daysx
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustItemNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CustItemNo
 		{
 			get
 			{
-				return this._Daysx;
+				return this._CustItemNo;
 			}
 			set
 			{
-				if ((this._Daysx != value))
+				if ((this._CustItemNo != value))
 				{
-					this.OnDaysxChanging(value);
+					this.OnCustItemNoChanging(value);
 					this.SendPropertyChanging();
-					this._Daysx = value;
-					this.SendPropertyChanged("Daysx");
-					this.OnDaysxChanged();
+					this._CustItemNo = value;
+					this.SendPropertyChanged("CustItemNo");
+					this.OnCustItemNoChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KeyLot", DbType="NVarChar(10)")]
-		public string KeyLot
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustItemName", DbType="NVarChar(90)")]
+		public string CustItemName
 		{
 			get
 			{
-				return this._KeyLot;
+				return this._CustItemName;
 			}
 			set
 			{
-				if ((this._KeyLot != value))
+				if ((this._CustItemName != value))
 				{
-					this.OnKeyLotChanging(value);
+					this.OnCustItemNameChanging(value);
 					this.SendPropertyChanging();
-					this._KeyLot = value;
-					this.SendPropertyChanged("KeyLot");
-					this.OnKeyLotChanged();
+					this._CustItemName = value;
+					this.SendPropertyChanged("CustItemName");
+					this.OnCustItemNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerNo", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string CustomerNo
+		{
+			get
+			{
+				return this._CustomerNo;
+			}
+			set
+			{
+				if ((this._CustomerNo != value))
+				{
+					this.OnCustomerNoChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerNo = value;
+					this.SendPropertyChanged("CustomerNo");
+					this.OnCustomerNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DWG", DbType="NVarChar(10)")]
+		public string DWG
+		{
+			get
+			{
+				return this._DWG;
+			}
+			set
+			{
+				if ((this._DWG != value))
+				{
+					this.OnDWGChanging(value);
+					this.SendPropertyChanging();
+					this._DWG = value;
+					this.SendPropertyChanged("DWG");
+					this.OnDWGChanged();
 				}
 			}
 		}
@@ -9592,6 +9799,356 @@ namespace StockControl
 		}
 	}
 	
+	public partial class sp_E_001_Excel_tb_CheckStockTempCheckResult
+	{
+		
+		private int _id;
+		
+		private string _CheckNo;
+		
+		private string _CheckMachine;
+		
+		private string _Location;
+		
+		private string _CheckBy;
+		
+		private System.Nullable<System.DateTime> _CreateDate;
+		
+		private string _CreateBy;
+		
+		private string _Code;
+		
+		private string _ItemName;
+		
+		private System.Nullable<decimal> _Quantity;
+		
+		private string _Status;
+		
+		private string _Remark;
+		
+		private string _Package;
+		
+		private string _Type;
+		
+		private string _LotNo;
+		
+		private System.Nullable<int> _SNP;
+		
+		private string _ofTAG;
+		
+		private string _RefNo;
+		
+		private string _SP;
+		
+		public sp_E_001_Excel_tb_CheckStockTempCheckResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckNo", DbType="NVarChar(20)")]
+		public string CheckNo
+		{
+			get
+			{
+				return this._CheckNo;
+			}
+			set
+			{
+				if ((this._CheckNo != value))
+				{
+					this._CheckNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckMachine", DbType="NVarChar(50)")]
+		public string CheckMachine
+		{
+			get
+			{
+				return this._CheckMachine;
+			}
+			set
+			{
+				if ((this._CheckMachine != value))
+				{
+					this._CheckMachine = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Location", DbType="NVarChar(20)")]
+		public string Location
+		{
+			get
+			{
+				return this._Location;
+			}
+			set
+			{
+				if ((this._Location != value))
+				{
+					this._Location = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckBy", DbType="NVarChar(50)")]
+		public string CheckBy
+		{
+			get
+			{
+				return this._CheckBy;
+			}
+			set
+			{
+				if ((this._CheckBy != value))
+				{
+					this._CheckBy = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreateDate
+		{
+			get
+			{
+				return this._CreateDate;
+			}
+			set
+			{
+				if ((this._CreateDate != value))
+				{
+					this._CreateDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateBy", DbType="NVarChar(50)")]
+		public string CreateBy
+		{
+			get
+			{
+				return this._CreateBy;
+			}
+			set
+			{
+				if ((this._CreateBy != value))
+				{
+					this._CreateBy = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Code", DbType="NVarChar(50)")]
+		public string Code
+		{
+			get
+			{
+				return this._Code;
+			}
+			set
+			{
+				if ((this._Code != value))
+				{
+					this._Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemName", DbType="NVarChar(50)")]
+		public string ItemName
+		{
+			get
+			{
+				return this._ItemName;
+			}
+			set
+			{
+				if ((this._ItemName != value))
+				{
+					this._ItemName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this._Quantity = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NVarChar(50)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this._Status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Remark", DbType="NVarChar(50)")]
+		public string Remark
+		{
+			get
+			{
+				return this._Remark;
+			}
+			set
+			{
+				if ((this._Remark != value))
+				{
+					this._Remark = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Package", DbType="NVarChar(50)")]
+		public string Package
+		{
+			get
+			{
+				return this._Package;
+			}
+			set
+			{
+				if ((this._Package != value))
+				{
+					this._Package = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="NVarChar(50)")]
+		public string Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this._Type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LotNo", DbType="NVarChar(50)")]
+		public string LotNo
+		{
+			get
+			{
+				return this._LotNo;
+			}
+			set
+			{
+				if ((this._LotNo != value))
+				{
+					this._LotNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SNP", DbType="Int")]
+		public System.Nullable<int> SNP
+		{
+			get
+			{
+				return this._SNP;
+			}
+			set
+			{
+				if ((this._SNP != value))
+				{
+					this._SNP = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ofTAG", DbType="NVarChar(50)")]
+		public string ofTAG
+		{
+			get
+			{
+				return this._ofTAG;
+			}
+			set
+			{
+				if ((this._ofTAG != value))
+				{
+					this._ofTAG = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RefNo", DbType="NVarChar(50)")]
+		public string RefNo
+		{
+			get
+			{
+				return this._RefNo;
+			}
+			set
+			{
+				if ((this._RefNo != value))
+				{
+					this._RefNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SP", DbType="NVarChar(50)")]
+		public string SP
+		{
+			get
+			{
+				return this._SP;
+			}
+			set
+			{
+				if ((this._SP != value))
+				{
+					this._SP = value;
+				}
+			}
+		}
+	}
+	
 	public partial class sp_003_TPIC_GETBOMNoResult
 	{
 		
@@ -9636,6 +10193,8 @@ namespace StockControl
 		private System.Nullable<System.DateTime> _CreateDate;
 		
 		private string _INPUTUSER;
+		
+		private string _LotNo;
 		
 		private string _CustItemName;
 		
@@ -9981,6 +10540,22 @@ namespace StockControl
 				if ((this._INPUTUSER != value))
 				{
 					this._INPUTUSER = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LotNo", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
+		public string LotNo
+		{
+			get
+			{
+				return this._LotNo;
+			}
+			set
+			{
+				if ((this._LotNo != value))
+				{
+					this._LotNo = value;
 				}
 			}
 		}
@@ -10455,7 +11030,7 @@ namespace StockControl
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LotNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LotNo", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
 		public string LotNo
 		{
 			get
@@ -10467,6 +11042,122 @@ namespace StockControl
 				if ((this._LotNo != value))
 				{
 					this._LotNo = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_005_TPIC_SelectMappingResult
+	{
+		
+		private string _Code;
+		
+		private int _Ac;
+		
+		private string _CustItemNo;
+		
+		private string _CustItemName;
+		
+		private string _CustomerNo;
+		
+		private string _DWG;
+		
+		public sp_005_TPIC_SelectMappingResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Code", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Code
+		{
+			get
+			{
+				return this._Code;
+			}
+			set
+			{
+				if ((this._Code != value))
+				{
+					this._Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ac", DbType="Int NOT NULL")]
+		public int Ac
+		{
+			get
+			{
+				return this._Ac;
+			}
+			set
+			{
+				if ((this._Ac != value))
+				{
+					this._Ac = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustItemNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CustItemNo
+		{
+			get
+			{
+				return this._CustItemNo;
+			}
+			set
+			{
+				if ((this._CustItemNo != value))
+				{
+					this._CustItemNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustItemName", DbType="NVarChar(90)")]
+		public string CustItemName
+		{
+			get
+			{
+				return this._CustItemName;
+			}
+			set
+			{
+				if ((this._CustItemName != value))
+				{
+					this._CustItemName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerNo", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string CustomerNo
+		{
+			get
+			{
+				return this._CustomerNo;
+			}
+			set
+			{
+				if ((this._CustomerNo != value))
+				{
+					this._CustomerNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DWG", DbType="NVarChar(10)")]
+		public string DWG
+		{
+			get
+			{
+				return this._DWG;
+			}
+			set
+			{
+				if ((this._DWG != value))
+				{
+					this._DWG = value;
 				}
 			}
 		}

@@ -559,8 +559,14 @@ namespace StockControl
 
         private void btnSave_Click_2(object sender, EventArgs e)
         {
+            if (row >= 0)
+            {
+                string BomNo = radGridView1.Rows[row].Cells["PORDER"].Value.ToString();
+                PrintPDTAG pd = new PrintPDTAG(BomNo);
+                pd.Show();
+            }
             //Print TAG Barcode//
-            PrintTAG();
+           // PrintTAG();
 
         }
         private void PrintTAG()

@@ -368,25 +368,6 @@
       <Column Name="LotNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.tb_ProductTAG" Member="tb_ProductTAGs">
-    <Type Name="tb_ProductTAG">
-      <Column Name="Machine" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="UserID" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="PartNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Seq" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="PartName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="CSTMShot" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="CSTMItem" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="CustItem2" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="LotNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="Qty" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="OFTAG" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="CustomerName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Column Name="PathPic" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Column Name="BOMNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="QRCode" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
-    </Type>
-  </Table>
   <Table Name="dbo.tb_LotNo" Member="tb_LotNos">
     <Type Name="tb_LotNo">
       <Column Name="LotDate" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -397,6 +378,35 @@
     <Type Name="tb_GenerateLotMap">
       <Column Name="Daysx" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="KeyLot" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_ProductTAG" Member="tb_ProductTAGs">
+    <Type Name="tb_ProductTAG">
+      <Column Name="Machine" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PartNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Seq" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PartName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CSTMShot" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
+      <Column Name="CSTMItem" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CustItem2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Qty" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="OFTAG" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="CustomerName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="PathPic" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="BOMNo" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="QRCode" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_MapItemTPICS" Member="tb_MapItemTPICs">
+    <Type Name="tb_MapItemTPIC">
+      <Column Name="Code" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ac" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CustItemNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CustItemName" Type="System.String" DbType="NVarChar(90)" CanBeNull="true" />
+      <Column Name="CustomerNo" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="DWG" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.Sp_ADM03_OpenFormSelect" Method="Sp_ADM03_OpenFormSelect">
@@ -543,6 +553,32 @@
       <Column Name="UnitOfMeasure" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.sp_E_001_Excel_tb_CheckStockTempCheck" Method="sp_E_001_Excel_tb_CheckStockTempCheck">
+    <Parameter Name="CheckNo" Parameter="checkNo" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="Location" Parameter="location" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Code" Parameter="code" Type="System.String" DbType="VarChar(100)" />
+    <ElementType Name="sp_E_001_Excel_tb_CheckStockTempCheckResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CheckNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="CheckMachine" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Location" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="CheckBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Code" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ItemName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Package" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SNP" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ofTAG" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="RefNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.sp_003_TPIC_GETBOMNo" Method="sp_003_TPIC_GETBOMNo">
     <Parameter Name="BOMNo" Parameter="bOMNo" Type="System.String" DbType="NVarChar(50)" />
     <Parameter Name="AC" Parameter="aC" Type="System.Int32" DbType="Int" />
@@ -568,6 +604,7 @@
       <Column Name="REMARK" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="INPUTUSER" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="CustItemName" Type="System.String" DbType="NVarChar(90)" CanBeNull="true" />
       <Column Name="CustItemNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="CustomerNo" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
@@ -604,7 +641,18 @@
       <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="INPUTUSER" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="PrintTAG" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="LotNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_005_TPIC_SelectMapping" Method="sp_005_TPIC_SelectMapping">
+    <Parameter Name="Code" Parameter="code" Type="System.String" DbType="NVarChar(30)" />
+    <ElementType Name="sp_005_TPIC_SelectMappingResult">
+      <Column Name="Code" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Ac" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustItemNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CustItemName" Type="System.String" DbType="NVarChar(90)" CanBeNull="true" />
+      <Column Name="CustomerNo" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="DWG" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

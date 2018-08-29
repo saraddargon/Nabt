@@ -20,7 +20,7 @@ namespace StockControl
         {
             this.Name = "PrintTEMPTAG";
             InitializeComponent();
-            txtPartNo.Text = Code;
+            txtBomNo.Text = Code;
         }
        // TextBox Lot;
         private void radMenuItem2_Click(object sender, EventArgs e)
@@ -40,6 +40,10 @@ namespace StockControl
         {
 
             dtDate1.Value = DateTime.Now;
+            if(!txtBomNo.Text.Equals(""))
+            {
+                LoadBomNo();
+            }
             //try
             //{
             //    using (DataClasses1DataContext db = new DataClasses1DataContext())
@@ -83,7 +87,7 @@ namespace StockControl
                         txtsNP.Text = Convert.ToInt32(rd.LotSize).ToString();
 
                         txtLotNo.Text = "";
-                        txtQty.Text = Convert.ToInt32(rd.OrderQty).ToString("###,##0");
+                        txtQty.Text = Convert.ToInt32(rd.OrderQty).ToString("#####0");
 
                         tb_LotNo gl = db.tb_LotNos.Where(l => (l.LotDate.Year == dtDate1.Value.Year && l.LotDate.Month==dtDate1.Value.Month && l.LotDate.Day==dtDate1.Value.Day)).FirstOrDefault();
                         if(gl!=null)
@@ -146,7 +150,7 @@ namespace StockControl
                         }
 
 
-                        var tm = db.tb_ProductTAGs.Where(t => t.UserID == dbClss.UserID && t.PartNo == txtPartNo.Text).ToList();
+                        var tm = db.tb_ProductTAGs.Where(t => t.UserID.ToLower() == dbClss.UserID.ToLower()).ToList();
                         if (tm.Count > 0)
                         {
                             db.tb_ProductTAGs.DeleteAllOnSubmit(tm);
@@ -184,7 +188,10 @@ namespace StockControl
                             ts.PartNo = txtPartNo.Text;
                             ts.Machine = Environment.MachineName;
                             ts.OFTAG= i + "/" + TAG;
-                            ts.PathPic = ImagePath + ImageName;
+                            if (!ImageName.Equals(""))
+                                ts.PathPic = ImagePath + ImageName;
+                            else
+                                ts.PathPic = "";
                             ts.Qty = Qty;
                             ts.Seq = i;
                             ts.CSTMShot = txtCustomerShortName.Text;

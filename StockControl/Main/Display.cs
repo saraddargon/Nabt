@@ -176,7 +176,10 @@ namespace StockControl
                                     c.LinkNode.ToString().Equals("CheckStock") ||
                                         c.LinkNode.ToString().Equals("ProductionBom") ||
                                         c.LinkNode.ToString().Equals("PrintRW") ||
-                                            c.LinkNode.ToString().Equals("PCCheck") 
+                                            c.LinkNode.ToString().Equals("PCCheck") ||
+                                            c.LinkNode.ToString().Equals("ListWO")
+                           || c.LinkNode.ToString().Equals("ListMapItem")
+                                            
                             )
                         {
                             ListItem.ImageIndex = 16;
