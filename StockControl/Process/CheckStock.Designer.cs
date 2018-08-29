@@ -45,6 +45,7 @@
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn10 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.ConditionalFormattingObject conditionalFormattingObject2 = new Telerik.WinControls.UI.ConditionalFormattingObject();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
             this.radRibbonBarGroup1 = new Telerik.WinControls.UI.RadRibbonBarGroup();
@@ -88,6 +89,7 @@
             this.radContextMenu1 = new Telerik.WinControls.UI.RadContextMenu(this.components);
             this.RMenu4 = new Telerik.WinControls.UI.RadMenuItem();
             this.radContextMenuManager1 = new Telerik.WinControls.UI.RadContextMenuManager();
+            this.radGridView2 = new Telerik.WinControls.UI.RadGridView();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -97,6 +99,8 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCheckNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radGridView2.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -256,6 +260,7 @@
             this.radButtonElement6.Name = "radButtonElement6";
             this.radButtonElement6.Text = "รายการบันทึกเข้า";
             this.radButtonElement6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.radButtonElement6.Click += new System.EventHandler(this.radButtonElement6_Click);
             // 
             // radButtonElement7
             // 
@@ -538,6 +543,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.MintCream;
+            this.panel2.Controls.Add(this.radGridView2);
             this.panel2.Controls.Add(this.txtCheckNo);
             this.panel2.Controls.Add(this.radLabel1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -610,6 +616,18 @@
             this.RMenu4.Name = "RMenu4";
             this.RMenu4.Text = "แสดงรายการ";
             // 
+            // radGridView2
+            // 
+            this.radGridView2.Location = new System.Drawing.Point(643, 6);
+            // 
+            // 
+            // 
+            this.radGridView2.MasterTemplate.ViewDefinition = tableViewDefinition2;
+            this.radGridView2.Name = "radGridView2";
+            this.radGridView2.Size = new System.Drawing.Size(240, 150);
+            this.radGridView2.TabIndex = 3;
+            this.radGridView2.Visible = false;
+            // 
             // CheckStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -639,6 +657,8 @@
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCheckNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radGridView2.MasterTemplate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -690,5 +710,6 @@
         private Telerik.WinControls.UI.RadButtonElement radButtonElement7;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem openHistoryCheckToolStripMenuItem;
+        private Telerik.WinControls.UI.RadGridView radGridView2;
     }
 }
