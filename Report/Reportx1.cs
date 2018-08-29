@@ -11,6 +11,7 @@ using CrystalDecisions.Shared;
 using CrystalDecisions.CrystalReports;
 using CrystalDecisions.CrystalReports.Engine;
 using System.Runtime.InteropServices;
+using System.Globalization;
 
 namespace Report
 {
@@ -152,7 +153,18 @@ namespace Report
 
             switch (WReport)
             {
-                case "SupplierTAG":
+                
+                 case "ReportCheckStock":
+                    {
+
+                        rptDc.SetParameterValue("@CheckNo1", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@CheckNo2", Convert.ToString(Value[1].ToString()));
+                        rptDc.SetParameterValue("@Date", Convert.ToDateTime(DateTime.Now,new CultureInfo("en-US")));
+
+                    }
+                    break;
+
+                case "001_Kanban_Part":
                     {
 
                         rptDc.SetParameterValue("@UserID", Convert.ToString(Value[0].ToString()));

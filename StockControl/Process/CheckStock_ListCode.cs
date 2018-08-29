@@ -12,18 +12,19 @@ using System.Globalization;
 
 namespace StockControl
 {
-    public partial class PCCheck : Telerik.WinControls.UI.RadRibbonForm
+    public partial class CheckStock_ListCode : Telerik.WinControls.UI.RadRibbonForm
     {
 
         Telerik.WinControls.UI.RadTextBox CodeNo_tt = new Telerik.WinControls.UI.RadTextBox();
         int screen = 0;
-        public PCCheck(Telerik.WinControls.UI.RadTextBox CodeNox)
+        public CheckStock_ListCode(string CodeNox)
         {
             InitializeComponent();
-            CodeNo_tt = CodeNox;
+            //CodeNo_tt = CodeNox;
+            txtCheckNo.Text = CodeNox;
             screen = 1;
         }
-        public PCCheck()
+        public CheckStock_ListCode()
         {
             InitializeComponent();
         }
@@ -54,12 +55,18 @@ namespace StockControl
             //RMenu4.Click += RMenu4_Click;
 
             LoadDefault();
-            txtCheckNo.Text = "";
+           
             ddlLocation.Text = "";
             txtItemCount.Text = "0";
             txtCheckBy.Text = dbClss.UserID;
-            txtScanCode.Enabled = false;
-            txtCheckNo.Enabled = true;
+            //txtScanCode.Enabled = false;
+            //txtCheckNo.Enabled = true;
+
+            if(txtCheckNo.Text !="")
+            {
+                LoadData(txtCheckNo.Text);
+            }
+
         }
         private void LoadDefault()
         {
@@ -79,17 +86,17 @@ namespace StockControl
                 txtCheckNo.Text = txtCheckNo.Text.ToUpper();
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    var h = (from ix in db.tb_CheckStocks
-                             where ix.CheckNo == txtCheckNo.Text.Trim()
-                             && ix.Status == "Waiting Upload"
-                             select ix).ToList();
-                    if (h.Count > 0)
-                    {
-                        txtScanCode.Enabled = true;
-                        txtCheckNo.Enabled = false;
-                    }
-                    //else
-                    //    MessageBox.Show("เลข Check No สถานะไม่ถูกต้อง !");
+                    //var h = (from ix in db.tb_CheckStocks
+                    //         where ix.CheckNo == txtCheckNo.Text.Trim()
+                    //         && ix.Status == "Waiting Upload"
+                    //         select ix).ToList();
+                    //if (h.Count > 0)
+                    //{
+                    //    txtScanCode.Enabled = true;
+                    //    txtCheckNo.Enabled = false;
+                    //}
+                    ////else
+                    ////    MessageBox.Show("เลข Check No สถานะไม่ถูกต้อง !");
 
                     LoadData(txtCheckNo.Text);
                 }
@@ -270,7 +277,8 @@ namespace StockControl
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
                     var g = (from ix in db.tb_CheckStockTempChecks
-                             where ix.CheckNo.Trim() == checkNo
+                             where //ix.CheckNo.Trim() == checkNo
+                             ix.Code == checkNo
                              && ix.Status != "Cancel"                             
                              select ix).ToList();
                     if(g.Count>0)
