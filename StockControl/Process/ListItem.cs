@@ -574,5 +574,38 @@ namespace StockControl
                 DataLoad();
             }
         }
+
+        private void btnSave_Click_1(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            PrintTAG();
+            this.Cursor = Cursors.Default; ;
+
+        }
+        private void PrintTAG()
+        {
+            Report.Reportx1.WReport = "PDTAG";
+            Report.Reportx1.Value = new string[2];
+            Report.Reportx1.Value[0] = "BomNo";
+            Report.Reportx1.Value[1] = dbClss.UserID;
+            Report.Reportx1 op = new Report.Reportx1("FG_TAG.rpt");
+            op.Show();
+        }
+
+        private void radButtonElement1_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor ;
+            try
+            {
+                Report.Reportx1.WReport = "StockCard";
+                Report.Reportx1.Value = new string[2];
+                Report.Reportx1.Value[0] = "0101100014000";
+                Report.Reportx1.Value[1] = dbClss.UserID;
+                Report.Reportx1 op = new Report.Reportx1("StockCard.rpt");
+                op.Show();
+            }
+            catch { }
+            this.Cursor = Cursors.Default;
+        }
     }
 }

@@ -160,19 +160,20 @@ namespace Report
 
                     }
                     break;
-                case "002_BoxShelf_Part":
+                case "StockCard":
                     {
 
-                        rptDc.SetParameterValue("@User", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@DateTime", DateTime.Now);
+                        rptDc.SetParameterValue("@Code", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@Machine", Convert.ToString(Value[1].ToString()));
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
                         
                     } break;
-                case "ReportPR":
+                case "PDTAG":
                     {
-
-                        rptDc.SetParameterValue("@PRNo", Convert.ToString(Value[0].ToString()));
-                        rptDc.SetParameterValue("@DateTime", DateTime.Now);
-                        // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
+                        rptDc.SetParameterValue("@BomNo", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@USERID", Convert.ToString(Value[1].ToString()));
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
+                       
                     } break;
                 case "ReportPR3":
                     {

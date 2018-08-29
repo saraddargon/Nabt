@@ -518,7 +518,7 @@ namespace StockControl
 
                 try
                 {
-                    int version = 3;
+                    int version = 5;
                     qrCodeEncoder.QRCodeVersion = version;
                 }
                 catch

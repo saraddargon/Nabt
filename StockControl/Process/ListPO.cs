@@ -567,7 +567,7 @@ namespace StockControl
         {
             try
             {
-               
+                this.Cursor = Cursors.WaitCursor;
                 //Supplier_TAG.rpt
                 //@UserID
                 //@Datex
@@ -576,30 +576,60 @@ namespace StockControl
                 int Qty = 0;
                 int Snp = 0;
                 int TAG = 0;
+                int Remain = 0;
                 DateTime dl = DateTime.Now;
                 string QrCode = "";
                 string OfTAG = "";
-
+                
+                double ap = 0;
+                int a = 0;
                 //   DateTime DateDl = DateTime.Now;
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    var td = db.TempPrintSuppliers.Where(t => t.UserID == dbClss.UserID);
+                    var td = db.TempPrintSuppliers.Where(t => t.UserID.ToLower() == dbClss.UserID.ToLower());
                     db.TempPrintSuppliers.DeleteAllOnSubmit(td);
-                    foreach(GridViewRowInfo rd in radGridView1.Rows)
+                    db.SubmitChanges();
+                    radGridView1.EndUpdate();
+                    radGridView1.EndEdit();
+
+                    foreach (GridViewRowInfo rd in radGridView1.Rows.Where(o => Convert.ToBoolean(o.Cells["chk"].Value)))
                     {
                         if (Convert.ToBoolean(rd.Cells["chk"].Value))
                         {
                             Snp = Convert.ToInt32(rd.Cells["LotSize"].Value);
                             Qty = Convert.ToInt32(rd.Cells["OrderQty"].Value);
                             dl = Convert.ToDateTime(rd.Cells["DeliveryDate"].Value);
+                            if (Qty != 0 && Snp != 0)
+                            {
+                                a = 0;
+                                ap = (Qty % Snp);
+                                if (ap > 0)
+                                    a = 1;
+                                TAG = Convert.ToInt32(Math.Floor((Convert.ToDouble(Qty) / Convert.ToDouble(Snp)) + a));//.ToString("###");
+
+                                //txtOftag.Text = Math.Ceiling((double)1.7 / 10).ToString("###");
+
+                                Remain = Qty;
+                            }
                             ////////////////////////////////////////////////
                             for (int i = 1; i <= TAG; i++)
                             {
+                                if (Remain > Snp)
+                                {
+                                    Qty = Snp;
+                                    Remain = Remain - Snp;
+                                }
+                                else
+                                {
+                                    Qty = Remain;
+                                    Remain = 0;
+                                }
                                 OfTAG = i + "of" + TAG;
                                 QrCode = "";
                                 QrCode = "EX," + rd.Cells["PORDER"].Value.ToString() + "," + Qty + "," + Snp + "," + rd.Cells["LotNo"].Value.ToString() + "," + OfTAG + "," + rd.Cells["Code"].Value.ToString();
+                                //MessageBox.Show(QrCode);
                                 byte[] barcode = dbClss.SaveQRCode2D(QrCode);
-                               
+                                
                                 TempPrintSupplier ts = new TempPrintSupplier();
                                 ts.UserID = dbClss.UserID;
                                 ts.PONo = rd.Cells["PORDER"].Value.ToString();
@@ -610,9 +640,11 @@ namespace StockControl
                                 ts.ItemNo = rd.Cells["Code"].Value.ToString();
                                 ts.SNP = Convert.ToInt32(rd.Cells["LotSize"].Value);
                                 ts.Company = rd.Cells["VendorName"].Value.ToString();
-                                ts.OfTAG = i+" / "+TAG;
+                                ts.Quantity = Qty;
+                                ts.OfTAG = i + " / " + TAG;
                                 ///////////////////////////////////////////////
                                 db.TempPrintSuppliers.InsertOnSubmit(ts);
+                                db.SubmitChanges();
                             }
 
                             tb_HistoryPrintSupplier tp = db.tb_HistoryPrintSuppliers.Where(t => t.PONo == rd.Cells["PORDER"].Value.ToString()).FirstOrDefault();
@@ -641,12 +673,13 @@ namespace StockControl
 
                 Report.Reportx1.WReport = "SupplierTAG";
                 Report.Reportx1.Value = new string[1];
-                Report.Reportx1.Value[0] = dbClss.UserID;               
+                Report.Reportx1.Value[0] = dbClss.UserID;
                 Report.Reportx1 op = new Report.Reportx1("Supplier_TAG.rpt");
                 op.Show();
 
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            this.Cursor = Cursors.Default;
         }
 
         private void txtItemNo_KeyPress(object sender, KeyPressEventArgs e)
