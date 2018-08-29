@@ -428,6 +428,13 @@ namespace StockControl
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), checkNo1, checkNo2, date);
 			return ((ISingleResult<sp_R_001_Report_CheckStockResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_E_001_Excel_tb_CheckStockTempCheck")]
+		public ISingleResult<sp_E_001_Excel_tb_CheckStockTempCheckResult> sp_E_001_Excel_tb_CheckStockTempCheck([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CheckNo", DbType="NVarChar(30)")] string checkNo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Location", DbType="VarChar(100)")] string location, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Code", DbType="VarChar(100)")] string code)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), checkNo, location, code);
+			return ((ISingleResult<sp_E_001_Excel_tb_CheckStockTempCheckResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ErrorLog")]
@@ -8609,6 +8616,356 @@ namespace StockControl
 				if ((this._UnitOfMeasure != value))
 				{
 					this._UnitOfMeasure = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_E_001_Excel_tb_CheckStockTempCheckResult
+	{
+		
+		private int _id;
+		
+		private string _CheckNo;
+		
+		private string _CheckMachine;
+		
+		private string _Location;
+		
+		private string _CheckBy;
+		
+		private System.Nullable<System.DateTime> _CreateDate;
+		
+		private string _CreateBy;
+		
+		private string _Code;
+		
+		private string _ItemName;
+		
+		private System.Nullable<decimal> _Quantity;
+		
+		private string _Status;
+		
+		private string _Remark;
+		
+		private string _Package;
+		
+		private string _Type;
+		
+		private string _LotNo;
+		
+		private System.Nullable<int> _SNP;
+		
+		private string _ofTAG;
+		
+		private string _RefNo;
+		
+		private string _SP;
+		
+		public sp_E_001_Excel_tb_CheckStockTempCheckResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckNo", DbType="NVarChar(20)")]
+		public string CheckNo
+		{
+			get
+			{
+				return this._CheckNo;
+			}
+			set
+			{
+				if ((this._CheckNo != value))
+				{
+					this._CheckNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckMachine", DbType="NVarChar(50)")]
+		public string CheckMachine
+		{
+			get
+			{
+				return this._CheckMachine;
+			}
+			set
+			{
+				if ((this._CheckMachine != value))
+				{
+					this._CheckMachine = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Location", DbType="NVarChar(20)")]
+		public string Location
+		{
+			get
+			{
+				return this._Location;
+			}
+			set
+			{
+				if ((this._Location != value))
+				{
+					this._Location = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckBy", DbType="NVarChar(50)")]
+		public string CheckBy
+		{
+			get
+			{
+				return this._CheckBy;
+			}
+			set
+			{
+				if ((this._CheckBy != value))
+				{
+					this._CheckBy = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreateDate
+		{
+			get
+			{
+				return this._CreateDate;
+			}
+			set
+			{
+				if ((this._CreateDate != value))
+				{
+					this._CreateDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateBy", DbType="NVarChar(50)")]
+		public string CreateBy
+		{
+			get
+			{
+				return this._CreateBy;
+			}
+			set
+			{
+				if ((this._CreateBy != value))
+				{
+					this._CreateBy = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Code", DbType="NVarChar(50)")]
+		public string Code
+		{
+			get
+			{
+				return this._Code;
+			}
+			set
+			{
+				if ((this._Code != value))
+				{
+					this._Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemName", DbType="NVarChar(50)")]
+		public string ItemName
+		{
+			get
+			{
+				return this._ItemName;
+			}
+			set
+			{
+				if ((this._ItemName != value))
+				{
+					this._ItemName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this._Quantity = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NVarChar(50)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this._Status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Remark", DbType="NVarChar(50)")]
+		public string Remark
+		{
+			get
+			{
+				return this._Remark;
+			}
+			set
+			{
+				if ((this._Remark != value))
+				{
+					this._Remark = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Package", DbType="NVarChar(50)")]
+		public string Package
+		{
+			get
+			{
+				return this._Package;
+			}
+			set
+			{
+				if ((this._Package != value))
+				{
+					this._Package = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="NVarChar(50)")]
+		public string Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this._Type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LotNo", DbType="NVarChar(50)")]
+		public string LotNo
+		{
+			get
+			{
+				return this._LotNo;
+			}
+			set
+			{
+				if ((this._LotNo != value))
+				{
+					this._LotNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SNP", DbType="Int")]
+		public System.Nullable<int> SNP
+		{
+			get
+			{
+				return this._SNP;
+			}
+			set
+			{
+				if ((this._SNP != value))
+				{
+					this._SNP = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ofTAG", DbType="NVarChar(50)")]
+		public string ofTAG
+		{
+			get
+			{
+				return this._ofTAG;
+			}
+			set
+			{
+				if ((this._ofTAG != value))
+				{
+					this._ofTAG = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RefNo", DbType="NVarChar(50)")]
+		public string RefNo
+		{
+			get
+			{
+				return this._RefNo;
+			}
+			set
+			{
+				if ((this._RefNo != value))
+				{
+					this._RefNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SP", DbType="NVarChar(50)")]
+		public string SP
+		{
+			get
+			{
+				return this._SP;
+			}
+			set
+			{
+				if ((this._SP != value))
+				{
+					this._SP = value;
 				}
 			}
 		}

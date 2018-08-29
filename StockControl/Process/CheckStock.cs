@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Linq;
 using Microsoft.VisualBasic.FileIO;
 using System.Globalization;
+using Telerik.WinControls.UI;
 
 namespace StockControl
 {
@@ -587,6 +588,35 @@ namespace StockControl
                 }
 
             }catch(Exception ex) { MessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
+        }
+
+        private void radButtonElement6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    var x = (from ix in db.sp_E_001_Excel_tb_CheckStockTempCheck(txtCheckNo.Text,"","") select ix).ToList();
+                    if(x.Count>0)
+                    {
+
+                        //RadGridView ex = new RadGridView();
+                        //ex.DataSource = null;
+                        //ex.DataSource = x;
+
+                        radGridView2.DataSource = x;
+                        dbClss.ExportGridXlSX(radGridView2);
+                    }
+                    else
+                    {
+                        MessageBox.Show("not found.");
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
             finally { this.Cursor = Cursors.Default; }
         }
     }
