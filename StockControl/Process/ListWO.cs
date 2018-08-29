@@ -7,13 +7,14 @@ using System.Text;
 using System.Windows.Forms;
 using System.Linq;
 using Microsoft.VisualBasic.FileIO;
+using Telerik.WinControls.UI;
 namespace StockControl
 {
-    public partial class ListItem : Telerik.WinControls.UI.RadRibbonForm
+    public partial class ListWO : Telerik.WinControls.UI.RadRibbonForm
     {
-        public ListItem()
+        public ListWO()
         {
-            this.Name = "ListItem";
+            this.Name = "ListWO";
             if (!dbClss.PermissionScreen(this.Name))
             {
                 MessageBox.Show("Access denied", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -25,7 +26,6 @@ namespace StockControl
         //private int RowView = 50;
         //private int ColView = 10;
         DataTable dt = new DataTable();
-        string PathFile = "";
         private void radMenuItem2_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
@@ -40,47 +40,34 @@ namespace StockControl
         }
         private void GETDTRow()
         {
-            //dt.Columns.Add(new DataColumn("edit", typeof(bool)));
-            //dt.Columns.Add(new DataColumn("code", typeof(string)));
-            //dt.Columns.Add(new DataColumn("Name", typeof(string)));
-            //dt.Columns.Add(new DataColumn("Active", typeof(bool)));
-            //dt.Columns.Add(new DataColumn("CreateDate", typeof(DateTime)));
-            //dt.Columns.Add(new DataColumn("CreateBy", typeof(string)));
+            dt.Columns.Add(new DataColumn("edit", typeof(bool)));
+            dt.Columns.Add(new DataColumn("code", typeof(string)));
+            dt.Columns.Add(new DataColumn("Name", typeof(string)));
+            dt.Columns.Add(new DataColumn("Active", typeof(bool)));
+            dt.Columns.Add(new DataColumn("CreateDate", typeof(DateTime)));
+            dt.Columns.Add(new DataColumn("CreateBy", typeof(string)));
         }
         private void Unit_Load(object sender, EventArgs e)
         {
-            RMenu3.Click += RMenu3_Click;
-            RMenu4.Click += RMenu4_Click;
-            // RMenu5.Click += RMenu5_Click;
-            RMenu6.Click += RMenu6_Click;
-            radGridView1.ReadOnly = true;
+            //RMenu3.Click += RMenu3_Click;
+            //RMenu4.Click += RMenu4_Click;
+            //RMenu5.Click += RMenu5_Click;
+            //RMenu6.Click += RMenu6_Click;
+            // radGridView1.ReadOnly = true;
+            dtDate1.Value = DateTime.Now;
+            dtDate2.Value = DateTime.Now;
             radGridView1.AutoGenerateColumns = false;
-            // GETDTRow();
-
-            LoadDataDefault();
+           // GETDTRow();
+           
+            
             DataLoad();
-        }
-        private void LoadDataDefault()
-        {
-            try
-            {
-                using (DataClasses1DataContext db = new DataClasses1DataContext())
-                {
-                    tb_Path ph = db.tb_Paths.Where(p => p.PathCode == "Image").FirstOrDefault();
-                    if(ph!=null)
-                    {
-                        PathFile = ph.PathFile;
-                    }
-                }
-            }
-            catch { }
         }
 
         private void RMenu6_Click(object sender, EventArgs e)
         {
            
-            DeleteUnit();
-            DataLoad();
+            //DeleteUnit();
+            //DataLoad();
         }
 
         private void RMenu5_Click(object sender, EventArgs e)
@@ -98,17 +85,17 @@ namespace StockControl
             NewClick();
 
         }
-        
+
         private void DataLoad()
         {
-            this.Cursor = Cursors.WaitCursor;
             try
             {
+                this.Cursor = Cursors.WaitCursor;
                 int ck = 0;
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
 
-                    radGridView1.DataSource = db.sp_001_TPIC_SelectItem(txtItemNo.Text).ToList();
+                    radGridView1.DataSource = db.sp_004_TPIC_SelectWO(txtPONo.Text, txtItemNo.Text, txtVendorCode.Text, chkUseDate.Checked, dtDate1.Value, dtDate2.Value).ToList();
                     foreach (var x in radGridView1.Rows)
                     {
 
@@ -129,7 +116,8 @@ namespace StockControl
             catch { }
             this.Cursor = Cursors.Default;
 
-            
+
+
         }
         private bool CheckDuplicate(string code)
         {
@@ -301,53 +289,6 @@ namespace StockControl
         private void btnView_Click(object sender, EventArgs e)
         {
             ViewClick();
-
-            //genLOt();
-        }
-
-        private void genLOt()
-        {
-            string LotMap = "";
-            string LotY = "";
-            string LotM = "";
-            string LotNo = "";
-            using (DataClasses1DataContext db = new DataClasses1DataContext())
-            {
-                DateTime thisDay = DateTime.Now;
-                for (int i = 1; i <= 1200; i++)
-                {
-                    LotMap = "";
-                    LotY = "";
-                    LotM = "";
-                    LotNo = "";
-                    tb_GenerateLotMap g = db.tb_GenerateLotMaps.Where(t => t.Daysx == thisDay.Day).FirstOrDefault();
-                    if (g != null)
-                    {
-                        LotMap = g.KeyLot;
-                        LotY = thisDay.Year.ToString().Substring(3, 1);
-                        LotM = thisDay.Month.ToString();
-
-
-                        if (thisDay.Month == 10)
-                            LotM = "X";
-                        else if (thisDay.Month == 11)
-                            LotM = "Y";
-                        else if (thisDay.Month == 12)
-                            LotM = "Z";
-                        LotNo = LotY + LotM + LotMap + "T";
-
-                        tb_LotNo nl = new tb_LotNo();
-                        nl.LotNo = LotNo;
-                        nl.LotDate = thisDay;
-                        db.tb_LotNos.InsertOnSubmit(nl);
-                        db.SubmitChanges();
-
-
-                    }
-                    thisDay = thisDay.AddDays(1);
-                }
-                MessageBox.Show("Completed");
-            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -378,24 +319,36 @@ namespace StockControl
         {
             try
             {
-                //radGridView1.Rows[e.RowIndex].Cells["dgvC"].Value = "T";
-                //string check1 = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["UnitCode"].Value);
-                //string TM= Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["dgvCodeTemp"].Value);
-                //if (!check1.Trim().Equals("") && TM.Equals(""))
-                //{
-                    
-                //    if (!CheckDuplicate(check1.Trim()))
-                //    {
-                //        MessageBox.Show("ข้อมูล รหัสหน่วย ซ้ำ");
-                //        radGridView1.Rows[e.RowIndex].Cells["UnitCode"].Value = "";
-                //        radGridView1.Rows[e.RowIndex].Cells["UnitCode"].IsSelected = true;
+                if (e.ColumnIndex == radGridView1.Columns["LotNo"].Index)
+                {
+                    string LotNo = radGridView1.Rows[e.RowIndex].Cells["LotNo"].Value.ToString();
+                    string PONo = radGridView1.Rows[e.RowIndex].Cells["PORDER"].Value.ToString();
+                    DateTime date1 = Convert.ToDateTime(radGridView1.Rows[e.RowIndex].Cells["DeliveryDate"].Value.ToString());
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                        tb_HistoryPrintSupplier tp = db.tb_HistoryPrintSuppliers.Where(t => t.PONo == PONo).FirstOrDefault();
+                        if (tp != null)
+                        {
+                            tp.LotNo = LotNo;
+                            db.SubmitChanges();
+                        }
+                        else
+                        {
+                            tb_HistoryPrintSupplier tn = new tb_HistoryPrintSupplier();
+                            tn.PONo = PONo;
+                            tn.LotNo = LotNo;
+                            tn.PrintTAG = false;
+                            tn.DeliveryDate = date1;
+                            db.tb_HistoryPrintSuppliers.InsertOnSubmit(tn);
+                            db.SubmitChanges();
 
-                //    }
-                //}
+                        }
+                    }
+                }
         
 
             }
-            catch(Exception ex) { }
+            catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void Unit_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -428,8 +381,8 @@ namespace StockControl
         private void btnDelete_Click(object sender, EventArgs e)
         {
             
-                DeleteUnit();
-                DataLoad();
+                //DeleteUnit();
+                //DataLoad();
             
         }
 
@@ -574,44 +527,159 @@ namespace StockControl
             this.Close();
         }
 
-        private void radButtonElement2_Click(object sender, EventArgs e)
+        private void btnSave_Click_1(object sender, EventArgs e)
         {
+            //Example01.pdf
+         //   System.Diagnostics.Process.Start(Environment.CurrentDirectory+@"\Example\Example01.pdf");
 
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void radButton1_Click(object sender, EventArgs e)
         {
             DataLoad();
         }
 
-        private void radButtonElement2_Click_1(object sender, EventArgs e)
+        private void chkSelect_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
         {
-            if (row >= 0)
+            if(chkSelect.Checked)
             {
-                string code = radGridView1.Rows[row].Cells["Code"].Value.ToString();
-                ItemListImage im = new ItemListImage(code);
-                im.ShowDialog();
-            }
+                foreach(GridViewRowInfo rd in radGridView1.Rows)
+                {
+                    rd.Cells["chk"].Value = true;
+                }
 
+            }else
+            {
+                foreach (GridViewRowInfo rd in radGridView1.Rows)
+                {
+                    rd.Cells["chk"].Value = false;
+                }
+            }
         }
 
-        private void radGridView1_CellDoubleClick(object sender, Telerik.WinControls.UI.GridViewCellEventArgs e)
+        private void btnSave_Click_2(object sender, EventArgs e)
         {
-            if(e.RowIndex>=0)
+            //Print TAG Barcode//
+            PrintTAG();
+
+        }
+        private void PrintTAG()
+        {
+            try
             {
-                if(!radGridView1.Rows[e.RowIndex].Cells["PahtImage"].Value.ToString().Equals("") && !PathFile.Equals(""))
+                this.Cursor = Cursors.WaitCursor;
+                //Supplier_TAG.rpt
+                //@UserID
+                //@Datex
+                //WP=> SupplierTAG
+                int chkAdd = 0;
+                int Qty = 0;
+                int Snp = 0;
+                int TAG = 0;
+                int Remain = 0;
+                DateTime dl = DateTime.Now;
+                string QrCode = "";
+                string OfTAG = "";
+                
+                double ap = 0;
+                int a = 0;
+                //   DateTime DateDl = DateTime.Now;
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    try
+                    var td = db.TempPrintSuppliers.Where(t => t.UserID.ToLower() == dbClss.UserID.ToLower());
+                    db.TempPrintSuppliers.DeleteAllOnSubmit(td);
+                    db.SubmitChanges();
+                    radGridView1.EndUpdate();
+                    radGridView1.EndEdit();
+
+                    foreach (GridViewRowInfo rd in radGridView1.Rows.Where(o => Convert.ToBoolean(o.Cells["chk"].Value)))
                     {
-                        System.Diagnostics.Process.Start(PathFile+"" +radGridView1.Rows[e.RowIndex].Cells["PahtImage"].Value.ToString());
+                        if (Convert.ToBoolean(rd.Cells["chk"].Value))
+                        {
+                            Snp = Convert.ToInt32(rd.Cells["LotSize"].Value);
+                            Qty = Convert.ToInt32(rd.Cells["OrderQty"].Value);
+                            dl = Convert.ToDateTime(rd.Cells["DeliveryDate"].Value);
+                            if (Qty != 0 && Snp != 0)
+                            {
+                                a = 0;
+                                ap = (Qty % Snp);
+                                if (ap > 0)
+                                    a = 1;
+                                TAG = Convert.ToInt32(Math.Floor((Convert.ToDouble(Qty) / Convert.ToDouble(Snp)) + a));//.ToString("###");
+
+                                //txtOftag.Text = Math.Ceiling((double)1.7 / 10).ToString("###");
+
+                                Remain = Qty;
+                            }
+                            ////////////////////////////////////////////////
+                            for (int i = 1; i <= TAG; i++)
+                            {
+                                if (Remain > Snp)
+                                {
+                                    Qty = Snp;
+                                    Remain = Remain - Snp;
+                                }
+                                else
+                                {
+                                    Qty = Remain;
+                                    Remain = 0;
+                                }
+                                OfTAG = i + "of" + TAG;
+                                QrCode = "";
+                                QrCode = "EX," + rd.Cells["PORDER"].Value.ToString() + "," + Qty + "," + Snp + "," + rd.Cells["LotNo"].Value.ToString() + "," + OfTAG + "," + rd.Cells["Code"].Value.ToString();
+                                //MessageBox.Show(QrCode);
+                                byte[] barcode = dbClss.SaveQRCode2D(QrCode);
+                                
+                                TempPrintSupplier ts = new TempPrintSupplier();
+                                ts.UserID = dbClss.UserID;
+                                ts.PONo = rd.Cells["PORDER"].Value.ToString();
+                                ts.LotNo = rd.Cells["LotNo"].Value.ToString();
+                                ts.TAGRemark = dl.ToString("dd/MM/yyyy");
+                                ts.QRCode = barcode;
+                                ts.PartName = rd.Cells["NAME"].Value.ToString();
+                                ts.ItemNo = rd.Cells["Code"].Value.ToString();
+                                ts.SNP = Convert.ToInt32(rd.Cells["LotSize"].Value);
+                                ts.Company = rd.Cells["VendorName"].Value.ToString();
+                                ts.Quantity = Qty;
+                                ts.OfTAG = i + " / " + TAG;
+                                ///////////////////////////////////////////////
+                                db.TempPrintSuppliers.InsertOnSubmit(ts);
+                                db.SubmitChanges();
+                            }
+
+                            tb_HistoryPrintSupplier tp = db.tb_HistoryPrintSuppliers.Where(t => t.PONo == rd.Cells["PORDER"].Value.ToString()).FirstOrDefault();
+                            if (tp != null)
+                            {
+                                tp.LotNo = rd.Cells["LotNo"].Value.ToString();
+                                tp.PrintTAG = true;
+                                db.SubmitChanges();
+                            }
+                            else
+                            {
+                                tb_HistoryPrintSupplier tn = new tb_HistoryPrintSupplier();
+                                tn.PONo = rd.Cells["PORDER"].Value.ToString();
+                                tn.LotNo = rd.Cells["LotNo"].Value.ToString();
+                                tn.PrintTAG = true;
+                                tn.DeliveryDate = dl;
+                                db.tb_HistoryPrintSuppliers.InsertOnSubmit(tn);
+                                db.SubmitChanges();
+
+                            }
+
+                            chkAdd += 1;
+                        }
                     }
-                    catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);  }
                 }
-                else
-                {
-                    MessageBox.Show("Path file Empty!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+
+                Report.Reportx1.WReport = "SupplierTAG";
+                Report.Reportx1.Value = new string[1];
+                Report.Reportx1.Value[0] = dbClss.UserID;
+                Report.Reportx1 op = new Report.Reportx1("Supplier_TAG.rpt");
+                op.Show();
+
             }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            this.Cursor = Cursors.Default;
         }
 
         private void txtItemNo_KeyPress(object sender, KeyPressEventArgs e)
@@ -620,66 +688,6 @@ namespace StockControl
             {
                 DataLoad();
             }
-        }
-
-        private void btnSave_Click_1(object sender, EventArgs e)
-        {
-            this.Cursor = Cursors.WaitCursor;
-            PrintTAG();
-            this.Cursor = Cursors.Default; ;
-
-        }
-        private void PrintTAG()
-        {
-            //Temp TAG//
-            try
-            {
-                //TextBox tempTag = new TextBox();
-                string Code = radGridView1.Rows[row].Cells["Code"].Value.ToString();
-                if (!Code.Equals(""))
-                {
-                    PrintTEMPTAG pt = new PrintTEMPTAG(Code);
-                    pt.Show();
-                }
-
-                //Report.Reportx1.WReport = "PDTAG";
-                //Report.Reportx1.Value = new string[2];
-                //Report.Reportx1.Value[0] = "BomNo";
-                //Report.Reportx1.Value[1] = dbClss.UserID;
-                //Report.Reportx1 op = new Report.Reportx1("TEMPTAG.rpt");
-                //op.Show();
-            }
-            catch { }
-        }
-
-        private void radButtonElement1_Click(object sender, EventArgs e)
-        {
-            this.Cursor = Cursors.WaitCursor ;
-            try
-            {
-                Report.Reportx1.WReport = "StockCard";
-                Report.Reportx1.Value = new string[2];
-                Report.Reportx1.Value[0] = "0101100014000";
-                Report.Reportx1.Value[1] = dbClss.UserID;
-                Report.Reportx1 op = new Report.Reportx1("StockCard.rpt");
-                op.Show();
-            }
-            catch { }
-            this.Cursor = Cursors.Default;
-        }
-
-        private void radButtonElement3_Click(object sender, EventArgs e)
-        {
-            //FG_TAG
-            //Report.Reportx1.WReport = "PDTAG";
-            //Report.Reportx1.Value = new string[2];
-            //Report.Reportx1.Value[0] = "BomNo";
-            //Report.Reportx1.Value[1] = dbClss.UserID;
-            //Report.Reportx1 op = new Report.Reportx1("FG_TAG.rpt");
-            //op.Show();
-            PrintPDTAG pd = new PrintPDTAG("");
-            pd.Show();
-
         }
     }
 }

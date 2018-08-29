@@ -141,6 +141,12 @@
     <Compile Include="Process\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\ListWO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ListWO.Designer.cs">
+      <DependentUpon>ListWO.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\LocalShipment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,6 +200,18 @@
     </Compile>
     <Compile Include="Process\CheckStockUpload.Designer.cs">
       <DependentUpon>CheckStockUpload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\PrintPDTAG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\PrintPDTAG.Designer.cs">
+      <DependentUpon>PrintPDTAG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\PrintTEMPTAG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\PrintTEMPTAG.Designer.cs">
+      <DependentUpon>PrintTEMPTAG.cs</DependentUpon>
     </Compile>
     <Compile Include="Process\PrintPOSelectLot.cs">
       <SubType>Form</SubType>
@@ -367,6 +385,9 @@
     <EmbeddedResource Include="Main\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Process\ListWO.resx">
+      <DependentUpon>ListWO.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Process\LocalShipment.resx">
       <DependentUpon>LocalShipment.cs</DependentUpon>
     </EmbeddedResource>
@@ -393,6 +414,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\CheckStockUpload.resx">
       <DependentUpon>CheckStockUpload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\PrintPDTAG.resx">
+      <DependentUpon>PrintPDTAG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\PrintTEMPTAG.resx">
+      <DependentUpon>PrintTEMPTAG.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\PrintPOSelectLot.resx">
       <DependentUpon>PrintPOSelectLot.cs</DependentUpon>

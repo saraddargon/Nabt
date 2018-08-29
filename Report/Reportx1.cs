@@ -164,7 +164,15 @@ namespace Report
                     }
                     break;
 
-                case "001_Kanban_Part":
+                case "SupplierTAG":
+                    {
+
+                        rptDc.SetParameterValue("@UserID", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
+
+                    }
+                    break;
+                case "TEMPTAG":
                     {
 
                         rptDc.SetParameterValue("@UserID", Convert.ToString(Value[0].ToString()));
@@ -184,6 +192,7 @@ namespace Report
                     {
                         rptDc.SetParameterValue("@BomNo", Convert.ToString(Value[0].ToString()));
                         rptDc.SetParameterValue("@USERID", Convert.ToString(Value[1].ToString()));
+                        //rptDc.SetParameterValue("@AC", Convert.ToInt32(Value[2].ToString()));
                         rptDc.SetParameterValue("@Datex", DateTime.Now);
                        
                     } break;
