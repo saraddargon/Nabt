@@ -683,4 +683,26 @@
       <Column Name="UnitOfMeasure" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.sp_E_002_Excel_tb_CheckStockList" Method="sp_E_002_Excel_tb_CheckStockList">
+    <Parameter Name="CheckNo" Parameter="checkNo" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="Location" Parameter="location" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Code" Parameter="code" Type="System.String" DbType="VarChar(100)" />
+    <ElementType Name="sp_E_002_Excel_tb_CheckStockListResult">
+      <Column Name="DKUBU" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="[Item Code]" Member="Item_Code" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="[Item Description]" Member="Item_Description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Revision" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="[Exclusion Class]" Member="Exclusion_Class" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="[Storage Work Center]" Member="Storage_Work_Center" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="[Storage Work Center Name]" Member="Storage_Work_Center_Name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="[Current Inventory]" Member="Current_Inventory" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="[Inventory Value]" Member="Inventory_Value" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="[Stock Before Inventory]" Member="Stock_Before_Inventory" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="[Physical Inventory Value]" Member="Physical_Inventory_Value" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="[Unit of Measure]" Member="Unit_of_Measure" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CheckNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="No" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

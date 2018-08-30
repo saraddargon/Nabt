@@ -272,7 +272,6 @@
             this.radButtonElement7.Name = "radButtonElement7";
             this.radButtonElement7.Text = "รายการเปรียบเทียบ";
             this.radButtonElement7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.radButtonElement7.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
             this.radButtonElement7.Click += new System.EventHandler(this.radButtonElement7_Click);
             // 
             // radRibbonBarGroup3
