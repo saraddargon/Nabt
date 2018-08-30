@@ -163,7 +163,15 @@ namespace Report
 
                     }
                     break;
+                case "ReportCheckStockDiff":
+                    {
 
+                        rptDc.SetParameterValue("@CheckNo1", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@CheckNo2", Convert.ToString(Value[1].ToString()));
+                        rptDc.SetParameterValue("@Date", Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US")));
+
+                    }
+                    break;                    
                 case "SupplierTAG":
                     {
 

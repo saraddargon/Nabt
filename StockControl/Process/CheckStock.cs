@@ -650,12 +650,58 @@ namespace StockControl
 
         private void radButtonElement4_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+                string CheckNo = txtCheckNo.Text;
+                //ReportCheckStock.rpt
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    //string CheckNo = dbClss.TSt(dgvData.CurrentRow.Cells["CheckNo"].Value);
+
+                    var g = (from ix in db.sp_R_001_Report_CheckStock(CheckNo, CheckNo, Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"))) select ix).ToList();
+                    if (g.Count() > 0)
+                    {
+                        Report.Reportx1.Value = new string[2];
+                        Report.Reportx1.Value[0] = CheckNo;
+                        Report.Reportx1.Value[1] = CheckNo;
+                        Report.Reportx1.WReport = "ReportCheckStock";
+                        Report.Reportx1 op = new Report.Reportx1("ReportCheckStockInput.rpt");
+                        op.Show();
+                    }
+                    else
+                        MessageBox.Show("not found.");
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void radButtonElement5_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+                string CheckNo = txtCheckNo.Text;
+                //ReportCheckStock.rpt
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    //string CheckNo = dbClss.TSt(dgvData.CurrentRow.Cells["CheckNo"].Value);
+
+                    var g = (from ix in db.sp_R_002_Report_DiffCheckStock(CheckNo, CheckNo, Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"))) select ix).ToList();
+                    if (g.Count() > 0)
+                    {
+                        Report.Reportx1.Value = new string[2];
+                        Report.Reportx1.Value[0] = CheckNo;
+                        Report.Reportx1.Value[1] = CheckNo;
+                        Report.Reportx1.WReport = "ReportCheckStockDiff";
+                        Report.Reportx1 op = new Report.Reportx1("ReportCheckStockDiff.rpt");
+                        op.Show();
+                    }
+                    else
+                        MessageBox.Show("not found.");
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }
