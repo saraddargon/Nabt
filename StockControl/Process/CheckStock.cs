@@ -707,6 +707,31 @@ namespace StockControl
         private void radButtonElement7_Click(object sender, EventArgs e)
         {
             //export excal to original Template//
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    var x = (from ix in db.sp_E_002_Excel_tb_CheckStockList(txtCheckNo.Text, "", "") select ix).ToList();
+                    if (x.Count > 0)
+                    {
+
+                        //RadGridView ex = new RadGridView();
+                        //ex.DataSource = null;
+                        //ex.DataSource = x;
+
+                        radGridView2.DataSource = x;
+                        dbClss.ExportGridXlSX(radGridView2);
+                    }
+                    else
+                    {
+                        MessageBox.Show("not found.");
+                    }
+                }
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
         }
     }
 }

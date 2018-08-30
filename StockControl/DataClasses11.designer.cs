@@ -518,6 +518,13 @@ namespace StockControl
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), checkNo1, checkNo2, date);
 			return ((ISingleResult<sp_R_002_Report_DiffCheckStockResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_E_002_Excel_tb_CheckStockList")]
+		public ISingleResult<sp_E_002_Excel_tb_CheckStockListResult> sp_E_002_Excel_tb_CheckStockList([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CheckNo", DbType="NVarChar(30)")] string checkNo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Location", DbType="VarChar(100)")] string location, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Code", DbType="VarChar(100)")] string code)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), checkNo, location, code);
+			return ((ISingleResult<sp_E_002_Excel_tb_CheckStockListResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ErrorLog")]
@@ -11551,6 +11558,284 @@ namespace StockControl
 				if ((this._UnitOfMeasure != value))
 				{
 					this._UnitOfMeasure = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_E_002_Excel_tb_CheckStockListResult
+	{
+		
+		private string _DKUBU;
+		
+		private string _Item_Code;
+		
+		private string _Item_Description;
+		
+		private string _Type;
+		
+		private string _Revision;
+		
+		private string _Exclusion_Class;
+		
+		private string _Storage_Work_Center;
+		
+		private string _Storage_Work_Center_Name;
+		
+		private string _Current_Inventory;
+		
+		private string _Inventory_Value;
+		
+		private string _Stock_Before_Inventory;
+		
+		private string _Physical_Inventory_Value;
+		
+		private string _Unit_of_Measure;
+		
+		private string _CheckNo;
+		
+		private System.Nullable<long> _No;
+		
+		public sp_E_002_Excel_tb_CheckStockListResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DKUBU", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
+		public string DKUBU
+		{
+			get
+			{
+				return this._DKUBU;
+			}
+			set
+			{
+				if ((this._DKUBU != value))
+				{
+					this._DKUBU = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Item Code]", Storage="_Item_Code", DbType="NVarChar(50)")]
+		public string Item_Code
+		{
+			get
+			{
+				return this._Item_Code;
+			}
+			set
+			{
+				if ((this._Item_Code != value))
+				{
+					this._Item_Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Item Description]", Storage="_Item_Description", DbType="NVarChar(50)")]
+		public string Item_Description
+		{
+			get
+			{
+				return this._Item_Description;
+			}
+			set
+			{
+				if ((this._Item_Description != value))
+				{
+					this._Item_Description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="VarChar(50)")]
+		public string Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this._Type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Revision", DbType="VarChar(50)")]
+		public string Revision
+		{
+			get
+			{
+				return this._Revision;
+			}
+			set
+			{
+				if ((this._Revision != value))
+				{
+					this._Revision = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Exclusion Class]", Storage="_Exclusion_Class", DbType="VarChar(50)")]
+		public string Exclusion_Class
+		{
+			get
+			{
+				return this._Exclusion_Class;
+			}
+			set
+			{
+				if ((this._Exclusion_Class != value))
+				{
+					this._Exclusion_Class = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Storage Work Center]", Storage="_Storage_Work_Center", DbType="VarChar(255)")]
+		public string Storage_Work_Center
+		{
+			get
+			{
+				return this._Storage_Work_Center;
+			}
+			set
+			{
+				if ((this._Storage_Work_Center != value))
+				{
+					this._Storage_Work_Center = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Storage Work Center Name]", Storage="_Storage_Work_Center_Name", DbType="VarChar(255)")]
+		public string Storage_Work_Center_Name
+		{
+			get
+			{
+				return this._Storage_Work_Center_Name;
+			}
+			set
+			{
+				if ((this._Storage_Work_Center_Name != value))
+				{
+					this._Storage_Work_Center_Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Current Inventory]", Storage="_Current_Inventory", DbType="VarChar(50)")]
+		public string Current_Inventory
+		{
+			get
+			{
+				return this._Current_Inventory;
+			}
+			set
+			{
+				if ((this._Current_Inventory != value))
+				{
+					this._Current_Inventory = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Inventory Value]", Storage="_Inventory_Value", DbType="VarChar(50)")]
+		public string Inventory_Value
+		{
+			get
+			{
+				return this._Inventory_Value;
+			}
+			set
+			{
+				if ((this._Inventory_Value != value))
+				{
+					this._Inventory_Value = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Stock Before Inventory]", Storage="_Stock_Before_Inventory", DbType="VarChar(50)")]
+		public string Stock_Before_Inventory
+		{
+			get
+			{
+				return this._Stock_Before_Inventory;
+			}
+			set
+			{
+				if ((this._Stock_Before_Inventory != value))
+				{
+					this._Stock_Before_Inventory = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Physical Inventory Value]", Storage="_Physical_Inventory_Value", DbType="VarChar(50)")]
+		public string Physical_Inventory_Value
+		{
+			get
+			{
+				return this._Physical_Inventory_Value;
+			}
+			set
+			{
+				if ((this._Physical_Inventory_Value != value))
+				{
+					this._Physical_Inventory_Value = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Unit of Measure]", Storage="_Unit_of_Measure", DbType="VarChar(50)")]
+		public string Unit_of_Measure
+		{
+			get
+			{
+				return this._Unit_of_Measure;
+			}
+			set
+			{
+				if ((this._Unit_of_Measure != value))
+				{
+					this._Unit_of_Measure = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckNo", DbType="NVarChar(50)")]
+		public string CheckNo
+		{
+			get
+			{
+				return this._CheckNo;
+			}
+			set
+			{
+				if ((this._CheckNo != value))
+				{
+					this._CheckNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_No", DbType="BigInt")]
+		public System.Nullable<long> No
+		{
+			get
+			{
+				return this._No;
+			}
+			set
+			{
+				if ((this._No != value))
+				{
+					this._No = value;
 				}
 			}
 		}
