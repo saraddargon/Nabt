@@ -122,10 +122,10 @@
         <elementListCompartment Id="12e6a247-2828-4449-b1ca-2f007991ba1b" absoluteBounds="2.89, 3.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="b78d2ebd-2059-4e30-aff6-a40225682b64" isExpanded="false" absoluteBounds="2.75, 4, 2, 0.45">
+    <classShape Id="b78d2ebd-2059-4e30-aff6-a40225682b64" isExpanded="false" absoluteBounds="2.875, 4, 2, 0.45">
       <DataClassMoniker Name="/DataClasses1DataContext/tb_ItemList" />
       <nestedChildShapes>
-        <elementListCompartment Id="f7d33ea1-be85-47b2-bff2-f0a1f69f7219" absoluteBounds="2.765, 4.46, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="f7d33ea1-be85-47b2-bff2-f0a1f69f7219" absoluteBounds="2.89, 4.46, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="cb958546-dc81-41f2-a775-6e85d1d2a985" isExpanded="false" absoluteBounds="0.5, 6, 2, 0.45">

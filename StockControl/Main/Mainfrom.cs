@@ -232,7 +232,7 @@ namespace StockControl
                 //    db.sp_RunJOB();
                 //    db.sp_SelectItemUpdate();
                 //}
-                    MessageBox.Show("Script Run StoreProcedure Agent Completed.");
+                 MessageBox.Show("Script Run StoreProcedure Agent Completed.");
             }
         }
 

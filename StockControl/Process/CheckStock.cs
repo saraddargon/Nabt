@@ -703,5 +703,10 @@ namespace StockControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
+
+        private void radButtonElement7_Click(object sender, EventArgs e)
+        {
+            //export excal to original Template//
+        }
     }
 }
