@@ -118,7 +118,7 @@
             this.radMenuItem2,
             this.radMenuItem3});
             this.radRibbonBar1.TabIndex = 0;
-            this.radRibbonBar1.Text = "List Mapping Item";
+            this.radRibbonBar1.Text = "List WO";
             this.radRibbonBar1.ThemeName = "Office2010Blue";
             this.radRibbonBar1.Click += new System.EventHandler(this.radRibbonBar1_Click);
             // 

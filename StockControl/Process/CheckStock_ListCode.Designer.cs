@@ -44,6 +44,7 @@
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn11 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn12 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn13 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn14 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
@@ -61,8 +62,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
             this.dgvData = new Telerik.WinControls.UI.RadGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.deletePartNoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnLoad = new Telerik.WinControls.UI.RadButton();
             this.ddlLocation = new Telerik.WinControls.UI.RadDropDownList();
@@ -77,6 +76,8 @@
             this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
             this.txtCheckNo = new Telerik.WinControls.UI.RadTextBox();
             this.radLabel7 = new Telerik.WinControls.UI.RadLabel();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deletePartNoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.office2010BlueTheme1 = new Telerik.WinControls.Themes.Office2010BlueTheme();
             this.radRibbonBarButtonGroup2 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
@@ -93,7 +94,6 @@
             this.radPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData.MasterTemplate)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnLoad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ddlLocation)).BeginInit();
@@ -109,6 +109,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCheckNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel7)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -383,6 +384,12 @@
             gridViewTextBoxColumn13.Name = "CheckNo";
             gridViewTextBoxColumn13.ReadOnly = true;
             gridViewTextBoxColumn13.Width = 102;
+            gridViewTextBoxColumn14.EnableExpressionEditor = false;
+            gridViewTextBoxColumn14.FieldName = "CheckMachine";
+            gridViewTextBoxColumn14.HeaderText = "CheckMachine";
+            gridViewTextBoxColumn14.Name = "CheckMachine";
+            gridViewTextBoxColumn14.ReadOnly = true;
+            gridViewTextBoxColumn14.Width = 120;
             this.dgvData.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
             gridViewTextBoxColumn1,
             gridViewTextBoxColumn2,
@@ -396,7 +403,8 @@
             gridViewTextBoxColumn10,
             gridViewTextBoxColumn11,
             gridViewTextBoxColumn12,
-            gridViewTextBoxColumn13});
+            gridViewTextBoxColumn13,
+            gridViewTextBoxColumn14});
             this.dgvData.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
             this.dgvData.MasterTemplate.ViewDefinition = tableViewDefinition1;
             this.dgvData.Name = "dgvData";
@@ -406,22 +414,6 @@
             this.dgvData.Size = new System.Drawing.Size(1005, 542);
             this.dgvData.TabIndex = 1;
             this.dgvData.ThemeName = "Office2010Blue";
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deletePartNoToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(154, 26);
-            // 
-            // deletePartNoToolStripMenuItem
-            // 
-            this.deletePartNoToolStripMenuItem.BackColor = System.Drawing.Color.MistyRose;
-            this.deletePartNoToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
-            this.deletePartNoToolStripMenuItem.Name = "deletePartNoToolStripMenuItem";
-            this.deletePartNoToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.deletePartNoToolStripMenuItem.Text = "Delete Part No.";
-            this.deletePartNoToolStripMenuItem.Click += new System.EventHandler(this.deletePartNoToolStripMenuItem_Click);
             // 
             // panel2
             // 
@@ -589,6 +581,22 @@
             this.radLabel7.TabIndex = 0;
             this.radLabel7.Text = "Code.";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deletePartNoToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(154, 26);
+            // 
+            // deletePartNoToolStripMenuItem
+            // 
+            this.deletePartNoToolStripMenuItem.BackColor = System.Drawing.Color.MistyRose;
+            this.deletePartNoToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
+            this.deletePartNoToolStripMenuItem.Name = "deletePartNoToolStripMenuItem";
+            this.deletePartNoToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.deletePartNoToolStripMenuItem.Text = "Delete Part No.";
+            this.deletePartNoToolStripMenuItem.Click += new System.EventHandler(this.deletePartNoToolStripMenuItem_Click);
+            // 
             // radRibbonBarButtonGroup2
             // 
             this.radRibbonBarButtonGroup2.Items.AddRange(new Telerik.WinControls.RadItem[] {
@@ -684,7 +692,6 @@
             this.radPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvData.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnLoad)).EndInit();
@@ -702,6 +709,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCheckNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel7)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

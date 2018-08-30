@@ -558,11 +558,11 @@ namespace StockControl
 
         private void btnSave_Click_2(object sender, EventArgs e)
         {
-            if (row >= 0)
-            {
+            //if (row >= 0)
+            //{
                 UploadMapping um = new UploadMapping();
                 um.Show();
-            }
+            //}
            
 
         }

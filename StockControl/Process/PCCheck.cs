@@ -216,7 +216,7 @@ namespace StockControl
 
                         gg.CreateBy = dbClss.UserID;
                         gg.CreateDate = Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"));
-                        gg.CheckMachine = "";
+                        gg.CheckMachine = Environment.MachineName;
                         gg.Location = ddlLocation.Text;
                         gg.CheckBy = txtCheckBy.Text;
                         gg.Code = Code;
@@ -241,7 +241,7 @@ namespace StockControl
                     u.CheckNo = CheckNo;
                     u.CreateBy = dbClss.UserID;
                     u.CreateDate = Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"));
-                    u.CheckMachine = "";
+                    u.CheckMachine = Environment.MachineName;
                     u.Location = ddlLocation.Text;
                     u.CheckBy = txtCheckBy.Text;
                     u.Code = Code;
@@ -271,6 +271,7 @@ namespace StockControl
                 {
                     var g = (from ix in db.tb_CheckStockTempChecks
                              where ix.CheckNo.Trim() == checkNo
+                             && ix.CheckMachine == Environment.MachineName
                              && ix.Status != "Cancel"                             
                              select ix).ToList();
                     if(g.Count>0)
