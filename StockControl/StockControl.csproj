@@ -51,7 +51,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Barcode-scanner.ico</ApplicationIcon>
+    <ApplicationIcon>scan_barcode.png.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -578,6 +578,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Graphicloads-100-Flat-Cloud.ico" />
     <Content Include="Graphicloads-100-Flat-System-analytics.ico" />
+    <Content Include="scan_barcode.png.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClassLib\ClassLib.csproj">

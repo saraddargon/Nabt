@@ -374,6 +374,7 @@
             this.ClientSize = new System.Drawing.Size(1045, 521);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "display";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

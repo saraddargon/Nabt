@@ -41,6 +41,7 @@
             this.radLabelElement1 = new Telerik.WinControls.UI.RadLabelElement();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtPathInput = new Telerik.WinControls.UI.RadTextBox();
             this.txtImage = new Telerik.WinControls.UI.RadTextBox();
             this.btnImage = new Telerik.WinControls.UI.RadButton();
             this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
@@ -52,18 +53,17 @@
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
-            this.txtPathInput = new Telerik.WinControls.UI.RadTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPathInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtItemNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPathImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPathInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -199,6 +199,14 @@
             this.panel2.Size = new System.Drawing.Size(495, 182);
             this.panel2.TabIndex = 0;
             // 
+            // txtPathInput
+            // 
+            this.txtPathInput.Location = new System.Drawing.Point(123, 103);
+            this.txtPathInput.Name = "txtPathInput";
+            this.txtPathInput.Size = new System.Drawing.Size(111, 20);
+            this.txtPathInput.TabIndex = 5;
+            this.txtPathInput.Visible = false;
+            // 
             // txtImage
             // 
             this.txtImage.Location = new System.Drawing.Point(123, 77);
@@ -282,14 +290,6 @@
             this.radRibbonBarButtonGroup5.ShowBorder = false;
             this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
-            // txtPathInput
-            // 
-            this.txtPathInput.Location = new System.Drawing.Point(123, 103);
-            this.txtPathInput.Name = "txtPathInput";
-            this.txtPathInput.Size = new System.Drawing.Size(111, 20);
-            this.txtPathInput.TabIndex = 5;
-            this.txtPathInput.Visible = false;
-            // 
             // ItemListImage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -298,6 +298,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.radStatusStrip1);
             this.Controls.Add(this.radRibbonBar1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "ItemListImage";
             // 
@@ -313,13 +314,13 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPathInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtItemNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPathImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPathInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
