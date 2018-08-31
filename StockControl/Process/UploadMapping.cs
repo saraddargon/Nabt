@@ -63,7 +63,8 @@ namespace StockControl
             dt_d.Columns.Add(new DataColumn("CustItemNo", typeof(string)));
             dt_d.Columns.Add(new DataColumn("CustItemName", typeof(string)));
             dt_d.Columns.Add(new DataColumn("CustomerNo", typeof(string)));
-           
+            dt_d.Columns.Add(new DataColumn("CustomerName", typeof(string)));
+
         }
         private void radButton1_Click(object sender, EventArgs e)
         {
@@ -136,7 +137,7 @@ namespace StockControl
                     }
 
                     System.Array myvalues;
-                    Excel.Range range = worksheet.get_Range("A" + j.ToString(), "E" + j.ToString());
+                    Excel.Range range = worksheet.get_Range("A" + j.ToString(), "F" + j.ToString());
                     myvalues = (System.Array)range.Cells.Value;
                     string[] strArray = ConvertToStringArray(myvalues);
                     if (!Convert.ToString(strArray[0]).Equals("")
@@ -144,9 +145,10 @@ namespace StockControl
                         )
                     {
                         GetDataSystem2(Convert.ToString(strArray[0]).Trim() //Code
-                            , Convert.ToString(strArray[1]).Trim()//CustItemNo
-                            , Convert.ToString(strArray[2]).Trim()//CustItemName
-                            , Convert.ToString(strArray[3]).Trim()//CustomerNo  
+                            , Convert.ToString(strArray[1]).Trim()//CustItemName
+                            , Convert.ToString(strArray[2]).Trim()//CustItemNo
+                            , Convert.ToString(strArray[3]).Trim()//CustoemrName
+                            , Convert.ToString(strArray[4]).Trim()//CustomerNo  
                             );
                     }
                     else
@@ -169,7 +171,7 @@ namespace StockControl
 
         }
         int RowIndex_temp = 0;
-        private void GetDataSystem2(string Code, string CustItemNo, string CustItemName, string CustomerNo
+        private void GetDataSystem2(string Code,string CustItemName, string CustItemNo, string CustomerName, string CustomerNo
            )
         {
             try
@@ -193,7 +195,8 @@ namespace StockControl
                 //    Status = "NG";
 
                 dr["CustomerNo"] = CustomerNo;
-              
+                dr["CustomerName"] = CustomerName;
+
 
 
                 if (Status == "OK")
@@ -218,7 +221,7 @@ namespace StockControl
                 int c = 0;
 
                 string Code, CustItemNo, CustItemName, CustomerNo = "";
-
+                string CSTMName = "";
                 while (!parser.EndOfData)
                 {
                     //Processing row
@@ -242,10 +245,12 @@ namespace StockControl
                             if (c == 1)
                                 Code = Convert.ToString(field);
                             else if (c == 2)
-                                CustItemNo = Convert.ToString(field);
-                            else if (c == 3)
                                 CustItemName = Convert.ToString(field);
+                            else if (c == 3)
+                                CustItemNo = Convert.ToString(field);                            
                             else if (c == 4)
+                                CSTMName = Convert.ToString(field);
+                            else if (c == 5)
                                 CustomerNo = Convert.ToString(field);
                          
                         }
@@ -253,7 +258,7 @@ namespace StockControl
                     }
                     if (Code != "")
                     {
-                        GetDataSystem2(Code, CustItemNo, CustItemName, CustomerNo);
+                        GetDataSystem2(Code,  CustItemName, CustItemNo,CSTMName, CustomerNo);
                     }
 
                 }
@@ -342,6 +347,7 @@ namespace StockControl
                                 hh.Code = dbClss.TSt(dr["Code"]);
                                 hh.CustItemName = dbClss.TSt(dr["CustItemName"]);
                                 hh.CustomerNo = dbClss.TSt(dr["CustomerNo"]);
+                                hh.CustomerName= dbClss.TSt(dr["CustomerName"]);
                                 hh.Ac = 1;
                                 hh.DWG = "-";
                                 db.SubmitChanges();
@@ -354,6 +360,7 @@ namespace StockControl
                                 u.Code = dbClss.TSt(dr["Code"]);
                                 u.CustItemName = dbClss.TSt(dr["CustItemName"]);
                                 u.CustomerNo = dbClss.TSt(dr["CustomerNo"]);
+                                u.CustomerName = dbClss.TSt(dr["CustomerName"]);
                                 u.Ac = 1;
                                 u.DWG = "-";
                                 db.tb_MapItemTPICs.InsertOnSubmit(u);
@@ -381,6 +388,26 @@ namespace StockControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             finally { this.Cursor = Cursors.Default; }
+        }
+
+        private void radButtonElement1_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            if (MessageBox.Show("คุณต้องการลบข้อมูลทั้งหมด หรือไม่ ?", "ลบรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    var mp = db.tb_MapItemTPICs.Where(m => m.Code != "").ToList();
+                    if(mp.Count>0)
+                    {
+                        db.tb_MapItemTPICs.DeleteAllOnSubmit(mp);
+                        db.SubmitChanges();
+                        MessageBox.Show("ลบข้อมูลเรียบร้อย");
+                    }
+                }
+            }
+            this.Cursor = Cursors.Default ;
+
         }
     }
 }

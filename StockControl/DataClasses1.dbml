@@ -407,6 +407,7 @@
       <Column Name="CustItemName" Type="System.String" DbType="NVarChar(90)" CanBeNull="true" />
       <Column Name="CustomerNo" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="DWG" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="CustomerName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.Sp_ADM03_OpenFormSelect" Method="Sp_ADM03_OpenFormSelect">
@@ -465,66 +466,6 @@
     <Parameter Name="CheckNo" Parameter="checkNo" Type="System.String" DbType="NVarChar(30)" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.sp_001_TPIC_SelectItem" Method="sp_001_TPIC_SelectItem">
-    <Parameter Name="Code" Parameter="code" Type="System.String" DbType="NVarChar(50)" />
-    <ElementType Name="sp_001_TPIC_SelectItemResult">
-      <Column Name="CODE" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="NAME" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="Detail" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
-      <Column Name="WorkCenterNo" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="WorkCenterName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="Unit" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
-      <Column Name="Parent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="SHELVES" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
-      <Column Name="ReqLot" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Remark" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
-      <Column Name="VENDOR" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="VendorName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="VendorName1" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="PahtImage" Type="System.String" DbType="NVarChar(350) NOT NULL" CanBeNull="false" />
-      <Column Name="LeadTime" Type="System.Decimal" DbType="Decimal(29,0)" CanBeNull="true" />
-      <Column Name="LotSize" Type="System.Decimal" DbType="Decimal(29,2)" CanBeNull="true" />
-      <Column Name="MinimumStock" Type="System.Decimal" DbType="Decimal(29,2)" CanBeNull="true" />
-      <Column Name="HOKAN" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="InspectionReq" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="InputDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="INC" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="CurrentStock" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.sp_002_TPIC_SelectPO" Method="sp_002_TPIC_SelectPO">
-    <Parameter Name="PONo" Parameter="pONo" Type="System.String" DbType="NVarChar(30)" />
-    <Parameter Name="Code" Parameter="code" Type="System.String" DbType="NVarChar(30)" />
-    <Parameter Name="Vendor" Parameter="vendor" Type="System.String" DbType="NVarChar(30)" />
-    <Parameter Name="ck" Type="System.Boolean" DbType="Bit" />
-    <Parameter Name="Date1" Parameter="date1" Type="System.DateTime" DbType="DateTime" />
-    <Parameter Name="Date2" Parameter="date2" Type="System.DateTime" DbType="DateTime" />
-    <ElementType Name="sp_002_TPIC_SelectPOResult">
-      <Column Name="PORDER" Type="System.String" DbType="NVarChar(18) NOT NULL" CanBeNull="false" />
-      <Column Name="CODE" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="NAME" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Unit" Type="System.String" DbType="NVarChar(4) NOT NULL" CanBeNull="false" />
-      <Column Name="LotSize" Type="System.Decimal" DbType="Decimal(29,2)" CanBeNull="true" />
-      <Column Name="Location" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="BUMO" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="VENDOR" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="VendorName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="OrderQty" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
-      <Column Name="BeforeIns" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
-      <Column Name="TotalResults" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
-      <Column Name="ScheduleDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="DeliveryDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Revision" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
-      <Column Name="RATE" Type="System.Decimal" DbType="Decimal(29,0) NOT NULL" CanBeNull="false" />
-      <Column Name="PRICE" Type="System.Decimal" DbType="Decimal(29,4) NOT NULL" CanBeNull="false" />
-      <Column Name="INVOICENO" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="REMARK" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="INPUTUSER" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="PrintTAG" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="LotNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.sp_E_001_Excel_tb_CheckStockTempCheck" Method="sp_E_001_Excel_tb_CheckStockTempCheck">
     <Parameter Name="CheckNo" Parameter="checkNo" Type="System.String" DbType="NVarChar(30)" />
     <Parameter Name="Location" Parameter="location" Type="System.String" DbType="VarChar(100)" />
@@ -549,82 +490,6 @@
       <Column Name="ofTAG" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="RefNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="SP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.sp_003_TPIC_GETBOMNo" Method="sp_003_TPIC_GETBOMNo">
-    <Parameter Name="BOMNo" Parameter="bOMNo" Type="System.String" DbType="NVarChar(50)" />
-    <Parameter Name="AC" Parameter="aC" Type="System.Int32" DbType="Int" />
-    <ElementType Name="sp_003_TPIC_GETBOMNoResult">
-      <Column Name="PORDER" Type="System.String" DbType="NVarChar(18) NOT NULL" CanBeNull="false" />
-      <Column Name="CODE" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="NAME" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Unit" Type="System.String" DbType="NVarChar(4) NOT NULL" CanBeNull="false" />
-      <Column Name="LotSize" Type="System.Decimal" DbType="Decimal(29,2)" CanBeNull="true" />
-      <Column Name="Location" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="BUMO" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="VENDOR" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="VendorName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="OrderQty" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
-      <Column Name="BeforeIns" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
-      <Column Name="TotalResults" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
-      <Column Name="ScheduleDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="DeliveryDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Revision" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
-      <Column Name="RATE" Type="System.Decimal" DbType="Decimal(29,0) NOT NULL" CanBeNull="false" />
-      <Column Name="PRICE" Type="System.Decimal" DbType="Decimal(29,4) NOT NULL" CanBeNull="false" />
-      <Column Name="INVOICENO" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="REMARK" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="INPUTUSER" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="LotNo" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="CustItemName" Type="System.String" DbType="NVarChar(90)" CanBeNull="true" />
-      <Column Name="CustItemNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="CustomerNo" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Column Name="CSTMName" Type="System.String" DbType="VarChar(47) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.sp_004_TPIC_SelectWO" Method="sp_004_TPIC_SelectWO">
-    <Parameter Name="PONo" Parameter="pONo" Type="System.String" DbType="NVarChar(30)" />
-    <Parameter Name="Code" Parameter="code" Type="System.String" DbType="NVarChar(30)" />
-    <Parameter Name="Vendor" Parameter="vendor" Type="System.String" DbType="NVarChar(30)" />
-    <Parameter Name="ck" Type="System.Boolean" DbType="Bit" />
-    <Parameter Name="Date1" Parameter="date1" Type="System.DateTime" DbType="DateTime" />
-    <Parameter Name="Date2" Parameter="date2" Type="System.DateTime" DbType="DateTime" />
-    <ElementType Name="sp_004_TPIC_SelectWOResult">
-      <Column Name="PORDER" Type="System.String" DbType="NVarChar(18) NOT NULL" CanBeNull="false" />
-      <Column Name="CODE" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="NAME" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Unit" Type="System.String" DbType="NVarChar(4) NOT NULL" CanBeNull="false" />
-      <Column Name="LotSize" Type="System.Decimal" DbType="Decimal(29,2)" CanBeNull="true" />
-      <Column Name="Location" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="BUMO" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="VENDOR" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="VendorName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="OrderQty" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
-      <Column Name="BeforeIns" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
-      <Column Name="TotalResults" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
-      <Column Name="ScheduleDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="DeliveryDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Revision" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
-      <Column Name="RATE" Type="System.Decimal" DbType="Decimal(29,0) NOT NULL" CanBeNull="false" />
-      <Column Name="PRICE" Type="System.Decimal" DbType="Decimal(29,4) NOT NULL" CanBeNull="false" />
-      <Column Name="INVOICENO" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="REMARK" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="INPUTUSER" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="PrintTAG" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="LotNo" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.sp_005_TPIC_SelectMapping" Method="sp_005_TPIC_SelectMapping">
-    <Parameter Name="Code" Parameter="code" Type="System.String" DbType="NVarChar(30)" />
-    <ElementType Name="sp_005_TPIC_SelectMappingResult">
-      <Column Name="Code" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Ac" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CustItemNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="CustItemName" Type="System.String" DbType="NVarChar(90)" CanBeNull="true" />
-      <Column Name="CustomerNo" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
-      <Column Name="DWG" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
     </ElementType>
   </Function>
   <Function Name="dbo.sp_R_001_Report_CheckStock" Method="sp_R_001_Report_CheckStock">
@@ -683,6 +548,143 @@
       <Column Name="UnitOfMeasure" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.sp_001_TPIC_SelectItem" Method="sp_001_TPIC_SelectItem">
+    <Parameter Name="Code" Parameter="code" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="sp_001_TPIC_SelectItemResult">
+      <Column Name="CODE" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Detail" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+      <Column Name="WorkCenterNo" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="WorkCenterName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Unit" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="Parent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SHELVES" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="ReqLot" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Remark" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="VENDOR" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="VendorName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="VendorName1" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="PahtImage" Type="System.String" DbType="NVarChar(350) NOT NULL" CanBeNull="false" />
+      <Column Name="LeadTime" Type="System.Decimal" DbType="Decimal(29,0)" CanBeNull="true" />
+      <Column Name="LotSize" Type="System.Decimal" DbType="Decimal(29,2)" CanBeNull="true" />
+      <Column Name="MinimumStock" Type="System.Decimal" DbType="Decimal(29,2)" CanBeNull="true" />
+      <Column Name="HOKAN" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="InspectionReq" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="InputDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="INC" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="CurrentStock" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_002_TPIC_SelectPO" Method="sp_002_TPIC_SelectPO">
+    <Parameter Name="PONo" Parameter="pONo" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="Code" Parameter="code" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="Vendor" Parameter="vendor" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="ck" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Date1" Parameter="date1" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Date2" Parameter="date2" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="sp_002_TPIC_SelectPOResult">
+      <Column Name="PORDER" Type="System.String" DbType="NVarChar(18) NOT NULL" CanBeNull="false" />
+      <Column Name="CODE" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Unit" Type="System.String" DbType="NVarChar(4) NOT NULL" CanBeNull="false" />
+      <Column Name="LotSize" Type="System.Decimal" DbType="Decimal(29,2)" CanBeNull="true" />
+      <Column Name="Location" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="BUMO" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="VENDOR" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="VendorName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="OrderQty" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
+      <Column Name="BeforeIns" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalResults" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
+      <Column Name="ScheduleDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DeliveryDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Revision" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="RATE" Type="System.Decimal" DbType="Decimal(29,0) NOT NULL" CanBeNull="false" />
+      <Column Name="PRICE" Type="System.Decimal" DbType="Decimal(29,4) NOT NULL" CanBeNull="false" />
+      <Column Name="INVOICENO" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="REMARK" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="INPUTUSER" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="PrintTAG" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_004_TPIC_SelectWO" Method="sp_004_TPIC_SelectWO">
+    <Parameter Name="PONo" Parameter="pONo" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="Code" Parameter="code" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="Vendor" Parameter="vendor" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="ck" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Date1" Parameter="date1" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Date2" Parameter="date2" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="sp_004_TPIC_SelectWOResult">
+      <Column Name="PORDER" Type="System.String" DbType="NVarChar(18) NOT NULL" CanBeNull="false" />
+      <Column Name="CODE" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Unit" Type="System.String" DbType="NVarChar(4) NOT NULL" CanBeNull="false" />
+      <Column Name="LotSize" Type="System.Decimal" DbType="Decimal(29,2)" CanBeNull="true" />
+      <Column Name="Location" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="BUMO" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="VENDOR" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="VendorName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="OrderQty" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
+      <Column Name="BeforeIns" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalResults" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
+      <Column Name="ScheduleDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DeliveryDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Revision" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="RATE" Type="System.Decimal" DbType="Decimal(29,0) NOT NULL" CanBeNull="false" />
+      <Column Name="PRICE" Type="System.Decimal" DbType="Decimal(29,4) NOT NULL" CanBeNull="false" />
+      <Column Name="INVOICENO" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="REMARK" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="INPUTUSER" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="PrintTAG" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_005_TPIC_SelectMapping" Method="sp_005_TPIC_SelectMapping">
+    <Parameter Name="Code" Parameter="code" Type="System.String" DbType="NVarChar(30)" />
+    <ElementType Name="sp_005_TPIC_SelectMappingResult">
+      <Column Name="Code" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Ac" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustItemNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CustItemName" Type="System.String" DbType="NVarChar(90)" CanBeNull="true" />
+      <Column Name="CustomerNo" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="DWG" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="CustomerName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_003_TPIC_GETBOMNo" Method="sp_003_TPIC_GETBOMNo">
+    <Parameter Name="BOMNo" Parameter="bOMNo" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="AC" Parameter="aC" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_003_TPIC_GETBOMNoResult">
+      <Column Name="PORDER" Type="System.String" DbType="NVarChar(18) NOT NULL" CanBeNull="false" />
+      <Column Name="CODE" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Unit" Type="System.String" DbType="NVarChar(4) NOT NULL" CanBeNull="false" />
+      <Column Name="LotSize" Type="System.Decimal" DbType="Decimal(29,2)" CanBeNull="true" />
+      <Column Name="Location" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="BUMO" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="VENDOR" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="VendorName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="OrderQty" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
+      <Column Name="BeforeIns" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalResults" Type="System.Decimal" DbType="Decimal(29,2) NOT NULL" CanBeNull="false" />
+      <Column Name="ScheduleDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DeliveryDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Revision" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="RATE" Type="System.Decimal" DbType="Decimal(29,0) NOT NULL" CanBeNull="false" />
+      <Column Name="PRICE" Type="System.Decimal" DbType="Decimal(29,4) NOT NULL" CanBeNull="false" />
+      <Column Name="INVOICENO" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="REMARK" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="INPUTUSER" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="CustItemName" Type="System.String" DbType="NVarChar(90)" CanBeNull="true" />
+      <Column Name="CustItemNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CustomerNo" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="CSTMName" Type="System.String" DbType="VarChar(47) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.sp_E_002_Excel_tb_CheckStockList" Method="sp_E_002_Excel_tb_CheckStockList">
     <Parameter Name="CheckNo" Parameter="checkNo" Type="System.String" DbType="NVarChar(30)" />
     <Parameter Name="Location" Parameter="location" Type="System.String" DbType="VarChar(100)" />
@@ -700,9 +702,7 @@
       <Column Name="[Inventory Value]" Member="Inventory_Value" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="[Stock Before Inventory]" Member="Stock_Before_Inventory" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="[Physical Inventory Value]" Member="Physical_Inventory_Value" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="[Unit of Measure]" Member="Unit_of_Measure" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="CheckNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="No" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="[&#x9;Unit of Measure]" Member="_Unit_of_Measure" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

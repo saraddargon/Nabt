@@ -52,7 +52,7 @@ namespace StockControl
                         //dtDate1.Value=Convert.ToDateTime(rd.d)
                         txtsNP.Text = Convert.ToInt32(rd.LotSize).ToString();
                         txtLotNo.Text = "";
-                        txtQty.Text = "0";
+                        txtQty.Text = Convert.ToInt32(rd.CurrentStock).ToString();
                     }
                 }
             }

@@ -136,7 +136,6 @@
             this.radButtonElement1});
             this.radRibbonBarGroup1.Name = "radRibbonBarGroup1";
             this.radRibbonBarGroup1.Text = "Manage";
-            this.radRibbonBarGroup1.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
             // 
             // radButtonElement1
             // 
@@ -147,6 +146,7 @@
             this.radButtonElement1.Text = "ลบรายการที่อัพโหลด";
             this.radButtonElement1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.radButtonElement1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.radButtonElement1.Click += new System.EventHandler(this.radButtonElement1_Click);
             // 
             // radRibbonBarGroup3
             // 

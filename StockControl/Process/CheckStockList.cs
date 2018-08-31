@@ -187,7 +187,7 @@ namespace StockControl
         private bool DeleteUnit()
         {
             bool ck = false;
-
+            this.Cursor = Cursors.WaitCursor;
             int C = 0;
             try
             {
@@ -206,8 +206,14 @@ namespace StockControl
                             {
                                 db.tb_CheckStocks.DeleteOnSubmit(cd);
                                 var DeleteStockList = db.tb_CheckStockLists.Where(s => s.CheckNo == CheckNo).ToList();
-                                db.tb_CheckStockLists.DeleteAllOnSubmit(DeleteStockList);
+                               // db.tb_CheckStockLists.DeleteAllOnSubmit(DeleteStockList);
+                                foreach(var rd in DeleteStockList)
+                                {
+                                    db.tb_CheckStockLists.DeleteOnSubmit(rd);
+                                    //db.SubmitChanges();
+                                }
                                 db.SubmitChanges();
+                                
                                 C = 1;
                                 dbClss.AddHistory(this.Name, "ลบรายการ", "Delete Check No [" + CheckNo + "]", "");
                             }
@@ -228,7 +234,7 @@ namespace StockControl
                 row = row - 1;
                 MessageBox.Show("ลบรายการ สำเร็จ!");
             }
-
+            this.Cursor = Cursors.Default;
 
 
 
@@ -623,6 +629,12 @@ namespace StockControl
                 CheckStock ck = new CheckStock(ckNo);
                 ck.ShowDialog();
             }
+        }
+
+        private void radButtonElement3_Click(object sender, EventArgs e)
+        {
+            DeleteUnit();
+            LoadDefault();
         }
     }
 }

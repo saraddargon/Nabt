@@ -255,6 +255,9 @@
             this.btnExport.Text = "รายการเช็ค";
             this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            ((Telerik.WinControls.Primitives.TextPrimitive)(this.btnExport.GetChildAt(1).GetChildAt(1))).LineLimit = false;
+            ((Telerik.WinControls.Primitives.TextPrimitive)(this.btnExport.GetChildAt(1).GetChildAt(1))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(121)))), ((int)(((byte)(0)))));
+            ((Telerik.WinControls.Primitives.TextPrimitive)(this.btnExport.GetChildAt(1).GetChildAt(1))).Alignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // radButtonElement6
             // 
@@ -270,9 +273,12 @@
             this.radButtonElement7.Image = ((System.Drawing.Image)(resources.GetObject("radButtonElement7.Image")));
             this.radButtonElement7.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.radButtonElement7.Name = "radButtonElement7";
-            this.radButtonElement7.Text = "รายการเปรียบเทียบ";
+            this.radButtonElement7.Text = "Export to TPICS";
             this.radButtonElement7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.radButtonElement7.Click += new System.EventHandler(this.radButtonElement7_Click);
+            ((Telerik.WinControls.Primitives.TextPrimitive)(this.radButtonElement7.GetChildAt(1).GetChildAt(1))).LineLimit = false;
+            ((Telerik.WinControls.Primitives.TextPrimitive)(this.radButtonElement7.GetChildAt(1).GetChildAt(1))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
+            ((Telerik.WinControls.Primitives.TextPrimitive)(this.radButtonElement7.GetChildAt(1).GetChildAt(1))).Alignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // radRibbonBarGroup3
             // 
@@ -564,7 +570,7 @@
             // 
             this.radGridView2.MasterTemplate.ViewDefinition = tableViewDefinition2;
             this.radGridView2.Name = "radGridView2";
-            this.radGridView2.Size = new System.Drawing.Size(240, 150);
+            this.radGridView2.Size = new System.Drawing.Size(240, 27);
             this.radGridView2.TabIndex = 3;
             this.radGridView2.Visible = false;
             // 
@@ -640,6 +646,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.radStatusStrip1);
             this.Controls.Add(this.radRibbonBar1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "CheckStock";
             // 

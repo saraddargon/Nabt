@@ -15,12 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_007E073E9A704E3DAB3F0CFA3D6AC3D8"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_05249B6ED13A8F4D4A565B224DCFDD0A"
         "OwnerKey" = "8:_CA4CB381165BD71CB441ED336EBB77BA"
         "MsmSig" = "8:_UNDEFINED"
@@ -111,7 +105,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_345F597957DB445EA4E12A559D525F53"
+        "MsmKey" = "8:_335E1186E61C45B191EEFCCFB1268AF8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -166,6 +160,12 @@
         "Entry"
         {
         "MsmKey" = "8:_403B17082F474F5DBA4A24979947D1B6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_40781939892041CA95B990C3E2188FC0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -316,12 +316,6 @@
         "Entry"
         {
         "MsmKey" = "8:_645CFD989D0C4212AD53B13C5C357479"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7A948B4CF8C94176B28604022BD31F09"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -573,6 +567,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_D7F8FE2F42FC4AA99561FAF7A8BF50D6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_E2FA5C5476287E18E000EA71CA662A76"
         "OwnerKey" = "8:_A4DE26BAE5DED5219C88305D95F0E555"
         "MsmSig" = "8:_UNDEFINED"
@@ -670,13 +670,13 @@
         "Entry"
         {
         "MsmKey" = "8:_FBE4D8A9CB4370736A00E14CC2471CA0"
-        "OwnerKey" = "8:_37A2C527DA948B2BA7AB3D6FC82036B2"
+        "OwnerKey" = "8:_93FF6ADC102247618259DA6A3A4DADB3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_FBE4D8A9CB4370736A00E14CC2471CA0"
-        "OwnerKey" = "8:_93FF6ADC102247618259DA6A3A4DADB3"
+        "OwnerKey" = "8:_37A2C527DA948B2BA7AB3D6FC82036B2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -688,13 +688,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0EADBCAB72039D675F736CABB5172E6F"
+        "OwnerKey" = "8:_FBE4D8A9CB4370736A00E14CC2471CA0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_345F597957DB445EA4E12A559D525F53"
+        "OwnerKey" = "8:_40781939892041CA95B990C3E2188FC0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -761,12 +761,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_37A2C527DA948B2BA7AB3D6FC82036B2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FBE4D8A9CB4370736A00E14CC2471CA0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -871,6 +865,12 @@
         "OwnerKey" = "8:_9895885876702851ED8035E0597B661C"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0EADBCAB72039D675F736CABB5172E6F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -889,6 +889,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -905,6 +913,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -934,26 +950,6 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_007E073E9A704E3DAB3F0CFA3D6AC3D8"
-            {
-            "SourcePath" = "8:..\\StockControl\\bin\\Debug\\Autoupdate.xml"
-            "TargetName" = "8:Autoupdate.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_378C77F3DABD4FABA0353B6D9F86AC97"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_05249B6ED13A8F4D4A565B224DCFDD0A"
             {
             "AssemblyRegister" = "3:1"
@@ -1109,21 +1105,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_345F597957DB445EA4E12A559D525F53"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_335E1186E61C45B191EEFCCFB1268AF8"
             {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AutoUpdateFTP, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_345F597957DB445EA4E12A559D525F53"
-                    {
-                    "Name" = "8:AutoUpdateFTP.exe"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\StockControl\\bin\\Debug\\AutoUpdateFTP.exe"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\StockControl\\bin\\Debug\\Autoupdate.xml"
+            "TargetName" = "8:Autoupdate.xml"
             "Tag" = "8:"
             "Folder" = "8:_378C77F3DABD4FABA0353B6D9F86AC97"
             "Condition" = "8:"
@@ -1208,6 +1193,37 @@
             "TargetName" = "8:Supplier_TAG.rpt"
             "Tag" = "8:"
             "Folder" = "8:_0DE5374DD5304F4DB17BE249A6872DF1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_40781939892041CA95B990C3E2188FC0"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:AutoUpdate, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_40781939892041CA95B990C3E2188FC0"
+                    {
+                    "Name" = "8:AutoUpdate.exe"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\StockControl\\bin\\Debug\\AutoUpdate.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_378C77F3DABD4FABA0353B6D9F86AC97"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1423,26 +1439,6 @@
             "TargetName" = "8:StockCard.rpt"
             "Tag" = "8:"
             "Folder" = "8:_0DE5374DD5304F4DB17BE249A6872DF1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7A948B4CF8C94176B28604022BD31F09"
-            {
-            "SourcePath" = "8:..\\StockControl\\bin\\Debug\\AutoUpdateFTP.exe.config"
-            "TargetName" = "8:AutoUpdateFTP.exe.config"
-            "Tag" = "8:"
-            "Folder" = "8:_378C77F3DABD4FABA0353B6D9F86AC97"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1907,6 +1903,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D7F8FE2F42FC4AA99561FAF7A8BF50D6"
+            {
+            "SourcePath" = "8:..\\StockControl\\bin\\Debug\\AutoUpdate.exe.config"
+            "TargetName" = "8:AutoUpdate.exe.config"
+            "Tag" = "8:"
+            "Folder" = "8:_378C77F3DABD4FABA0353B6D9F86AC97"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E2FA5C5476287E18E000EA71CA662A76"

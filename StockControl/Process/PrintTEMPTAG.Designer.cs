@@ -220,23 +220,23 @@
             this.txtLotNo.Name = "txtLotNo";
             this.txtLotNo.NullText = "Lot Name";
             this.txtLotNo.Size = new System.Drawing.Size(100, 20);
-            this.txtLotNo.TabIndex = 11;
+            this.txtLotNo.TabIndex = 5;
             // 
             // txtQty
             // 
-            this.txtQty.Location = new System.Drawing.Point(190, 131);
+            this.txtQty.Location = new System.Drawing.Point(190, 103);
             this.txtQty.Name = "txtQty";
             this.txtQty.NullText = "0.00";
             this.txtQty.Size = new System.Drawing.Size(100, 20);
-            this.txtQty.TabIndex = 9;
+            this.txtQty.TabIndex = 3;
             // 
             // txtsNP
             // 
-            this.txtsNP.Location = new System.Drawing.Point(190, 104);
+            this.txtsNP.Location = new System.Drawing.Point(190, 131);
             this.txtsNP.Name = "txtsNP";
             this.txtsNP.NullText = "0.00";
             this.txtsNP.Size = new System.Drawing.Size(100, 20);
-            this.txtsNP.TabIndex = 7;
+            this.txtsNP.TabIndex = 4;
             // 
             // radLabel6
             // 
@@ -256,7 +256,7 @@
             // 
             // radLabel5
             // 
-            this.radLabel5.Location = new System.Drawing.Point(135, 131);
+            this.radLabel5.Location = new System.Drawing.Point(135, 103);
             this.radLabel5.Name = "radLabel5";
             this.radLabel5.Size = new System.Drawing.Size(49, 18);
             this.radLabel5.TabIndex = 8;
@@ -264,7 +264,7 @@
             // 
             // radLabel4
             // 
-            this.radLabel4.Location = new System.Drawing.Point(143, 106);
+            this.radLabel4.Location = new System.Drawing.Point(143, 133);
             this.radLabel4.Name = "radLabel4";
             this.radLabel4.Size = new System.Drawing.Size(27, 18);
             this.radLabel4.TabIndex = 6;
@@ -284,7 +284,7 @@
             this.txtPartName.Name = "txtPartName";
             this.txtPartName.ReadOnly = true;
             this.txtPartName.Size = new System.Drawing.Size(164, 20);
-            this.txtPartName.TabIndex = 3;
+            this.txtPartName.TabIndex = 1;
             // 
             // txtPartNo
             // 
@@ -292,7 +292,7 @@
             this.txtPartNo.Name = "txtPartNo";
             this.txtPartNo.ReadOnly = true;
             this.txtPartNo.Size = new System.Drawing.Size(164, 20);
-            this.txtPartNo.TabIndex = 1;
+            this.txtPartNo.TabIndex = 0;
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtPartNo.GetChildAt(0).GetChildAt(0))).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             // 
             // radLabel1
@@ -310,7 +310,7 @@
             this.dtDate1.Location = new System.Drawing.Point(190, 77);
             this.dtDate1.Name = "dtDate1";
             this.dtDate1.Size = new System.Drawing.Size(164, 20);
-            this.dtDate1.TabIndex = 5;
+            this.dtDate1.TabIndex = 2;
             this.dtDate1.TabStop = false;
             this.dtDate1.Text = "16/07/2018";
             this.dtDate1.Value = new System.DateTime(2018, 7, 16, 8, 48, 23, 110);

@@ -692,5 +692,30 @@ namespace StockControl
                 DataLoad();
             }
         }
+
+        private void radButtonElement1_Click(object sender, EventArgs e)
+        {
+            if (row >= 0)
+            {
+                string Code = radGridView1.Rows[row].Cells["Code"].Value.ToString();
+                //delete
+                if (MessageBox.Show("คุณต้องการลบ [ "+ Code  + " ] หรือไม่ ?", "ลบรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                        tb_MapItemTPIC tb = db.tb_MapItemTPICs.Where(m => m.Code == Code).FirstOrDefault();
+                        if (tb != null)
+                        {
+
+                            db.tb_MapItemTPICs.DeleteOnSubmit(tb);
+                            db.SubmitChanges();
+                            MessageBox.Show("ลบเรียบร้อยแล้ว!");
+                            DataLoad();
+                        }
+                    }
+                }
+            }
+        }
     }
 }
