@@ -81,7 +81,7 @@ namespace StockControl
                 {
                     var h = (from ix in db.tb_CheckStocks
                              where ix.CheckNo == txtCheckNo.Text.Trim()
-                             && ix.Status == "Waiting Upload"
+                             && ix.Status == "Waiting Check"
                              select ix).ToList();
                     if (h.Count > 0)
                     {
@@ -112,8 +112,11 @@ namespace StockControl
                     //SP/PONo/Quantity/SPN/LotNo/TAGof/ItemNo
                     if (CodeNo != "" && txtCheckNo.Text !="" && ddlLocation.Text !="")
                     {
-                        LoadCode(CodeNo);
-                        
+                        //LoadCode(CodeNo);
+                        StockControl.Process.ChckStockPC ck = new Process.ChckStockPC(txtScanCode.Text, ddlLocation.Text, txtCheckBy.Text, txtCheckNo.Text);
+                        ck.ShowDialog();
+                        LoadData(txtCheckNo.Text);
+
                     }
                     txtScanCode.Text = "";
                 }
@@ -272,7 +275,8 @@ namespace StockControl
                     var g = (from ix in db.tb_CheckStockTempChecks
                              where ix.CheckNo.Trim() == checkNo
                              && ix.CheckMachine == Environment.MachineName
-                             && ix.Status != "Cancel"                             
+                             && ix.Status != "Cancel"         
+                             orderby ix.id descending                    
                              select ix).ToList();
                     if(g.Count>0)
                     {
@@ -394,7 +398,7 @@ namespace StockControl
                 {
                     var h = (from ix in db.tb_CheckStocks
                              where ix.CheckNo == txtCheckNo.Text.Trim()
-                             && ix.Status == "Waiting Upload"
+                             && ix.Status == "Waiting Check"
                              select ix).ToList();
                     if (h.Count > 0)
                     {
@@ -431,6 +435,40 @@ namespace StockControl
             txtCheckNo.Enabled = true;
             dgvData.Rows.Clear();
 
+        }
+
+        private void radButtonElement4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("คุณต้องการลบหรือไม่ ?", "ลบรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    int id = 0;
+                    int.TryParse(dgvData.Rows[row].Cells["id"].Value.ToString(), out id);
+                    string CodeNo = dgvData.Rows[row].Cells["Code"].Value.ToString();
+                    if (!CodeNo.Equals("") && !id.Equals(0))
+                    {
+                        using (DataClasses1DataContext db = new DataClasses1DataContext())
+                        {
+                            tb_CheckStockTempCheck td = db.tb_CheckStockTempChecks.Where(t => t.id == id).FirstOrDefault();
+                            if (td != null)
+                            {
+                                db.tb_CheckStockTempChecks.DeleteOnSubmit(td);
+                                db.SubmitChanges();
+                                LoadData(txtCheckNo.Text);
+                                // LoadData(CodeNo);
+                            }
+                        }
+                    }
+                }
+            }
+            catch { }
+        }
+
+        int row = -1;
+        private void dgvData_CellClick(object sender, GridViewCellEventArgs e)
+        {
+            row = e.RowIndex;
         }
     }
 }

@@ -141,6 +141,12 @@
     <Compile Include="Process\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\ChckStockPC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ChckStockPC.Designer.cs">
+      <DependentUpon>ChckStockPC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\ListMapItem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -396,6 +402,9 @@
     <Compile Include="version.cs" />
     <EmbeddedResource Include="Main\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ChckStockPC.resx">
+      <DependentUpon>ChckStockPC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\ListMapItem.resx">
       <DependentUpon>ListMapItem.cs</DependentUpon>

@@ -345,7 +345,7 @@ namespace StockControl
         {
             try
             {
-                System.Diagnostics.Process.Start(@"Report\ManualHHL.pdf");
+                System.Diagnostics.Process.Start(@"Report\Manual.pdf");
             }
             catch { }
         }

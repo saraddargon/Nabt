@@ -590,6 +590,7 @@ namespace StockControl
                 
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            LoadDefault();
             /////////////////////////////////
         }
 
@@ -635,6 +636,33 @@ namespace StockControl
         {
             DeleteUnit();
             LoadDefault();
+        }
+
+        private void radButtonElement4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (row >= 0)
+                {
+                    if (MessageBox.Show("คุณต้องการ [Finish] หรือไม่ ?", "Finish รายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        string ckNo = dgvData.Rows[row].Cells["CheckNo"].Value.ToString();
+                        using (DataClasses1DataContext db = new DataClasses1DataContext())
+                        {
+                            tb_CheckStock ck = db.tb_CheckStocks.Where(t => t.CheckNo == ckNo && t.Status == "Waiting Check").FirstOrDefault();
+                            if (ck != null)
+                            {
+                                ck.Status = "Completed";
+                                db.SubmitChanges();
+                                db.sp_E_004_CompletedStock(ckNo);
+                                MessageBox.Show("Update Completed.");
+                                LoadDefault();
+                            }
+                        }
+                    }
+                }
+            }
+            catch { }
         }
     }
 }

@@ -17,15 +17,21 @@ namespace StockControl
 
         Telerik.WinControls.UI.RadTextBox CodeNo_tt = new Telerik.WinControls.UI.RadTextBox();
         int screen = 0;
-        public CheckStock_ListCode(string CodeNox)
+        public CheckStock_ListCode(string CodeNox,string CheckNox)
         {
+            this.Name = "CheckStock_ListCode";
             InitializeComponent();
             //CodeNo_tt = CodeNox;
             txtCheckNo.Text = CodeNox;
+            CodeNo = CodeNox;
+            CKNo = CheckNox;
             screen = 1;
         }
+        string CKNo = "";
+        string CodeNo = "";
         public CheckStock_ListCode()
         {
+            this.Name = "CheckStock_ListCode";
             InitializeComponent();
         }
 
@@ -54,7 +60,7 @@ namespace StockControl
         {
             //RMenu4.Click += RMenu4_Click;
 
-            LoadDefault();
+           // LoadDefault();
            
             ddlLocation.Text = "";
             txtItemCount.Text = "0";
@@ -268,7 +274,7 @@ namespace StockControl
                 }
             }
         }
-        private void LoadData(string checkNo)
+        private void LoadData(string Code)
         {
             try
             {
@@ -277,8 +283,8 @@ namespace StockControl
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
                     var g = (from ix in db.tb_CheckStockTempChecks
-                             where //ix.CheckNo.Trim() == checkNo
-                             ix.Code == checkNo
+                             where ix.CheckNo.Trim() == CKNo
+                             && ix.Code == Code
                              && ix.Status != "Cancel"                             
                              select ix).ToList();
                     if(g.Count>0)
@@ -401,7 +407,7 @@ namespace StockControl
                 {
                     var h = (from ix in db.tb_CheckStocks
                              where ix.CheckNo == txtCheckNo.Text.Trim()
-                             && ix.Status == "Waiting Upload"
+                             && ix.Status == "Waiting Check"
                              select ix).ToList();
                     if (h.Count > 0)
                     {
@@ -436,8 +442,41 @@ namespace StockControl
             txtScanCode.Text = "";
             txtScanCode.Enabled = false;
             txtCheckNo.Enabled = true;
+            row = -1;
             dgvData.Rows.Clear();
 
+        }
+
+        int row = -1;
+        private void dgvData_CellClick(object sender, GridViewCellEventArgs e)
+        {
+            row = e.RowIndex;
+        }
+
+        private void radButtonElement4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("คุณต้องการลบหรือไม่ ?", "ลบรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    int id = 0;
+                    int.TryParse(dgvData.Rows[row].Cells["id"].Value.ToString(), out id);
+                    if(!CodeNo.Equals("") && !id.Equals(0))
+                    {
+                        using (DataClasses1DataContext db = new DataClasses1DataContext())
+                        {
+                            tb_CheckStockTempCheck td = db.tb_CheckStockTempChecks.Where(t => t.id == id).FirstOrDefault();
+                            if (td != null)
+                            {
+                                db.tb_CheckStockTempChecks.DeleteOnSubmit(td);
+                                db.SubmitChanges();
+                                LoadData(CodeNo);
+                            }
+                        }
+                    }
+                }
+            }
+            catch { }
         }
     }
 }

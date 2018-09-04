@@ -14,7 +14,8 @@ namespace StockControl
 {
     public partial class display : Form
     {
-        public List<Process> Process_List = new List<Process>();
+        
+        public List<System.Diagnostics.Process> Process_List = new List<System.Diagnostics.Process>();
         public ListViewItem ListItem;    
         private string sqlname;
         //private BaseClassAllDataContext GetData = null;
@@ -397,6 +398,7 @@ namespace StockControl
                             DateTime ComDate = File.GetLastWriteTime(ToolTipText);
                             DateTime ServerDate = File.GetLastWriteTime(ServerPath);
 
+
                             if (ComDate.Equals(ServerDate))
                             {
                                 string LText = listView1.FocusedItem.Text;
@@ -404,7 +406,7 @@ namespace StockControl
                                    // GetData.sp_211_DC004_OpenProgram_SAVE(FMSClass.ConnectDB.User, 2);
 
                                 System.Diagnostics.Process.Start(ToolTipText);
-                                Process_List.Add(Process.GetProcessesByName(FileName[0]).FirstOrDefault());
+                                Process_List.Add(System.Diagnostics.Process.GetProcessesByName(FileName[0]).FirstOrDefault());
                             }
                             else
                             {

@@ -302,7 +302,8 @@ namespace StockControl
         {
             try
             {
-                radGridView1.Rows[e.RowIndex].Cells["C"].Value = true;
+                if(e.RowIndex>=0)
+                  radGridView1.Rows[e.RowIndex].Cells["C"].Value = true;
                 //string check1 = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["UnitCode"].Value);
                 //string TM= Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["dgvCodeTemp"].Value);
                 //if (!check1.Trim().Equals("") && TM.Equals(""))
@@ -583,7 +584,7 @@ namespace StockControl
                 if(radGridView1.Rows.Count>0)
                 {
                     string Code = dbClss.TSt(radGridView1.CurrentRow.Cells["Code"].Value);
-                    CheckStock_ListCode op = new CheckStock_ListCode(Code);
+                    CheckStock_ListCode op = new CheckStock_ListCode(Code,txtCheckNo.Text);
                     op.Show();
                 }
 
@@ -711,6 +712,7 @@ namespace StockControl
             {
                 this.Cursor = Cursors.WaitCursor;
 
+
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
                     var x = (from ix in db.sp_E_002_Excel_tb_CheckStockList(txtCheckNo.Text, "", "") select ix).ToList();
@@ -731,6 +733,106 @@ namespace StockControl
                 }
             }
             catch(Exception ex) { MessageBox.Show(ex.Message); }
+            finally { this.Cursor = Cursors.Default; }
+        }
+
+        private void radButtonElement8_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("ต้องการ Calculate ใช่หรือไม่?", "Calculate", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Caculate();
+                    DataLoad();
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+        private void Caculate()
+        {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    // db.sp_E_003_Calculate(txtCheckNo.Text);
+                    tb_CheckStock chk = db.tb_CheckStocks.Where(t => t.CheckNo == txtCheckNo.Text && !t.Status.Equals("Completed")).FirstOrDefault();
+                    if (chk != null)
+                    {
+
+                        var Listx = db.tb_CheckStockPDALists.Where(p => p.CheckNo == txtCheckNo.Text).ToList();
+                        if (Listx.Count > 0)
+                        {
+                            int SNP = 0;
+                            decimal Qty = 0;
+
+                            foreach (var rd in Listx)
+                            {
+                                tb_CheckStockTempCheck tc = db.tb_CheckStockTempChecks.Where(t => t.CheckNo == txtCheckNo.Text && t.PKTAG == rd.PKTAG).FirstOrDefault();
+                                if (tc != null)
+                                {
+                                    db.tb_CheckStockTempChecks.DeleteOnSubmit(tc);
+                                    db.SubmitChanges();
+                                }
+                                //////////
+                                string[] Data = rd.PKTAG.Split(',');
+                                if (Data.Length > 2)
+                                {
+                                    SNP = 0;
+                                    Qty = 0;
+                                    int.TryParse(rd.SNP.ToString(), out SNP);
+                                    decimal.TryParse(rd.Qty.ToString(), out Qty);
+                                    tb_CheckStockTempCheck ci = new tb_CheckStockTempCheck();
+                                    ci.RefNo = Data[1];
+                                    ci.Code = rd.PartNo.ToString();
+                                    ci.ItemName = db.getItemNoTPICS(rd.PartNo);
+                                    ci.PKTAG = rd.PKTAG;
+                                    ci.ofTAG = rd.OfTAG;
+                                    ci.LotNo = rd.LotNo;
+                                    ci.Location = rd.LW;
+                                    ci.CheckMachine = "PDA";
+                                    ci.CreateBy = rd.UserID;
+                                    ci.CreateDate = rd.CreateDate;
+                                    ci.CheckBy = rd.UserID;
+                                    ci.CheckNo = rd.CheckNo;
+                                    ci.SNP = SNP;
+                                    ci.Quantity = Qty;
+                                    ci.Remark = "";
+                                    ci.Package = "";
+                                    ci.Status = "Waiting";
+                                    ci.SP = Data[0];
+                                    ci.Type = db.getTypeTPICS(rd.PartNo);
+                                    db.tb_CheckStockTempChecks.InsertOnSubmit(ci);
+                                    db.SubmitChanges();
+
+                                    tb_CheckStockPDAList pl = db.tb_CheckStockPDALists.Where(p => p.PKTAG == rd.PKTAG).FirstOrDefault();
+                                    if (pl != null)
+                                    {
+                                        db.tb_CheckStockPDALists.DeleteOnSubmit(pl);
+                                        db.SubmitChanges();
+                                    }
+                                }
+                                ///////
+
+
+
+                            }
+                        }
+                        //Update Qty//
+
+                        db.sp_E_003_Calculate(txtCheckNo.Text);
+                        MessageBox.Show("Calculate Completed.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("สถานะ Completed. แล้ว!");
+                    }
+                }
+                this.Cursor = Cursors.Default;
+               
+            }
+            catch (Exception ex) { this.Cursor = Cursors.Default;  MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             finally { this.Cursor = Cursors.Default; }
         }
     }
