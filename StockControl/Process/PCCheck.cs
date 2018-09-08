@@ -76,23 +76,9 @@ namespace StockControl
         {
             if (txtCheckNo.Text != "")
             {
-                txtCheckNo.Text = txtCheckNo.Text.ToUpper();
-                using (DataClasses1DataContext db = new DataClasses1DataContext())
-                {
-                    var h = (from ix in db.tb_CheckStocks
-                             where ix.CheckNo == txtCheckNo.Text.Trim()
-                             && ix.Status == "Waiting Check"
-                             select ix).ToList();
-                    if (h.Count > 0)
-                    {
-                        txtScanCode.Enabled = true;
-                        txtCheckNo.Enabled = false;
-                    }
-                    //else
-                    //    MessageBox.Show("เลข Check No สถานะไม่ถูกต้อง !");
-
-                    LoadData(txtCheckNo.Text);
-                }
+                LoadData(txtCheckNo.Text);
+                txtScanCode.Enabled = true;
+                txtCheckNo.Enabled = false;
             }
             
         }
@@ -275,7 +261,8 @@ namespace StockControl
                     var g = (from ix in db.tb_CheckStockTempChecks
                              where ix.CheckNo.Trim() == checkNo
                              && ix.CheckMachine == Environment.MachineName
-                             && ix.Status != "Cancel"         
+                             && ix.Status != "Cancel"  
+                             && (ddlLocation.Text==string.Empty || ix.Location==ddlLocation.Text)       
                              orderby ix.id descending                    
                              select ix).ToList();
                     if(g.Count>0)
@@ -469,6 +456,15 @@ namespace StockControl
         private void dgvData_CellClick(object sender, GridViewCellEventArgs e)
         {
             row = e.RowIndex;
+        }
+
+        private void ddlLocation_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            try
+            {
+               // LoadData(txtCheckNo.Text);
+            }
+            catch { }
         }
     }
 }

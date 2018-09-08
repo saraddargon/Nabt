@@ -47,6 +47,7 @@ namespace StockControl
                     var getCode = (from ix in db.sp_001_TPIC_SelectItem(txtPartNo.Text.ToString()) select ix).ToList();
                     if (getCode.Count > 0)
                     {
+                       
                         var rd = getCode.FirstOrDefault();
                         txtPartName.Text = rd.NAME.ToString();
                         //dtDate1.Value=Convert.ToDateTime(rd.d)

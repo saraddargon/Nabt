@@ -46,22 +46,63 @@ namespace StockControl.Process
                 if (!PKTAG.Equals(""))
                 {
                     string[] Data = PKTAG.Split(',');
-                    if(Data.Length>2)
-                    {
-                        // PD,WO17001112,2,4,AA2,3of3,41217058036N1
-                        txtPKTAG.Text = PKTAG;
-                        txtRef.Text = Data[1];
-                        txtType.Text = Data[0];
-                        txtQty.Text = Data[2];
-                        txtSNP.Text = Data[3];
-                        txtLotNo.Text = Data[4];
-                        txtOfTAG.Text = Data[5];
-                        txtPartNo.Text = Data[6];
-                        using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    
+                        // แบบ 1 // PD,WO17001112,2,4,AA2,3of3,41217058036N1
+                        if (Data.Length > 2)
                         {
-                            txtPartName.Text = db.getItemNoTPICS(txtPartNo.Text).ToString();
-                            txtTypeF.Text = db.getTypeTPICS(txtPartNo.Text).ToString();
+                            txtPKTAG.Text = PKTAG;
+                            txtRef.Text = Data[1];
+                            txtType.Text = Data[0];
+                            txtQty.Text = Data[2];
+                            txtSNP.Text = Data[3];
+                            txtLotNo.Text = Data[4];
+                            txtOfTAG.Text = Data[5];
+                            txtPartNo.Text = Data[6];
                         }
+                        else
+                        {
+                         // แบบ 1 // PD,WO17001112,2,4,AA2,3of3,41217058036N1
+                            txtPKTAG.Text = PKTAG;
+                            txtPartNo.Text = PKTAG;
+                            //txtRef.Text = Data[1];
+                            txtType.Text = "Code";
+                            // Data[0];
+                            // txtQty.Text = "0";
+                            txtLotNo.ReadOnly = false;
+                           
+                            //txtLotNo.Text = Data[4];
+                           // txtOfTAG.Text = Data[5];
+                           // txtPartNo.Text = PKTAG;
+                        }
+
+
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                        tb_CheckStockList im = db.tb_CheckStockLists.Where(i => i.CheckNo == CheckNo && i.Code == txtPartNo.Text).FirstOrDefault();
+                        if (im != null)
+                        {
+                            var part = db.sp_001_TPIC_SelectItem(txtPartNo.Text).FirstOrDefault();
+                            if (part != null)
+                            {
+                                txtPartName.Text = part.NAME.ToString();//db.getItemNoTPICS(txtPartNo.Text).ToString();
+                                txtTypeF.Text = part.Detail; //db.getTypeTPICS(txtPartNo.Text).ToString();
+                                if (Data.Length < 2)
+                                {
+                                    txtSNP.Text = part.LotSize.ToString();
+                                    txtQty.Text = part.CurrentStock.ToString();
+                                }
+                            }
+                            else
+                            {
+                               // MessageBox.Show("ไม่พบไอเท็มนี้ ในรายการเช็คสินค้า !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                              //  this.Close();
+                            }
+                        }else
+                        {
+                            MessageBox.Show("ไม่พบไอเท็มนี้ ในรายการเช็คสินค้า !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            this.Close();
+                        }
+
 
                     }
                 }
@@ -81,12 +122,14 @@ namespace StockControl.Process
                     decimal.TryParse(txtQtyR.Text, out QtyR);
                     int SNP = 0;
                     int.TryParse(txtSNP.Text, out SNP);
+                    int ZoneNo = 0;
+
                     if (QtyR > 0)
                     {
                         using (DataClasses1DataContext db = new DataClasses1DataContext())
                         {
-                            tb_CheckStockTempCheck ck = db.tb_CheckStockTempChecks.Where(t => t.PKTAG == PKTAG).FirstOrDefault();
-                            if (ck != null)
+                            tb_CheckStockTempCheck ck = db.tb_CheckStockTempChecks.Where(t => t.PKTAG == PKTAG && t.CheckNo==CheckNo).FirstOrDefault();
+                            if (ck != null && !txtType.Text.Equals("Code"))
                             {
 
                                 MessageBox.Show("ข้อมูลซ้ำกับที่ยงเข้าไปแล้ว! Qty [ " + ck.Quantity.ToString() + " ]", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -94,6 +137,8 @@ namespace StockControl.Process
                             }
                             else
                             {
+                                ZoneNo = Convert.ToInt32(db.getMaxZone(CheckNo, LW)) + 1;
+
                                 tb_CheckStockTempCheck ci = new tb_CheckStockTempCheck();
                                 ci.RefNo = txtRef.Text;
                                 ci.Code = txtPartNo.Text;
@@ -114,7 +159,8 @@ namespace StockControl.Process
                                 ci.Status = "Waiting";
                                 ci.SP = txtType.Text;
                                 ci.Type = txtTypeF.Text;
-
+                                ci.ZoneNo = ZoneNo;
+                                ci.TY = 0;
                                 db.tb_CheckStockTempChecks.InsertOnSubmit(ci);
                                 db.SubmitChanges();
 

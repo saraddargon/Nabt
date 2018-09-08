@@ -38,6 +38,8 @@
             this.radMenuItem1 = new Telerik.WinControls.UI.RadMenuItem();
             this.radStatusStrip1 = new Telerik.WinControls.UI.RadStatusStrip();
             this.radLabelElement1 = new Telerik.WinControls.UI.RadLabelElement();
+            this.commandBarSeparator1 = new Telerik.WinControls.UI.CommandBarSeparator();
+            this.radProgressBarElement1 = new Telerik.WinControls.UI.RadProgressBarElement();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -53,8 +55,6 @@
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.commandBarSeparator1 = new Telerik.WinControls.UI.CommandBarSeparator();
-            this.radProgressBarElement1 = new Telerik.WinControls.UI.RadProgressBarElement();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -177,6 +177,29 @@
             this.radLabelElement1.TextWrap = true;
             this.radLabelElement1.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
             // 
+            // commandBarSeparator1
+            // 
+            this.commandBarSeparator1.Name = "commandBarSeparator1";
+            this.radStatusStrip1.SetSpring(this.commandBarSeparator1, false);
+            this.commandBarSeparator1.VisibleInOverflowMenu = false;
+            // 
+            // radProgressBarElement1
+            // 
+            this.radProgressBarElement1.Name = "radProgressBarElement1";
+            this.radProgressBarElement1.SeparatorColor1 = System.Drawing.Color.White;
+            this.radProgressBarElement1.SeparatorColor2 = System.Drawing.Color.White;
+            this.radProgressBarElement1.SeparatorColor3 = System.Drawing.Color.White;
+            this.radProgressBarElement1.SeparatorColor4 = System.Drawing.Color.White;
+            this.radProgressBarElement1.SeparatorGradientAngle = 0;
+            this.radProgressBarElement1.SeparatorGradientPercentage1 = 0.4F;
+            this.radProgressBarElement1.SeparatorGradientPercentage2 = 0.6F;
+            this.radProgressBarElement1.SeparatorNumberOfColors = 2;
+            this.radStatusStrip1.SetSpring(this.radProgressBarElement1, false);
+            this.radProgressBarElement1.StepWidth = 14;
+            this.radProgressBarElement1.SweepAngle = 90;
+            this.radProgressBarElement1.Text = "";
+            this.radProgressBarElement1.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
@@ -203,6 +226,7 @@
             this.radPanel1.Size = new System.Drawing.Size(489, 259);
             this.radPanel1.TabIndex = 1;
             this.radPanel1.ThemeName = "Office2010Blue";
+            this.radPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.radPanel1_Paint);
             // 
             // progressBar1
             // 
@@ -301,30 +325,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // commandBarSeparator1
-            // 
-            this.commandBarSeparator1.Name = "commandBarSeparator1";
-            this.radStatusStrip1.SetSpring(this.commandBarSeparator1, false);
-            this.commandBarSeparator1.Text = "";
-            this.commandBarSeparator1.VisibleInOverflowMenu = false;
-            // 
-            // radProgressBarElement1
-            // 
-            this.radProgressBarElement1.Name = "radProgressBarElement1";
-            this.radProgressBarElement1.SeparatorColor1 = System.Drawing.Color.White;
-            this.radProgressBarElement1.SeparatorColor2 = System.Drawing.Color.White;
-            this.radProgressBarElement1.SeparatorColor3 = System.Drawing.Color.White;
-            this.radProgressBarElement1.SeparatorColor4 = System.Drawing.Color.White;
-            this.radProgressBarElement1.SeparatorGradientAngle = 0;
-            this.radProgressBarElement1.SeparatorGradientPercentage1 = 0.4F;
-            this.radProgressBarElement1.SeparatorGradientPercentage2 = 0.6F;
-            this.radProgressBarElement1.SeparatorNumberOfColors = 2;
-            this.radStatusStrip1.SetSpring(this.radProgressBarElement1, false);
-            this.radProgressBarElement1.StepWidth = 14;
-            this.radProgressBarElement1.SweepAngle = 90;
-            this.radProgressBarElement1.Text = "";
-            this.radProgressBarElement1.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
             // 
             // CheckStockUpload
             // 

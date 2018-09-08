@@ -657,6 +657,9 @@ namespace StockControl
                                 db.sp_E_004_CompletedStock(ckNo);
                                 MessageBox.Show("Update Completed.");
                                 LoadDefault();
+                            }else
+                            {
+                                MessageBox.Show("เลขที่เอกสารนี้ ไม่สามารถลบได้!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }

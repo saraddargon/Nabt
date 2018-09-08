@@ -45,6 +45,7 @@
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn12 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn13 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn14 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn15 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
@@ -404,6 +405,10 @@
             gridViewTextBoxColumn14.HeaderText = "CheckBy";
             gridViewTextBoxColumn14.Name = "CheckBy";
             gridViewTextBoxColumn14.Width = 90;
+            gridViewTextBoxColumn15.FieldName = "SP";
+            gridViewTextBoxColumn15.HeaderText = "SP";
+            gridViewTextBoxColumn15.Name = "SP";
+            gridViewTextBoxColumn15.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.dgvData.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
             gridViewTextBoxColumn1,
             gridViewTextBoxColumn2,
@@ -418,7 +423,8 @@
             gridViewTextBoxColumn11,
             gridViewTextBoxColumn12,
             gridViewTextBoxColumn13,
-            gridViewTextBoxColumn14});
+            gridViewTextBoxColumn14,
+            gridViewTextBoxColumn15});
             this.dgvData.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
             this.dgvData.MasterTemplate.ViewDefinition = tableViewDefinition1;
             this.dgvData.Name = "dgvData";
@@ -452,12 +458,11 @@
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(569, 9);
+            this.btnLoad.Location = new System.Drawing.Point(277, 35);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(56, 24);
             this.btnLoad.TabIndex = 11;
             this.btnLoad.Text = "Load..";
-            this.btnLoad.Visible = false;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
             // ddlLocation
@@ -468,6 +473,7 @@
             this.ddlLocation.Size = new System.Drawing.Size(166, 20);
             this.ddlLocation.TabIndex = 10;
             this.ddlLocation.Text = "เลือก";
+            this.ddlLocation.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.ddlLocation_SelectedIndexChanged);
             // 
             // radGroupBox1
             // 
@@ -557,11 +563,11 @@
             // radLabel1
             // 
             this.radLabel1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.radLabel1.Location = new System.Drawing.Point(10, 38);
+            this.radLabel1.Location = new System.Drawing.Point(46, 38);
             this.radLabel1.Name = "radLabel1";
-            this.radLabel1.Size = new System.Drawing.Size(91, 18);
+            this.radLabel1.Size = new System.Drawing.Size(34, 18);
             this.radLabel1.TabIndex = 3;
-            this.radLabel1.Text = "Location (zone)";
+            this.radLabel1.Text = "Zone";
             // 
             // txtCheckNo
             // 

@@ -82,6 +82,8 @@
             this.openHistoryCheckToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.radGridView2 = new Telerik.WinControls.UI.RadGridView();
+            this.txtItemNo = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
             this.txtCheckNo = new Telerik.WinControls.UI.RadTextBox();
             this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
             this.office2010BlueTheme1 = new Telerik.WinControls.Themes.Office2010BlueTheme();
@@ -101,6 +103,8 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGridView2.MasterTemplate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtItemNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCheckNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -422,7 +426,7 @@
             this.radGridView1.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.radGridView1.ForeColor = System.Drawing.Color.Black;
             this.radGridView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.radGridView1.Location = new System.Drawing.Point(0, 44);
+            this.radGridView1.Location = new System.Drawing.Point(0, 65);
             // 
             // 
             // 
@@ -552,8 +556,8 @@
             this.radGridView1.Name = "radGridView1";
             this.radGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.radGridView1.ShowGroupPanel = false;
-            this.radGridView1.Size = new System.Drawing.Size(895, 358);
-            this.radGridView1.TabIndex = 0;
+            this.radGridView1.Size = new System.Drawing.Size(895, 337);
+            this.radGridView1.TabIndex = 1;
             this.radGridView1.ThemeName = "Office2010Blue";
             this.radGridView1.CellEndEdit += new Telerik.WinControls.UI.GridViewCellEventHandler(this.radGridView1_CellEndEdit);
             this.radGridView1.CellClick += new Telerik.WinControls.UI.GridViewCellEventHandler(this.radGridView1_CellClick);
@@ -579,13 +583,15 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.MintCream;
             this.panel2.Controls.Add(this.radGridView2);
+            this.panel2.Controls.Add(this.txtItemNo);
+            this.panel2.Controls.Add(this.radLabel2);
             this.panel2.Controls.Add(this.txtCheckNo);
             this.panel2.Controls.Add(this.radLabel1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(895, 44);
-            this.panel2.TabIndex = 1;
+            this.panel2.Size = new System.Drawing.Size(895, 65);
+            this.panel2.TabIndex = 0;
             // 
             // radGridView2
             // 
@@ -596,8 +602,25 @@
             this.radGridView2.MasterTemplate.ViewDefinition = tableViewDefinition2;
             this.radGridView2.Name = "radGridView2";
             this.radGridView2.Size = new System.Drawing.Size(240, 27);
-            this.radGridView2.TabIndex = 3;
+            this.radGridView2.TabIndex = 4;
             this.radGridView2.Visible = false;
+            // 
+            // txtItemNo
+            // 
+            this.txtItemNo.Location = new System.Drawing.Point(119, 39);
+            this.txtItemNo.Name = "txtItemNo";
+            this.txtItemNo.NullText = "Item No.";
+            this.txtItemNo.Size = new System.Drawing.Size(173, 20);
+            this.txtItemNo.TabIndex = 3;
+            this.txtItemNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtItemNo_KeyPress);
+            // 
+            // radLabel2
+            // 
+            this.radLabel2.Location = new System.Drawing.Point(64, 41);
+            this.radLabel2.Name = "radLabel2";
+            this.radLabel2.Size = new System.Drawing.Size(49, 18);
+            this.radLabel2.TabIndex = 2;
+            this.radLabel2.Text = "Item No.";
             // 
             // txtCheckNo
             // 
@@ -605,16 +628,16 @@
             this.txtCheckNo.Name = "txtCheckNo";
             this.txtCheckNo.NullText = "Check Stock No.";
             this.txtCheckNo.Size = new System.Drawing.Size(113, 20);
-            this.txtCheckNo.TabIndex = 2;
+            this.txtCheckNo.TabIndex = 1;
             this.txtCheckNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCheckNo_KeyPress);
             // 
             // radLabel1
             // 
-            this.radLabel1.Location = new System.Drawing.Point(28, 13);
+            this.radLabel1.Location = new System.Drawing.Point(28, 15);
             this.radLabel1.Name = "radLabel1";
-            this.radLabel1.Size = new System.Drawing.Size(85, 18);
-            this.radLabel1.TabIndex = 1;
-            this.radLabel1.Text = "Check Stock No";
+            this.radLabel1.Size = new System.Drawing.Size(88, 18);
+            this.radLabel1.TabIndex = 0;
+            this.radLabel1.Text = "Check Stock No.";
             // 
             // radRibbonBarButtonGroup2
             // 
@@ -693,6 +716,8 @@
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radGridView2.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtItemNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCheckNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
@@ -748,5 +773,7 @@
         private System.Windows.Forms.ToolStripMenuItem openHistoryCheckToolStripMenuItem;
         private Telerik.WinControls.UI.RadGridView radGridView2;
         private Telerik.WinControls.UI.RadButtonElement radButtonElement8;
+        private Telerik.WinControls.UI.RadTextBox txtItemNo;
+        private Telerik.WinControls.UI.RadLabel radLabel2;
     }
 }

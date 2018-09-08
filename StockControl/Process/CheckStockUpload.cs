@@ -392,76 +392,104 @@ namespace StockControl
                 this.Cursor = Cursors.WaitCursor;
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    //radProgressBarElement1.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-                    //radProgressBarElement1.Minimum = 0;
-                    //radProgressBarElement1.Maximum = dt_d.Rows.Count;
-                  
-                    foreach (DataRow dr in dt_d.Rows)
+                    tb_CheckStock tc = db.tb_CheckStocks.Where(c => c.CheckNo == txtCheckNo.Text && c.Status != "Completed").FirstOrDefault();
+                    if (tc != null)
                     {
 
-                        //DKUBU = ""; ItemCode = ""; ItemDescription = ""; Type = "";
-                        //Revision = ""; ExclusionClass = ""; StorageWorkCenter = ""; StorageWorkCenterName = "";
-                        //CurrentInventory = ""; InventoryValue = ""; StockBeforeInventory = ""; PhysicalInventoryValue = "";
-                        //UnitOfMeasure = "";
+                        progressBar1.Minimum = 0;
+                        progressBar1.Maximum = dt_d.Rows.Count + 1;
+                        progressBar1.Visible = true;
+                        progressBar1.Step = 1;
 
-                        //d = dr["DATE"].ToString();
-                        if (dbClss.TSt(dr["StorageWorkCenter"]).Equals("WH01"))
+                        var Dl = db.tb_CheckStockLists.Where(w => w.CheckNo == txtCheckNo.Text).ToList();
+                        db.tb_CheckStockLists.DeleteAllOnSubmit(Dl);
+                        db.SubmitChanges();
+
+                        foreach (DataRow dr in dt_d.Rows)
                         {
 
-                            tb_CheckStockList u = new tb_CheckStockList();
-                            u.CheckNo = txtCheckNo.Text.Trim();
-                            u.Status = "Waiting";
-                            u.Code = dbClss.TSt(dr["ItemCode"]);
-                            u.PartName = dbClss.TSt(dr["ItemDescription"]);
-                            u.Type = dbClss.TSt(dr["Type"]);
-                            u.Location = dbClss.TSt(dr["StorageWorkCenter"]);
-                            u.Revision = dbClss.TInt(dr["Revision"]);
-                            u.ExclusionClass = dbClss.TInt(dr["ExclusionClass"]);
-                            u.StorageWorkCenter = dbClss.TSt(dr["StorageWorkCenter"]);
-                            u.StorageWorkCenterName = dbClss.TSt(dr["StorageWorkCenterName"]);
-                            u.CurrentInventory = dbClss.TDe(dr["CurrentInventory"]);
-                            u.InventoryValue = dbClss.TDe(dr["InventoryValue"]);
-                            u.StockBeforeInventory = dbClss.TDe(dr["StockBeforeInventory"]);
-                            u.PhysicalInventoryValue = 0;//dbClss.TDe(dr["PhysicalInventoryValue"]);
-                            u.UnitOfMeasure = dbClss.TSt(dr["UnitOfMeasure"]);
-                            u.Quantity = dbClss.TDe(dr["CurrentInventory"]);
-                            u.InputQty = 0;
-                            u.Remark = "";
-                            u.Diff = 0;
+                            //DKUBU = ""; ItemCode = ""; ItemDescription = ""; Type = "";
+                            //Revision = ""; ExclusionClass = ""; StorageWorkCenter = ""; StorageWorkCenterName = "";
+                            //CurrentInventory = ""; InventoryValue = ""; StockBeforeInventory = ""; PhysicalInventoryValue = "";
+                            //UnitOfMeasure = "";
+                            //d = dr["DATE"].ToString();
+                            
+                            if (dbClss.TSt(dr["StorageWorkCenter"]).Equals("WH01"))
+                            {
+                                //tb_CheckStockList ck = db.tb_CheckStockLists.Where(cp => cp.CheckNo == txtCheckNo.Text).FirstOrDefault();
 
-                            db.tb_CheckStockLists.InsertOnSubmit(u);
-                            db.SubmitChanges();
-                            C += 1;
+                                //if (ck != null)
+                                //{
+
+                                //}
+                                //else
+                                //{
+
+                                    tb_CheckStockList u = new tb_CheckStockList();
+                                    u.CheckNo = txtCheckNo.Text.Trim();
+                                    u.Status = "Waiting";
+                                    u.Code = dbClss.TSt(dr["ItemCode"]);
+                                    u.PartName = dbClss.TSt(dr["ItemDescription"]);
+                                    u.Type = dbClss.TSt(dr["Type"]);
+                                    u.Location = dbClss.TSt(dr["StorageWorkCenter"]);
+                                    u.Revision = dbClss.TInt(dr["Revision"]);
+                                    u.ExclusionClass = dbClss.TInt(dr["ExclusionClass"]);
+                                    u.StorageWorkCenter = dbClss.TSt(dr["StorageWorkCenter"]);
+                                    u.StorageWorkCenterName = dbClss.TSt(dr["StorageWorkCenterName"]);
+                                    u.CurrentInventory = dbClss.TDe(dr["CurrentInventory"]);
+                                    u.InventoryValue = dbClss.TDe(dr["InventoryValue"]);
+                                    u.StockBeforeInventory = dbClss.TDe(dr["StockBeforeInventory"]);
+                                    u.PhysicalInventoryValue = 0;//dbClss.TDe(dr["PhysicalInventoryValue"]);
+                                    u.UnitOfMeasure = dbClss.TSt(dr["UnitOfMeasure"]);
+                                    u.Quantity = dbClss.TDe(dr["CurrentInventory"]);
+                                    u.Plant = db.getPlanTIDTPICS(dbClss.TSt(dr["ItemCode"]));
+                                    u.InputQty = 0;
+                                    u.Remark = "";
+                                    u.Diff = 0;
+
+                                    db.tb_CheckStockLists.InsertOnSubmit(u);
+                                    db.SubmitChanges();
+                                //}
+                                C += 1;
+                            }
+
+                            progressBar1.Value = C;
+                            progressBar1.PerformStep();
+
                         }
-                  
-                    }
 
-                    if (C > 0)
-                    {
-                        var h = (from ix in db.tb_CheckStocks
-                                 where ix.CheckNo == txtCheckNo.Text.Trim()
-                                 select ix).ToList();
-                        if (h.Count > 0)
+                        if (C > 0)
                         {
-                            var hh = (from ix in db.tb_CheckStocks
-                                      where ix.CheckNo == txtCheckNo.Text.Trim()
-                                      select ix).First();
-                            //unit1.Status = "";
-                            hh.CheckDate = Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"));
-                            hh.CreateBy = dbClss.UserID;
-                            hh.Status = "Waiting Check";
-                            db.SubmitChanges();
-                            dbClss.AddHistory(this.Name, "แก้ไข", "Import CheckStock [" + hh.CheckNo + "]", "");
+                            var h = (from ix in db.tb_CheckStocks
+                                     where ix.CheckNo == txtCheckNo.Text.Trim()
+                                     select ix).ToList();
+                            if (h.Count > 0)
+                            {
+                                var hh = (from ix in db.tb_CheckStocks
+                                          where ix.CheckNo == txtCheckNo.Text.Trim()
+                                          select ix).First();
+                                //unit1.Status = "";
+                                hh.CheckDate = Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"));
+                                hh.CreateBy = dbClss.UserID;
+                                hh.Status = "Waiting Check";
+                                db.SubmitChanges();
+
+                                dbClss.AddHistory(this.Name, "แก้ไข", "Import CheckStock [" + hh.CheckNo + "]", "");
+                            }
+
+                            MessageBox.Show("Import data Complete.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("ไม่พบข้อมูล!");
                         }
 
-                        MessageBox.Show("Import data Complete.");
+                        //radProgressBarElement1.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
                     }
                     else
                     {
-                        MessageBox.Show("ไม่พบข้อมูล!");
+                        MessageBox.Show("เอกสารเสร็จสิ้นแล้ว แก้ไขไฟล์ไม่ได้!");
                     }
-
-                    //radProgressBarElement1.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
 
                 }
                 lblSS.Visible = false;
@@ -469,6 +497,11 @@ namespace StockControl
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             finally { this.Cursor = Cursors.Default; }
+        }
+
+        private void radPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
