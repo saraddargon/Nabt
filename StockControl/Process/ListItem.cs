@@ -7,12 +7,14 @@ using System.Text;
 using System.Windows.Forms;
 using System.Linq;
 using Microsoft.VisualBasic.FileIO;
+using Telerik.WinControls.UI;
 namespace StockControl
 {
     public partial class ListItem : Telerik.WinControls.UI.RadRibbonForm
     {
         public ListItem()
         {
+            
             this.Name = "ListItem";
             if (!dbClss.PermissionScreen(this.Name))
             {
@@ -20,10 +22,12 @@ namespace StockControl
                 this.Close();
             }
             InitializeComponent();
+            lblCount.Text = "Count 0";
         }
 
         //private int RowView = 50;
         //private int ColView = 10;
+        DataTable dt3 = new DataTable();
         DataTable dt = new DataTable();
         string PathFile = "";
         private void radMenuItem2_Click(object sender, EventArgs e)
@@ -40,12 +44,12 @@ namespace StockControl
         }
         private void GETDTRow()
         {
-            //dt.Columns.Add(new DataColumn("edit", typeof(bool)));
-            //dt.Columns.Add(new DataColumn("code", typeof(string)));
-            //dt.Columns.Add(new DataColumn("Name", typeof(string)));
-            //dt.Columns.Add(new DataColumn("Active", typeof(bool)));
-            //dt.Columns.Add(new DataColumn("CreateDate", typeof(DateTime)));
-            //dt.Columns.Add(new DataColumn("CreateBy", typeof(string)));
+            
+            dt3.Columns.Add(new DataColumn("Code", typeof(string)));
+            dt3.Columns.Add(new DataColumn("NAME", typeof(string)));
+            dt3.Columns.Add(new DataColumn("PLANTID", typeof(string)));
+            dt3.Columns.Add(new DataColumn("SHELVES", typeof(string)));
+
         }
         private void Unit_Load(object sender, EventArgs e)
         {
@@ -53,9 +57,10 @@ namespace StockControl
             RMenu4.Click += RMenu4_Click;
             // RMenu5.Click += RMenu5_Click;
             RMenu6.Click += RMenu6_Click;
-            radGridView1.ReadOnly = true;
+           // radGridView1.ReadOnly = true;
             radGridView1.AutoGenerateColumns = false;
-            // GETDTRow();
+             GETDTRow();
+
 
             LoadDataDefault();
             DataLoad();
@@ -108,7 +113,7 @@ namespace StockControl
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
 
-                    radGridView1.DataSource = db.sp_001_TPIC_SelectItem(txtItemNo.Text).ToList();
+                    radGridView1.DataSource = db.sp_001_1_TPIC_SelectItem(txtItemNo.Text,txtPlant.Text).ToList();
                     foreach (var x in radGridView1.Rows)
                     {
 
@@ -599,7 +604,8 @@ namespace StockControl
         {
             if(e.RowIndex>=0)
             {
-                if(!radGridView1.Rows[e.RowIndex].Cells["PahtImage"].Value.ToString().Equals("") && !PathFile.Equals(""))
+                if(!radGridView1.Rows[e.RowIndex].Cells["PahtImage"].Value.ToString().Equals("") && !PathFile.Equals("")
+                    && e.ColumnIndex==radGridView1.Columns["PahtImage"].Index)
                 {
                     try
                     {
@@ -607,10 +613,10 @@ namespace StockControl
                     }
                     catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);  }
                 }
-                else
-                {
-                    MessageBox.Show("Path file Empty!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                //else
+                //{
+                //    MessageBox.Show("Path file Empty!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //}
             }
         }
 
@@ -670,16 +676,128 @@ namespace StockControl
 
         private void radButtonElement3_Click(object sender, EventArgs e)
         {
-            //FG_TAG
-            //Report.Reportx1.WReport = "PDTAG";
-            //Report.Reportx1.Value = new string[2];
-            //Report.Reportx1.Value[0] = "BomNo";
-            //Report.Reportx1.Value[1] = dbClss.UserID;
-            //Report.Reportx1 op = new Report.Reportx1("FG_TAG.rpt");
-            //op.Show();
-            PrintPDTAG pd = new PrintPDTAG("");
-            pd.Show();
+            ////FG_TAG
+            ////Report.Reportx1.WReport = "PDTAG";
+            ////Report.Reportx1.Value = new string[2];
+            ////Report.Reportx1.Value[0] = "BomNo";
+            ////Report.Reportx1.Value[1] = dbClss.UserID;
+            ////Report.Reportx1 op = new Report.Reportx1("FG_TAG.rpt");
+            ////op.Show();
+            //PrintPDTAG pd = new PrintPDTAG("");
+            //pd.Show();
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    var tp = db.TempPrints.Where(t => !t.CodeNo.Equals("")).ToList();
+                    if(tp!=null)
+                    {
+                        foreach(var rd in tp)
+                        {
+                            db.TempPrints.DeleteOnSubmit(rd);
+                            db.SubmitChanges();
+                        }
 
+                    }
+
+                    radGridView1.EndEdit();
+                    radGridView1.EndUpdate();
+                    int ck = 1;
+                    int Gp = 1;
+                    foreach(DataRow rd in dt3.Rows)
+                    {
+                       
+
+                            if (ck == 8)
+                            {
+                                ck = 1;
+                                Gp += 1;
+                            }
+                            TempPrint tm = new TempPrint();
+                            tm.CodeNo = rd["Code"].ToString();
+                            tm.Name = rd["NAME"].ToString();
+                            tm.PLANTID = rd["PLANTID"].ToString();
+                            tm.SHELVES = rd["SHELVES"].ToString();
+                            tm.No = ck;
+                            tm.GP = Gp;
+                            db.TempPrints.InsertOnSubmit(tm);
+                            db.SubmitChanges();
+                            ck += 1;
+                        
+                    }
+
+                    this.Cursor = Cursors.WaitCursor;
+                    try
+                    {
+                        Report.Reportx1.WReport = "TAGITEM";
+                        Report.Reportx1.Value = new string[1];
+                        Report.Reportx1.Value[0] = Gp.ToString();
+
+                        Report.Reportx1 op = new Report.Reportx1("TAGItem.rpt");
+                        op.Show();
+                    }
+                    catch { }
+                    this.Cursor = Cursors.Default;
+                }
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
+            this.Cursor = Cursors.Default;
+        }
+
+        private void radCheckBox1_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
+        {
+            if (radCheckBox1.Checked)
+            {
+                foreach (GridViewRowInfo rd in radGridView1.Rows)
+                {
+                    rd.Cells["chk"].Value = true;
+                }
+
+            }
+            else
+            {
+                foreach (GridViewRowInfo rd in radGridView1.Rows)
+                {
+                    rd.Cells["chk"].Value = false;
+                }
+            }
+            
+        }
+
+        private void radButton1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                radGridView1.EndEdit();
+                radGridView1.EndUpdate();
+                foreach (GridViewRowInfo rd in radGridView1.Rows)
+                {
+                    if(Convert.ToBoolean(rd.Cells["chk"].Value))
+                    {
+                        DataRow nr = dt3.NewRow();
+                        nr["Code"] = rd.Cells["Code"].Value.ToString();
+                        nr["NAME"]= rd.Cells["NAME"].Value.ToString();
+                        nr["PLANTID"] = rd.Cells["PLANTID"].Value.ToString();
+                        nr["SHELVES"] = rd.Cells["SHELVES"].Value.ToString();
+
+                        dt3.Rows.Add(nr);
+
+                        rd.Cells["chk"].Value = false;
+
+                    }
+                }
+                lblCount.Text = "Count " + dt3.Rows.Count.ToString();
+                this.Cursor = Cursors.Default;
+            }
+            catch { }
+        }
+
+        private void radButton2_Click(object sender, EventArgs e)
+        {
+            dt3.Rows.Clear();
+            lblCount.Text = "Count 0";
         }
     }
 }

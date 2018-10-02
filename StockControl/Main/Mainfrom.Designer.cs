@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Mainfrom));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Master List");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("T-PIC List");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Receive List");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Production List");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Export List");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Local Delivery List");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Check Stock List");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Master List");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("T-PIC List");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Receive List");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Production List");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Export List");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Local Delivery List");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Check Stock List");
             this.office2010BlueTheme1 = new Telerik.WinControls.Themes.Office2010BlueTheme();
             this.radStatusStrip1 = new Telerik.WinControls.UI.RadStatusStrip();
             this.radLabelElement1 = new Telerik.WinControls.UI.RadLabelElement();
@@ -85,11 +85,14 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.radMenuItem15 = new Telerik.WinControls.UI.RadMenuItem();
+            this.radMenuItem16 = new Telerik.WinControls.UI.RadMenuItem();
+            this.radMenuItem17 = new Telerik.WinControls.UI.RadMenuItem();
             this.radMenu1 = new Telerik.WinControls.UI.RadMenu();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radMenu1)).BeginInit();
             this.SuspendLayout();
             // 
             // radStatusStrip1
@@ -382,6 +385,10 @@
             // radMenuItem9
             // 
             this.radMenuItem9.Image = ((System.Drawing.Image)(resources.GetObject("radMenuItem9.Image")));
+            this.radMenuItem9.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.radMenuItem15,
+            this.radMenuItem16,
+            this.radMenuItem17});
             this.radMenuItem9.Name = "radMenuItem9";
             this.radMenuItem9.Text = "Manual";
             this.radMenuItem9.Click += new System.EventHandler(this.radMenuItem9_Click);
@@ -444,28 +451,28 @@
             this.TreeManu.ImageList = this.ImageList;
             this.TreeManu.Location = new System.Drawing.Point(0, 31);
             this.TreeManu.Name = "TreeManu";
-            treeNode1.Name = "MasterList";
-            treeNode1.Text = "Master List";
-            treeNode2.Name = "TPIC";
-            treeNode2.Text = "T-PIC List";
-            treeNode3.Name = "Receive";
-            treeNode3.Text = "Receive List";
-            treeNode4.Name = "Production";
-            treeNode4.Text = "Production List";
-            treeNode5.Name = "Export";
-            treeNode5.Text = "Export List";
-            treeNode6.Name = "Local";
-            treeNode6.Text = "Local Delivery List";
-            treeNode7.Name = "CheckStock";
-            treeNode7.Text = "Check Stock List";
+            treeNode8.Name = "MasterList";
+            treeNode8.Text = "Master List";
+            treeNode9.Name = "TPIC";
+            treeNode9.Text = "T-PIC List";
+            treeNode10.Name = "Receive";
+            treeNode10.Text = "Receive List";
+            treeNode11.Name = "Production";
+            treeNode11.Text = "Production List";
+            treeNode12.Name = "Export";
+            treeNode12.Text = "Export List";
+            treeNode13.Name = "Local";
+            treeNode13.Text = "Local Delivery List";
+            treeNode14.Name = "CheckStock";
+            treeNode14.Text = "Check Stock List";
             this.TreeManu.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode5,
-            treeNode6,
-            treeNode7});
+            treeNode8,
+            treeNode9,
+            treeNode10,
+            treeNode11,
+            treeNode12,
+            treeNode13,
+            treeNode14});
             this.TreeManu.SelectedImageIndex = 4;
             this.TreeManu.ShowNodeToolTips = true;
             this.TreeManu.Size = new System.Drawing.Size(212, 495);
@@ -523,6 +530,30 @@
             this.imageList1.Images.SetKeyName(0, "Folder.png");
             this.imageList1.Images.SetKeyName(1, "Downloads folder.png");
             // 
+            // radMenuItem15
+            // 
+            this.radMenuItem15.Name = "radMenuItem15";
+            this.radMenuItem15.Text = "Check Stock and Master";
+            this.radMenuItem15.Click += new System.EventHandler(this.radMenuItem15_Click_1);
+            // 
+            // radMenuItem16
+            // 
+            this.radMenuItem16.Name = "radMenuItem16";
+            this.radMenuItem16.Text = "Production";
+            this.radMenuItem16.Click += new System.EventHandler(this.radMenuItem16_Click_1);
+            // 
+            // radMenuItem17
+            // 
+            this.radMenuItem17.Name = "radMenuItem17";
+            this.radMenuItem17.Text = "Receive";
+            this.radMenuItem17.Click += new System.EventHandler(this.radMenuItem17_Click_1);
+            // 
+            // Mainfrom
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1072, 667);
+            // 
             // radMenu1
             // 
             this.radMenu1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(206)))), ((int)(((byte)(225)))));
@@ -540,12 +571,6 @@
             ((Telerik.WinControls.UI.RadMenuElement)(this.radMenu1.GetChildAt(0))).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             ((Telerik.WinControls.Primitives.FillPrimitive)(this.radMenu1.GetChildAt(0).GetChildAt(1))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(4)))), ((int)(((byte)(129)))));
             ((Telerik.WinControls.Primitives.FillPrimitive)(this.radMenu1.GetChildAt(0).GetChildAt(1))).ClipDrawing = false;
-            // 
-            // Mainfrom
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1072, 667);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -621,7 +646,6 @@
         private Telerik.WinControls.UI.RadMenuSeparatorItem radMenuSeparatorItem4;
         private Telerik.WinControls.UI.RadMenuItem radMenuItem21;
         private Telerik.WinControls.UI.RadMenuItem radMenuItem22;
-        private Telerik.WinControls.UI.RadMenu radMenu1;
         private Telerik.WinControls.UI.RadMenuItem radMenuItem20;
         private Telerik.WinControls.UI.CommandBarSeparator commandBarSeparator4;
         private Telerik.WinControls.UI.RadLabelElement radLabelElement4;
@@ -629,5 +653,9 @@
         private Telerik.WinControls.UI.CommandBarSeparator commandBarSeparator5;
         private Telerik.WinControls.UI.RadLabelElement radLabelElement5;
         private Telerik.WinControls.UI.RadLabelElement txtposition;
+        private Telerik.WinControls.UI.RadMenuItem radMenuItem15;
+        private Telerik.WinControls.UI.RadMenuItem radMenuItem16;
+        private Telerik.WinControls.UI.RadMenuItem radMenuItem17;
+        private Telerik.WinControls.UI.RadMenu radMenu1;
     }
 }

@@ -505,5 +505,26 @@ namespace StockControl
         {
             this.Close();
         }
+
+        private void radButtonElement1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    db.sp_TPICS_CalculateListQueue();
+                    db.sp_TPICS_CalculateListQueuePD();
+                }
+            }
+            catch { }
+            MessageBox.Show("Get List Completed.");
+            this.Cursor = Cursors.Default;
+        }
+
+        private void radButtonElement2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Waiting TEST for TPICS.");
+        }
     }
 }

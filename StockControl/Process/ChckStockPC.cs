@@ -45,8 +45,7 @@ namespace StockControl.Process
             {
                 if (!PKTAG.Equals(""))
                 {
-                    string[] Data = PKTAG.Split(',');
-                    
+                    string[] Data = PKTAG.Split(',');                    
                         // แบบ 1 // PD,WO17001112,2,4,AA2,3of3,41217058036N1
                         if (Data.Length > 2)
                         {
@@ -97,10 +96,19 @@ namespace StockControl.Process
                                // MessageBox.Show("ไม่พบไอเท็มนี้ ในรายการเช็คสินค้า !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                               //  this.Close();
                             }
-                        }else
+
+                        }
+                        else
                         {
-                            MessageBox.Show("ไม่พบไอเท็มนี้ ในรายการเช็คสินค้า !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            this.Close();
+                            txtPartNo.Text = PKTAG;
+                            txtQty.Text = "0";
+                            txtSNP.Text = "0";
+                            txtQtyR.Text = "";
+                            txtQtyR.Focus();
+                            ///////////////////////////////////////////////////////////
+                            //MessageBox.Show("ไม่พบไอเท็มนี้ ในรายการเช็คสินค้า !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            //this.Close();
+
                         }
 
 
@@ -140,8 +148,7 @@ namespace StockControl.Process
                                 ZoneNo = Convert.ToInt32(db.getMaxZone(CheckNo, LW)) + 1;
 
                                 tb_CheckStockTempCheck ci = new tb_CheckStockTempCheck();
-                                ci.RefNo = txtRef.Text;
-                                ci.Code = txtPartNo.Text;
+                                ci.RefNo = txtRef.Text;                               
                                 ci.ItemName = txtPartName.Text;
                                 ci.PKTAG = txtPKTAG.Text;
                                 ci.ofTAG = txtOfTAG.Text;
@@ -161,6 +168,11 @@ namespace StockControl.Process
                                 ci.Type = txtTypeF.Text;
                                 ci.ZoneNo = ZoneNo;
                                 ci.TY = 0;
+                                ci.Code2 = txtPartNo.Text;
+                                if (txtPartName.Text.Trim().Equals(""))
+                                    ci.Code = "";
+                                else
+                                    ci.Code = txtPartNo.Text;
                                 db.tb_CheckStockTempChecks.InsertOnSubmit(ci);
                                 db.SubmitChanges();
 

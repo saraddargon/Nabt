@@ -213,6 +213,14 @@ namespace Report
                         // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
                     }
                     break;
+                case "TAGITEM":
+                    {
+
+                        rptDc.SetParameterValue("@IC", Convert.ToInt32(Value[0].ToString()));
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
+                        // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
+                    }
+                    break;
                 case "ReportPO":
                     {
 
@@ -262,7 +270,24 @@ namespace Report
                         // rptDc.SetParameterValue("@Action", Convert.ToInt32(ClassReport.Value[1]));
                     }
                     break;
-
+                case "ReportReceiveList":
+                    {
+                        rptDc.SetParameterValue("@Date1", Convert.ToDateTime(Value[0].ToString()));
+                        rptDc.SetParameterValue("@Date2", Convert.ToDateTime(Value[1].ToString()));
+                    }
+                    break;
+                case "ReportPD01":
+                    {
+                        rptDc.SetParameterValue("@Date1", Convert.ToDateTime(Value[0].ToString()));
+                        rptDc.SetParameterValue("@Date2", Convert.ToDateTime(Value[1].ToString()));
+                    }
+                    break;
+                case "ReportPD02":
+                    {
+                        rptDc.SetParameterValue("@Date1", Convert.ToDateTime(Value[0].ToString()));
+                        rptDc.SetParameterValue("@Date2", Convert.ToDateTime(Value[1].ToString()));
+                    }
+                    break;
 
             }
         }

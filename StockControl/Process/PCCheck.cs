@@ -260,7 +260,7 @@ namespace StockControl
                 {
                     var g = (from ix in db.tb_CheckStockTempChecks
                              where ix.CheckNo.Trim() == checkNo
-                             && ix.CheckMachine == Environment.MachineName
+                           //  && ix.CheckMachine == Environment.MachineName
                              && ix.Status != "Cancel"  
                              && (ddlLocation.Text==string.Empty || ix.Location==ddlLocation.Text)       
                              orderby ix.id descending                    
@@ -433,7 +433,7 @@ namespace StockControl
                     int id = 0;
                     int.TryParse(dgvData.Rows[row].Cells["id"].Value.ToString(), out id);
                     string CodeNo = dgvData.Rows[row].Cells["Code"].Value.ToString();
-                    if (!CodeNo.Equals("") && !id.Equals(0))
+                    if (!id.Equals(0))
                     {
                         using (DataClasses1DataContext db = new DataClasses1DataContext())
                         {
@@ -463,6 +463,37 @@ namespace StockControl
             try
             {
                // LoadData(txtCheckNo.Text);
+            }
+            catch { }
+        }
+
+        private void radButtonElement5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("คุณต้องการแก้ไข หรือไม่ ?", "แก้ไขรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    int id = 0;
+                    int.TryParse(dgvData.Rows[row].Cells["id"].Value.ToString(), out id);
+                    string CodeNo = dgvData.Rows[row].Cells["Code"].Value.ToString();
+                    if (!id.Equals(0))
+                    {
+                        StockControl.Process.CheckStockEdit edit = new Process.CheckStockEdit(id);
+                        edit.ShowDialog();
+                        LoadData(txtCheckNo.Text);
+                        //using (DataClasses1DataContext db = new DataClasses1DataContext())
+                        //{
+                        //    tb_CheckStockTempCheck td = db.tb_CheckStockTempChecks.Where(t => t.id == id).FirstOrDefault();
+                        //    if (td != null)
+                        //    {
+                        //        db.tb_CheckStockTempChecks.DeleteOnSubmit(td);
+                        //        db.SubmitChanges();
+                        //        LoadData(txtCheckNo.Text);
+                        //        // LoadData(CodeNo);
+                        //    }
+                        //}
+                    }
+                }
             }
             catch { }
         }

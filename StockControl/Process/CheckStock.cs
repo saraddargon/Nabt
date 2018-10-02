@@ -754,23 +754,25 @@ namespace StockControl
             try
             {
                 this.Cursor = Cursors.WaitCursor;
-
+                int RowNox = 0;
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
                     // db.sp_E_003_Calculate(txtCheckNo.Text);
-                    tb_CheckStock chk = db.tb_CheckStocks.Where(t => t.CheckNo == txtCheckNo.Text && !t.Status.Equals("Completed")).FirstOrDefault();
+                    tb_CheckStock chk = db.tb_CheckStocks.Where(t => t.CheckNo.Trim().ToLower() == txtCheckNo.Text.Trim().ToLower() && !t.Status.Equals("Completed")).FirstOrDefault();
                     if (chk != null)
                     {
 
-                        var Listx = db.tb_CheckStockPDALists.Where(p => p.CheckNo == txtCheckNo.Text).ToList();
+                        var Listx = db.tb_CheckStockPDALists.Where(p => p.CheckNo.ToLower() == txtCheckNo.Text.Trim().ToLower()).ToList();
+                       MessageBox.Show("PDA Count List : "+Listx.Count.ToString());
                         if (Listx.Count > 0)
                         {
                             int SNP = 0;
                             decimal Qty = 0;
-
+                           
                             foreach (var rd in Listx)
                             {
-                                tb_CheckStockTempCheck tc = db.tb_CheckStockTempChecks.Where(t => t.CheckNo == txtCheckNo.Text && t.PKTAG == rd.PKTAG).FirstOrDefault();
+                                tb_CheckStockTempCheck tc = db.tb_CheckStockTempChecks.Where(t => t.CheckNo.ToLower() == txtCheckNo.Text.ToLower() && t.PKTAG.ToLower() == rd.PKTAG.ToLower()
+                                && t.ZoneNo==rd.ZoneNo && t.Location.ToLower()==rd.LW.ToLower()).FirstOrDefault();
                                 if (tc != null)
                                 {
                                     db.tb_CheckStockTempChecks.DeleteOnSubmit(tc);
@@ -778,15 +780,20 @@ namespace StockControl
                                 }
                                 //////////
                                 string[] Data = rd.PKTAG.Split(',');
-                                if (Data.Length > 2)
+                                if (Data.Length > 0)
                                 {
+                                    RowNox += 1;
                                     SNP = 0;
                                     Qty = 0;
                                     int.TryParse(rd.SNP.ToString(), out SNP);
                                     decimal.TryParse(rd.Qty.ToString(), out Qty);
                                     tb_CheckStockTempCheck ci = new tb_CheckStockTempCheck();
-                                    ci.RefNo = Data[1];
-                                    ci.Code = rd.PartNo.ToString();
+                                    if (Data.Length > 1)
+                                        ci.RefNo = Data[1];
+                                    else
+                                        ci.RefNo = "";
+
+                                    ci.Code2 = rd.PartNo.ToString();
                                     ci.ItemName = db.getItemNoTPICS(rd.PartNo);
                                     ci.PKTAG = rd.PKTAG;
                                     ci.ofTAG = rd.OfTAG;
@@ -797,17 +804,27 @@ namespace StockControl
                                     ci.CreateDate = rd.CreateDate;
                                     ci.CheckBy = rd.UserID;
                                     ci.CheckNo = rd.CheckNo;
+                                    ci.ZoneNo = rd.ZoneNo;
                                     ci.SNP = SNP;
                                     ci.Quantity = Qty;
-                                    ci.Remark = "";
-                                    ci.Package = "";
+                                    ci.Remark = rd.id.ToString();
+                                    ci.Package = rd.Pdaid.ToString();
                                     ci.Status = "Waiting";
-                                    ci.SP = Data[0];
+                                    if (Data.Length > 1)
+                                        ci.SP = Data[0];
+                                    else
+                                        ci.SP = "";// 
+
+                                    if (rd.OfTAG.Equals("Code"))
+                                        ci.Code = "";
+                                    else
+                                        ci.Code = rd.PartNo.ToString();
+
                                     ci.Type = db.getTypeTPICS(rd.PartNo);
                                     db.tb_CheckStockTempChecks.InsertOnSubmit(ci);
                                     db.SubmitChanges();
 
-                                    tb_CheckStockPDAList pl = db.tb_CheckStockPDALists.Where(p => p.PKTAG == rd.PKTAG).FirstOrDefault();
+                                    tb_CheckStockPDAList pl = db.tb_CheckStockPDALists.Where(p => p.PKTAG.ToLower() == rd.PKTAG.ToLower() && p.id==rd.id).FirstOrDefault();
                                     if (pl != null)
                                     {
                                         db.tb_CheckStockPDALists.DeleteOnSubmit(pl);
@@ -823,7 +840,7 @@ namespace StockControl
                         //Update Qty//
 
                         db.sp_E_003_Calculate(txtCheckNo.Text);
-                        MessageBox.Show("Calculate Completed.");
+                        MessageBox.Show("Calculate Completed. ["+RowNox+"])");
                     }
                     else
                     {

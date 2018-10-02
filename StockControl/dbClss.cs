@@ -19,7 +19,7 @@ namespace StockControl
         //MessageBox.Show(ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
         //if (MessageBox.Show("คุณต้องการลบหรือไม่ ?", "ลบรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
 
-        public static string versioin = "v 1.0.0";
+        public static string versioin = "v 1.0.3";
         public static string UserID = "";
         public static string UserName = "";
         public static bool PermissionScreen(string ScreenName)
@@ -484,7 +484,86 @@ namespace StockControl
             }
             catch (Exception ex) { return null; }
         }
+        public static byte[] SaveQRCode2DMini(string Condition)
+        {
+            try
+            {
+                //string Data2D = "ReqNo-";
+                ////-----------ทำ บาร์โค้ด 2D
+                //if (Condition.Equals("Kanban"))
+                //    Data2D = "";
+
+                //Data2D = txtReqNo.Text;
+                //// สร้าง Image 2D    
+                Image image2D = QRBarcode2DMini(Condition);
+                //// แปลง Image เป็น Byte เพิ่อนำเข้า SQL                    
+                //bye_2D = ImageToByteArray(image2D);
+                //-----------------------
+
+                return ImageToByteArray(image2D);
+            }
+            catch (Exception ex) { return null; }
+        }
         private static Image QRBarcode2D(string SystemNo)
+        {
+            // System.Threading.Thread.Sleep(5000);
+            QRCodeEncoder qrCodeEncoder = new QRCodeEncoder();
+            try
+            {
+                //SystemNo = SystemNo.Substring(0, 35);
+                String encoding = "Byte";
+                if (encoding == "Byte")
+                {
+                    qrCodeEncoder.QRCodeEncodeMode = QRCodeEncoder.ENCODE_MODE.BYTE;
+                }
+                else if (encoding == "AlphaNumeric")
+                {
+                    qrCodeEncoder.QRCodeEncodeMode = QRCodeEncoder.ENCODE_MODE.ALPHA_NUMERIC;
+                }
+                else if (encoding == "Numeric")
+                {
+                    qrCodeEncoder.QRCodeEncodeMode = QRCodeEncoder.ENCODE_MODE.NUMERIC;
+                }
+
+                try
+                {
+                    int scale = Convert.ToInt32(3);
+                    qrCodeEncoder.QRCodeScale = scale;
+                }
+                catch
+                {
+                    //MessageBox.Show("Invalid size!" + ex.Message);
+                    // return;
+                }
+
+                try
+                {
+                    int version = 5;
+                    qrCodeEncoder.QRCodeVersion = version;
+                }
+                catch
+                {
+                    // MessageBox.Show("Invalid version !" + ex.Message);
+                }
+
+
+                string errorCorrect = "M";
+                if (errorCorrect == "L")
+                    qrCodeEncoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.L;
+                else if (errorCorrect == "M")
+                    qrCodeEncoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.M;
+                else if (errorCorrect == "Q")
+                    qrCodeEncoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.Q;
+                else if (errorCorrect == "H")
+                    qrCodeEncoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.H;
+
+
+            }
+            catch (Exception ex) { }//ErrorAdd("INV EXEx", ex.ToString(), "BaseClass TAXWin.cs"); }
+            String data = SystemNo;
+            return qrCodeEncoder.Encode(data);
+        }
+        private static Image QRBarcode2DMini(string SystemNo)
         {
             // System.Threading.Thread.Sleep(5000);
             QRCodeEncoder qrCodeEncoder = new QRCodeEncoder();

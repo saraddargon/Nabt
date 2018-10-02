@@ -349,5 +349,32 @@ namespace StockControl
             }
             catch { }
         }
+
+        private void radMenuItem15_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@"Report\Manual.pdf");
+            }
+            catch { }
+        }
+
+        private void radMenuItem16_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@"Report\Production Order.pdf");
+            }
+            catch { }
+        }
+
+        private void radMenuItem17_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@"Report\Receive.pdf");
+            }
+            catch { }
+        }
     }
 }

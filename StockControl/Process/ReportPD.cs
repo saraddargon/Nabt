@@ -50,8 +50,46 @@ namespace StockControl
         {
             radDateTimePicker1.Value = DateTime.Now;
             radDateTimePicker2.Value = DateTime.Now;
+
+
+        }
+        private void LoadData()
+        {
+            try
+            {
+                radGridView1.AutoGenerateColumns = true;
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    radGridView1.DataSource = db.sp_011_PD_ReportDialy(radDateTimePicker1.Value, radDateTimePicker2.Value);
+                }
+            }
+            catch { }
         }
 
-        
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            LoadData();
+            dbClss.ExportGridXlSX(radGridView1);
+        }
+
+        private void btn_PrintPD1_Click(object sender, EventArgs e)
+        {
+            Report.Reportx1.Value = new string[2];
+            Report.Reportx1.Value[0] = radDateTimePicker1.Value.ToString();
+            Report.Reportx1.Value[1] = radDateTimePicker2.Value.ToString();
+            Report.Reportx1.WReport = "ReportPD02";
+            Report.Reportx1 op = new Report.Reportx1("Report_Production02.rpt");
+            op.Show();
+        }
+
+        private void radButtonElement1_Click(object sender, EventArgs e)
+        {
+            Report.Reportx1.Value = new string[2];
+            Report.Reportx1.Value[0] = radDateTimePicker1.Value.ToString();
+            Report.Reportx1.Value[1] = radDateTimePicker2.Value.ToString();
+            Report.Reportx1.WReport = "ReportPD01";
+            Report.Reportx1 op = new Report.Reportx1("Report_Production01.rpt");
+            op.Show();
+        }
     }
 }

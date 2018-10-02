@@ -57,6 +57,11 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -64,6 +69,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -141,6 +148,12 @@
     <Compile Include="Process\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\CheckStockEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\CheckStockEdit.Designer.cs">
+      <DependentUpon>CheckStockEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\ChckStockPC.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,6 +226,12 @@
     <Compile Include="Process\CheckStockUpload.Designer.cs">
       <DependentUpon>CheckStockUpload.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\PrintRW.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\PrintRW.Designer.cs">
+      <DependentUpon>PrintRW.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\PrintPDTAG.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +261,12 @@
     </Compile>
     <Compile Include="Process\Receive.Designer.cs">
       <DependentUpon>Receive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ReceivePO1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ReceivePO1.Designer.cs">
+      <DependentUpon>ReceivePO1.cs</DependentUpon>
     </Compile>
     <Compile Include="Process\ReceiveCheck.cs">
       <SubType>Form</SubType>
@@ -273,17 +298,17 @@
     <Compile Include="Process\ReportExport.Designer.cs">
       <DependentUpon>ReportExport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Process\PrintRW.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Process\PrintRW.Designer.cs">
-      <DependentUpon>PrintRW.cs</DependentUpon>
-    </Compile>
     <Compile Include="Process\ReportPD.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Process\ReportPD.Designer.cs">
       <DependentUpon>ReportPD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\Report\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\Report\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Process\UploadMapping.cs">
       <SubType>Form</SubType>
@@ -403,6 +428,9 @@
     <EmbeddedResource Include="Main\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Process\CheckStockEdit.resx">
+      <DependentUpon>CheckStockEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Process\ChckStockPC.resx">
       <DependentUpon>ChckStockPC.cs</DependentUpon>
     </EmbeddedResource>
@@ -439,6 +467,9 @@
     <EmbeddedResource Include="Process\CheckStockUpload.resx">
       <DependentUpon>CheckStockUpload.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Process\PrintRW.resx">
+      <DependentUpon>PrintRW.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Process\PrintPDTAG.resx">
       <DependentUpon>PrintPDTAG.cs</DependentUpon>
     </EmbeddedResource>
@@ -453,6 +484,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\Receive.resx">
       <DependentUpon>Receive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ReceivePO1.resx">
+      <DependentUpon>ReceivePO1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\ReceiveCheck.resx">
       <DependentUpon>ReceiveCheck.cs</DependentUpon>
@@ -469,11 +503,11 @@
     <EmbeddedResource Include="Process\ReportExport.resx">
       <DependentUpon>ReportExport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Process\PrintRW.resx">
-      <DependentUpon>PrintRW.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Process\ReportPD.resx">
       <DependentUpon>ReportPD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\Report\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\UploadMapping.resx">
       <DependentUpon>UploadMapping.cs</DependentUpon>
@@ -619,9 +653,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Process\Report\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -77,7 +77,7 @@ namespace StockControl
                     if (getCode.Count > 0)
                     {
                         var rd = getCode.FirstOrDefault();
-                        dtDate1.Value = Convert.ToDateTime(rd.CreateDate);
+                        dtDate1.Value = Convert.ToDateTime(rd.DeliveryDate);
                         txtPartName.Text = rd.NAME.ToString();
                         txtPartNo.Text = rd.CODE.ToString();
                         txtCustItemName.Text = rd.CustItemName.ToString();
@@ -85,15 +85,23 @@ namespace StockControl
                         txtCustomerName.Text = rd.CSTMName.ToString();
                         txtCustomerShortName.Text = rd.CustomerNo.ToString();                        
                         txtsNP.Text = Convert.ToInt32(rd.LotSize).ToString();
+                        txtShift.Text = rd.SHIFT;
+                        if (txtCustItemNo.Text.Equals(""))
+                        {
+                            txtCustItemName.Text = rd.BUNR;
+                            txtCustItemNo.Text = rd.BUNR;
+                            txtCustomerShortName.Text = rd.BUNR;
+                        }
 
                         txtLotNo.Text = "";
                         txtQty.Text = Convert.ToInt32(rd.OrderQty).ToString("#####0");
+                        txtLotNo.Text = rd.LotNo;
 
-                        tb_LotNo gl = db.tb_LotNos.Where(l => (l.LotDate.Year == dtDate1.Value.Year && l.LotDate.Month==dtDate1.Value.Month && l.LotDate.Day==dtDate1.Value.Day)).FirstOrDefault();
-                        if(gl!=null)
-                        {
-                            txtLotNo.Text = gl.LotNo.ToString();
-                        }
+                        //tb_LotNo gl = db.tb_LotNos.Where(l => (l.LotDate.Year == dtDate1.Value.Year && l.LotDate.Month==dtDate1.Value.Month && l.LotDate.Day==dtDate1.Value.Day)).FirstOrDefault();
+                        //if(gl!=null)
+                        //{
+                        //    txtLotNo.Text = gl.LotNo.ToString();
+                        //}
                     }
                 }
             }
@@ -257,8 +265,10 @@ namespace StockControl
                 int a = 0;
                 double ap = 0;
                 int Remain = 0;
+                int OrderQty = 0;
                 int.TryParse(txtQty.Text, out Qty);
                 int.TryParse(txtsNP.Text, out snp);
+                OrderQty = Qty;
 
                 string OfTAG = "";
                 string QrCode = "";
@@ -281,6 +291,7 @@ namespace StockControl
                     int C = 0;
                     string ImagePath = "";
                     string ImageName = "";
+
                     using (DataClasses1DataContext db = new DataClasses1DataContext())
                     {
                         tb_Path ph = db.tb_Paths.Where(p => p.PathCode == "Image").First();
@@ -318,7 +329,7 @@ namespace StockControl
                             }
                             OfTAG = i + "of" + TAG;
                             QrCode = "";
-                            QrCode = "PD," + txtBomNo.Text + "," + Qty + "," + snp + "," + txtLotNo.Text + "," + OfTAG + "," + txtPartNo.Text;
+                            QrCode = "PD," + txtBomNo.Text + "," + Qty + "," + OrderQty + "," + txtLotNo.Text + "," + OfTAG + "," + txtPartNo.Text + "," + dtDate1.Value.ToString("ddMMyy");
                             //MessageBox.Show(QrCode);
                             byte[] barcode = dbClss.SaveQRCode2D(QrCode);
 
@@ -337,12 +348,21 @@ namespace StockControl
                                 ts.PathPic = ImagePath + ImageName;
                             else
                                 ts.PathPic = "";
+
                             ts.Qty = Qty;
                             ts.Seq = i;
                             ts.CSTMShot = txtCustomerShortName.Text;
                             ts.CustomerName = txtCustomerName.Text;
                             ts.CSTMItem = txtCustItemNo.Text;
                             ts.CustItem2 = txtCustItemName.Text;
+                            ts.SHIFT = "";// txtShift.Text;
+
+                            //// ลูกค้า ISUSU  ///
+                            if (txtCustomerShortName.Text.Trim().Equals("ISUZU"))
+                            {
+                                ts.CSTMItem = "A" + txtCustItemNo.Text;// + ""+dtDate1.Value.Year.ToString();
+                            }
+                            ///////////////////
 
                             //ts.s = snp;
                             // ts.Company = "Nabtesco Autmotive Corporation";

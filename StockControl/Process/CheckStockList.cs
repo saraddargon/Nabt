@@ -608,6 +608,21 @@ namespace StockControl
                     var g = (from ix in db.sp_R_001_Report_CheckStock(CheckNo, CheckNo,Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"))) select ix).ToList();
                     if (g.Count() > 0)
                     {
+                        QRCodePrint qd = db.QRCodePrints.Where(q => q.DocuNo == CheckNo).FirstOrDefault();
+                        if(qd!=null)
+                        {
+                            db.QRCodePrints.DeleteOnSubmit(qd);
+                            db.SubmitChanges();
+                        }
+
+                        byte[] barcode = dbClss.SaveQRCode2D(CheckNo);
+                        QRCodePrint qn = new QRCodePrint();
+                        qn.DocuNo = CheckNo;
+                        qn.QRCode = barcode;
+
+                        db.QRCodePrints.InsertOnSubmit(qn);
+                        db.SubmitChanges();
+
                         Report.Reportx1.Value = new string[2];
                         Report.Reportx1.Value[0] = CheckNo;
                         Report.Reportx1.Value[1] = CheckNo;

@@ -577,10 +577,11 @@ namespace StockControl
                 int Snp = 0;
                 int TAG = 0;
                 int Remain = 0;
+                int OrderQty = 0;
                 DateTime dl = DateTime.Now;
                 string QrCode = "";
                 string OfTAG = "";
-                
+                string SHIFT = "";
                 double ap = 0;
                 int a = 0;
                 //   DateTime DateDl = DateTime.Now;
@@ -596,9 +597,13 @@ namespace StockControl
                     {
                         if (Convert.ToBoolean(rd.Cells["chk"].Value))
                         {
+                            SHIFT = "";
+                            SHIFT = rd.Cells["SHIFT"].Value.ToString();
                             Snp = Convert.ToInt32(rd.Cells["LotSize"].Value);
                             Qty = Convert.ToInt32(rd.Cells["OrderQty"].Value);
                             dl = Convert.ToDateTime(rd.Cells["DeliveryDate"].Value);
+                            OrderQty = Qty;
+
                             if (Qty != 0 && Snp != 0)
                             {
                                 a = 0;
@@ -626,7 +631,7 @@ namespace StockControl
                                 }
                                 OfTAG = i + "of" + TAG;
                                 QrCode = "";
-                                QrCode = "EX," + rd.Cells["PORDER"].Value.ToString() + "," + Qty + "," + Snp + "," + rd.Cells["LotNo"].Value.ToString() + "," + OfTAG + "," + rd.Cells["Code"].Value.ToString();
+                                QrCode = "EX," + rd.Cells["PORDER"].Value.ToString() + "," + Qty + "," + OrderQty + "," + rd.Cells["LotNo"].Value.ToString() + "," + OfTAG + "," + rd.Cells["Code"].Value.ToString() + "," + dl.ToString("ddMMyy");
                                 //MessageBox.Show(QrCode);
                                 byte[] barcode = dbClss.SaveQRCode2D(QrCode);
                                 
@@ -642,6 +647,7 @@ namespace StockControl
                                 ts.Company = rd.Cells["VendorName"].Value.ToString();
                                 ts.Quantity = Qty;
                                 ts.OfTAG = i + " / " + TAG;
+                                ts.TAGValue = SHIFT;
                                 ///////////////////////////////////////////////
                                 db.TempPrintSuppliers.InsertOnSubmit(ts);
                                 db.SubmitChanges();
