@@ -71,7 +71,7 @@ namespace StockControl
                 radGridView1.DataSource = null;
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    radGridView1.DataSource = db.sp_006_SelectListReceive("", radDateTimePicker1.Value, radDateTimePicker2.Value).ToList();
+                    radGridView1.DataSource = db.sp_006_SelectListReceive("","", radDateTimePicker1.Value, radDateTimePicker2.Value).ToList();
                     int ck = 0;
                     foreach (var x in radGridView1.Rows)
                     {

@@ -94,8 +94,8 @@ namespace StockControl
                 int ck = 0;
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-
-                    radGridView1.DataSource = db.sp_004_TPIC_SelectWO(txtPONo.Text, txtItemNo.Text, txtVendorCode.Text, chkUseDate.Checked, dtDate1.Value, dtDate2.Value).ToList();
+                    //tpics//db.sp_004_TPIC_SelectWO(txtPONo.Text, txtItemNo.Text, txtVendorCode.Text, chkUseDate.Checked, dtDate1.Value, dtDate2.Value).ToList();
+                    radGridView1.DataSource = db.sp_004_TPIC_SelectWO_Dynamics(txtPONo.Text, txtItemNo.Text, txtVendorCode.Text, chkUseDate.Checked, dtDate1.Value, dtDate2.Value).ToList();
                     foreach (var x in radGridView1.Rows)
                     {
 
@@ -693,6 +693,31 @@ namespace StockControl
             if(e.KeyChar==13)
             {
                 DataLoad();
+            }
+        }
+
+        private void radButtonElement1_Click(object sender, EventArgs e)
+        {
+            ListMapBom lm = new ListMapBom();
+            lm.Show();
+        }
+
+        private void radButtonElement2_Click(object sender, EventArgs e)
+        {
+            if (row >= 0)
+            {
+                string WONo = radGridView1.Rows[row].Cells["PORDER"].Value.ToString();
+                string LotNo = radGridView1.Rows[row].Cells["LotNo"].Value.ToString();
+                string PartNo = radGridView1.Rows[row].Cells["Code"].Value.ToString();
+                string PartName = radGridView1.Rows[row].Cells["NAME"].Value.ToString();
+                Report.Reportx1.WReport = "PartBomList";
+                Report.Reportx1.Value = new string[2];
+                Report.Reportx1.Value[0] = PartNo;
+                Report.Reportx1.Value[1] = LotNo;
+                // Report.Reportx1.Value[2] = txtAC.Text;
+
+                Report.Reportx1 op = new Report.Reportx1("PartBomList.rpt");
+                op.Show();
             }
         }
     }

@@ -44,7 +44,8 @@ namespace StockControl
             {
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    var getCode = (from ix in db.sp_001_TPIC_SelectItem(txtPartNo.Text.ToString()) select ix).ToList();
+                    //Tpics//var getCode = (from ix in db.sp_001_TPIC_SelectItem(txtPartNo.Text.ToString()) select ix).ToList();
+                    var getCode = (from ix in db.sp_001_TPIC_SelectItem_Dynamics(txtPartNo.Text.ToString()) select ix).ToList();
                     if (getCode.Count > 0)
                     {
                        
@@ -64,6 +65,7 @@ namespace StockControl
         private void btnExport_Click(object sender, EventArgs e)
         {
             //Print TAG//
+            
             try
             {
                 this.Cursor = Cursors.WaitCursor;

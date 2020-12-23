@@ -37,12 +37,15 @@
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn5 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn9 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
             this.radRibbonBarGroup1 = new Telerik.WinControls.UI.RadRibbonBarGroup();
             this.btnSave = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarGroup2 = new Telerik.WinControls.UI.RadRibbonBarGroup();
+            this.radButtonElement2 = new Telerik.WinControls.UI.RadButtonElement();
             this.btnView = new Telerik.WinControls.UI.RadButtonElement();
             this.radButtonElement1 = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarGroup4 = new Telerik.WinControls.UI.RadRibbonBarGroup();
@@ -156,10 +159,20 @@
             // radRibbonBarGroup2
             // 
             this.radRibbonBarGroup2.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.radButtonElement2,
             this.btnView,
             this.radButtonElement1});
             this.radRibbonBarGroup2.Name = "radRibbonBarGroup2";
             this.radRibbonBarGroup2.Text = "Manage";
+            // 
+            // radButtonElement2
+            // 
+            this.radButtonElement2.Image = ((System.Drawing.Image)(resources.GetObject("radButtonElement2.Image")));
+            this.radButtonElement2.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radButtonElement2.Name = "radButtonElement2";
+            this.radButtonElement2.Text = "Add Item";
+            this.radButtonElement2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.radButtonElement2.Click += new System.EventHandler(this.radButtonElement2_Click);
             // 
             // btnView
             // 
@@ -374,7 +387,18 @@
             gridViewTextBoxColumn7.FieldName = "AC";
             gridViewTextBoxColumn7.HeaderText = "AC";
             gridViewTextBoxColumn7.Name = "AC";
+            gridViewTextBoxColumn7.ReadOnly = true;
             gridViewTextBoxColumn7.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn8.FieldName = "PackagePallet";
+            gridViewTextBoxColumn8.FormatString = "{0:N0}";
+            gridViewTextBoxColumn8.HeaderText = "PackagePallet";
+            gridViewTextBoxColumn8.Name = "PackagePallet";
+            gridViewTextBoxColumn8.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn8.Width = 90;
+            gridViewTextBoxColumn9.FieldName = "id";
+            gridViewTextBoxColumn9.HeaderText = "id";
+            gridViewTextBoxColumn9.IsVisible = false;
+            gridViewTextBoxColumn9.Name = "id";
             this.radGridView1.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
             gridViewTextBoxColumn1,
             gridViewTextBoxColumn2,
@@ -382,11 +406,12 @@
             gridViewTextBoxColumn4,
             gridViewTextBoxColumn5,
             gridViewTextBoxColumn6,
-            gridViewTextBoxColumn7});
+            gridViewTextBoxColumn7,
+            gridViewTextBoxColumn8,
+            gridViewTextBoxColumn9});
             this.radGridView1.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
             this.radGridView1.MasterTemplate.ViewDefinition = tableViewDefinition1;
             this.radGridView1.Name = "radGridView1";
-            this.radGridView1.ReadOnly = true;
             this.radGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.radGridView1.ShowGroupPanel = false;
             this.radGridView1.Size = new System.Drawing.Size(952, 355);
@@ -589,5 +614,6 @@
         private Telerik.WinControls.UI.RadLabel radLabel1;
         private Telerik.WinControls.UI.RadTextBox txtItemNo;
         private Telerik.WinControls.UI.RadButtonElement radButtonElement1;
+        private Telerik.WinControls.UI.RadButtonElement radButtonElement2;
     }
 }

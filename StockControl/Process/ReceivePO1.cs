@@ -62,7 +62,7 @@ namespace StockControl
                 txtReceiveNo.Text = RCNo;
                 txtPONo.Text = PONo;
                
-                var getpo = db.sp_002_1_TPIC_SelectPOItem(txtPONo.Text).FirstOrDefault();
+                var getpo = db.sp_002_1_TPIC_SelectPOItem_Dynamics(txtPONo.Text).FirstOrDefault();
                 if (getpo != null)
                 {
                     txtQtyInPO.Text = getpo.TotalResults.ToString();

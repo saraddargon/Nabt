@@ -318,34 +318,77 @@ namespace StockControl
         {
             try
             {
-                if (e.ColumnIndex == radGridView1.Columns["LotNo"].Index)
+
+                if (e.ColumnIndex == radGridView1.Columns["PackagePallet"].Index)
                 {
-                    string LotNo = radGridView1.Rows[e.RowIndex].Cells["LotNo"].Value.ToString();
-                    string PONo = radGridView1.Rows[e.RowIndex].Cells["PORDER"].Value.ToString();
-                    DateTime date1 = Convert.ToDateTime(radGridView1.Rows[e.RowIndex].Cells["DeliveryDate"].Value.ToString());
                     using (DataClasses1DataContext db = new DataClasses1DataContext())
                     {
-                        tb_HistoryPrintSupplier tp = db.tb_HistoryPrintSuppliers.Where(t => t.PONo == PONo).FirstOrDefault();
-                        if (tp != null)
+                        int Pk = 0;
+                        tb_MapItemTPIC mp = db.tb_MapItemTPICs.Where(p => p.Code.Equals(Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["Code"].Value))).FirstOrDefault();
+                        if (mp != null)
                         {
-                            tp.LotNo = LotNo;
+                            int.TryParse(Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["PackagePallet"].Value), out Pk);
+                            mp.PackagePallet = Pk;
                             db.SubmitChanges();
-                        }
-                        else
-                        {
-                            tb_HistoryPrintSupplier tn = new tb_HistoryPrintSupplier();
-                            tn.PONo = PONo;
-                            tn.LotNo = LotNo;
-                            tn.PrintTAG = false;
-                            tn.DeliveryDate = date1;
-                            db.tb_HistoryPrintSuppliers.InsertOnSubmit(tn);
-                            db.SubmitChanges();
-
                         }
                     }
                 }
-        
-
+                else if (e.ColumnIndex == radGridView1.Columns["Code"].Index)
+                {
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                        int id = 0;
+                        int.TryParse(Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["id"].Value), out id);
+                        tb_MapItemTPIC mp = db.tb_MapItemTPICs.Where(p => p.id.Equals(id)).FirstOrDefault();
+                        if (mp != null)
+                        {
+                            mp.Code = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["Code"].Value);
+                            db.SubmitChanges();
+                        }
+                    }
+                }
+                else if (e.ColumnIndex == radGridView1.Columns["CustomerNo"].Index)
+                {
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                        int id = 0;
+                        int.TryParse(Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["id"].Value), out id);
+                        tb_MapItemTPIC mp = db.tb_MapItemTPICs.Where(p => p.id.Equals(id)).FirstOrDefault();
+                        if (mp != null)
+                        {
+                            mp.CustomerNo = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["CustomerNo"].Value);
+                            db.SubmitChanges();
+                        }
+                    }
+                }
+                else if (e.ColumnIndex == radGridView1.Columns["CustItemNo"].Index)
+                {
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                        int id = 0;
+                        int.TryParse(Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["id"].Value), out id);
+                        tb_MapItemTPIC mp = db.tb_MapItemTPICs.Where(p => p.id.Equals(id)).FirstOrDefault();
+                        if (mp != null)
+                        {
+                            mp.CustItemNo = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["CustItemNo"].Value);
+                            db.SubmitChanges();
+                        }
+                    }
+                }
+                else if (e.ColumnIndex == radGridView1.Columns["CustItemName"].Index)
+                {
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                        int id = 0;
+                        int.TryParse(Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["id"].Value), out id);
+                        tb_MapItemTPIC mp = db.tb_MapItemTPICs.Where(p => p.id.Equals(id)).FirstOrDefault();
+                        if (mp != null)
+                        {
+                            mp.CustItemName = Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["CustItemName"].Value);
+                            db.SubmitChanges();
+                        }
+                    }
+                }
             }
             catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -378,11 +421,9 @@ namespace StockControl
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
-        {
-            
+        {            
                 //DeleteUnit();
-                //DataLoad();
-            
+                //DataLoad();            
         }
 
         int row = -1;
@@ -716,6 +757,14 @@ namespace StockControl
                     }
                 }
             }
+        }
+
+        private void radButtonElement2_Click(object sender, EventArgs e)
+        {
+            
+            ListAddMapping Lmt = new ListAddMapping("");
+            Lmt.ShowDialog();
+            DataLoad();
         }
     }
 }

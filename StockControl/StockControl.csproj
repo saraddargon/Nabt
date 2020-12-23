@@ -51,7 +51,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>scan_barcode.png.ico</ApplicationIcon>
+    <ApplicationIcon>Cjdowner-Cryptocurrency-Flat-NavCoin-NAV.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -66,6 +66,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
@@ -79,34 +80,38 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Telerik.WinControls, Version=2018.2.621.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
-      <HintPath>..\lib\RCWF\2018.2.621.40\Telerik.WinControls.dll</HintPath>
+    <Reference Include="Telerik.WinControls, Version=2018.3.1016.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2018.3.1016.40\Telerik.WinControls.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Telerik.WinControls.GridView, Version=2018.2.621.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
-      <HintPath>..\lib\RCWF\2018.2.621.40\Telerik.WinControls.GridView.dll</HintPath>
+    <Reference Include="Telerik.WinControls.GridView, Version=2018.3.1016.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2018.3.1016.40\Telerik.WinControls.GridView.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Telerik.WinControls.Themes.Office2010Blue, Version=2018.2.621.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
-      <HintPath>..\lib\RCWF\2018.2.621.40\Telerik.WinControls.Themes.Office2010Blue.dll</HintPath>
+    <Reference Include="Telerik.WinControls.PdfViewer, Version=2018.3.1016.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="Telerik.WinControls.Themes.Office2010Blue, Version=2018.3.1016.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2018.3.1016.40\Telerik.WinControls.Themes.Office2010Blue.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Telerik.WinControls.UI, Version=2018.2.621.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
-      <HintPath>..\lib\RCWF\2018.2.621.40\Telerik.WinControls.UI.dll</HintPath>
+    <Reference Include="Telerik.WinControls.UI, Version=2018.3.1016.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2018.3.1016.40\Telerik.WinControls.UI.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="TelerikCommon, Version=2018.2.621.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
-      <HintPath>..\lib\RCWF\2018.2.621.40\TelerikCommon.dll</HintPath>
+    <Reference Include="Telerik.Windows.Documents.Core, Version=2018.3.1010.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7" />
+    <Reference Include="Telerik.Windows.Documents.Fixed, Version=2018.3.1010.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7" />
+    <Reference Include="TelerikCommon, Version=2018.3.1016.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2018.3.1016.40\TelerikCommon.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="TelerikData, Version=2018.2.621.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
-      <HintPath>..\lib\RCWF\2018.2.621.40\TelerikData.dll</HintPath>
+    <Reference Include="TelerikData, Version=2018.3.1016.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2018.3.1016.40\TelerikData.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ThoughtWorks.QRCode, Version=1.0.2774.19990, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\ThoughtWorks.QRCode.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataClasses1.cs">
@@ -118,6 +123,7 @@
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
     <Compile Include="dbClss.cs" />
+    <Compile Include="dbShowData.cs" />
     <Compile Include="Main\Display.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +154,54 @@
     <Compile Include="Process\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\BOXMoveToUni.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\BOXMoveToUni.Designer.cs">
+      <DependentUpon>BOXMoveToUni.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\BOXReceiveListPK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\BOXReceiveListPK.Designer.cs">
+      <DependentUpon>BOXReceiveListPK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\BOXReceiveListUni.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\BOXReceiveListUni.Designer.cs">
+      <DependentUpon>BOXReceiveListUni.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\BOXReceiveListUniDumy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\BOXReceiveListUniDumy.Designer.cs">
+      <DependentUpon>BOXReceiveListUniDumy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\BOXReceiveUni.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\BOXReceiveUni.Designer.cs">
+      <DependentUpon>BOXReceiveUni.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\BOXStart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\BOXStart.Designer.cs">
+      <DependentUpon>BOXStart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\BOXReceiveList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\BOXReceiveList.Designer.cs">
+      <DependentUpon>BOXReceiveList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\BOXStartNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\BOXStartNew.Designer.cs">
+      <DependentUpon>BOXStartNew.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\CheckStockEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +213,282 @@
     </Compile>
     <Compile Include="Process\ChckStockPC.Designer.cs">
       <DependentUpon>ChckStockPC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\BOX.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\BOX.Designer.cs">
+      <DependentUpon>BOX.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\BoxItemListImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\BoxItemListImage.Designer.cs">
+      <DependentUpon>BoxItemListImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ExDN_localdelivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ExDN_localdelivery.Designer.cs">
+      <DependentUpon>ExDN_localdelivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\PlantEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\PlantEdit.Designer.cs">
+      <DependentUpon>PlantEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\GuideLineLotHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\GuideLineLotHistory.Designer.cs">
+      <DependentUpon>GuideLineLotHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\InvoiceEx_AddMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\InvoiceEx_AddMap.Designer.cs">
+      <DependentUpon>InvoiceEx_AddMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\InvoiceEx_MasterMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\InvoiceEx_MasterMap.Designer.cs">
+      <DependentUpon>InvoiceEx_MasterMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\InvoiceTest2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\InvoiceTest2.Designer.cs">
+      <DependentUpon>InvoiceTest2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\InvoiceTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\InvoiceTest.Designer.cs">
+      <DependentUpon>InvoiceTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\InvoiceList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\InvoiceList.Designer.cs">
+      <DependentUpon>InvoiceList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\InvoiceLocalShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\InvoiceLocalShow.Designer.cs">
+      <DependentUpon>InvoiceLocalShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\LocationTAGCheckIV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\LocationTAGCheckIV.Designer.cs">
+      <DependentUpon>LocationTAGCheckIV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\NCRList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\NCRList.Designer.cs">
+      <DependentUpon>NCRList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QCCheckReq.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QCCheckReq.Designer.cs">
+      <DependentUpon>QCCheckReq.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QCApprove.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QCApprove.Designer.cs">
+      <DependentUpon>QCApprove.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QCListLot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QCListLot.Designer.cs">
+      <DependentUpon>QCListLot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QCListNGTAG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QCListNGTAG.Designer.cs">
+      <DependentUpon>QCListNGTAG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QCProblemFix2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QCProblemFix2.Designer.cs">
+      <DependentUpon>QCProblemFix2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QCProblem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QCProblem.Designer.cs">
+      <DependentUpon>QCProblem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QCListTAG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QCListTAG.Designer.cs">
+      <DependentUpon>QCListTAG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QCListNG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QCListNG.Designer.cs">
+      <DependentUpon>QCListNG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QCSetMasterSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QCSetMasterSelect.Designer.cs">
+      <DependentUpon>QCSetMasterSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QCSetMasterQC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QCSetMasterQC.Designer.cs">
+      <DependentUpon>QCSetMasterQC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QCSetMasterPD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QCSetMasterPD.Designer.cs">
+      <DependentUpon>QCSetMasterPD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ItemQCImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ItemQCImage.Designer.cs">
+      <DependentUpon>ItemQCImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ListMapBom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ListMapBom.Designer.cs">
+      <DependentUpon>ListMapBom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\InvoiceLocalCre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\InvoiceLocalCre.Designer.cs">
+      <DependentUpon>InvoiceLocalCre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\InvoiceEx_Update.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\InvoiceEx_Update.Designer.cs">
+      <DependentUpon>InvoiceEx_Update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QC\QCFormPD033.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QC\QCFormPD033.Designer.cs">
+      <DependentUpon>QCFormPD033.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QC\QCFormQC5501.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QC\QCFormQC5501.Designer.cs">
+      <DependentUpon>QCFormQC5501.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QC\QCFormPD035.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QC\QCFormPD035.Designer.cs">
+      <DependentUpon>QCFormPD035.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QC\QCFormQC5601.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QC\QCFormQC5601.Designer.cs">
+      <DependentUpon>QCFormQC5601.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QC\QCFormPD026.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QC\QCFormPD026.Designer.cs">
+      <DependentUpon>QCFormPD026.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QC\QCSetMasterPD0351.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QC\QCSetMasterPD0351.Designer.cs">
+      <DependentUpon>QCSetMasterPD0351.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QCList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QCList.Designer.cs">
+      <DependentUpon>QCList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\NCRReq.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\NCRReq.Designer.cs">
+      <DependentUpon>NCRReq.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ScanPDAList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ScanPDAList.Designer.cs">
+      <DependentUpon>ScanPDAList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\BOXReceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\BOXReceive.Designer.cs">
+      <DependentUpon>BOXReceive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\UploadMappingBOM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\UploadMappingBOM.Designer.cs">
+      <DependentUpon>UploadMappingBOM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\InvoiceEx_Master.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\InvoiceEx_Master.Designer.cs">
+      <DependentUpon>InvoiceEx_Master.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\InvoiceEx_Add.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\InvoiceEx_Add.Designer.cs">
+      <DependentUpon>InvoiceEx_Add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QCSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QCSetup.Designer.cs">
+      <DependentUpon>QCSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QCSetupMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QCSetupMaster.Designer.cs">
+      <DependentUpon>QCSetupMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QCMasterCopy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QCMasterCopy.Designer.cs">
+      <DependentUpon>QCMasterCopy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\WHReceiveReq.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\WHReceiveReq.Designer.cs">
+      <DependentUpon>WHReceiveReq.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\MoveStockList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\MoveStockList.Designer.cs">
+      <DependentUpon>MoveStockList.cs</DependentUpon>
     </Compile>
     <Compile Include="Process\ListMapItem.cs">
       <SubType>Form</SubType>
@@ -214,6 +544,12 @@
     <Compile Include="Process\CheckStock_ListCode.Designer.cs">
       <DependentUpon>CheckStock_ListCode.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\ExportTAGCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ExportTAGCheck.Designer.cs">
+      <DependentUpon>ExportTAGCheck.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\PCCheck.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -226,6 +562,24 @@
     <Compile Include="Process\CheckStockUpload.Designer.cs">
       <DependentUpon>CheckStockUpload.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\ListAddMapping.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ListAddMapping.Designer.cs">
+      <DependentUpon>ListAddMapping.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\PrintPOTAG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\PrintPOTAG.Designer.cs">
+      <DependentUpon>PrintPOTAG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\PrintHINO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\PrintHINO.Designer.cs">
+      <DependentUpon>PrintHINO.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\PrintRW.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -237,6 +591,12 @@
     </Compile>
     <Compile Include="Process\PrintPDTAG.Designer.cs">
       <DependentUpon>PrintPDTAG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\LocationTAGCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\LocationTAGCheck.Designer.cs">
+      <DependentUpon>LocationTAGCheck.cs</DependentUpon>
     </Compile>
     <Compile Include="Process\PrintTEMPTAG.cs">
       <SubType>Form</SubType>
@@ -255,6 +615,12 @@
     </Compile>
     <Compile Include="Process\ProductionBom.Designer.cs">
       <DependentUpon>ProductionBom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ReqMoveStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ReqMoveStock.Designer.cs">
+      <DependentUpon>ReqMoveStock.cs</DependentUpon>
     </Compile>
     <Compile Include="Process\Receive.cs">
       <SubType>Form</SubType>
@@ -388,11 +754,23 @@
     <Compile Include="Process\ItemListImage.Designer.cs">
       <DependentUpon>ItemListImage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\ExportEditAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ExportEditAdd.Designer.cs">
+      <DependentUpon>ExportEditAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\UserAdd.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Process\UserAdd.Designer.cs">
       <DependentUpon>UserAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\ItemSkipList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\ItemSkipList.Designer.cs">
+      <DependentUpon>ItemSkipList.cs</DependentUpon>
     </Compile>
     <Compile Include="Process\UserSetup.cs">
       <SubType>Form</SubType>
@@ -405,6 +783,12 @@
     </Compile>
     <Compile Include="Process\UserList.Designer.cs">
       <DependentUpon>UserList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Process\QC\QCPicture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\QC\QCPicture.Designer.cs">
+      <DependentUpon>QCPicture.cs</DependentUpon>
     </Compile>
     <Compile Include="Process\WorkDays.cs">
       <SubType>Form</SubType>
@@ -428,11 +812,173 @@
     <EmbeddedResource Include="Main\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Process\BOXMoveToUni.resx">
+      <DependentUpon>BOXMoveToUni.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\BOXReceiveListPK.resx">
+      <DependentUpon>BOXReceiveListPK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\BOXReceiveListUni.resx">
+      <DependentUpon>BOXReceiveListUni.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\BOXReceiveListUniDumy.resx">
+      <DependentUpon>BOXReceiveListUniDumy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\BOXReceiveUni.resx">
+      <DependentUpon>BOXReceiveUni.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\BOXStart.resx">
+      <DependentUpon>BOXStart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\BOXReceiveList.resx">
+      <DependentUpon>BOXReceiveList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\BOXStartNew.resx">
+      <DependentUpon>BOXStartNew.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Process\CheckStockEdit.resx">
       <DependentUpon>CheckStockEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\ChckStockPC.resx">
       <DependentUpon>ChckStockPC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\BOX.resx">
+      <DependentUpon>BOX.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\BoxItemListImage.resx">
+      <DependentUpon>BoxItemListImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ExDN_localdelivery.resx">
+      <DependentUpon>ExDN_localdelivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\PlantEdit.resx">
+      <DependentUpon>PlantEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\GuideLineLotHistory.resx">
+      <DependentUpon>GuideLineLotHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\InvoiceEx_AddMap.resx">
+      <DependentUpon>InvoiceEx_AddMap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\InvoiceEx_MasterMap.resx">
+      <DependentUpon>InvoiceEx_MasterMap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\InvoiceTest2.resx">
+      <DependentUpon>InvoiceTest2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\InvoiceTest.resx">
+      <DependentUpon>InvoiceTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\InvoiceList.resx">
+      <DependentUpon>InvoiceList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\InvoiceLocalShow.resx">
+      <DependentUpon>InvoiceLocalShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\LocationTAGCheckIV.resx">
+      <DependentUpon>LocationTAGCheckIV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\NCRList.resx">
+      <DependentUpon>NCRList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QCCheckReq.resx">
+      <DependentUpon>QCCheckReq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QCApprove.resx">
+      <DependentUpon>QCApprove.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QCListLot.resx">
+      <DependentUpon>QCListLot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QCListNGTAG.resx">
+      <DependentUpon>QCListNGTAG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QCProblemFix2.resx">
+      <DependentUpon>QCProblemFix2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QCProblem.resx">
+      <DependentUpon>QCProblem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QCListTAG.resx">
+      <DependentUpon>QCListTAG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QCListNG.resx">
+      <DependentUpon>QCListNG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QCSetMasterSelect.resx">
+      <DependentUpon>QCSetMasterSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QCSetMasterQC.resx">
+      <DependentUpon>QCSetMasterQC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QCSetMasterPD.resx">
+      <DependentUpon>QCSetMasterPD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ItemQCImage.resx">
+      <DependentUpon>ItemQCImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ListMapBom.resx">
+      <DependentUpon>ListMapBom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\InvoiceLocalCre.resx">
+      <DependentUpon>InvoiceLocalCre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\InvoiceEx_Update.resx">
+      <DependentUpon>InvoiceEx_Update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QC\QCFormPD033.resx">
+      <DependentUpon>QCFormPD033.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QC\QCFormQC5501.resx">
+      <DependentUpon>QCFormQC5501.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QC\QCFormPD035.resx">
+      <DependentUpon>QCFormPD035.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QC\QCFormQC5601.resx">
+      <DependentUpon>QCFormQC5601.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QC\QCFormPD026.resx">
+      <DependentUpon>QCFormPD026.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QC\QCSetMasterPD0351.resx">
+      <DependentUpon>QCSetMasterPD0351.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QCList.resx">
+      <DependentUpon>QCList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\NCRReq.resx">
+      <DependentUpon>NCRReq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ScanPDAList.resx">
+      <DependentUpon>ScanPDAList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\BOXReceive.resx">
+      <DependentUpon>BOXReceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\UploadMappingBOM.resx">
+      <DependentUpon>UploadMappingBOM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\InvoiceEx_Master.resx">
+      <DependentUpon>InvoiceEx_Master.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\InvoiceEx_Add.resx">
+      <DependentUpon>InvoiceEx_Add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QCSetup.resx">
+      <DependentUpon>QCSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QCSetupMaster.resx">
+      <DependentUpon>QCSetupMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\QCMasterCopy.resx">
+      <DependentUpon>QCMasterCopy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\WHReceiveReq.resx">
+      <DependentUpon>WHReceiveReq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\MoveStockList.resx">
+      <DependentUpon>MoveStockList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\ListMapItem.resx">
       <DependentUpon>ListMapItem.cs</DependentUpon>
@@ -461,17 +1007,32 @@
     <EmbeddedResource Include="Process\CheckStock_ListCode.resx">
       <DependentUpon>CheckStock_ListCode.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Process\ExportTAGCheck.resx">
+      <DependentUpon>ExportTAGCheck.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Process\PCCheck.resx">
       <DependentUpon>PCCheck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\CheckStockUpload.resx">
       <DependentUpon>CheckStockUpload.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Process\ListAddMapping.resx">
+      <DependentUpon>ListAddMapping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\PrintPOTAG.resx">
+      <DependentUpon>PrintPOTAG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\PrintHINO.resx">
+      <DependentUpon>PrintHINO.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Process\PrintRW.resx">
       <DependentUpon>PrintRW.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\PrintPDTAG.resx">
       <DependentUpon>PrintPDTAG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\LocationTAGCheck.resx">
+      <DependentUpon>LocationTAGCheck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\PrintTEMPTAG.resx">
       <DependentUpon>PrintTEMPTAG.cs</DependentUpon>
@@ -481,6 +1042,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\ProductionBom.resx">
       <DependentUpon>ProductionBom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ReqMoveStock.resx">
+      <DependentUpon>ReqMoveStock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\Receive.resx">
       <DependentUpon>Receive.cs</DependentUpon>
@@ -548,8 +1112,14 @@
     <EmbeddedResource Include="Process\ItemListImage.resx">
       <DependentUpon>ItemListImage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Process\ExportEditAdd.resx">
+      <DependentUpon>ExportEditAdd.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Process\UserAdd.resx">
       <DependentUpon>UserAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\ItemSkipList.resx">
+      <DependentUpon>ItemSkipList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\UserSetup.resx">
       <DependentUpon>UserSetup.cs</DependentUpon>
@@ -557,6 +1127,10 @@
     <EmbeddedResource Include="Process\UserList.resx">
       <DependentUpon>UserList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Process\QC\QCPicture.resx">
+      <DependentUpon>QCPicture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="test.resx">
       <DependentUpon>test.cs</DependentUpon>
     </EmbeddedResource>
@@ -578,7 +1152,6 @@
     <EmbeddedResource Include="Process\WorkDays.resx">
       <DependentUpon>WorkDays.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="RadForm1.resx">
       <DependentUpon>RadForm1.cs</DependentUpon>
     </EmbeddedResource>
@@ -610,12 +1183,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <!--sirinie -->
     <Content Include="Barcode-scanner.ico" />
     <Content Include="Bokehlicia-Pacifica-Mega-cloud.ico" />
+    <Content Include="Cjdowner-Cryptocurrency-Flat-NavCoin-NAV.ico" />
     <Content Include="favicon %282%29.ico" />
     <Content Include="favicon %283%29.ico" />
     <Content Include="favicon.ico" />

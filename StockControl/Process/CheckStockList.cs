@@ -9,7 +9,7 @@ using System.Linq;
 using Microsoft.VisualBasic.FileIO;
 using Telerik.WinControls.UI;
 using System.Globalization;
-
+using Microsoft.VisualBasic;
 namespace StockControl
 {
     public partial class CheckStockList : Telerik.WinControls.UI.RadRibbonForm
@@ -283,7 +283,7 @@ namespace StockControl
 
             EditClick();
         }
-        private void Saveclick()
+        private void Saveclick(string CKNo)
         {
             if (MessageBox.Show("ต้องการสร้าง List สำหรับเช็ค Stock ?", "สร้าง List", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -291,16 +291,17 @@ namespace StockControl
                 {
                     using (DataClasses1DataContext db = new DataClasses1DataContext())
                     {
-                        tb_CheckStock cl = db.tb_CheckStocks.Where(c => !c.Status.Equals("Completed")).FirstOrDefault();
+                        tb_CheckStock cl = db.tb_CheckStocks.Where(c => c.CheckNo.Equals(CKNo)).FirstOrDefault();
                         if (cl != null)
                         {
-                            MessageBox.Show("เลขเช็คสต๊อค เก่ายังไม่ได้ ปิดสถานะ!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("เลขนี้ใช้ไปแล้ว!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         }
                         else
                         {
                             tb_CheckStock list1 = new tb_CheckStock();
-                            list1.CheckNo = dbClss.GetSeriesNo(1, 2);
+                            //list1.CheckNo = dbClss.GetSeriesNo(1, 2);
+                            list1.CheckNo = CKNo;
                             list1.CreateBy = dbClss.UserID;
                             list1.CheckDate = DateTime.Now;
                             list1.Status = "Waiting Upload";
@@ -321,7 +322,12 @@ namespace StockControl
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Saveclick();
+            string CKNo = "";
+           CKNo= Interaction.InputBox("Input Check Stock No.", "Check No.", "");
+            if (CKNo != "")
+            {
+                Saveclick(CKNo);
+            }
         }
 
 
@@ -605,7 +611,7 @@ namespace StockControl
                 {
                     string CheckNo = dbClss.TSt(dgvData.CurrentRow.Cells["CheckNo"].Value);
 
-                    var g = (from ix in db.sp_R_001_Report_CheckStock(CheckNo, CheckNo,Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"))) select ix).ToList();
+                    var g = (from ix in db.sp_R_001_Report_CheckStock_Dynamics(CheckNo, CheckNo,Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"))) select ix).ToList();
                     if (g.Count() > 0)
                     {
                         QRCodePrint qd = db.QRCodePrints.Where(q => q.DocuNo == CheckNo).FirstOrDefault();
@@ -672,7 +678,8 @@ namespace StockControl
                                 db.sp_E_004_CompletedStock(ckNo);
                                 MessageBox.Show("Update Completed.");
                                 LoadDefault();
-                            }else
+                            }
+                            else
                             {
                                 MessageBox.Show("เลขที่เอกสารนี้ ไม่สามารถลบได้!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }

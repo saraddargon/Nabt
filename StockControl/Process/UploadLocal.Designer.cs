@@ -42,8 +42,11 @@
             this.radLabelElement1 = new Telerik.WinControls.UI.RadLabelElement();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
-            this.radButton1 = new Telerik.WinControls.UI.RadButton();
-            this.radTextBox2 = new Telerik.WinControls.UI.RadTextBox();
+            this.txtReferNo = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.btnSelect = new Telerik.WinControls.UI.RadButton();
+            this.txtPath = new Telerik.WinControls.UI.RadTextBox();
             this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
             this.office2010BlueTheme1 = new Telerik.WinControls.Themes.Office2010BlueTheme();
             this.radRibbonBarButtonGroup2 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
@@ -51,18 +54,16 @@
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.radTextBox1 = new Telerik.WinControls.UI.RadTextBox();
-            this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radButton1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReferNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSelect)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPath)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -129,6 +130,7 @@
             this.btnExport.Name = "btnExport";
             this.btnExport.Text = "อัพโหลดข้อมูล";
             this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // radRibbonBarGroup1
             // 
@@ -146,6 +148,7 @@
             this.radButtonElement1.Text = "ลบรายการที่อัพโหลด";
             this.radButtonElement1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.radButtonElement1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.radButtonElement1.Click += new System.EventHandler(this.radButtonElement1_Click);
             // 
             // radRibbonBarGroup3
             // 
@@ -163,6 +166,7 @@
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Text = "รีเฟรช";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // radMenuItem1
             // 
@@ -201,40 +205,65 @@
             // radPanel1
             // 
             this.radPanel1.BackColor = System.Drawing.Color.AliceBlue;
-            this.radPanel1.Controls.Add(this.radTextBox1);
+            this.radPanel1.Controls.Add(this.txtReferNo);
             this.radPanel1.Controls.Add(this.radLabel1);
-            this.radPanel1.Controls.Add(this.radButton1);
-            this.radPanel1.Controls.Add(this.radTextBox2);
+            this.radPanel1.Controls.Add(this.progressBar1);
+            this.radPanel1.Controls.Add(this.btnSelect);
+            this.radPanel1.Controls.Add(this.txtPath);
             this.radPanel1.Controls.Add(this.radLabel2);
             this.radPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radPanel1.Location = new System.Drawing.Point(0, 0);
             this.radPanel1.Name = "radPanel1";
             this.radPanel1.Size = new System.Drawing.Size(444, 200);
-            this.radPanel1.TabIndex = 1;
+            this.radPanel1.TabIndex = 0;
             this.radPanel1.ThemeName = "Office2010Blue";
             // 
-            // radButton1
+            // txtReferNo
             // 
-            this.radButton1.Location = new System.Drawing.Point(355, 108);
-            this.radButton1.Name = "radButton1";
-            this.radButton1.Size = new System.Drawing.Size(31, 24);
-            this.radButton1.TabIndex = 3;
-            this.radButton1.Text = "...";
-            this.radButton1.Click += new System.EventHandler(this.radButton1_Click);
+            this.txtReferNo.Location = new System.Drawing.Point(41, 42);
+            this.txtReferNo.Name = "txtReferNo";
+            this.txtReferNo.Size = new System.Drawing.Size(152, 20);
+            this.txtReferNo.TabIndex = 9;
             // 
-            // radTextBox2
+            // radLabel1
             // 
-            this.radTextBox2.Location = new System.Drawing.Point(37, 110);
-            this.radTextBox2.Name = "radTextBox2";
-            this.radTextBox2.Size = new System.Drawing.Size(312, 20);
-            this.radTextBox2.TabIndex = 2;
+            this.radLabel1.Location = new System.Drawing.Point(41, 18);
+            this.radLabel1.Name = "radLabel1";
+            this.radLabel1.Size = new System.Drawing.Size(96, 18);
+            this.radLabel1.TabIndex = 8;
+            this.radLabel1.Text = "Document Ref No";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(41, 118);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(312, 13);
+            this.progressBar1.TabIndex = 7;
+            this.progressBar1.Visible = false;
+            // 
+            // btnSelect
+            // 
+            this.btnSelect.Location = new System.Drawing.Point(359, 90);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(31, 24);
+            this.btnSelect.TabIndex = 4;
+            this.btnSelect.Text = "...";
+            this.btnSelect.Click += new System.EventHandler(this.radButton1_Click);
+            // 
+            // txtPath
+            // 
+            this.txtPath.Location = new System.Drawing.Point(41, 92);
+            this.txtPath.Name = "txtPath";
+            this.txtPath.ReadOnly = true;
+            this.txtPath.Size = new System.Drawing.Size(312, 20);
+            this.txtPath.TabIndex = 3;
             // 
             // radLabel2
             // 
-            this.radLabel2.Location = new System.Drawing.Point(37, 86);
+            this.radLabel2.Location = new System.Drawing.Point(41, 68);
             this.radLabel2.Name = "radLabel2";
             this.radLabel2.Size = new System.Drawing.Size(47, 18);
-            this.radLabel2.TabIndex = 0;
+            this.radLabel2.TabIndex = 2;
             this.radLabel2.Text = "Path file";
             // 
             // radRibbonBarButtonGroup2
@@ -275,21 +304,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // radTextBox1
-            // 
-            this.radTextBox1.Location = new System.Drawing.Point(37, 51);
-            this.radTextBox1.Name = "radTextBox1";
-            this.radTextBox1.Size = new System.Drawing.Size(152, 20);
-            this.radTextBox1.TabIndex = 5;
-            // 
-            // radLabel1
-            // 
-            this.radLabel1.Location = new System.Drawing.Point(37, 27);
-            this.radLabel1.Name = "radLabel1";
-            this.radLabel1.Size = new System.Drawing.Size(117, 18);
-            this.radLabel1.TabIndex = 4;
-            this.radLabel1.Text = "local No. / Invoice No.";
-            // 
             // UploadLocal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -314,11 +328,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).EndInit();
             this.radPanel1.ResumeLayout(false);
             this.radPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radButton1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReferNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSelect)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPath)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -343,13 +357,14 @@
         private Telerik.WinControls.UI.RadButtonElement Unfilter;
         private Telerik.WinControls.UI.RadRibbonBarButtonGroup radRibbonBarButtonGroup5;
         private Telerik.WinControls.UI.RadPanel radPanel1;
-        private Telerik.WinControls.UI.RadButton radButton1;
-        private Telerik.WinControls.UI.RadTextBox radTextBox2;
+        private Telerik.WinControls.UI.RadButton btnSelect;
+        private Telerik.WinControls.UI.RadTextBox txtPath;
         private Telerik.WinControls.UI.RadLabel radLabel2;
         private Telerik.WinControls.UI.RadRibbonBarGroup radRibbonBarGroup1;
         private Telerik.WinControls.UI.RadButtonElement radButtonElement1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private Telerik.WinControls.UI.RadTextBox radTextBox1;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private Telerik.WinControls.UI.RadTextBox txtReferNo;
         private Telerik.WinControls.UI.RadLabel radLabel1;
     }
 }

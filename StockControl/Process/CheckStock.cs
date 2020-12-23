@@ -633,7 +633,7 @@ namespace StockControl
                 {
                     //string CheckNo = dbClss.TSt(dgvData.CurrentRow.Cells["CheckNo"].Value);
 
-                    var g = (from ix in db.sp_R_001_Report_CheckStock(CheckNo, CheckNo, Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"))) select ix).ToList();
+                    var g = (from ix in db.sp_R_001_Report_CheckStock_Dynamics(CheckNo, CheckNo, Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"))) select ix).ToList();
                     if (g.Count() > 0)
                     {
                         Report.Reportx1.Value = new string[2];
@@ -661,7 +661,7 @@ namespace StockControl
                 {
                     //string CheckNo = dbClss.TSt(dgvData.CurrentRow.Cells["CheckNo"].Value);
 
-                    var g = (from ix in db.sp_R_001_Report_CheckStock(CheckNo, CheckNo, Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"))) select ix).ToList();
+                    var g = (from ix in db.sp_R_001_Report_CheckStock_Dynamics(CheckNo, CheckNo, Convert.ToDateTime(DateTime.Now, new CultureInfo("en-US"))) select ix).ToList();
                     if (g.Count() > 0)
                     {
                         Report.Reportx1.Value = new string[2];
@@ -794,7 +794,7 @@ namespace StockControl
                                         ci.RefNo = "";
 
                                     ci.Code2 = rd.PartNo.ToString();
-                                    ci.ItemName = db.getItemNoTPICS(rd.PartNo);
+                                    ci.ItemName = db.getItemNoTPICS_Dynamics(rd.PartNo);
                                     ci.PKTAG = rd.PKTAG;
                                     ci.ofTAG = rd.OfTAG;
                                     ci.LotNo = rd.LotNo;
@@ -810,6 +810,7 @@ namespace StockControl
                                     ci.Remark = rd.id.ToString();
                                     ci.Package = rd.Pdaid.ToString();
                                     ci.Status = "Waiting";
+
                                     if (Data.Length > 1)
                                         ci.SP = Data[0];
                                     else
@@ -820,7 +821,7 @@ namespace StockControl
                                     else
                                         ci.Code = rd.PartNo.ToString();
 
-                                    ci.Type = db.getTypeTPICS(rd.PartNo);
+                                    ci.Type = db.getTypeTPICS_Dynamics(rd.PartNo);
                                     db.tb_CheckStockTempChecks.InsertOnSubmit(ci);
                                     db.SubmitChanges();
 
@@ -839,7 +840,7 @@ namespace StockControl
                         }
                         //Update Qty//
 
-                        db.sp_E_003_Calculate(txtCheckNo.Text);
+                        db.sp_E_003_Calculate_Dynamics(txtCheckNo.Text);
                         MessageBox.Show("Calculate Completed. ["+RowNox+"])");
                     }
                     else

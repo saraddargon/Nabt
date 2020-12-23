@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using Telerik.WinControls;
 using ClassLib;
 using System.Security.Permissions;
-
+using System.Linq;
 namespace StockControl
 {
     public partial class Mainfrom : Telerik.WinControls.UI.RadForm
@@ -47,6 +47,20 @@ namespace StockControl
             txtposition.Text = "x0:y0";
             CallDisplayHome();
             this.Text = "Barcode System " + dbClss.versioin ;
+            try
+            {
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    tb_QCConfig cf = db.tb_QCConfigs.FirstOrDefault();
+                    if(cf !=null)
+                    {
+                        dbClss.UseQC = Convert.ToBoolean(cf.UsedQC);
+                        dbClss.UseQCDept = Convert.ToBoolean(cf.UsePDDept);
+                        dbClss.UseQCDept = Convert.ToBoolean(cf.UseQCDept);
+                    }
+                }
+            }
+            catch { }
         }
         private void CallDisplayHome()
         {
@@ -373,6 +387,73 @@ namespace StockControl
             try
             {
                 System.Diagnostics.Process.Start(@"Report\Receive.pdf");
+            }
+            catch { }
+        }
+
+        private void radMenuItem18_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@"Report\Manual_Export_LocalDelivery.pdf");
+            }
+            catch { }
+        }
+
+        private void radMenuItem23_Click(object sender, EventArgs e)
+        {
+            //Move Stock.pdf
+
+            try
+            {
+                System.Diagnostics.Process.Start(@"Report\Move Stock.pdf");
+            }
+            catch { }
+        }
+
+        private void radMenuItem24_Click(object sender, EventArgs e)
+        {
+
+
+            try
+            {
+                System.Diagnostics.Process.Start(@"Report\Manual System Barcode Box.pdf");
+            }
+            catch { }
+        }
+
+        private void radMenuItem27_Click(object sender, EventArgs e)
+        {
+            
+                try
+            {
+                System.Diagnostics.Process.Start(@"Report\LocalInvoice.pdf");
+            }
+            catch { }
+        }
+
+        private void radMenuItem28_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                System.Diagnostics.Process.Start(@"Report\Export Invoice.pdf");
+            }
+            catch { }
+        }
+
+        private void radMenuItem29_Click(object sender, EventArgs e)
+        {
+            //QC Setup
+            QCSetup qcs = new QCSetup();
+            qcs.ShowDialog();
+        }
+
+        private void radMenuItem30_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@"Report\ManualQC.pdf");
             }
             catch { }
         }

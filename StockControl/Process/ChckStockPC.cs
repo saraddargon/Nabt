@@ -80,7 +80,8 @@ namespace StockControl.Process
                         tb_CheckStockList im = db.tb_CheckStockLists.Where(i => i.CheckNo == CheckNo && i.Code == txtPartNo.Text).FirstOrDefault();
                         if (im != null)
                         {
-                            var part = db.sp_001_TPIC_SelectItem(txtPartNo.Text).FirstOrDefault();
+                            //Tpics// db.sp_001_TPIC_SelectItem(txtPartNo.Text).FirstOrDefault();
+                            var part = db.sp_001_TPIC_SelectItem_Dynamics(txtPartNo.Text).FirstOrDefault();
                             if (part != null)
                             {
                                 txtPartName.Text = part.NAME.ToString();//db.getItemNoTPICS(txtPartNo.Text).ToString();
@@ -88,7 +89,7 @@ namespace StockControl.Process
                                 if (Data.Length < 2)
                                 {
                                     txtSNP.Text = part.LotSize.ToString();
-                                    txtQty.Text = part.CurrentStock.ToString();
+                                    //txtQty.Text = part.CurrentStock.ToString("########.##");
                                 }
                             }
                             else
@@ -100,9 +101,29 @@ namespace StockControl.Process
                         }
                         else
                         {
-                            txtPartNo.Text = PKTAG;
-                            txtQty.Text = "0";
-                            txtSNP.Text = "0";
+                            //txtPartNo.Text = PKTAG;
+                            //txtQty.Text = "0";
+                            //txtSNP.Text = "0";
+                            try
+                            {
+                                var part = db.sp_001_TPIC_SelectItem_Dynamics(txtPartNo.Text).FirstOrDefault();
+                                if (part != null)
+                                {
+                                    txtPartName.Text = part.NAME.ToString();//db.getItemNoTPICS(txtPartNo.Text).ToString();
+                                    txtTypeF.Text = part.Detail; //db.getTypeTPICS(txtPartNo.Text).ToString();
+                                    if (Data.Length < 2)
+                                    {
+                                        txtSNP.Text = part.LotSize.ToString();
+                                        //txtQty.Text = part.CurrentStock.ToString();
+                                    }
+                                }
+                                else
+                                {
+                                    // MessageBox.Show("ไม่พบไอเท็มนี้ ในรายการเช็คสินค้า !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    //  this.Close();
+                                }
+                            }
+                            catch { }
                             txtQtyR.Text = "";
                             txtQtyR.Focus();
                             ///////////////////////////////////////////////////////////

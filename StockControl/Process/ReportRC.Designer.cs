@@ -63,6 +63,7 @@
             this.radLabelElement1 = new Telerik.WinControls.UI.RadLabelElement();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
+            this.radGridView1 = new Telerik.WinControls.UI.RadGridView();
             this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
             this.radDateTimePicker2 = new Telerik.WinControls.UI.RadDateTimePicker();
@@ -72,18 +73,17 @@
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
-            this.radGridView1 = new Telerik.WinControls.UI.RadGridView();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radDateTimePicker2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radDateTimePicker1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,7 +109,7 @@
             // 
             // 
             this.radRibbonBar1.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.WrapAroundChildren;
-            this.radRibbonBar1.Size = new System.Drawing.Size(392, 161);
+            this.radRibbonBar1.Size = new System.Drawing.Size(506, 161);
             this.radRibbonBar1.StartButtonImage = ((System.Drawing.Image)(resources.GetObject("radRibbonBar1.StartButtonImage")));
             this.radRibbonBar1.StartMenuItems.AddRange(new Telerik.WinControls.RadItem[] {
             this.radMenuItem1});
@@ -195,9 +195,9 @@
             // 
             this.radStatusStrip1.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.radLabelElement1});
-            this.radStatusStrip1.Location = new System.Drawing.Point(0, 330);
+            this.radStatusStrip1.Location = new System.Drawing.Point(0, 368);
             this.radStatusStrip1.Name = "radStatusStrip1";
-            this.radStatusStrip1.Size = new System.Drawing.Size(392, 26);
+            this.radStatusStrip1.Size = new System.Drawing.Size(506, 26);
             this.radStatusStrip1.SizingGrip = false;
             this.radStatusStrip1.TabIndex = 1;
             // 
@@ -216,7 +216,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 161);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(392, 169);
+            this.panel1.Size = new System.Drawing.Size(506, 207);
             this.panel1.TabIndex = 2;
             // 
             // radPanel1
@@ -230,83 +230,9 @@
             this.radPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radPanel1.Location = new System.Drawing.Point(0, 0);
             this.radPanel1.Name = "radPanel1";
-            this.radPanel1.Size = new System.Drawing.Size(392, 169);
+            this.radPanel1.Size = new System.Drawing.Size(506, 207);
             this.radPanel1.TabIndex = 1;
             this.radPanel1.ThemeName = "Office2010Blue";
-            // 
-            // radLabel2
-            // 
-            this.radLabel2.Location = new System.Drawing.Point(57, 63);
-            this.radLabel2.Name = "radLabel2";
-            this.radLabel2.Size = new System.Drawing.Size(52, 18);
-            this.radLabel2.TabIndex = 2;
-            this.radLabel2.Text = "End Date";
-            // 
-            // radLabel1
-            // 
-            this.radLabel1.Location = new System.Drawing.Point(57, 37);
-            this.radLabel1.Name = "radLabel1";
-            this.radLabel1.Size = new System.Drawing.Size(56, 18);
-            this.radLabel1.TabIndex = 2;
-            this.radLabel1.Text = "Start Date";
-            // 
-            // radDateTimePicker2
-            // 
-            this.radDateTimePicker2.CustomFormat = "dd/MM/yyyy";
-            this.radDateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.radDateTimePicker2.Location = new System.Drawing.Point(119, 61);
-            this.radDateTimePicker2.Name = "radDateTimePicker2";
-            this.radDateTimePicker2.Size = new System.Drawing.Size(164, 20);
-            this.radDateTimePicker2.TabIndex = 1;
-            this.radDateTimePicker2.TabStop = false;
-            this.radDateTimePicker2.Text = "16/07/2018";
-            this.radDateTimePicker2.Value = new System.DateTime(2018, 7, 16, 8, 48, 28, 197);
-            // 
-            // radDateTimePicker1
-            // 
-            this.radDateTimePicker1.CustomFormat = "dd/MM/yyyy";
-            this.radDateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.radDateTimePicker1.Location = new System.Drawing.Point(119, 35);
-            this.radDateTimePicker1.Name = "radDateTimePicker1";
-            this.radDateTimePicker1.Size = new System.Drawing.Size(164, 20);
-            this.radDateTimePicker1.TabIndex = 0;
-            this.radDateTimePicker1.TabStop = false;
-            this.radDateTimePicker1.Text = "16/07/2018";
-            this.radDateTimePicker1.Value = new System.DateTime(2018, 7, 16, 8, 48, 23, 110);
-            // 
-            // radRibbonBarButtonGroup2
-            // 
-            this.radRibbonBarButtonGroup2.Items.AddRange(new Telerik.WinControls.RadItem[] {
-            this.btnFilter,
-            this.Unfilter});
-            this.radRibbonBarButtonGroup2.Name = "radRibbonBarButtonGroup2";
-            this.radRibbonBarButtonGroup2.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.radRibbonBarButtonGroup2.Padding = new System.Windows.Forms.Padding(1);
-            this.radRibbonBarButtonGroup2.ShowBackColor = false;
-            this.radRibbonBarButtonGroup2.Text = "radRibbonBarButtonGroup2";
-            // 
-            // btnFilter
-            // 
-            this.btnFilter.Image = ((System.Drawing.Image)(resources.GetObject("btnFilter.Image")));
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Text = "Filter";
-            this.btnFilter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            // 
-            // Unfilter
-            // 
-            this.Unfilter.Image = ((System.Drawing.Image)(resources.GetObject("Unfilter.Image")));
-            this.Unfilter.Name = "Unfilter";
-            this.Unfilter.Text = "Un Filter";
-            this.Unfilter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            // 
-            // radRibbonBarButtonGroup5
-            // 
-            this.radRibbonBarButtonGroup5.Name = "radRibbonBarButtonGroup5";
-            this.radRibbonBarButtonGroup5.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.radRibbonBarButtonGroup5.Padding = new System.Windows.Forms.Padding(1);
-            this.radRibbonBarButtonGroup5.ShowBackColor = false;
-            this.radRibbonBarButtonGroup5.ShowBorder = false;
-            this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
             // radGridView1
             // 
@@ -472,11 +398,85 @@
             this.radGridView1.ThemeName = "Office2010Blue";
             this.radGridView1.Visible = false;
             // 
+            // radLabel2
+            // 
+            this.radLabel2.Location = new System.Drawing.Point(57, 63);
+            this.radLabel2.Name = "radLabel2";
+            this.radLabel2.Size = new System.Drawing.Size(52, 18);
+            this.radLabel2.TabIndex = 2;
+            this.radLabel2.Text = "End Date";
+            // 
+            // radLabel1
+            // 
+            this.radLabel1.Location = new System.Drawing.Point(57, 37);
+            this.radLabel1.Name = "radLabel1";
+            this.radLabel1.Size = new System.Drawing.Size(56, 18);
+            this.radLabel1.TabIndex = 2;
+            this.radLabel1.Text = "Start Date";
+            // 
+            // radDateTimePicker2
+            // 
+            this.radDateTimePicker2.CustomFormat = "dd/MM/yyyy";
+            this.radDateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.radDateTimePicker2.Location = new System.Drawing.Point(119, 61);
+            this.radDateTimePicker2.Name = "radDateTimePicker2";
+            this.radDateTimePicker2.Size = new System.Drawing.Size(164, 20);
+            this.radDateTimePicker2.TabIndex = 1;
+            this.radDateTimePicker2.TabStop = false;
+            this.radDateTimePicker2.Text = "16/07/2018";
+            this.radDateTimePicker2.Value = new System.DateTime(2018, 7, 16, 8, 48, 28, 197);
+            // 
+            // radDateTimePicker1
+            // 
+            this.radDateTimePicker1.CustomFormat = "dd/MM/yyyy";
+            this.radDateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.radDateTimePicker1.Location = new System.Drawing.Point(119, 35);
+            this.radDateTimePicker1.Name = "radDateTimePicker1";
+            this.radDateTimePicker1.Size = new System.Drawing.Size(164, 20);
+            this.radDateTimePicker1.TabIndex = 0;
+            this.radDateTimePicker1.TabStop = false;
+            this.radDateTimePicker1.Text = "16/07/2018";
+            this.radDateTimePicker1.Value = new System.DateTime(2018, 7, 16, 8, 48, 23, 110);
+            // 
+            // radRibbonBarButtonGroup2
+            // 
+            this.radRibbonBarButtonGroup2.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.btnFilter,
+            this.Unfilter});
+            this.radRibbonBarButtonGroup2.Name = "radRibbonBarButtonGroup2";
+            this.radRibbonBarButtonGroup2.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.radRibbonBarButtonGroup2.Padding = new System.Windows.Forms.Padding(1);
+            this.radRibbonBarButtonGroup2.ShowBackColor = false;
+            this.radRibbonBarButtonGroup2.Text = "radRibbonBarButtonGroup2";
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.Image = ((System.Drawing.Image)(resources.GetObject("btnFilter.Image")));
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Text = "Filter";
+            this.btnFilter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            // 
+            // Unfilter
+            // 
+            this.Unfilter.Image = ((System.Drawing.Image)(resources.GetObject("Unfilter.Image")));
+            this.Unfilter.Name = "Unfilter";
+            this.Unfilter.Text = "Un Filter";
+            this.Unfilter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            // 
+            // radRibbonBarButtonGroup5
+            // 
+            this.radRibbonBarButtonGroup5.Name = "radRibbonBarButtonGroup5";
+            this.radRibbonBarButtonGroup5.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.radRibbonBarButtonGroup5.Padding = new System.Windows.Forms.Padding(1);
+            this.radRibbonBarButtonGroup5.ShowBackColor = false;
+            this.radRibbonBarButtonGroup5.ShowBorder = false;
+            this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
+            // 
             // ReportRC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(392, 356);
+            this.ClientSize = new System.Drawing.Size(506, 394);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.radStatusStrip1);
             this.Controls.Add(this.radRibbonBar1);
@@ -496,12 +496,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).EndInit();
             this.radPanel1.ResumeLayout(false);
             this.radPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radDateTimePicker2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radDateTimePicker1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

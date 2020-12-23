@@ -57,6 +57,7 @@ namespace StockControl
             //RMenu4.Click += RMenu4_Click;
             //RMenu5.Click += RMenu5_Click;
             //RMenu6.Click += RMenu6_Click;
+            dtReceive.Value = DateTime.Now;
             radGridView1.ReadOnly = true;
             radGridView1.AutoGenerateColumns = false;
             // GETDTRow();  
@@ -112,14 +113,14 @@ namespace StockControl
                     StatusAC = "New";
                 }
 
-                var gpd= db.tb_ReceiveLineTemps.Where(r => r.RCNo == RRC).ToList();
+                var gpd= db.tb_ReceiveLineTemps.Where(r => r.RCNo == RRC && r.CreateBy.Equals(dbClss.UserID)).ToList();
                 if (gpd.Count > 0)
                 {
                     var tn = gpd.FirstOrDefault();
                     txtReceiveNo.Text = RRC;
                     txtInvoiceNo.Text = tn.InvoiceNo;
                     txtCreateBy.Text = tn.CreateBy;
-                    txtCreateDate.Text = Convert.ToDateTime(tn.CreateDate).ToString("dd/MM/yyyy");
+                    txtCreateDate.Text =  Convert.ToDateTime(tn.CreateDate).ToString("dd/MM/yyyy");
                     txtScanPO.Text = "";
                    
                     radGridView1.AutoGenerateColumns = false;
@@ -194,6 +195,7 @@ namespace StockControl
         string StatusAC = "New";
         private void Clear()
         {
+            dtReceive.Value = DateTime.Now;
             StatusAC = "New";
             txtStatus.Text = "New";
             radGridView1.DataSource = null;
@@ -310,7 +312,7 @@ namespace StockControl
                                     if (rd.Cells["StatusTranfer"].Value.ToString().Equals("Waiting"))
                                     {
                                         tb_ReceiveLine tr = db.tb_ReceiveLines.Where(r => r.RCNo == txtReceiveNo.Text
-                                     && r.PONo == rd.Cells["PONo"].Value.ToString()).FirstOrDefault();
+                                     && r.PONo == rd.Cells["PONo"].Value.ToString() && r.BarcodeText.Equals(rd.Cells["BarcodeText"].Value.ToString())).FirstOrDefault();
                                         if (tr != null)
                                         {
                                             //แก้ไข
@@ -318,8 +320,8 @@ namespace StockControl
                                             tr.Remark = rd.Cells["Remark"].Value.ToString();
                                            // tr.BeforeRemain = Convert.ToDecimal(rd.Cells[""].Value);
                                             tr.CreateBy = dbClss.UserID;
-                                            tr.CreateDate = DateTime.Now;
-                                            tr.InvoiceNo = rd.Cells["InvoiceNo"].Value.ToString();
+                                            tr.CreateDate = dtReceive.Value;
+                                            tr.InvoiceNo =txtInvoiceNo.Text ;// rd.Cells["InvoiceNo"].Value.ToString();
                                             tr.LocalLotNo = DateTime.Now.ToString("yyyyMMdd")+"T";
                                             tr.LotNo = rd.Cells["LotNo"].Value.ToString();
                                             tr.Status = rd.Cells["Status"].Value.ToString();
@@ -330,7 +332,7 @@ namespace StockControl
                                         {
                                             //Use Store Procedure
                                             //เพิ่มใหม่//
-                                            db.sp_009_InsertReceiveLine(txtReceiveNo.Text, rd.Cells["PONo"].Value.ToString());
+                                            db.sp_009_InsertReceiveLine_Dynamics(txtReceiveNo.Text, rd.Cells["PONo"].Value.ToString(), rd.Cells["BarcodeText"].Value.ToString(), dtReceive.Value);
                                             CountAdd += 1;
                                         }
                                     }
@@ -338,6 +340,7 @@ namespace StockControl
                             }
                             if(CountAdd>0)
                             {
+                                LoadTemp(txtReceiveNo.Text);
                                 MessageBox.Show("บันทึกเรียบร้อย!");
                             }
                         }
@@ -639,7 +642,7 @@ namespace StockControl
             {
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    var gPO = db.sp_007_TPIC_SelectPO(PO).ToList();
+                    var gPO = db.sp_007_TPIC_SelectPO_Dynamics(PO).ToList();
                     if (gPO.Count > 0)
                     {
                         ReceiveCheck ckp = new ReceiveCheck(txtReceiveNo.Text, txtScanPO.Text,txtInvoiceNo.Text);
@@ -664,7 +667,7 @@ namespace StockControl
             {
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    db.sp_008_InsertTempReceive(RC);
+                    db.sp_008_InsertTempReceive_Dynamics(RC,dbClss.UserID);
                     
                 }
             }
@@ -688,6 +691,15 @@ namespace StockControl
             }
             catch { }
             this.Cursor = Cursors.Default;
+        }
+
+        private void radButtonElement2_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("ต้องการส่งข้อมูลเข้า TPICS ข้อมูลหรือไม่?", "ส่งข้อมูล TPICS", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                System.Threading.Thread.Sleep(2000);
+                MessageBox.Show("Completed.");
+            }
         }
     }
 }

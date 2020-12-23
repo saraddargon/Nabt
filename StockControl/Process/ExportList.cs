@@ -42,16 +42,19 @@ namespace StockControl
         }
         private void Unit_Load(object sender, EventArgs e)
         {
-            RMenu3.Click += RMenu3_Click;
-            RMenu4.Click += RMenu4_Click;
-            RMenu5.Click += RMenu5_Click;
-            RMenu6.Click += RMenu6_Click;
-           // radGridView1.ReadOnly = true;
+            //RMenu3.Click += RMenu3_Click;
+            //RMenu4.Click += RMenu4_Click;
+            //RMenu5.Click += RMenu5_Click;
+            //RMenu6.Click += RMenu6_Click;
+            // radGridView1.ReadOnly = true;
+            dtDate1.Value = DateTime.Now;
+            dtDate2.Value = DateTime.Now;
             radGridView1.AutoGenerateColumns = false;
             GETDTRow();
+
            
-            
             DataLoad();
+            DataLoad2();
         }
 
         private void RMenu6_Click(object sender, EventArgs e)
@@ -80,27 +83,27 @@ namespace StockControl
         private void DataLoad()
         {
             
-            int ck = 0;
-            using (DataClasses1DataContext db = new DataClasses1DataContext())
-            {
+            //int ck = 0;
+            //using (DataClasses1DataContext db = new DataClasses1DataContext())
+            //{
 
-                radGridView1.DataSource = db.tb_ExportList1s.ToList();
-                foreach (var x in radGridView1.Rows)
-                {
+            //    radGridView1.DataSource = db.tb_ExportLists.ToList();
+            //    foreach (var x in radGridView1.Rows)
+            //    {
 
-                   // x.Cells["dgvCodeTemp"].Value = x.Cells["UnitCode"].Value.ToString();
-                  //  x.Cells["UnitCode"].ReadOnly = true;
-                    //if (row >= 0 && row == ck && radGridView1.Rows.Count > 0)
-                    //{
+            //       // x.Cells["dgvCodeTemp"].Value = x.Cells["UnitCode"].Value.ToString();
+            //      //  x.Cells["UnitCode"].ReadOnly = true;
+            //        //if (row >= 0 && row == ck && radGridView1.Rows.Count > 0)
+            //        //{
 
-                    //    x.ViewInfo.CurrentRow = x;
+            //        //    x.ViewInfo.CurrentRow = x;
 
-                    //}
-                    ck += 1;
-                    x.Cells["No"].Value = ck;
-                }
+            //        //}
+            //        ck += 1;
+            //        x.Cells["No"].Value = ck;
+            //    }
 
-            }
+            //}
 
 
             
@@ -274,7 +277,7 @@ namespace StockControl
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            ViewClick();
+           //แสดงรายการ//
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -319,6 +322,24 @@ namespace StockControl
 
                 //    }
                 //}
+
+                if(e.RowIndex>=0)
+                {
+                    if(e.ColumnIndex==radGridView1.Columns["Revision"].Index)
+                    {
+                        string RV=Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["Revision"].Value);
+                        string IV= Convert.ToString(radGridView1.Rows[e.RowIndex].Cells["InvoiceNo"].Value);
+                        using (DataClasses1DataContext db = new DataClasses1DataContext())
+                        {
+                            tb_ExportList ep = db.tb_ExportLists.Where(s => s.InvoiceNo.Equals(IV)).FirstOrDefault();
+                            if(ep!=null)
+                            {
+                                ep.Revision = RV;
+                                db.SubmitChanges();
+                            }
+                        }
+                    }
+                }
         
 
             }
@@ -499,6 +520,76 @@ namespace StockControl
         private void radMenuItem1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            DataLoad2();
+        }
+
+        private void ExportList_Load(object sender, EventArgs e)
+        {
+            DateTime date = DateTime.Now;
+var firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
+            var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+
+            dtDate1.Value = firstDayOfMonth;
+            dtDate2.Value = lastDayOfMonth;
+            txtINv.Text = "";
+            // radCheckBox1.Checked = false;
+            DataLoad2();
+        }
+
+        private void DataLoad2()
+        {
+            int ck = 0;
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+
+                radGridView1.DataSource = db.sp_013_selectExportList(txtINv.Text, radCheckBox1.Checked, dtDate1.Value, dtDate2.Value);
+                foreach (var x in radGridView1.Rows)
+                {
+
+                    // x.Cells["dgvCodeTemp"].Value = x.Cells["UnitCode"].Value.ToString();
+                    //  x.Cells["UnitCode"].ReadOnly = true;
+                    //if (row >= 0 && row == ck && radGridView1.Rows.Count > 0)
+                    //{
+
+                    //    x.ViewInfo.CurrentRow = x;
+
+                    //}
+                    ck += 1;
+                    x.Cells["No"].Value = ck;
+                }
+
+            }
+        }
+
+        private void radGridView1_CellDoubleClick(object sender, Telerik.WinControls.UI.GridViewCellEventArgs e)
+        {
+            try
+            {
+                string Inv = radGridView1.Rows[e.RowIndex].Cells["InvoiceNo"].Value.ToString();
+                ExShipment ex = new ExShipment(Inv);
+                ex.Show();
+            }
+            catch { }
+        }
+
+        private void radButtonElement1_Click(object sender, EventArgs e)
+        {
+            InvoiceEx_Master iv = new InvoiceEx_Master();
+            iv.Show();
+        }
+
+        private void radButtonElement2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                InvoiceEx_MasterMap iv = new InvoiceEx_MasterMap();
+                iv.Show();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

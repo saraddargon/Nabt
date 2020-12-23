@@ -80,7 +80,7 @@ namespace StockControl
                     int.TryParse(txtAC.Text, out ac);
                     
 
-                    var getCode = (from ix in db.sp_003_TPIC_GETBOMNo(txtBomNo.Text,ac) select ix).ToList();
+                    var getCode = (from ix in db.sp_003_TPIC_GETBOMNo_Dynamics(txtBomNo.Text,ac) select ix).ToList();
                     if (getCode.Count > 0)
                     {
                         var rd = getCode.FirstOrDefault();

@@ -58,6 +58,8 @@ namespace StockControl
                             txtUserID.Text = UserIDEdit;
                             txtUserName.Text = ur.UserName.ToString();
                             txtPassword.Text = ur.Password.ToString();
+                            txtNameApp.Text = ur.NameApp.ToString();
+                            txtEmail.Text=Convert.ToString(ur.Email);
                             chkActive.Checked = Convert.ToBoolean(ur.Active);
                         }
                     }
@@ -290,6 +292,8 @@ namespace StockControl
                                 uck.Active = chkActive.Checked;
                                 uck.CreateBy = dbClss.UserID;
                                 uck.CreateDate = DateTime.Now;
+                                uck.NameApp = txtNameApp.Text;
+                                uck.Email = txtEmail.Text;
                                 db.SubmitChanges();
                                 dbClss.AddHistory("UserList", "แก้ไขผู้ใช้งาน", "แก้ไขรายละเอียด  [" + txtUserID.Text + "] ", "จากเครื่อง " + System.Environment.MachineName);
 
@@ -303,6 +307,8 @@ namespace StockControl
                                 un.Active = chkActive.Checked;
                                 un.CreateBy = dbClss.UserID;
                                 un.CreateDate = DateTime.Now;
+                                un.NameApp = txtNameApp.Text;
+                                un.Email = txtEmail.Text;
                                 db.tb_Users.InsertOnSubmit(un);
                                 db.SubmitChanges();
                                 dbClss.AddHistory("UserList", "เพิ่มผู้ใช้งาน", "ทำการเพิ่มรายการชื่อ  [" + txtUserID.Text + "] เข้าระบบ", "จากเครื่อง " + System.Environment.MachineName);

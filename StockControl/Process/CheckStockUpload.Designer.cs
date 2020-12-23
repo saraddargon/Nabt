@@ -273,6 +273,7 @@
             // 
             // btnSelectFile
             // 
+            this.btnSelectFile.Enabled = false;
             this.btnSelectFile.Location = new System.Drawing.Point(372, 98);
             this.btnSelectFile.Name = "btnSelectFile";
             this.btnSelectFile.Size = new System.Drawing.Size(71, 24);
@@ -282,6 +283,7 @@
             // 
             // txtFileName
             // 
+            this.txtFileName.Enabled = false;
             this.txtFileName.Location = new System.Drawing.Point(50, 100);
             this.txtFileName.Name = "txtFileName";
             this.txtFileName.ReadOnly = true;

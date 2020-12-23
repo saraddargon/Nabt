@@ -18,10 +18,15 @@ namespace StockControl
     {
         //MessageBox.Show(ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
         //if (MessageBox.Show("คุณต้องการลบหรือไม่ ?", "ลบรายการ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-
-        public static string versioin = "v 1.0.3";
+        /// <summary>
+        /// ////
+        /// </summary>
+        public static string versioin = "v 3.0.2 (Dynamics 365v1)";
         public static string UserID = "";
         public static string UserName = "";
+        public static bool UseQC = false;
+        public static bool UsePDDept = false;
+        public static bool UseQCDept = false;
         public static bool PermissionScreen(string ScreenName)
         {
             bool ck = false;
@@ -124,7 +129,27 @@ namespace StockControl
             //    MessageBox.Show("Export Finished");
             //}
         }
+        public static Image ByteArrayToImage(byte[] byteArrayIn)
+        {
+            using (MemoryStream ms = new MemoryStream(byteArrayIn))
+            {
+                Image returnImage = Image.FromStream(ms);
+                return returnImage;
+            }
+        }
+        public static Image BinaryToImage(System.Data.Linq.Binary binaryData)
+        {
+            if (binaryData == null) return null;
 
+            byte[] buffer = binaryData.ToArray();
+            MemoryStream memStream = new MemoryStream();
+            memStream.Write(buffer, 0, buffer.Length);
+            return Image.FromStream(memStream);
+        }
+        public static string Right(this string value, int length)
+        {
+            return value.Substring(value.Length - length);
+        }
         public static void AddError(string Mathod,string Error,string Screen)
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())
@@ -169,7 +194,20 @@ namespace StockControl
             }
             catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
+        public static decimal ConvertToDecimal(string Value, decimal Default)
+        {
+            decimal RT = Default;
+            decimal.TryParse(Value, out RT);
 
+            return RT;
+        }
+        public static decimal ConvertInt(string Value, int Default)
+        {
+            int RT = Default;
+            int.TryParse(Value, out RT);
+
+            return RT;
+        }
         public static string GetSeriesNo(int ControlNo,int Ac)
         {
             string No = "";
@@ -451,7 +489,7 @@ namespace StockControl
             return dtReturn;
         }
 
-        private static byte[] ImageToByteArray(System.Drawing.Image imageIn)
+        public static byte[] ImageToByteArray(System.Drawing.Image imageIn)
         {
             try
             {
@@ -660,6 +698,64 @@ namespace StockControl
             {
                 Grid.Rows[rd.Index].IsPinned = false;
             }
+        }
+        public static string ThaiBaht(string txt)
+        {
+            string bahtTxt, n, bahtTH = "";
+            double amount;
+            try { amount = Convert.ToDouble(txt); }
+            catch { amount = 0; }
+            bahtTxt = amount.ToString("####.00");
+            string[] num = { "ศูนย์", "หนึ่ง", "สอง", "สาม", "สี่", "ห้า", "หก", "เจ็ด", "แปด", "เก้า", "สิบ" };
+            string[] rank = { "", "สิบ", "ร้อย", "พัน", "หมื่น", "แสน", "ล้าน" };
+            string[] temp = bahtTxt.Split('.');
+            string intVal = temp[0];
+            string decVal = temp[1];
+            if (Convert.ToDouble(bahtTxt) == 0)
+                bahtTH = "ศูนย์บาทถ้วน";
+            else
+            {
+                for (int i = 0; i < intVal.Length; i++)
+                {
+                    n = intVal.Substring(i, 1);
+                    if (n != "0")
+                    {
+                        if ((i == (intVal.Length - 1)) && (n == "1"))
+                            bahtTH += "เอ็ด";
+                        else if ((i == (intVal.Length - 2)) && (n == "2"))
+                            bahtTH += "ยี่";
+                        else if ((i == (intVal.Length - 2)) && (n == "1"))
+                            bahtTH += "";
+                        else
+                            bahtTH += num[Convert.ToInt32(n)];
+                        bahtTH += rank[(intVal.Length - i) - 1];
+                    }
+                }
+                bahtTH += "บาท";
+                if (decVal == "00")
+                    bahtTH += "ถ้วน";
+                else
+                {
+                    for (int i = 0; i < decVal.Length; i++)
+                    {
+                        n = decVal.Substring(i, 1);
+                        if (n != "0")
+                        {
+                            if ((i == decVal.Length - 1) && (n == "1"))
+                                bahtTH += "เอ็ด";
+                            else if ((i == (decVal.Length - 2)) && (n == "2"))
+                                bahtTH += "ยี่";
+                            else if ((i == (decVal.Length - 2)) && (n == "1"))
+                                bahtTH += "";
+                            else
+                                bahtTH += num[Convert.ToInt32(n)];
+                            bahtTH += rank[(decVal.Length - i) - 1];
+                        }
+                    }
+                    bahtTH += "สตางค์";
+                }
+            }
+            return bahtTH;
         }
     }
 }

@@ -127,6 +127,7 @@
             this.btnExport.Name = "btnExport";
             this.btnExport.Text = "ส่งข้อมูลออก";
             this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // radRibbonBarGroup3
             // 
@@ -160,6 +161,7 @@
             this.btn_PrintPR.Name = "btn_PrintPR";
             this.btn_PrintPR.Text = "รายการการรับเข้า";
             this.btn_PrintPR.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btn_PrintPR.Click += new System.EventHandler(this.btn_PrintPR_Click);
             // 
             // radMenuItem1
             // 

@@ -489,5 +489,65 @@ namespace StockControl
         {
             this.Close();
         }
+
+        private void radButtonElement1_Click(object sender, EventArgs e)
+        {
+            if(row>=0)
+            {
+                string uid = radGridView1.Rows[row].Cells["dgvUserID"].Value.ToString();
+                if(uid!="")
+                {
+                    
+                    try
+                    {
+                        OpenFileDialog op = new OpenFileDialog();
+                        op.Filter = "Image files (*.PNG)|*.PNG|JPEG files (*.JPEG)|*.JPEG|JPG files (*.JPG)|*.JPG";
+                        if (op.ShowDialog() == DialogResult.OK)
+                        {
+
+                          //  PictureBox px = null;
+                            using (DataClasses1DataContext db = new DataClasses1DataContext())
+                            {
+                                tb_User us = db.tb_Users.Where(u => u.UserID.Equals(uid)).FirstOrDefault();
+                                if (us != null)
+                                {
+                                    us.SignPic = dbClss.ImageToByteArray(System.Drawing.Image.FromFile(op.FileName));
+                                    db.SubmitChanges();
+                                }
+                            }
+                        }
+                    }
+                    catch { }
+                }
+            }
+        }
+
+        private void radButtonElement2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    var rlist = db.tb_Users.ToList();
+                    foreach(var rd in rlist)
+                    {
+                        tb_User us = db.tb_Users.Where(u => u.UserID.Equals(rd.UserID)).FirstOrDefault();
+                        if(us!=null)
+                        {
+                            byte[] barcode = dbClss.SaveQRCode2D(rd.UserID);
+                            us.BarCode = barcode;
+                            db.SubmitChanges();
+                        }
+                    }
+
+                    Report.Reportx1.WReport = "UserS";
+                    Report.Reportx1.Value = new string[1];
+                    Report.Reportx1.Value[0] = "";
+                    Report.Reportx1 op = new Report.Reportx1("UserBarcode.rpt");
+                    op.Show();
+                }
+            }
+            catch { }
+        }
     }
 }

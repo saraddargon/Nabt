@@ -55,8 +55,13 @@ namespace StockControl
             //radGridView1.ReadOnly = true;
             //radGridView1.AutoGenerateColumns = false;
             //GETDTRow();
-           
-            
+            DateTime date = DateTime.Now;
+            var firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
+            var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+
+            dtDate1.Value = firstDayOfMonth;
+            dtDate2.Value = lastDayOfMonth;
+
             DataLoad();
         }
 
@@ -90,7 +95,8 @@ namespace StockControl
             using (DataClasses1DataContext db = new DataClasses1DataContext())
             {
 
-                radGridView1.DataSource = db.sp_SC_002_SelectListQueue().ToList();
+                //  radGridView1.DataSource = db.sp_SC_002_SelectListQueue().ToList();
+                radGridView1.DataSource = db.sp_SC_003_SelectListQueue(cboType1.Text, cboStatus.Text, dtDate1.Value, dtDate2.Value);
                 //foreach(var x in radGridView1.Rows)
                 //{
 
@@ -279,7 +285,21 @@ namespace StockControl
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            ViewClick();
+            try
+            {
+                int id = 0;
+                int.TryParse(radGridView1.Rows[row].Cells["id"].Value.ToString(), out id);
+                if (id > 0)
+                {
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                        db.sp_SC_004_SelectListQueue_Update(id);
+                        MessageBox.Show("Update Completed.");
+                        DataLoad();
+                    }
+                }
+            }
+            catch { }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -513,8 +533,10 @@ namespace StockControl
                 this.Cursor = Cursors.WaitCursor;
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
-                    db.sp_TPICS_CalculateListQueue();
-                    db.sp_TPICS_CalculateListQueuePD();
+                   // db.sp_TPICS_CalculateListQueue();
+                   // db.sp_TPICS_CalculateListQueuePD();
+                  //  db.sp_Job_TPICS_CalculateListQueueExport();
+                  //  db.sp_Job_TPICS_CalculateListQueueLocal();
                 }
             }
             catch { }
@@ -524,7 +546,22 @@ namespace StockControl
 
         private void radButtonElement2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Waiting TEST for TPICS.");
+            // MessageBox.Show("Waiting TEST for TPICS.");
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                  //  db.sp_TPICS_TranferDataPD();
+                    MessageBox.Show("Completed.");
+                }
+            }catch(Exception ex) { MessageBox.Show(ex.Message); }
+            this.Cursor = Cursors.Default;
+        }
+
+        private void radButton1_Click(object sender, EventArgs e)
+        {
+            DataLoad();
         }
     }
 }

@@ -20,7 +20,13 @@ namespace StockControl
             this.Name = "ReceiveCheck";
             this.Text = "Receive Item";
             InitializeComponent();
-            PONo = PONox;
+            BarcodeText = PONox;
+            string[] Data = PONox.Split('$');
+            if (Data.Length > 1)
+                PONo = Data[0];
+            else
+                PONo = Data[0];
+           // PONo = PONox;
             RCNo = RCNox;
             Invoice = INV;
             screen = 1;
@@ -29,7 +35,7 @@ namespace StockControl
         string RCNo = "";
         string PONo = "";
         string Invoice = "";
-
+        string BarcodeText = "";
         string PR1 = "";
         string PR2 = "";
         string Type = "";
@@ -71,31 +77,31 @@ namespace StockControl
                     {
 
 
-                        var gp = db.sp_007_TPIC_SelectPO(PONo).ToList();
+                        var gp = db.sp_007_TPIC_SelectPO_Dynamics(BarcodeText).ToList();
                         if (gp.Count > 0)
                         {
                             txtPartNo.Text = gp.FirstOrDefault().CODE;
                             txtPartName.Text = gp.FirstOrDefault().NAME;
-                            txtSNP.Text = gp.FirstOrDefault().LotSize.ToString();
-                            txtQtyInPO.Text = gp.FirstOrDefault().OrderQty.ToString();
-                            txtRemain.Text = (gp.FirstOrDefault().OrderQty - gp.FirstOrDefault().TotalResults).ToString();
+                            txtSNP.Text = Convert.ToString(gp.FirstOrDefault().LotSize);
+                            txtQtyInPO.Text = gp.FirstOrDefault().OrderQty.ToString("###,##0.##");
+                            txtRemain.Text = (gp.FirstOrDefault().OrderQty - gp.FirstOrDefault().TotalResults).ToString("###,##0.##");
                             txtVendorName.Text = gp.FirstOrDefault().VendorName;
                             txtUnit.Text = gp.FirstOrDefault().Unit;
                             txtVendorNo.Text = gp.FirstOrDefault().VENDOR;
                             txtLocation.Text = gp.FirstOrDefault().Location.ToUpper();
-                            txtPrice.Text = gp.FirstOrDefault().PRICE.ToString();
+                            txtPrice.Text = gp.FirstOrDefault().PRICE.ToString("###,###,##0.#####");
                             txtReceiveQty.Text = "0";
-                            txtLotNo.Text = "";
+                            txtLotNo.Text = DateTime.Now.ToString("yyyyMMdd") + "T";
                             txtid.Text = "";
 
                             double QtyRemain = 0;
                             double.TryParse(txtRemain.Text, out QtyRemain);
-                            tb_ReceiveLineTemp tm = db.tb_ReceiveLineTemps.Where(t => t.RCNo == RCNo && t.PONo == PONo).FirstOrDefault();
+                            tb_ReceiveLineTemp tm = db.tb_ReceiveLineTemps.Where(t => t.RCNo == RCNo && t.PONo == PONo && t.BarcodeText.Equals(BarcodeText)).FirstOrDefault();
                             if (tm != null)
                             {
                                 txtid.Text = tm.id.ToString();
                                 txtLotNo.Text = tm.LotNo;
-                                txtReceiveQty.Text = tm.Qty.ToString();
+                                txtReceiveQty.Text = Convert.ToDecimal(tm.Qty).ToString("###,##0.##");
                                 txtRemark.Text = tm.Remark;
 
                             }
@@ -154,7 +160,7 @@ namespace StockControl
                         if (ReceiveQty <= Remain)
                         {
 
-                            tb_ReceiveLineTemp tm = db.tb_ReceiveLineTemps.Where(t => t.id == id && !t.StatusTranfer.Equals("Completed")).FirstOrDefault();
+                            tb_ReceiveLineTemp tm = db.tb_ReceiveLineTemps.Where(t => t.id == id && !t.StatusTranfer.Equals("Completed") && t.CreateBy.Equals(dbClss.UserID)).FirstOrDefault();
                             if (tm != null)
                             {
                                 //Edit//
@@ -170,6 +176,7 @@ namespace StockControl
                                 tm.Location = txtLocation.Text;
                                 tm.LotNo = txtLotNo.Text;
                                 tm.Remark = txtRemark.Text;
+                                tm.BarcodeText = BarcodeText;
 
                                 tm.Status = Status;
                                 tm.StatusTranfer = "Waiting";
@@ -208,6 +215,7 @@ namespace StockControl
                                     tn.LotNo = txtLotNo.Text;
                                     tn.Remark = txtRemark.Text;
                                     tn.Location = txtLocation.Text;
+                                    tn.BarcodeText = BarcodeText;
 
 
                                     tn.Status = Status;

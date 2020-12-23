@@ -93,7 +93,7 @@ namespace StockControl
                 //&& (Convert.ToDecimal(Convert.ToDateTime(r.CreateDate).ToString("YYYYMMdd"))>=Convert.ToDecimal(dtDate1.Value.ToString("YYYYMMdd"))
                 //   && Convert.ToDecimal(Convert.ToDateTime(r.CreateDate).ToString("YYYYMMdd")) <= Convert.ToDecimal(dtDate2.Value.ToString("YYYYMMdd")))
                 //).ToList();
-                radGridView1.DataSource = db.sp_006_SelectListReceive(txtRCNo.Text, dtDate1.Value, dtDate2.Value).ToList();
+                radGridView1.DataSource = db.sp_006_SelectListReceive(txtRCNo.Text,txtPO.Text, dtDate1.Value, dtDate2.Value).ToList();
                 foreach (var x in radGridView1.Rows)
                 {                 
                     ck += 1;
@@ -280,9 +280,10 @@ namespace StockControl
             {
                 string RC = radGridView1.Rows[e.RowIndex].Cells["RCNo"].Value.ToString();
                 Receive rc = new Receive(RC);
-                rc.Show();
-
-            }catch { }
+                rc.ShowDialog();
+                DataLoad();
+            }
+            catch { }
         }
 
         private void radButtonElement1_Click(object sender, EventArgs e)

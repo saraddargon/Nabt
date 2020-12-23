@@ -37,6 +37,8 @@ namespace StockControl
                 case "Export": { ShowName = "Export"; pictureBox1.Image = imageList4.Images[4]; } break;
                 case "Local": { ShowName = "Local"; pictureBox1.Image = imageList4.Images[5]; } break;
                 case "CheckStock": { ShowName = "CheckStock"; pictureBox1.Image = imageList4.Images[7]; } break;
+                case "MoveStock": { ShowName = "MoveStock"; pictureBox1.Image = imageList4.Images[4]; } break;
+                case "QCList": { ShowName = "QC List"; pictureBox1.Image = imageList4.Images[4]; } break;
 
             }
             lblModule.Text = ShowName;
@@ -180,12 +182,31 @@ namespace StockControl
                                             c.LinkNode.ToString().Equals("PCCheck") ||
                                             c.LinkNode.ToString().Equals("ListWO")
                            || c.LinkNode.ToString().Equals("ListMapItem")
-                                            
+                           || c.LinkNode.ToString().Equals("ItemSkipList")
+                           || c.LinkNode.ToString().Equals("ReqMoveStock")
+                           || c.LinkNode.ToString().Equals("MoveStockList")
+                           || c.LinkNode.ToString().Equals("BOX")
+                           || c.LinkNode.ToString().Equals("QCMaster")
+                            || c.LinkNode.ToString().Equals("QCSetMaster")
+                            || c.LinkNode.ToString().Equals("QCSetMasterPD")
+                            || c.LinkNode.ToString().Equals("QCSetMaster")
+                            || c.LinkNode.ToString().Equals("QCList")
+                            || c.LinkNode.ToString().Equals("QCSetMasterQC")
+                            || c.LinkNode.ToString().Equals("QCApprove")
+                            || c.LinkNode.ToString().Equals("NCRList")
+                            || c.LinkNode.ToString().Equals("NCRReq")
+                            || c.LinkNode.ToString().Equals("QCCheckReq")
+                          
+
+
+
+                           
+
                             )
                         {
                             ListItem.ImageIndex = 16;
                         }
-                        else if (c.LinkNode.ToString().Equals("ExportImportPart"))
+                        else if (c.LinkNode.ToString().Equals("ExportImportPart") )
                         {
                             ListItem.ImageIndex = 17;
                         }
@@ -201,7 +222,7 @@ namespace StockControl
                         {
                             ListItem.ImageIndex = 20;
                         }
-                        else if (c.LinkNode.ToString().Equals("Receive"))
+                        else if (c.LinkNode.ToString().Equals("Receive") || c.LinkNode.ToString().Equals("WHReceiveReq"))
                         {
                             ListItem.ImageIndex = 21;
                         }

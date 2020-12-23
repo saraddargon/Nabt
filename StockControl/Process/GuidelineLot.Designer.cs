@@ -30,16 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GuidelineLot));
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn5 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
             this.radRibbonBar1 = new Telerik.WinControls.UI.RadRibbonBar();
             this.ribbonTab1 = new Telerik.WinControls.UI.RibbonTab();
-            this.radRibbonBarGroup1 = new Telerik.WinControls.UI.RadRibbonBarGroup();
-            this.radButtonElement1 = new Telerik.WinControls.UI.RadButtonElement();
-            this.radButtonElement2 = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarGroup2 = new Telerik.WinControls.UI.RadRibbonBarGroup();
             this.btnView = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarGroup4 = new Telerik.WinControls.UI.RadRibbonBarGroup();
@@ -59,14 +56,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.radGridView1 = new Telerik.WinControls.UI.RadGridView();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.radLabel3 = new Telerik.WinControls.UI.RadLabel();
-            this.radLabel4 = new Telerik.WinControls.UI.RadLabel();
-            this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
-            this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
-            this.radTextBox3 = new Telerik.WinControls.UI.RadTextBox();
-            this.radTextBox4 = new Telerik.WinControls.UI.RadTextBox();
-            this.radTextBox2 = new Telerik.WinControls.UI.RadTextBox();
-            this.radTextBox1 = new Telerik.WinControls.UI.RadTextBox();
             this.office2010BlueTheme1 = new Telerik.WinControls.Themes.Office2010BlueTheme();
             this.radRibbonBarButtonGroup2 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
@@ -79,20 +68,32 @@
             this.RMenu5 = new Telerik.WinControls.UI.RadMenuItem();
             this.RMenu6 = new Telerik.WinControls.UI.RadMenuItem();
             this.radContextMenuManager1 = new Telerik.WinControls.UI.RadContextMenuManager();
+            this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
+            this.txtSaleOrder = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
+            this.txtInvoiceNo = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel3 = new Telerik.WinControls.UI.RadLabel();
+            this.txtPartNo = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel4 = new Telerik.WinControls.UI.RadLabel();
+            this.txtPartName = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel5 = new Telerik.WinControls.UI.RadLabel();
+            this.txtQuantity = new Telerik.WinControls.UI.RadTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGridView1.MasterTemplate)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSaleOrder)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInvoiceNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPartNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPartName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -133,7 +134,6 @@
             // 
             this.ribbonTab1.IsSelected = true;
             this.ribbonTab1.Items.AddRange(new Telerik.WinControls.RadItem[] {
-            this.radRibbonBarGroup1,
             this.radRibbonBarGroup2,
             this.radRibbonBarGroup4,
             this.radRibbonBarGroup3,
@@ -142,36 +142,13 @@
             this.ribbonTab1.Text = "Action";
             this.ribbonTab1.UseMnemonic = false;
             // 
-            // radRibbonBarGroup1
-            // 
-            this.radRibbonBarGroup1.Items.AddRange(new Telerik.WinControls.RadItem[] {
-            this.radButtonElement1,
-            this.radButtonElement2});
-            this.radRibbonBarGroup1.Name = "radRibbonBarGroup1";
-            this.radRibbonBarGroup1.Text = "Guide Line";
-            // 
-            // radButtonElement1
-            // 
-            this.radButtonElement1.Image = ((System.Drawing.Image)(resources.GetObject("radButtonElement1.Image")));
-            this.radButtonElement1.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radButtonElement1.Name = "radButtonElement1";
-            this.radButtonElement1.Text = "Generate Lot No.";
-            this.radButtonElement1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // radButtonElement2
-            // 
-            this.radButtonElement2.Image = ((System.Drawing.Image)(resources.GetObject("radButtonElement2.Image")));
-            this.radButtonElement2.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radButtonElement2.Name = "radButtonElement2";
-            this.radButtonElement2.Text = "Print List Lot";
-            this.radButtonElement2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
             // radRibbonBarGroup2
             // 
             this.radRibbonBarGroup2.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.btnView});
             this.radRibbonBarGroup2.Name = "radRibbonBarGroup2";
             this.radRibbonBarGroup2.Text = "Manage";
+            this.radRibbonBarGroup2.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
             // 
             // btnView
             // 
@@ -322,7 +299,7 @@
             this.radGridView1.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.radGridView1.ForeColor = System.Drawing.Color.Black;
             this.radGridView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.radGridView1.Location = new System.Drawing.Point(0, 68);
+            this.radGridView1.Location = new System.Drawing.Point(0, 66);
             // 
             // 
             // 
@@ -336,40 +313,39 @@
             this.radGridView1.MasterTemplate.AllowRowHeaderContextMenu = false;
             this.radGridView1.MasterTemplate.AllowRowResize = false;
             this.radGridView1.MasterTemplate.AutoGenerateColumns = false;
-            gridViewTextBoxColumn1.EnableExpressionEditor = false;
-            gridViewTextBoxColumn1.FieldName = "No";
-            gridViewTextBoxColumn1.HeaderText = "No.";
-            gridViewTextBoxColumn1.Name = "No";
-            gridViewTextBoxColumn1.Width = 44;
-            gridViewTextBoxColumn2.EnableExpressionEditor = false;
-            gridViewTextBoxColumn2.FieldName = "LotNo";
-            gridViewTextBoxColumn2.HeaderText = "LotNo";
-            gridViewTextBoxColumn2.Name = "LotNo";
-            gridViewTextBoxColumn2.Width = 209;
-            gridViewTextBoxColumn3.EnableExpressionEditor = false;
-            gridViewTextBoxColumn3.FieldName = "Qty";
-            gridViewTextBoxColumn3.HeaderText = "Quantity";
-            gridViewTextBoxColumn3.Name = "Qty";
-            gridViewTextBoxColumn3.Width = 120;
-            gridViewTextBoxColumn4.EnableExpressionEditor = false;
-            gridViewTextBoxColumn4.FieldName = "SNP";
-            gridViewTextBoxColumn4.HeaderText = "SNP";
-            gridViewTextBoxColumn4.Name = "SNP";
-            gridViewTextBoxColumn4.Width = 100;
+            gridViewTextBoxColumn5.EnableExpressionEditor = false;
+            gridViewTextBoxColumn5.FieldName = "No";
+            gridViewTextBoxColumn5.HeaderText = "No.";
+            gridViewTextBoxColumn5.Name = "No";
+            gridViewTextBoxColumn5.Width = 44;
+            gridViewTextBoxColumn6.EnableExpressionEditor = false;
+            gridViewTextBoxColumn6.FieldName = "LotNo";
+            gridViewTextBoxColumn6.HeaderText = "LotNo";
+            gridViewTextBoxColumn6.Name = "LotNo";
+            gridViewTextBoxColumn6.Width = 209;
+            gridViewTextBoxColumn7.EnableExpressionEditor = false;
+            gridViewTextBoxColumn7.FieldName = "Qty";
+            gridViewTextBoxColumn7.HeaderText = "Quantity";
+            gridViewTextBoxColumn7.Name = "Qty";
+            gridViewTextBoxColumn7.Width = 120;
+            gridViewTextBoxColumn8.EnableExpressionEditor = false;
+            gridViewTextBoxColumn8.FieldName = "SNP";
+            gridViewTextBoxColumn8.HeaderText = "SNP";
+            gridViewTextBoxColumn8.Name = "SNP";
+            gridViewTextBoxColumn8.Width = 100;
             this.radGridView1.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn1,
-            gridViewTextBoxColumn2,
-            gridViewTextBoxColumn3,
-            gridViewTextBoxColumn4});
+            gridViewTextBoxColumn5,
+            gridViewTextBoxColumn6,
+            gridViewTextBoxColumn7,
+            gridViewTextBoxColumn8});
             this.radGridView1.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
-            this.radGridView1.MasterTemplate.ViewDefinition = tableViewDefinition1;
+            this.radGridView1.MasterTemplate.ViewDefinition = tableViewDefinition2;
             this.radGridView1.Name = "radGridView1";
-            this.radContextMenuManager1.SetRadContextMenu(this.radGridView1, this.radContextMenu1);
             this.radGridView1.ReadOnly = true;
             this.radGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.radGridView1.ShowGroupPanel = false;
-            this.radGridView1.Size = new System.Drawing.Size(611, 462);
-            this.radGridView1.TabIndex = 0;
+            this.radGridView1.Size = new System.Drawing.Size(611, 464);
+            this.radGridView1.TabIndex = 1;
             this.radGridView1.ThemeName = "Office2010Blue";
             this.radGridView1.CellEndEdit += new Telerik.WinControls.UI.GridViewCellEventHandler(this.radGridView1_CellEndEdit);
             this.radGridView1.CellClick += new Telerik.WinControls.UI.GridViewCellEventHandler(this.radGridView1_CellClick);
@@ -378,83 +354,21 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.GhostWhite;
-            this.panel2.Controls.Add(this.radLabel3);
+            this.panel2.Controls.Add(this.txtPartName);
             this.panel2.Controls.Add(this.radLabel4);
+            this.panel2.Controls.Add(this.txtPartNo);
+            this.panel2.Controls.Add(this.radLabel3);
+            this.panel2.Controls.Add(this.txtQuantity);
+            this.panel2.Controls.Add(this.radLabel5);
+            this.panel2.Controls.Add(this.txtInvoiceNo);
             this.panel2.Controls.Add(this.radLabel2);
+            this.panel2.Controls.Add(this.txtSaleOrder);
             this.panel2.Controls.Add(this.radLabel1);
-            this.panel2.Controls.Add(this.radTextBox3);
-            this.panel2.Controls.Add(this.radTextBox4);
-            this.panel2.Controls.Add(this.radTextBox2);
-            this.panel2.Controls.Add(this.radTextBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(611, 68);
-            this.panel2.TabIndex = 1;
-            // 
-            // radLabel3
-            // 
-            this.radLabel3.Location = new System.Drawing.Point(247, 34);
-            this.radLabel3.Name = "radLabel3";
-            this.radLabel3.Size = new System.Drawing.Size(62, 18);
-            this.radLabel3.TabIndex = 1;
-            this.radLabel3.Text = "Item Name";
-            // 
-            // radLabel4
-            // 
-            this.radLabel4.Location = new System.Drawing.Point(57, 31);
-            this.radLabel4.Name = "radLabel4";
-            this.radLabel4.Size = new System.Drawing.Size(49, 18);
-            this.radLabel4.TabIndex = 1;
-            this.radLabel4.Text = "Quantity";
-            // 
-            // radLabel2
-            // 
-            this.radLabel2.Location = new System.Drawing.Point(262, 7);
-            this.radLabel2.Name = "radLabel2";
-            this.radLabel2.Size = new System.Drawing.Size(47, 18);
-            this.radLabel2.TabIndex = 1;
-            this.radLabel2.Text = "Item No";
-            // 
-            // radLabel1
-            // 
-            this.radLabel1.Location = new System.Drawing.Point(51, 7);
-            this.radLabel1.Name = "radLabel1";
-            this.radLabel1.Size = new System.Drawing.Size(53, 18);
-            this.radLabel1.TabIndex = 1;
-            this.radLabel1.Text = "Order No";
-            // 
-            // radTextBox3
-            // 
-            this.radTextBox3.Location = new System.Drawing.Point(315, 32);
-            this.radTextBox3.Name = "radTextBox3";
-            this.radTextBox3.Size = new System.Drawing.Size(211, 20);
-            this.radTextBox3.TabIndex = 0;
-            this.radTextBox3.Text = "TEST Part01";
-            // 
-            // radTextBox4
-            // 
-            this.radTextBox4.Location = new System.Drawing.Point(110, 32);
-            this.radTextBox4.Name = "radTextBox4";
-            this.radTextBox4.Size = new System.Drawing.Size(121, 20);
-            this.radTextBox4.TabIndex = 0;
-            this.radTextBox4.Text = "100";
-            // 
-            // radTextBox2
-            // 
-            this.radTextBox2.Location = new System.Drawing.Point(315, 8);
-            this.radTextBox2.Name = "radTextBox2";
-            this.radTextBox2.Size = new System.Drawing.Size(128, 20);
-            this.radTextBox2.TabIndex = 0;
-            this.radTextBox2.Text = "4435667";
-            // 
-            // radTextBox1
-            // 
-            this.radTextBox1.Location = new System.Drawing.Point(110, 6);
-            this.radTextBox1.Name = "radTextBox1";
-            this.radTextBox1.Size = new System.Drawing.Size(121, 20);
-            this.radTextBox1.TabIndex = 0;
-            this.radTextBox1.Text = "OR000001";
+            this.panel2.Size = new System.Drawing.Size(611, 66);
+            this.panel2.TabIndex = 0;
             // 
             // radRibbonBarButtonGroup2
             // 
@@ -534,6 +448,86 @@
             this.RMenu6.Name = "RMenu6";
             this.RMenu6.Text = "ลบรายการ";
             // 
+            // radLabel1
+            // 
+            this.radLabel1.Location = new System.Drawing.Point(29, 8);
+            this.radLabel1.Name = "radLabel1";
+            this.radLabel1.Size = new System.Drawing.Size(59, 18);
+            this.radLabel1.TabIndex = 0;
+            this.radLabel1.Text = "Sale Order";
+            // 
+            // txtSaleOrder
+            // 
+            this.txtSaleOrder.Location = new System.Drawing.Point(90, 6);
+            this.txtSaleOrder.Name = "txtSaleOrder";
+            this.txtSaleOrder.ReadOnly = true;
+            this.txtSaleOrder.Size = new System.Drawing.Size(100, 20);
+            this.txtSaleOrder.TabIndex = 1;
+            // 
+            // radLabel2
+            // 
+            this.radLabel2.Location = new System.Drawing.Point(26, 32);
+            this.radLabel2.Name = "radLabel2";
+            this.radLabel2.Size = new System.Drawing.Size(62, 18);
+            this.radLabel2.TabIndex = 6;
+            this.radLabel2.Text = "Invoice No.";
+            // 
+            // txtInvoiceNo
+            // 
+            this.txtInvoiceNo.Location = new System.Drawing.Point(90, 32);
+            this.txtInvoiceNo.Name = "txtInvoiceNo";
+            this.txtInvoiceNo.ReadOnly = true;
+            this.txtInvoiceNo.Size = new System.Drawing.Size(100, 20);
+            this.txtInvoiceNo.TabIndex = 7;
+            // 
+            // radLabel3
+            // 
+            this.radLabel3.Location = new System.Drawing.Point(196, 6);
+            this.radLabel3.Name = "radLabel3";
+            this.radLabel3.Size = new System.Drawing.Size(44, 18);
+            this.radLabel3.TabIndex = 2;
+            this.radLabel3.Text = "Part No";
+            // 
+            // txtPartNo
+            // 
+            this.txtPartNo.Location = new System.Drawing.Point(257, 6);
+            this.txtPartNo.Name = "txtPartNo";
+            this.txtPartNo.ReadOnly = true;
+            this.txtPartNo.Size = new System.Drawing.Size(178, 20);
+            this.txtPartNo.TabIndex = 3;
+            // 
+            // radLabel4
+            // 
+            this.radLabel4.Location = new System.Drawing.Point(196, 32);
+            this.radLabel4.Name = "radLabel4";
+            this.radLabel4.Size = new System.Drawing.Size(59, 18);
+            this.radLabel4.TabIndex = 8;
+            this.radLabel4.Text = "Part Name";
+            // 
+            // txtPartName
+            // 
+            this.txtPartName.Location = new System.Drawing.Point(257, 32);
+            this.txtPartName.Name = "txtPartName";
+            this.txtPartName.ReadOnly = true;
+            this.txtPartName.Size = new System.Drawing.Size(178, 20);
+            this.txtPartName.TabIndex = 9;
+            // 
+            // radLabel5
+            // 
+            this.radLabel5.Location = new System.Drawing.Point(447, 6);
+            this.radLabel5.Name = "radLabel5";
+            this.radLabel5.Size = new System.Drawing.Size(49, 18);
+            this.radLabel5.TabIndex = 4;
+            this.radLabel5.Text = "Quantity";
+            // 
+            // txtQuantity
+            // 
+            this.txtQuantity.Location = new System.Drawing.Point(508, 6);
+            this.txtQuantity.Name = "txtQuantity";
+            this.txtQuantity.ReadOnly = true;
+            this.txtQuantity.Size = new System.Drawing.Size(75, 20);
+            this.txtQuantity.TabIndex = 5;
+            // 
             // GuidelineLot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -559,14 +553,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.radGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSaleOrder)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInvoiceNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPartNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPartName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -608,16 +604,15 @@
         private Telerik.WinControls.UI.RadMenuItem RMenu6;
         private Telerik.WinControls.UI.RadContextMenuManager radContextMenuManager1;
         private System.Windows.Forms.Panel panel2;
-        private Telerik.WinControls.UI.RadLabel radLabel3;
+        private Telerik.WinControls.UI.RadTextBox txtPartName;
         private Telerik.WinControls.UI.RadLabel radLabel4;
+        private Telerik.WinControls.UI.RadTextBox txtPartNo;
+        private Telerik.WinControls.UI.RadLabel radLabel3;
+        private Telerik.WinControls.UI.RadTextBox txtQuantity;
+        private Telerik.WinControls.UI.RadLabel radLabel5;
+        private Telerik.WinControls.UI.RadTextBox txtInvoiceNo;
         private Telerik.WinControls.UI.RadLabel radLabel2;
+        private Telerik.WinControls.UI.RadTextBox txtSaleOrder;
         private Telerik.WinControls.UI.RadLabel radLabel1;
-        private Telerik.WinControls.UI.RadTextBox radTextBox3;
-        private Telerik.WinControls.UI.RadTextBox radTextBox4;
-        private Telerik.WinControls.UI.RadTextBox radTextBox2;
-        private Telerik.WinControls.UI.RadTextBox radTextBox1;
-        private Telerik.WinControls.UI.RadRibbonBarGroup radRibbonBarGroup1;
-        private Telerik.WinControls.UI.RadButtonElement radButtonElement1;
-        private Telerik.WinControls.UI.RadButtonElement radButtonElement2;
     }
 }

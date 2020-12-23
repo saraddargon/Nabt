@@ -100,7 +100,7 @@ namespace StockControl.Process
                                 db.SubmitChanges();
                         
                             }
-                            db.sp_E_003_Calculate(CKNo);
+                            db.sp_E_003_Calculate_Dynamics(CKNo);
                             this.Close();
                         }
                     }

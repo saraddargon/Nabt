@@ -443,7 +443,6 @@
             // 
             this.txtPartName.Location = new System.Drawing.Point(132, 68);
             this.txtPartName.Name = "txtPartName";
-            this.txtPartName.ReadOnly = true;
             this.txtPartName.Size = new System.Drawing.Size(251, 20);
             this.txtPartName.TabIndex = 2;
             // 
@@ -460,7 +459,6 @@
             // 
             this.txtPartNo.Location = new System.Drawing.Point(132, 42);
             this.txtPartNo.Name = "txtPartNo";
-            this.txtPartNo.ReadOnly = true;
             this.txtPartNo.Size = new System.Drawing.Size(164, 20);
             this.txtPartNo.TabIndex = 1;
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtPartNo.GetChildAt(0).GetChildAt(0))).BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
@@ -477,7 +475,6 @@
             // dtDate1
             // 
             this.dtDate1.CustomFormat = "dd/MM/yyyy";
-            this.dtDate1.Enabled = false;
             this.dtDate1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtDate1.Location = new System.Drawing.Point(132, 172);
             this.dtDate1.Name = "dtDate1";

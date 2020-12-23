@@ -41,6 +41,8 @@
             this.radLabelElement1 = new Telerik.WinControls.UI.RadLabelElement();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.radLabel4 = new Telerik.WinControls.UI.RadLabel();
+            this.txtNameApp = new Telerik.WinControls.UI.RadTextBox();
             this.radLabel3 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel2 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
@@ -53,10 +55,14 @@
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
+            this.txtEmail = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel5 = new Telerik.WinControls.UI.RadLabel();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNameApp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
@@ -64,6 +70,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUserName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkActive)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEmail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -89,7 +97,7 @@
             // 
             // 
             this.radRibbonBar1.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.WrapAroundChildren;
-            this.radRibbonBar1.Size = new System.Drawing.Size(483, 160);
+            this.radRibbonBar1.Size = new System.Drawing.Size(511, 160);
             this.radRibbonBar1.StartButtonImage = ((System.Drawing.Image)(resources.GetObject("radRibbonBar1.StartButtonImage")));
             this.radRibbonBar1.StartMenuItems.AddRange(new Telerik.WinControls.RadItem[] {
             this.radMenuItem1,
@@ -160,9 +168,9 @@
             // 
             this.radStatusStrip1.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.radLabelElement1});
-            this.radStatusStrip1.Location = new System.Drawing.Point(0, 376);
+            this.radStatusStrip1.Location = new System.Drawing.Point(0, 412);
             this.radStatusStrip1.Name = "radStatusStrip1";
-            this.radStatusStrip1.Size = new System.Drawing.Size(483, 26);
+            this.radStatusStrip1.Size = new System.Drawing.Size(511, 26);
             this.radStatusStrip1.SizingGrip = false;
             this.radStatusStrip1.TabIndex = 1;
             // 
@@ -180,12 +188,16 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 160);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(483, 216);
+            this.panel1.Size = new System.Drawing.Size(511, 252);
             this.panel1.TabIndex = 2;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Honeydew;
+            this.panel2.Controls.Add(this.radLabel5);
+            this.panel2.Controls.Add(this.radLabel4);
+            this.panel2.Controls.Add(this.txtEmail);
+            this.panel2.Controls.Add(this.txtNameApp);
             this.panel2.Controls.Add(this.radLabel3);
             this.panel2.Controls.Add(this.radLabel2);
             this.panel2.Controls.Add(this.radLabel1);
@@ -196,12 +208,27 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(483, 216);
+            this.panel2.Size = new System.Drawing.Size(511, 252);
             this.panel2.TabIndex = 0;
+            // 
+            // radLabel4
+            // 
+            this.radLabel4.Location = new System.Drawing.Point(85, 102);
+            this.radLabel4.Name = "radLabel4";
+            this.radLabel4.Size = new System.Drawing.Size(65, 18);
+            this.radLabel4.TabIndex = 5;
+            this.radLabel4.Text = "Name App :";
+            // 
+            // txtNameApp
+            // 
+            this.txtNameApp.Location = new System.Drawing.Point(157, 101);
+            this.txtNameApp.Name = "txtNameApp";
+            this.txtNameApp.Size = new System.Drawing.Size(140, 20);
+            this.txtNameApp.TabIndex = 7;
             // 
             // radLabel3
             // 
-            this.radLabel3.Location = new System.Drawing.Point(79, 75);
+            this.radLabel3.Location = new System.Drawing.Point(92, 75);
             this.radLabel3.Name = "radLabel3";
             this.radLabel3.Size = new System.Drawing.Size(59, 18);
             this.radLabel3.TabIndex = 4;
@@ -209,7 +236,7 @@
             // 
             // radLabel2
             // 
-            this.radLabel2.Location = new System.Drawing.Point(79, 49);
+            this.radLabel2.Location = new System.Drawing.Point(84, 49);
             this.radLabel2.Name = "radLabel2";
             this.radLabel2.Size = new System.Drawing.Size(67, 18);
             this.radLabel2.TabIndex = 2;
@@ -217,7 +244,7 @@
             // 
             // radLabel1
             // 
-            this.radLabel1.Location = new System.Drawing.Point(79, 24);
+            this.radLabel1.Location = new System.Drawing.Point(106, 24);
             this.radLabel1.Name = "radLabel1";
             this.radLabel1.Size = new System.Drawing.Size(45, 18);
             this.radLabel1.TabIndex = 0;
@@ -246,7 +273,7 @@
             // 
             // chkActive
             // 
-            this.chkActive.Location = new System.Drawing.Point(157, 101);
+            this.chkActive.Location = new System.Drawing.Point(157, 162);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(51, 18);
             this.chkActive.TabIndex = 6;
@@ -286,11 +313,26 @@
             this.radRibbonBarButtonGroup5.ShowBorder = false;
             this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
+            // txtEmail
+            // 
+            this.txtEmail.Location = new System.Drawing.Point(157, 127);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(140, 20);
+            this.txtEmail.TabIndex = 7;
+            // 
+            // radLabel5
+            // 
+            this.radLabel5.Location = new System.Drawing.Point(110, 127);
+            this.radLabel5.Name = "radLabel5";
+            this.radLabel5.Size = new System.Drawing.Size(38, 18);
+            this.radLabel5.TabIndex = 5;
+            this.radLabel5.Text = "Email :";
+            // 
             // UserAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 402);
+            this.ClientSize = new System.Drawing.Size(511, 438);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.radStatusStrip1);
             this.Controls.Add(this.radRibbonBar1);
@@ -310,6 +352,8 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNameApp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
@@ -317,6 +361,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUserName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkActive)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEmail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -349,5 +395,9 @@
         private Telerik.WinControls.UI.RadLabel radLabel2;
         private Telerik.WinControls.UI.RadTextBox txtUserID;
         private Telerik.WinControls.UI.RadTextBox txtPassword;
+        private Telerik.WinControls.UI.RadLabel radLabel4;
+        private Telerik.WinControls.UI.RadTextBox txtNameApp;
+        private Telerik.WinControls.UI.RadLabel radLabel5;
+        private Telerik.WinControls.UI.RadTextBox txtEmail;
     }
 }

@@ -52,6 +52,14 @@ namespace StockControl
             radDateTimePicker2.Value = DateTime.Now;
         }
 
-        
+        private void btn_PrintPR_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

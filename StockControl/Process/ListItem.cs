@@ -30,6 +30,10 @@ namespace StockControl
         DataTable dt3 = new DataTable();
         DataTable dt = new DataTable();
         string PathFile = "";
+        string PathQC1 = "";
+        string PathQC2 = "";
+        string PathQC3 = "";
+        string PathQC4 = "";
         private void radMenuItem2_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
@@ -74,8 +78,33 @@ namespace StockControl
                     tb_Path ph = db.tb_Paths.Where(p => p.PathCode == "Image").FirstOrDefault();
                     if(ph!=null)
                     {
-                        PathFile = ph.PathFile;
+                        PathFile = ph.PathFile;                       
                     }
+
+                    var lPath= db.tb_Paths.Where(p => p.PathCode.Contains("QC")).ToList();
+                    if(lPath.Count>0)
+                    {
+                        foreach(var rd in lPath)
+                        {
+                            if(rd.PathCode.Equals("QC1"))
+                            {
+                                PathQC1 = rd.PathFile;
+
+                            }else if(rd.PathCode.Equals("QC2"))
+                            {
+                                PathQC2 = rd.PathFile;
+                            }
+                            else if (rd.PathCode.Equals("QC3"))
+                            {
+                                PathQC3 = rd.PathFile;
+                            }
+                            else if (rd.PathCode.Equals("QC4"))
+                            {
+                                PathQC4 = rd.PathFile;
+                            }
+                        }
+                    }
+                    
                 }
             }
             catch { }
@@ -112,8 +141,11 @@ namespace StockControl
                 int ck = 0;
                 using (DataClasses1DataContext db = new DataClasses1DataContext())
                 {
+                    //Dynamics
+                    // radGridView1.DataSource = db.sp_001_1_TPIC_SelectItem_Dynamics(txtItemNo.Text, txtPlant.Text).ToList();
 
-                    radGridView1.DataSource = db.sp_001_1_TPIC_SelectItem(txtItemNo.Text,txtPlant.Text).ToList();
+                    //Tpics// radGridView1.DataSource = db.sp_001_1_TPIC_SelectItem(txtItemNo.Text, txtPlant.Text).ToList();
+                    radGridView1.DataSource = db.sp_001_1_TPIC_SelectItem_Dynamics(txtItemNo.Text, txtPlant.Text).ToList();
                     foreach (var x in radGridView1.Rows)
                     {
 
@@ -613,10 +645,43 @@ namespace StockControl
                     }
                     catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);  }
                 }
-                //else
-                //{
-                //    MessageBox.Show("Path file Empty!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //}
+                
+                if(!radGridView1.Rows[e.RowIndex].Cells["QCImage1"].Value.ToString().Equals("") && !PathQC1.Equals("")
+                    && e.ColumnIndex == radGridView1.Columns["QCImage1"].Index)
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start(PathQC1 + "" + radGridView1.Rows[e.RowIndex].Cells["QCImage1"].Value.ToString());
+                    }
+                    catch { }
+                }
+                if (!radGridView1.Rows[e.RowIndex].Cells["QCImage2"].Value.ToString().Equals("") && !PathQC2.Equals("")
+                    && e.ColumnIndex == radGridView1.Columns["QCImage2"].Index)
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start(PathQC2 + "" + radGridView1.Rows[e.RowIndex].Cells["QCImage2"].Value.ToString());
+                    }
+                    catch { }
+                }
+                if (!radGridView1.Rows[e.RowIndex].Cells["QCImage3"].Value.ToString().Equals("") && !PathQC3.Equals("")
+                    && e.ColumnIndex == radGridView1.Columns["QCImage3"].Index)
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start(PathQC3 + "" + radGridView1.Rows[e.RowIndex].Cells["QCImage3"].Value.ToString());
+                    }
+                    catch { }
+                }
+                if (!radGridView1.Rows[e.RowIndex].Cells["QCImage4"].Value.ToString().Equals("") && !PathQC4.Equals("")
+                    && e.ColumnIndex == radGridView1.Columns["QCImage4"].Index)
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start(PathQC4 + "" + radGridView1.Rows[e.RowIndex].Cells["QCImage4"].Value.ToString());
+                    }
+                    catch { }
+                }
             }
         }
 
@@ -663,12 +728,22 @@ namespace StockControl
             this.Cursor = Cursors.WaitCursor ;
             try
             {
-                Report.Reportx1.WReport = "StockCard";
-                Report.Reportx1.Value = new string[2];
-                Report.Reportx1.Value[0] = "0101100014000";
-                Report.Reportx1.Value[1] = dbClss.UserID;
-                Report.Reportx1 op = new Report.Reportx1("StockCard.rpt");
-                op.Show();
+                if (row >= 0)
+                {
+                    string Code = radGridView1.Rows[row].Cells["Code"].Value.ToString();
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                        db.RP_StockCard_Cal_Dynamics(dbClss.UserID, Code, dbClss.UserID, DateTime.Now);
+                    }
+                        
+
+                    Report.Reportx1.WReport = "StockCard";
+                    Report.Reportx1.Value = new string[2];
+                    Report.Reportx1.Value[0] = Code;
+                    Report.Reportx1.Value[1] = dbClss.UserID;
+                    Report.Reportx1 op = new Report.Reportx1("StockCard.rpt");
+                    op.Show();
+                }
             }
             catch { }
             this.Cursor = Cursors.Default;
@@ -676,6 +751,7 @@ namespace StockControl
 
         private void radButtonElement3_Click(object sender, EventArgs e)
         {
+
             ////FG_TAG
             ////Report.Reportx1.WReport = "PDTAG";
             ////Report.Reportx1.Value = new string[2];
@@ -798,6 +874,34 @@ namespace StockControl
         {
             dt3.Rows.Clear();
             lblCount.Text = "Count 0";
+        }
+
+        private void radButtonElement4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (row >= 0)
+                {
+                    string code = radGridView1.Rows[row].Cells["Code"].Value.ToString();
+                    ItemQCImage im = new ItemQCImage(code);
+                    im.ShowDialog();
+                }
+            }
+            catch { }
+        }
+
+        private void radButtonElement5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(row>=0)
+                {
+                    string code = radGridView1.Rows[row].Cells["Code"].Value.ToString();
+                    QCSetupMaster qc = new QCSetupMaster(code);
+                    qc.ShowDialog();
+                }
+            }
+            catch { }
         }
     }
 }
