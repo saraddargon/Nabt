@@ -15,6 +15,7 @@ namespace Report
         public static string dbUser = "";
         public static string dbPass = "";
         public static string dbPartReport = "";
+        public static string PrinterName = "EPSON L360 Series_too";
 
 
         public static CrystalDecisions.CrystalReports.Engine.ReportDocument rptSourceX = new CrystalDecisions.CrystalReports.Engine.ReportDocument();

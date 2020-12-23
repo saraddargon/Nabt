@@ -64,13 +64,29 @@ namespace Report
               
                 if (fromdt.Equals(""))
                 {
+                    if (Report.Reportx1.WReport == "PDTAG")
+                    {
+                        CRRReport.rptSourceX.Load(DATA, OpenReportMethod.OpenReportByDefault);
+                        CRRReport.rptSourceX.PrintOptions.PaperSize = (CrystalDecisions.Shared.PaperSize)3;
+                        SetDataSourceConnection(CRRReport.rptSourceX);
+                        SetParameter(CRRReport.rptSourceX);
+                        crystalReportViewer1.ReportSource = CRRReport.rptSourceX;
 
-                    CRRReport.rptSourceX.Load(DATA, OpenReportMethod.OpenReportByDefault);
-                    SetDataSourceConnection(CRRReport.rptSourceX);
-                    SetParameter(CRRReport.rptSourceX);
-                    crystalReportViewer1.ReportSource = CRRReport.rptSourceX;
-                    crystalReportViewer1.Refresh();
-                    crystalReportViewer1.Zoom(100);
+                        crystalReportViewer1.Refresh();
+                        crystalReportViewer1.Zoom(100);
+
+                    }
+                    else
+                    {
+                        CRRReport.rptSourceX.Load(DATA, OpenReportMethod.OpenReportByDefault);
+                      
+                        SetDataSourceConnection(CRRReport.rptSourceX);
+                        SetParameter(CRRReport.rptSourceX);
+                        crystalReportViewer1.ReportSource = CRRReport.rptSourceX;
+
+                        crystalReportViewer1.Refresh();
+                        crystalReportViewer1.Zoom(100);
+                    }
                 }
                 else
                 {
@@ -204,6 +220,44 @@ namespace Report
                         rptDc.SetParameterValue("@Datex", DateTime.Now);
                        
                     } break;
+                case "PrintEXTAG":
+                    {
+                        rptDc.SetParameterValue("@InvoiceNo", Convert.ToString(Value[0].ToString()));                        
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
+
+                    }
+                    break;
+                case "ExportTAG1":
+                    {
+                      
+                        rptDc.SetParameterValue("@Date1", Convert.ToDateTime(Value[0].ToString()));
+                        rptDc.SetParameterValue("@Date2", Convert.ToDateTime(Value[1].ToString()));
+                        rptDc.SetParameterValue("@CustNo", Convert.ToString(Value[2].ToString()));
+
+                    }
+                    break;
+                case "ExportTAG22":
+                    {
+
+                        rptDc.SetParameterValue("@Date1", Convert.ToDateTime(Value[0].ToString()));
+                        rptDc.SetParameterValue("@Date2", Convert.ToDateTime(Value[1].ToString()));                       
+
+                    }
+                    break;
+                case "Guideline":
+                    {
+                       
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);                       
+                    }
+                    break;
+                case "PackingList":
+                    {
+
+                        rptDc.SetParameterValue("@Date1", Convert.ToDateTime(Value[0].ToString()));
+                        rptDc.SetParameterValue("@Date2", Convert.ToDateTime(Value[1].ToString()));
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
+                    }
+                    break;
                 case "ReportPR3":
                     {
 
@@ -278,14 +332,103 @@ namespace Report
                     break;
                 case "ReportPD01":
                     {
-                        rptDc.SetParameterValue("@Date1", Convert.ToDateTime(Value[0].ToString()));
-                        rptDc.SetParameterValue("@Date2", Convert.ToDateTime(Value[1].ToString()));
+                        rptDc.SetParameterValue("@WO", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@Line", Convert.ToString(Value[1].ToString()));
+                        rptDc.SetParameterValue("@Date1", Convert.ToDateTime(Value[2].ToString()));
+                        rptDc.SetParameterValue("@Date2", Convert.ToDateTime(Value[3].ToString()));
                     }
                     break;
                 case "ReportPD02":
                     {
                         rptDc.SetParameterValue("@Date1", Convert.ToDateTime(Value[0].ToString()));
                         rptDc.SetParameterValue("@Date2", Convert.ToDateTime(Value[1].ToString()));
+                    }
+                    break;
+                case "ExportListRP":
+                    {
+                        rptDc.SetParameterValue("@Invoice", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
+                    }
+                    break;
+                case "InvoiceLocal":
+                    {
+                        rptDc.SetParameterValue("@InvNo", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
+                    }break;
+                case "MoveStock":
+                    {
+                        rptDc.SetParameterValue("@ReqNo", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
+                    }
+                    break;
+                case "InvoiceEx":
+                    {
+                        rptDc.SetParameterValue("@InvNo", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
+                    }
+                    break;
+                case "BOXList":
+                    {
+                        rptDc.SetParameterValue("@ItemNo", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@ItemName", Convert.ToString(Value[1].ToString()));
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
+                    }
+                    break;
+                case "PartBomList":
+                    {
+                        rptDc.SetParameterValue("@Date1", DateTime.Now);
+                        rptDc.SetParameterValue("@PartNo", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@LotNo", Convert.ToString(Value[1].ToString()));
+                    }
+                    break;
+                    
+                case "BoxReport":
+                    {
+                       
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
+                    }
+                    break;
+                case "NSTAG":
+                    {
+
+                        
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
+
+                    }break;
+                case "DeliveryCheck":
+                    {
+
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
+                        
+
+                    }break;
+                case "PrintHiNO":
+                    {                       
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
+                    }
+                    break;
+                case "QCReport01":
+                    {
+                        rptDc.SetParameterValue("@FormISO", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@WONo", Convert.ToString(Value[1].ToString()));
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
+                    }
+                    break;
+                case "NCR":
+                    {
+                       
+                        rptDc.SetParameterValue("@NCRNo", Convert.ToString(Value[0].ToString()));
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
+                    }
+                    break;
+                case "QCQRCode":
+                    {
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
+                    }
+                    break;
+                case "UserS":
+                    {
+                        rptDc.SetParameterValue("@Datex", DateTime.Now);
                     }
                     break;
 
