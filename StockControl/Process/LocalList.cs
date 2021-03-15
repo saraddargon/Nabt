@@ -29,7 +29,7 @@ namespace StockControl
             this.Cursor = Cursors.Default;
             hw.ShowDialog();
         }
-
+        int CCRow = 0;
         private void radRibbonBar1_Click(object sender, EventArgs e)
         {
 
@@ -74,6 +74,7 @@ namespace StockControl
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            CCRow = 0;
             LoadData();
         }
         int Row = 0;
@@ -86,7 +87,7 @@ namespace StockControl
                 {
                     db.sp_019_LocaDeliveryList_DynamicsUPDate();
                     radGridView1.DataSource = null;
-                    radGridView1.DataSource = db.sp_019_LocaDeliveryList_Dynamics(dtDate1.Value, dtDate2.Value, txtSaleOrderNo.Text, txtPartNo.Text, txtPlant.Text).ToList();
+                    radGridView1.DataSource = db.sp_019_LocaDeliveryList_Dynamics(dtDate1.Value, dtDate2.Value, txtSaleOrderNo.Text, txtPartNo.Text, txtPlant.Text,txtCust.Text).ToList();
                     int CRow = 0;
                     foreach (GridViewRowInfo rd in radGridView1.Rows)
                     {
@@ -1387,48 +1388,56 @@ namespace StockControl
         {
             try
             {
-                if(Convert.ToBoolean(e.RowElement.RowInfo.Cells["ShipFlag"].Value).Equals(true))
+                
+                if (CCRow > 5000)
                 {
-
-                    e.RowElement.DrawFill = true;
-                    e.RowElement.GradientStyle = GradientStyles.Solid;
-                    e.RowElement.BackColor = Color.LightGreen;
-
+                    CCRow += 1;
                 }
-                else if (Convert.ToBoolean(e.RowElement.RowInfo.Cells["PackingFlag"].Value).Equals(true)
-                    && Convert.ToBoolean(e.RowElement.RowInfo.Cells["PDACheckFlag"].Value).Equals(true))
-                {
-
-                    e.RowElement.DrawFill = true;
-                    e.RowElement.GradientStyle = GradientStyles.Solid;
-                    e.RowElement.BackColor = Color.Yellow;
-
-                }
-                else if (Convert.ToBoolean(e.RowElement.RowInfo.Cells["DocumentFlag"].Value).Equals(true)
-                    && Convert.ToBoolean(e.RowElement.RowInfo.Cells["PrintFlag"].Value).Equals(true)
-                    && !Convert.ToString(e.RowElement.RowInfo.Cells["InvoiceNo"].Value).Equals("")
-                    && Convert.ToBoolean(e.RowElement.RowInfo.Cells["CheckFlag"].Value).Equals(true)                    
-                    )
-                {
-
-                    e.RowElement.DrawFill = true;
-                    e.RowElement.GradientStyle = GradientStyles.Solid;
-                    e.RowElement.BackColor = Color.LightSkyBlue;
-
-                }
-
-                //else if (!e.RowElement.RowInfo.Cells["InvoiceNo"].Value.Equals("") )
-                //{
-                //    //e.RowElement.DrawFill = true;
-                //    //e.RowElement.GradientStyle = GradientStyles.Solid;
-                //    //e.RowElement.BackColor = Color.LightGreen;
-
-                //}                
                 else
                 {
-                    e.RowElement.ResetValue(LightVisualElement.BackColorProperty, ValueResetFlags.Local);
-                    e.RowElement.ResetValue(LightVisualElement.GradientStyleProperty, ValueResetFlags.Local);
-                    e.RowElement.ResetValue(LightVisualElement.DrawFillProperty, ValueResetFlags.Local);
+                    if (Convert.ToBoolean(e.RowElement.RowInfo.Cells["ShipFlag"].Value).Equals(true))
+                    {
+
+                        e.RowElement.DrawFill = true;
+                        e.RowElement.GradientStyle = GradientStyles.Solid;
+                        e.RowElement.BackColor = Color.LightGreen;
+
+                    }
+                    else if (Convert.ToBoolean(e.RowElement.RowInfo.Cells["PackingFlag"].Value).Equals(true)
+                        && Convert.ToBoolean(e.RowElement.RowInfo.Cells["PDACheckFlag"].Value).Equals(true))
+                    {
+
+                        e.RowElement.DrawFill = true;
+                        e.RowElement.GradientStyle = GradientStyles.Solid;
+                        e.RowElement.BackColor = Color.Yellow;
+
+                    }
+                    else if (Convert.ToBoolean(e.RowElement.RowInfo.Cells["DocumentFlag"].Value).Equals(true)
+                        && Convert.ToBoolean(e.RowElement.RowInfo.Cells["PrintFlag"].Value).Equals(true)
+                        && !Convert.ToString(e.RowElement.RowInfo.Cells["InvoiceNo"].Value).Equals("")
+                        && Convert.ToBoolean(e.RowElement.RowInfo.Cells["CheckFlag"].Value).Equals(true)
+                        )
+                    {
+
+                        e.RowElement.DrawFill = true;
+                        e.RowElement.GradientStyle = GradientStyles.Solid;
+                        e.RowElement.BackColor = Color.LightSkyBlue;
+
+                    }
+
+                    //else if (!e.RowElement.RowInfo.Cells["InvoiceNo"].Value.Equals("") )
+                    //{
+                    //    //e.RowElement.DrawFill = true;
+                    //    //e.RowElement.GradientStyle = GradientStyles.Solid;
+                    //    //e.RowElement.BackColor = Color.LightGreen;
+
+                    //}                
+                    else
+                    {
+                        e.RowElement.ResetValue(LightVisualElement.BackColorProperty, ValueResetFlags.Local);
+                        e.RowElement.ResetValue(LightVisualElement.GradientStyleProperty, ValueResetFlags.Local);
+                        e.RowElement.ResetValue(LightVisualElement.DrawFillProperty, ValueResetFlags.Local);
+                    }
                 }
             }
             catch { }

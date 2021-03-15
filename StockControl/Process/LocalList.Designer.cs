@@ -147,6 +147,8 @@
             this.RMenu5 = new Telerik.WinControls.UI.RadMenuItem();
             this.RMenu6 = new Telerik.WinControls.UI.RadMenuItem();
             this.radContextMenuManager1 = new Telerik.WinControls.UI.RadContextMenuManager();
+            this.txtCust = new Telerik.WinControls.UI.RadTextBox();
+            this.radLabel4 = new Telerik.WinControls.UI.RadLabel();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -170,6 +172,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtDate2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtDate1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCust)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -566,7 +570,7 @@
             this.radGridView1.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.radGridView1.ForeColor = System.Drawing.Color.Black;
             this.radGridView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.radGridView1.Location = new System.Drawing.Point(0, 127);
+            this.radGridView1.Location = new System.Drawing.Point(0, 142);
             // 
             // 
             // 
@@ -863,7 +867,7 @@
             this.radGridView1.Name = "radGridView1";
             this.radGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.radGridView1.ShowGroupPanel = false;
-            this.radGridView1.Size = new System.Drawing.Size(1271, 403);
+            this.radGridView1.Size = new System.Drawing.Size(1271, 388);
             this.radGridView1.TabIndex = 1;
             this.radGridView1.ThemeName = "Office2010Blue";
             this.radGridView1.RowFormatting += new Telerik.WinControls.UI.RowFormattingEventHandler(this.radGridView1_RowFormatting);
@@ -931,9 +935,11 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.radLabel4);
             this.panel2.Controls.Add(this.groupBox1);
             this.panel2.Controls.Add(this.progressBar1);
             this.panel2.Controls.Add(this.chkALL);
+            this.panel2.Controls.Add(this.txtCust);
             this.panel2.Controls.Add(this.txtPlant);
             this.panel2.Controls.Add(this.radLabel1);
             this.panel2.Controls.Add(this.txtPartNo);
@@ -948,7 +954,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1271, 127);
+            this.panel2.Size = new System.Drawing.Size(1271, 142);
             this.panel2.TabIndex = 0;
             // 
             // groupBox1
@@ -1015,7 +1021,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(209, 103);
+            this.progressBar1.Location = new System.Drawing.Point(397, 103);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(208, 18);
             this.progressBar1.TabIndex = 14;
@@ -1023,7 +1029,7 @@
             // 
             // chkALL
             // 
-            this.chkALL.Location = new System.Drawing.Point(33, 106);
+            this.chkALL.Location = new System.Drawing.Point(33, 119);
             this.chkALL.Name = "chkALL";
             this.chkALL.Size = new System.Drawing.Size(38, 18);
             this.chkALL.TabIndex = 13;
@@ -1039,7 +1045,7 @@
             // 
             // radLabel1
             // 
-            this.radLabel1.Location = new System.Drawing.Point(156, 78);
+            this.radLabel1.Location = new System.Drawing.Point(172, 78);
             this.radLabel1.Name = "radLabel1";
             this.radLabel1.Size = new System.Drawing.Size(31, 18);
             this.radLabel1.TabIndex = 10;
@@ -1205,6 +1211,21 @@
             this.RMenu6.Name = "RMenu6";
             this.RMenu6.Text = "ลบรายการ";
             // 
+            // txtCust
+            // 
+            this.txtCust.Location = new System.Drawing.Point(209, 101);
+            this.txtCust.Name = "txtCust";
+            this.txtCust.Size = new System.Drawing.Size(111, 20);
+            this.txtCust.TabIndex = 11;
+            // 
+            // radLabel4
+            // 
+            this.radLabel4.Location = new System.Drawing.Point(150, 101);
+            this.radLabel4.Name = "radLabel4";
+            this.radLabel4.Size = new System.Drawing.Size(55, 18);
+            this.radLabel4.TabIndex = 11;
+            this.radLabel4.Text = "Customer";
+            // 
             // LocalList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1249,6 +1270,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtDate2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtDate1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCust)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radLabel4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1331,5 +1354,7 @@
         private Telerik.WinControls.UI.RadButtonElement radButtonElement14;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem editPlantToolStripMenuItem;
+        private Telerik.WinControls.UI.RadLabel radLabel4;
+        private Telerik.WinControls.UI.RadTextBox txtCust;
     }
 }

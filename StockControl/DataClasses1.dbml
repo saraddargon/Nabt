@@ -4513,53 +4513,6 @@
     <Parameter Name="ItemCode" Parameter="itemCode" Type="System.String" DbType="VarChar(50)" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.sp_019_LocaDeliveryList_Dynamics" Method="sp_019_LocaDeliveryList_Dynamics">
-    <Parameter Name="Date1" Parameter="date1" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="Date2" Parameter="date2" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="SaleOrder" Parameter="saleOrder" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="PartNo" Parameter="partNo" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="Plant" Parameter="plant" Type="System.String" DbType="VarChar(50)" />
-    <ElementType Name="sp_019_LocaDeliveryList_DynamicsResult">
-      <Column Name="DocuNo" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="SORDER" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
-      <Column Name="NAME" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="CUSTNAME" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="CODE" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="CCODE" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="SEDA" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="KVOL" Type="System.Decimal" DbType="Decimal(38,20)" CanBeNull="true" />
-      <Column Name="EIGYOU" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="NOTE" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="PLANTID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="SNP" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Period" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ShippingDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="CDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="CustomerNo" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="LotSize" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PrintFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="PrintBy" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="PrintDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="DocumentFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="DocumentBy" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="DocumentDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="PackingFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="PackingBy" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="PackingDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ShipFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="ShipBy" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ShipDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Status" Type="System.String" DbType="VarChar(9) NOT NULL" CanBeNull="false" />
-      <Column Name="PL" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="InvoiceNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="ForDynamics" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="CheckFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="CheckBy" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="CheckDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="PDACheckFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="PDAReturn" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.sp_46_QCMaster" Method="sp_46_QCMaster">
     <Parameter Name="ISO" Parameter="iSO" Type="System.String" DbType="VarChar(30)" />
     <Parameter Name="PartNo" Parameter="partNo" Type="System.String" DbType="VarChar(30)" />
@@ -4609,5 +4562,53 @@
     <Parameter Name="PTAG" Parameter="pTAG" Type="System.String" DbType="VarChar(250)" />
     <Parameter Name="AC" Parameter="aC" Type="System.Int32" DbType="Int" />
     <Return Type="System.Decimal" />
+  </Function>
+  <Function Name="dbo.sp_019_LocaDeliveryList_Dynamics" Method="sp_019_LocaDeliveryList_Dynamics">
+    <Parameter Name="Date1" Parameter="date1" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="Date2" Parameter="date2" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="SaleOrder" Parameter="saleOrder" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="PartNo" Parameter="partNo" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Plant" Parameter="plant" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Cust" Parameter="cust" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="sp_019_LocaDeliveryList_DynamicsResult">
+      <Column Name="DocuNo" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="SORDER" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CUSTNAME" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CODE" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="CCODE" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="SEDA" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KVOL" Type="System.Decimal" DbType="Decimal(38,20)" CanBeNull="true" />
+      <Column Name="EIGYOU" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="NOTE" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="PLANTID" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="SNP" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Period" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShippingDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CustomerNo" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="LotSize" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PrintFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PrintBy" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PrintDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DocumentFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DocumentBy" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DocumentDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PackingFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PackingBy" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PackingDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ShipFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ShipBy" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ShipDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(9) NOT NULL" CanBeNull="false" />
+      <Column Name="PL" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ForDynamics" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CheckFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CheckBy" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CheckDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PDACheckFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PDAReturn" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
   </Function>
 </Database>

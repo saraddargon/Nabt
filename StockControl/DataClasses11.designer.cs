@@ -2468,13 +2468,6 @@ namespace StockControl
 			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), itemCode).ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_019_LocaDeliveryList_Dynamics")]
-		public ISingleResult<sp_019_LocaDeliveryList_DynamicsResult> sp_019_LocaDeliveryList_Dynamics([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Date1", DbType="Date")] System.Nullable<System.DateTime> date1, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Date2", DbType="Date")] System.Nullable<System.DateTime> date2, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="SaleOrder", DbType="VarChar(50)")] string saleOrder, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PartNo", DbType="VarChar(50)")] string partNo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Plant", DbType="VarChar(50)")] string plant)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), date1, date2, saleOrder, partNo, plant);
-			return ((ISingleResult<sp_019_LocaDeliveryList_DynamicsResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_46_QCMaster")]
 		public ISingleResult<sp_46_QCMasterResult> sp_46_QCMaster([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ISO", DbType="VarChar(30)")] string iSO, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PartNo", DbType="VarChar(30)")] string partNo)
 		{
@@ -2499,6 +2492,13 @@ namespace StockControl
 		public System.Nullable<decimal> get_QCSumQtyTAGNG([global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCNo", DbType="VarChar(30)")] string qCNo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PTAG", DbType="VarChar(250)")] string pTAG, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AC", DbType="Int")] System.Nullable<int> aC)
 		{
 			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), qCNo, pTAG, aC).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_019_LocaDeliveryList_Dynamics")]
+		public ISingleResult<sp_019_LocaDeliveryList_DynamicsResult> sp_019_LocaDeliveryList_Dynamics([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Date1", DbType="Date")] System.Nullable<System.DateTime> date1, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Date2", DbType="Date")] System.Nullable<System.DateTime> date2, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="SaleOrder", DbType="VarChar(50)")] string saleOrder, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PartNo", DbType="VarChar(50)")] string partNo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Plant", DbType="VarChar(50)")] string plant, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cust", DbType="VarChar(50)")] string cust)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), date1, date2, saleOrder, partNo, plant, cust);
+			return ((ISingleResult<sp_019_LocaDeliveryList_DynamicsResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -68358,6 +68358,526 @@ namespace StockControl
 		}
 	}
 	
+	public partial class sp_46_QCMasterResult
+	{
+		
+		private System.Nullable<long> _No;
+		
+		private string _PartNo;
+		
+		private string _FormISO;
+		
+		private string _StepPart;
+		
+		private string _TopPic;
+		
+		private string _SetData;
+		
+		private int _id;
+		
+		private System.Nullable<int> _Seq;
+		
+		private string _Image1;
+		
+		private System.Nullable<decimal> _Value1;
+		
+		private System.Nullable<decimal> _Value2;
+		
+		public sp_46_QCMasterResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_No", DbType="BigInt")]
+		public System.Nullable<long> No
+		{
+			get
+			{
+				return this._No;
+			}
+			set
+			{
+				if ((this._No != value))
+				{
+					this._No = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PartNo", DbType="NVarChar(50)")]
+		public string PartNo
+		{
+			get
+			{
+				return this._PartNo;
+			}
+			set
+			{
+				if ((this._PartNo != value))
+				{
+					this._PartNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormISO", DbType="NVarChar(50)")]
+		public string FormISO
+		{
+			get
+			{
+				return this._FormISO;
+			}
+			set
+			{
+				if ((this._FormISO != value))
+				{
+					this._FormISO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StepPart", DbType="NVarChar(150)")]
+		public string StepPart
+		{
+			get
+			{
+				return this._StepPart;
+			}
+			set
+			{
+				if ((this._StepPart != value))
+				{
+					this._StepPart = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TopPic", DbType="NVarChar(150)")]
+		public string TopPic
+		{
+			get
+			{
+				return this._TopPic;
+			}
+			set
+			{
+				if ((this._TopPic != value))
+				{
+					this._TopPic = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SetData", DbType="NVarChar(250)")]
+		public string SetData
+		{
+			get
+			{
+				return this._SetData;
+			}
+			set
+			{
+				if ((this._SetData != value))
+				{
+					this._SetData = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Seq", DbType="Int")]
+		public System.Nullable<int> Seq
+		{
+			get
+			{
+				return this._Seq;
+			}
+			set
+			{
+				if ((this._Seq != value))
+				{
+					this._Seq = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image1", DbType="NVarChar(50)")]
+		public string Image1
+		{
+			get
+			{
+				return this._Image1;
+			}
+			set
+			{
+				if ((this._Image1 != value))
+				{
+					this._Image1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Value1", DbType="Decimal(18,6)")]
+		public System.Nullable<decimal> Value1
+		{
+			get
+			{
+				return this._Value1;
+			}
+			set
+			{
+				if ((this._Value1 != value))
+				{
+					this._Value1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Value2", DbType="Decimal(18,6)")]
+		public System.Nullable<decimal> Value2
+		{
+			get
+			{
+				return this._Value2;
+			}
+			set
+			{
+				if ((this._Value2 != value))
+				{
+					this._Value2 = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_46_QCMasterALLResult
+	{
+		
+		private int _id;
+		
+		private string _PartNo;
+		
+		private System.Nullable<int> _Seq;
+		
+		private string _FormISO;
+		
+		private string _GroupPart;
+		
+		private string _StepPart;
+		
+		private string _TopPic;
+		
+		private string _TopPic2;
+		
+		private string _SetData;
+		
+		private string _Stamp;
+		
+		private string _SetDate2;
+		
+		private string _Image1;
+		
+		private string _Image2;
+		
+		private string _Image3;
+		
+		private string _Image4;
+		
+		private System.Nullable<decimal> _Value1;
+		
+		private System.Nullable<decimal> _Value2;
+		
+		public sp_46_QCMasterALLResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PartNo", DbType="NVarChar(50)")]
+		public string PartNo
+		{
+			get
+			{
+				return this._PartNo;
+			}
+			set
+			{
+				if ((this._PartNo != value))
+				{
+					this._PartNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Seq", DbType="Int")]
+		public System.Nullable<int> Seq
+		{
+			get
+			{
+				return this._Seq;
+			}
+			set
+			{
+				if ((this._Seq != value))
+				{
+					this._Seq = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormISO", DbType="NVarChar(50)")]
+		public string FormISO
+		{
+			get
+			{
+				return this._FormISO;
+			}
+			set
+			{
+				if ((this._FormISO != value))
+				{
+					this._FormISO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroupPart", DbType="NVarChar(50)")]
+		public string GroupPart
+		{
+			get
+			{
+				return this._GroupPart;
+			}
+			set
+			{
+				if ((this._GroupPart != value))
+				{
+					this._GroupPart = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StepPart", DbType="NVarChar(150)")]
+		public string StepPart
+		{
+			get
+			{
+				return this._StepPart;
+			}
+			set
+			{
+				if ((this._StepPart != value))
+				{
+					this._StepPart = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TopPic", DbType="NVarChar(150)")]
+		public string TopPic
+		{
+			get
+			{
+				return this._TopPic;
+			}
+			set
+			{
+				if ((this._TopPic != value))
+				{
+					this._TopPic = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TopPic2", DbType="NVarChar(150)")]
+		public string TopPic2
+		{
+			get
+			{
+				return this._TopPic2;
+			}
+			set
+			{
+				if ((this._TopPic2 != value))
+				{
+					this._TopPic2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SetData", DbType="NVarChar(250)")]
+		public string SetData
+		{
+			get
+			{
+				return this._SetData;
+			}
+			set
+			{
+				if ((this._SetData != value))
+				{
+					this._SetData = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Stamp", DbType="NVarChar(50)")]
+		public string Stamp
+		{
+			get
+			{
+				return this._Stamp;
+			}
+			set
+			{
+				if ((this._Stamp != value))
+				{
+					this._Stamp = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SetDate2", DbType="NVarChar(50)")]
+		public string SetDate2
+		{
+			get
+			{
+				return this._SetDate2;
+			}
+			set
+			{
+				if ((this._SetDate2 != value))
+				{
+					this._SetDate2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image1", DbType="NVarChar(50)")]
+		public string Image1
+		{
+			get
+			{
+				return this._Image1;
+			}
+			set
+			{
+				if ((this._Image1 != value))
+				{
+					this._Image1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image2", DbType="NVarChar(50)")]
+		public string Image2
+		{
+			get
+			{
+				return this._Image2;
+			}
+			set
+			{
+				if ((this._Image2 != value))
+				{
+					this._Image2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image3", DbType="NVarChar(50)")]
+		public string Image3
+		{
+			get
+			{
+				return this._Image3;
+			}
+			set
+			{
+				if ((this._Image3 != value))
+				{
+					this._Image3 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image4", DbType="NVarChar(50)")]
+		public string Image4
+		{
+			get
+			{
+				return this._Image4;
+			}
+			set
+			{
+				if ((this._Image4 != value))
+				{
+					this._Image4 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Value1", DbType="Decimal(18,6)")]
+		public System.Nullable<decimal> Value1
+		{
+			get
+			{
+				return this._Value1;
+			}
+			set
+			{
+				if ((this._Value1 != value))
+				{
+					this._Value1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Value2", DbType="Decimal(18,6)")]
+		public System.Nullable<decimal> Value2
+		{
+			get
+			{
+				return this._Value2;
+			}
+			set
+			{
+				if ((this._Value2 != value))
+				{
+					this._Value2 = value;
+				}
+			}
+		}
+	}
+	
 	public partial class sp_019_LocaDeliveryList_DynamicsResult
 	{
 		
@@ -69045,526 +69565,6 @@ namespace StockControl
 				if ((this._PDAReturn != value))
 				{
 					this._PDAReturn = value;
-				}
-			}
-		}
-	}
-	
-	public partial class sp_46_QCMasterResult
-	{
-		
-		private System.Nullable<long> _No;
-		
-		private string _PartNo;
-		
-		private string _FormISO;
-		
-		private string _StepPart;
-		
-		private string _TopPic;
-		
-		private string _SetData;
-		
-		private int _id;
-		
-		private System.Nullable<int> _Seq;
-		
-		private string _Image1;
-		
-		private System.Nullable<decimal> _Value1;
-		
-		private System.Nullable<decimal> _Value2;
-		
-		public sp_46_QCMasterResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_No", DbType="BigInt")]
-		public System.Nullable<long> No
-		{
-			get
-			{
-				return this._No;
-			}
-			set
-			{
-				if ((this._No != value))
-				{
-					this._No = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PartNo", DbType="NVarChar(50)")]
-		public string PartNo
-		{
-			get
-			{
-				return this._PartNo;
-			}
-			set
-			{
-				if ((this._PartNo != value))
-				{
-					this._PartNo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormISO", DbType="NVarChar(50)")]
-		public string FormISO
-		{
-			get
-			{
-				return this._FormISO;
-			}
-			set
-			{
-				if ((this._FormISO != value))
-				{
-					this._FormISO = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StepPart", DbType="NVarChar(150)")]
-		public string StepPart
-		{
-			get
-			{
-				return this._StepPart;
-			}
-			set
-			{
-				if ((this._StepPart != value))
-				{
-					this._StepPart = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TopPic", DbType="NVarChar(150)")]
-		public string TopPic
-		{
-			get
-			{
-				return this._TopPic;
-			}
-			set
-			{
-				if ((this._TopPic != value))
-				{
-					this._TopPic = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SetData", DbType="NVarChar(250)")]
-		public string SetData
-		{
-			get
-			{
-				return this._SetData;
-			}
-			set
-			{
-				if ((this._SetData != value))
-				{
-					this._SetData = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this._id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Seq", DbType="Int")]
-		public System.Nullable<int> Seq
-		{
-			get
-			{
-				return this._Seq;
-			}
-			set
-			{
-				if ((this._Seq != value))
-				{
-					this._Seq = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image1", DbType="NVarChar(50)")]
-		public string Image1
-		{
-			get
-			{
-				return this._Image1;
-			}
-			set
-			{
-				if ((this._Image1 != value))
-				{
-					this._Image1 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Value1", DbType="Decimal(18,6)")]
-		public System.Nullable<decimal> Value1
-		{
-			get
-			{
-				return this._Value1;
-			}
-			set
-			{
-				if ((this._Value1 != value))
-				{
-					this._Value1 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Value2", DbType="Decimal(18,6)")]
-		public System.Nullable<decimal> Value2
-		{
-			get
-			{
-				return this._Value2;
-			}
-			set
-			{
-				if ((this._Value2 != value))
-				{
-					this._Value2 = value;
-				}
-			}
-		}
-	}
-	
-	public partial class sp_46_QCMasterALLResult
-	{
-		
-		private int _id;
-		
-		private string _PartNo;
-		
-		private System.Nullable<int> _Seq;
-		
-		private string _FormISO;
-		
-		private string _GroupPart;
-		
-		private string _StepPart;
-		
-		private string _TopPic;
-		
-		private string _TopPic2;
-		
-		private string _SetData;
-		
-		private string _Stamp;
-		
-		private string _SetDate2;
-		
-		private string _Image1;
-		
-		private string _Image2;
-		
-		private string _Image3;
-		
-		private string _Image4;
-		
-		private System.Nullable<decimal> _Value1;
-		
-		private System.Nullable<decimal> _Value2;
-		
-		public sp_46_QCMasterALLResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this._id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PartNo", DbType="NVarChar(50)")]
-		public string PartNo
-		{
-			get
-			{
-				return this._PartNo;
-			}
-			set
-			{
-				if ((this._PartNo != value))
-				{
-					this._PartNo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Seq", DbType="Int")]
-		public System.Nullable<int> Seq
-		{
-			get
-			{
-				return this._Seq;
-			}
-			set
-			{
-				if ((this._Seq != value))
-				{
-					this._Seq = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormISO", DbType="NVarChar(50)")]
-		public string FormISO
-		{
-			get
-			{
-				return this._FormISO;
-			}
-			set
-			{
-				if ((this._FormISO != value))
-				{
-					this._FormISO = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroupPart", DbType="NVarChar(50)")]
-		public string GroupPart
-		{
-			get
-			{
-				return this._GroupPart;
-			}
-			set
-			{
-				if ((this._GroupPart != value))
-				{
-					this._GroupPart = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StepPart", DbType="NVarChar(150)")]
-		public string StepPart
-		{
-			get
-			{
-				return this._StepPart;
-			}
-			set
-			{
-				if ((this._StepPart != value))
-				{
-					this._StepPart = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TopPic", DbType="NVarChar(150)")]
-		public string TopPic
-		{
-			get
-			{
-				return this._TopPic;
-			}
-			set
-			{
-				if ((this._TopPic != value))
-				{
-					this._TopPic = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TopPic2", DbType="NVarChar(150)")]
-		public string TopPic2
-		{
-			get
-			{
-				return this._TopPic2;
-			}
-			set
-			{
-				if ((this._TopPic2 != value))
-				{
-					this._TopPic2 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SetData", DbType="NVarChar(250)")]
-		public string SetData
-		{
-			get
-			{
-				return this._SetData;
-			}
-			set
-			{
-				if ((this._SetData != value))
-				{
-					this._SetData = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Stamp", DbType="NVarChar(50)")]
-		public string Stamp
-		{
-			get
-			{
-				return this._Stamp;
-			}
-			set
-			{
-				if ((this._Stamp != value))
-				{
-					this._Stamp = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SetDate2", DbType="NVarChar(50)")]
-		public string SetDate2
-		{
-			get
-			{
-				return this._SetDate2;
-			}
-			set
-			{
-				if ((this._SetDate2 != value))
-				{
-					this._SetDate2 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image1", DbType="NVarChar(50)")]
-		public string Image1
-		{
-			get
-			{
-				return this._Image1;
-			}
-			set
-			{
-				if ((this._Image1 != value))
-				{
-					this._Image1 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image2", DbType="NVarChar(50)")]
-		public string Image2
-		{
-			get
-			{
-				return this._Image2;
-			}
-			set
-			{
-				if ((this._Image2 != value))
-				{
-					this._Image2 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image3", DbType="NVarChar(50)")]
-		public string Image3
-		{
-			get
-			{
-				return this._Image3;
-			}
-			set
-			{
-				if ((this._Image3 != value))
-				{
-					this._Image3 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image4", DbType="NVarChar(50)")]
-		public string Image4
-		{
-			get
-			{
-				return this._Image4;
-			}
-			set
-			{
-				if ((this._Image4 != value))
-				{
-					this._Image4 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Value1", DbType="Decimal(18,6)")]
-		public System.Nullable<decimal> Value1
-		{
-			get
-			{
-				return this._Value1;
-			}
-			set
-			{
-				if ((this._Value1 != value))
-				{
-					this._Value1 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Value2", DbType="Decimal(18,6)")]
-		public System.Nullable<decimal> Value2
-		{
-			get
-			{
-				return this._Value2;
-			}
-			set
-			{
-				if ((this._Value2 != value))
-				{
-					this._Value2 = value;
 				}
 			}
 		}

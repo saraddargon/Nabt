@@ -160,7 +160,7 @@ namespace StockControl
                         ).FirstOrDefault();
 
 
-                        if (!CSTMNo.Equals("300113S") && !CSTMNo.Equals("300113V") && !CSTMNo.Equals("300153M") && !CSTMNo.Equals("300153S") && !CSTMNo.Equals("3006"))
+                        if (!CSTMNo.Equals("300113S") && !CSTMNo.Equals("300113V") && !CSTMNo.Equals("300153M") && !CSTMNo.Equals("300153S") && !CSTMNo.Equals("3006") && !CSTMNo.Equals("3030"))
                         {
                             rc = db.tb_LocalListDeliverly01s.Where(c => c.SaleOrder == txtOrderNo.Text
                                    && c.PartNo == txtNaptTAG0.Text
@@ -275,7 +275,7 @@ namespace StockControl
                                 txtNaptTAG.Focus();
                                 txtPlant.Text = "";
                                 txtPlant.Focus();
-                                if (!CSTMNo.Equals("300113S") && !CSTMNo.Equals("300113V") && !CSTMNo.Equals("300153M") && !CSTMNo.Equals("300153S") && !CSTMNo.Equals("3006"))
+                                if (!CSTMNo.Equals("300113S") && !CSTMNo.Equals("300113V") && !CSTMNo.Equals("300153M") && !CSTMNo.Equals("300153S") && !CSTMNo.Equals("3006") && !CSTMNo.Equals("3030"))
                                 {
                                     txtNaptTAG.Text = "";
                                     txtNaptTAG.Focus();
@@ -283,15 +283,25 @@ namespace StockControl
                             }
                             else
                             {
-
-                                skp = 1;
-                                txtPlant.Text = "";
-                                txtPlant.Focus();
-                                if (!CSTMNo.Equals("300113S") && !CSTMNo.Equals("300113V") && !CSTMNo.Equals("300153M") && !CSTMNo.Equals("300153S") && !CSTMNo.Equals("3006"))
+                                if (chkPlant.Checked)
                                 {
-                                    CheckItemMap();
+                                    skp = 1;
+                                    txtPlant.Text = "";
+                                    txtPlant.Focus();
+                                   
                                 }
-                              //  CheckItemMap();
+                                else
+                                {
+
+                                    skp = 1;
+                                    txtPlant.Text = "";
+                                    txtPlant.Focus();
+                                    if (!CSTMNo.Equals("300113S") && !CSTMNo.Equals("300113V") && !CSTMNo.Equals("300153M") && !CSTMNo.Equals("300153S") && !CSTMNo.Equals("3006") && !CSTMNo.Equals("3030"))
+                                    {
+                                        CheckItemMap();
+                                    }
+                                }
+                              
                             }
 
                         }
