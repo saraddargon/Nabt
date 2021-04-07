@@ -4611,4 +4611,13 @@
       <Column Name="PDAReturn" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.sp_52_ChangeInvoice" Method="sp_52_ChangeInvoice">
+    <Parameter Name="Invoice1" Parameter="invoice1" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Invoice2" Parameter="invoice2" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_53_UpdatePriceInvoice" Method="sp_53_UpdatePriceInvoice">
+    <Parameter Name="Invoice1" Parameter="invoice1" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>

@@ -145,7 +145,7 @@ namespace StockControl
                          
                            // hd.InvoiceNo = txtInvNo.Text;
                            // hd.InvoiceDate = dtDate1.Value;
-                           // hd.CustomerNo = txtCustomerNo.Text;
+                            hd.CustomerNo = txtCustomerNo.Text;
                             hd.CustomerName = txtCustomer.Text;
                             hd.Address = txtAddress.Text;
                             hd.Address2 = txtAddress2.Text;
@@ -328,7 +328,28 @@ namespace StockControl
 
         private void radButton1_Click_1(object sender, EventArgs e)
         {
-            txtInvNo.Text = GetInvoiceNo(txtCustomerNo.Text, dtDate1.Value);
+            // txtInvNo.Text = GetInvoiceNo(txtCustomerNo.Text, dtDate1.Value);
+            //Switp invoice
+            //Microsoft.VisualBasic.Interaction.InputBox("");
+            if (MessageBox.Show("ต้องการสลับเลข Invoice?","Change Invoice",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                string Data1 = Microsoft.VisualBasic.Interaction.InputBox("Invoice No A?", "Invoice A", "");
+                string Data2 = Microsoft.VisualBasic.Interaction.InputBox("Invoice No B?", "Invoice B", "");
+                if (Data1 != "" && Data2 != "")
+                {
+                    try
+                    {
+                        using (DataClasses1DataContext db = new DataClasses1DataContext())
+                        {
+                            db.sp_52_ChangeInvoice(Data1, Data2);
+                        }
+                            MessageBox.Show("เรียบร้อย โปรดปิดหน้าต่างเพิ่มเริ่มใหม่!");
+                        InvNo = Data2;
+                        DataLoad();
+                    }
+                    catch { }
+                }
+            }
         }
         
         private string GetInvoiceNo(string CustNo, DateTime ShipDate)
@@ -596,6 +617,65 @@ namespace StockControl
                     else
                     {
                         Type = "A";
+                    }
+                }
+            }
+        }
+
+        private void radButton3_Click(object sender, EventArgs e)
+        {
+            //
+            if(MessageBox.Show("ต้องการเปลี่ยน ลูกค้า!!","เปลี่ยนแปลงลูกค้า",MessageBoxButtons.YesNo,MessageBoxIcon.Question)==DialogResult.Yes)
+            {
+                try
+                {
+                    using (DataClasses1DataContext db = new DataClasses1DataContext())
+                    {
+                        string Data1 = Microsoft.VisualBasic.Interaction.InputBox("Customer No?", "Cust. No", "");
+
+                        if (Data1 != "" && radGridView1.Rows.Count==0)
+                        {
+                            var CustList2 = db.sp_043_Inv_LocalCust_Dynamics(Data1).ToList();
+                            if (CustList2.Count > 0)
+                            {
+                                var info = CustList2.FirstOrDefault();
+                                txtCustomerNo.Text = Data1;
+                                txtCustomer.Text = Convert.ToString(info.CNAME);
+                                txtBRANCH.Text = Convert.ToString(info.Branch);
+                                txtCredit.Text = Convert.ToString(info.Credit);
+                                txtTAXID.Text = Convert.ToString(info.TAXID);
+                                txtAddress.Text = Convert.ToString(info.ADR1);
+                                txtAddress2.Text = Convert.ToString(info.ADR2);
+                                if (info.PType.Equals("EXP"))
+                                {
+                                    Type = "B";
+                                }
+                                else
+                                {
+                                    Type = "A";
+                                }
+                            }
+                            MessageBox.Show("ทำการกด บันทึกการแก้ไข เพื่อ Save");
+                        }
+                    }
+                }
+                catch { }
+            }
+        }
+
+        private void radButtonElement2_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Update Price!!", "Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                using (DataClasses1DataContext db = new DataClasses1DataContext())
+                {
+                    if (!txtInvNo.Text.Equals(""))
+                    {
+                        db.sp_53_UpdatePriceInvoice(txtInvNo.Text);
+                        InvNo = txtInvNo.Text;
+                        DataLoad();
+                        UpdateCost();
+                        MessageBox.Show("ทำการบันทึก อีกครั้ง");
                     }
                 }
             }

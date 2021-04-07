@@ -2500,6 +2500,20 @@ namespace StockControl
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), date1, date2, saleOrder, partNo, plant, cust);
 			return ((ISingleResult<sp_019_LocaDeliveryList_DynamicsResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_52_ChangeInvoice")]
+		public int sp_52_ChangeInvoice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Invoice1", DbType="VarChar(30)")] string invoice1, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Invoice2", DbType="VarChar(30)")] string invoice2)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), invoice1, invoice2);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_53_UpdatePriceInvoice")]
+		public int sp_53_UpdatePriceInvoice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Invoice1", DbType="VarChar(30)")] string invoice1)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), invoice1);
+			return ((int)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ErrorLog")]
