@@ -160,11 +160,13 @@ namespace StockControl
                         ).FirstOrDefault();
 
 
-                        if (!CSTMNo.Equals("300113S") && !CSTMNo.Equals("300113V") && !CSTMNo.Equals("300153M") && !CSTMNo.Equals("300153S") && !CSTMNo.Equals("3006") && !CSTMNo.Equals("3030"))
+                        if (!CSTMNo.Equals("300113S") && !CSTMNo.Equals("300113V") 
+                            && !CSTMNo.Equals("300153M") && !CSTMNo.Equals("300153S") 
+                            && !CSTMNo.Equals("3006") && !CSTMNo.Equals("3030"))
                         {
                             rc = db.tb_LocalListDeliverly01s.Where(c => c.SaleOrder == txtOrderNo.Text
                                    && c.PartNo == txtNaptTAG0.Text
-                                 //  && c.Plant.Trim().ToUpper().Equals(txtPlant.Text.Trim().ToUpper())
+                                   && c.Plant.Trim().ToUpper().Equals(txtPlant.Text.Trim().ToUpper())
                                    ).FirstOrDefault();
                         }
 
@@ -193,33 +195,47 @@ namespace StockControl
                                 {
                                     txtPlant.Text = ck.FirstOrDefault().BR_PLANTD.ToString();
                                 }
+                                //CheckPlant Again//
+                                int AAA = 0;
+                                tb_LocalListDeliverly01 ps = db.tb_LocalListDeliverly01s.Where(csc =>Convert.ToString(csc.SaleOrder).Equals(txtOrderNo.Text)
+                                && Convert.ToString(csc.PartNo).Equals(txtNaptTAG0.Text) && Convert.ToString(csc.Plant).Equals(txtPlant.Text)).FirstOrDefault();
+                                if(ps!=null)
+                                {
+                                    AAA += 1;
+                                    MessageBox.Show("Sales Order,Part No,Plant Duplicate!!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                                    return;
+                                }
+                                
 
                                 var listSO = db.sp_020_LocalDeliverySaleOrder_Plant_Dynamics(txtOrderNo.Text, txtNaptTAG0.Text, txtPlant.Text.Trim().ToUpper()).ToList();
                                 foreach (var rss in listSO)
                                 {
-                                    cck += 1;
+                                    
                                     var rd = ck.FirstOrDefault();
+                                    if (AAA == 0)
+                                    {
+                                        cck += 1;
+                                        tb_LocalListDeliverly01 ne = new tb_LocalListDeliverly01();
+                                        ne.SaleOrder = rd.SORDER.ToString();
+                                        ne.DocumentDate = DateTime.Now;
+                                        ne.DocumentFlag = true;
+                                        ne.DocumentBy = dbClss.UserID;
+                                        ne.ShipFlag = false;
+                                        ne.PackingFlag = false;
+                                        ne.PrintFlag = false;
+                                        ne.PartNo = rd.CODE;
+                                        ne.CustomerNo = rd.CustomerNo;
+                                        ne.ShippingDate = Convert.ToDateTime(rd.ShippingDate);
 
-                                    tb_LocalListDeliverly01 ne = new tb_LocalListDeliverly01();
-                                    ne.SaleOrder = rd.SORDER.ToString();
-                                    ne.DocumentDate = DateTime.Now;
-                                    ne.DocumentFlag = true;
-                                    ne.DocumentBy = dbClss.UserID;
-                                    ne.ShipFlag = false;
-                                    ne.PackingFlag = false;
-                                    ne.PrintFlag = false;
-                                    ne.PartNo = rd.CODE;
-                                    ne.CustomerNo = rd.CustomerNo;
-                                    ne.ShippingDate = Convert.ToDateTime(rd.ShippingDate);
+                                        ne.ShipBy = "";
+                                        ne.PrintBy = "";
+                                        ne.PackingBy = "";
+                                        ne.Plant = Convert.ToString(rss.BR_PLANTD);
 
-                                    ne.ShipBy = "";
-                                    ne.PrintBy = "";
-                                    ne.PackingBy = "";
-                                    ne.Plant = Convert.ToString(rss.BR_PLANTD);
-
-                                    ne.SS = 1;
-                                    db.tb_LocalListDeliverly01s.InsertOnSubmit(ne);
-                                    db.SubmitChanges();
+                                        ne.SS = 1;
+                                        db.tb_LocalListDeliverly01s.InsertOnSubmit(ne);
+                                        db.SubmitChanges();
+                                    }
                                 }
                                 if (cck > 0)
                                 {
@@ -262,9 +278,7 @@ namespace StockControl
                             txtNaptTAG0.Text = ck.FirstOrDefault().CODE;
                             tb_SkipItemCheck li = db.tb_SkipItemChecks.Where(rc => rc.ItemNapt.Equals(txtNaptTAG0.Text) && rc.CheckItem == true).FirstOrDefault();
                             if (li != null)
-                            {
-
-                                // txtItemCheck.Text = li.ItemNaptMap;
+                            {                               
                                 txtCustomerTAG.Text = li.ItemNaptMap;
                             }
                             tb_SkipItemCheck li2 = db.tb_SkipItemChecks.Where(rr => rr.ItemNapt == txtNaptTAG0.Text && rr.FixItem == true).FirstOrDefault();
@@ -275,7 +289,12 @@ namespace StockControl
                                 txtNaptTAG.Focus();
                                 txtPlant.Text = "";
                                 txtPlant.Focus();
-                                if (!CSTMNo.Equals("300113S") && !CSTMNo.Equals("300113V") && !CSTMNo.Equals("300153M") && !CSTMNo.Equals("300153S") && !CSTMNo.Equals("3006") && !CSTMNo.Equals("3030"))
+                                if (!CSTMNo.Equals("300113S") 
+                                    && !CSTMNo.Equals("300113V") 
+                                    && !CSTMNo.Equals("300153M") 
+                                    && !CSTMNo.Equals("300153S") 
+                                    && !CSTMNo.Equals("3006") 
+                                    && !CSTMNo.Equals("3030"))
                                 {
                                     txtNaptTAG.Text = "";
                                     txtNaptTAG.Focus();
@@ -287,8 +306,7 @@ namespace StockControl
                                 {
                                     skp = 1;
                                     txtPlant.Text = "";
-                                    txtPlant.Focus();
-                                   
+                                    txtPlant.Focus();                                   
                                 }
                                 else
                                 {
@@ -296,7 +314,9 @@ namespace StockControl
                                     skp = 1;
                                     txtPlant.Text = "";
                                     txtPlant.Focus();
-                                    if (!CSTMNo.Equals("300113S") && !CSTMNo.Equals("300113V") && !CSTMNo.Equals("300153M") && !CSTMNo.Equals("300153S") && !CSTMNo.Equals("3006") && !CSTMNo.Equals("3030"))
+                                    if (!CSTMNo.Equals("300113S") && !CSTMNo.Equals("300113V") 
+                                        && !CSTMNo.Equals("300153M") && !CSTMNo.Equals("300153S") 
+                                        && !CSTMNo.Equals("3006") && !CSTMNo.Equals("3030"))
                                     {
                                         CheckItemMap();
                                     }
@@ -316,86 +336,7 @@ namespace StockControl
                         }
                     }
 
-                    /*
-                    //string ItemForCheck = txtNaptTAG.Text;
-                    //if (!txtItemCheck.Text.Equals(""))
-                    //    ItemForCheck = txtItemCheck.Text;
-
-                    //if (txtCustomerTAG.Text.Contains(ItemForCheck))
-                    //{
-
-                    using (DataClasses1DataContext db = new DataClasses1DataContext())
-                        {
-                            tb_LocalListDeliverly01 rc = db.tb_LocalListDeliverly01s.Where(c => c.SaleOrder == txtOrderNo.Text && c.PartNo== txtNaptTAG0.Text).FirstOrDefault();
-                            if (rc != null)
-                            {
-                                rc.DocumentFlag = true;
-                                rc.DocumentDate = DateTime.Now;
-                                rc.DocumentBy = dbClss.UserID;
-                                db.SubmitChanges();
-
-                                txtStatus.Text = "OK";
-                                txtStatus.ForeColor = Color.Green;
-                                System.Media.SoundPlayer player = new System.Media.SoundPlayer(Environment.CurrentDirectory + @"\beep-07.wav");
-                                player.Play();
-                            }
-                            else
-                            {
-                                var ck = db.sp_020_LocalDeliverySaleOrder(txtOrderNo.Text, txtNaptTAG0.Text).ToList();
-                                if (ck.Count > 0)
-                                {
-                                    var rd = ck.FirstOrDefault();
-
-                                    tb_LocalListDeliverly01 ne = new tb_LocalListDeliverly01();
-                                    ne.SaleOrder = rd.SORDER.ToString();
-                                    ne.DocumentDate = DateTime.Now;
-                                    ne.DocumentFlag = true;
-                                    ne.DocumentBy = dbClss.UserID;
-                                    ne.ShipFlag = false;
-                                    ne.PackingFlag = false;
-                                    ne.PrintFlag = false;
-                                    ne.PartNo = rd.CODE;
-                                    ne.CustomerNo = rd.CustomerNo;
-                                    ne.ShippingDate = Convert.ToDateTime(rd.ShippingDate);
-
-                                    ne.ShipBy = "";
-                                    ne.PrintBy = "";
-                                    ne.PackingBy = "";
-
-
-                                    ne.SS = 1;
-                                    db.tb_LocalListDeliverly01s.InsertOnSubmit(ne);
-                                    db.SubmitChanges();
-                                    txtStatus.Text = "OK";
-                                    txtStatus.ForeColor = Color.Green;
-                                    System.Media.SoundPlayer player = new System.Media.SoundPlayer(Environment.CurrentDirectory + @"\beep-07.wav");
-                                    player.Play();
-                                }
-                                else
-                                {
-                                    MessageBox.Show("PartNo ไม่ตรงกับ Sale Order No.!");
-                                    txtStatus.Text = "Item Not Match!!!";
-                                    txtStatus.ForeColor = Color.Red;
-                                    System.Media.SoundPlayer player2 = new System.Media.SoundPlayer(Environment.CurrentDirectory + @"\beep-05.wav");
-                                    player2.Play();
-                                    Clear2();
-                                }
-
-                            }
-                        }
-                        //Clear2();
-                    //}
-                    //else
-                    //{
-
-                    //    txtStatus.Text = "Not Match!!!";
-                    //    txtStatus.ForeColor = Color.Red;
-                    //    System.Media.SoundPlayer player = new System.Media.SoundPlayer(Environment.CurrentDirectory + @"\beep-05.wav");
-                    //    player.Play();
-                    //    Clear2();
-
-                    //}
-                    */
+            
 
                 }
                 else
@@ -490,7 +431,6 @@ namespace StockControl
                                     txtOrderNo.Text = RN;
                                     Check1 = 1;
                                 }
-
                                 if (Check1 == 0)
                                 {
                                     RN = "M" + txtOrderNo.Text;

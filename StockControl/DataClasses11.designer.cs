@@ -2514,6 +2514,19 @@ namespace StockControl
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), invoice1);
 			return ((int)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_003_TPIC_GETBOMNo_DynamicsPIX")]
+		public ISingleResult<sp_003_TPIC_GETBOMNo_DynamicsPIXResult> sp_003_TPIC_GETBOMNo_DynamicsPIX([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id);
+			return ((ISingleResult<sp_003_TPIC_GETBOMNo_DynamicsPIXResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.g_getID_SalesOrder", IsComposable=true)]
+		public System.Nullable<int> g_getID_SalesOrder([global::System.Data.Linq.Mapping.ParameterAttribute(Name="SalesOrder", DbType="VarChar(30)")] string salesOrder, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PartNo", DbType="VarChar(30)")] string partNo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Plant", DbType="VarChar(30)")] string plant)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), salesOrder, partNo, plant).ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ErrorLog")]
@@ -69579,6 +69592,194 @@ namespace StockControl
 				if ((this._PDAReturn != value))
 				{
 					this._PDAReturn = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_003_TPIC_GETBOMNo_DynamicsPIXResult
+	{
+		
+		private string _SaleOrder;
+		
+		private string _PartNo;
+		
+		private string _CustomerNo;
+		
+		private string _CShortName;
+		
+		private string _ItemName;
+		
+		private int _SNP;
+		
+		private string _CCODE;
+		
+		private string _NaptName;
+		
+		private decimal _Qty;
+		
+		private string _CustName;
+		
+		public sp_003_TPIC_GETBOMNo_DynamicsPIXResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SaleOrder", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string SaleOrder
+		{
+			get
+			{
+				return this._SaleOrder;
+			}
+			set
+			{
+				if ((this._SaleOrder != value))
+				{
+					this._SaleOrder = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PartNo", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string PartNo
+		{
+			get
+			{
+				return this._PartNo;
+			}
+			set
+			{
+				if ((this._PartNo != value))
+				{
+					this._PartNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerNo", DbType="NVarChar(50)")]
+		public string CustomerNo
+		{
+			get
+			{
+				return this._CustomerNo;
+			}
+			set
+			{
+				if ((this._CustomerNo != value))
+				{
+					this._CustomerNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CShortName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string CShortName
+		{
+			get
+			{
+				return this._CShortName;
+			}
+			set
+			{
+				if ((this._CShortName != value))
+				{
+					this._CShortName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string ItemName
+		{
+			get
+			{
+				return this._ItemName;
+			}
+			set
+			{
+				if ((this._ItemName != value))
+				{
+					this._ItemName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SNP", DbType="Int NOT NULL")]
+		public int SNP
+		{
+			get
+			{
+				return this._SNP;
+			}
+			set
+			{
+				if ((this._SNP != value))
+				{
+					this._SNP = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CCODE", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string CCODE
+		{
+			get
+			{
+				return this._CCODE;
+			}
+			set
+			{
+				if ((this._CCODE != value))
+				{
+					this._CCODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NaptName", DbType="VarChar(49) NOT NULL", CanBeNull=false)]
+		public string NaptName
+		{
+			get
+			{
+				return this._NaptName;
+			}
+			set
+			{
+				if ((this._NaptName != value))
+				{
+					this._NaptName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Qty", DbType="Decimal(38,20) NOT NULL")]
+		public decimal Qty
+		{
+			get
+			{
+				return this._Qty;
+			}
+			set
+			{
+				if ((this._Qty != value))
+				{
+					this._Qty = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string CustName
+		{
+			get
+			{
+				return this._CustName;
+			}
+			set
+			{
+				if ((this._CustName != value))
+				{
+					this._CustName = value;
 				}
 			}
 		}

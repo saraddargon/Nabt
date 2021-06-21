@@ -1641,5 +1641,19 @@ namespace StockControl
                 catch { }
             }
         }
+
+        private void printTAGToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Row >= 0)
+                {
+                    PrintPDTAGLocal hl = new PrintPDTAGLocal(Convert.ToString(radGridView1.Rows[Row].Cells["SaleOrderNo"].Value), Convert.ToString(radGridView1.Rows[Row].Cells["PartNo"].Value)
+                        , Convert.ToString(radGridView1.Rows[Row].Cells["Plant"].Value));
+                    hl.ShowDialog();
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
     }
 }

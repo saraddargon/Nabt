@@ -35,6 +35,19 @@ namespace StockControl
             txtCustomerNo.Text = CustNo;
             txtCustomer.Text = CustName;
             dtDate1.Value = InvoiceDate;
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                var CustList2 = db.sp_043_Inv_LocalCust_Dynamics(txtCustomerNo.Text.Trim()).ToList();
+                if (CustList2.Count > 0)
+                {
+                    if (CustList2.FirstOrDefault().PType.Equals(""))
+                    {
+                        Type = "A";
+                    }
+                    else
+                        Type = "B";
+                }
+            }
             if (Type.Equals("B"))
             {
                 chkNoVat.Checked = true;
@@ -43,6 +56,7 @@ namespace StockControl
             {
                 chkNoVat.Checked = false;
             }
+            CheckVAT();
 
         }
         string InvNo = "";
@@ -75,6 +89,8 @@ namespace StockControl
             //  radDateTimePicker2.Value = DateTime.Now;
             DataLoad();
             LoadCustomer();
+            //UpdateCost();
+            CheckVAT();
            
            
 
@@ -183,6 +199,13 @@ namespace StockControl
                             byte[] barcode = dbClss.SaveQRCode2D(txtInvNo.Text);
                             hd.BarCode = barcode;
                             hd.TypeVat = Type;
+                            if(chkNoVat.Checked)
+                            {
+                                hd.TypeVat = "B";
+                            }else
+                            {
+                                hd.TypeVat = "A";
+                            }
                             db.tb_InvoiceLocalHDs.InsertOnSubmit(hd);
                             db.SubmitChanges();
 
@@ -334,8 +357,15 @@ namespace StockControl
                     txtVat.Text = "0";
                 }
                 txtTotal.Text = Total.ToString("###,###,##0.00");
-                txtVat.Text = Vat.ToString("###,###,##0.00");
-                txtAmount.Text = (Total + Vat).ToString("###,###,##0.00");
+                if (!chkNoVat.Checked)
+                {
+                    txtVat.Text = ((Total * Convert.ToDecimal(1.07)) - Total).ToString("###,###,##0.00");
+                    txtAmount.Text = (Total * Convert.ToDecimal(1.07)).ToString("###,###,##0.00");
+                }else
+                {
+                    txtVat.Text = "0";
+                    txtAmount.Text = txtTotal.Text;
+                }
                 txtDiscount.Text = "0.00";
                 txtAfterDiscount.Text = "0.00";
                 txtThaiBath.Text = dbClss.ThaiBaht(txtAmount.Text);
@@ -346,6 +376,23 @@ namespace StockControl
         private void radButton1_Click_1(object sender, EventArgs e)
         {
             txtInvNo.Text = GetInvoiceNo(txtCustomerNo.Text, dtDate1.Value);
+            CheckVAT();
+        }
+        private void CheckVAT()
+        {
+            if (txtInvNo.Text.Length > 1)
+            {
+               
+                if (txtInvNo.Text.Substring(0, 2).ToUpper().Equals("FZ"))
+                {
+                    chkNoVat.Checked = true;
+                }
+                else
+                {
+                    chkNoVat.Checked = false;
+                }
+                UpdateCost();
+            }
         }
         
         private string GetInvoiceNo(string CustNo, DateTime ShipDate)
@@ -380,7 +427,7 @@ namespace StockControl
                             {
                                 CKInv = false;
                             }
-                            Type = "A";
+                            Type = "B";
                             tb_InvoiceNoSery Ns = db.tb_InvoiceNoSeries.Where(w => w.LastDate.Equals(LastDate) && w.VatType.Equals("A")).FirstOrDefault();
                             if (Ns != null)
                             {

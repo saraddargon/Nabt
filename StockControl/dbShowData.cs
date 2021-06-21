@@ -1107,29 +1107,28 @@ namespace StockControl
                                             if (countA == 2 && row1==10)
                                                    PV = "";
 
-                                            if (rd.Seq>7)
+                                            if (rd.Seq >= 6 && rd.Seq <= 7)
                                             {
                                                 PV = "";
-                                                if (rd.Seq < 16)
-                                                {
-                                                    string SValue = db.get_QC_DATAPoint(QHNo, rs.BarcodeTag, rd.Seq);
-                                                    Excel.Range Col0 = worksheet.get_Range(col2x + row1.ToString());
-                                                    Col0.Value2 = SValue;
-                                                    Excel.Range Col02 = worksheet.get_Range(col + row1.ToString());
-                                                    Col02.Value2 = db.get_QC_DATAPointValue4(QHNo, rs.BarcodeTag, rd.Seq);
-                                                }
-                                                if(rd.Seq==16)
-                                                {
-                                                    Excel.Range Col02 = worksheet.get_Range(col + row1.ToString());
-                                                    Col02.Value2 = db.get_QC_DATAPoint(QHNo, rs.BarcodeTag, rd.Seq);
-                                                }
-                                                
+                                                Excel.Range Col02 = worksheet.get_Range(col2x + row1.ToString());
+                                                Col02.Value2 = db.get_QC_DATAPoint(QHNo, rs.BarcodeTag, rd.Seq);
+
+                                                Excel.Range Col0K = worksheet.get_Range(col + row1.ToString());
+                                                string ValueP= db.get_QC_DATAPointValue4(QHNo, rs.BarcodeTag, rd.Seq);
+
+                                                if (ValueP == "OK")
+                                                    Col0K.Value2 = "P";
+                                                else if (ValueP=="NG")
+                                                    Col0K.Value2 = "O";
+
                                             }
                                             else
                                             {
+
                                                 Excel.Range Col0 = worksheet.get_Range(col + row1.ToString());
                                                 Col0.Value2 = PV;
                                             }
+                                            
                                            
 
 

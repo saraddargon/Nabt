@@ -292,6 +292,12 @@
     <Compile Include="Process\NCRList.Designer.cs">
       <DependentUpon>NCRList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Process\PrintPDTAGLocal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Process\PrintPDTAGLocal.Designer.cs">
+      <DependentUpon>PrintPDTAGLocal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Process\QCCheckReq.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -880,6 +886,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Process\NCRList.resx">
       <DependentUpon>NCRList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Process\PrintPDTAGLocal.resx">
+      <DependentUpon>PrintPDTAGLocal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Process\QCCheckReq.resx">
       <DependentUpon>QCCheckReq.cs</DependentUpon>

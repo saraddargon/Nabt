@@ -29,8 +29,9 @@ namespace StockControl
             PTAG2 = PTAGx2;
             TypeP = Typex;
             LineName = LineNamex;
-           
-            
+            OpenPage = 0;
+
+
         }
         string TypeP = "";
         string WOs = "";
@@ -42,6 +43,7 @@ namespace StockControl
         string SPG33_2 = "７０６０～８４２０　N";
         string Piggy = "Piggy Back Checksheet การตรวจสอบด้วยตนเอง　（Size 24）";
         string LotMark = "Lot ที่ตอกสามารถอ่านได้อย่างชัดเจน ";
+        int OpenPage = 0;
      
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
@@ -79,10 +81,12 @@ namespace StockControl
 
                 if (AciveC.Equals("radPageViewPage1"))
                 {
+                    OpenPage = 1;
                     NextPage(radPageViewPage7);
                 }                
                 else
                 {
+                    OpenPage = 1;
                     NextPage(radPageViewPage1);
                 }
             }
@@ -103,6 +107,7 @@ namespace StockControl
         {
             try
             {
+                
                 int ValueID = 0;
                 int qid = 0;
                 int Cseq = 0;
@@ -1843,8 +1848,10 @@ namespace StockControl
 
                         lblSeq.Text = "ลำดับ "+Convert.ToString(qg.Seq);
                         /////new 31/07/2020
-                        txtSeq.Text= Convert.ToString(qg.Seq);                        
-                        ShowImg();
+                        txtSeq.Text= Convert.ToString(qg.Seq);      
+                         
+                       if(OpenPage>0)                 
+                              ShowImg();
                     }
                 }
             }
@@ -1896,10 +1903,10 @@ namespace StockControl
                                 
                                 db.tb_QCNGPoints.InsertOnSubmit(qc);
                                 db.SubmitChanges();
-                                cboCheckGroupPart.Text = "";
-                                txtValue.Text = "";
-                                txtNGQty.Text = "";
-                                txtNGID.Text = "";
+                               // cboCheckGroupPart.Text = "";
+                               // txtValue.Text = "";
+                              //  txtNGQty.Text = "";
+                               // txtNGID.Text = "";
                                 db.sp_46_QCHD_Update_HD(txtQCNo.Text.ToUpper()); //Call Update Status
                                 MessageBox.Show("บันทึกเรียบร้อย");
                                 LoadNGPoint();
@@ -2086,7 +2093,7 @@ namespace StockControl
         private void radPageView1_SelectedPageChanged(object sender, EventArgs e)
         {
             Snew += 1;
-           
+            OpenPage = 1;
             txtDataBox.Focus();
         }
 

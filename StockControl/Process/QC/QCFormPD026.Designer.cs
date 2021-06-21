@@ -593,7 +593,7 @@
             this.radPageView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radPageView1.Location = new System.Drawing.Point(0, 0);
             this.radPageView1.Name = "radPageView1";
-            this.radPageView1.SelectedPage = this.radPageViewPage7;
+            this.radPageView1.SelectedPage = this.radPageViewPage1;
             this.radPageView1.Size = new System.Drawing.Size(878, 501);
             this.radPageView1.TabIndex = 0;
             this.radPageView1.ThemeName = "ControlDefault";
@@ -1075,12 +1075,12 @@
             // 
             // txtNGID
             // 
-            this.txtNGID.Location = new System.Drawing.Point(739, 131);
+            this.txtNGID.Location = new System.Drawing.Point(654, 36);
             this.txtNGID.Name = "txtNGID";
-            this.txtNGID.Size = new System.Drawing.Size(100, 20);
+            this.txtNGID.ReadOnly = true;
+            this.txtNGID.Size = new System.Drawing.Size(66, 20);
             this.txtNGID.TabIndex = 6;
             this.txtNGID.TabStop = false;
-            this.txtNGID.Visible = false;
             // 
             // txtDataBox
             // 

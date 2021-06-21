@@ -91,6 +91,8 @@ namespace StockControl
 
                         if (hd.TypeVat.Equals("B"))
                             chkNoVat.Checked = true;
+                        else
+                            chkNoVat.Checked = false;
 
                         /////////// End Header///////////
 
@@ -145,6 +147,13 @@ namespace StockControl
                          
                            // hd.InvoiceNo = txtInvNo.Text;
                            // hd.InvoiceDate = dtDate1.Value;
+                           if(chkNoVat.Checked)
+                            {
+                                hd.TypeVat = "B";
+                            }else
+                            {
+                                hd.TypeVat = "A";
+                            }
                             hd.CustomerNo = txtCustomerNo.Text;
                             hd.CustomerName = txtCustomer.Text;
                             hd.Address = txtAddress.Text;
@@ -317,8 +326,17 @@ namespace StockControl
                 }
 
                 txtTotal.Text = Total.ToString("###,###,##0.00");
-                txtVat.Text = Vat.ToString("###,###,##0.00");
-                txtAmount.Text = (Total + Vat).ToString("###,###,##0.00");
+                if (!chkNoVat.Checked)
+                {
+                    txtVat.Text = ((Total * Convert.ToDecimal(1.07)) - Total).ToString("###,###,##0.00");
+                    txtAmount.Text = ((Total * Convert.ToDecimal(1.07))).ToString("###,###,##0.00");
+                }
+                else
+                {
+                    txtVat.Text = "0";
+                    txtAmount.Text = txtTotal.Text;
+                }
+
                 txtDiscount.Text = "0.00";
                 txtAfterDiscount.Text = "0.00";
                 txtThaiBath.Text = dbClss.ThaiBaht(txtAmount.Text);

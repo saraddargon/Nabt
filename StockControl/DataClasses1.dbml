@@ -4620,4 +4620,25 @@
     <Parameter Name="Invoice1" Parameter="invoice1" Type="System.String" DbType="VarChar(30)" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.sp_003_TPIC_GETBOMNo_DynamicsPIX" Method="sp_003_TPIC_GETBOMNo_DynamicsPIX">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_003_TPIC_GETBOMNo_DynamicsPIXResult">
+      <Column Name="SaleOrder" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PartNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CShortName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="SNP" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CCODE" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="NaptName" Type="System.String" DbType="VarChar(49) NOT NULL" CanBeNull="false" />
+      <Column Name="Qty" Type="System.Decimal" DbType="Decimal(38,20) NOT NULL" CanBeNull="false" />
+      <Column Name="CustName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.g_getID_SalesOrder" Method="g_getID_SalesOrder" IsComposable="true">
+    <Parameter Name="SalesOrder" Parameter="salesOrder" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="PartNo" Parameter="partNo" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Plant" Parameter="plant" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>

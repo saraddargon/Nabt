@@ -43,6 +43,7 @@
             this.radPageView1 = new Telerik.WinControls.UI.RadPageView();
             this.radPageViewPage1 = new Telerik.WinControls.UI.RadPageViewPage();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
+            this.chkPlant = new Telerik.WinControls.UI.RadCheckBox();
             this.txtCSTM = new Telerik.WinControls.UI.RadTextBox();
             this.radLabel13 = new Telerik.WinControls.UI.RadLabel();
             this.chkManual = new Telerik.WinControls.UI.RadCheckBox();
@@ -79,7 +80,6 @@
             this.btnFilter = new Telerik.WinControls.UI.RadButtonElement();
             this.Unfilter = new Telerik.WinControls.UI.RadButtonElement();
             this.radRibbonBarButtonGroup5 = new Telerik.WinControls.UI.RadRibbonBarButtonGroup();
-            this.chkPlant = new Telerik.WinControls.UI.RadCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -88,6 +88,7 @@
             this.radPageViewPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkPlant)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCSTM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkManual)).BeginInit();
@@ -119,7 +120,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOrder2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkPlant)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -293,6 +293,14 @@
             this.radPanel1.TabIndex = 0;
             this.radPanel1.ThemeName = "Office2010Blue";
             // 
+            // chkPlant
+            // 
+            this.chkPlant.Location = new System.Drawing.Point(453, 60);
+            this.chkPlant.Name = "chkPlant";
+            this.chkPlant.Size = new System.Drawing.Size(79, 18);
+            this.chkPlant.TabIndex = 12;
+            this.chkPlant.Text = "Check Plant";
+            // 
             // txtCSTM
             // 
             this.txtCSTM.Location = new System.Drawing.Point(534, 32);
@@ -397,12 +405,11 @@
             // 
             // txtItemCheck
             // 
-            this.txtItemCheck.Location = new System.Drawing.Point(442, 58);
+            this.txtItemCheck.Location = new System.Drawing.Point(154, 162);
             this.txtItemCheck.Name = "txtItemCheck";
-            this.txtItemCheck.Size = new System.Drawing.Size(100, 20);
+            this.txtItemCheck.Size = new System.Drawing.Size(255, 20);
             this.txtItemCheck.TabIndex = 4;
             this.txtItemCheck.TabStop = false;
-            this.txtItemCheck.Visible = false;
             // 
             // txtHCustomerTAG
             // 
@@ -615,14 +622,6 @@
             this.radRibbonBarButtonGroup5.ShowBorder = false;
             this.radRibbonBarButtonGroup5.Text = "radRibbonBarButtonGroup4";
             // 
-            // chkPlant
-            // 
-            this.chkPlant.Location = new System.Drawing.Point(453, 60);
-            this.chkPlant.Name = "chkPlant";
-            this.chkPlant.Size = new System.Drawing.Size(79, 18);
-            this.chkPlant.TabIndex = 12;
-            this.chkPlant.Text = "Check Plant";
-            // 
             // LocationTAGCheck
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -650,6 +649,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).EndInit();
             this.radPanel1.ResumeLayout(false);
             this.radPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkPlant)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCSTM)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkManual)).EndInit();
@@ -683,7 +683,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOrder2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkPlant)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

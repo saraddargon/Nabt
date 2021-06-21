@@ -331,6 +331,7 @@ namespace StockControl
         {
             row = e.RowIndex;
             rowsQC = e.RowIndex;
+            row1 = e.RowIndex;
         }
 
         private void btnExport_Click(object sender, EventArgs e)

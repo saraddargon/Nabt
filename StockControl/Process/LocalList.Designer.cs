@@ -149,6 +149,8 @@
             this.RMenu5 = new Telerik.WinControls.UI.RadMenuItem();
             this.RMenu6 = new Telerik.WinControls.UI.RadMenuItem();
             this.radContextMenuManager1 = new Telerik.WinControls.UI.RadContextMenuManager();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.printTAGToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.radRibbonBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radStatusStrip1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -884,9 +886,11 @@
             this.toolStripMenuItem2,
             this.historyGuideLotToolStripMenuItem,
             this.toolStripMenuItem3,
-            this.editPlantToolStripMenuItem});
+            this.editPlantToolStripMenuItem,
+            this.toolStripMenuItem4,
+            this.printTAGToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(196, 110);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(196, 160);
             // 
             // เพมInvToolStripMenuItem
             // 
@@ -1226,6 +1230,19 @@
             this.RMenu6.Name = "RMenu6";
             this.RMenu6.Text = "ลบรายการ";
             // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(192, 6);
+            // 
+            // printTAGToolStripMenuItem
+            // 
+            this.printTAGToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.printTAGToolStripMenuItem.Name = "printTAGToolStripMenuItem";
+            this.printTAGToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.printTAGToolStripMenuItem.Text = "Print TAG";
+            this.printTAGToolStripMenuItem.Click += new System.EventHandler(this.printTAGToolStripMenuItem_Click);
+            // 
             // LocalList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1356,5 +1373,7 @@
         private System.Windows.Forms.ToolStripMenuItem editPlantToolStripMenuItem;
         private Telerik.WinControls.UI.RadLabel radLabel4;
         private Telerik.WinControls.UI.RadTextBox txtCust;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem printTAGToolStripMenuItem;
     }
 }
